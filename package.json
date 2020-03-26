@@ -1,0 +1,39 @@
+{
+  "name": "@kohost/api-client",
+  "version": "0.1.0",
+  "description": "HTTP client to interact with Kohost APIs",
+  "main": "src/client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "start": "webpack --watch --mode development",
+    "clean": "rm -rf ./dist/*",
+    "lint": "eslint ./src",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/kohost/kohost-api-client/src"
+  },
+  "keywords": [
+    "http",
+    "kohost",
+    "api"
+  ],
+  "author": "Ian Rogers",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.3",
+    "prettier": "^2.0.2",
+    "pretty-quick": "^2.0.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}
