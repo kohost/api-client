@@ -157,4 +157,6 @@ class KohostApi {
   }
 }
 
-export default new KohostApi();
+const API = new KohostApi();
+
+export default API;
