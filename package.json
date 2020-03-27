@@ -1,8 +1,8 @@
 {
   "name": "@kohost/api-client",
-  "version": "0.1.0",
+  "version": "0.1.0-beta.0",
   "description": "HTTP client to interact with Kohost APIs",
-  "main": "src/client.js",
+  "main": "dist/bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
@@ -35,5 +35,10 @@
     "pretty-quick": "^2.0.1",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

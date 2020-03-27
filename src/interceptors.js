@@ -17,7 +17,7 @@ function handleHTTPError(error) {
 
     if (newTokensNeeded) {
       return this.Auth.requestNewTokens()
-        .then(response => {
+        .then((response) => {
           // update headers with the new tokens
           originalReq.headers[this.authTokenKey] =
             response.headers[this.authTokenKey];
@@ -32,6 +32,13 @@ function handleHTTPError(error) {
   return Promise.reject(error);
 }
 
+function handleHTTPResponse(response) {
+  if (response && response.data && response.data.data) {
+    response.data = response.data.data;
+  }
+  return response;
+}
+
 function handleGenerateConfig(config) {
   config.headers[this.authTokenKey] = this.getAuthToken();
   return config;
@@ -39,5 +46,6 @@ function handleGenerateConfig(config) {
 
 export default {
   handleHTTPError,
-  handleGenerateConfig
+  handleHTTPResponse,
+  handleGenerateConfig,
 };

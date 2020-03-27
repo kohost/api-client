@@ -1,0 +1,24 @@
+image: node:12.14.1
+
+pipelines:
+  pull-requests:
+    "**":
+      - step:
+          name: Install dependencies and build
+          caches:
+            - node
+          script:
+            - npm install
+            - npm run build
+  branches:
+    master:
+      - step:
+          name: Build and publish to NPM
+          caches:
+            - node
+          script:
+            - npm install
+            - npm run prepare
+            - pipe: atlassian/npm-publish:0.2.6
+              variables:
+                NPM_TOKEN: $NPM_TOKEN

@@ -1,34 +1,40 @@
+import generateFunctions from "../utils/generate";
+
 const base = "/hotel-rooms";
 
-function getAllHotelRooms() {
-  return this.get(base);
-}
-
-function getHotelRoom(id) {
-  const url = `${base}/${id}`;
+function getRooms(hotelRoomId) {
+  const url = `${base}/${hotelRoomId}/rooms`;
   return this.get(url);
 }
 
-function updateHotelRoom(id, body) {
-  const url = `${base}/${id}`;
-  return this.put(url, body);
+function addRoom(hotelRoomId, body) {
+  const url = `${base}/${hotelRoomId}/rooms`;
+  return this.post(url, body);
 }
 
-function addHotelRoom(body) {
-  return this.post(base, body);
-}
-
-function deleteHotelRoom(id, body = {}) {
-  const url = `${base}/${id}`;
+function deleteRooms(hotelRoomId, body) {
+  const url = `${base}/${hotelRoomId}/rooms`;
   return this.delete(url, body);
 }
 
-const HotelRoom = {
-  getAll: getAllHotelRooms,
-  get: getHotelRoom,
-  update: updateHotelRoom,
-  add: addHotelRoom,
-  delete: deleteHotelRoom
+const Room = {
+  getAll: getRooms,
+  add: addRoom,
+  delete: deleteRooms,
 };
+
+function getGuests(hotelRoomId) {
+  const url = `${base}/${hotelRoomId}/guests`;
+  return this.get(url);
+}
+
+const Guest = {
+  getAll: getGuests,
+};
+
+const HotelRoom = generateFunctions(base);
+
+HotelRoom.Room = Room;
+HotelRoom.Guest = Guest;
 
 export default HotelRoom;
