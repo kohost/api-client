@@ -7,25 +7,25 @@ async function requestNewTokens() {
     {},
     {
       headers: {
-        [this.refreshTokenKey]: this.getRefreshToken()
-      }
+        [this.refreshTokenKey]: this.getRefreshToken(),
+      },
     }
   )
-    .then(response => {
+    .then((response) => {
       this.setAuthToken(response.headers[this.authTokenKey]);
       this.setRefreshToken(response.headers[this.refreshTokenKey]);
       return response;
     })
-    .catch(error => this.handleLogAndNotifyError(error));
+    .catch((error) => this.handleLogAndNotifyError(error));
 }
 
 function loginUser(email, password) {
   const url = `${base}/user`;
   return this.post(url, { email: email.toLowerCase(), password }).then(
-    response => {
+    (response) => {
       const authToken = response.headers[this.authTokenKey];
       const refreshToken = response.headers[this.refreshTokenKey];
-      const user = response.data.data[0];
+      const user = response.data[0];
       this.setAuthToken(authToken);
       this.setRefreshToken(refreshToken);
       this.setCurrentUser(user);
@@ -36,7 +36,7 @@ function loginUser(email, password) {
 
 const Auth = {
   requestNewTokens,
-  loginUser
+  loginUser,
 };
 
 export default Auth;
