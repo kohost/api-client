@@ -13,6 +13,9 @@ import Lock from "./methods/Lock";
 import Settings from "./methods/Settings";
 import Reports from "./methods/Reports";
 import Controllers from "./methods/Controller";
+import Integrations from "./methods/Integrations";
+import Commands from "./methods/Commands";
+
 
 class KohostApi {
   constructor(url) {
@@ -48,6 +51,7 @@ class KohostApi {
     this.HotelRoom.Room = this.bindMethods(HotelRoom.Room);
     this.HotelRoom.Guest = this.bindMethods(HotelRoom.Guest);
     this.HotelRoom.Scenes = this.bindMethods(HotelRoom.Scenes);
+    this.HotelRoom.Integrations = this.bindMethods(HotelRoom.Integrations);
 
     this.Room = this.bindMethods(Room);
     this.Room.Light = this.bindMethods(Light);
@@ -57,6 +61,8 @@ class KohostApi {
     this.Settings = this.bindMethods(Settings);
     this.Reports = this.bindMethods(Reports);
     this.Controllers = this.bindMethods(Controllers);
+    this.Integrations = this.bindMethods(Integrations);
+    this.Commands = this.bindMethods(Commands);
 
     this.createHTTPClient();
   }

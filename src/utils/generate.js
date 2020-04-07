@@ -73,5 +73,28 @@ export function generateSceneFunctions() {
   };
 }
 
-
-
+export function generateIntegrationFunctions() {
+  const base = "/hotel-rooms";
+  return {
+    getAll: function (roomId) {
+      const url = `${base}/${roomId}/integrations`;
+      return this.get(url);
+    },
+    get: function (roomId, id) {
+      const url = `${base}/${roomId}/integrations/${id}`;
+      return this.get(url);
+    },
+    update: function (roomId, id, body) {
+      const url = `${base}/${roomId}/integrations/${id}`;
+      return this.put(url, body);
+    },
+    add: function (roomId, body) {
+      const url = `${base}/${roomId}/integrations`;
+      return this.post(url, body);
+    },
+    delete: function (roomId, id) {
+      const url = `${base}/${roomId}/integrations/${id}`;
+      return this.delete(url);
+    },
+  };
+}

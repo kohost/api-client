@@ -12,9 +12,14 @@ function checkOutGuest(id, body) {
   return this.post(url, body);
 }
 
-const Guest = generateFunctions(base);
+function invite(id) {
+  const url = `${base}/${id}/invite`;
+  return this.post(url);
+}
 
+const Guest = generateFunctions(base);
 Guest.checkIn = checkInGuest;
 Guest.checkOut = checkOutGuest;
+Guest.invite = invite;
 
 export default Guest;
