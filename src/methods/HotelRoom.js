@@ -1,4 +1,5 @@
 import generateFunctions from "../utils/generate";
+import generateSceneFunctions from "../utils/generate";
 
 const base = "/hotel-rooms";
 
@@ -32,9 +33,23 @@ const Guest = {
   getAll: getGuests,
 };
 
+function getScenes(hotelRoomId) {
+  const url = `${base}/${hotelRoomId}/scenes`;
+  return this.get(url);
+}
+
+
+// const Scenes = {
+//   getAll: getScenes,
+// };
+
+const Scenes = generateSceneFunctions();
+
 const HotelRoom = generateFunctions(base);
 
 HotelRoom.Room = Room;
 HotelRoom.Guest = Guest;
+HotelRoom.Scenes = Scenes;
+
 
 export default HotelRoom;

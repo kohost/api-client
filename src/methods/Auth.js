@@ -33,10 +33,24 @@ function loginUser(email, password) {
     }
   );
 }
+function resetPassword(userID, password) {
+  const url = base + `/${userID}/set-password`;
+  return this.post(url, { password }).then(
+    (response) => {
+      if (response.status >= 400 && response.status <= 500) {
+        body.error = response.data.error;
+        return body;
+      } else {
+        return true;
+      }
+    }
+  );
+}
 
 const Auth = {
   requestNewTokens,
   loginUser,
+  resetPassword
 };
 
 export default Auth;

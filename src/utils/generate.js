@@ -8,14 +8,14 @@ export default function generateFunctions(baseUrl) {
       return this.get(url);
     },
     update: function (id, body) {
-      const url = `${base}/${id}`;
+      const url = `${baseUrl}/${id}`;
       return this.put(url, body);
     },
     add: function (body) {
-      return this.post(base, body);
+      return this.post(baseUrl, body);
     },
     delete: function (id) {
-      const url = `${base}/${id}`;
+      const url = `${baseUrl}/${id}`;
       return this.delete(url);
     },
   };
@@ -46,3 +46,32 @@ export function generateDeviceFunctions(path) {
     },
   };
 }
+
+export function generateSceneFunctions() {
+  const base = "/hotel-rooms";
+  return {
+    getAll: function (roomId) {
+      const url = `${base}/${roomId}/scenes`;
+      return this.get(url);
+    },
+    get: function (roomId, id) {
+      const url = `${base}/${roomId}/scenes/${id}`;
+      return this.get(url);
+    },
+    update: function (roomId, id, body) {
+      const url = `${base}/${roomId}/scenes/${id}`;
+      return this.put(url, body);
+    },
+    add: function (roomId, body) {
+      const url = `${base}/${roomId}/scenes`;
+      return this.post(url, body);
+    },
+    delete: function (roomId, id) {
+      const url = `${base}/${roomId}/scenes/${id}`;
+      return this.delete(url);
+    },
+  };
+}
+
+
+

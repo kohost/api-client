@@ -10,6 +10,9 @@ import Light from "./methods/Light";
 import Shade from "./methods/Shade";
 import Thermostat from "./methods/Thermostat";
 import Lock from "./methods/Lock";
+import Settings from "./methods/Settings";
+import Reports from "./methods/Reports";
+import Controllers from "./methods/Controller";
 
 class KohostApi {
   constructor(url) {
@@ -44,12 +47,16 @@ class KohostApi {
     this.HotelRoom = this.bindMethods(HotelRoom);
     this.HotelRoom.Room = this.bindMethods(HotelRoom.Room);
     this.HotelRoom.Guest = this.bindMethods(HotelRoom.Guest);
+    this.HotelRoom.Scenes = this.bindMethods(HotelRoom.Scenes);
 
     this.Room = this.bindMethods(Room);
     this.Room.Light = this.bindMethods(Light);
     this.Room.Shade = this.bindMethods(Shade);
     this.Room.Thermostat = this.bindMethods(Thermostat);
     this.Room.Lock = this.bindMethods(Lock);
+    this.Settings = this.bindMethods(Settings);
+    this.Reports = this.bindMethods(Reports);
+    this.Controllers = this.bindMethods(Controllers);
 
     this.createHTTPClient();
   }
