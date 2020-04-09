@@ -15,6 +15,8 @@ import Reports from "./methods/Reports";
 import Controllers from "./methods/Controller";
 import Integrations from "./methods/Integrations";
 import Commands from "./methods/Commands";
+import Image from "./methods/Image";
+import Structure from "./methods/Structure";
 
 
 class KohostApi {
@@ -63,6 +65,8 @@ class KohostApi {
     this.Controllers = this.bindMethods(Controllers);
     this.Integrations = this.bindMethods(Integrations);
     this.Commands = this.bindMethods(Commands);
+    this.Image = this.bindMethods(Image);
+    this.Structure = this.bindMethods(Structure);
 
     this.createHTTPClient();
   }
@@ -99,6 +103,9 @@ class KohostApi {
     );
     this.http.interceptors.request.use(this.handleHTTPRequestConfig, null);
   }
+
+ 
+
 
   getItem(key) {
     if (this.isBrowser) {
@@ -153,6 +160,7 @@ class KohostApi {
   }
 
   get(url, options = {}) {
+    console.log(url)
     return this.http.get(url, options);
   }
 
@@ -167,6 +175,19 @@ class KohostApi {
   delete(url, body, options = {}) {
     options.data = body;
     return this.http.delete(url, options);
+  }
+
+  uploadFile(url, formData, uploadHandler = function() {}) {
+    url = this.config.url + url;
+    return this.http({
+      method: "POST",
+      url,
+      data: formData,
+      onUploadProgress: uploadHandler,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    });
   }
 }
 

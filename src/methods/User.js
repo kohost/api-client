@@ -9,5 +9,12 @@ function changeAvatar(data) {
   return this.http.post(url, data);
 }
 
+
+function checkout() {
+  const url = `${base}/checkout`;
+  return this.http.post(url);
+}
+
 Users.changeAvatar = changeAvatar;
+Users.checkout = checkout;
 export default Users;

@@ -47,10 +47,42 @@ function resetPassword(userID, password) {
   );
 }
 
+function verifyToken(token) {
+  const url = base + `/verifyToken`;
+  return this.post(url, { token }).then(
+    (response) => {
+      if (response.status >= 400 && response.status <= 500) {
+        body.error = response.data.error;
+        return body;
+      } else {
+        return response;
+      }
+    }
+  );
+}
+
+function sendResetPasswordLink(userId) {
+  const url = base + `/${userId}/sendResetPasswordLink`;
+  return this.post(url, {}).then(
+    (response) => {
+      if (response.status >= 400 && response.status <= 500) {
+        body.error = response.data.error;
+        return body;
+      } else {
+        return response;
+      }
+    }
+  );
+}
+
+
+
 const Auth = {
   requestNewTokens,
   loginUser,
-  resetPassword
+  resetPassword,
+  verifyToken,
+  sendResetPasswordLink
 };
 
 export default Auth;
