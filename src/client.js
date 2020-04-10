@@ -17,6 +17,7 @@ import Integrations from "./methods/Integrations";
 import Commands from "./methods/Commands";
 import Image from "./methods/Image";
 import Structure from "./methods/Structure";
+import Media from "./methods/Media";
 
 
 class KohostApi {
@@ -67,6 +68,7 @@ class KohostApi {
     this.Commands = this.bindMethods(Commands);
     this.Image = this.bindMethods(Image);
     this.Structure = this.bindMethods(Structure);
+    this.Media = this.bindMethods(Media);
 
     this.createHTTPClient();
   }
