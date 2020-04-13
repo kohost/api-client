@@ -1,3 +1,11 @@
 import generateFunctions from "../utils/generate";
 
-export default generateFunctions("/settings");
+const base = "/settings";
+const Settings = generateFunctions(base);
+
+function getAppSettings() {
+  return this.http.get(`${base}/application`, {});
+}
+
+Settings.getAppSettings = getAppSettings;
+export default Settings;

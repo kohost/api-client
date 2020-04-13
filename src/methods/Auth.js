@@ -33,6 +33,22 @@ function loginUser(email, password) {
     }
   );
 }
+
+function loginGuest(email, password) {
+  const url = `${base}/guest`;
+  return this.post(url, { email: email.toLowerCase(), password }).then(
+    (response) => {
+      const authToken = response.headers[this.authTokenKey];
+      const refreshToken = response.headers[this.refreshTokenKey];
+      const user = response.data[0];
+      this.setAuthToken(authToken);
+      this.setRefreshToken(refreshToken);
+      this.setCurrentUser(user);
+      return response;
+    }
+  );
+}
+
 function resetPassword(userID, password) {
   const url = base + `/${userID}/set-password`;
   return this.post(url, { password }).then(
@@ -75,14 +91,31 @@ function sendResetPasswordLink(userId) {
   );
 }
 
+function forgotPassword(email) {
+  const url = `/users/forgot-password`;
+  return this.post(url, {email}).then(
+    (response) => {
+      if (response.status >= 400 && response.status <= 500) {
+        body.error = response.data.error;
+        return body;
+      } else {
+        return response;
+      }
+    }
+  );
+}
+
+
 
 
 const Auth = {
   requestNewTokens,
   loginUser,
+  loginGuest,
   resetPassword,
   verifyToken,
-  sendResetPasswordLink
+  sendResetPasswordLink,
+  forgotPassword
 };
 
 export default Auth;
