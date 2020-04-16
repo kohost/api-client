@@ -98,16 +98,12 @@ class KohostApi {
         "Content-Type": "application/json; charset=utf-8",
       },
     });
-
     this.http.interceptors.response.use(
       this.handleHTTPResponseSuccess,
       this.handleHTTPResponseError
     );
-    this.http.interceptors.request.use(this.handleHTTPRequestConfig, null);
+   this.http.interceptors.request.use(this.handleHTTPRequestConfig, null);
   }
-
- 
-
 
   getItem(key) {
     if (this.isBrowser) {
@@ -123,7 +119,7 @@ class KohostApi {
   }
 
   setAuthToken(token) {
-    this.authToken = token;
+    this.authTokenKey = token;
     this.saveItem(this.config.lsAuthTokenKey, token);
   }
 
@@ -139,7 +135,7 @@ class KohostApi {
 
   getAuthToken() {
     if (this.isBrowser) return this.getItem(this.config.lsAuthTokenKey);
-    return this.authToken;
+    return this.authTokenKey;
   }
 
   getRefreshToken() {
@@ -162,7 +158,6 @@ class KohostApi {
   }
 
   get(url, options = {}) {
-    console.log(url)
     return this.http.get(url, options);
   }
 
@@ -171,6 +166,7 @@ class KohostApi {
   }
 
   put(url, body, options = {}) {
+  
     return this.http.put(url, body, options);
   }
 
