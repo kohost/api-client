@@ -1,8 +1,5 @@
 import generateFunctions from "../utils/generate";
 
-export default generateFunctions("/structure");
-
-
 const base = "/structure";
 const Structure = generateFunctions(base);
 
