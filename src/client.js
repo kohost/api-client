@@ -19,7 +19,6 @@ import Image from "./methods/Image";
 import Structure from "./methods/Structure";
 import Media from "./methods/Media";
 
-
 class KohostApi {
   constructor(url) {
     this.config = {
@@ -102,7 +101,7 @@ class KohostApi {
       this.handleHTTPResponseSuccess,
       this.handleHTTPResponseError
     );
-   this.http.interceptors.request.use(this.handleHTTPRequestConfig, null);
+    this.http.interceptors.request.use(this.handleHTTPRequestConfig, null);
   }
 
   getItem(key) {
@@ -166,7 +165,6 @@ class KohostApi {
   }
 
   put(url, body, options = {}) {
-  
     return this.http.put(url, body, options);
   }
 
@@ -175,7 +173,7 @@ class KohostApi {
     return this.http.delete(url, options);
   }
 
-  uploadFile(url, formData, uploadHandler = function() {}) {
+  uploadFile(url, formData, uploadHandler = function () {}) {
     url = this.config.url + url;
     return this.http({
       method: "POST",
@@ -184,7 +182,7 @@ class KohostApi {
       onUploadProgress: uploadHandler,
       headers: {
         "Content-Type": "multipart/form-data",
-      }
+      },
     });
   }
 }
