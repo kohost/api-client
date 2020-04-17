@@ -40,7 +40,7 @@ function handleHTTPResponse(response) {
 }
 
 function handleGenerateConfig(config) {
-  config.headers[this.authTokenKey] = this.getAuthToken();
+  config.headers[this.config.lsAuthTokenKey] = this.getAuthToken();
   return config;
 }
 

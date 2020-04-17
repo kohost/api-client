@@ -10,6 +10,14 @@ import Light from "./methods/Light";
 import Shade from "./methods/Shade";
 import Thermostat from "./methods/Thermostat";
 import Lock from "./methods/Lock";
+import Settings from "./methods/Settings";
+import Reports from "./methods/Reports";
+import Controllers from "./methods/Controller";
+import Integrations from "./methods/Integrations";
+import Commands from "./methods/Commands";
+import Image from "./methods/Image";
+import Structure from "./methods/Structure";
+import Media from "./methods/Media";
 
 class KohostApi {
   constructor(url) {
@@ -44,12 +52,22 @@ class KohostApi {
     this.HotelRoom = this.bindMethods(HotelRoom);
     this.HotelRoom.Room = this.bindMethods(HotelRoom.Room);
     this.HotelRoom.Guest = this.bindMethods(HotelRoom.Guest);
+    this.HotelRoom.Scenes = this.bindMethods(HotelRoom.Scenes);
+    this.HotelRoom.Integrations = this.bindMethods(HotelRoom.Integrations);
 
     this.Room = this.bindMethods(Room);
     this.Room.Light = this.bindMethods(Light);
     this.Room.Shade = this.bindMethods(Shade);
     this.Room.Thermostat = this.bindMethods(Thermostat);
     this.Room.Lock = this.bindMethods(Lock);
+    this.Settings = this.bindMethods(Settings);
+    this.Reports = this.bindMethods(Reports);
+    this.Controllers = this.bindMethods(Controllers);
+    this.Integrations = this.bindMethods(Integrations);
+    this.Commands = this.bindMethods(Commands);
+    this.Image = this.bindMethods(Image);
+    this.Structure = this.bindMethods(Structure);
+    this.Media = this.bindMethods(Media);
 
     this.createHTTPClient();
   }
@@ -79,7 +97,6 @@ class KohostApi {
         "Content-Type": "application/json; charset=utf-8",
       },
     });
-
     this.http.interceptors.response.use(
       this.handleHTTPResponseSuccess,
       this.handleHTTPResponseError
@@ -101,7 +118,7 @@ class KohostApi {
   }
 
   setAuthToken(token) {
-    this.authToken = token;
+    this.authTokenKey = token;
     this.saveItem(this.config.lsAuthTokenKey, token);
   }
 
@@ -117,7 +134,7 @@ class KohostApi {
 
   getAuthToken() {
     if (this.isBrowser) return this.getItem(this.config.lsAuthTokenKey);
-    return this.authToken;
+    return this.authTokenKey;
   }
 
   getRefreshToken() {
@@ -154,6 +171,19 @@ class KohostApi {
   delete(url, body, options = {}) {
     options.data = body;
     return this.http.delete(url, options);
+  }
+
+  uploadFile(url, formData, uploadHandler = function () {}) {
+    url = this.config.url + url;
+    return this.http({
+      method: "POST",
+      url,
+      data: formData,
+      onUploadProgress: uploadHandler,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   }
 }
 
