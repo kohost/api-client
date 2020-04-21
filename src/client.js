@@ -96,6 +96,7 @@ class KohostApi {
       baseURL: this.config.url,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
       },
     });
     this.http.interceptors.response.use(
