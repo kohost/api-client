@@ -11,7 +11,7 @@ function getTypes() {
 
 function getRoomMap(roomMap) {
   const url = `${base}/roomMap`;
-  return this.post(url,roomMap);
+  return this.post(url, roomMap);
 }
 
 Integrations.getTypes = getTypes;
