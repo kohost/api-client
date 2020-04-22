@@ -99,6 +99,8 @@ class KohostApi {
         "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
       },
     });
+
+
     this.http.interceptors.response.use(
       this.handleHTTPResponseSuccess,
       this.handleHTTPResponseError
@@ -120,7 +122,7 @@ class KohostApi {
   }
 
   setAuthToken(token) {
-    this.authTokenKey = token;
+    this.authToken = token;
     this.saveItem(this.config.lsAuthTokenKey, token);
   }
 
@@ -136,7 +138,7 @@ class KohostApi {
 
   getAuthToken() {
     if (this.isBrowser) return this.getItem(this.config.lsAuthTokenKey);
-    return this.authTokenKey;
+    return this.authToken;
   }
 
   getRefreshToken() {
