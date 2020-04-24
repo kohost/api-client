@@ -18,6 +18,7 @@ import Commands from "./methods/Commands";
 import Image from "./methods/Image";
 import Structure from "./methods/Structure";
 import Media from "./methods/Media";
+import Manifest from "./methods/Manifest";
 
 class KohostApi {
   constructor(url) {
@@ -68,6 +69,7 @@ class KohostApi {
     this.Image = this.bindMethods(Image);
     this.Structure = this.bindMethods(Structure);
     this.Media = this.bindMethods(Media);
+    this.Manifest = this.bindMethods(Manifest);
 
     this.createHTTPClient();
   }
@@ -149,7 +151,6 @@ class KohostApi {
   }
 
   handleLoginRequired() {
-    console.log("require login");
     return this.config.onLoginRequired();
   }
 
