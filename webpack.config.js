@@ -5,8 +5,7 @@ const serverConfig = {
   entry: "./src/client.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-    library: "@kohost/api-client",
+    filename: "bundle.node.js",
     libraryTarget: "commonjs2",
   },
 };
@@ -17,8 +16,7 @@ const clientConfig = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    library: "@kohost/api-client",
-    libraryTarget: "commonjs2",
+    libraryTarget: "umd",
   },
 };
 
