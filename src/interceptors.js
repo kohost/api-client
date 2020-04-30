@@ -40,7 +40,10 @@ function handleHTTPResponse(response) {
 }
 
 function handleGenerateConfig(config) {
-  config.headers[this.authTokenKey] = this.getAuthToken();
+  if (this.config.secretKey && this.config.clientId) {
+    config.headers["clientId"] = this.config.clientId;
+    config.headers["secretKey"] = this.config.secretKey;
+  } else config.headers[this.authTokenKey] = this.getAuthToken();
   return config;
 }
 

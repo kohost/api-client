@@ -5,7 +5,7 @@ const serverConfig = {
   entry: "./src/client.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.node.js",
+    filename: "bundle.js",
     libraryTarget: "commonjs2",
   },
 };

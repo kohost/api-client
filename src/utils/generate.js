@@ -58,6 +58,10 @@ export function generateSceneFunctions() {
       const url = `${base}/${roomId}/scenes/${id}`;
       return this.get(url);
     },
+    trigger: function (roomId, id) {
+      const url = `${base}/${roomId}/scenes/${id}/trigger`;
+      return this.post(url,{});
+    },
     update: function (roomId, id, body) {
       const url = `${base}/${roomId}/scenes/${id}`;
       return this.put(url, body);

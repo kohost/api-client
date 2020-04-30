@@ -28,6 +28,8 @@ class KohostApi {
       lsAuthTokenKey: "x-auth-token",
       lsRefreshTokenKey: "x-refresh-token",
       lsUserKey: "current-user",
+      clientId: undefined,
+      secretKey: undefined,
       onLoginRequired: function () {
         throw new Error("Login required");
       },
@@ -36,8 +38,7 @@ class KohostApi {
     this.authTokenKey = "x-auth-token";
     this.refreshTokenKey = "x-refresh-token";
     this.http = undefined;
-    this.authToken = undefined;
-    this.refreshToken = undefined;
+    this.authToken = "";
     this.currentUser = undefined;
     this.logger = console;
     // bind methods
@@ -163,7 +164,7 @@ class KohostApi {
   }
 
   post(url, body, options = {}) {
-    return this.http.post(url, body, options);
+      return this.http.post(url, body, options);
   }
 
   put(url, body, options = {}) {
