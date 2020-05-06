@@ -1,26 +1,27 @@
-import axios from "axios";
 import merge from "lodash/merge";
+import axios from "axios";
 import interceptors from "./interceptors";
+import Admin from "./methods/Admin";
 import Auth from "./methods/Auth";
-import Guest from "./methods/Guest";
-import User from "./methods/User";
-import HotelRoom from "./methods/HotelRoom";
-import Room from "./methods/Room";
-import Light from "./methods/Light";
-import Shade from "./methods/Shade";
-import Thermostat from "./methods/Thermostat";
-import Lock from "./methods/Lock";
-import Settings from "./methods/Settings";
-import Reports from "./methods/Reports";
 import Controllers from "./methods/Controller";
-import Integrations from "./methods/Integrations";
 import Commands from "./methods/Commands";
+import Guest from "./methods/Guest";
+import HotelRoom from "./methods/HotelRoom";
+import Integrations from "./methods/Integrations";
 import Image from "./methods/Image";
-import Structure from "./methods/Structure";
-import Media from "./methods/Media";
+import Light from "./methods/Light";
+import Lock from "./methods/Lock";
 import Manifest from "./methods/Manifest";
+import Media from "./methods/Media";
+import Reports from "./methods/Reports";
+import Room from "./methods/Room";
+import Settings from "./methods/Settings";
+import Shade from "./methods/Shade";
+import Structure from "./methods/Structure";
+import Thermostat from "./methods/Thermostat";
+import User from "./methods/User";
 
-class KohostApi {
+class KohostAPI {
   constructor(url) {
     this.config = {
       url: url,
@@ -47,7 +48,9 @@ class KohostApi {
     this.handleHTTPResponseSuccess = interceptors.handleHTTPResponse.bind(this);
     this.handleHTTPRequestConfig = interceptors.handleGenerateConfig.bind(this);
 
+    this.Admin = this.bindMethods(Admin);
     this.Auth = this.bindMethods(Auth);
+
     this.Guest = this.bindMethods(Guest);
     this.User = this.bindMethods(User);
 
@@ -84,7 +87,6 @@ class KohostApi {
       if (typeof funcObject[method] !== "function") return;
       boundMethods[method] = bindMethod(funcObject[method]);
     });
-
     return boundMethods;
   }
 
@@ -200,6 +202,6 @@ class KohostApi {
   }
 }
 
-const API = new KohostApi();
+const Kohost = new KohostAPI();
 
-export default API;
+export default Kohost;
