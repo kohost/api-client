@@ -1,4 +1,4 @@
-import axios from "axios";
+let axios = require ("axios");
 import merge from "lodash/merge";
 import interceptors from "./interceptors";
 import Admin from "./methods/Admin";
@@ -21,7 +21,7 @@ import Structure from "./methods/Structure";
 import Thermostat from "./methods/Thermostat";
 import User from "./methods/User";
 
-class KohostApi {
+class KohostAPI{
   constructor(url) {
     this.config = {
       url: url,
@@ -76,9 +76,9 @@ class KohostApi {
     this.Manifest = this.bindMethods(Manifest);
 
     this.createHTTPClient();
-  }
+  };
 
-  bindMethods(funcObject) {
+   bindMethods(funcObject) {
     const bindMethod = (func) => {
       return func.bind(this);
     };
@@ -87,16 +87,15 @@ class KohostApi {
       if (typeof funcObject[method] !== "function") return;
       boundMethods[method] = bindMethod(funcObject[method]);
     });
-
     return boundMethods;
-  }
+  };
 
-  updateConfig(config) {
+   updateConfig(config){
     this.config = merge(this.config, config);
     this.createHTTPClient();
   }
 
-  createHTTPClient() {
+   createHTTPClient () {
     this.http = axios.create({
       baseURL: this.config.url,
       headers: {
@@ -111,7 +110,7 @@ class KohostApi {
     this.http.interceptors.request.use(this.handleHTTPRequestConfig, null);
   }
 
-  getItem(key) {
+  getItem (key){
     if (this.isBrowser) {
       return localStorage.getItem(key);
     }
@@ -167,7 +166,7 @@ class KohostApi {
   }
 
   post(url, body, options = {}) {
-      return this.http.post(url, body, options);
+    return this.http.post(url, body, options);
   }
 
   put(url, body, options = {}) {
@@ -193,6 +192,11 @@ class KohostApi {
   }
 }
 
-const API = new KohostApi();
+const Kohost = new KohostAPI();
 
-export default API;
+Object.keys(Kohost).forEach(index => {
+  const unbound = Kohost[index];
+  exports[index] = unbound;
+});
+
+exports.Kohost = Kohost;

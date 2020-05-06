@@ -1,23 +1,46 @@
 const path = require("path");
+const webpack = require("webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-const serverConfig = {
-  target: "node",
-  entry: "./src/client.js",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-    libraryTarget: "commonjs2",
+module.exports = [
+  {
+    target: "web",
+    entry: "./src/client.js",
+    resolve: {
+      alias: {
+        web: "./src/client.js",
+      },
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        "process.env.BROWSER": true,
+      }),
+      new CleanWebpackPlugin(),
+    ],
+    output: {
+      path: path.resolve(__dirname, "dist"),
+      filename: "bundle.js",
+      libraryTarget: "umd",
+    },
   },
-};
-
-const clientConfig = {
-  target: "web", // <=== can be omitted as default is 'web'
-  entry: "./src/client.js",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-    libraryTarget: "umd",
+  {
+    target: "node",
+    entry: "./src/client.js",
+    resolve: {
+      alias: {
+        web: "./src/client.js",
+      },
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        "process.env.BROWSER": false,
+      }),
+      new CleanWebpackPlugin(),
+    ],
+    output: {
+      path: path.resolve(__dirname, "dist"),
+      filename: "bundle.js",
+      libraryTarget: "global",
+    },
   },
-};
-
-module.exports = [serverConfig, clientConfig];
+];
