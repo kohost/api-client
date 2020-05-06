@@ -72,13 +72,14 @@ class KohostAPI{
     this.Commands = this.bindMethods(Commands);
     this.Image = this.bindMethods(Image);
     this.Structure = this.bindMethods(Structure);
+    this.Structure.Images = this.bindMethods(Image);
     this.Media = this.bindMethods(Media);
     this.Manifest = this.bindMethods(Manifest);
 
     this.createHTTPClient();
-  };
+  }
 
-   bindMethods(funcObject) {
+  bindMethods(funcObject) {
     const bindMethod = (func) => {
       return func.bind(this);
     };
@@ -88,14 +89,14 @@ class KohostAPI{
       boundMethods[method] = bindMethod(funcObject[method]);
     });
     return boundMethods;
-  };
+  }
 
-   updateConfig(config){
+  updateConfig(config){
     this.config = merge(this.config, config);
     this.createHTTPClient();
   }
 
-   createHTTPClient () {
+  createHTTPClient () {
     this.http = axios.create({
       baseURL: this.config.url,
       headers: {
@@ -192,11 +193,8 @@ class KohostAPI{
   }
 }
 
-const Kohost = new KohostAPI();
+const API = new KohostAPI();
+ 
+export default API;
 
-Object.keys(Kohost).forEach(index => {
-  const unbound = Kohost[index];
-  exports[index] = unbound;
-});
 
-exports.Kohost = Kohost;
