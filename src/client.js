@@ -110,7 +110,11 @@ class KohostApi {
 
   getItem(key) {
     if (this.isBrowser) {
-      return localStorage.getItem(key);
+      try {
+        return JSON.parse(localStorage.getItem(key));
+      } catch (error) {
+        return localStorage.getItem(key);
+      }
     }
   }
 
@@ -118,6 +122,12 @@ class KohostApi {
     if (this.isBrowser) {
       if (typeof data === "object") data = JSON.stringify(data);
       localStorage.setItem(key, data);
+    }
+  }
+
+  removeItem(key) {
+    if (this.isBrowser) {
+      localStorage.removeItem(key);
     }
   }
 
@@ -164,7 +174,7 @@ class KohostApi {
   }
 
   post(url, body, options = {}) {
-      return this.http.post(url, body, options);
+    return this.http.post(url, body, options);
   }
 
   put(url, body, options = {}) {

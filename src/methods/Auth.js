@@ -112,6 +112,15 @@ function getNewControllerAuthToken(authKey, controllerId) {
     });
 }
 
+function logout() {
+  this.setAuthToken(null);
+  this.setRefreshToken(null);
+  this.setCurrentUser(null);
+  this.removeItem(this.config.lsAuthTokenKey);
+  this.removeItem(this.config.lsRefreshTokenKey);
+  this.removeItem(this.config.lsUserKey);
+}
+
 const Auth = {
   requestNewTokens,
   loginUser,
@@ -121,6 +130,7 @@ const Auth = {
   sendResetPasswordLink,
   forgotPassword,
   getNewControllerAuthToken,
+  logout,
 };
 
 export default Auth;
