@@ -190,7 +190,6 @@ class KohostAPI {
   }
 
   uploadFile(url, formData, uploadHandler = function () {}) {
-    url = this.config.url + url;
     return this.http({
       method: "POST",
       url,
@@ -204,6 +203,5 @@ class KohostAPI {
 }
 
 const API = new KohostAPI();
- 
-export default API;
 
+export default API;
