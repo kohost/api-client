@@ -1,5 +1,5 @@
-let axios = require ("axios");
 import merge from "lodash/merge";
+import axios from "axios";
 import interceptors from "./interceptors";
 import Admin from "./methods/Admin";
 import Auth from "./methods/Auth";
@@ -21,7 +21,7 @@ import Structure from "./methods/Structure";
 import Thermostat from "./methods/Thermostat";
 import User from "./methods/User";
 
-class KohostAPI{
+class KohostAPI {
   constructor(url) {
     this.config = {
       url: url,
@@ -91,12 +91,12 @@ class KohostAPI{
     return boundMethods;
   }
 
-  updateConfig(config){
+  updateConfig(config) {
     this.config = merge(this.config, config);
     this.createHTTPClient();
   }
 
-  createHTTPClient () {
+  createHTTPClient() {
     this.http = axios.create({
       baseURL: this.config.url,
       headers: {
@@ -111,9 +111,13 @@ class KohostAPI{
     this.http.interceptors.request.use(this.handleHTTPRequestConfig, null);
   }
 
-  getItem (key){
+  getItem(key) {
     if (this.isBrowser) {
-      return localStorage.getItem(key);
+      try {
+        return JSON.parse(localStorage.getItem(key));
+      } catch (error) {
+        return localStorage.getItem(key);
+      }
     }
   }
 
@@ -121,6 +125,12 @@ class KohostAPI{
     if (this.isBrowser) {
       if (typeof data === "object") data = JSON.stringify(data);
       localStorage.setItem(key, data);
+    }
+  }
+
+  removeItem(key) {
+    if (this.isBrowser) {
+      localStorage.removeItem(key);
     }
   }
 
@@ -196,5 +206,4 @@ class KohostAPI{
 const API = new KohostAPI();
  
 export default API;
-
 
