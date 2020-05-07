@@ -1,6 +1,6 @@
 import generateFunctions from "../utils/generate";
 
-const images = generateFunctions("/images");
+const images = generateFunctions("structure/images");
 
 async function uploadImage(formData, callbackFn) {
   return await this.uploadFile(

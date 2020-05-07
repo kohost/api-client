@@ -72,6 +72,7 @@ class KohostAPI {
     this.Commands = this.bindMethods(Commands);
     this.Image = this.bindMethods(Image);
     this.Structure = this.bindMethods(Structure);
+    this.Structure.Images = this.bindMethods(Image);
     this.Media = this.bindMethods(Media);
     this.Manifest = this.bindMethods(Manifest);
 
@@ -189,7 +190,6 @@ class KohostAPI {
   }
 
   uploadFile(url, formData, uploadHandler = function () {}) {
-    url = this.config.url + url;
     return this.http({
       method: "POST",
       url,
@@ -202,6 +202,6 @@ class KohostAPI {
   }
 }
 
-const Kohost = new KohostAPI();
+const API = new KohostAPI();
 
-export default Kohost;
+export default API;
