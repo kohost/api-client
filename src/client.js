@@ -89,6 +89,9 @@ class KohostAPI {
     this.Commands = this.bindMethods(Commands);
     this.Image = this.bindMethods(Image);
     this.Source = this.bindMethods(Source);
+    this.Source.browse = this.bindMethods(Source.browse);
+    this.Source.browse.genres = this.bindMethods(Source.browse.genres);
+    this.Source.browse.stations = this.bindMethods(Source.browse.stations);
     this.Structure = this.bindMethods(Structure);
     this.Structure.Images = this.bindMethods(Image);
     this.Media = this.bindMethods(Media);
