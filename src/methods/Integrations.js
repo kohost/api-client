@@ -1,20 +1,57 @@
-import generateFunctions from "../utils/generate";
 
 let base = "/integrations";
 
-const Integrations = generateFunctions(base);
+const Integrations = {
+  getAll: function () {
+    return this.get(baseUrl);
+  },
+  get: function (id) {
+    const url = `${baseUrl}/${id}`;
+    return this.get(url);
+  },
+  update: function (id, body) {
+    const url = `${baseUrl}/${id}`;
+    return this.put(url, body);
+  },
+  add: function (body) {
+    return this.post(baseUrl, body);
+  },
+};
 
-function getTypes() {
-  const url = `${base}/types`;
-  return this.get(url);
-}
+const types = {
+  getAll: function () {
+    return this.get(`${base}/types`);
+  },
+};
 
-function getRoomMap(roomMap) {
-  const url = `${base}/roomMap`;
-  return this.post(url, roomMap);
-}
+const deviceMap = {
+  add: function (integrationId, data) {
+    return this.post(`${base}/${integrationId}/deviceMap`, data);
+  },
+  delete: function (integrationId, data) {
+    return this.delete(`${base}/${integrationId}/deviceMap`, data);
+  },
+};
 
-Integrations.getTypes = getTypes;
-Integrations.getRoomMap = getRoomMap;
+const roomMap = {
+  add: function (integrationId, data) {
+    return this.post(`${base}/${integrationId}/roomMap`, data);
+  },
+  delete: function (integrationId, data) {
+    return this.delete(`${base}/${integrationId}/roomMap`, data);
+  },
+};
+
+const metadata = {
+  update: function (integrationId, body) {
+    const url = `${base}/${integrationId}/metaData`;
+    return this.post(url, body);
+  },
+};
+
+Integrations.Types = types;
+Integrations.RoomMap = roomMap;
+Integrations.Metadata = metadata;
+Integrations.deviceMap = deviceMap;
 
 export default Integrations;

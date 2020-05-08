@@ -13,11 +13,14 @@ import Light from "./methods/Light";
 import Lock from "./methods/Lock";
 import Manifest from "./methods/Manifest";
 import Media from "./methods/Media";
+import Notifications from "./methods/Notifications";
 import Reports from "./methods/Reports";
 import Room from "./methods/Room";
 import Settings from "./methods/Settings";
 import Shade from "./methods/Shade";
+import Source from "./methods/Source";
 import Structure from "./methods/Structure";
+import Subscriptions from "./methods/Subscriptions";
 import Thermostat from "./methods/Thermostat";
 import User from "./methods/User";
 
@@ -55,8 +58,10 @@ class KohostAPI {
     this.User = this.bindMethods(User);
 
     this.HotelRoom = this.bindMethods(HotelRoom);
+  
     this.HotelRoom.Room = this.bindMethods(HotelRoom.Room);
     this.HotelRoom.Guest = this.bindMethods(HotelRoom.Guest);
+    this.HotelRoom.Alarms = this.bindMethods(HotelRoom.Alarms);
     this.HotelRoom.Scenes = this.bindMethods(HotelRoom.Scenes);
     this.HotelRoom.Integrations = this.bindMethods(HotelRoom.Integrations);
 
@@ -65,16 +70,31 @@ class KohostAPI {
     this.Room.Shade = this.bindMethods(Shade);
     this.Room.Thermostat = this.bindMethods(Thermostat);
     this.Room.Lock = this.bindMethods(Lock);
+    this.Room.Scenes = this.bindMethods(Room.Scenes);
+    this.Room.Security = this.bindMethods(Room.Security);
+    this.Room.Security.Locks = this.bindMethods(Room.Security.Locks);
+    this.Room.Security.Cameras = this.bindMethods(Room.Security.Cameras);
+
     this.Settings = this.bindMethods(Settings);
+    this.Subscriptions = this.bindMethods(Subscriptions);
     this.Reports = this.bindMethods(Reports);
     this.Controllers = this.bindMethods(Controllers);
+
     this.Integrations = this.bindMethods(Integrations);
+    this.Integrations.Types = this.bindMethods(Integrations.Types);
+    this.Integrations.RoomMap = this.bindMethods(Integrations.RoomMap);
+    this.Integrations.Metadata = this.bindMethods(Integrations.Metadata);
+    this.Integrations.deviceMap = this.bindMethods(Integrations.deviceMap);
+
     this.Commands = this.bindMethods(Commands);
     this.Image = this.bindMethods(Image);
+    this.Source = this.bindMethods(Source);
     this.Structure = this.bindMethods(Structure);
     this.Structure.Images = this.bindMethods(Image);
     this.Media = this.bindMethods(Media);
     this.Manifest = this.bindMethods(Manifest);
+
+    this.Notifications = this.bindMethods(Notifications);
 
     this.createHTTPClient();
   }
@@ -204,6 +224,5 @@ class KohostAPI {
 }
 
 const API = new KohostAPI();
- 
-export default API;
 
+export default API;

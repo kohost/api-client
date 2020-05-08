@@ -1,51 +1,88 @@
 import generateFunctions from "../utils/generate";
-import {
-  generateSceneFunctions,
-  generateIntegrationFunctions,
-} from "../utils/generate";
 
 const base = "/hotel-rooms";
-
-function getRooms(hotelRoomId) {
-  const url = `${base}/${hotelRoomId}/rooms`;
-  return this.get(url);
-}
-
-function addRoom(hotelRoomId, body) {
-  const url = `${base}/${hotelRoomId}/rooms`;
-  return this.post(url, body);
-}
-
-function deleteRooms(hotelRoomId, body) {
-  const url = `${base}/${hotelRoomId}/rooms`;
-  return this.delete(url, body);
-}
-
-const Room = {
-  getAll: getRooms,
-  add: addRoom,
-  delete: deleteRooms,
-};
-
-function getGuests(hotelRoomId) {
-  const url = `${base}/${hotelRoomId}/guests`;
-  return this.get(url);
-}
-
-const Guest = {
-  getAll: getGuests,
-};
-
-function getScenes(hotelRoomId) {
-  const url = `${base}/${hotelRoomId}/scenes`;
-  return this.get(url);
-}
-
 const HotelRoom = generateFunctions(base);
 
-HotelRoom.Room = Room;
-HotelRoom.Guest = Guest;
-HotelRoom.Scenes = generateSceneFunctions();
-HotelRoom.Integrations = generateIntegrationFunctions();
+HotelRoom.Room = {
+  getAll: function getRooms(hotelRoomId) {
+    const url = `${base}/${hotelRoomId}/rooms`;
+    return this.get(url);
+  },
+  add: function addRoom(hotelRoomId, body) {
+    const url = `${base}/${hotelRoomId}/rooms`;
+    return this.post(url, body);
+  },
+  delete: function deleteRooms(hotelRoomId, body) {
+    const url = `${base}/${hotelRoomId}/rooms`;
+    return this.delete(url, body);
+  },
+};
+HotelRoom.Guest = {
+  getAll: function getGuests(hotelRoomId) {
+    const url = `${base}/${hotelRoomId}/guests`;
+    return this.get(url);
+  },
+};
+
+HotelRoom.Scenes = {
+  getAll: function (roomId) {
+    const url = `${base}/${roomId}/scenes`;
+    return this.get(url);
+  },
+  get: function (roomId, id) {
+    const url = `${base}/${roomId}/scenes/${id}`;
+    return this.get(url);
+  },
+  trigger: function (roomId, id) {
+    const url = `${base}/${roomId}/scenes/${id}/trigger`;
+    return this.post(url, {});
+  },
+  update: function (roomId, id, body) {
+    const url = `${base}/${roomId}/scenes/${id}`;
+    return this.put(url, body);
+  },
+  add: function (roomId, body) {
+    const url = `${base}/${roomId}/scenes`;
+    return this.post(url, body);
+  },
+  delete: function (roomId, id) {
+    const url = `${base}/${roomId}/scenes/${id}`;
+    return this.delete(url);
+  },
+};
+
+HotelRoom.Integrations = {
+  getAll: function (roomId) {
+    const url = `${base}/${roomId}/integrations`;
+    return this.get(url);
+  },
+  add: function (roomId, body) {
+    const url = `${base}/${roomId}/integrations`;
+    return this.post(url, body);
+  },
+  delete: function (roomId, id) {
+    const url = `${base}/${roomId}/integrations/${id}`;
+    return this.delete(url);
+  },
+};
+
+HotelRoom.Alarms = {
+  getAll: function (roomId) {
+    const url = `${base}/${roomId}/alarms`;
+    return this.get(url);
+  },
+  get: function (roomId, id) {
+    const url = `${base}/${roomId}/alarms/${id}`;
+    return this.get(url);
+  },
+  add: function (roomId, body) {
+    const url = `${base}/${roomId}/alarms`;
+    return this.post(url, body);
+  },
+  delete: function (roomId, id) {
+    const url = `${base}/${roomId}/alarms/${id}`;
+    return this.delete(url);
+  },
+};
 
 export default HotelRoom;
