@@ -1,6 +1,7 @@
 import generateFunctions from "../utils/generate";
 
-const Room = generateFunctions("/rooms");
+const base = "/rooms";
+const Room = generateFunctions(base);
 
 Room.Scenes = {
   getAll: function (roomId) {
@@ -26,6 +27,20 @@ Room.Scenes = {
   delete: function (roomId, id) {
     const url = `${base}/${roomId}/scenes/${id}`;
     return this.delete(url);
+  },
+};
+Room.Media = {
+  getAll: function (roomId) {
+    const url = `${base}/${roomId}/media`;
+    return this.get(url);
+  },
+  update: function (roomId, body) {
+    const url = `${base}/${roomId}/media`;
+    return this.put(url, body);
+  },
+  trigger: function (roomId, body) {
+    const url = `${base}/${roomId}/media`;
+    return this.post(url, body);
   },
 };
 
@@ -65,19 +80,19 @@ Room.Security = {
       const url = `${base}/${roomId}/security/cameras`;
       return this.get(url);
     },
-    get: function (roomId,id) {
+    get: function (roomId, id) {
       const url = `${base}/${roomId}/security/cameras/${id}`;
       return this.get(url);
     },
-    update: function (roomId,id, body) {
+    update: function (roomId, id, body) {
       const url = `${base}/${roomId}/security/cameras/${id}`;
       return this.put(url, body);
     },
-    add: function (roomId,body) {
+    add: function (roomId, body) {
       const url = `${base}/${roomId}/security/cameras`;
       return this.post(url, body);
     },
-    delete: function (roomId,id) {
+    delete: function (roomId, id) {
       const url = `${base}/${roomId}/security/cameras/${id}`;
       return this.delete(url);
     },

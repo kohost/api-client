@@ -71,6 +71,7 @@ class KohostAPI {
     this.Room.Thermostat = this.bindMethods(Thermostat);
     this.Room.Lock = this.bindMethods(Lock);
     this.Room.Scenes = this.bindMethods(Room.Scenes);
+    this.Room.Media = this.bindMethods(Room.Media);
     this.Room.Security = this.bindMethods(Room.Security);
     this.Room.Security.Locks = this.bindMethods(Room.Security.Locks);
     this.Room.Security.Cameras = this.bindMethods(Room.Security.Cameras);
