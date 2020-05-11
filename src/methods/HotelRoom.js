@@ -8,9 +8,9 @@ HotelRoom.Room = {
     const url = `${base}/${hotelRoomId}/rooms`;
     return this.get(url);
   },
-  add: function addRoom(hotelRoomId, body) {
+  add: function addRoom(hotelRoomId, rooms) {
     const url = `${base}/${hotelRoomId}/rooms`;
-    return this.post(url, body);
+    return this.post(url, { rooms });
   },
   delete: function deleteRooms(hotelRoomId, body) {
     const url = `${base}/${hotelRoomId}/rooms`;

@@ -3,18 +3,18 @@ let base = "/integrations";
 
 const Integrations = {
   getAll: function () {
-    return this.get(baseUrl);
+    return this.get(base);
   },
   get: function (id) {
-    const url = `${baseUrl}/${id}`;
+    const url = `${base}/${id}`;
     return this.get(url);
   },
   update: function (id, body) {
-    const url = `${baseUrl}/${id}`;
+    const url = `${base}/${id}`;
     return this.put(url, body);
   },
   add: function (body) {
-    return this.post(baseUrl, body);
+    return this.post(base, body);
   },
 };
 
