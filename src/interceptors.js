@@ -11,7 +11,7 @@ function handleHTTPError(error) {
     if (status === 401) {
       return this.handleLoginRequired();
     }
-    if (status === 400 && data && data.error && errorCode === 1010) {
+    if (status === 400 && errorCode === 1010) {
       return this.handleLoginRequired();
     }
 
@@ -19,8 +19,9 @@ function handleHTTPError(error) {
       return this.Auth.requestNewTokens()
         .then((response) => {
           // update headers with the new tokens
-          originalReq.headers[this.authTokenKey] =
-            response.headers[this.authTokenKey];
+          const newToken = response.headers[this.authTokenKey];
+          originalReq.headers[this.authTokenKey] = newToken;
+          this.handleNewToken(newToken);
           return this.http(originalReq);
         })
         .catch(() => this.handleLoginRequired());

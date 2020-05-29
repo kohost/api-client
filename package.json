@@ -1,6 +1,6 @@
 {
   "name": "@kohost/api-client",
-  "version": "0.2.0-beta7",
+  "version": "0.2.0-beta9",
   "description": "HTTP client to interact with Kohost APIs",
   "main": "dist/bundle.js",
   "scripts": {
@@ -28,9 +28,9 @@
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
+    "@babel/core": "^7.9.6",
     "babel-loader": "^8.1.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "husky": "^4.2.5",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",

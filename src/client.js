@@ -35,8 +35,10 @@ class KohostAPI {
       lsUserKey: "current-user",
       clientId: undefined,
       secretKey: undefined,
+      autoRefreshTokens: true,
+      onNewToken: function () {},
       onLoginRequired: function () {
-        throw new Error("Login required");
+        throw new Error("API Client - login required");
       },
     };
     this.isBrowser = typeof window !== "undefined";
@@ -59,7 +61,7 @@ class KohostAPI {
     this.User = this.bindMethods(User);
 
     this.HotelRoom = this.bindMethods(HotelRoom);
-  
+
     this.HotelRoom.Room = this.bindMethods(HotelRoom.Room);
     this.HotelRoom.Guest = this.bindMethods(HotelRoom.Guest);
     this.HotelRoom.Alarms = this.bindMethods(HotelRoom.Alarms);
@@ -192,6 +194,10 @@ class KohostAPI {
 
   handleLoginRequired() {
     return this.config.onLoginRequired();
+  }
+
+  handleNewToken(token) {
+    return this.config.onNewToken(token);
   }
 
   handleLogAndNotifyError(error) {
