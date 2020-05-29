@@ -11,6 +11,7 @@ import Integrations from "./methods/Integrations";
 import Image from "./methods/Image";
 import Light from "./methods/Light";
 import Lock from "./methods/Lock";
+import Manager from "./methods/Manager";
 import Manifest from "./methods/Manifest";
 import Media from "./methods/Media";
 import Notifications from "./methods/Notifications";
@@ -99,6 +100,7 @@ class KohostAPI {
     this.Structure.Images = this.bindMethods(Image);
     this.Media = this.bindMethods(Media);
     this.Manifest = this.bindMethods(Manifest);
+    this.Manager = this.bindMethods(Manager);
 
     this.Notifications = this.bindMethods(Notifications);
 
