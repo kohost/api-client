@@ -47,9 +47,16 @@ function loginGuest(lastName, roomNumber, phone) {
   });
 }
 
-function resetPassword(userID, password) {
+function resetPassword(userID, password, token) {
   const url = base + `/${userID}/set-password`;
-  return this.post(url, { password }).then((response) => {
+  let options = {};
+  if (token) {
+    options.headers = {
+      "x-reset-token": token,
+    };
+  }
+
+  return this.post(url, { password }, options).then((response) => {
     if (response.status >= 400 && response.status <= 500) {
       body.error = response.data.error;
       return body;
