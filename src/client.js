@@ -228,7 +228,7 @@ class KohostAPI {
       data: formData,
       onUploadProgress: uploadHandler,
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
       },
     });
   }
