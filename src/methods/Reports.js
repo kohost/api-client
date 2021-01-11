@@ -3,10 +3,16 @@ import generateFunctions from "../utils/generate";
 const base = "/reports";
 const Reports = generateFunctions(base);
 
-function getStats(data) {
+function getEnergyStats(data) {
   const url = `${base}/room/stats`;
   return this.http.get(url, { params: data });
 }
 
-Reports.getStats = getStats;
+function getTicketStats(data) {
+  const url = `${base}/ticket/stats`;
+  return this.http.get(url, { params: data });
+}
+
+Reports.getEnergyStats = getEnergyStats;
+Reports.getTicketStats = getTicketStats;
 export default Reports;
