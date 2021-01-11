@@ -3,6 +3,7 @@ import axios from "axios";
 import interceptors from "./interceptors";
 import Admin from "./methods/Admin";
 import Auth from "./methods/Auth";
+import Concierge from "./methods/Concierge";
 import Controllers from "./methods/Controller";
 import Commands from "./methods/Commands";
 import Guest from "./methods/Guest";
@@ -89,7 +90,7 @@ class KohostAPI {
     this.Integrations.RoomMap = this.bindMethods(Integrations.RoomMap);
     this.Integrations.Metadata = this.bindMethods(Integrations.Metadata);
     this.Integrations.deviceMap = this.bindMethods(Integrations.deviceMap);
-
+    this.Concierge = this.bindMethods(Concierge);
     this.Commands = this.bindMethods(Commands);
     this.Image = this.bindMethods(Image);
     this.Source = this.bindMethods(Source);
