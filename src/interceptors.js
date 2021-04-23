@@ -1,5 +1,6 @@
 function handleHTTPError(error) {
   const { config: originalReq } = error;
+  if (!error.response) return Promise.reject(error);
   const { status, data } = error.response;
   const errorCode = data && data.error && data.error.code;
   try {
