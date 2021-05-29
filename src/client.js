@@ -37,6 +37,7 @@ class KohostAPI {
       clientId: undefined,
       secretKey: undefined,
       autoRefreshTokens: true,
+      tenant: null,
       onNewToken: function () {},
       onLoginRequired: function () {
         throw new Error("API Client - login required");
@@ -130,6 +131,7 @@ class KohostAPI {
       baseURL: this.config.url,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
+        "x-tenant-id": this.config.tenant,
       },
     });
 
