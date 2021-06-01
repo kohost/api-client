@@ -90,7 +90,7 @@ class KohostAPI {
     this.Integrations.Types = this.bindMethods(Integrations.Types);
     this.Integrations.RoomMap = this.bindMethods(Integrations.RoomMap);
     this.Integrations.Metadata = this.bindMethods(Integrations.Metadata);
-    this.Integrations.deviceMap = this.bindMethods(Integrations.deviceMap);
+    this.Integrations.DeviceMap = this.bindMethods(Integrations.DeviceMap);
     this.Concierge = this.bindMethods(Concierge);
     this.Commands = this.bindMethods(Commands);
     this.Image = this.bindMethods(Image);

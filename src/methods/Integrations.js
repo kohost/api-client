@@ -1,4 +1,3 @@
-
 let base = "/integrations";
 
 const Integrations = {
@@ -52,6 +51,6 @@ const metadata = {
 Integrations.Types = types;
 Integrations.RoomMap = roomMap;
 Integrations.Metadata = metadata;
-Integrations.deviceMap = deviceMap;
+Integrations.DeviceMap = deviceMap;
 
 export default Integrations;
