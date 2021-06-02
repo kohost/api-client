@@ -11,6 +11,7 @@ import HotelRoom from "./methods/HotelRoom";
 import Integrations from "./methods/Integrations";
 import Image from "./methods/Image";
 import Light from "./methods/Light";
+import Privacy from "./methods/Privacy";
 import Lock from "./methods/Lock";
 import Manager from "./methods/Manager";
 import Manifest from "./methods/Manifest";
@@ -75,6 +76,7 @@ class KohostAPI {
     this.Room.Shade = this.bindMethods(Shade);
     this.Room.Thermostat = this.bindMethods(Thermostat);
     this.Room.Lock = this.bindMethods(Lock);
+    this.Room.Privacy = this.bindMethods(Privacy);
     this.Room.Scenes = this.bindMethods(Room.Scenes);
     this.Room.Media = this.bindMethods(Room.Media);
     this.Room.Security = this.bindMethods(Room.Security);
