@@ -43,7 +43,7 @@ const roomMap = {
 
 const metadata = {
   update: function (integrationId, body) {
-    const url = `${base}/${integrationId}/metaData`;
+    const url = `${base}/${integrationId}/metadata`;
     return this.post(url, body);
   },
 };
