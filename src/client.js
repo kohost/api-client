@@ -6,6 +6,7 @@ import Auth from "./methods/Auth";
 import Concierge from "./methods/Concierge";
 import Controllers from "./methods/Controller";
 import Commands from "./methods/Commands";
+import Group from "./methods/Group";
 import Guest from "./methods/Guest";
 import HotelRoom from "./methods/HotelRoom";
 import Integrations from "./methods/Integrations";
@@ -63,6 +64,20 @@ class KohostAPI {
     this.Guest = this.bindMethods(Guest);
     this.User = this.bindMethods(User);
 
+    this.Group = this.bindMethods(Group);
+    this.Group.Room = this.bindMethods(Group.Room);
+    this.Group.Room.Light = this.bindMethods(Group.Room.Light);
+    this.Group.Room.Shade = this.bindMethods(Group.Room.Shade);
+    this.Group.Room.Thermostat = this.bindMethods(Group.Room.Thermostat);
+    this.Group.Room.Media = this.bindMethods(Group.Room.Media);
+    this.Group.Room.Privacy = this.bindMethods(Group.Room.Privacy);
+    this.Group.Room.Security = this.bindMethods(Group.Room.Security);
+    this.Group.Room.Security.Locks = this.bindMethods(
+      Group.Room.Security.Locks
+    );
+    this.Group.Room.Security.Cameras = this.bindMethods(
+      Group.Room.Security.Cameras
+    );
     this.HotelRoom = this.bindMethods(HotelRoom);
 
     this.HotelRoom.Room = this.bindMethods(HotelRoom.Room);

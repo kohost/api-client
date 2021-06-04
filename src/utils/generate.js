@@ -47,6 +47,58 @@ export function generateDeviceFunctions(path) {
   };
 }
 
+export function generateGroupDeviceFunctions(path) {
+  const base = "/groups";
+  return {
+    getAll: function (groupId, roomId) {
+      const url = `${base}/${groupId}/rooms/${roomId}/${path}`;
+      return this.get(url);
+    },
+    get: function (groupId, roomId, id) {
+      const url = `${base}/${groupId}/rooms/${roomId}/${path}/${id}`;
+      return this.get(url);
+    },
+    update: function (groupId, roomId, id, body) {
+      const url = `${base}/${groupId}/rooms/${roomId}/${path}/${id}`;
+      return this.put(url, body);
+    },
+    add: function (groupId, roomId, body) {
+      const url = `${base}/${groupId}/rooms/${roomId}/${path}`;
+      return this.post(url, body);
+    },
+    delete: function (groupId, roomId, id) {
+      const url = `${base}/${groupId}/rooms/${roomId}/${path}/${id}`;
+      return this.delete(url);
+    },
+  };
+}
+
+export function generateGroupRoomFunctions() {
+  const base = "/groups";
+  return {
+    getAll: function (groupId) {
+      const url = `${base}/${groupId}/rooms`;
+      return this.get(url);
+    },
+    get: function (groupId, roomId) {
+      const url = `${base}/${groupId}/rooms/${roomId}`;
+      return this.get(url);
+    },
+    update: function (groupId, roomId, body) {
+      const url = `${base}/${groupId}/rooms/${roomId}`;
+      return this.put(url, body);
+    },
+    add: function (groupId, body) {
+      const url = `${base}/${groupId}/rooms`;
+      return this.post(url, body);
+    },
+    delete: function (groupId, roomId) {
+      const url = `${base}/${groupId}/rooms/${roomId}`;
+      return this.delete(url);
+    },
+  };
+}
+
 export function generateSceneFunctions() {
   const base = "/hotel-rooms";
   return {
