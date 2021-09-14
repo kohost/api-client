@@ -10,13 +10,11 @@ async function requestNewTokens() {
         [this.refreshTokenKey]: this.getRefreshToken(),
       },
     }
-  )
-    .then((response) => {
-      this.setAuthToken(response.headers[this.authTokenKey]);
-      this.setRefreshToken(response.headers[this.refreshTokenKey]);
-      return response;
-    })
-    .catch((error) => this.handleLogAndNotifyError(error));
+  ).then((response) => {
+    this.setAuthToken(response.headers[this.authTokenKey]);
+    this.setRefreshToken(response.headers[this.refreshTokenKey]);
+    return response;
+  });
 }
 
 function loginUser(email, password) {

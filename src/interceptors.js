@@ -8,8 +8,9 @@ function handleHTTPError(error) {
     if (!expectedError) this.handleLogAndNotifyError(error);
 
     // prettier-ignore
-    const newTokensNeeded = expectedError && errorCode && ((status === 401 && errorCode === 1004) || (status === 400 && errorCode === 1009));
-    if (status === 401) {
+    const newTokensNeeded = expectedError && errorCode === 1004 && status === 401
+
+    if (status === 401 && !newTokensNeeded) {
       return this.handleLoginRequired();
     }
     if (status === 400 && errorCode === 1010) {
@@ -17,15 +18,13 @@ function handleHTTPError(error) {
     }
 
     if (newTokensNeeded) {
-      return this.Auth.requestNewTokens()
-        .then((response) => {
-          // update headers with the new tokens
-          const newToken = response.headers[this.authTokenKey];
-          originalReq.headers[this.authTokenKey] = newToken;
-          this.handleNewToken(newToken);
-          return this.http(originalReq);
-        })
-        .catch(() => this.handleLoginRequired());
+      return this.Auth.requestNewTokens().then((response) => {
+        // update headers with the new tokens
+        const newToken = response.headers[this.authTokenKey];
+        originalReq.headers[this.authTokenKey] = newToken;
+        this.handleNewToken(newToken);
+        return this.http(originalReq);
+      });
     }
   } catch (error) {
     this.handleLogAndNotifyError(error);
