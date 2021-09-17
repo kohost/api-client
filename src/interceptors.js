@@ -11,10 +11,11 @@ function handleHTTPError(error) {
     const newTokensNeeded = expectedError && errorCode === 1004 && status === 401
 
     if (status === 401 && !newTokensNeeded) {
-      return this.handleLoginRequired();
+      return Promise.reject(error);
     }
     if (status === 400 && errorCode === 1010) {
-      return this.handleLoginRequired();
+      this.handleLoginRequired();
+      return Promise.reject(error);
     }
 
     if (newTokensNeeded) {
@@ -35,6 +36,8 @@ function handleHTTPError(error) {
 
 function handleHTTPResponse(response) {
   if (response && response.data && response.data.data) {
+    response.query = response.data.query;
+    response.pagination = response.data.pagination;
     response.data = response.data.data;
   }
   return response;
