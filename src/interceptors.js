@@ -3,9 +3,16 @@ function handleHTTPError(error) {
   if (!error.response) return Promise.reject(error);
   const { status, data } = error.response;
   const errorCode = data && data.error && data.error.code;
+  const errorMessage = data && data.error && data.error.message;
+
   try {
     const expectedError = status >= 400 && status < 500;
     if (!expectedError) this.handleLogAndNotifyError(error);
+
+    if (errorMessage && errorMessage === "Login Required") {
+      this.handleLoginRequired();
+      return Promise.reject(error);
+    }
 
     // prettier-ignore
     const newTokensNeeded = expectedError && errorCode === 1004 && status === 401
