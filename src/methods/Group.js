@@ -30,4 +30,19 @@ Group.Room.Security = {
   Cameras: generateGroupDeviceFunctions("security/cameras"),
 };
 
+Group.Integrations = {
+  getAll: function (groupId) {
+    const url = `${base}/${groupId}/integrations`;
+    return this.get(url);
+  },
+  add: function (groupId, body) {
+    const url = `${base}/${groupId}/integrations`;
+    return this.post(url, body);
+  },
+  delete: function (groupId, integrationId) {
+    const url = `${base}/${groupId}/integrations/${integrationId}`;
+    return this.delete(url);
+  },
+};
+
 export default Group;

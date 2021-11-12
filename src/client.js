@@ -65,6 +65,7 @@ class KohostAPI {
     this.User = this.bindMethods(User);
 
     this.Group = this.bindMethods(Group);
+    this.Group.Integrations = this.bindMethods(Group.Integrations);
     this.Group.Room = this.bindMethods(Group.Room);
     this.Group.Room.Light = this.bindMethods(Group.Room.Light);
     this.Group.Room.Shade = this.bindMethods(Group.Room.Shade);
