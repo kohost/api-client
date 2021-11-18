@@ -10,6 +10,7 @@ function setTokensFromResponse(response) {
 }
 
 async function requestNewTokens() {
+  const setTokens = setTokensFromResponse.bind(this);
   if (!this.getRefreshToken()) return this.handleLoginRequired();
   return this.post(
     `${base}/token`,
@@ -20,30 +21,29 @@ async function requestNewTokens() {
       },
     }
   ).then((response) => {
-    setTokensFromResponse(response);
+    setTokens(response);
     return response;
   });
 }
 
 function loginUser(email, password) {
+  const setTokens = setTokensFromResponse.bind(this);
   const url = `${base}/user`;
   return this.post(url, { email: email.toLowerCase(), password }).then(
     (response) => {
-      const authToken = response.headers[this.authTokenKey];
-      const refreshToken = response.headers[this.refreshTokenKey];
-      const user = response.data[0];
-      this.setAuthToken(authToken);
-      this.setRefreshToken(refreshToken);
-      this.setCurrentUser(user);
+      setTokens(response);
+      const user = response && response.data && response.data[0];
+      if (user) this.setCurrentUser(user);
       return response;
     }
   );
 }
 
 function loginGuest(lastName, roomNumber, phone) {
+  const setTokens = setTokensFromResponse.bind(this);
   const url = `${base}/guest`;
   return this.post(url, { lastName, roomNumber, phone }).then((response) => {
-    setTokensFromResponse(response);
+    setTokens(response);
     const user = response && response.data && response.data[0];
     if (user) this.setCurrentUser(user);
     return response;
@@ -106,14 +106,16 @@ function forgotPassword(email) {
 }
 
 function getNewControllerAuthToken(authKey, controllerId) {
+  const setTokens = setTokensFromResponse.bind(this);
   const url = `${base}/controller`;
+
   return this.post(url, { authKey, controllerId })
     .then((response) => {
       if (response.status >= 400 && response.status <= 500) {
         body.error = response.data.error;
         return body;
       } else {
-        setTokensFromResponse(response);
+        setTokens(response);
         return response;
       }
     })
