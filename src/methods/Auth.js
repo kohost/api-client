@@ -1,5 +1,14 @@
 const base = "/auth";
 
+function setTokensFromResponse(response) {
+  if (response && response.headers) {
+    const authToken = response.headers[this.authTokenKey];
+    const refreshToken = response.headers[this.refreshTokenKey];
+    if (authToken) this.setAuthToken(authToken);
+    if (refreshToken) this.setRefreshToken(refreshToken);
+  }
+}
+
 async function requestNewTokens() {
   if (!this.getRefreshToken()) return this.handleLoginRequired();
   return this.post(
@@ -11,8 +20,7 @@ async function requestNewTokens() {
       },
     }
   ).then((response) => {
-    this.setAuthToken(response.headers[this.authTokenKey]);
-    this.setRefreshToken(response.headers[this.refreshTokenKey]);
+    setTokensFromResponse(response);
     return response;
   });
 }
@@ -35,12 +43,9 @@ function loginUser(email, password) {
 function loginGuest(lastName, roomNumber, phone) {
   const url = `${base}/guest`;
   return this.post(url, { lastName, roomNumber, phone }).then((response) => {
-    const authToken = response.headers[this.authTokenKey];
-    const refreshToken = response.headers[this.refreshTokenKey];
-    const user = response.data[0];
-    this.setAuthToken(authToken);
-    this.setRefreshToken(refreshToken);
-    this.setCurrentUser(user);
+    setTokensFromResponse(response);
+    const user = response && response.data && response.data[0];
+    if (user) this.setCurrentUser(user);
     return response;
   });
 }
@@ -108,7 +113,7 @@ function getNewControllerAuthToken(authKey, controllerId) {
         body.error = response.data.error;
         return body;
       } else {
-        this.setAuthToken(response.headers[this.authTokenKey]);
+        setTokensFromResponse(response);
         return response;
       }
     })
@@ -136,6 +141,7 @@ const Auth = {
   forgotPassword,
   getNewControllerAuthToken,
   logout,
+  setTokensFromResponse,
 };
 
 export default Auth;

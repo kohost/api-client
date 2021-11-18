@@ -28,10 +28,16 @@ function handleHTTPError(error) {
     if (newTokensNeeded) {
       return this.Auth.requestNewTokens().then((response) => {
         // update headers with the new tokens
-        const newToken = response.headers[this.authTokenKey];
-        originalReq.headers[this.authTokenKey] = newToken;
-        this.handleNewToken(newToken);
-        return this.http(originalReq);
+        if (
+          response &&
+          response.headers &&
+          response.headers[this.authTokenKey]
+        ) {
+          const newToken = response.headers[this.authTokenKey];
+          originalReq.headers[this.authTokenKey] = newToken;
+          this.handleNewToken(newToken);
+          return this.http(originalReq);
+        }
       });
     }
   } catch (error) {
