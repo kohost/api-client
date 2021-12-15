@@ -28,7 +28,7 @@ import Subscriptions from "./methods/Subscriptions";
 import Thermostat from "./methods/Thermostat";
 import User from "./methods/User";
 
-class KohostAPI {
+class KohostAPIClient {
   constructor(url) {
     this.config = {
       url: url,
@@ -255,6 +255,6 @@ class KohostAPI {
   }
 }
 
-const API = new KohostAPI();
+const API = new KohostAPIClient();
 
 export default API;
