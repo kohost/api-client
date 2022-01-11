@@ -28,6 +28,7 @@ Group.Room.Security = {
   },
   Locks: generateGroupDeviceFunctions("security/locks"),
   Cameras: generateGroupDeviceFunctions("security/cameras"),
+  Alarms: generateGroupDeviceFunctions("security/alarms"),
 };
 
 Group.Integrations = {
