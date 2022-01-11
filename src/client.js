@@ -79,6 +79,9 @@ class KohostAPIClient {
     this.Group.Room.Security.Cameras = this.bindMethods(
       Group.Room.Security.Cameras
     );
+    this.Group.Room.Security.Alarms = this.bindMethods(
+      Group.Room.Security.Alarms
+    );
     this.HotelRoom = this.bindMethods(HotelRoom);
 
     this.HotelRoom.Room = this.bindMethods(HotelRoom.Room);
