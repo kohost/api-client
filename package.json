@@ -2,7 +2,8 @@
   "name": "@kohost/api-client",
   "version": "0.6.5-alpha.3",
   "description": "HTTP client to interact with Kohost APIs",
-  "main": "dist/bundle.js",
+  "main": "dist/bundle.node.js",
+  "module": "dist/bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
@@ -36,13 +37,13 @@
     "util": "^0.12.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.5",
+    "@babel/core": "^7.16.7",
     "babel-loader": "^8.2.3",
     "eslint": "^7.32.0",
     "husky": "^4.3.8",
     "prettier": "^2.5.1",
     "pretty-quick": "^2.0.2",
-    "webpack": "^5.65.0",
+    "webpack": "^5.66.0",
     "webpack-cli": "^4.9.1"
   },
   "husky": {

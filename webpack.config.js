@@ -5,7 +5,7 @@ const serverConfig = {
   entry: "./src/client.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "bundle.node.js",
     libraryTarget: "commonjs2",
   },
 };
@@ -33,4 +33,4 @@ const clientConfig = {
   },
 };
 
-module.exports = [serverConfig, clientConfig];
+module.exports = [clientConfig, serverConfig];
