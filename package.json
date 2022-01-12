@@ -21,6 +21,9 @@
     "kohost",
     "api"
   ],
+  "files": [
+    "dist/*.js"
+  ],
   "author": "Ian Rogers",
   "license": "ISC",
   "dependencies": {
