@@ -1,4 +1,4 @@
-image: node:12.14.1
+image: node:12.22
 
 pipelines:
   pull-requests:
@@ -9,7 +9,11 @@ pipelines:
             - node
           script:
             - npm install
-            - npm run build
+            - npm version prerelease --preid=alpha -m "Upgrade to %s [skip ci]"
+            - git push && git push --tags
+            - pipe: atlassian/npm-publish:0.2.6
+              variables:
+                NPM_TOKEN: $NPM_TOKEN
   branches:
     master:
       - step:
@@ -18,7 +22,18 @@ pipelines:
             - node
           script:
             - npm install
-            - npm run prepare
+            - pipe: atlassian/npm-publish:0.2.6
+              variables:
+                NPM_TOKEN: $NPM_TOKEN
+    dev:
+      - step:
+          name: Build and publish to NPM
+          caches:
+            - node
+          script:
+            - npm install
+            - npm version prerelease --preid=beta -m "Upgrade to %s [skip ci]"
+            - git push && git push --tags
             - pipe: atlassian/npm-publish:0.2.6
               variables:
                 NPM_TOKEN: $NPM_TOKEN
