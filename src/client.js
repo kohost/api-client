@@ -222,7 +222,6 @@ class KohostAPIClient {
   }
 
   handleNewToken(token) {
-    console.log("handling new token", token);
     return this.config.onNewToken(token);
   }
 
