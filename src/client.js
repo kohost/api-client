@@ -189,6 +189,7 @@ class KohostAPIClient {
   setAuthToken(token) {
     this.authToken = token;
     this.saveItem(this.config.lsAuthTokenKey, token);
+    this.handleNewToken(token);
   }
 
   setRefreshToken(token) {
@@ -221,6 +222,7 @@ class KohostAPIClient {
   }
 
   handleNewToken(token) {
+    console.log("handling new token", token);
     return this.config.onNewToken(token);
   }
 
