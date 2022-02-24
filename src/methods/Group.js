@@ -11,6 +11,7 @@ Group.Room.Light = generateGroupDeviceFunctions("lights");
 Group.Room.Shade = generateGroupDeviceFunctions("shades");
 Group.Room.Thermostat = generateGroupDeviceFunctions("thermostats");
 Group.Room.Privacy = generateGroupDeviceFunctions("privacy");
+Group.Room.MotionSensor = generateGroupDeviceFunctions("motionSensors");
 Group.Room.Media = {
   get: function (groupId, roomId) {
     const url = `${base}/${groupId}/rooms/${roomId}/media`;
