@@ -1,6 +1,6 @@
 {
   "name": "@kohost/api-client",
-  "version": "0.7.4",
+  "version": "0.8.0",
   "description": "HTTP client to interact with Kohost APIs",
   "main": "dist/bundle.node.js",
   "module": "dist/bundle.js",
