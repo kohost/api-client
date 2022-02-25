@@ -73,6 +73,9 @@ class KohostAPIClient {
     this.Group.Room.Media = this.bindMethods(Group.Room.Media);
     this.Group.Room.Privacy = this.bindMethods(Group.Room.Privacy);
     this.Group.Room.MotionSensor = this.bindMethods(Group.Room.MotionSensor);
+    this.Group.Room.SceneController = this.bindMethods(
+      Group.Room.SceneController
+    );
     this.Group.Room.Security = this.bindMethods(Group.Room.Security);
     this.Group.Room.Security.Locks = this.bindMethods(
       Group.Room.Security.Locks
