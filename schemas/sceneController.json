@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/sceneController.json",
+  "title": "Scene Controller",
+  "description": "Any smart scene controller",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/id"
+    },
+    "type": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/type"
+    },
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/systemData"
+    },
+    "supportedNotifications": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/supportedNotifications"
+    },
+    "notification": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/notification"
+    },
+    "subType": {
+      "type": ["string", "null"]
+    },
+    "supportedScenes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "scene": {
+      "type": ["object", "null"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "$ref": "#/properties/supportedScenes/items"
+        },
+        "timestamp": {
+          "type": "number",
+          "minimum": 1655907956593
+        }
+      }
+    },
+    "level": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "state": {
+      "type": "string",
+      "enum": ["on", "off"]
+    }
+  },
+  "additionalProperties": true,
+  "required": ["id", "type", "systemData", "supportedScenes", "scene"]
+}

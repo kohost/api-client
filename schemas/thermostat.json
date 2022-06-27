@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/thermostat.json",
+  "title": "Thermostat",
+  "description": "Any smart thermostat",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/id"
+    },
+    "type": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/type"
+    },
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/systemData"
+    },
+    "supportedNotifications": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/supportedNotifications"
+    },
+    "notification": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/notification"
+    },
+    "currentTemperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 99
+    },
+    "currentHumidity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 99
+    },
+    "hvacMode": {
+      "type": "string",
+      "$ref": "#/properties/supportedHvacModes/items"
+    },
+    "hvacState": {
+      "type": "string",
+      "enum": ["cooling", "heating", "off"]
+    },
+    "fanMode": {
+      "type": "string",
+      "$ref": "#/properties/supportedFanModes/items"
+    },
+    "fanState": {
+      "type": "string",
+      "enum": ["off", "low", "medium", "high"]
+    },
+    "temperatureScale": {
+      "type": "string",
+      "enum": ["celcius", "farenheit"]
+    },
+    "humidityScale": {
+      "type": "string",
+      "enum": ["absolute", "relative"]
+    },
+    "supportedHvacModes": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 2,
+      "items": {
+        "enum": ["cool", "heat", "auto", "off"]
+      }
+    },
+    "supportedFanModes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": ["auto", "low", "medium", "high", "off"]
+      }
+    },
+    "setpoints": {
+      "type": "object",
+      "properties": {
+        "cool": {
+          "$ref": "#/$defs/setpoint"
+        },
+        "heat": {
+          "$ref": "#/$defs/setpoint"
+        },
+        "auto": {
+          "$ref": "#/$defs/setpoint"
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "setpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "#/$defs/setpointValue"
+        },
+        "min": {
+          "$ref": "#/$defs/setpointMinMax"
+        },
+        "max": {
+          "$ref": "#/$defs/setpointMinMax"
+        }
+      }
+    },
+    "setpointValue": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 99
+    },
+    "setpointMinMax": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 99
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "systemData",
+    "currentTemperature",
+    "hvacMode",
+    "fanMode",
+    "hvacState",
+    "fanState",
+    "setpoints",
+    "temperatureScale",
+    "supportedHvacModes",
+    "supportedFanModes"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/lock.json",
+  "title": "Lock",
+  "description": "Any smart lock",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/id"
+    },
+    "type": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/type"
+    },
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/systemData"
+    },
+    "supportedNotifications": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/supportedNotifications"
+    },
+    "notification": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/notification"
+    },
+    "state": {
+      "type": "string",
+      "enum": ["locked", "unlocked"]
+    }
+  },
+  "additionalProperties": false,
+  "required": ["id", "type", "systemData", "state"]
+}

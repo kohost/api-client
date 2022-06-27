@@ -1,57 +1,15 @@
 {
-  "name": "@kohost/api-client",
-  "version": "0.8.2",
-  "description": "HTTP client to interact with Kohost APIs",
-  "main": "dist/bundle.node.js",
-  "module": "dist/bundle.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production",
-    "start": "webpack --watch --mode development",
-    "clean": "rm -rf ./dist/*",
-    "lint": "eslint ./src",
-    "prepare": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://bitbucket.org/kohost/kohost-api-client/src"
-  },
-  "keywords": [
-    "http",
-    "kohost",
-    "api"
-  ],
-  "files": [
-    "dist/*.js"
-  ],
-  "author": "Ian Rogers",
-  "license": "ISC",
   "dependencies": {
-    "assert": "^2.0.0",
-    "axios": "^0.24.0",
-    "browserify-zlib": "^0.2.0",
-    "clean-webpack-plugin": "^4.0.0",
-    "https-browserify": "^1.0.0",
-    "lodash": "^4.17.21",
-    "os-browserify": "^0.3.0",
-    "stream-browserify": "^3.0.0",
-    "stream-http": "^3.2.0",
-    "tty-browserify": "0.0.1",
-    "util": "^0.12.4"
+    "ajv": "^8.11.0"
   },
-  "devDependencies": {
-    "@babel/core": "^7.16.7",
-    "babel-loader": "^8.2.3",
-    "eslint": "^7.32.0",
-    "husky": "^4.3.8",
-    "prettier": "^2.5.1",
-    "pretty-quick": "^2.0.2",
-    "webpack": "^5.66.0",
-    "webpack-cli": "^4.9.1"
+  "name": "@kohost/api-client",
+  "version": "1.0.0-alpha.2",
+  "description": "API client for Kohost utils",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  }
+  "author": "Ian Rogers",
+  "license": "ISC"
 }
