@@ -11,6 +11,9 @@
     "type": {
       "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/type"
     },
+    "subType": {
+      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/subType"
+    },
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/systemData"
     },

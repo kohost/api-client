@@ -1,7 +1,11 @@
 // create the Alarm Model
-const { createModel } = require("../utils/compiler");
 const alarmSchema = require("../schemas/alarm.json");
+const { createIotModel } = require("../utils/iot");
 
-const Alarm = createModel({ schema: alarmSchema, name: "Alarm" });
+const Alarm = createIotModel({
+  schema: alarmSchema,
+  name: "Alarm",
+  generateGenerics: false,
+});
 
 module.exports = Alarm;

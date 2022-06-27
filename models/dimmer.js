@@ -1,7 +1,11 @@
 // Create the Dimmer Model
-const { createModel } = require("../utils/compiler");
 const dimmerSchema = require("../schemas/dimmer.json");
+const { createIotModel } = require("../utils/iot");
 
-const Dimmer = createModel({ schema: dimmerSchema, name: "Dimmer" });
+const Dimmer = createIotModel({
+  schema: dimmerSchema,
+  name: "Dimmer",
+  settableProps: ["level"],
+});
 
 module.exports = Dimmer;

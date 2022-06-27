@@ -1,10 +1,11 @@
 // Create the WindowCovering Model
-const { createModel } = require("../utils/compiler");
+const { createIotModel } = require("../utils/iot");
 const windowCoveringSchema = require("../schemas/windowCovering.json");
 
-const WindowCovering = createModel({
+const WindowCovering = createIotModel({
   schema: windowCoveringSchema,
   name: "WindowCovering",
+  settableProps: ["position"],
 });
 
 module.exports = WindowCovering;

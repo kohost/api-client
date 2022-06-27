@@ -1,7 +1,11 @@
 // create the Courtesy Model
-const { createModel } = require("../utils/compiler");
 const courtesySchema = require("../schemas/courtesy.json");
+const { createIotModel } = require("../utils/iot");
 
-const Courtesy = createModel({ schema: courtesySchema, name: "Courtesy" });
+const Courtesy = createIotModel({
+  schema: courtesySchema,
+  name: "Courtesy",
+  settableProps: ["state"],
+});
 
 module.exports = Courtesy;

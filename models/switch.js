@@ -1,7 +1,11 @@
 // create the Switch model
-const { createModel } = require("../utils/compiler");
+const { createIotModel } = require("../utils/iot");
 const switchSchema = require("../schemas/switch.json");
 
-const Switch = createModel({ schema: switchSchema, name: "Switch" });
+const Switch = createIotModel({
+  schema: switchSchema,
+  name: "Switch",
+  settableProps: ["state"],
+});
 
 module.exports = Switch;

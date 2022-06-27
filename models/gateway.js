@@ -1,7 +1,11 @@
 // Create the Gateway Model
-const { createModel } = require("../utils/compiler");
+const { createIotModel } = require("../utils/iot");
 const gatewaySchema = require("../schemas/gateway.json");
 
-const Gateway = createModel({ schema: gatewaySchema, name: "Gateway" });
+const Gateway = createIotModel({
+  schema: gatewaySchema,
+  name: "Gateway",
+  generateGenerics: false,
+});
 
 module.exports = Gateway;

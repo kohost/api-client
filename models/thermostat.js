@@ -1,4 +1,4 @@
-const { createModel } = require("../utils/compiler");
+const { createIotModel } = require("../utils/iot");
 const thermostatSchema = require("../schemas/thermostat.json");
 
 function toCelsius() {
@@ -15,10 +15,13 @@ function toFarenheit() {
   return this.currentTemperature;
 }
 
-const Thermostat = createModel({
+const methods = [toCelsius, toFarenheit];
+
+const Thermostat = createIotModel({
   schema: thermostatSchema,
   name: "Thermostat",
-  methods: [toCelsius, toFarenheit],
+  methods,
+  settableProps: ["hvacMode", "setpoints", "fanMode"],
 });
 
 module.exports = Thermostat;

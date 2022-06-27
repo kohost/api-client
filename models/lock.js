@@ -1,7 +1,11 @@
 // Create the Lock Model
-const { createModel } = require("../utils/compiler");
+const { createIotModel } = require("../utils/iot");
 const lockSchema = require("../schemas/lock.json");
 
-const Lock = createModel({ schema: lockSchema, name: "Lock" });
+const Lock = createIotModel({
+  schema: lockSchema,
+  name: "Lock",
+  settableProps: ["state"],
+});
 
 module.exports = Lock;
