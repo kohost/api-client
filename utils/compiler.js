@@ -29,6 +29,7 @@ function createModel({ schema, name, methods = [], statics = [] }) {
   KohostModel.prototype._validator = validator;
   KohostModel.prototype.schema = schema;
   KohostModel.validProperties = properties;
+
   methods.forEach((method) => {
     const methodName = method.name;
     KohostModel.prototype[methodName] = method;

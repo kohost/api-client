@@ -1,4 +1,4 @@
-const { createModel, addSchema } = require("./complier");
+const { createModel, addSchema } = require("./compiler");
 const deviceSchema = require("../schemas/definitions/device.json");
 
 addSchema(deviceSchema);

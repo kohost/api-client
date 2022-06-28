@@ -6,6 +6,7 @@ const Lock = require("./lock");
 const SceneController = require("./sceneController");
 const Thermostat = require("./thermostat");
 const WindowCovering = require("./windowCovering");
+const User = require("./user");
 
 module.exports = {
   Gateway,
@@ -16,4 +17,5 @@ module.exports = {
   SceneController,
   Thermostat,
   WindowCovering,
+  User,
 };
