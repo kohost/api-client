@@ -1,50 +1,46 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "http://example.com/example.json",
-  "title": "Root Schema",
+  "$id": "https://api.kohost.app/schemas/v3/user.json",
+  "title": "User Schema",
   "type": "object",
   "default": {},
-  "required": ["active", "firstName", "lastName", "phone", "email"],
+  "required": ["active", "firstName", "lastName", "phone", "email", "type"],
   "properties": {
-    "id": {},
+    "id": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/id"
+    },
     "active": {
-      "title": "The active Schema",
-      "type": "boolean",
-      "default": false,
-      "examples": [true]
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/active"
     },
     "firstName": {
-      "title": "The firstName Schema",
-      "type": "string",
-      "default": "",
-      "examples": ["Kohost"]
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/firstName"
     },
     "lastName": {
-      "title": "The lastName Schema",
-      "type": "string",
-      "default": "",
-      "examples": ["User"]
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/lastName"
     },
     "phone": {
-      "title": "The phone Schema",
-      "type": "string",
-      "default": "",
-      "examples": ["+17022917409"]
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/phone"
     },
     "email": {
-      "title": "The email Schema",
-      "type": "string",
-      "default": "",
-      "examples": ["admin@kohost.io"]
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/email"
+    },
+    "hashedPassword": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/hashedPassword"
+    },
+    "photo": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/photo"
+    },
+    "jobTitle": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/jobTitle"
+    },
+    "preferences": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/preferences"
+    },
+    "location": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/location"
+    },
+    "type": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/type"
     }
-  },
-  "examples": [
-    {
-      "active": true,
-      "firstName": "Kohost",
-      "lastName": "User",
-      "phone": "+17022917409",
-      "email": "admin@kohost.io"
-    }
-  ]
+  }
 }

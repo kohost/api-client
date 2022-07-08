@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/definitions/user.json",
+  "definitions": {
+    "id": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "hashedPassword": {
+      "type": "string"
+    },
+    "photo": {
+      "type": "string"
+    },
+    "jobTitle": {
+      "type": "string"
+    },
+    "acl": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "type": {
+      "type": "string",
+      "enum": ["User", "Guest", "Manager", "Admin", "SuperAdmin"]
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "notifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["roomControl", "marketing"]]
+        },
+        "location": {
+          "title": "The location Schema",
+          "type": "boolean",
+          "default": false,
+          "examples": [true]
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "default": {},
+      "required": ["accuracy", "latitude", "longitude", "timestamp"],
+      "additionalProperties": false,
+      "properties": {
+        "accuracy": {
+          "type": ["number", "null"]
+        },
+        "latitude": {
+          "type": ["number", "null"]
+        },
+        "longitude": {
+          "type": ["number", "null"]
+        },
+        "timestamp": {
+          "type": ["number", "null"]
+        }
+      }
+    }
+  }
+}

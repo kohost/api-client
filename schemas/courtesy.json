@@ -4,22 +4,21 @@
   "title": "Courtesy",
   "description": "Any smart courtesy system",
   "type": "object",
-  "allOf": [{ "$ref": "https://api.kohost.app/schemas/v3/device.json" }],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/id"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/id"
     },
     "type": {
-      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/type"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/type"
     },
     "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/systemData"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
     },
     "supportedNotifications": {
-      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/supportedNotifications"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
     },
     "notification": {
-      "$ref": "https://api.kohost.app/schemas/v3/device.json#/definitions/notification"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/notification"
     },
     "supportedStates": {
       "type": "array",
