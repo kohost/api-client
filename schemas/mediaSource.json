@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/mediaSource.json",
+  "title": "Media Source",
+  "description": "Any media source",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/id"
+    },
+    "type": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/type"
+    },
+    "subType": {
+      "type": "string",
+      "enum": [
+        "tv",
+        "dvr",
+        "appleTv",
+        "discPlayer",
+        "mediaPlayer",
+        "uncontrolledDevice"
+      ]
+    },
+    "audio": {
+      "type": "boolean"
+    },
+    "video": {
+      "type": "boolean"
+    },
+    "powerFeedback": {
+      "type": "boolean"
+    },
+    "volumeFeedback": {
+      "type": "boolean"
+    },
+    "command": {
+      "type": ["string", "null"],
+      "enum": [
+        "mute",
+        "volumeUp",
+        "volumeDown",
+        "channelUp",
+        "channelDown",
+        "number0",
+        "number1",
+        "number2",
+        "number3",
+        "number4",
+        "number5",
+        "number6",
+        "number7",
+        "number8",
+        "number9",
+        "lastChannel",
+        "display",
+        "favoriteChannel",
+        "play",
+        "stop",
+        "pause",
+        "fastForward",
+        "rewind",
+        "instantReplay",
+        "record",
+        "ac3",
+        "pvrMenu",
+        "guide",
+        "menu",
+        "menuUp",
+        "menuDown",
+        "menuLeft",
+        "menuRight",
+        "pageUp",
+        "pageDown",
+        "select",
+        "exit",
+        "input",
+        "power",
+        "enterChannel",
+        "number10",
+        "number11",
+        "number12",
+        "number13",
+        "number14",
+        "number15",
+        "number16",
+        "number10Plus",
+        "number20Plus",
+        "number100",
+        "dash",
+        "threeChan",
+        "threeD",
+        "sixChan",
+        "a",
+        "add",
+        "alarm",
+        "am",
+        "analog",
+        "angle",
+        "antenna",
+        "antennaEast",
+        "antennaWest",
+        "aspect",
+        "audio1",
+        "audio2",
+        "audio3",
+        "audioDumming",
+        "audioLevelDown",
+        "audioLevelUp",
+        "b",
+        "back",
+        "c",
+        "component1",
+        "component2",
+        "component3",
+        "d",
+        "home",
+        "list",
+        "liveTv",
+        "discreteInputCable",
+        "powerOff",
+        "powerOn",
+        "setupMenu",
+        "skipForward",
+        "skipReverse",
+        "video1",
+        "video2",
+        "video3",
+        "video4",
+        "video5",
+        "details",
+        "hdmi1",
+        "hdmi2",
+        "hdmi3",
+        "cecDeviceList",
+        "mtsSap"
+      ]
+    },
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
+    },
+    "supportedNotifications": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
+    },
+    "notification": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/notification"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["id", "type", "systemData", "audio", "video"]
+}

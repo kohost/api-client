@@ -7,6 +7,12 @@ const SceneController = require("./sceneController");
 const Thermostat = require("./thermostat");
 const WindowCovering = require("./windowCovering");
 const User = require("./user");
+const ACL = require("./acl");
+const Courtesy = require("./courtesy");
+const Camera = require("./camera");
+const MotionSensor = require("./motionSensor");
+const MediaSource = require("./mediaSource");
+const Room = require("./room");
 
 module.exports = {
   Gateway,
@@ -14,8 +20,14 @@ module.exports = {
   Alarm,
   Dimmer,
   Lock,
+  Courtesy,
+  Camera,
   SceneController,
+  MotionSensor,
   Thermostat,
   WindowCovering,
+  MediaSource,
   User,
+  ACL,
+  Room,
 };

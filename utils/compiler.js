@@ -1,10 +1,15 @@
 const Ajv = require("ajv");
 const ajv = new Ajv({ allErrors: true });
 const { customAlphabet: generate } = require("nanoid");
+const userDefs = require("../schemas/definitions/user.json");
+const deviceDefs = require("../schemas/definitions/device.json");
 
 function addSchema(schema) {
   ajv.addSchema(schema);
 }
+
+addSchema(userDefs);
+addSchema(deviceDefs);
 
 function createModel({ schema, name, methods = [], statics = [] }) {
   ajv.addSchema(schema);

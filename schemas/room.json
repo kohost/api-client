@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/room.json",
+  "title": "Room",
+  "description": "A room represents a physical space of controllable IoT devices",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/id"
+    },
+    "name": {
+      "type": "string"
+    },
+    "dimmers": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/dimmer.json"
+      }
+    },
+    "switches": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/switch.json"
+      }
+    },
+    "thermostats": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/thermostat.json"
+      }
+    },
+    "locks": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/lock.json"
+      }
+    },
+    "windowCoverings": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/windowCovering.json"
+      }
+    },
+    "courtesy": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/courtesy.json"
+      }
+    },
+    "sceneController": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/sceneController.json"
+      }
+    },
+    "cameras": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/camera.json"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/mediaSource.json"
+      }
+    },
+    "motionSensors": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/motionSensor.json"
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "volume": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "currentSource": {
+          "type": ["string", "null"]
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

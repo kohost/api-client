@@ -1,7 +1,4 @@
-const { createModel, addSchema } = require("./compiler");
-const deviceSchema = require("../schemas/definitions/device.json");
-
-addSchema(deviceSchema);
+const { createModel } = require("./compiler");
 
 function createGenericIotSetCommand(command, allowedSets) {
   return function createSetCommand(data) {

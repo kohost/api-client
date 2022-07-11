@@ -4,7 +4,15 @@
   "title": "User Schema",
   "type": "object",
   "default": {},
-  "required": ["active", "firstName", "lastName", "phone", "email", "type"],
+  "required": [
+    "active",
+    "firstName",
+    "lastName",
+    "phone",
+    "email",
+    "type",
+    "acl"
+  ],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/id"
@@ -41,6 +49,12 @@
     },
     "type": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/type"
+    },
+    "acl": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   }
 }

@@ -1,10 +1,7 @@
 // Create the User Model
-const { createModel, addSchema } = require("../utils/compiler");
-const userDefs = require("../schemas/definitions/user.json");
+const { createModel } = require("../utils/compiler");
 const userSchema = require("../schemas/user.json");
 const { nanoid } = require("nanoid");
-
-addSchema(userDefs);
 
 // validate e.164 phone number
 function validatePhone(phoneNumber) {
@@ -33,6 +30,12 @@ const User = createModel({
 Object.defineProperty(User.prototype, "fullName", {
   get: function () {
     return `${this.firstName} ${this.lastName}`;
+  },
+});
+
+Object.defineProperty(User.prototype, "role", {
+  get: function () {
+    return this.type;
   },
 });
 
