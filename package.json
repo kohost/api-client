@@ -15,7 +15,6 @@
   "author": "Ian Rogers",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^28.1.2",
-    "mongoose": "^6.4.1"
+    "jest": "^28.1.2"
   }
 }
