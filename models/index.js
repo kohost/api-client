@@ -13,6 +13,7 @@ const Camera = require("./camera");
 const MotionSensor = require("./motionSensor");
 const MediaSource = require("./mediaSource");
 const Room = require("./room");
+const Application = require("./application");
 
 module.exports = {
   Gateway,
@@ -30,4 +31,5 @@ module.exports = {
   User,
   ACL,
   Room,
+  Application,
 };
