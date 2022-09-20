@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/definitions/common.json",
+  "definitions": {
+    "id": {
+      "type": "string"
+    },
+    "systemData": {
+      "type": "object",
+      "default": {}
+    }
+  }
+}

@@ -8,14 +8,19 @@
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/id"
     },
+    "name": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/name"
+    },
     "type": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/type"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/type",
+      "default": "thermostat"
     },
     "subType": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/subType"
     },
     "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData",
+      "default": {}
     },
     "supportedNotifications": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
@@ -51,7 +56,8 @@
     },
     "temperatureScale": {
       "type": "string",
-      "enum": ["celcius", "farenheit"]
+      "enum": ["celcius", "farenheit"],
+      "default": "farenheit"
     },
     "humidityScale": {
       "type": "string",

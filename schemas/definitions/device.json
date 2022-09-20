@@ -3,12 +3,15 @@
   "$id": "https://api.kohost.app/schemas/v3/definitions/device.json",
   "definitions": {
     "id": {
-      "type": "string"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
     },
     "systemData": {
-      "type": "object"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
     },
     "type": {
+      "type": "string"
+    },
+    "name": {
       "type": "string"
     },
     "subType": {

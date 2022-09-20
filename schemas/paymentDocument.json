@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/paymentDocument.json",
+  "title": "Payment Document",
+  "type": "object",
+  "default": {},
+  "required": ["type", "maskedNumber", "expires"],
+  "properties": {
+    "id": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/id"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "amex",
+        "visa",
+        "masterCard",
+        "discover",
+        "diners",
+        "jcb",
+        "applePay",
+        "alipay",
+        "chinaUnionPay"
+      ]
+    },
+    "maskedNumber": {
+      "string": "string"
+    },
+    "issued": {
+      "type": ["string", "null"]
+    },
+    "expires": {
+      "string": "string"
+    },
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
+    }
+  }
+}

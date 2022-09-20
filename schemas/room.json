@@ -4,69 +4,80 @@
   "title": "Room",
   "description": "A room represents a physical space of controllable IoT devices",
   "type": "object",
+  "default": {},
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/id"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
     },
     "name": {
       "type": "string"
     },
     "dimmers": {
       "type": "array",
+      "default": [],
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/dimmer.json"
       }
     },
     "switches": {
       "type": "array",
+      "default": [],
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/switch.json"
       }
     },
     "thermostats": {
       "type": "array",
+      "default": [],
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/thermostat.json"
       }
     },
     "locks": {
       "type": "array",
+      "default": [],
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/lock.json"
       }
     },
     "windowCoverings": {
       "type": "array",
+      "default": [],
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/windowCovering.json"
       }
     },
     "courtesy": {
       "type": "array",
+      "default": [],
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/courtesy.json"
       }
     },
-    "sceneController": {
+    "sceneControllers": {
       "type": "array",
+      "default": [],
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/sceneController.json"
       }
     },
     "cameras": {
       "type": "array",
+      "default": [],
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/camera.json"
       }
     },
     "sources": {
       "type": "array",
+      "default": [],
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/mediaSource.json"
       }
     },
     "motionSensors": {
       "type": "array",
+      "default": [],
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/motionSensor.json"
       }
@@ -74,6 +85,10 @@
     "media": {
       "type": "object",
       "additionalProperties": false,
+      "default": {
+        "volume": 0,
+        "currentSource": null
+      },
       "properties": {
         "volume": {
           "type": "number",

@@ -1,13 +1,16 @@
 const Ajv = require("ajv");
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv({ allErrors: true, useDefaults: true, strict: false });
 const { customAlphabet: generate } = require("nanoid");
+const commonDefs = require("../schemas/definitions/common.json");
 const userDefs = require("../schemas/definitions/user.json");
 const deviceDefs = require("../schemas/definitions/device.json");
+const { ValidationError } = require("../errors");
 
 function addSchema(schema) {
   ajv.addSchema(schema);
 }
 
+addSchema(commonDefs);
 addSchema(userDefs);
 addSchema(deviceDefs);
 
@@ -35,7 +38,9 @@ function createModel({ schema, name, methods = [], statics = [] }) {
     validate(data) {
       const valid = this._validator(data);
       if (!valid)
-        throw new Error(`Invalid ${name}`, { cause: this._validator.errors });
+        throw new ValidationError(`Invalid ${name}`, {
+          cause: this._validator.errors,
+        });
     }
 
     static generateId() {

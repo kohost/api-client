@@ -14,6 +14,7 @@ const MotionSensor = require("./motionSensor");
 const MediaSource = require("./mediaSource");
 const Room = require("./room");
 const Application = require("./application");
+const Group = require("./group");
 
 module.exports = {
   Gateway,
@@ -32,4 +33,5 @@ module.exports = {
   ACL,
   Room,
   Application,
+  Group,
 };

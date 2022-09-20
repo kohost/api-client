@@ -14,7 +14,7 @@
   ],
   "properties": {
     "id": {
-      "type": "string"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
     },
     "active": {
       "type": "boolean"

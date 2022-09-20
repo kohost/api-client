@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/identityDocument.json",
+  "title": "Identity Document",
+  "type": "object",
+  "default": {},
+  "required": ["type", "number", "expires", "issuingCountry"],
+  "properties": {
+    "id": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["driversLicense", "passport", "identityCard"]
+    },
+    "number": {
+      "string": "string"
+    },
+    "issued": {
+      "string": "string"
+    },
+    "expires": {
+      "string": "string"
+    },
+    "issuingCountry": {
+      "string": "string",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
+    }
+  }
+}
