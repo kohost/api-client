@@ -1,15 +1,44 @@
 // create the ACL model
 const roomSchema = require("../schemas/room.json");
 const { createModel } = require("../utils/compiler");
+const Switch = require("./switch");
+const Dimmer = require("./dimmer");
+const Thermostat = require("./thermostat");
+const Lock = require("./lock");
+const WindowCovering = require("./windowCovering");
+const Courtesy = require("./courtesy");
+const SceneController = require("./sceneController");
+const Camera = require("./camera");
+const Alarm = require("./alarm");
 
-const Room = createModel({ schema: roomSchema, name: "Room" });
+function roomPreValidate(data) {
+  data.switches?.map((sw) => new Switch(sw));
+  data.dimmers?.map((dimmer) => new Dimmer(dimmer));
+  data.thermostats?.map((thermostat) => new Thermostat(thermostat));
+  data.locks?.map((lock) => new Lock(lock));
+  data.windowCoverings?.map((wc) => new WindowCovering(wc));
+  data.courtesy?.map((courtesy) => new Courtesy(courtesy));
+  data.sceneControllers?.map((sc) => new SceneController(sc));
+  data.cameras?.map((camera) => new Camera(camera));
+  data.sources?.map((source) => new MediaSource(source));
+  data.alarms?.map((alarm) => new Alarm(alarm));
+}
 
-Object.defineProperty(Room.prototype, "hasLight", {
+const Room = createModel({
+  preValidate: roomPreValidate,
+  schema: roomSchema,
+  name: "Room",
+});
+
+Object.defineProperty(Room.prototype, "hasDimmer", {
   get: function () {
-    return (
-      (this.dimmers && this.dimmers.length > 0) ||
-      (this.switches && this.switches.length > 0)
-    );
+    return this.dimmers && this.dimmers.length > 0;
+  },
+});
+
+Object.defineProperty(Room.prototype, "hasSwitch", {
+  get: function () {
+    return this.switches && this.switches.length > 0;
   },
 });
 
@@ -27,7 +56,7 @@ Object.defineProperty(Room.prototype, "hasThermostat", {
 
 Object.defineProperty(Room.prototype, "hasCourtesy", {
   get: function () {
-    return this.hasCourtesy && this.hasCourtesy.length > 0;
+    return this.courtesy && this.courtesy.length > 0;
   },
 });
 

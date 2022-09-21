@@ -82,6 +82,13 @@
         "$ref": "https://api.kohost.app/schemas/v3/motionSensor.json"
       }
     },
+    "alarms": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/alarm.json"
+      }
+    },
     "media": {
       "type": "object",
       "additionalProperties": false,
@@ -99,6 +106,12 @@
           "type": ["string", "null"]
         }
       }
+    },
+    "createdAt": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
+    },
+    "updatedAt": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/updatedAt"
     }
   },
   "additionalProperties": false

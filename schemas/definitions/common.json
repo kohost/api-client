@@ -8,6 +8,14 @@
     "systemData": {
       "type": "object",
       "default": {}
+    },
+    "createdAt": {
+      "type": ["string", "object"],
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": ["string", "object"],
+      "format": "date-time"
     }
   }
 }

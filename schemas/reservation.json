@@ -14,10 +14,12 @@
       "enum": ["confirmed", "checkedIn", "checkedOut", "cancelled"]
     },
     "checkInDateTime": {
-      "type": "string"
+      "type": "string",
+      "format": "date-time"
     },
     "checkOutDateTime": {
-      "type": "string"
+      "type": "string",
+      "format": "date-time"
     },
     "hotelRooms": {
       "type": "array",

@@ -29,7 +29,8 @@
         "default": false
       },
       "activatedAt": {
-        "type": "string"
+        "type": "string",
+        "format": "date-time"
       },
       "allowed": {
         "type": "boolean",

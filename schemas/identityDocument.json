@@ -17,10 +17,12 @@
       "string": "string"
     },
     "issued": {
-      "string": "string"
+      "string": "string",
+      "format": "date-time"
     },
     "expires": {
-      "string": "string"
+      "string": "string",
+      "format": "date-time"
     },
     "issuingCountry": {
       "string": "string",

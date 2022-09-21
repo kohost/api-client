@@ -1,10 +1,13 @@
 const Ajv = require("ajv");
 const ajv = new Ajv({ allErrors: true, useDefaults: true, strict: false });
+const addFormats = require("ajv-formats");
 const { customAlphabet: generate } = require("nanoid");
 const commonDefs = require("../schemas/definitions/common.json");
 const userDefs = require("../schemas/definitions/user.json");
 const deviceDefs = require("../schemas/definitions/device.json");
 const { ValidationError } = require("../errors");
+
+addFormats(ajv);
 
 function addSchema(schema) {
   ajv.addSchema(schema);
@@ -14,28 +17,67 @@ addSchema(commonDefs);
 addSchema(userDefs);
 addSchema(deviceDefs);
 
-function createModel({ schema, name, methods = [], statics = [] }) {
+function createModel({
+  preValidate,
+  schema,
+  name,
+  methods = [],
+  statics = [],
+}) {
   ajv.addSchema(schema);
   const validator = ajv.compile(schema);
   const properties = Object.keys(validator.schema.properties);
   class KohostModel {
     constructor(data) {
-      // apply schema properties to the class
-      if (data._id) data.id = data._id;
-      if (data.id && typeof data.id !== "string") data.id = data.id.toString();
-      if (!data.id) data.id = this.constructor.generateId();
-      delete data._id;
-      this.validate(data);
-      properties.forEach((key) => {
-        if (data[key] !== undefined) this[key] = data[key];
-      });
+      this._setId(data);
+      if (preValidate) preValidate.call(this, data);
+      this._validate(data);
+      this._setProperties(data);
+      this._setTimestamps();
     }
 
     set _id(id) {
       this.id = id;
     }
 
-    validate(data) {
+    set isNew(isNew = false) {
+      this._isNew = isNew || false;
+    }
+
+    get isNew() {
+      return this._isNew || false;
+    }
+
+    get properties() {
+      return properties;
+    }
+
+    _setId(data) {
+      if (data._id) data.id = data._id;
+      if (!data.id) {
+        data.id = this.constructor.generateId();
+        this.isNew = true;
+      }
+      delete data._id;
+    }
+
+    _setProperties(data) {
+      this.properties.forEach((key) => {
+        if (data[key] !== undefined) this[key] = data[key];
+      });
+    }
+
+    _setTimestamps() {
+      const now = new Date();
+      if (this.isNew && this.properties.includes("createdAt")) {
+        this.createdAt = now;
+      }
+      if (this.properties.includes("updatedAt")) {
+        this.updatedAt = now;
+      }
+    }
+
+    _validate(data) {
       const valid = this._validator(data);
       if (!valid)
         throw new ValidationError(`Invalid ${name}`, {
@@ -51,13 +93,13 @@ function createModel({ schema, name, methods = [], statics = [] }) {
       return id;
     }
 
-    toObject({ mongo = false }) {
+    toObject(opts = { mongo: false }) {
       const obj = { ...this };
-      if (mongo) {
+      if (opts?.mongo) {
         obj._id = obj.id;
         delete obj.id;
       }
-
+      delete obj._isNew;
       return obj;
     }
   }

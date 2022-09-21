@@ -16,10 +16,12 @@
       "type": "string"
     },
     "phone": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^\\+?[1-9]{1,14}$"
     },
     "email": {
-      "type": "string"
+      "type": "string",
+      "format": "email"
     },
     "hashedPassword": {
       "type": "string"
