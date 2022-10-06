@@ -1,7 +1,13 @@
 const Models = require("./models");
 const Errors = require("./errors");
-// export all classes on the Models object
-module.exports = {
+const HttpClient = require("./http");
+const defs = require("./defs");
+
+const Kohost = {
   Models,
   Errors,
+  defs,
+  Client: HttpClient,
 };
+
+module.exports = Kohost;

@@ -1,4 +1,4 @@
-const Gateway = require("./gateway");
+const IotGateway = require("./iotGateway");
 const Switch = require("./switch");
 const Alarm = require("./alarm");
 const Dimmer = require("./dimmer");
@@ -15,9 +15,21 @@ const MediaSource = require("./mediaSource");
 const Room = require("./room");
 const Application = require("./application");
 const Group = require("./group");
+const Ticket = require("./ticket");
+const Scene = require("./scene");
+const Driver = require("./driver");
+const Gateway = require("./gateway");
+
+const AdminCustomer = require("./admin/customer");
+const AdminProperty = require("./admin/property");
 
 module.exports = {
+  Admin: {
+    Customer: AdminCustomer,
+    Property: AdminProperty,
+  },
   Gateway,
+  IotGateway,
   Switch,
   Alarm,
   Dimmer,
@@ -34,4 +46,7 @@ module.exports = {
   Room,
   Application,
   Group,
+  Ticket,
+  Scene,
+  Driver,
 };

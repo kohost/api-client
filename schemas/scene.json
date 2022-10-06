@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/scene.json",
+  "title": "Scene",
+  "description": "A room represents a physical space of controllable IoT devices",
+  "type": "object",
+  "default": {},
+  "properties": {
+    "id": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+    },
+    "name": {
+      "type": "string"
+    },
+    "devices": {
+      "type": "object",
+      "properties": {
+        "switches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+              },
+              "state": {
+                "$ref": "https://api.kohost.app/schemas/v3/switch.json#/properties/state"
+              }
+            },
+            "default": []
+          }
+        },
+        "dimmers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+              },
+              "level": {
+                "$ref": "https://api.kohost.app/schemas/v3/dimmer.json#/properties/level"
+              }
+            }
+          },
+          "default": []
+        },
+        "windowCoverings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+              },
+              "position": {
+                "$ref": "https://api.kohost.app/schemas/v3/windowCovering.json#/properties/position"
+              }
+            }
+          },
+          "default": []
+        },
+        "thermostats": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+              },
+              "hvacMode": {
+                "$ref": "https://api.kohost.app/schemas/v3/thermostat.json#/properties/hvacMode"
+              },
+              "setpoints": {
+                "$ref": "https://api.kohost.app/schemas/v3/thermostat.json#/properties/setpoints"
+              },
+              "fanMode": {
+                "$ref": "https://api.kohost.app/schemas/v3/thermostat.json#/properties/fanMode"
+              }
+            }
+          },
+          "default": []
+        },
+        "media": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+              },
+              "volume": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "commands": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "isDefault": {
+      "type": "boolean",
+      "default": false
+    },
+    "showOnUi": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false
+}

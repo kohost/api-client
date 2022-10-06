@@ -1,32 +1,19 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/gateway.json",
-  "title": "Gateway",
-  "description": "Any Kohost gateway",
+  "$id": "https://api.kohost.app/schemas/v3/driver.json",
+  "title": "Driver",
+  "description": "Driver configuration",
   "type": "object",
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
     },
-    "name": {
+    "type": {
       "type": "string"
     },
-    "hashedAuthKey": {
-      "type": "string"
-    },
-    "drivers": {
-      "type": "array",
-      "items": {
-        "oneOf": [
-          {
-            "$ref": "https://api.kohost.app/schemas/v3/driver.json"
-          },
-          {
-            "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
-          }
-        ]
-      },
-      "default": []
+    "config": {
+      "type": "object",
+      "default": {}
     },
     "health": {
       "type": "object",
@@ -42,13 +29,6 @@
       },
       "additionalProperties": false
     },
-    "roles": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "default": ["Gateway"]
-    },
     "createdAt": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
@@ -57,5 +37,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["id", "name", "hashedAuthKey", "drivers", "health"]
+  "required": ["id", "name", "config", "health"]
 }

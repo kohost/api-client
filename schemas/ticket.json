@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/room.json",
+  "$id": "https://api.kohost.app/schemas/v3/ticket.json",
   "title": "Ticket",
   "description": "A ticket is a request for help from a user.",
   "type": "object",
@@ -15,15 +15,14 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "user": {
             "type": "string"
           },
-          "messageId": {
-            "type": "string"
-          },
           "timestamp": {
-            "type": "string",
-            "format": "date-time"
+            "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
           },
           "body": {
             "type": "string"
@@ -36,7 +35,7 @@
             }
           }
         },
-        "required": ["user", "messageId", "timestamp", "body"]
+        "required": ["user", "id", "timestamp", "body"]
       }
     },
     "requester": {
@@ -57,31 +56,23 @@
         "type": "string"
       }
     },
-    "sentiment": {
-      "type": "object"
-    },
     "createdAt": {
-      "type": "string",
-      "format": "date-time"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
     "updatedAt": {
-      "type": "string",
-      "format": "date-time"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
     "solvedAt": {
-      "type": "string",
-      "format": "date-time"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
     "closedAt": {
-      "type": "string",
-      "format": "date-time"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
     }
   },
   "required": [
     "id",
     "conversation",
     "requester",
-    "assignedTo",
     "status",
     "tags",
     "createdAt",

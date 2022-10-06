@@ -39,7 +39,15 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["User", "Guest", "Manager", "Admin", "SuperAdmin"]
+        "enum": [
+          "Staff",
+          "Faculty",
+          "Student",
+          "Visitor",
+          "Manager",
+          "Administrator",
+          "SuperAdmin"
+        ]
       }
     },
     "preferences": {

@@ -1,7 +1,7 @@
 // Create the User Model
 const { createModel } = require("../utils/compiler");
 const userSchema = require("../schemas/user.json");
-const { nanoid } = require("nanoid");
+const { nanoid } = require("nanoid/async");
 
 // validate e.164 phone number
 function validatePhone(phoneNumber) {
@@ -17,8 +17,8 @@ function validateEmail(email) {
 }
 
 // generate random password with nanoid
-function generatePassword(len = 16) {
-  return nanoid(len);
+async function generatePassword(len = 16) {
+  return await nanoid(len);
 }
 
 const User = createModel({

@@ -1,0 +1,787 @@
+[
+  [
+    "AdminListCustomers",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/admin/customers"
+      }
+    }
+  ],
+  [
+    "AdminListProperties",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/admin/properties"
+      }
+    }
+  ],
+  [
+    "LoginUser",
+    {
+      "http": {
+        "disableAuth": true,
+        "method": "POST",
+        "path": "/auth/user"
+      }
+    }
+  ],
+  [
+    "LoginGateway",
+    {
+      "http": {
+        "disableAuth": true,
+        "method": "POST",
+        "path": "/auth/gateway"
+      }
+    }
+  ],
+  [
+    "DescribeSelf",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/me"
+      }
+    }
+  ],
+  [
+    "DescribeUser",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/:id"
+      }
+    }
+  ],
+  [
+    "CreateUser",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/users"
+      }
+    }
+  ],
+  [
+    "ListUsers",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users"
+      }
+    }
+  ],
+  [
+    "UpdateUser",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/users/:id"
+      }
+    }
+  ],
+  [
+    "DeleteUser",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/users/:id"
+      }
+    }
+  ],
+  [
+    "DescribeGateway",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/gateways/:gatewayId"
+      }
+    }
+  ],
+  [
+    "ListGateways",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/gateways"
+      }
+    }
+  ],
+  [
+    "CreateGateway",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/gateways"
+      }
+    }
+  ],
+  [
+    "UpdateGateway",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/gateways/:gatewayId"
+      }
+    }
+  ],
+  [
+    "DeleteGateway",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/gateways/:gatewayId"
+      }
+    }
+  ],
+  [
+    "EmailUserAccountSetup",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/users/:id/email/setup"
+      }
+    }
+  ],
+  [
+    "ListGroups",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/groups"
+      }
+    }
+  ],
+  [
+    "CreateGroup",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/groups"
+      }
+    }
+  ],
+  [
+    "DescribeGroup",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/groups/:id"
+      }
+    }
+  ],
+  [
+    "DeleteGroup",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/groups/:id"
+      }
+    }
+  ],
+  [
+    "UpdateGroup",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/groups/:id"
+      }
+    }
+  ],
+  [
+    "CreateRoomInGroup",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/groups/:groupId/rooms"
+      }
+    }
+  ],
+  [
+    "ListRooms",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms"
+      }
+    }
+  ],
+  [
+    "DescribeRoom",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:id"
+      }
+    }
+  ],
+  [
+    "CreateRoom",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms"
+      }
+    }
+  ],
+  [
+    "UpdateRoom",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:id"
+      }
+    }
+  ],
+  [
+    "DeleteRoom",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:id"
+      }
+    }
+  ],
+  [
+    "CreateAlarm",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/alarms"
+      }
+    }
+  ],
+  [
+    "ListAlarms",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/alarms"
+      }
+    }
+  ],
+  [
+    "UpdateAlarm",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:roomId/alarms/:id"
+      }
+    }
+  ],
+  [
+    "DeleteAlarm",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:roomId/alarms/:id"
+      }
+    }
+  ],
+  [
+    "DescribeAlarm",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/alarms/:id"
+      }
+    }
+  ],
+  [
+    "CreateCamera",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/cameras"
+      }
+    }
+  ],
+  [
+    "ListCameras",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/cameras"
+      }
+    }
+  ],
+  [
+    "UpdateCamera",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:roomId/cameras/:id"
+      }
+    }
+  ],
+  [
+    "DeleteCamera",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:roomId/cameras/:id"
+      }
+    }
+  ],
+  [
+    "DescribeCamera",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/cameras/:id"
+      }
+    }
+  ],
+  [
+    "CreateCourtesy",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/courtesy"
+      }
+    }
+  ],
+  [
+    "ListCourtesy",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/courtesy"
+      }
+    }
+  ],
+  [
+    "UpdateCourtesy",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:roomId/courtesy/:id"
+      }
+    }
+  ],
+  [
+    "DeleteCourtesy",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:roomId/courtesy/:id"
+      }
+    }
+  ],
+  [
+    "DescribeCourtesy",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/courtesy/:id"
+      }
+    }
+  ],
+  [
+    "CreateDimmer",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/dimmers"
+      }
+    }
+  ],
+  [
+    "ListDimmers",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/dimmers"
+      }
+    }
+  ],
+  [
+    "UpdateDimmer",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:roomId/dimmers/:id"
+      }
+    }
+  ],
+  [
+    "DeleteDimmer",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:roomId/dimmers/:id"
+      }
+    }
+  ],
+  [
+    "DescribeDimmer",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/dimmers/:id"
+      }
+    }
+  ],
+  [
+    "CreateLock",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/locks"
+      }
+    }
+  ],
+  [
+    "ListLocks",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/locks"
+      }
+    }
+  ],
+  [
+    "UpdateLock",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:roomId/locks/:id"
+      }
+    }
+  ],
+  [
+    "DeleteLock",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:roomId/locks/:id"
+      }
+    }
+  ],
+  [
+    "DescribeLock",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/locks/:id"
+      }
+    }
+  ],
+  [
+    "CreateSwitch",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/switches"
+      }
+    }
+  ],
+  [
+    "ListSwitches",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/switches"
+      }
+    }
+  ],
+  [
+    "UpdateSwitch",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:roomId/switches/:id"
+      }
+    }
+  ],
+  [
+    "DeleteSwitch",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:roomId/switches/:id"
+      }
+    }
+  ],
+  [
+    "DescribeSwitch",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/switches/:id"
+      }
+    }
+  ],
+  [
+    "CreateSceneController",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/sceneControllers"
+      }
+    }
+  ],
+  [
+    "ListSceneControllers",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/sceneControllers"
+      }
+    }
+  ],
+  [
+    "UpdateSceneController",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:roomId/sceneControllers/:id"
+      }
+    }
+  ],
+  [
+    "DeleteSceneController",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:roomId/sceneControllers/:id"
+      }
+    }
+  ],
+  [
+    "DescribeSceneController",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/sceneControllers/:id"
+      }
+    }
+  ],
+  [
+    "CreateSource",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/sources"
+      }
+    }
+  ],
+  [
+    "ListSources",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/sources"
+      }
+    }
+  ],
+  [
+    "UpdateSource",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:roomId/sources/:id"
+      }
+    }
+  ],
+  [
+    "DeleteSource",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:roomId/sources/:id"
+      }
+    }
+  ],
+  [
+    "DescribeSource",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/sources/:id"
+      }
+    }
+  ],
+  [
+    "CreateThermostat",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/thermostats"
+      }
+    }
+  ],
+  [
+    "ListThermostats",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/thermostats"
+      }
+    }
+  ],
+  [
+    "UpdateThermostat",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:roomId/thermostats/:id"
+      }
+    }
+  ],
+  [
+    "DeleteThermostat",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:roomId/thermostats/:id"
+      }
+    }
+  ],
+  [
+    "DescribeThermostat",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/thermostats/:id"
+      }
+    }
+  ],
+  [
+    "CreateWindowCovering",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/windowCoverings"
+      }
+    }
+  ],
+  [
+    "ListWindowCoverings",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/windowCoverings"
+      }
+    }
+  ],
+  [
+    "UpdateWindowCovering",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/rooms/:roomId/windowCoverings/:id"
+      }
+    }
+  ],
+  [
+    "DeleteWindowCovering",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/rooms/:roomId/windowCoverings/:id"
+      }
+    }
+  ],
+  [
+    "DescribeWindowCovering",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/windowCoverings/:id"
+      }
+    }
+  ],
+  [
+    "AddSceneToRoom",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/scenes"
+      }
+    }
+  ],
+  [
+    "CreateTicket",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets"
+      }
+    }
+  ],
+  [
+    "CreateTicketMessage",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:ticketId/messages"
+      }
+    }
+  ],
+  [
+    "DeleteTicket",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/tickets/:ticketId"
+      }
+    }
+  ],
+  [
+    "DescribeTicket",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/:ticketId"
+      }
+    }
+  ],
+  [
+    "ListTickets",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets"
+      }
+    }
+  ],
+  [
+    "UpdateMessageReadStatus",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:ticketId/readAll"
+      }
+    }
+  ],
+  [
+    "UpdateTicket",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/tickets/:ticketId"
+      }
+    }
+  ],
+  [
+    "UpdateTicketStatus",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/tickets/:ticketId/status"
+      }
+    }
+  ],
+  [
+    "CreateDefaultScenes",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/scenes/default"
+      }
+    }
+  ]
+]

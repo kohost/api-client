@@ -1,4 +1,4 @@
-// create the ACL model
+// create the Room model
 const roomSchema = require("../schemas/room.json");
 const { createModel } = require("../utils/compiler");
 const Switch = require("./switch");
@@ -10,6 +10,7 @@ const Courtesy = require("./courtesy");
 const SceneController = require("./sceneController");
 const Camera = require("./camera");
 const Alarm = require("./alarm");
+const Scene = require("./scene");
 
 function roomPreValidate(data) {
   data.switches?.map((sw) => new Switch(sw));
@@ -22,6 +23,10 @@ function roomPreValidate(data) {
   data.cameras?.map((camera) => new Camera(camera));
   data.sources?.map((source) => new MediaSource(source));
   data.alarms?.map((alarm) => new Alarm(alarm));
+  data.scenes?.map((scene) => {
+    if (scene instanceof Scene) return scene;
+    else return new Scene(scene);
+  });
 }
 
 const Room = createModel({

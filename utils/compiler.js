@@ -48,7 +48,7 @@ function createModel({
       return this._isNew || false;
     }
 
-    get properties() {
+    get schemaProperties() {
       return properties;
     }
 
@@ -62,18 +62,15 @@ function createModel({
     }
 
     _setProperties(data) {
-      this.properties.forEach((key) => {
+      this.schemaProperties.forEach((key) => {
         if (data[key] !== undefined) this[key] = data[key];
       });
     }
 
     _setTimestamps() {
       const now = new Date();
-      if (this.isNew && this.properties.includes("createdAt")) {
+      if (this.isNew && this.schemaProperties.includes("createdAt")) {
         this.createdAt = now;
-      }
-      if (this.properties.includes("updatedAt")) {
-        this.updatedAt = now;
       }
     }
 
@@ -108,8 +105,18 @@ function createModel({
   Object.defineProperty(KohostModel, "name", { value: name });
   KohostModel.validProperties = properties;
   KohostModel.requiredProperties = schema.required;
-  KohostModel.prototype._validator = validator;
-  KohostModel.prototype.schema = validator.schema;
+
+  Object.defineProperty(KohostModel.prototype, "_validator", {
+    get: function () {
+      return validator;
+    },
+  });
+
+  Object.defineProperty(KohostModel.prototype, "schema", {
+    get: function () {
+      return validator.schema;
+    },
+  });
 
   methods.forEach((method) => {
     const methodName = method.name;

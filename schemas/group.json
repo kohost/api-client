@@ -4,7 +4,7 @@
   "title": "Group",
   "type": "object",
   "default": {},
-  "required": ["name", "rooms"],
+  "required": ["name", "rooms", "type"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
@@ -13,6 +13,12 @@
       "type": "string"
     },
     "rooms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "subGroups": {
       "type": "array",
       "items": {
         "type": "string"
@@ -34,6 +40,10 @@
           "default": false
         }
       }
+    },
+    "type": {
+      "type": "string",
+      "enum": ["Classroom", "Office", "Building", "Common Area", "Other"]
     },
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
