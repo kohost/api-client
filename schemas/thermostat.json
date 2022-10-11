@@ -34,7 +34,7 @@
       "maximum": 99
     },
     "currentHumidity": {
-      "type": "number",
+      "type": ["number", "null"],
       "minimum": 0,
       "maximum": 99
     },
@@ -56,12 +56,12 @@
     },
     "temperatureScale": {
       "type": "string",
-      "enum": ["celcius", "farenheit"],
-      "default": "farenheit"
+      "enum": ["celsius", "fahrenheit"],
+      "default": "fahrenheit"
     },
     "humidityScale": {
-      "type": "string",
-      "enum": ["absolute", "relative"]
+      "type": ["string", "null"],
+      "enum": ["absolute", "relative", null]
     },
     "supportedHvacModes": {
       "type": "array",

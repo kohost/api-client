@@ -3,15 +3,7 @@
   "$id": "https://api.kohost.app/schemas/v3/application.json",
   "title": "Application",
   "type": "object",
-  "default": {},
-  "required": [
-    "id",
-    "active",
-    "name",
-    "phone",
-    "publicKey",
-    "hashedPrivateKey"
-  ],
+  "required": ["id", "active", "name", "publicKey", "hashedPrivateKey"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"

@@ -3,7 +3,6 @@
   "$id": "https://api.kohost.app/schemas/v3/hotelRoom.json",
   "title": "Hotel Room",
   "type": "object",
-  "default": {},
   "required": ["name", "status", "rooms"],
   "properties": {
     "id": {

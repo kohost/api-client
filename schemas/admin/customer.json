@@ -4,7 +4,6 @@
   "title": "Customer",
   "type": "object",
   "description": "A Kohost customer",
-  "default": {},
   "required": ["accountNumber", "name"],
   "properties": {
     "id": {

@@ -9,10 +9,9 @@ module.exports = function handleResponseError(error) {
 
   try {
     const expectedError = status >= 400 && status < 500;
-    if (!expectedError) this.handleLogAndNotifyError(error);
 
     if (errorMessage && errorMessage === "Login Required") {
-      this.handleLoginRequired();
+      this.onLoginRequired();
       return Promise.reject(error);
     }
 
@@ -23,27 +22,31 @@ module.exports = function handleResponseError(error) {
       return Promise.reject(error);
     }
     if (status === 400 && errorCode === 1010) {
-      this.handleLoginRequired();
+      this.onLoginRequired();
       return Promise.reject(error);
     }
 
     if (newTokensNeeded) {
-      return this.Auth.requestNewTokens().then((response) => {
+      return this.RefreshToken({
+        headers: {
+          [defs.refreshTokenHeader]: this.refreshToken,
+        },
+      }).then((response) => {
         // update headers with the new tokens
         if (
           response &&
           response.headers &&
-          response.headers[defs.authTokenHeader]
+          response.headers[this.authTokenHeaderKey]
         ) {
-          const newToken = response.headers[defs.authTokenHeader];
-          originalReq.headers[this.authTokenKey] = newToken;
-          this.handleNewToken(newToken);
+          const newToken = response.headers[this.authTokenHeaderKey];
+          originalReq.headers[defs.authTokenHeader] = newToken;
+          this.authToken = newToken;
           return this.http(originalReq);
         }
       });
     }
   } catch (error) {
-    this.handleLogAndNotifyError(error);
+    console.log(error);
   }
 
   return Promise.reject(error);

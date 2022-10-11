@@ -29,6 +29,15 @@
       },
       "additionalProperties": false
     },
+    "deviceMap": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9]{8}$": {
+          "type": "string"
+        }
+      },
+      "properties": {}
+    },
     "createdAt": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
@@ -37,5 +46,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["id", "name", "config", "health"]
+  "required": ["id", "type", "config", "health", "deviceMap"]
 }

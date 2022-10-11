@@ -3,7 +3,6 @@
   "$id": "https://api.kohost.app/schemas/v3/acl.json",
   "title": "Access Control List Schema",
   "type": "object",
-  "default": {},
   "required": ["id", "name", "resource", "resourceFilter", "permissions"],
   "properties": {
     "id": {

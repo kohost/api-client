@@ -3,7 +3,6 @@
   "$id": "https://api.kohost.app/schemas/v3/paymentDocument.json",
   "title": "Payment Document",
   "type": "object",
-  "default": {},
   "required": ["type", "maskedNumber", "expires"],
   "properties": {
     "id": {

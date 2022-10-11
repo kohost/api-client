@@ -1,5 +1,11 @@
 const Ajv = require("ajv");
-const ajv = new Ajv({ allErrors: true, useDefaults: true, strict: false });
+const ajv = new Ajv({
+  allErrors: true,
+  useDefaults: true,
+  strict: true,
+  allowMatchingProperties: true,
+  allowUnionTypes: true,
+});
 const addFormats = require("ajv-formats");
 const { customAlphabet: generate } = require("nanoid");
 const commonDefs = require("../schemas/definitions/common.json");
@@ -110,6 +116,12 @@ function createModel({
     get: function () {
       return validator;
     },
+  });
+
+  Object.defineProperty(KohostModel.prototype, "_isNew", {
+    value: false,
+    writable: true,
+    enumerable: false,
   });
 
   Object.defineProperty(KohostModel.prototype, "schema", {

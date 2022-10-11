@@ -38,6 +38,16 @@
     }
   ],
   [
+    "RefreshToken",
+    {
+      "http": {
+        "disableAuth": true,
+        "method": "POST",
+        "path": "/auth/refresh"
+      }
+    }
+  ],
+  [
     "DescribeSelf",
     {
       "http": {
@@ -781,6 +791,60 @@
       "http": {
         "method": "POST",
         "path": "/scenes/default"
+      }
+    }
+  ],
+  [
+    "CreateDiscoveredDevice",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/discoveredDevices"
+      }
+    }
+  ],
+  [
+    "ListDiscoveredDevices",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/discoveredDevices"
+      }
+    }
+  ],
+  [
+    "UpdateDiscoveredDevice",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/discoveredDevices/:id"
+      }
+    }
+  ],
+  [
+    "DeleteDiscoveredDevice",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/discoveredDevices/:id"
+      }
+    }
+  ],
+  [
+    "DescribeDiscoveredDevice",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/discoveredDevices/:id"
+      }
+    }
+  ],
+  [
+    "UpsertDiscoveredDevice",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/discoveredDevices/upsert"
       }
     }
   ]

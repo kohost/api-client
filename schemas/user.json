@@ -3,7 +3,6 @@
   "$id": "https://api.kohost.app/schemas/v3/user.json",
   "title": "User",
   "type": "object",
-  "default": {},
   "required": ["active", "firstName", "lastName", "phone", "email", "roles"],
   "properties": {
     "id": {

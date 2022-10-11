@@ -3,8 +3,7 @@
   "$id": "https://api.kohost.app/schemas/v3/group.json",
   "title": "Group",
   "type": "object",
-  "default": {},
-  "required": ["name", "rooms", "type"],
+  "required": ["name", "rooms"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
@@ -42,7 +41,7 @@
       }
     },
     "type": {
-      "type": "string",
+      "type": ["string", "null"],
       "enum": ["Classroom", "Office", "Building", "Common Area", "Other"]
     },
     "systemData": {

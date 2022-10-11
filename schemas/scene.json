@@ -4,7 +4,6 @@
   "title": "Scene",
   "description": "A room represents a physical space of controllable IoT devices",
   "type": "object",
-  "default": {},
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"

@@ -3,7 +3,6 @@
   "$id": "https://api.kohost.app/schemas/v3/reservation.json",
   "title": "Reservation",
   "type": "object",
-  "default": {},
   "required": ["status", "checkInDateTime", "checkOutDateTime", "hotelRooms"],
   "properties": {
     "id": {

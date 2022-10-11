@@ -9,7 +9,19 @@
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
     },
     "type": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "dimmer",
+        "switch",
+        "motionSensor",
+        "windowCovering",
+        "camera",
+        "mediaSource",
+        "thermostat",
+        "lock",
+        "courtesy",
+        "sceneController"
+      ]
     },
     "name": {
       "type": "string"

@@ -19,6 +19,7 @@ const Ticket = require("./ticket");
 const Scene = require("./scene");
 const Driver = require("./driver");
 const Gateway = require("./gateway");
+const DiscoveredDevice = require("./discoveredDevice");
 
 const AdminCustomer = require("./admin/customer");
 const AdminProperty = require("./admin/property");
@@ -49,4 +50,5 @@ module.exports = {
   Ticket,
   Scene,
   Driver,
+  DiscoveredDevice,
 };

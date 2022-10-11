@@ -7,4 +7,18 @@ const Driver = createModel({
   name: "Driver",
 });
 
+const driver = new Driver({
+  deviceMap: {
+    abcdef12_: {
+      id: "1",
+      type: "dimmer",
+      name: "Dimmer 1",
+    },
+  },
+  type: "pelicanWireless",
+  health: {},
+});
+
+console.log(driver);
+
 module.exports = Driver;

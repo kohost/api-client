@@ -19,7 +19,7 @@ function useCaseMethodFactory(Client) {
 
         const { data, params, query, headers } = options;
 
-        //replace path parameters with values from params
+        // replace path parameters with values from params
         let url = path;
         if (pathParams && params) {
           for (const param of pathParams) {
@@ -57,13 +57,13 @@ class KohostApiClient extends EventEmitter {
   constructor(
     options = {
       url: "",
-      tenant: "",
+      tenantId: "",
       headers: {},
     }
   ) {
     super();
     if (!options.url) throw new Error("options.url is required");
-    if (!options.tenant) throw new Error("options.tenant is required");
+    if (!options.tenantId) throw new Error("options.tenant is required");
     this.options = options;
     this.isBrower = typeof window !== "undefined";
     this._http = axios.create({
@@ -72,13 +72,15 @@ class KohostApiClient extends EventEmitter {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        [defs.tenantHeader]: options.tenant,
+        [defs.tenantHeader]: options.tenantId,
         ...options.headers,
       },
     });
 
-    this._http.interceptors.response.use(handleResponseError.bind(this));
-    this._http.interceptors.response.use(handleResponseSuccess.bind(this));
+    this._http.interceptors.response.use(
+      handleResponseSuccess.bind(this),
+      handleResponseError.bind(this)
+    );
 
     this._http.interceptors.request.use((config) => {
       config.headers[defs.authTokenHeader] = this.authToken;
@@ -86,8 +88,16 @@ class KohostApiClient extends EventEmitter {
     });
   }
 
+  get authTokenHeaderKey() {
+    return defs.authTokenHeader.toLowerCase();
+  }
+
+  get refreshTokenHeaderKey() {
+    return defs.refreshTokenHeader.toLowerCase();
+  }
+
   get lsTokenKey() {
-    return `${this.options.tenant}_${defs.authTokenHeader}`;
+    return `${this.options.tenantId}_${defs.authTokenHeader}`;
   }
 
   get authToken() {
@@ -109,16 +119,5 @@ class KohostApiClient extends EventEmitter {
 }
 
 useCaseMethodFactory(KohostApiClient);
-
-// const Kohost = new KohostApiClient({
-//   url: "http://localhost:3000/v3",
-//   tenant: "development",
-// });
-
-// setTimeout(() => {
-//   Kohost.DescribeThermostat({ params: { id: "cQbXo7EO", roomId: "nrB6juLY" } })
-//     .then((data) => console.log(data))
-//     .catch((err) => console.log(err));
-// }, 5000);
 
 module.exports = KohostApiClient;

@@ -4,7 +4,6 @@
   "title": "Property",
   "type": "object",
   "description": "A property is a physical asset or building",
-  "default": {},
   "required": ["id", "name", "type"],
   "properties": {
     "id": {
