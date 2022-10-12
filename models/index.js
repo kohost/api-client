@@ -17,7 +17,7 @@ const Application = require("./application");
 const Group = require("./group");
 const Ticket = require("./ticket");
 const Scene = require("./scene");
-const Driver = require("./driver");
+const Integration = require("./integration");
 const Gateway = require("./gateway");
 const DiscoveredDevice = require("./discoveredDevice");
 
@@ -49,6 +49,6 @@ module.exports = {
   Group,
   Ticket,
   Scene,
-  Driver,
+  Integration,
   DiscoveredDevice,
 };

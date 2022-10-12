@@ -847,5 +847,32 @@
         "path": "/discoveredDevices/upsert"
       }
     }
+  ],
+  [
+    "CreateIntegration",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/integrations"
+      }
+    }
+  ],
+  [
+    "UpdateIntegration",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/integrations/:id"
+      }
+    }
+  ],
+  [
+    "CreateIntegrationDeviceMapEntry",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/integrations/:id/deviceMap"
+      }
+    }
   ]
 ]

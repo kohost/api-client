@@ -138,6 +138,7 @@ function createModel({
     const methodName = method.name;
     KohostModel[methodName] = method;
   });
+
   return KohostModel;
 }
 

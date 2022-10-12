@@ -14,12 +14,12 @@
     "hashedAuthKey": {
       "type": "string"
     },
-    "drivers": {
+    "integrations": {
       "type": "array",
       "items": {
         "oneOf": [
           {
-            "$ref": "https://api.kohost.app/schemas/v3/driver.json"
+            "$ref": "https://api.kohost.app/schemas/v3/integration.json"
           },
           {
             "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
@@ -57,5 +57,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["id", "name", "hashedAuthKey", "drivers", "health"]
+  "required": ["id", "name", "hashedAuthKey", "integrations", "health"]
 }
