@@ -1,17 +1,35 @@
 // Create the User Model
-const { createModel } = require("../utils/compiler");
-const ticketSchema = require("../schemas/ticket.json");
+const schemas = require("../utils/schema");
+const schema = require("../schemas/ticket.json");
+const Kohost = require("./kohost");
+
 const { nanoid } = require("nanoid");
 
-// generate random password with nanoid
-function generateMessageId(len = 16) {
-  return nanoid(len);
+schemas.add(schema);
+const validator = schemas.compile(schema);
+
+class Ticket extends Kohost {
+  constructor(data) {
+    super(data);
+  }
+
+  static generateMessageId(len = 16) {
+    return nanoid(len);
+  }
 }
 
-const Ticket = createModel({
-  schema: ticketSchema,
-  name: "Ticket",
-  statics: [generateMessageId],
+Object.defineProperty(Ticket.prototype, "schema", {
+  value: schema,
+});
+
+Object.defineProperty(Ticket.prototype, "validator", {
+  get: function () {
+    return validator;
+  },
+});
+
+Object.defineProperty(Ticket, "validProperties", {
+  value: Object.keys(schema.properties),
 });
 
 Object.defineProperty(Ticket.prototype, "responseTime", {

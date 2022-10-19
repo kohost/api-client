@@ -1,10 +1,28 @@
-// create the ACL model
-const applicationSchema = require("../schemas/application.json");
-const { createModel } = require("../utils/compiler");
+// create the Application model
+const schemas = require("../utils/schema");
+const schema = require("../schemas/application.json");
+const Kohost = require("./kohost");
 
-const Application = createModel({
-  schema: applicationSchema,
-  name: "Application",
+schemas.add(schema);
+const validator = schemas.compile(schema);
+class Application extends Kohost {
+  constructor(data) {
+    super(data);
+  }
+}
+
+Object.defineProperty(Application.prototype, "schema", {
+  value: schema,
+});
+
+Object.defineProperty(Application.prototype, "validator", {
+  get: function () {
+    return validator;
+  },
+});
+
+Object.defineProperty(Application, "validProperties", {
+  value: Object.keys(schema.properties),
 });
 
 module.exports = Application;

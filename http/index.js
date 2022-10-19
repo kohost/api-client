@@ -152,9 +152,4 @@ class KohostApiClient extends EventEmitter {
 
 useCaseMethodFactory(KohostApiClient);
 
-const kohost = new KohostApiClient({
-  url: "https://api.kohost.app/v3",
-  tenantId: "kohost",
-});
-
 module.exports = KohostApiClient;

@@ -1,11 +1,29 @@
 // Create the Gateway Model
-const { createIotModel } = require("../utils/iot");
-const iotGatewaySchema = require("../schemas/iotGateway.json");
+const schemas = require("../utils/schema");
+const schema = require("../schemas/iotGateway.json");
+const Kohost = require("./kohost");
 
-const Gateway = createIotModel({
-  schema: iotGatewaySchema,
-  name: "IoT Gateway",
-  generateGenerics: false,
+schemas.add(schema);
+const validator = schemas.compile(schema);
+
+class IotGateway extends Kohost {
+  constructor(data) {
+    super(data);
+  }
+}
+
+Object.defineProperty(IotGateway.prototype, "schema", {
+  value: schema,
 });
 
-module.exports = Gateway;
+Object.defineProperty(IotGateway.prototype, "validator", {
+  get: function () {
+    return validator;
+  },
+});
+
+Object.defineProperty(IotGateway, "validProperties", {
+  value: Object.keys(schema.properties),
+});
+
+module.exports = IotGateway;
