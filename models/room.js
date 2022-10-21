@@ -16,6 +16,9 @@ const Camera = require("./camera");
 const Alarm = require("./alarm");
 const Scene = require("./scene");
 
+schemas.add(schema);
+const validator = schemas.compile(schema);
+
 class Room extends Kohost {
   constructor(data) {
     const roomData = mapRoomData(data);

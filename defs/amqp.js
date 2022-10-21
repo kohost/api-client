@@ -1,10 +1,10 @@
 const amqpDefs = {
   exchanges: {
     dlx: "kohost.dlx",
-    gateways: "kohost.gateways",
-    comm: "kohost.comm",
-    devices: "kohost.devices",
-    pms: "kohost.pms",
+    Gateways: "Kohost.Gateways",
+    Devices: "Kohost.Devices",
+    Scenes: "Kohost.Scenes",
+    Integrations: "Kohost.Integrations",
   },
 };
 

@@ -10,7 +10,7 @@ class Integration extends Kohost {
     super(data);
   }
   getDriverDeviceId(kohostDeviceId) {
-    return this.data?.deviceMap && this.data.deviceMap[kohostDeviceId]?.id;
+    return this.deviceMap.get(kohostDeviceId);
   }
 
   get deviceMap() {

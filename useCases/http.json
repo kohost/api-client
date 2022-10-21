@@ -849,6 +849,15 @@
     }
   ],
   [
+    "CreateDiscoveredDeviceAssociation",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/discoveredDevices/:id/associate"
+      }
+    }
+  ],
+  [
     "CreateIntegration",
     {
       "http": {
