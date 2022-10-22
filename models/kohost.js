@@ -70,6 +70,12 @@ class Kohost {
 
   toObject() {
     const obj = { ...this };
+    // delete keys if they are not valid properties
+    Object.keys(obj).forEach((key) => {
+      if (!this.constructor.validProperties.includes(key)) {
+        delete obj[key];
+      }
+    });
     return obj;
   }
 }

@@ -9,12 +9,34 @@ class Integration extends Kohost {
   constructor(data) {
     super(data);
   }
-  getDriverDeviceId(kohostDeviceId) {
-    return this.deviceMap.get(kohostDeviceId);
+  getDriverDeviceId(kohostDeviceId, type) {
+    const found = this.deviceMap.get(kohostDeviceId);
+    if (found) {
+      if (type && found.type === type) return found.id;
+      else if (!type) return found.id;
+    }
+    return null;
+  }
+
+  getKohostDeviceId(driverDeviceId, type) {
+    const found = this.driverDeviceMap.get(driverDeviceId);
+    if (found) {
+      if (type && found.type === type) return found.id;
+      else if (!type) return found.id;
+    }
+    return null;
   }
 
   get deviceMap() {
     return new Map(Object.entries(this.data?.deviceMap || {}));
+  }
+
+  get driverDeviceMap() {
+    const map = new Map();
+    for (const [id, value] of Object.entries(this.data?.deviceMap || {})) {
+      map.set(value.id, { id, type: value.type });
+    }
+    return map;
   }
 }
 

@@ -4,7 +4,7 @@ const schema = require("../schemas/room.json");
 const Kohost = require("./kohost");
 const cloneDeep = require("lodash.clonedeep");
 
-// dependencies
+// device dependencies
 const Switch = require("./switch");
 const Dimmer = require("./dimmer");
 const Thermostat = require("./thermostat");
@@ -14,6 +14,10 @@ const Courtesy = require("./courtesy");
 const SceneController = require("./sceneController");
 const Camera = require("./camera");
 const Alarm = require("./alarm");
+const Source = require("./mediaSource");
+const MotionSensor = require("./motionSensor");
+
+// other dependencies
 const Scene = require("./scene");
 
 schemas.add(schema);
@@ -23,6 +27,32 @@ class Room extends Kohost {
   constructor(data) {
     const roomData = mapRoomData(data);
     super(roomData);
+  }
+
+  static getDevicePath(type) {
+    const validTypes = [
+      "dimmer",
+      "switch",
+      "thermostat",
+      "lock",
+      "windowCovering",
+      "courtesy",
+      "sceneController",
+      "camera",
+      "source",
+      "motionSensor",
+      "alarm",
+    ];
+    if (!validTypes.includes(type))
+      throw new Error("Invalid device type:" + type);
+    switch (type) {
+      case "courtesy":
+        return type;
+      case "switch":
+        return "switches";
+      default:
+        return `${type}s`;
+    }
   }
 
   get hasDimmer() {
@@ -116,8 +146,8 @@ function mapRoomData(data) {
   });
 
   roomData.sources.map((source) => {
-    if (source instanceof Scene) return source;
-    else return new Scene(source);
+    if (source instanceof Source) return source;
+    else return new Source(source);
   });
 
   roomData.sceneControllers?.map((sceneController) => {
@@ -133,6 +163,11 @@ function mapRoomData(data) {
   roomData.alarms?.map((alarm) => {
     if (alarm instanceof Alarm) return alarm;
     else return new Alarm(alarm);
+  });
+
+  roomData.motionSensors?.map((motionSensor) => {
+    if (motionSensor instanceof MotionSensor) return motionSensor;
+    else return new MotionSensor(motionSensor);
   });
 
   roomData.scenes?.map((scene) => {

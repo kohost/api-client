@@ -705,7 +705,7 @@
     }
   ],
   [
-    "AddSceneToRoom",
+    "AddScenesToRoom",
     {
       "http": {
         "method": "POST",
