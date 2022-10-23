@@ -1,4 +1,5 @@
 // Create the Group Model
+// A group of rooms
 const schemas = require("../utils/schema");
 const schema = require("../schemas/group.json");
 const Kohost = require("./kohost");

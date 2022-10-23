@@ -3,14 +3,32 @@
   "$id": "https://api.kohost.app/schemas/v3/reservation.json",
   "title": "Reservation",
   "type": "object",
-  "required": ["status", "checkInDateTime", "checkOutDateTime", "hotelRooms"],
+  "required": ["status", "checkInDateTime", "checkOutDateTime", "reservationGuestId", "groupIds"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
     },
+    "reservationGuestId": {
+      "$ref": "string"
+    },
+    "sharedGuestIds": {
+      "type":"array",
+      "items": {
+        "$ref": "string"
+      }
+    },
+    "hotelRoomId": {
+      "type":"array",
+      "items": {
+        "$ref": "string"
+      }
+    },
     "status": {
       "type": "string",
-      "enum": ["confirmed", "checkedIn", "checkedOut", "cancelled"]
+      "enum": ["reserved", "checkedIn", "checkedOut", "cancelled", "noShow"]
+    },
+    "confirmationNumber": {
+      "type": "string"
     },
     "checkInDateTime": {
       "type": "string",
@@ -20,11 +38,25 @@
       "type": "string",
       "format": "date-time"
     },
-    "hotelRooms": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+    "adultCount": {
+      "type": "number",
+      "default": 1,
+      "minimum": 1
+    },
+    "childCount": {
+      "type": "number",
+      "default": 0
+    },
+    "rateSuppressed": {
+      "type": "boolean"
+    },
+    "paymentId": {
+      "$ref": "string"
+    },
+    "companyId": {
+      "$ref": "string",
+    "travelAgentId": {
+      "$ref": "string"
     },
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
