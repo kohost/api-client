@@ -714,6 +714,15 @@
     }
   ],
   [
+    "AddDefaultScenesToRooms",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/scenes/default"
+      }
+    }
+  ],
+  [
     "CreateTicket",
     {
       "http": {
@@ -792,6 +801,12 @@
         "method": "POST",
         "path": "/scenes/default"
       }
+    }
+  ],
+  [
+    "ScheduleGroupEcoScenes",
+    {
+      "http": false
     }
   ],
   [

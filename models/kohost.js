@@ -68,6 +68,18 @@ class Kohost {
     return id;
   }
 
+  static getActionDelta(old, _new) {
+    const delta = {};
+    for (const action in _new) {
+      if (this.actionProperties?.includes(action)) {
+        if (old[action] !== _new[action]) {
+          delta[action] = 1;
+        }
+      }
+    }
+    return delta;
+  }
+
   toObject() {
     const obj = { ...this };
     // delete keys if they are not valid properties

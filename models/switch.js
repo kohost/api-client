@@ -26,4 +26,8 @@ Object.defineProperty(Switch, "validProperties", {
   value: Object.keys(schema.properties),
 });
 
+Object.defineProperty(Switch, "actionProperties", {
+  value: ["state"],
+});
+
 module.exports = Switch;

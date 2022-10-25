@@ -23,6 +23,40 @@ class Thermostat extends Kohost {
     this.temperatureScale = "farenheit";
     return this.currentTemperature;
   }
+
+  static getActionDelta(old, _new) {
+    const delta = {};
+    for (const action in _new) {
+      if (this.actionProperties.includes(action)) {
+        switch (action) {
+          case "hvacMode":
+          case "fanMode": {
+            if (old[action] !== _new[action]) delta[action] = 1;
+            break;
+          }
+          case "setpoints": {
+            const setpoints = _new[action];
+            for (const setpoint in setpoints) {
+              if (old[action][setpoint].value !== setpoints[setpoint].value) {
+                const min =
+                  setpoints[setpoint].min || old[action][setpoint].min;
+                const max =
+                  setpoints[setpoint].max || old[action][setpoint].max;
+                const oldValue = old[action][setpoint].value;
+                const value = setpoints[setpoint].value;
+                // get percentage change relative to min and max
+                const percentChange = (value - oldValue) / (max - min);
+                // get the delta
+                delta[`setpoints.${setpoint}`] = percentChange;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return delta;
+  }
 }
 
 Object.defineProperty(Thermostat.prototype, "schema", {
@@ -37,6 +71,10 @@ Object.defineProperty(Thermostat.prototype, "validator", {
 
 Object.defineProperty(Thermostat, "validProperties", {
   value: Object.keys(schema.properties),
+});
+
+Object.defineProperty(Thermostat, "actionProperties", {
+  value: ["hvacMode", "fanMode", "setpoints"],
 });
 
 module.exports = Thermostat;

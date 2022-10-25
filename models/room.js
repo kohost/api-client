@@ -98,6 +98,14 @@ class Room extends Kohost {
   get hasMedia() {
     return this.sources?.length > 0;
   }
+
+  get occupied() {
+    const now = new Date();
+    const lastOccupied = new Date(this.occupiedAt);
+    const diff = now - lastOccupied;
+    // check if the room has been occupied in the last 60 minutes
+    return diff < 60 * 60 * 1000;
+  }
 }
 
 Object.defineProperty(Room.prototype, "schema", {

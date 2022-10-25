@@ -26,4 +26,8 @@ Object.defineProperty(Courtesy, "validProperties", {
   value: Object.keys(schema.properties),
 });
 
+Object.defineProperty(Courtesy, "actionProperties", {
+  value: ["state"],
+});
+
 module.exports = Courtesy;

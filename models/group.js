@@ -54,6 +54,9 @@ class Group extends Kohost {
   get hasMedia() {
     return this.rooms.some((room) => room.hasMedia);
   }
+  get occupied() {
+    return this.rooms.some((room) => room.occupied);
+  }
 }
 
 Object.defineProperty(Group.prototype, "schema", {

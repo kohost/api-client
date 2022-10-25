@@ -26,4 +26,8 @@ Object.defineProperty(Lock, "validProperties", {
   value: Object.keys(schema.properties),
 });
 
+Object.defineProperty(Lock, "actionProperties", {
+  value: ["state"],
+});
+
 module.exports = Lock;

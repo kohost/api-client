@@ -1,6 +1,7 @@
+const http = require("./http");
+
 const defs = {
-  amqp: require("./amqp"),
-  http: require("./http"),
+  http,
 };
 
 module.exports = defs;

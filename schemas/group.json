@@ -26,15 +26,20 @@
     "eco": {
       "type": "object",
       "additionalProperties": false,
+      "default": {
+        "enabled": false,
+        "active": false
+      },
       "properties": {
         "active": {
           "type": "boolean",
           "default": false
         },
         "activatedAt": {
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
-        "allowed": {
+        "enabled": {
           "type": "boolean",
           "default": false
         }

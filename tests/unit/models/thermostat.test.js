@@ -1,12 +1,9 @@
-const mongoose = require("mongoose");
 const Thermostat = require("../../../models/thermostat");
-const User = require("../../../models/user");
-const { toMongoose } = require("../../../utils/compiler");
 
 test("Thermostat properties exist", () => {
   expect(Thermostat.name).toBe("Thermostat");
-  expect(Thermostat.settableProperties).toBeDefined();
-  expect(Thermostat.requiredProperties).toBeDefined();
+  expect(Thermostat.actionProperties).toBeDefined();
+  expect(Thermostat.validProperties).toBeDefined();
 });
 
 test("throws error if missing all required properties", () => {
@@ -21,14 +18,55 @@ test("throws error if missing any required property", () => {
   expect(() => new Thermostat(data)).toThrow();
 });
 
-test("is compatible with schema loadClass", () => {
-  const schema = new mongoose.Schema(toMongoose(Thermostat.prototype.schema));
+test("returns deltas", () => {
+  const data = {
+    id: "1",
+    type: "thermostat",
+    name: "Test Thermostat",
+    hvacMode: "cool",
+    hvacState: "off",
+    fanMode: "auto",
+    fanState: "off",
+    temperatureScale: "fahrenheit",
+    supportedHvacModes: ["cool", "heat"],
+    supportedFanModes: ["auto", "low"],
+    currentTemperature: 72,
+    systemData: {},
+    setpoints: {
+      cool: {
+        min: 60,
+        max: 85,
+        value: 72,
+      },
+      heat: {
+        value: 68,
+        min: 60,
+        max: 85,
+      },
+    },
+  };
+  const thermostat = new Thermostat(data);
 
-  schema.loadClass(Thermostat);
+  const delta1 = Thermostat.getActionDelta(thermostat, {
+    hvacMode: "heat",
+    setpoints: {
+      cool: {
+        value: 71,
+      },
+    },
+  });
 
-  expect(schema).toBeDefined();
-  for (const key of Thermostat.validProperties) {
-    if (key === "id") expect(schema.path(key)).toBeUndefined();
-    else expect(schema.paths[key]).toBeDefined();
-  }
+  const delta2 = Thermostat.getActionDelta(thermostat, {
+    setpoints: {
+      heat: {
+        value: 71,
+      },
+    },
+  });
+
+  expect(delta1.hvacMode).toBe(1);
+  expect(delta1["setpoints.cool"]).toBeLessThan(0);
+  expect(delta1["setpoints.cool"]).toBeGreaterThan(-1);
+  expect(delta2["setpoints.heat"]).toBeGreaterThan(0);
+  expect(delta2["setpoints.heat"]).toBeLessThan(1);
 });
