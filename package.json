@@ -16,7 +16,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint ./",
-    "lint:fix": "eslint --fix ./"
+    "lint:fix": "eslint --fix ./",
+    "prepare": "node prepare.js"
   },
   "author": "Ian Rogers",
   "license": "ISC",
