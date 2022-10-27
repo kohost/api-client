@@ -21,8 +21,9 @@ const Scene = require("./scene");
 const Integration = require("./integration");
 const Gateway = require("./gateway");
 const DiscoveredDevice = require("./discoveredDevice");
+const Reservation = require("./reservation");
 
-const AdminCustomer = require("./admin/customer"); 
+const AdminCustomer = require("./admin/customer");
 const AdminProperty = require("./admin/property");
 
 module.exports = {
@@ -53,4 +54,5 @@ module.exports = {
   Scene,
   Integration,
   DiscoveredDevice,
+  Reservation,
 };

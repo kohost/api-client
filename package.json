@@ -14,7 +14,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watchAll",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
     "prepare": "node prepare.js"
