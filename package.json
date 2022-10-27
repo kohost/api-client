@@ -17,6 +17,15 @@
   "author": "Ian Rogers",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^28.1.2"
+    "@kohost/eslint-config": "^1.0.0",
+    "jest": "^29.2.2",
+    "eslint": "^8.6.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.5.1"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md,json}": "prettier --write"
   }
 }

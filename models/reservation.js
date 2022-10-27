@@ -11,14 +11,13 @@ class Reservation extends Kohost {
   }
 
   get peopleCount() {
-    return this.adultCount + this.childCount
-  };
+    return this.adultCount + this.childCount;
+  }
 
   get hasPayment() {
     return this.paymentId?.length > 0;
-  };
-
-};
+  }
+}
 
 Object.defineProperty(Reservation.prototype, "schema", {
   value: schema,
