@@ -13,6 +13,7 @@ const Camera = require("./camera");
 const MotionSensor = require("./motionSensor");
 const MediaSource = require("./mediaSource");
 const Room = require("./room");
+const Reservation = require("./reservation");
 const Application = require("./application");
 const Group = require("./group");
 const Ticket = require("./ticket");
@@ -21,7 +22,7 @@ const Integration = require("./integration");
 const Gateway = require("./gateway");
 const DiscoveredDevice = require("./discoveredDevice");
 
-const AdminCustomer = require("./admin/customer");
+const AdminCustomer = require("./admin/customer"); 
 const AdminProperty = require("./admin/property");
 
 module.exports = {
@@ -45,6 +46,7 @@ module.exports = {
   User,
   ACL,
   Room,
+  Reservation,
   Application,
   Group,
   Ticket,

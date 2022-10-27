@@ -115,9 +115,9 @@ function mapRoomData(data) {
     else return new Courtesy(courtesy);
   });
 
-  roomData.sources.map((source) => {
+  roomData.sources?.map((source) => {
     if (source instanceof Scene) return source;
-    else return new Scene(source);
+    else return new Scene(source); 
   });
 
   roomData.sceneControllers?.map((sceneController) => {

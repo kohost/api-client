@@ -16,6 +16,18 @@ class Group extends Kohost {
     super(groupData);
   }
 
+  get floor() {
+    floors = new Set()
+    
+    this.room.forEach(room => {
+      if(room.floor) floors.add(room.floor)
+    });
+
+    return floors.size == 1
+    ? [...floors][0]
+    : undefined
+  }
+
   get hasDimmer() {
     return this.rooms.some((room) => room.hasDimmer);
   }

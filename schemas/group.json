@@ -13,7 +13,7 @@
     },
     "type": {
       "type": ["string"],
-      "enum": ["Classroom", "Hotel room", "Office", "Building", "Common Area", "Other"]
+      "enum": ["classroom", "hotelRoom", "office", "building", "commonArea", "other"]
     },
     "rooms": {
       "type": "array",
@@ -79,13 +79,13 @@
       "anyOf": [
         {
           "properties": {
-            "type": { "enum": ["Hotel room"]}
+            "type": { "enum": ["Hotel Room"]} 
           },
           "required": ["housekeepingStatus", "serviceStatus", "features", "maximumOccupancy"]
         },
         {
           "properties": {
-            "type": { "enum": ["Classroom", "Office", "Building", "Common Area", "Other"]}
+            "type": { "enum": ["classroom", "hotelRoom", "office", "building", "commonArea", "other"]}
           },
           "required": []
         }
