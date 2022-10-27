@@ -11,6 +11,10 @@
     "name": {
       "type": "string"
     },
+    "type": {
+      "type": ["string"],
+      "enum": ["classroom", "hotelRoom", "office", "building", "commonArea", "other"]
+    },
     "rooms": {
       "type": "array",
       "items": {
@@ -45,12 +49,53 @@
         }
       }
     },
-    "type": {
-      "type": ["string", "null"],
-      "enum": ["Classroom", "Office", "Building", "Common Area", "Other"]
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
+    "maximumOccupancy": {
+      "type": "number",
+      "default": 2,
+      "minimum": 1
+    },
+    "housekeepingStatus": {
+      "type": "string",
+      "enum": ["clean", "dirty", "inspected", "pickup"],
+      "default": "dirty"
+    },
+    "serviceStatus": {
+      "type": "string",
+      "enum": ["inService", "outOfOrder", "outOfService"],
+      "default": "inService"
+    },
+
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
     }
-  }
+  },
+  "oneOf": [
+    {
+      "not": {"required": ["type"]}
+    },
+    {
+      "required": ["type"],
+      "anyOf": [
+        {
+          "properties": {
+            "type": { "enum": ["Hotel Room"]} 
+          },
+          "required": ["housekeepingStatus", "serviceStatus", "features", "maximumOccupancy"]
+        },
+        {
+          "properties": {
+            "type": { "enum": ["classroom", "hotelRoom", "office", "building", "commonArea", "other"]}
+          },
+          "required": []
+        }
+      ]
+    }
+  ]
+
 }

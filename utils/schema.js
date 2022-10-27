@@ -5,6 +5,7 @@ const ajv = new Ajv({
   strict: true,
   allowMatchingProperties: true,
   allowUnionTypes: true,
+  strictRequired: false
 });
 const addFormats = require("ajv-formats");
 

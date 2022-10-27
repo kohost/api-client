@@ -27,6 +27,7 @@ class Dimmer extends Kohost {
     return delta;
   }
 }
+
 Object.defineProperty(Dimmer.prototype, "schema", {
   value: schema,
 });

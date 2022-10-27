@@ -1,4 +1,5 @@
 // Create the Group Model
+// A group of rooms
 const schemas = require("../utils/schema");
 const schema = require("../schemas/group.json");
 const Kohost = require("./kohost");
@@ -13,6 +14,18 @@ class Group extends Kohost {
   constructor(data) {
     const groupData = mapGroupData(data);
     super(groupData);
+  }
+
+  get floor() {
+    floors = new Set()
+    
+    this.room.forEach(room => {
+      if(room.floor) floors.add(room.floor)
+    });
+
+    return floors.size == 1
+    ? [...floors][0]
+    : undefined
   }
 
   get hasDimmer() {
