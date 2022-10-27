@@ -29,6 +29,7 @@ function useCaseMethodFactory(Client) {
         @returns {Promise} The response from the API
       */
 
+      //eslint-disable-next-line no-inner-declarations
       function UseCase(options) {
         if (!options) options = {};
 
@@ -92,6 +93,7 @@ class KohostApiClient extends EventEmitter {
     if (!options.url) throw new Error("options.url is required");
     if (!options.tenantId) throw new Error("options.tenant is required");
     this.options = options;
+    // eslint-disable-next-line no-undef
     this.isBrower = typeof window !== "undefined";
     this._http = axios.create({
       baseURL: options.url,
@@ -130,7 +132,8 @@ class KohostApiClient extends EventEmitter {
   get authToken() {
     if (this.isBrower) {
       // get token from localStorage
-      return localStorage.getItem(this.lsTokenKey);
+      // eslint-disable-next-line no-undef
+      return window.localStorage.getItem(this.lsTokenKey);
     } else {
       return this._authToken;
     }
@@ -143,7 +146,8 @@ class KohostApiClient extends EventEmitter {
 
   set authToken(token) {
     if (this.isBrower) {
-      localStorage.setItem(this.lsTokenKey, token);
+      // eslint-disable-next-line no-undef
+      window.localStorage.setItem(this.lsTokenKey, token);
     } else {
       this._authToken = token;
     }

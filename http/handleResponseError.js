@@ -16,7 +16,7 @@ module.exports = function handleResponseError(error) {
     }
 
     // prettier-ignore
-    const newTokensNeeded = expectedError && errorCode === 1004 && status === 401
+    const newTokensNeeded = expectedError && errorCode === 1004 && status === 401;
 
     if (status === 401 && !newTokensNeeded) {
       return Promise.reject(error);

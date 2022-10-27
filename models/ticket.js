@@ -3,6 +3,9 @@ const schemas = require("../utils/schema");
 const schema = require("../schemas/ticket.json");
 const Kohost = require("./kohost");
 
+const sortBy = require("lodash.sortby");
+const findLast = require("lodash.findlast");
+
 const { nanoid } = require("nanoid");
 
 schemas.add(schema);

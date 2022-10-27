@@ -76,7 +76,7 @@ class Room extends Kohost {
   }
 
   get hasCourtesy() {
-    return this.courtesies?.length > 0;
+    return this.courtesy?.length > 0;
   }
 
   get hasSceneController() {
@@ -89,10 +89,6 @@ class Room extends Kohost {
 
   get hasAlarm() {
     return this.alarms?.length > 0;
-  }
-
-  get hasCourtesy() {
-    return this.courtesies?.length > 0;
   }
 
   get hasMedia() {
@@ -154,8 +150,8 @@ function mapRoomData(data) {
   });
 
   roomData.sources?.map((source) => {
-    if (source instanceof Scene) return source;
-    else return new Scene(source);
+    if (source instanceof Source) return source;
+    else return new Source(source);
   });
 
   roomData.sceneControllers?.map((sceneController) => {

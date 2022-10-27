@@ -17,15 +17,13 @@ class Group extends Kohost {
   }
 
   get floor() {
-    floors = new Set()
-    
-    this.room.forEach(room => {
-      if(room.floor) floors.add(room.floor)
+    const floors = new Set();
+
+    this.room.forEach((room) => {
+      if (room.floor) floors.add(room.floor);
     });
 
-    return floors.size == 1
-    ? [...floors][0]
-    : undefined
+    return floors.size == 1 ? [...floors][0] : undefined;
   }
 
   get hasDimmer() {
