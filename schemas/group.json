@@ -3,7 +3,7 @@
   "$id": "https://api.kohost.app/schemas/v3/group.json",
   "title": "Group",
   "type": "object",
-  "required": ["name", "rooms"],
+  "required": ["name"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
@@ -13,7 +13,14 @@
     },
     "type": {
       "type": ["string"],
-      "enum": ["classroom", "hotelRoom", "office", "building", "commonArea", "other"]
+      "enum": [
+        "classroom",
+        "hotelRoom",
+        "office",
+        "building",
+        "commonArea",
+        "other"
+      ]
     },
     "rooms": {
       "type": "array",
@@ -49,53 +56,65 @@
         }
       }
     },
-    "features": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "maximumOccupancy": {
-      "type": "number",
-      "default": 2,
-      "minimum": 1
-    },
-    "housekeepingStatus": {
-      "type": "string",
-      "enum": ["clean", "dirty", "inspected", "pickup"],
-      "default": "dirty"
-    },
-    "serviceStatus": {
-      "type": "string",
-      "enum": ["inService", "outOfOrder", "outOfService"],
-      "default": "inService"
-    },
-
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
     }
   },
   "oneOf": [
     {
-      "not": {"required": ["type"]}
+      "not": { "required": ["type"] }
     },
     {
       "required": ["type"],
       "anyOf": [
         {
           "properties": {
-            "type": { "enum": ["Hotel Room"]} 
+            "type": { "enum": ["hotelRoom"] },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "maximumOccupancy": {
+              "type": "number",
+              "default": 2,
+              "minimum": 1
+            },
+            "housekeepingStatus": {
+              "type": "string",
+              "enum": ["clean", "dirty", "inspected", "pickup"],
+              "default": "dirty"
+            },
+            "serviceStatus": {
+              "type": "string",
+              "enum": ["inService", "outOfOrder", "outOfService"],
+              "default": "inService"
+            }
           },
-          "required": ["housekeepingStatus", "serviceStatus", "features", "maximumOccupancy"]
+          "required": [
+            "housekeepingStatus",
+            "serviceStatus",
+            "features",
+            "maximumOccupancy"
+          ]
         },
         {
           "properties": {
-            "type": { "enum": ["classroom", "hotelRoom", "office", "building", "commonArea", "other"]}
+            "type": {
+              "enum": [
+                "classroom",
+                "hotelRoom",
+                "office",
+                "building",
+                "commonArea",
+                "other"
+              ]
+            }
           },
           "required": []
         }
       ]
     }
   ]
-
 }

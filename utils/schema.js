@@ -2,10 +2,10 @@ const Ajv = require("ajv");
 const ajv = new Ajv({
   allErrors: true,
   useDefaults: true,
-  strict: true,
+  strict: false,
   allowMatchingProperties: true,
   allowUnionTypes: true,
-  strictRequired: false
+  strictRequired: false,
 });
 const addFormats = require("ajv-formats");
 
