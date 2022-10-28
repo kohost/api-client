@@ -3,7 +3,6 @@
   "$id": "https://api.kohost.app/schemas/v3/group.json",
   "title": "Group",
   "type": "object",
-  "required": ["name"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
@@ -61,62 +60,47 @@
       "type": "array",
       "items": {
         "type": "string"
-      },
-      "default": []
+      }
     },
     "maximumOccupancy": {
       "type": "number",
-      "default": 2,
       "minimum": 1
     },
     "housekeepingStatus": {
       "type": "string",
-      "enum": ["clean", "dirty", "inspected", "pickup"],
-      "default": "dirty"
+      "enum": ["clean", "dirty", "inspected", "pickup"]
     },
     "serviceStatus": {
       "type": "string",
-      "enum": ["inService", "outOfOrder", "outOfService"],
-      "default": "inService"
+      "enum": ["inService", "outOfOrder", "outOfService"]
     },
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
     }
   },
-  "oneOf": [
-    {
-      "not": { "required": ["type"] }
-    },
-    {
-      "required": ["type"],
-      "anyOf": [
-        {
-          "properties": {
-            "type": { "enum": ["hotelRoom"] }
-          },
-          "required": [
-            "housekeepingStatus",
-            "serviceStatus",
-            "features",
-            "maximumOccupancy"
-          ]
-        },
-        {
-          "properties": {
-            "type": {
-              "enum": [
-                "classRoom",
-                "hotelRoom",
-                "office",
-                "building",
-                "commonArea",
-                "other"
-              ]
-            }
-          },
-          "required": []
-        }
-      ]
+  "if": {
+    "properties": { "type": { "const": "hotelRoom" } }
+  },
+  "then": {
+    "required": [
+      "features",
+      "maximumOccupancy",
+      "housekeepingStatus",
+      "serviceStatus"
+    ],
+    "properties": {
+      "features": {
+        "default": []
+      },
+      "maximumOccupancy": {
+        "default": 2
+      },
+      "housekeepingStatus": {
+        "default": "dirty"
+      },
+      "serviceStatus": {
+        "default": "inService"
+      }
     }
-  ]
+  }
 }
