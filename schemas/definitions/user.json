@@ -43,7 +43,7 @@
           "Staff",
           "Faculty",
           "Student",
-          "Visitor",
+          "Guest",
           "Manager",
           "Administrator",
           "SuperAdmin"

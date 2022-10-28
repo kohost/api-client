@@ -9,7 +9,8 @@
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "type": {
       "type": ["string"],
@@ -56,6 +57,28 @@
         }
       }
     },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "maximumOccupancy": {
+      "type": "number",
+      "default": 2,
+      "minimum": 1
+    },
+    "housekeepingStatus": {
+      "type": "string",
+      "enum": ["clean", "dirty", "inspected", "pickup"],
+      "default": "dirty"
+    },
+    "serviceStatus": {
+      "type": "string",
+      "enum": ["inService", "outOfOrder", "outOfService"],
+      "default": "inService"
+    },
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
     }
@@ -69,28 +92,7 @@
       "anyOf": [
         {
           "properties": {
-            "type": { "enum": ["hotelRoom"] },
-            "features": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "maximumOccupancy": {
-              "type": "number",
-              "default": 2,
-              "minimum": 1
-            },
-            "housekeepingStatus": {
-              "type": "string",
-              "enum": ["clean", "dirty", "inspected", "pickup"],
-              "default": "dirty"
-            },
-            "serviceStatus": {
-              "type": "string",
-              "enum": ["inService", "outOfOrder", "outOfService"],
-              "default": "inService"
-            }
+            "type": { "enum": ["hotelRoom"] }
           },
           "required": [
             "housekeepingStatus",
