@@ -14,7 +14,7 @@
     "type": {
       "type": ["string"],
       "enum": [
-        "classroom",
+        "classRoom",
         "hotelRoom",
         "office",
         "building",
@@ -103,7 +103,7 @@
           "properties": {
             "type": {
               "enum": [
-                "classroom",
+                "classRoom",
                 "hotelRoom",
                 "office",
                 "building",

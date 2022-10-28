@@ -8,20 +8,20 @@
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
     },
-    "reservationGuestId": {
+    "primaryGuest": {
       "type": "string"
     },
     "type": {
-      "type": "string" 
+      "type": "string"
     },
-    "sharedGuestIds": {
-      "type":"array",
+    "sharedGuests": {
+      "type": "array",
       "items": {
         "type": "string"
       }
     },
-    "hotelRoomId": { 
-      "type":"string"
+    "group": {
+      "type": "string"
     },
     "status": {
       "type": "string",
@@ -50,13 +50,13 @@
     "rateSuppressed": {
       "type": "boolean"
     },
-    "paymentId": {
+    "payment": {
       "type": "string"
     },
-    "companyId": {
+    "company": {
       "type": "string"
     },
-    "travelAgentId": {
+    "travelAgent": {
       "type": "string"
     },
     "systemData": {
