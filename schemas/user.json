@@ -3,52 +3,122 @@
   "$id": "https://api.kohost.app/schemas/v3/user.json",
   "title": "User",
   "type": "object",
-  "required": ["active", "firstName", "lastName", "phone", "email", "roles"],
+  "required": ["active", "lastName", "roles"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/id"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+    },
+    "type": {
+      "type": "string",
+      "default": "user"
     },
     "active": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/active"
+      "type": "boolean", 
+      "default": true
     },
     "firstName": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/firstName"
+      "type": "string"
     },
     "lastName": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/lastName"
+      "type": "string"
     },
     "phone": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/phone"
+      "type": "string",
+      "pattern": "^\\+?[0-9]{1,14}$"  
     },
     "email": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/email"
+      "type": "string",
+      "format": "email"
     },
     "hashedPassword": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/hashedPassword"
+      "type": "string"
     },
     "photo": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/photo"
+      "type": "string"
     },
     "jobTitle": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/jobTitle"
+      "type": "string"
     },
-    "preferences": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/preferences"
-    },
-    "location": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/location"
-    },
-    "roles": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/roles"
+    "dob": {
+      "type": "string"
     },
     "gender": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/gender"
+      "type": "string"
     },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Guest",
+          "Staff",
+          "Faculty",
+          "Student",
+          "Visitor",
+          "Manager",
+          "Administrator",
+          "SuperAdmin"
+        ]
+      }
+    },
+    "identifications": {
+      "type":"array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/identification.json"
+      }
+    },    
+    "payments": {
+      "type":"array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/payment.json"
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false, 
+      "properties": {
+        "notifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["roomControl", "marketing"]]
+        },
+        "location": {
+          "title": "The location Schema",
+          "type": "boolean",
+          "default": false,
+          "examples": [true]
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "required": ["accuracy", "latitude", "longitude", "timestamp"],
+      "additionalProperties": false,
+      "properties": {
+        "accuracy": {
+          "type": ["number", "null"]
+        },
+        "latitude": {
+          "type": ["number", "null"]
+        },
+        "longitude": {
+          "type": ["number", "null"]
+        },
+        "timestamp": {
+          "type": ["number", "null"]
+        }
+      }
+    },   
     "createdAt": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
     "updatedAt": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/updatedAt"
+    },
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
     }
   }
 }

@@ -15,7 +15,7 @@ const MediaSource = require("./mediaSource");
 const Room = require("./room");
 const Reservation = require("./reservation");
 const Application = require("./application");
-const Group = require("./group");
+const Space = require("./space");
 const Ticket = require("./ticket");
 const Scene = require("./scene");
 const Integration = require("./integration");
@@ -46,8 +46,8 @@ module.exports = {
   User,
   ACL,
   Room,
-  Application,
-  Group,
+  Application, 
+  Space,
   Ticket,
   Scene,
   Integration,

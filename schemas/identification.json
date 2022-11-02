@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/identityDocument.json",
-  "title": "Identity Document",
+  "$id": "https://api.kohost.app/schemas/v3/identification.json",
+  "title": "Identification",
   "type": "object",
   "required": ["type", "number", "expires", "issuingCountry"],
   "properties": {

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/paymentDocument.json",
-  "title": "Payment Document",
+  "$id": "https://api.kohost.app/schemas/v3/payment.json",
+  "title": "Payment",
   "type": "object",
   "required": ["type", "maskedNumber", "expires"],
   "properties": {
