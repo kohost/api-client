@@ -1,19 +1,19 @@
-// Create the Group Model
-// A group of rooms
+// Create the Space Model
+// A group of rooms -> rooms could become a space later...
 const schemas = require("../utils/schema");
-const schema = require("../schemas/group.json");
+const schema = require("../schemas/space.json");
 const Kohost = require("./kohost");
-const cloneDeep = require("lodash.clonedeep");
+const cloneDeep = require("lodash.clonedeep"); 
 
 const Room = require("./room");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Group extends Kohost {
+class Space extends Kohost {
   constructor(data) {
-    const groupData = mapGroupData(data);
-    super(groupData);
+    const spaceData = mapSpaceData(data);
+    super(spaceData);
   }
 
   get floor() {
@@ -70,30 +70,30 @@ class Group extends Kohost {
   }
 }
 
-Object.defineProperty(Group.prototype, "schema", {
+Object.defineProperty(Space.prototype, "schema", {
   value: schema,
 });
 
-Object.defineProperty(Group.prototype, "validator", {
+Object.defineProperty(Space.prototype, "validator", {
   get: function () {
     return validator;
   },
 });
 
-Object.defineProperty(Group, "validProperties", {
+Object.defineProperty(Space, "validProperties", {
   value: Object.keys(schema.properties),
 });
 
-function mapGroupData(data) {
-  const groupData = cloneDeep(data);
-  if (groupData.rooms?.length) {
-    groupData.rooms.map((room) => {
+function mapSpaceData(data) {
+  const spaceData = cloneDeep(data);
+  if (spaceData.rooms?.length) {
+    spaceData.rooms.map((room) => {
       if (typeof room === "string") return room;
       if (room instanceof Room) return room;
       return new Room(room);
     });
   }
-  return groupData;
+  return spaceData;
 }
 
-module.exports = Group;
+module.exports = Space;

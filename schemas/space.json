@@ -1,26 +1,19 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "https://api.kohost.app/schemas/v3/group.json",
-  "title": "Group",
+  "title": "Space",
   "type": "object",
+  "required": ["name", "rooms"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
     },
     "name": {
-      "type": "string",
-      "minLength": 1
+      "type": "string"
     },
     "type": {
       "type": ["string"],
-      "enum": [
-        "classRoom",
-        "hotelRoom",
-        "office",
-        "building",
-        "commonArea",
-        "other"
-      ]
+      "enum": ["classRoom", "hotelRoom", "office", "building", "commonArea", "other"]
     },
     "rooms": {
       "type": "array",
@@ -28,7 +21,7 @@
         "type": "string"
       }
     },
-    "subGroups": {
+    "subSpace": {
       "type": "array",
       "items": {
         "type": "string"
@@ -37,20 +30,15 @@
     "eco": {
       "type": "object",
       "additionalProperties": false,
-      "default": {
-        "enabled": false,
-        "active": false
-      },
       "properties": {
         "active": {
           "type": "boolean",
           "default": false
         },
         "activatedAt": {
-          "type": "string",
-          "format": "date-time"
+          "type": "string"
         },
-        "enabled": {
+        "allowed": {
           "type": "boolean",
           "default": false
         }
@@ -64,43 +52,45 @@
     },
     "maximumOccupancy": {
       "type": "number",
+      "default": 2,
       "minimum": 1
     },
     "housekeepingStatus": {
       "type": "string",
-      "enum": ["clean", "dirty", "inspected", "pickup"]
+      "enum": ["clean", "dirty", "inspected", "pickup"],
+      "default": "dirty"
     },
     "serviceStatus": {
       "type": "string",
-      "enum": ["inService", "outOfOrder", "outOfService"]
+      "enum": ["inService", "outOfOrder", "outOfService"],
+      "default": "inService"
     },
+
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
     }
   },
-  "if": {
-    "properties": { "type": { "const": "hotelRoom" } }
-  },
-  "then": {
-    "required": [
-      "features",
-      "maximumOccupancy",
-      "housekeepingStatus",
-      "serviceStatus"
-    ],
-    "properties": {
-      "features": {
-        "default": []
-      },
-      "maximumOccupancy": {
-        "default": 2
-      },
-      "housekeepingStatus": {
-        "default": "dirty"
-      },
-      "serviceStatus": {
-        "default": "inService"
-      }
+  "oneOf": [
+    {
+      "not": {"required": ["type"]}
+    },
+    {
+      "required": ["type"],
+      "anyOf": [
+        {
+          "properties": {
+            "type": { "enum": ["Hotel Room"]} 
+          },
+          "required": ["housekeepingStatus", "serviceStatus", "features", "maximumOccupancy"]
+        },
+        {
+          "properties": {
+            "type": { "enum": ["classRoom", "hotelRoom", "office", "building", "commonArea", "other"]}
+          },
+          "required": []
+        }
+      ]
     }
-  }
+  ]
+
 }
