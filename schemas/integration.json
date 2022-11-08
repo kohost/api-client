@@ -47,6 +47,7 @@
             "^[a-zA-Z0-9]{8}$": {
               "type": "object",
               "additionalProperties": false,
+              "required": ["id", "type", "roomId"],
               "properties": {
                 "id": {
                   "type": "string",
@@ -55,6 +56,10 @@
                 "type": {
                   "type": "string",
                   "description": "Driver device type"
+                },
+                "roomId": {
+                  "type": "string",
+                  "description": "Kohost room id"
                 }
               }
             }

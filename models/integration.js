@@ -18,11 +18,30 @@ class Integration extends Kohost {
     return null;
   }
 
-  getKohostDeviceId(driverDeviceId, type) {
+  getDeviceId(driverDeviceId, type) {
     const found = this.driverDeviceMap.get(driverDeviceId);
     if (found) {
       if (type && found.type === type) return found.id;
       else if (!type) return found.id;
+    }
+    return null;
+  }
+
+  getRoomId(driverDeviceId, type) {
+    const found = this.driverDeviceMap.get(driverDeviceId);
+    if (found) {
+      if (type && found.type === type) return found.roomId;
+      else if (!type) return found.roomId;
+    }
+    return null;
+  }
+
+  getDeviceData(driverDeviceId, type) {
+    const found = this.driverDeviceMap.get(driverDeviceId);
+    if (found) {
+      if (type && found.type === type)
+        return { id: found.id, roomId: found.roomId };
+      else if (!type) return { id: found.id, roomId: found.roomId };
     }
     return null;
   }
@@ -34,7 +53,7 @@ class Integration extends Kohost {
   get driverDeviceMap() {
     const map = new Map();
     for (const [id, value] of Object.entries(this.data?.deviceMap || {})) {
-      map.set(value.id, { id, type: value.type });
+      map.set(value.id, { id, type: value.type, roomId: value.roomId });
     }
     return map;
   }
