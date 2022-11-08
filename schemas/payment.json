@@ -6,7 +6,7 @@
   "required": ["type", "maskedNumber", "expires"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/user.json#/definitions/id"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
     },
     "type": {
       "type": "string",

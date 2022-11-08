@@ -1,11 +1,16 @@
 // Create the User Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/user.json");
+const idSchema = require("../schemas/identification.json");
+const paymentSchema = require("../schemas/payment.json");
 const Kohost = require("./kohost");
 
 const { nanoid } = require("nanoid/async");
 
+schemas.add(idSchema);
+schemas.add(paymentSchema);
 schemas.add(schema);
+
 const validator = schemas.compile(schema);
 
 class User extends Kohost {
