@@ -29,13 +29,3 @@ test("only sets defaults based on hotelRoom type ", () => {
   expect(space).not.toHaveProperty("serviceStatus");
   expect(space).not.toHaveProperty("features");
 });
-
-test("will not set hotelRoom defaults without type ", () => {
-  const data = { ...valid, type: "other" };
-  const space = new Space(data);
-  expect(space).not.toHaveProperty("type", "hotelRoom");
-  expect(space).not.toHaveProperty("maximumOccupancy");
-  expect(space).not.toHaveProperty("housekeepingStatus");
-  expect(space).not.toHaveProperty("serviceStatus");
-  expect(space).not.toHaveProperty("features");
-});
