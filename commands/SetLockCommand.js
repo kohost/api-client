@@ -9,12 +9,12 @@ class SetLockCommand extends Command {
     return "SetLock";
   }
 
-  get exchange() {
-    return "Devices";
-  }
-
   get routingKey() {
     return `lock.${this.data.id}.set`;
+  }
+
+  get replyTo() {
+    return "system.response.devices";
   }
 }
 

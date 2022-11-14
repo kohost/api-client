@@ -9,10 +9,6 @@ class SystemThermostatUpdatedEvent extends Event {
     return "SystemThermostatUpdated";
   }
 
-  get exchange() {
-    return "Devices";
-  }
-
   get routingKey() {
     return `thermostat.${this.data.id}.updated`;
   }

@@ -9,10 +9,6 @@ class UpdateReservationEvent extends Event {
     return "UpdateReservation";
   }
 
-  get exchange() {
-    return "Reservations";
-  }
-
   get routingKey() {
     return `reservation.${this.id}.updated`;
   }

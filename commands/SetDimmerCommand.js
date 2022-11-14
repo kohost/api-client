@@ -9,12 +9,12 @@ class SetDimmerCommand extends Command {
     return "SetDimmer";
   }
 
-  get exchange() {
-    return "Devices";
-  }
-
   get routingKey() {
     return `dimmer.${this.data.id}.set`;
+  }
+
+  get replyTo() {
+    return "system.response.devices";
   }
 }
 

@@ -9,12 +9,12 @@ class SetSwitchCommand extends Command {
     return "SetSwitch";
   }
 
-  get exchange() {
-    return "Devices";
-  }
-
   get routingKey() {
     return `switch.${this.data.id}.set`;
+  }
+
+  get replyTo() {
+    return "system.response.devices";
   }
 }
 

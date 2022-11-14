@@ -9,12 +9,12 @@ class SetSceneControllerCommand extends Command {
     return "SetSceneController";
   }
 
-  get exchange() {
-    return "Devices";
-  }
-
   get routingKey() {
     return `sceneController.${this.data.id}.set`;
+  }
+
+  get replyTo() {
+    return "system.response.devices";
   }
 }
 

@@ -9,10 +9,6 @@ class UpdateIntegrationEvent extends Event {
     return "UpdateIntegration";
   }
 
-  get exchange() {
-    return "Integrations";
-  }
-
   get routingKey() {
     return `integration.${this.id}.updated`;
   }

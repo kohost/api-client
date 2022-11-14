@@ -1,10 +1,9 @@
 const AppError = require("./AppError");
 
 module.exports = class LoginError extends AppError {
-  constructor(message = "Invalid Login information provided") {
-    super(message);
+  constructor(message = "Invalid Login information provided", options = {}) {
+    super(message, options);
     this.statusCode = 401;
-    this.code = 1008;
     Object.setPrototypeOf(this, LoginError.prototype);
   }
 };

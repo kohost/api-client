@@ -9,12 +9,12 @@ class SetThermostatCommand extends Command {
     return "SetThermostat";
   }
 
-  get exchange() {
-    return "Devices";
-  }
-
   get routingKey() {
     return `thermostat.${this.data.id}.set`;
+  }
+
+  get replyTo() {
+    return "system.response.devices";
   }
 }
 

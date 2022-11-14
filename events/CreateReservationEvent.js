@@ -9,10 +9,6 @@ class CreateReservationEvent extends Event {
     return "CreateReservation";
   }
 
-  get exchange() {
-    return "Reservations";
-  }
-
   get routingKey() {
     return `reservation.${this.id}.created`;
   }

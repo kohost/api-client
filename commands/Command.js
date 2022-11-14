@@ -26,6 +26,10 @@ class Command {
     return "Commands";
   }
 
+  get replyTo() {
+    return "amq.rabbitmq.reply-to";
+  }
+
   build() {
     return { data: { ...this.data } };
   }

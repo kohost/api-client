@@ -12,12 +12,12 @@ class VerifyDocumentCommand extends Command {
     return "VerifyDocument";
   }
 
-  get exchange() {
-    return "Drivers";
-  }
-
   get routingKey() {
     return `document.${this.data.type}.verify`;
+  }
+
+  get replyTo() {
+    return "system.response.documents";
   }
 }
 

@@ -9,10 +9,6 @@ class SystemDimmerUpdatedEvent extends Event {
     return "SystemDimmerUpdated";
   }
 
-  get exchange() {
-    return "Devices";
-  }
-
   get routingKey() {
     return `dimmer.${this.data.id}.updated`;
   }

@@ -9,12 +9,12 @@ class SetAlarmCommand extends Command {
     return "SetAlarm";
   }
 
-  get exchange() {
-    return "Devices";
-  }
-
   get routingKey() {
     return `alarm.${this.data.id}.set`;
+  }
+
+  get replyTo() {
+    return "system.response.devices";
   }
 }
 

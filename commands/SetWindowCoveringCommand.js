@@ -9,12 +9,12 @@ class SetWindowCoveringCommand extends Command {
     return "SetWindowCovering";
   }
 
-  get exchange() {
-    return "Devices";
+  get routingKey() {
+    return `windowCovering.${this.data.id}.set`;
   }
 
-  get routingKey() {
-    return `windowcovering.${this.data.id}.set`;
+  get replyTo() {
+    return "system.response.devices";
   }
 }
 
