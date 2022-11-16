@@ -6,6 +6,9 @@ const SetLockCommand = require("./SetLockCommand");
 const SetSceneControllerCommand = require("./SetSceneControllerCommand");
 const SetWindowCoveringCommand = require("./SetWindowCoveringCommand");
 const SetCourtesyCommand = require("./SetCourtesyCommand");
+
+const DiscoverUsersCommand = require("./DiscoverUsersCommand");
+
 const VerifyDocumentCommand = require("./VerifyDocumentCommand");
 
 module.exports = {
@@ -18,4 +21,5 @@ module.exports = {
   SetWindowCoveringCommand,
   SetCourtesyCommand,
   VerifyDocumentCommand,
+  DiscoverUsersCommand,
 };

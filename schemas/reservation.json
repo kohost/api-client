@@ -31,12 +31,12 @@
       "type": "string"
     },
     "checkInDateTime": {
-      "type": "string",
+      "type": ["string", "object"],
       "format": "date-time"
     },
     "checkOutDateTime": {
-      "type": "string",
-      "format": "date-time" 
+      "type": ["string", "object"],
+      "format": "date-time"
     },
     "adultCount": {
       "type": "number",
