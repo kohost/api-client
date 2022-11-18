@@ -7,7 +7,7 @@ const Kohost = require("./kohost");
 
 const { nanoid } = require("nanoid/async");
 
-schemas.add(idSchema);
+// schemas.add(idSchema);
 schemas.add(paymentSchema);
 schemas.add(schema);
 
@@ -19,7 +19,7 @@ class User extends Kohost {
   }
 
   static validatePhone(phoneNumber) {
-    const regex = /^\+?[1-9]\d{1,14}$/;
+    const regex = /^\+?[1-9]\d{1,14}$/; 
     return regex.test(phoneNumber);
   }
 

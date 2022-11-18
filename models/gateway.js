@@ -8,7 +8,7 @@ const validator = schemas.compile(schema);
 
 const { customAlphabet } = require("nanoid/async");
 const characters =
-  "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
 
 class Gateway extends Kohost {
   constructor(data) {

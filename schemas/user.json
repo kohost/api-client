@@ -17,18 +17,21 @@
       "default": true
     },
     "firstName": {
-      "type": "string"
+      "type": "string" 
     },
     "lastName": {
       "type": "string"
     },
     "phone": {
-      "type": "string",
-      "pattern": "^\\+?[0-9]{1,14}$"  
+      "type": "string",  
+      "pattern": "^\\+[0-9]{1,14}$"  
     },
     "email": {
       "type": "string",
       "format": "email"
+    },
+    "address": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/address"
     },
     "hashedPassword": {
       "type": "string"
@@ -43,7 +46,19 @@
       "type": "string"
     },
     "gender": {
-      "type": "string"
+      "type": "string",
+      "enum": ["male", "female", "tranny"] 
+    },
+    "nationality": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "roles": {
       "type": "array",
@@ -61,16 +76,16 @@
         ]
       }
     },
-    "identifications": {
+    "identifications": {  
       "type":"array",
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/identification.json"
+        "$ref": "https://api.kohost.app/schemas/v3/identification.json#"   
       }
     },    
     "payments": {
       "type":"array",
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/payment.json"
+        "type": "string"   
       }
     },
     "preferences": {
@@ -85,7 +100,7 @@
           "examples": [["roomControl", "marketing"]]
         },
         "location": {
-          "title": "The location Schema",
+          "title": "The location Schema", 
           "type": "boolean",
           "default": false,
           "examples": [true]
