@@ -1,5 +1,4 @@
 const { EventEmitter } = require("events");
-const axios = require("axios");
 const defs = require("../defs").http;
 const handleResponseError = require("./handleResponseError");
 const handleResponseSuccess = require("./handleResponseSuccess");
@@ -30,13 +29,21 @@ function useCaseMethodFactory(Client) {
       */
 
       //eslint-disable-next-line no-inner-declarations
-      function UseCase(options) {
-        if (!options) options = {};
+      function UseCase(requestData, options = {}) {
+        if (!this._init) {
+          // wait a second for the client to initialize
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(UseCase.call(this, requestData));
+            }, 500);
+          });
+        }
+        if (!requestData) requestData = {};
 
         // get parameters from path
         const pathParams = path.match(/:[a-zA-Z0-9]+/g);
 
-        const { data, params, query, headers } = options;
+        const { data, params, query, headers } = requestData;
 
         // replace path parameters with values from params
         let url = path;
@@ -60,6 +67,7 @@ function useCaseMethodFactory(Client) {
         const config = {
           method: method.toLowerCase(),
           url: url,
+          ...options,
         };
 
         if (data) config.data = data;
@@ -94,26 +102,33 @@ class KohostApiClient extends EventEmitter {
     if (!options.tenantId) throw new Error("options.tenant is required");
     this.options = options;
     // eslint-disable-next-line no-undef
-    this.isBrower = typeof window !== "undefined";
-    this._http = axios.create({
-      baseURL: options.url,
-      responseType: "json",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        [defs.tenantHeader]: options.tenantId,
-        ...options.headers,
-      },
-    });
+    this.isBrowser = typeof window !== "undefined";
+    this._init = false;
 
-    this._http.interceptors.response.use(
-      handleResponseSuccess.bind(this),
-      handleResponseError.bind(this)
-    );
+    import("axios").then((axiosModule) => {
+      const axios = axiosModule.default;
+      this._http = axios.create({
+        baseURL: options.url,
+        responseType: "json",
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          [defs.tenantHeader]: options.tenantId,
+          ...options.headers,
+        },
+      });
 
-    this._http.interceptors.request.use((config) => {
-      config.headers[defs.authTokenHeader] = this.authToken;
-      return config;
+      this._http.interceptors.response.use(
+        handleResponseSuccess.bind(this),
+        handleResponseError.bind(this)
+      );
+
+      this._http.interceptors.request.use((config) => {
+        config.headers[defs.authTokenHeader] = this.authToken;
+        return config;
+      });
+      this._init = true;
     });
   }
 
@@ -130,7 +145,7 @@ class KohostApiClient extends EventEmitter {
   }
 
   get authToken() {
-    if (this.isBrower) {
+    if (this.isBrowser) {
       // get token from localStorage
       // eslint-disable-next-line no-undef
       return window.localStorage.getItem(this.lsTokenKey);
@@ -145,7 +160,7 @@ class KohostApiClient extends EventEmitter {
   */
 
   set authToken(token) {
-    if (this.isBrower) {
+    if (this.isBrowser) {
       // eslint-disable-next-line no-undef
       window.localStorage.setItem(this.lsTokenKey, token);
     } else {

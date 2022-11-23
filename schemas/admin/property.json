@@ -45,6 +45,112 @@
     "longitude": {
       "type": "number"
     },
+    "appManifest": {
+      "type": "object",
+
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "short_name": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "start_url": {
+          "type": "string"
+        },
+        "themeColor": {
+          "type": "string"
+        },
+        "backgroundColor": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string",
+          "enum": ["fullscreen", "standalone", "minimal-ui", "browser"],
+          "default": "fullscreen"
+        },
+        "orientation": {
+          "type": "string",
+          "enum": ["portrait", "landscape"],
+          "default": "portrait"
+        },
+        "splash": {
+          "type": "object",
+          "properties": {
+            "src": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "sizes": {
+              "type": "string"
+            }
+          }
+        },
+        "icons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "src": {
+                "type": "string"
+              },
+              "sizes": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "logo": {
+          "type": "object",
+          "properties": {
+            "src": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "sizes": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "default": {
+        "name": "Kohost",
+        "short_name": "Kohost",
+        "start_url": "/",
+        "scope": "/",
+        "display": "fullscreen",
+        "orientation": "portrait",
+        "theme_color": "#1d1f22",
+        "background_color": "#1d1f22",
+        "icons": [
+          {
+            "src": "https://cdn.kohost.app/defaultIcon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+          }
+        ],
+        "splash": {
+          "src": "https://cdn.kohost.app/defaultSplash.jpg",
+          "sizes": "1500x800",
+          "type": "image/jpg"
+        },
+        "logo": {
+          "src": "https://cdn.kohost.app/defaultLogo.png",
+          "sizes": "300x75",
+          "type": "image/png"
+        }
+      }
+    },
     "credentials": {
       "type": "object",
       "additionalProperties": true

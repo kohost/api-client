@@ -156,56 +156,56 @@
     }
   ],
   [
-    "ListGroups",
+    "ListSpaces",
     {
       "http": {
         "method": "GET",
-        "path": "/groups"
+        "path": "/spaces"
       }
     }
   ],
   [
-    "CreateGroup",
+    "CreateSpace",
     {
       "http": {
         "method": "POST",
-        "path": "/groups"
+        "path": "/spaces"
       }
     }
   ],
   [
-    "DescribeGroup",
+    "DescribeSpace",
     {
       "http": {
         "method": "GET",
-        "path": "/groups/:id"
+        "path": "/spaces/:id"
       }
     }
   ],
   [
-    "DeleteGroup",
+    "DeleteSpace",
     {
       "http": {
         "method": "DELETE",
-        "path": "/groups/:id"
+        "path": "/spaces/:id"
       }
     }
   ],
   [
-    "UpdateGroup",
+    "UpdateSpace",
     {
       "http": {
         "method": "PUT",
-        "path": "/groups/:id"
+        "path": "/spaces/:id"
       }
     }
   ],
   [
-    "CreateRoomInGroup",
+    "CreateRoomInSpace",
     {
       "http": {
         "method": "POST",
-        "path": "/groups/:groupId/rooms"
+        "path": "/spaces/:id/rooms"
       }
     }
   ],
@@ -300,6 +300,15 @@
     }
   ],
   [
+    "SetLocks",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/locks/:id"
+      }
+    }
+  ],
+  [
     "CreateCamera",
     {
       "http": {
@@ -345,6 +354,15 @@
     }
   ],
   [
+    "SetCameras",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/cameras/:id"
+      }
+    }
+  ],
+  [
     "CreateCourtesy",
     {
       "http": {
@@ -385,6 +403,15 @@
     {
       "http": {
         "method": "GET",
+        "path": "/rooms/:roomId/courtesy/:id"
+      }
+    }
+  ],
+  [
+    "SetCourtesy",
+    {
+      "http": {
+        "method": "POST",
         "path": "/rooms/:roomId/courtesy/:id"
       }
     }
@@ -525,6 +552,15 @@
     }
   ],
   [
+    "SetSwitches",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/switches/:id"
+      }
+    }
+  ],
+  [
     "CreateSceneController",
     {
       "http": {
@@ -565,6 +601,15 @@
     {
       "http": {
         "method": "GET",
+        "path": "/rooms/:roomId/sceneControllers/:id"
+      }
+    }
+  ],
+  [
+    "SetSceneControllers",
+    {
+      "http": {
+        "method": "POST",
         "path": "/rooms/:roomId/sceneControllers/:id"
       }
     }
@@ -615,6 +660,15 @@
     }
   ],
   [
+    "SetSources",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/sources/:id"
+      }
+    }
+  ],
+  [
     "CreateThermostat",
     {
       "http": {
@@ -660,6 +714,15 @@
     }
   ],
   [
+    "SetThermostats",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/thermostats/:id"
+      }
+    }
+  ],
+  [
     "CreateWindowCovering",
     {
       "http": {
@@ -700,6 +763,15 @@
     {
       "http": {
         "method": "GET",
+        "path": "/rooms/:roomId/windowCoverings/:id"
+      }
+    }
+  ],
+  [
+    "SetWindowCoverings",
+    {
+      "http": {
+        "method": "POST",
         "path": "/rooms/:roomId/windowCoverings/:id"
       }
     }
@@ -804,7 +876,7 @@
     }
   ],
   [
-    "ScheduleGroupEcoScenes",
+    "ScheduleSpaceEcoScenes",
     {
       "http": false
     }
@@ -896,6 +968,130 @@
       "http": {
         "method": "POST",
         "path": "/integrations/:id/deviceMap"
+      }
+    }
+  ],
+  [
+    "DescribeIntegration",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/integrations/:id"
+      }
+    }
+  ],
+  [
+    "DeleteIntegration",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/integrations/:id"
+      }
+    }
+  ],
+  [
+    "ListIntegrations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/integrations/"
+      }
+    }
+  ],
+  [
+    "UpsertSystemDevice",
+    {
+      "http": false
+    }
+  ],
+  [
+    "UpsertSystemReservation",
+    {
+      "http": false
+    }
+  ],
+  [
+    "UpsertSystemSpace",
+    {
+      "http": false
+    }
+  ],
+  [
+    "UpsertSystemUser",
+    {
+      "http": false
+    }
+  ],
+  [
+    "CreateReservation",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations"
+      }
+    }
+  ],
+  [
+    "DeleteReservation",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/reservations/:id"
+      }
+    }
+  ],
+  [
+    "ListReservations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations"
+      }
+    }
+  ],
+  [
+    "ListMyReservations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/mine"
+      }
+    }
+  ],
+  [
+    "UpdateReservation",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/reservations/:id"
+      }
+    }
+  ],
+  [
+    "DescribeReservation",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/:id"
+      }
+    }
+  ],
+  [
+    "VerifyDocument",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/documents/verify",
+        "maxSize": "2mb"
+      }
+    }
+  ],
+  [
+    "DescribeMyProperty",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/properties/mine"
       }
     }
   ]

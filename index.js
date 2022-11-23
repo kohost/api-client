@@ -15,8 +15,8 @@ const Kohost = {
   defs,
   Client: HttpClient,
   utils: {
-    getFormalDeviceType,
-    getDeviceTypes,
+    getFormalDeviceType: getFormalDeviceType,
+    getDeviceTypes: getDeviceTypes,
   },
 };
 
