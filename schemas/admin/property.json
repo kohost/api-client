@@ -151,6 +151,20 @@
         }
       }
     },
+    "appFeatures": {
+      "type": "object",
+      "properties": {
+        "RoomControl": {},
+        "CheckIn": {},
+        "CheckOut": {},
+        "Concierge": {},
+        "Elevator": {}
+      },
+      "additionalProperties": false,
+      "default": {
+        "RoomControl": {}
+      }
+    },
     "credentials": {
       "type": "object",
       "additionalProperties": true

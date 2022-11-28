@@ -125,7 +125,9 @@ class KohostApiClient extends EventEmitter {
       );
 
       this._http.interceptors.request.use((config) => {
-        config.headers[defs.authTokenHeader] = this.authToken;
+        if (!this.isBrowser) {
+          config.headers[defs.authTokenHeader] = this.authToken;
+        }
         return config;
       });
       this._init = true;
@@ -145,13 +147,7 @@ class KohostApiClient extends EventEmitter {
   }
 
   get authToken() {
-    if (this.isBrowser) {
-      // get token from localStorage
-      // eslint-disable-next-line no-undef
-      return window.localStorage.getItem(this.lsTokenKey);
-    } else {
-      return this._authToken;
-    }
+    return this._authToken;
   }
 
   /* 
@@ -160,12 +156,7 @@ class KohostApiClient extends EventEmitter {
   */
 
   set authToken(token) {
-    if (this.isBrowser) {
-      // eslint-disable-next-line no-undef
-      window.localStorage.setItem(this.lsTokenKey, token);
-    } else {
-      this._authToken = token;
-    }
+    this._authToken = token;
   }
 }
 
