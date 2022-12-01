@@ -11,7 +11,7 @@ class WindowCovering extends Kohost {
     super(data);
   }
 
-  static getActionDelta(old, _new) {
+  static getActionDelta(old, _new) {  
     const delta = {};
     for (const action in _new) {
       if (this.actionProperties?.includes(action)) {

@@ -61,6 +61,9 @@
     },
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
+    },
+    "metadata": {
+      "ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/metadata"
     }
   }
 }

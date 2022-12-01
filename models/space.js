@@ -10,7 +10,7 @@ const Room = require("./room");
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Space extends Kohost {
+class Space extends Kohost { 
   constructor(data) {
     const spaceData = mapSpaceData(data);
     super(spaceData);

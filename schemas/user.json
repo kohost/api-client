@@ -17,18 +17,26 @@
       "default": true
     },
     "firstName": {
-      "type": "string"
+      "type": "string" 
     },
     "lastName": {
       "type": "string"
     },
     "phone": {
+<<<<<<< HEAD
+      "type": "string",  
+      "pattern": "^\\+[0-9]{1,14}$"  
+=======
       "type": ["string", "null"],
       "pattern": "^\\+?[0-9]{1,14}$"
+>>>>>>> 10e508da44f867ba7e01524303ca9ec3b2203ba1
     },
     "email": {
       "type": ["string", "null"],
       "format": "email"
+    },
+    "address": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/address"
     },
     "hashedPassword": {
       "type": "string"
@@ -43,7 +51,19 @@
       "type": "string"
     },
     "gender": {
-      "type": "string"
+      "type": "string",
+      "enum": ["male", "female", "tranny"] 
+    },
+    "nationality": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "roles": {
       "type": "array",
@@ -61,16 +81,21 @@
         ]
       }
     },
+<<<<<<< HEAD
+    "identifications": {  
+      "type":"array",
+=======
     "identifications": {
       "type": "array",
+>>>>>>> 10e508da44f867ba7e01524303ca9ec3b2203ba1
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/identification.json"
+        "$ref": "https://api.kohost.app/schemas/v3/identification.json#"   
       }
     },
     "payments": {
       "type": "array",
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/payment.json"
+        "type": "string"   
       }
     },
     "preferences": {
@@ -85,7 +110,7 @@
           "examples": [["roomControl", "marketing"]]
         },
         "location": {
-          "title": "The location Schema",
+          "title": "The location Schema", 
           "type": "boolean",
           "default": false,
           "examples": [true]
