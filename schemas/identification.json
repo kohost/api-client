@@ -16,12 +16,26 @@
       "string": "string"
     },
     "issued": {
-      "string": "string",
+      "type": ["string", "object"],
       "format": "date-time"
     },
     "expires": {
-      "string": "string",
+      "type": ["string", "object"],
       "format": "date-time"
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "matched": {
+      "type": "boolean",
+      "default": false
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
     },
     "issuingCountry": {
       "string": "string",

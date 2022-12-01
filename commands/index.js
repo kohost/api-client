@@ -6,10 +6,9 @@ const SetLockCommand = require("./SetLockCommand");
 const SetSceneControllerCommand = require("./SetSceneControllerCommand");
 const SetWindowCoveringCommand = require("./SetWindowCoveringCommand");
 const SetCourtesyCommand = require("./SetCourtesyCommand");
-
 const DiscoverUsersCommand = require("./DiscoverUsersCommand");
-
-const VerifyDocumentCommand = require("./VerifyDocumentCommand");
+const OCRDocumentCommand = require("./OCRDocumentCommand");
+const CheckInReservationCommand = require("./CheckInReservationCommand");
 
 module.exports = {
   SetAlarmCommand,
@@ -20,6 +19,7 @@ module.exports = {
   SetSceneControllerCommand,
   SetWindowCoveringCommand,
   SetCourtesyCommand,
-  VerifyDocumentCommand,
+  OCRDocumentCommand,
   DiscoverUsersCommand,
+  CheckInReservationCommand,
 };

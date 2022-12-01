@@ -18,6 +18,15 @@
     }
   ],
   [
+    "AdminUpdateProperty",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/admin/properties/:id"
+      }
+    }
+  ],
+  [
     "LoginUser",
     {
       "http": {
@@ -1077,11 +1086,30 @@
     }
   ],
   [
-    "VerifyDocument",
+    "MatchUserIdentification",
     {
       "http": {
         "method": "POST",
-        "path": "/documents/verify",
+        "path": "/reservations/:id/checkin/matchId",
+        "maxSize": "2mb"
+      }
+    }
+  ],
+  [
+    "CheckInReservation",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/checkin"
+      }
+    }
+  ],
+  [
+    "OCRDocument",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/documents/ocr",
         "maxSize": "2mb"
       }
     }
@@ -1091,7 +1119,8 @@
     {
       "http": {
         "method": "GET",
-        "path": "/properties/mine"
+        "path": "/properties/mine",
+        "disableAuth": true
       }
     }
   ]

@@ -6,6 +6,7 @@ const Lock = require("./lock");
 const SceneController = require("./sceneController");
 const Thermostat = require("./thermostat");
 const WindowCovering = require("./windowCovering");
+const Identification = require("./identification");
 const User = require("./user");
 const ACL = require("./acl");
 const Courtesy = require("./courtesy");
@@ -43,10 +44,11 @@ module.exports = {
   Thermostat,
   WindowCovering,
   MediaSource,
+  Identification,
   User,
   ACL,
   Room,
-  Application, 
+  Application,
   Space,
   Ticket,
   Scene,

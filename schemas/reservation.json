@@ -20,7 +20,7 @@
         "type": "string"
       }
     },
-    "group": {
+    "space": {
       "type": "string"
     },
     "status": {
