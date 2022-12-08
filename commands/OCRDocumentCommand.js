@@ -15,10 +15,6 @@ class OCRDocumentCommand extends Command {
   get routingKey() {
     return `document.${this.data.type}.ocr`;
   }
-
-  get replyTo() {
-    return "system.response.documents";
-  }
 }
 
 module.exports = OCRDocumentCommand;

@@ -19,6 +19,9 @@
     "timezone": {
       "type": "string"
     },
+    "smsNumber": {
+      "type": "string"
+    },
     "address": {
       "type": "object",
       "properties": {

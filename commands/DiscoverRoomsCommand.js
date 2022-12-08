@@ -1,16 +1,16 @@
 const Command = require("./Command");
 
-class DiscoverUsersCommand extends Command {
+class DiscoverRoomsCommand extends Command {
   constructor({ id }) {
     super({ id });
   }
 
   get name() {
-    return "DiscoverUsers";
+    return "DiscoverRooms";
   }
 
   get routingKey() {
-    return `users.${this.data.id}.get`;
+    return `rooms.${this.data.id}.get`;
   }
 
   get replyTo() {
@@ -18,4 +18,4 @@ class DiscoverUsersCommand extends Command {
   }
 }
 
-module.exports = DiscoverUsersCommand;
+module.exports = DiscoverRoomsCommand;
