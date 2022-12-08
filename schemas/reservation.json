@@ -20,24 +20,20 @@
         "type": "string"
       }
     },
-    "group": {
+    "space": {
       "type": "string"
     },
     "status": {
-      "type": "string",
-      "enum": ["reserved", "checkedIn", "checkedOut", "cancelled", "noShow"]
+      "type": "string", 
+      "enum": ["reserved", "checkedIn", "checkedOut", "cancelled", "noShow", "enquired", "requested", "optional"],
+      "description": " reserved - confirmed by both parties, before check-in\n checkedIn - checked in\n checkedOut - checked out\n cancelled - Cancelled\n noShow - No show\n enquired - Confirmed neither by the customer nor enterprise\n requested - Confirmed by the customer but not the enterprise (waitlist)\n optional - Confirmed by the enterprise but not the customer (holding)"
     },
     "confirmationNumber": {
       "type": "string"
     },
     "checkInDateTime": {
-<<<<<<< HEAD
       "type": "string",
       "format": "date-time" 
-=======
-      "type": ["string", "object"],
-      "format": "date-time"
->>>>>>> 10e508da44f867ba7e01524303ca9ec3b2203ba1
     },
     "checkOutDateTime": {
       "type": ["string", "object"],
@@ -72,3 +68,4 @@
     }
   }
 }
+

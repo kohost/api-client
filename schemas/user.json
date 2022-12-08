@@ -23,13 +23,8 @@
       "type": "string"
     },
     "phone": {
-<<<<<<< HEAD
       "type": "string",  
       "pattern": "^\\+[0-9]{1,14}$"  
-=======
-      "type": ["string", "null"],
-      "pattern": "^\\+?[0-9]{1,14}$"
->>>>>>> 10e508da44f867ba7e01524303ca9ec3b2203ba1
     },
     "email": {
       "type": ["string", "null"],
@@ -52,7 +47,7 @@
     },
     "gender": {
       "type": "string",
-      "enum": ["male", "female", "tranny"] 
+      "enum": ["male", "female", "tranny"]  
     },
     "nationality": {
       "type": "string",
@@ -62,7 +57,13 @@
     "notes": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string" 
+      }
+    },
+    "files": {
+      "type":"array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/file"
       }
     },
     "roles": {
@@ -81,13 +82,8 @@
         ]
       }
     },
-<<<<<<< HEAD
-    "identifications": {  
-      "type":"array",
-=======
-    "identifications": {
+    "identifications": { 
       "type": "array",
->>>>>>> 10e508da44f867ba7e01524303ca9ec3b2203ba1
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/identification.json#"   
       }
@@ -95,7 +91,7 @@
     "payments": {
       "type": "array",
       "items": {
-        "type": "string"   
+        "$ref": "https://api.kohost.app/schemas/v3/payment.json#"   
       }
     },
     "preferences": {

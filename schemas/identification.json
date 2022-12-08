@@ -10,13 +10,16 @@
     },
     "type": {
       "type": "string",
-      "enum": ["driversLicense", "passport", "identityCard", "employeeId"]  
+      "enum": ["driversLicense", "passport", "identityCard", "visa"]  
+    },
+    "lastName": { 
+      "type":"string"
     },
     "number": {
       "string": "string"
     },
     "issued": {
-      "string": "string",
+      "string": "string", 
       "format": "date-time"
     },
     "expires": {
