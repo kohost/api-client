@@ -14,12 +14,14 @@
         "amex",
         "visa",
         "masterCard",
+        "maestro",
         "discover",
         "diners",
         "jcb",
         "applePay",
         "alipay",
-        "chinaUnionPay"
+        "chinaUnionPay",
+        "vpay"
       ]
     },
     "maskedNumber": {

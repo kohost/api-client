@@ -54,10 +54,11 @@ class Kohost {
 
   _validate(data) {
     const valid = this.validator(data);
-    if (!valid)
+    if (!valid) {
       throw new ValidationError(`Invalid ${this.constructor.name}`, {
-        cause: this.validator.errors,
-      });
+        cause: this.validator.errors,   
+    });    }
+   
   }
 
   static generateId() {

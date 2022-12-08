@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://api.kohost.app/schemas/v3/product.json",
+  "title": "Product",
+  "type": "object",
+  "required": ["name", "description", "price", "currency"], 
+  "properties": {
+    "id": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+    },
+    "type": {
+      "type": "string" 
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "string": "string"
+    },
+    "price": {
+      "type": "number"
+    },
+    "currency": { 
+      "type": "string",
+      "description": "ISO 4217 format",
+      "minLength": 3,
+      "maxLength": 3
+    },
+    "image": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/file"
+    },
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
+    }
+  }
+}
