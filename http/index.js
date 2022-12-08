@@ -85,7 +85,7 @@ function useCaseMethodFactory(Client) {
 class KohostApiClient extends EventEmitter {
   /* 
   @param {Object} options - The options to create the client
-  @param {String} options.tenantId - The tenant ID
+  @param {String} options.propertyId - The property ID
   @param {String} options.url - The base URL for the API endpint
   @param {Object} options.headers - Additional headers to send with each request
 
@@ -93,13 +93,13 @@ class KohostApiClient extends EventEmitter {
   constructor(
     options = {
       url: "",
-      tenantId: "",
+      propertyId: "",
       headers: {},
     }
   ) {
     super();
     if (!options.url) throw new Error("options.url is required");
-    if (!options.tenantId) throw new Error("options.tenant is required");
+    if (!options.propertyId) throw new Error("options.property is required");
     this.options = options;
     // eslint-disable-next-line no-undef
     this.isBrowser = typeof window !== "undefined";
@@ -114,7 +114,7 @@ class KohostApiClient extends EventEmitter {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          [defs.tenantHeader]: options.tenantId,
+          [defs.propertyHeader]: options.propertyId,
           ...options.headers,
         },
       });
@@ -143,7 +143,7 @@ class KohostApiClient extends EventEmitter {
   }
 
   get lsTokenKey() {
-    return `${this.options.tenantId}_${defs.authTokenHeader}`;
+    return `${this.options.propertyId}_${defs.authTokenHeader}`;
   }
 
   get authToken() {
