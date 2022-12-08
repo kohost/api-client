@@ -24,8 +24,9 @@
       "type": "string"
     },
     "status": {
-      "type": "string",
-      "enum": ["reserved", "checkedIn", "checkedOut", "cancelled", "noShow"]
+      "type": "string", 
+      "enum": ["reserved", "checkedIn", "checkedOut", "cancelled", "noShow", "enquired", "requested", "optional"],
+      "description": " reserved - confirmed by both parties, before check-in\n checkedIn - checked in\n checkedOut - checked out\n cancelled - Cancelled\n noShow - No show\n enquired - Confirmed neither by the customer nor enterprise\n requested - Confirmed by the customer but not the enterprise (waitlist)\n optional - Confirmed by the enterprise but not the customer (holding)"
     },
     "confirmationNumber": {
       "type": "string"
@@ -67,3 +68,4 @@
     }
   }
 }
+

@@ -21,6 +21,7 @@ const Ticket = require("./ticket");
 const Scene = require("./scene");
 const Integration = require("./integration");
 const Gateway = require("./gateway");
+const Product = require("./product");
 const DiscoveredDevice = require("./discoveredDevice");
 
 const AdminCustomer = require("./admin/customer");
@@ -45,6 +46,7 @@ module.exports = {
   WindowCovering,
   MediaSource,
   Identification,
+  Product,
   User,
   ACL,
   Room,

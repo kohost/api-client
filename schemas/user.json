@@ -47,7 +47,7 @@
     },
     "gender": {
       "type": "string",
-      "enum": ["male", "female", "tranny"]
+      "enum": ["male", "female"]
     },
     "nationality": {
       "type": "string",
@@ -57,7 +57,13 @@
     "notes": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string" 
+      }
+    },
+    "files": {
+      "type":"array",
+      "items": {
+        "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/file"
       }
     },
     "roles": {
@@ -85,7 +91,7 @@
     "payments": {
       "type": "array",
       "items": {
-        "type": "string"
+        "$ref": "https://api.kohost.app/schemas/v3/payment.json#"   
       }
     },
     "preferences": {

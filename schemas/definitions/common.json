@@ -21,6 +21,24 @@
       "type": ["string", "object"],
       "format": "date-time"
     },
+    "file": {
+      "type":"object",
+      "required": ["name", "type", "data"],
+      "properties": {
+        "name": {
+          "type":"string",
+          "description": "Name of the file."
+        },
+        "type": {
+          "type":"string",
+          "description": "MIME type of the file (e.g. application/pdf)."
+        },
+        "data": {
+          "type":"string",
+          "description": "Base64-encoded data of the file."
+        }
+      }
+    },
     "address": {
       "type":"object",
       "properties": {

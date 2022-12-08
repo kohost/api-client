@@ -10,7 +10,7 @@
     },
     "type": {
       "type": "string",
-      "enum": ["driversLicense", "passport", "identityCard", "employeeId"]  
+      "enum": ["driversLicense", "passport", "identityCard", "visa"]  
     },
     "number": {
       "string": "string"
