@@ -26,9 +26,15 @@
       "type": ["string", "null"],
       "pattern": "^\\+[0-9]{1,14}$"
     },
+    "phoneVerified": {
+      "type": "boolean"
+    },
     "email": {
       "type": ["string", "null"],
       "format": "email"
+    },
+    "emailVerified": {
+      "type": "boolean"
     },
     "address": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/address"
@@ -57,11 +63,11 @@
     "notes": {
       "type": "array",
       "items": {
-        "type": "string" 
+        "type": "string"
       }
     },
     "files": {
-      "type":"array",
+      "type": "array",
       "items": {
         "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/file"
       }
@@ -91,7 +97,7 @@
     "payments": {
       "type": "array",
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/payment.json#"   
+        "$ref": "https://api.kohost.app/schemas/v3/payment.json#"
       }
     },
     "preferences": {
@@ -129,6 +135,31 @@
         },
         "timestamp": {
           "type": ["number", "null"]
+        }
+      }
+    },
+    "registeredDevices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "userAgent": {
+            "type": "string"
+          },
+          "fingerPrint": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "registeredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
         }
       }
     },

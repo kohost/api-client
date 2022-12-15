@@ -23,6 +23,7 @@ const Integration = require("./integration");
 const Gateway = require("./gateway");
 const Product = require("./product");
 const DiscoveredDevice = require("./discoveredDevice");
+const Credential = require("./credential");
 
 const AdminCustomer = require("./admin/customer");
 const AdminProperty = require("./admin/property");
@@ -57,4 +58,5 @@ module.exports = {
   Integration,
   DiscoveredDevice,
   Reservation,
+  Credential,
 };
