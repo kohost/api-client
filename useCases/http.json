@@ -27,6 +27,15 @@
     }
   ],
   [
+    "AdminDescribeProperty",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/admin/properties/:id"
+      }
+    }
+  ],
+  [
     "LoginUser",
     {
       "http": {
@@ -53,6 +62,16 @@
         "disableAuth": true,
         "method": "POST",
         "path": "/auth/refresh"
+      }
+    }
+  ],
+  [
+    "RequestLoginLink",
+    {
+      "http": {
+        "disableAuth": true,
+        "method": "POST",
+        "path": "/auth/loginToken"
       }
     }
   ],
@@ -107,60 +126,6 @@
       "http": {
         "method": "DELETE",
         "path": "/users/:id"
-      }
-    }
-  ],
-  [
-    "DescribeGateway",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/gateways/:gatewayId"
-      }
-    }
-  ],
-  [
-    "ListGateways",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/gateways"
-      }
-    }
-  ],
-  [
-    "CreateGateway",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/gateways"
-      }
-    }
-  ],
-  [
-    "UpdateGateway",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/gateways/:gatewayId"
-      }
-    }
-  ],
-  [
-    "DeleteGateway",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/gateways/:gatewayId"
-      }
-    }
-  ],
-  [
-    "EmailUserAccountSetup",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/users/:id/email/setup"
       }
     }
   ],
@@ -790,7 +755,7 @@
     {
       "http": {
         "method": "POST",
-        "path": "/rooms/:roomId/scenes"
+        "path": "/rooms/:id/scenes"
       }
     }
   ],
@@ -817,7 +782,7 @@
     {
       "http": {
         "method": "POST",
-        "path": "/tickets/:ticketId/messages"
+        "path": "/tickets/:id/messages"
       }
     }
   ],
@@ -826,7 +791,7 @@
     {
       "http": {
         "method": "DELETE",
-        "path": "/tickets/:ticketId"
+        "path": "/tickets/:id"
       }
     }
   ],
@@ -835,7 +800,7 @@
     {
       "http": {
         "method": "GET",
-        "path": "/tickets/:ticketId"
+        "path": "/tickets/:id"
       }
     }
   ],
@@ -853,7 +818,7 @@
     {
       "http": {
         "method": "POST",
-        "path": "/tickets/:ticketId/readAll"
+        "path": "/tickets/:id/readAll"
       }
     }
   ],
@@ -862,7 +827,7 @@
     {
       "http": {
         "method": "PUT",
-        "path": "/tickets/:ticketId"
+        "path": "/tickets/:id"
       }
     }
   ],
@@ -871,7 +836,7 @@
     {
       "http": {
         "method": "PUT",
-        "path": "/tickets/:ticketId/status"
+        "path": "/tickets/:id/status"
       }
     }
   ],
@@ -1014,12 +979,6 @@
     }
   ],
   [
-    "UpsertSystemReservation",
-    {
-      "http": false
-    }
-  ],
-  [
     "UpsertSystemSpace",
     {
       "http": false
@@ -1029,6 +988,15 @@
     "UpsertSystemUser",
     {
       "http": false
+    }
+  ],
+  [
+    "DiscoverReservations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/discover"
+      }
     }
   ],
   [
@@ -1105,6 +1073,39 @@
     }
   ],
   [
+    "SendPreArrivalSMS",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/sendPreArrivalSMS"
+      }
+    }
+  ],
+  [
+    "SendPreArrivalEmail",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/sendPreArrivalEmail"
+      }
+    }
+  ],
+  [
+    "BatchNotifyPreArrival",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/batchNotifyPreArrival"
+      }
+    }
+  ],
+  [
+    "UpsertSystemReservation",
+    {
+      "http": false
+    }
+  ],
+  [
     "OCRDocument",
     {
       "http": {
@@ -1122,6 +1123,21 @@
         "path": "/properties/mine",
         "disableAuth": true
       }
+    }
+  ],
+  [
+    "EmailUserAccountSetup",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/users/:id/email/setup"
+      }
+    }
+  ],
+  [
+    "LogEvent",
+    {
+      "http": false
     }
   ]
 ]

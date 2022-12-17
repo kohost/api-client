@@ -158,6 +158,10 @@ class KohostApiClient extends EventEmitter {
   set authToken(token) {
     this._authToken = token;
   }
+
+  onLoginRequired() {
+    this.emit("LoginRequired");
+  }
 }
 
 useCaseMethodFactory(KohostApiClient);

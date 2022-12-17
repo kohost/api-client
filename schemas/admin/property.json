@@ -4,7 +4,7 @@
   "title": "Property",
   "type": "object",
   "description": "A property is a physical asset or building",
-  "required": ["id", "name", "type"],
+  "required": ["id", "name", "type", "hostname"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
@@ -20,6 +20,9 @@
       "type": "string"
     },
     "smsNumber": {
+      "type": "string"
+    },
+    "hostname": {
       "type": "string"
     },
     "address": {
