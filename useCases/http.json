@@ -36,6 +36,15 @@
     }
   ],
   [
+    "AdminCreateProperty",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/admin/properties"
+      }
+    }
+  ],
+  [
     "LoginUser",
     {
       "http": {
@@ -112,6 +121,15 @@
     }
   ],
   [
+    "UpdateSelf",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/users/me"
+      }
+    }
+  ],
+  [
     "UpdateUser",
     {
       "http": {
@@ -130,11 +148,57 @@
     }
   ],
   [
+    "SendVerificationCode",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/users/:id/sendVerificationCode"
+      }
+    }
+  ],
+  [
+    "CheckVerificationCode",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/users/:id/checkVerificationCode"
+      }
+    }
+  ],
+  [
+    "MatchUserIdentification",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/users/:id/identifications/match",
+        "maxSize": "2mb"
+      }
+    }
+  ],
+  [
     "ListSpaces",
     {
       "http": {
         "method": "GET",
         "path": "/spaces"
+      }
+    }
+  ],
+  [
+    "ListMySpaces",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/spaces/mine"
+      }
+    }
+  ],
+  [
+    "ListRoomsInSpace",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/spaces/:id/rooms"
       }
     }
   ],
@@ -274,7 +338,7 @@
     }
   ],
   [
-    "SetLocks",
+    "SetLock",
     {
       "http": {
         "method": "POST",
@@ -328,7 +392,7 @@
     }
   ],
   [
-    "SetCameras",
+    "SetCamera",
     {
       "http": {
         "method": "POST",
@@ -526,7 +590,7 @@
     }
   ],
   [
-    "SetSwitches",
+    "SetSwitch",
     {
       "http": {
         "method": "POST",
@@ -580,7 +644,7 @@
     }
   ],
   [
-    "SetSceneControllers",
+    "SetSceneController",
     {
       "http": {
         "method": "POST",
@@ -634,7 +698,7 @@
     }
   ],
   [
-    "SetSources",
+    "SetSource",
     {
       "http": {
         "method": "POST",
@@ -688,7 +752,7 @@
     }
   ],
   [
-    "SetThermostats",
+    "SetThermostat",
     {
       "http": {
         "method": "POST",
@@ -742,7 +806,7 @@
     }
   ],
   [
-    "SetWindowCoverings",
+    "SetWindowCovering",
     {
       "http": {
         "method": "POST",
@@ -1054,12 +1118,11 @@
     }
   ],
   [
-    "MatchUserIdentification",
+    "DescribeReservationCheckinStatus",
     {
       "http": {
-        "method": "POST",
-        "path": "/reservations/:id/checkin/matchId",
-        "maxSize": "2mb"
+        "method": "GET",
+        "path": "/reservations/:id/checkinStatus"
       }
     }
   ],

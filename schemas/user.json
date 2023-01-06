@@ -39,7 +39,7 @@
     "address": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/address"
     },
-    "hashedPassword": {
+    "secretKey": {
       "type": "string"
     },
     "photo": {

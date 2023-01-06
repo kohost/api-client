@@ -43,14 +43,14 @@ function useCaseMethodFactory(Client) {
         // get parameters from path
         const pathParams = path.match(/:[a-zA-Z0-9]+/g);
 
-        const { data, params, query, headers } = requestData;
+        const { data, query, headers } = requestData;
 
         // replace path parameters with values from params
         let url = path;
-        if (pathParams && params) {
+        if (pathParams && data) {
           for (const param of pathParams) {
             const paramName = param.replace(":", "");
-            url = url.replace(param, params[paramName]);
+            url = url.replace(param, data[paramName]);
           }
         }
 
