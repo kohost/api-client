@@ -136,14 +136,14 @@
         "mtsSap"
       ]
     },
-    "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
-    },
     "supportedNotifications": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
     },
     "notification": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/notification"
+    },
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
     }
   },
   "additionalProperties": false,

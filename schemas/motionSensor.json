@@ -12,14 +12,14 @@
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/type"
     },
     "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
-    },
     "supportedNotifications": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
     },
     "notification": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/notification"
-    }
+    },
+    "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
+  }
   },
   "additionalProperties": false,
   "required": ["id", "type", "systemData"]

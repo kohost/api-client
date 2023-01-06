@@ -1,61 +1,30 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/gateway.json",
-  "title": "Gateway",
-  "description": "Any Kohost gateway",
+  "$id": "https://api.kohost.app/schemas/v3/iotGateway.json",
+  "title": "IoT Gateway",
+  "description": "Any smart gateway that is an entrypoint for controlling devices",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/id"
     },
-    "name": {
+    "type": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/type"
+    },
+
+    "supportedNotifications": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
+    },
+    "notification": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/notification"
+    },
+    "status": {
       "type": "string"
     },
-    "hashedAuthKey": {
-      "type": "string"
-    },
-    "integrations": {
-      "type": "array",
-      "items": {
-        "oneOf": [
-          {
-            "$ref": "https://api.kohost.app/schemas/v3/integration.json"
-          },
-          {
-            "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
-          }
-        ]
-      },
-      "default": []
-    },
-    "health": {
-      "type": "object",
-      "properties": {
-        "upSince": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "lastSeen": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "additionalProperties": false
-    },
-    "roles": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "default": ["Gateway"]
-    },
-    "createdAt": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
-    },
-    "updatedAt": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/updatedAt"
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
     }
   },
   "additionalProperties": false,
-  "required": ["id", "name", "hashedAuthKey", "integrations", "health"]
+  "required": ["id", "type", "systemData", "status"]
 }

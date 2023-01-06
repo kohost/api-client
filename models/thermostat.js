@@ -11,16 +11,16 @@ class Thermostat extends Kohost {
   }
 
   toCelsius() {
-    if (this.temperatureScale === "farenheit")
+    if (this.temperatureScale === "fahrenheit")
       this.currentTemperature = ((this.currentTemperature - 32) * 5) / 9;
     this.temperatureScale = "celsius";
     return this.currentTemperature;
   }
 
-  toFarenheit() {
+  toFahrenheit() {
     if (this.temperatureScale === "celsius")
       this.currentTemperature = (this.currentTemperature * 9) / 5 + 32;
-    this.temperatureScale = "farenheit";
+    this.temperatureScale = "fahrenheit";
     return this.currentTemperature;
   }
 

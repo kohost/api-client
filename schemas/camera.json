@@ -11,9 +11,6 @@
     "type": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/type"
     },
-    "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
-    },
     "supportedNotifications": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
     },
@@ -34,6 +31,9 @@
           "type": ["string", "null"]
         }
       }
+    },
+    "systemData": {
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
     }
   },
   "additionalProperties": false,

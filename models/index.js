@@ -1,9 +1,7 @@
-const IotGateway = require("./iotGateway");
 const Switch = require("./switch");
 const Alarm = require("./alarm");
 const Dimmer = require("./dimmer");
 const Lock = require("./lock");
-const SceneController = require("./sceneController");
 const Thermostat = require("./thermostat");
 const WindowCovering = require("./windowCovering");
 const Identification = require("./identification");
@@ -24,7 +22,7 @@ const Gateway = require("./gateway");
 const Product = require("./product");
 const DiscoveredDevice = require("./discoveredDevice");
 
-const AdminCustomer = require("./admin/customer");
+const AdminCustomer = require("./admin/customer"); 
 const AdminProperty = require("./admin/property");
 
 module.exports = {
@@ -33,14 +31,12 @@ module.exports = {
     Property: AdminProperty,
   },
   Gateway,
-  IotGateway,
   Switch,
   Alarm,
   Dimmer,
   Lock,
   Courtesy,
   Camera,
-  SceneController,
   MotionSensor,
   Thermostat,
   WindowCovering,

@@ -6,17 +6,9 @@ const Kohost = require("./kohost");
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-const { customAlphabet } = require("nanoid/async");
-const characters =
-  "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
-
 class Gateway extends Kohost {
   constructor(data) {
     super(data);
-  }
-
-  static async generateAuthKey(length = 64) {
-    return await customAlphabet(characters, length)();
   }
 }
 
