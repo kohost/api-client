@@ -16,13 +16,13 @@ addFormats(ajv);
 
 ajv.addSchema(commonDefs);
 
-ajv.addSchema(deviceDefs);
+ajv.addSchema(deviceDefs); 
 
 module.exports = {
   add: function add(schema) {
     ajv.addSchema(schema);
   },
-  compile: function compile(schema) { 
+  compile: function compile(schema) {  
     return ajv.compile(schema);
   },
 };

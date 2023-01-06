@@ -11,7 +11,6 @@ const Thermostat = require("./thermostat");
 const Lock = require("./lock");
 const WindowCovering = require("./windowCovering");
 const Courtesy = require("./courtesy");
-const SceneController = require("./sceneController");
 const Camera = require("./camera");
 const Alarm = require("./alarm");
 const Source = require("./mediaSource");
@@ -37,7 +36,6 @@ class Room extends Kohost {
       "lock",
       "windowCovering",
       "courtesy",
-      "sceneController",
       "camera",
       "source",
       "motionSensor",
@@ -77,10 +75,6 @@ class Room extends Kohost {
 
   get hasCourtesy() {
     return this.courtesy?.length > 0;
-  }
-
-  get hasSceneController() {
-    return this.sceneControllers?.length > 0;
   }
 
   get hasCamera() {
@@ -135,7 +129,7 @@ function mapRoomData(data) {
   });
 
   roomData.thermostats?.map((thermostat) => {
-    if (thermostat instanceof Thermostat) return thermostat;
+    if (thermostat instanceof Thermostat) return thermostat; 
     else return new Thermostat(thermostat);
   });
 
@@ -152,11 +146,6 @@ function mapRoomData(data) {
   roomData.sources?.map((source) => {
     if (source instanceof Source) return source;
     else return new Source(source);
-  });
-
-  roomData.sceneControllers?.map((sceneController) => {
-    if (sceneController instanceof SceneController) return sceneController;
-    else return new SceneController(sceneController);
   });
 
   roomData.cameras?.map((camera) => {

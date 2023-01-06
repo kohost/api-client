@@ -56,18 +56,11 @@
         "$ref": "https://api.kohost.app/schemas/v3/courtesy.json"
       }
     },
-    "sceneControllers": {
-      "type": "array",
-      "default": [],
-      "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/sceneController.json"
-      }
-    },
     "cameras": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/camera.json"
+        "$ref": "https://api.kohost.app/schemas/v3/camera.json" 
       }
     },
     "sources": {
