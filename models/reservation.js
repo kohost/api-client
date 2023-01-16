@@ -18,7 +18,7 @@ class Reservation extends Kohost {
     return this.paymentId?.length > 0;
   }
 
-  get range() {
+  range(tz) {
     const start = new Date(this.checkInDateTime);
     const end = new Date(this.checkOutDateTime);
 
@@ -29,28 +29,39 @@ class Reservation extends Kohost {
     ) {
       return `${start.toLocaleString("default", {
         month: "short",
-      })} ${start.getDate()}-${end.getDate()}`;
+        timeZone: tz,
+      })} ${start.toLocaleString("default", {
+        timeZone: tz,
+        day: "numeric",
+      })}-${end.toLocaleString("default", {
+        timeZone: tz,
+        day: "numeric",
+      })}`;
     }
 
     // output Dec 19 - Jan 2 if different month and year
     return `${start.toLocaleString("default", {
       month: "short",
+      timeZone: tz,
     })} ${start.getDate()} - ${end.toLocaleString("default", {
       month: "short",
+      timeZone: tz,
     })} ${end.getDate()}`;
   }
 
-  get checkInTime() {
-    return new Date(this.checkInDateTime).toLocaleTimeString("en-US", {
+  checkInTime(tz) {
+    return new Date(this.checkInDateTime).toLocaleString("default", {
       hour: "numeric",
       minute: "numeric",
+      timeZone: tz,
     });
   }
 
-  get checkOutTime() {
-    return new Date(this.checkOutDateTime).toLocaleTimeString("en-US", {
+  checkOutTime(tz) {
+    return new Date(this.checkOutDateTime).toLocaleString("default", {
       hour: "numeric",
       minute: "numeric",
+      timeZone: tz,
     });
   }
 }

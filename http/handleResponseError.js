@@ -14,6 +14,11 @@ module.exports = function handleResponseError(error) {
       return Promise.reject(error);
     }
 
+    if (expectedError && errorMessage === "No token provided") {
+      this.onLoginRequired();
+      return Promise.reject(error);
+    }
+
     if (expectedError && newTokensNeeded) {
       return this.RefreshToken().then(() => {
         // retry the original request with the new token

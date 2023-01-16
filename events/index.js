@@ -14,6 +14,7 @@ const SystemReservationUpdatedEvent = require("./SystemReservationUpdatedEvent")
 
 const SMSSentEvent = require("./SMSSentEvent");
 const EmailSentEvent = require("./EmailSentEvent");
+const ShortLinkCreatedEvent = require("./ShortLinkCreatedEvent");
 
 module.exports = {
   SystemThermostatUpdatedEvent,
@@ -30,4 +31,5 @@ module.exports = {
   SystemReservationUpdatedEvent,
   SMSSentEvent,
   EmailSentEvent,
+  ShortLinkCreatedEvent,
 };
