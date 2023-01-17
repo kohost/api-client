@@ -1,14 +1,21 @@
 image: node:16.17.1
 
+definitions:
+  install-aws-cli: &install-aws-cli |
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    ./aws/install
+
 pipelines:
   custom:
     publish-use-cases:
       - variables:
           - name: USE_CASE_HASH
       - step:
-          image: amazon/aws-cli
+          image: atlassian/default-image:3
           name: Fetch use cases
           script:
+            - *install-aws-cli
             ## fetch use cases from s3
             - aws s3 cp s3://cloud-v3-data/useCases/useCases-${USE_CASE_HASH}.json ./useCases/http.json
             ## commit the result
