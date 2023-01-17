@@ -3,6 +3,8 @@ image: node:16.17.1
 pipelines:
   custom:
     publish-use-cases:
+      - variables:
+          - name: USE_CASE_HASH
       - step:
           image: amazon/aws-cli
           name: Fetch use cases
@@ -25,6 +27,7 @@ pipelines:
             - node
           script:
             - npm ci
+            - npm rum lint
   branches:
     master:
       - step:
