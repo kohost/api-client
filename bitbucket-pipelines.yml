@@ -1,6 +1,22 @@
 image: node:16.17.1
 
 pipelines:
+  custom:
+    publish-use-cases:
+      - step:
+          image: amazon/aws-cli
+          name: Fetch use cases
+          script:
+            ## fetch use cases from s3
+            - aws s3 cp s3://cloud-v3-data/useCases/useCases-${USE_CASE_HASH}.json ./useCases/http.json
+            - npm install
+            - npm version prerelease --preid=beta -m "Upgrade to %s [skip ci]"
+            - git push && git push --tags
+            - pipe: atlassian/npm-publish:0.3.2
+              variables:
+                NPM_TOKEN: $NPM_TOKEN
+                EXTRA_ARGS: --tag next-v1
+
   pull-requests:
     "**":
       - step:
@@ -8,7 +24,7 @@ pipelines:
           caches:
             - node
           script:
-            - npm install
+            - npm ci
   branches:
     master:
       - step:
@@ -16,7 +32,7 @@ pipelines:
           caches:
             - node
           script:
-            - npm install
+            - npm ci
             - pipe: atlassian/npm-publish:0.3.2
               variables:
                 NPM_TOKEN: $NPM_TOKEN
@@ -26,7 +42,7 @@ pipelines:
           caches:
             - node
           script:
-            - npm install
+            - npm ci
             - npm version prerelease --preid=beta -m "Upgrade to %s [skip ci]"
             - git push && git push --tags
             - pipe: atlassian/npm-publish:0.3.2
@@ -40,7 +56,7 @@ pipelines:
           caches:
             - node
           script:
-            - npm install
+            - npm ci
             - npm version prerelease --preid=beta -m "Upgrade to %s [skip ci]"
             - git push && git push --tags
             - pipe: atlassian/npm-publish:0.3.2
