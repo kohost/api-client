@@ -176,6 +176,15 @@
     }
   ],
   [
+    "ListUserReservations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/:id/reservations"
+      }
+    }
+  ],
+  [
     "ListSpaces",
     {
       "http": {
@@ -595,60 +604,6 @@
       "http": {
         "method": "POST",
         "path": "/rooms/:roomId/switches/:id"
-      }
-    }
-  ],
-  [
-    "CreateSceneController",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/sceneControllers"
-      }
-    }
-  ],
-  [
-    "ListSceneControllers",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/sceneControllers"
-      }
-    }
-  ],
-  [
-    "UpdateSceneController",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:roomId/sceneControllers/:id"
-      }
-    }
-  ],
-  [
-    "DeleteSceneController",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:roomId/sceneControllers/:id"
-      }
-    }
-  ],
-  [
-    "DescribeSceneController",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/sceneControllers/:id"
-      }
-    }
-  ],
-  [
-    "SetSceneController",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/sceneControllers/:id"
       }
     }
   ],
