@@ -1,23 +1,19 @@
-const Models = require("./models");
-const Errors = require("./errors");
-const Commands = require("./commands");
-const Events = require("./events");
-const HttpClient = require("./http");
+const Models = require("./Models");
+const Errors = require("./Errors");
+const Commands = require("./Commands");
+const Events = require("./Events");
 const defs = require("./defs");
-const getFormalDeviceType = require("./utils/getFormalDeviceType");
-const getDeviceTypes = require("./utils/getDeviceTypes");
+const utils = require("./utils");
+const Client = require("./Client");
 
 const Kohost = {
   Models,
   Errors,
   Commands,
   Events,
+  Client,
   defs,
-  Client: HttpClient,
-  utils: {
-    getFormalDeviceType: getFormalDeviceType,
-    getDeviceTypes: getDeviceTypes,
-  },
+  utils: utils,
 };
 
 module.exports = Kohost;

@@ -8,7 +8,7 @@ let useCasePlugin = {
   name: "useCasePlugin",
   setup(build) {
     build.onLoad(
-      { filter: /src\/http\/index.js/, namespace: "file" },
+      { filter: /src\/Client\/index.js/, namespace: "file" },
       async (args) => {
         const fileText = await fs.promises.readFile(args.path, "utf8");
 
@@ -137,12 +137,12 @@ let useCasePlugin = {
 
 esbuild.build({
   entryPoints: [
-    path.resolve(__dirname, "../src/models/"),
-    path.resolve(__dirname, "../src/errors/"),
-    path.resolve(__dirname, "../src/commands/"),
-    path.resolve(__dirname, "../src/events/"),
-    path.resolve(__dirname, "../src/utils/"),
-    path.resolve(__dirname, "../src/defs/"),
+    { in: path.resolve(__dirname, "../src/Models/"), out: "Models" },
+    { in: path.resolve(__dirname, "../src/Errors/"), out: "Errors" },
+    { in: path.resolve(__dirname, "../src/Commands/"), out: "Commands" },
+    { in: path.resolve(__dirname, "../src/Events/"), out: "Events" },
+    { in: path.resolve(__dirname, "../src/utils/"), out: "utils" },
+    { in: path.resolve(__dirname, "../src/defs/"), out: "defs" },
   ],
   bundle: true,
   platform: "node",
@@ -154,12 +154,22 @@ esbuild.build({
 });
 
 esbuild.build({
+  entryPoints: [path.resolve(__dirname, "../src/index.js")],
+  bundle: false,
+  platform: "node",
+  packages: "external",
+  target: ["node16"],
+  outdir: "dist",
+});
+
+esbuild.build({
   plugins: [useCasePlugin],
-  entryPoints: [path.resolve(__dirname, "../src/http/")],
+  entryPoints: [path.resolve(__dirname, "../src/Client/")],
   bundle: true,
   platform: "node",
   target: ["node16"],
   format: "cjs",
   outfile: "dist/Client.js",
+  packages: "external",
   allowOverwrite: true,
 });

@@ -1,4 +1,4 @@
-const { RequestError } = require("../errors");
+const { RequestError } = require("../Errors");
 const Command = require("./Command");
 
 class DiscoverReservationsCommand extends Command {

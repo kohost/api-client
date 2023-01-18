@@ -1,5 +1,5 @@
 const Command = require("./Command");
-const RequestError = require("../errors/RequestError");
+const RequestError = require("../Errors/RequestError");
 
 class SendSMSCommand extends Command {
   constructor({ body, to, from, metaData }) {

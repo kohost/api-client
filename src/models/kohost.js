@@ -1,4 +1,4 @@
-const { ValidationError } = require("../errors");
+const { ValidationError } = require("../Errors");
 const { customAlphabet: generate } = require("nanoid");
 
 class Kohost {
@@ -56,9 +56,9 @@ class Kohost {
     const valid = this.validator(data);
     if (!valid) {
       throw new ValidationError(`Invalid ${this.constructor.name}`, {
-        cause: this.validator.errors,   
-    });    }
-   
+        cause: this.validator.errors,
+      });
+    }
   }
 
   static generateId() {

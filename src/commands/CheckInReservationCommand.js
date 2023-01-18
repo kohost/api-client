@@ -1,5 +1,5 @@
 const Command = require("./Command");
-const RequestError = require("../errors/RequestError");
+const RequestError = require("../Errors/RequestError");
 
 class CheckInReservationCommand extends Command {
   constructor({ id }) {

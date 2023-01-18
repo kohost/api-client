@@ -2,8 +2,8 @@
   "name": "@kohost/api-client",
   "version": "1.0.0-beta.3",
   "description": "API client for Kohost utils",
-  "main": "index.js",
-  "module": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -16,6 +16,10 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
+  },
   "author": "Ian Rogers",
   "license": "ISC",
   "devDependencies": {

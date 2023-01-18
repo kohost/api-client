@@ -1,6 +1,6 @@
 const deviceTypes = require("./deviceTypes");
 const formalDeviceTypes = require("./formalDeviceTypes");
-const { defs: httpDefs } = require("../http");
+const { defs: httpDefs } = require("../Client");
 
 const defs = {
   http: httpDefs,
