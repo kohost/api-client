@@ -1,9 +1,9 @@
-const http = require("./http");
 const deviceTypes = require("./deviceTypes");
 const formalDeviceTypes = require("./formalDeviceTypes");
+const { defs: httpDefs } = require("../http");
 
 const defs = {
-  http,
+  http: httpDefs,
   deviceTypes,
   formalDeviceTypes,
 };

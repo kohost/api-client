@@ -30,7 +30,8 @@ pipelines:
             - node
           script:
             - npm ci
-            - npm rum lint
+            - npm run build
+            - npm run lint
   branches:
     master:
       - step:
@@ -49,6 +50,7 @@ pipelines:
             - node
           script:
             - npm ci
+            - npm run build
             - npm version prerelease --preid=beta -m "Upgrade to %s [skip ci]"
             - git push && git push --tags
             - pipe: atlassian/npm-publish:0.3.2
@@ -63,6 +65,7 @@ pipelines:
             - node
           script:
             - npm ci
+            - npm run build
             - npm version prerelease --preid=beta -m "Upgrade to %s [skip ci]"
             - git push && git push --tags
             - pipe: atlassian/npm-publish:0.3.2
