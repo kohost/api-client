@@ -17,9 +17,9 @@ pipelines:
           script:
             - *install-aws-cli
             ## fetch use cases from s3
-            - aws s3 cp s3://cloud-v3-data/useCases/useCases-${USE_CASE_HASH}.json ./useCases/http.json
+            - aws s3 cp s3://cloud-v3-data/useCases/useCases-${USE_CASE_HASH}.json ./src/useCases/http.json
             ## commit the result
-            - git commit -am "Update use cases"
+            - git commit -am "Update use cases to hash ${USE_CASE_HASH}"
             - git push
 
   pull-requests:
