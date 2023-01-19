@@ -8,9 +8,10 @@ definitions:
 
 pipelines:
   custom:
-    publish-use-cases:
+    release:
       - variables:
           - name: USE_CASE_HASH
+          - name: PACKAGE_VERSION
       - step:
           image: atlassian/default-image:3
           name: Fetch use cases
@@ -20,7 +21,23 @@ pipelines:
             - aws s3 cp s3://cloud-v3-data/useCases/useCases-${USE_CASE_HASH}.json ./src/useCases/http.json
             ## commit the result
             - git commit -am "Update use cases to hash ${USE_CASE_HASH}"
-            - git push
+            - npm version $PACKAGE_VERSION -m "Upgrade to %s"
+            - git push && git push --tags
+
+  tags:
+    # semver tags
+    "v*":
+      - step:
+          name: Build and publish to NPM
+          caches:
+            - node
+          script:
+            - npm ci
+            - npm run build
+            - npm run lint
+            - pipe: atlassian/npm-publish:0.3.2
+              variables:
+                NPM_TOKEN: $NPM_TOKEN
 
   pull-requests:
     "**":
@@ -32,43 +49,3 @@ pipelines:
             - npm ci
             - npm run build
             - npm run lint
-  branches:
-    master:
-      - step:
-          name: Build and publish to NPM
-          caches:
-            - node
-          script:
-            - npm ci
-            - pipe: atlassian/npm-publish:0.3.2
-              variables:
-                NPM_TOKEN: $NPM_TOKEN
-    dev:
-      - step:
-          name: Build and publish to NPM
-          caches:
-            - node
-          script:
-            - npm ci
-            - npm run build
-            - npm version prerelease --preid=beta -m "Upgrade to %s [skip ci]"
-            - git push && git push --tags
-            - pipe: atlassian/npm-publish:0.3.2
-              variables:
-                NPM_TOKEN: $NPM_TOKEN
-                EXTRA_ARGS: --tag next
-
-    v1:
-      - step:
-          name: Build and publish to NPM
-          caches:
-            - node
-          script:
-            - npm ci
-            - npm run build
-            - npm version prerelease --preid=beta -m "Upgrade to %s [skip ci]"
-            - git push && git push --tags
-            - pipe: atlassian/npm-publish:0.3.2
-              variables:
-                NPM_TOKEN: $NPM_TOKEN
-                EXTRA_ARGS: --tag next-v1
