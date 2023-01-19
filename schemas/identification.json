@@ -20,16 +20,14 @@
       "format": "date-time"
     },
     "expires": {
-      "type": ["string", "object"],
+      "type": ["string", "object", "null"], 
       "format": "date-time"
     },
     "verified": {
-      "type": "boolean",
-      "default": false
+      "type": "boolean"
     },
     "matched": {
-      "type": "boolean",
-      "default": false
+      "type": "boolean"
     },
     "firstName": {
       "type": "string"
