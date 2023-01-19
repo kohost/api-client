@@ -1,12 +1,6 @@
 /* Add Use Cases Here */
 const { EventEmitter } = require("events");
-
-/*
-  Creates methods for each use case in the API
-
-  @param {Object} Client - The client class
-  @returns undefined
-*/
+const axios = require("axios");
 
 class KohostApiClient extends EventEmitter {
   /* 
@@ -29,34 +23,29 @@ class KohostApiClient extends EventEmitter {
     this.options = options;
     // eslint-disable-next-line no-undef
     this.isBrowser = typeof window !== "undefined";
-    this._init = false;
 
-    import("axios").then((axiosModule) => {
-      const axios = axiosModule.default;
-      this._http = axios.create({
-        baseURL: options.url,
-        responseType: "json",
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          [KohostApiClient.defs.propertyHeader]: options.propertyId,
-          ...options.headers,
-        },
-      });
+    this._http = axios.create({
+      baseURL: options.url,
+      responseType: "json",
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        [KohostApiClient.defs.propertyHeader]: options.propertyId,
+        ...options.headers,
+      },
+    });
 
-      this._http.interceptors.response.use(
-        this._handleResponse,
-        this._handleResponseError
-      );
+    this._http.interceptors.response.use(
+      this._handleResponse.bind(this),
+      this._handleResponseError.bind(this)
+    );
 
-      this._http.interceptors.request.use((config) => {
-        if (!this.isBrowser) {
-          config.headers[KohostApiClient.defs.authTokenHeader] = this.authToken;
-        }
-        return config;
-      });
-      this._init = true;
+    this._http.interceptors.request.use((config) => {
+      if (!this.isBrowser) {
+        config.headers[KohostApiClient.defs.authTokenHeader] = this.authToken;
+      }
+      return config;
     });
   }
 
@@ -69,19 +58,23 @@ class KohostApiClient extends EventEmitter {
   }
 
   _handleResponse(response) {
-    if (response?.data?.data) {
-      response.query = response.data.query;
-      response.pagination = response.data.pagination;
-      response.data = response.data.data;
-    }
-    if (!this.isBrowser && response.headers[this.authTokenHeaderKey]) {
-      this.authToken = response.headers[this.authTokenHeaderKey];
-    }
+    try {
+      if (response?.data?.data) {
+        response.query = response.data.query;
+        response.pagination = response.data.pagination;
+        response.data = response.data.data;
+      }
+      if (!this.isBrowser && response.headers[this.authTokenHeaderKey]) {
+        this.authToken = response.headers[this.authTokenHeaderKey];
+      }
 
-    if (!this.isBrowser && response.headers[this.refreshTokenHeaderKey]) {
-      this.refreshToken = response.headers[this.refreshTokenHeaderKey];
+      if (!this.isBrowser && response.headers[this.refreshTokenHeaderKey]) {
+        this.refreshToken = response.headers[this.refreshTokenHeaderKey];
+      }
+      return response;
+    } catch (error) {
+      return Promise.reject(error);
     }
-    return response;
   }
 
   _handleResponseError(error) {

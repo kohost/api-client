@@ -1,9 +1,20 @@
 {
   "name": "@kohost/api-client",
   "version": "1.0.0-beta.4",
-  "description": "API client for Kohost utils",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "description": "API client, models, schemas, commands, and events for Kohost applications",
+  "author": "Ian Rogers",
+  "main": "dist/cjs/index.cjs.js",
+  "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs.js"
+    },
+    "./*": {
+      "import": "./dist/esm/*.js",
+      "require": "./dist/cjs/*.js"
+    }
+  },
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -16,12 +27,6 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": "./dist/index.js",
-    "./*": "./dist/*.js"
-  },
-  "author": "Ian Rogers",
-  "license": "ISC",
   "devDependencies": {
     "@kohost/eslint-config": "^1.0.0",
     "esbuild": "^0.17.2",
@@ -36,10 +41,14 @@
     "ajv": "^8.11.0",
     "ajv-formats": "^2.1.1",
     "axios": "^1.0.0",
+    "events": "^3.3.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.findlast": "^4.6.0",
     "lodash.sortby": "^4.7.0",
     "nanoid": "^3.3.4"
+  },
+  "browser": {
+    "events": "events"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",

@@ -4,6 +4,14 @@ const fs = require("node:fs");
 const useCases = require("../src/useCases/http.json");
 const useCaseMap = new Map(useCases);
 
+if (!fs.existsSync(path.resolve(__dirname, "../dist/cjs"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist/cjs"), { recursive: true });
+}
+
+if (!fs.existsSync(path.resolve(__dirname, "../dist/esm"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist/esm"), { recursive: true });
+}
+
 let useCasePlugin = {
   name: "useCasePlugin",
   setup(build) {
@@ -44,14 +52,7 @@ let useCasePlugin = {
             
             //eslint-disable-next-line no-inner-declarations
             module.exports = function ${useCase}(requestData, options = {}) {
-            if (!this._init) {
-              // wait a second for the client to initialize
-              return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve(${useCase}.call(this, requestData));
-              }, 500);
-              });
-            }
+
             if (!requestData) requestData = {};
             
             // get parameters from path
@@ -135,21 +136,75 @@ let useCasePlugin = {
   },
 };
 
+const entryPoints = [
+  { in: path.resolve(__dirname, "../src/Models/"), out: "Models" },
+  { in: path.resolve(__dirname, "../src/Errors/"), out: "Errors" },
+  { in: path.resolve(__dirname, "../src/Commands/"), out: "Commands" },
+  { in: path.resolve(__dirname, "../src/Events/"), out: "Events" },
+  { in: path.resolve(__dirname, "../src/utils/"), out: "utils" },
+  { in: path.resolve(__dirname, "../src/defs/"), out: "defs" },
+];
+
 esbuild.build({
-  entryPoints: [
-    { in: path.resolve(__dirname, "../src/Models/"), out: "Models" },
-    { in: path.resolve(__dirname, "../src/Errors/"), out: "Errors" },
-    { in: path.resolve(__dirname, "../src/Commands/"), out: "Commands" },
-    { in: path.resolve(__dirname, "../src/Events/"), out: "Events" },
-    { in: path.resolve(__dirname, "../src/utils/"), out: "utils" },
-    { in: path.resolve(__dirname, "../src/defs/"), out: "defs" },
-  ],
+  entryPoints: entryPoints,
   bundle: true,
   platform: "node",
   packages: "external",
   target: ["node16"],
-  outdir: "dist",
+  outdir: "dist/cjs",
   treeShaking: true,
+  allowOverwrite: true,
+});
+
+esbuild.build({
+  entryPoints: entryPoints,
+  bundle: true,
+  sourcemap: true,
+  minify: false,
+  format: "esm",
+  target: "esnext",
+  outdir: "dist/esm",
+  define: { global: "window" },
+});
+
+esbuild.build({
+  plugins: [useCasePlugin],
+  entryPoints: [path.resolve(__dirname, "../src/Client/")],
+  bundle: true,
+  sourcemap: true,
+  minify: false,
+  format: "esm",
+  target: "esnext",
+  outdir: "dist/esm",
+  define: { global: "window" },
+});
+
+esbuild.build({
+  plugins: [useCasePlugin],
+  entryPoints: [
+    { in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
+  ],
+  bundle: true,
+  platform: "node",
+  target: ["node16"],
+  format: "cjs",
+  outfile: "dist/cjs/Client.js",
+  packages: "external",
+  allowOverwrite: true,
+});
+
+esbuild.build({
+  plugins: [useCasePlugin],
+  entryPoints: [
+    { in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
+  ],
+  bundle: true,
+  sourcemap: true,
+  minify: false,
+  format: "esm",
+  target: "esnext",
+  outdir: "dist/esm",
+  define: { global: "window" },
   allowOverwrite: true,
 });
 
@@ -159,17 +214,31 @@ esbuild.build({
   platform: "node",
   packages: "external",
   target: ["node16"],
-  outdir: "dist",
+  outfile: "dist/cjs/index.cjs.js",
+  format: "cjs",
 });
 
 esbuild.build({
-  plugins: [useCasePlugin],
-  entryPoints: [path.resolve(__dirname, "../src/Client/")],
-  bundle: true,
+  entryPoints: [path.resolve(__dirname, "../src/index.js")],
+  bundle: false,
   platform: "node",
-  target: ["node16"],
-  format: "cjs",
-  outfile: "dist/Client.js",
   packages: "external",
-  allowOverwrite: true,
+  target: ["node16"],
+  outfile: "dist/cjs/index.cjs.js",
+  format: "cjs",
 });
+
+fs.writeFileSync(
+  path.resolve(__dirname, "../dist/esm/index.js"),
+  `import Client from "./Client";
+  import Commands from "./Commands";
+  import Events from "./Events";
+  import Models from "./Models";
+  import Errors from "./Errors";
+  import defs from "./defs";
+  import utils from "./utils";
+  
+  export
+   { Client, Commands, Events, Models, Errors, defs, utils };
+  `
+);
