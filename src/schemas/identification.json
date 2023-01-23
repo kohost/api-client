@@ -10,7 +10,7 @@
     },
     "type": {
       "type": "string",
-      "enum": ["driversLicense", "passport", "identityCard", "visa"]  
+      "enum": ["driversLicense", "passport", "identityCard", "visa"]
     },
     "number": {
       "string": "string"
@@ -20,7 +20,7 @@
       "format": "date-time"
     },
     "expires": {
-      "type": ["string", "object", "null"], 
+      "type": ["string", "object", "null"],
       "format": "date-time"
     },
     "verified": {
