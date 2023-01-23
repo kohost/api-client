@@ -20,7 +20,7 @@
       "format": "date-time"
     },
     "expires": {
-      "type": ["string", "object"],
+      "type": ["string", "object", "null"],
       "format": "date-time"
     },
     "verified": {
