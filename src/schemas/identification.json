@@ -3,7 +3,7 @@
   "$id": "https://api.kohost.app/schemas/v3/identification.json",
   "title": "Identification",
   "type": "object",
-  "required": ["type", "number", "expires"],
+  "required": ["type", "number"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
@@ -20,7 +20,7 @@
       "format": "date-time"
     },
     "expires": {
-      "type": ["string", "object", "null"],
+      "type": ["string", "object"],
       "format": "date-time"
     },
     "verified": {
