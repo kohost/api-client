@@ -86,7 +86,7 @@ let useCasePlugin = {
             };
             
             if (data) config.data = data;
-            if (query) config.query = query;
+            if (query) config.params = query;
             if (headers) config.headers = headers;
             
             return this._http.request(config);
