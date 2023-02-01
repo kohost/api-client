@@ -1,5 +1,32 @@
 [
   [
+    "AdminCreateCustomer",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/admin/customers"
+      }
+    }
+  ],
+  [
+    "AdminUpdateCustomer",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/admin/customers/:id"
+      }
+    }
+  ],
+  [
+    "AdminDescribeCustomer",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/admin/customers/:id"
+      }
+    }
+  ],
+  [
     "AdminListCustomers",
     {
       "http": {
@@ -45,18 +72,60 @@
     }
   ],
   [
+    "AdminCreateAdminUser",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/admin/users"
+      }
+    }
+  ],
+  [
+    "AdminListAdminUsers",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/admin/users"
+      }
+    }
+  ],
+  [
+    "AdminRequestLoginLink",
+    {
+      "http": {
+        "disableAuth": true,
+        "method": "POST",
+        "path": "/admin/auth/loginToken"
+      }
+    }
+  ],
+  [
+    "AdminLoginUser",
+    {
+      "http": {
+        "disableAuth": true,
+        "method": "POST",
+        "path": "/admin/auth/user"
+      }
+    }
+  ],
+  [
+    "AdminRefreshToken",
+    {
+      "http": {
+        "disableAuth": true,
+        "method": "POST",
+        "path": "/admin/auth/refresh"
+      }
+    }
+  ],
+  [
     "LoginUser",
     {
       "http": {
         "disableAuth": true,
         "method": "POST",
         "path": "/auth/user"
-      },
-      "types": {
-        "sub": "string",
-        "email": "string",
-        "phone": "string",
-        "token": "string"
       }
     }
   ],
@@ -1115,6 +1184,12 @@
   ],
   [
     "UpsertSystemReservation",
+    {
+      "http": false
+    }
+  ],
+  [
+    "BatchUpsertSystemReservations",
     {
       "http": false
     }
