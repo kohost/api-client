@@ -102,7 +102,7 @@ class KohostApiClient extends EventEmitter {
       if (expectedError && newTokensNeeded) {
         return this.RefreshToken().then(() => {
           // retry the original request with the new token
-          return this.http(originalReq);
+          return this._http(originalReq);
         });
       }
     } catch (error) {

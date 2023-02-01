@@ -153,6 +153,7 @@ async function main() {
     packages: "external",
     target: ["node16"],
     outdir: "dist/cjs",
+    keepNames: true,
     treeShaking: true,
     allowOverwrite: true,
   });
@@ -162,6 +163,7 @@ async function main() {
     bundle: true,
     sourcemap: true,
     minify: false,
+    keepNames: true,
     format: "esm",
     target: "esnext",
     outdir: "dist/esm",
@@ -177,6 +179,7 @@ async function main() {
     format: "esm",
     target: "esnext",
     outdir: "dist/esm",
+    keepNames: true,
     define: { global: "window" },
   });
 
@@ -191,6 +194,7 @@ async function main() {
     format: "cjs",
     outfile: "dist/cjs/Client.js",
     packages: "external",
+    keepNames: true,
     allowOverwrite: true,
   });
 
@@ -206,6 +210,7 @@ async function main() {
     target: "esnext",
     outdir: "dist/esm",
     define: { global: "window" },
+    keepNames: true,
     allowOverwrite: true,
   });
 
@@ -216,6 +221,7 @@ async function main() {
     packages: "external",
     target: ["node16"],
     outfile: "dist/cjs/index.cjs.js",
+    keepNames: true,
     format: "cjs",
   });
 
@@ -226,6 +232,7 @@ async function main() {
     packages: "external",
     target: ["node16"],
     outfile: "dist/cjs/index.cjs.js",
+    keepNames: true,
     format: "cjs",
   });
 

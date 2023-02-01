@@ -1,8 +1,8 @@
 const Event = require("./Event");
 
 class SystemUserUpdatedEvent extends Event {
-  constructor(thermostat) {
-    super(thermostat);
+  constructor(user) {
+    super(user);
   }
 
   get name() {

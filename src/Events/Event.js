@@ -6,18 +6,8 @@ class Event {
     if (typeof data !== "object")
       throw new Error("Event data must be an object");
 
-    if (!data.name) this.data.name = this.name;
-    if (!data.type) this.data.type = this.type;
-
     for (const key in data) {
       this.data[key] = data[key];
-    }
-
-    if (data.eventData) {
-      for (const key in data.eventData) {
-        this.data[key] = data.eventData[key];
-      }
-      delete this.data.eventData;
     }
 
     if (context) {
@@ -26,7 +16,12 @@ class Event {
       }
     }
 
-    if (!this.data.timestamp) this.data.timestamp = new Date();
+    if (this.data.eventData && !this.data.eventData.timestamp)
+      this.data.eventData.timestamp = new Date();
+    if (this.data.eventData && !this.data.eventData.name)
+      this.data.eventData.name = this.name;
+    if (this.data.eventData && !this.data.eventData.type)
+      this.data.eventData.type = this.type;
   }
   get name() {
     throw new Error("Event name is required");
