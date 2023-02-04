@@ -9,6 +9,7 @@ const SetCourtesyCommand = require("./SetCourtesyCommand");
 const DiscoverUsersCommand = require("./DiscoverUsersCommand");
 const OCRDocumentCommand = require("./OCRDocumentCommand");
 const CheckInReservationCommand = require("./CheckInReservationCommand");
+const SendEmailCommand = require("./SendEmailCommand");
 const SendSMSCommand = require("./SendSMSCommand");
 const DiscoverReservationsCommand = require("./DiscoverReservationsCommand");
 const DiscoverRoomsCommand = require("./DiscoverRoomsCommand");
@@ -26,6 +27,7 @@ module.exports = {
   DiscoverUsersCommand,
   CheckInReservationCommand,
   SendSMSCommand,
+  SendEmailCommand,
   DiscoverReservationsCommand,
   DiscoverRoomsCommand,
 };
