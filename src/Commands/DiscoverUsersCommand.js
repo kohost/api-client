@@ -10,7 +10,9 @@ class DiscoverUsersCommand extends Command {
   }
 
   get routingKey() {
-    return `users.${this.data.id}.get`;
+    if (typeof this.data.id === "string") return `users.${this.data.id}.get`;
+    if (Array.isArray(this.data.id)) return "users.batch.get";
+    return "users.get";
   }
 
   get replyTo() {

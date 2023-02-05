@@ -10,7 +10,9 @@ class DiscoverRoomsCommand extends Command {
   }
 
   get routingKey() {
-    return `rooms.${this.data.id}.get`;
+    if (typeof this.data.id === "string") return `rooms.${this.data.id}.get`;
+    if (Array.isArray(this.data.id)) return "rooms.batch.get";
+    return "rooms.get";
   }
 
   get replyTo() {
