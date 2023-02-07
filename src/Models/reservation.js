@@ -19,7 +19,7 @@ class Reservation extends Kohost {
   }
 
   range(tz) {
-    const start = new Date(this.checkInDateTime);
+    const start = new Date(this.checkInDateTime); 
     const end = new Date(this.checkOutDateTime);
 
     // output Dec 19-23 if same month and year

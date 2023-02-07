@@ -36,7 +36,7 @@
       "format": "date-time"
     },
     "checkOutDateTime": {
-      "type": ["string", "object"],
+      "type": ["string", "object"], 
       "format": "date-time"
     },
     "adultCount": {
@@ -48,6 +48,24 @@
       "type": "number",
       "default": 0
     },
+    "revenue": {
+      "type":"array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date" 
+          },
+          "amount": {
+            "type": "number" 
+          },
+          "type": {
+            "type": "string" 
+          }
+        }
+      }
+    },
     "rateSuppressed": {
       "type": "boolean"
     },
@@ -58,7 +76,7 @@
       "type": "string"
     },
     "travelAgent": {
-      "type": "string"
+      "type": "string" 
     },
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
