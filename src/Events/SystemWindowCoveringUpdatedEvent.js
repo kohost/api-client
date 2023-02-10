@@ -10,7 +10,7 @@ class SystemWindowCoveringUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `windowCovering.${this.data.id}.updated`;
+    return `windowCovering.${this.keyId}.updated`;
   }
 }
 

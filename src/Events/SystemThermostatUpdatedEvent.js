@@ -10,7 +10,7 @@ class SystemThermostatUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `thermostat.${this.data.id}.updated`;
+    return `thermostat.${this.keyId}.updated`;
   }
 }
 

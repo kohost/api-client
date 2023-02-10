@@ -10,7 +10,7 @@ class SystemCourtesyUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `courtesy.${this.data.id}.updated`;
+    return `courtesy.${this.keyId}.updated`;
   }
 }
 

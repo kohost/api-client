@@ -10,7 +10,7 @@ class SystemSpaceUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `space.${this.data.id}.updated`;
+    return `space.${this.keyId}.updated`;
   }
 }
 

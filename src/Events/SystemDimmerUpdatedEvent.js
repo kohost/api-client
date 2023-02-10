@@ -10,7 +10,7 @@ class SystemDimmerUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `dimmer.${this.data.id}.updated`;
+    return `dimmer.${this.keyId}.updated`;
   }
 }
 

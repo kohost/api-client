@@ -10,7 +10,7 @@ class SystemCameraUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `camera.${this.data.id}.updated`;
+    return `camera.${this.keyId}.updated`;
   }
 }
 
