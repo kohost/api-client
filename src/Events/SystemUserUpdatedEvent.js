@@ -10,7 +10,7 @@ class SystemUserUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `user.${this.data.id}.updated`;
+    return `user.${this.keyId}.updated`;
   }
 }
 

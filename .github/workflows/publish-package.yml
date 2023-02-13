@@ -1,0 +1,34 @@
+# Publish Package to NPM
+---
+name: Publish Package to NPM
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    name: Update version and publish to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          # npm token
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm version ${{ github.event.release.tag_name }} -m "Upgrade to %s"
+      - run: git push && git push --tags
+      - run: npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

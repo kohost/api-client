@@ -10,7 +10,7 @@ class SystemReservationUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `reservation.${this.data.id}.updated`;
+    return `reservation.${this.keyId}.updated`;
   }
 }
 

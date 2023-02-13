@@ -10,7 +10,7 @@ class SystemSourceUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `source.${this.data.id}.updated`;
+    return `source.${this.keyId}.updated`;
   }
 }
 

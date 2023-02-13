@@ -10,7 +10,7 @@ class ShortLinkCreatedEvent extends Event {
   }
 
   get routingKey() {
-    return `shortlink.${this.data.id}.created`;
+    return `shortlink.${this.keyId}.created`;
   }
 }
 

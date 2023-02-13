@@ -10,7 +10,7 @@ class SystemSceneControllerUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `sceneController.${this.data.id}.updated`;
+    return `sceneController.${this.keyId}.updated`;
   }
 }
 

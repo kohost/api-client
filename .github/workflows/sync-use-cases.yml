@@ -1,0 +1,47 @@
+# Sync Use Cases
+---
+name: Sync Use Cases
+
+on:
+  workflow_call:
+    inputs:
+      hash:
+        description: "The hash of the use cases to sync"
+        required: true
+        type: string
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  sync:
+    name: Save use cases to http.json
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: use-cases
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::859856851493:role/GithubActionsRole
+          role-session-name: actionsS3Upload
+          aws-region: us-east-1
+
+      - name: Download use cases
+        run: aws s3 cp s3://cloud-v3-data/useCases/useCases-${{ inputs.hash }}.json ./src/useCases/http.json
+
+      - run: git commit -am "Update use cases to hash ${{ inputs.hash }}"
+      - run: git push
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "Update use cases to hash ${{ inputs.hash }}"
+          title: "[CI] Update use cases to hash ${{ inputs.hash }}"
+          body: "Update use cases to hash ${{ inputs.hash }}"
+          branch: "use-cases"
+          labels: "use-cases"

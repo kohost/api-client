@@ -10,7 +10,7 @@ class SystemSwitchUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `switch.${this.data.id}.updated`;
+    return `switch.${this.keyId}.updated`;
   }
 }
 

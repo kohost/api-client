@@ -10,7 +10,7 @@ class SystemLockUpdatedEvent extends Event {
   }
 
   get routingKey() {
-    return `lock.${this.data.id}.updated`;
+    return `lock.${this.keyId}.updated`;
   }
 }
 
