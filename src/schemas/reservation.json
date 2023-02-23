@@ -20,6 +20,9 @@
         "type": "string"
       }
     },
+    "spaceType": {   
+      "type": "string"
+    },
     "space": {
       "type": "string"
     },
@@ -67,10 +70,10 @@
       }
     },
     "rateSuppressed": {
-      "type": "boolean"
+      "type": "boolean" 
     },
     "payment": {
-      "type": "string"
+      "type": "string" 
     },
     "company": {
       "type": "string"
