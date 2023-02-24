@@ -10,6 +10,7 @@ const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
 
 const SystemUserUpdatedEvent = require("./SystemUserUpdatedEvent");
 const SystemSpaceUpdatedEvent = require("./SystemSpaceUpdatedEvent");
+const SystemSpaceTypeUpdatedEvent = require("./SystemSpaceTypeUpdatedEvent");
 const SystemReservationUpdatedEvent = require("./SystemReservationUpdatedEvent");
 
 const SMSSentEvent = require("./SMSSentEvent");
@@ -28,6 +29,7 @@ module.exports = {
   SystemCourtesyUpdatedEvent,
   SystemUserUpdatedEvent,
   SystemSpaceUpdatedEvent,
+  SystemSpaceTypeUpdatedEvent,
   SystemReservationUpdatedEvent,
   SMSSentEvent,
   EmailSentEvent,
