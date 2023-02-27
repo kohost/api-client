@@ -8,6 +8,9 @@
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/id"
     },
+    "name": {
+      "type": "string"
+    },
     "type": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/type"
     },
