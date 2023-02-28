@@ -1,12 +1,12 @@
 const Command = require("./Command");
 
-class DiscoverRoomsCommand extends Command {
-  constructor({ id, types, startDate, endDate }) {
-    super({ id, types, startDate, endDate });
+class DiscoverRoomTypesCommand extends Command {
+  constructor({ id }) {
+    super({ id });
   }
 
   get name() {
-    return "DiscoverRooms";
+    return "DiscoverRoomTypes";
   }
 
   get routingKey() {
@@ -20,4 +20,4 @@ class DiscoverRoomsCommand extends Command {
   }
 }
 
-module.exports = DiscoverRoomsCommand;
+module.exports = DiscoverRoomTypesCommand;
