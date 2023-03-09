@@ -20,13 +20,42 @@
         "type": "string"
       }
     },
+<<<<<<< Updated upstream
+=======
+    "spaceType": {
+      "type": "string"
+    },
+>>>>>>> Stashed changes
     "space": {
       "type": "string"
     },
     "status": {
-      "type": "string", 
-      "enum": ["reserved", "checkedIn", "checkedOut", "cancelled", "noShow", "enquired", "requested", "optional"],
+      "type": "string",
+      "enum": [
+        "reserved",
+        "checkedIn",
+        "checkedOut",
+        "cancelled",
+        "noShow",
+        "enquired",
+        "requested",
+        "optional"
+      ],
       "description": " reserved - confirmed by both parties, before check-in\n checkedIn - checked in\n checkedOut - checked out\n cancelled - Cancelled\n noShow - No show\n enquired - Confirmed neither by the customer nor enterprise\n requested - Confirmed by the customer but not the enterprise (waitlist)\n optional - Confirmed by the enterprise but not the customer (holding)"
+    },
+    "mobileCheckInStatus": {
+      "type": "string",
+      "enum": [
+        "ready",
+        "blocked",
+        "preArrivalStepsRequired",
+        "spaceNotAssigned",
+        "spaceNotReady",
+        "checkInTimeNotStarted"
+      ]
+    },
+    "mobileCheckInStatusMessage": {
+      "type": "string"
     },
     "confirmationNumber": {
       "type": "string"
@@ -48,6 +77,27 @@
       "type": "number",
       "default": 0
     },
+<<<<<<< Updated upstream
+=======
+    "revenue": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+>>>>>>> Stashed changes
     "rateSuppressed": {
       "type": "boolean"
     },
@@ -68,4 +118,3 @@
     }
   }
 }
-

@@ -89,6 +89,11 @@ class KohostApiClient extends EventEmitter {
       const newTokensNeeded =
         expectedError && errorType === "TokenExpiredError";
 
+      if (expectedError && errorMessage === "Phone Verification is required") {
+        this._onPhoneVerificationRequired();
+        return Promise.reject(error);
+      }
+
       if (expectedError && errorMessage === "Login Required") {
         this._onLoginRequired();
         return Promise.reject(error);
@@ -139,6 +144,10 @@ class KohostApiClient extends EventEmitter {
 
   _onLoginRequired() {
     this.emit("LoginRequired");
+  }
+
+  _onPhoneVerificationRequired() {
+    this.emit("PhoneVerificationRequired");
   }
 }
 

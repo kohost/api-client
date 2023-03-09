@@ -250,6 +250,18 @@
     }
   ],
   [
+    "UpsertSystemUser",
+    {
+      "http": false
+    }
+  ],
+  [
+    "BatchUpsertSystemUser",
+    {
+      "http": false
+    }
+  ],
+  [
     "ListSpaces",
     {
       "http": {
@@ -308,7 +320,7 @@
     {
       "http": {
         "method": "PUT",
-        "path": "/spaces/:id"
+        "path": "/spaceTypes/:id"
       }
     }
   ],
@@ -318,6 +330,54 @@
       "http": {
         "method": "POST",
         "path": "/spaces/:id/rooms"
+      }
+    }
+  ],
+  [
+    "BatchUpsertSystemSpace",
+    {
+      "http": false
+    }
+  ],
+  [
+    "BatchUpsertSystemSpaceType",
+    {
+      "http": false
+    }
+  ],
+  [
+    "CreateSpaceType",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/spaceTypes"
+      }
+    }
+  ],
+  [
+    "DeleteSpaceType",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/spaceTypes/:id"
+      }
+    }
+  ],
+  [
+    "DescribeSpaceType",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/spaceTypes/:id"
+      }
+    }
+  ],
+  [
+    "ListSpaceTypes",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/spaceTypes"
       }
     }
   ],
@@ -569,6 +629,15 @@
     {
       "http": {
         "method": "GET",
+        "path": "/rooms/:roomId/dimmers/:id"
+      }
+    }
+  ],
+  [
+    "SetDimmer",
+    {
+      "http": {
+        "method": "POST",
         "path": "/rooms/:roomId/dimmers/:id"
       }
     }
@@ -1063,18 +1132,6 @@
     }
   ],
   [
-    "UpsertSystemSpace",
-    {
-      "http": false
-    }
-  ],
-  [
-    "UpsertSystemUser",
-    {
-      "http": false
-    }
-  ],
-  [
     "DiscoverReservations",
     {
       "http": {
@@ -1192,6 +1249,24 @@
     "BatchUpsertSystemReservations",
     {
       "http": false
+    }
+  ],
+  [
+    "BatchNotifyCheckIn",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/batchNotifyCheckIn"
+      }
+    }
+  ],
+  [
+    "AssignSpaceToReservation",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/space"
+      }
     }
   ],
   [

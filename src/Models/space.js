@@ -3,14 +3,14 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/space.json");
 const Kohost = require("./kohost");
-const cloneDeep = require("lodash.clonedeep"); 
+const cloneDeep = require("lodash.clonedeep");
 
 const Room = require("./room");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Space extends Kohost { 
+class Space extends Kohost {
   constructor(data) {
     const spaceData = mapSpaceData(data);
     super(spaceData);
@@ -48,10 +48,6 @@ class Space extends Kohost {
 
   get hasCourtesy() {
     return this.rooms.some((room) => room.hasCourtesy);
-  }
-
-  get hasSceneController() {
-    return this.rooms.some((room) => room.hasSceneController);
   }
 
   get hasCamera() {
