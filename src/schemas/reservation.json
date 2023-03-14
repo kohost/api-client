@@ -20,12 +20,9 @@
         "type": "string"
       }
     },
-<<<<<<< Updated upstream
-=======
     "spaceType": {
       "type": "string"
     },
->>>>>>> Stashed changes
     "space": {
       "type": "string"
     },
@@ -77,8 +74,6 @@
       "type": "number",
       "default": 0
     },
-<<<<<<< Updated upstream
-=======
     "revenue": {
       "type": "array",
       "items": {
@@ -97,7 +92,6 @@
         }
       }
     },
->>>>>>> Stashed changes
     "rateSuppressed": {
       "type": "boolean"
     },

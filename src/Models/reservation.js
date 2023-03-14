@@ -22,6 +22,21 @@ class Reservation extends Kohost {
     const start = new Date(this.checkInDateTime);
     const end = new Date(this.checkOutDateTime);
 
+    // output Dec 19 if same day in timezone
+
+    if (
+      start.getDate() === end.getDate() &&
+      start.getMonth() === end.getMonth() &&
+      start.getFullYear() === end.getFullYear()
+    ) {
+      return `${start.toLocaleString("default", {
+        month: "short",
+        timeZone: tz,
+      })} ${start.toLocaleString("default", {
+        timeZone: tz,
+        day: "numeric",
+      })}`;
+    }
     // output Dec 19-23 if same month and year
     if (
       start.getMonth() === end.getMonth() &&

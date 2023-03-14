@@ -1,10 +1,6 @@
 const Command = require("./Command");
 
 class DiscoverRoomsCommand extends Command {
-<<<<<<< Updated upstream
-  constructor({ id }) {
-    super({ id });
-=======
   constructor({
     id,
     types,
@@ -14,7 +10,6 @@ class DiscoverRoomsCommand extends Command {
     housekeepingStatus,
   }) {
     super({ id, types, startDate, endDate, serviceStatus, housekeepingStatus });
->>>>>>> Stashed changes
   }
 
   get name() {
