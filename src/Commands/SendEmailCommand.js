@@ -1,5 +1,5 @@
 const Command = require("./Command");
-const RequestError = require("../errors/RequestError");
+const RequestError = require("../Errors/RequestError");
 
 class SendEmailCommand extends Command {
   constructor({ text, html, to, from, subject, eventData }) {
