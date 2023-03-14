@@ -25,14 +25,7 @@ jobs:
           # npm token
           cache: "npm"
 
-      - name: Setup git config
-        run: |
-          git config --global user.email "<>"
-          git config --global user.name "GitHub Actions Bot"
-
       - run: npm ci
-      - run: npm version ${{ github.event.release.tag_name }} -m "Upgrade to %s"
-      - run: git push && git push --tags
       - run: npm run build
       - run: npm publish
         env:
