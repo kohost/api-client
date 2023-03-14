@@ -14,6 +14,7 @@ const Room = require("./room");
 const Reservation = require("./reservation");
 const Application = require("./application");
 const Space = require("./space");
+const SpaceType = require("./spaceType");
 const Ticket = require("./ticket");
 const Scene = require("./scene");
 const Gateway = require("./gateway");
@@ -47,6 +48,7 @@ module.exports = {
   Room,
   Application,
   Space,
+  SpaceType,
   Ticket,
   Scene,
   DiscoveredDevice,

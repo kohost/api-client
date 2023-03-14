@@ -18,9 +18,12 @@
         "hotelRoom",
         "office",
         "building",
-        "commonArea",
+        "commonArea",  
         "other"
       ]
+    },
+    "subType": {
+      "type":"string"
     },
     "rooms": {
       "type": "array",

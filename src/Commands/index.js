@@ -13,7 +13,9 @@ const SendEmailCommand = require("./SendEmailCommand");
 const SendSMSCommand = require("./SendSMSCommand");
 const DiscoverReservationsCommand = require("./DiscoverReservationsCommand");
 const DiscoverRoomsCommand = require("./DiscoverRoomsCommand");
+const DiscoverRoomTypesCommand = require("./DiscoverRoomTypesCommand");
 const CreateShortLinkCommand = require("./CreateShortLinkCommand");
+const UpdateReservationCommand = require("./UpdateReservationCommand");
 
 module.exports = {
   SetAlarmCommand,
@@ -31,5 +33,7 @@ module.exports = {
   SendEmailCommand,
   DiscoverReservationsCommand,
   DiscoverRoomsCommand,
+  DiscoverRoomTypesCommand,
   CreateShortLinkCommand,
+  UpdateReservationCommand,
 };
