@@ -43,6 +43,12 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run build
+      # check if package.json version matches release tag
+      - run: |
+          if [ $(jq -r .version package.json) != "${{ github.event.release.tag_name }}" ]; then
+            echo "package.json version does not match release tag"
+            exit 1
+          fi
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
