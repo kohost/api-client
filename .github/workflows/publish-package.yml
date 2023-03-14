@@ -5,15 +5,36 @@ name: Publish Package to NPM
 on:
   release:
     types: [published]
+  pull_request:
 
 permissions:
   id-token: write
   contents: read
 
 jobs:
-  publish:
-    name: Update version and publish to NPM
+  build:
+    name: Build and Lint
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          # npm token
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+
+  publish:
+    name: Publish to NPM
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
