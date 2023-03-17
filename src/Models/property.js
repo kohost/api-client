@@ -1,6 +1,6 @@
-const schemas = require("../../utils/schema");
-const schema = require("../../schemas/admin/property.json");
-const Kohost = require("../kohost");
+const schemas = require("../utils/schema");
+const schema = require("../schemas/property.json");
+const Kohost = require("./kohost");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);

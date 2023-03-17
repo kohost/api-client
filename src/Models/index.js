@@ -6,6 +6,7 @@ const Thermostat = require("./thermostat");
 const WindowCovering = require("./windowCovering");
 const Identification = require("./identification");
 const User = require("./user");
+const SystemUser = require("./systemUser");
 const Courtesy = require("./courtesy");
 const Camera = require("./camera");
 const MotionSensor = require("./motionSensor");
@@ -23,14 +24,12 @@ const DiscoveredDevice = require("./discoveredDevice");
 const Credential = require("./credential");
 const ShortLink = require("./shortLink");
 
-const AdminCustomer = require("./admin/customer");
-const AdminProperty = require("./admin/property");
+const Property = require("./property");
+const Organization = require("./organization");
 
 module.exports = {
-  Admin: {
-    Customer: AdminCustomer,
-    Property: AdminProperty,
-  },
+  Organization,
+  Property,
   Gateway,
   Switch,
   Alarm,
@@ -45,6 +44,7 @@ module.exports = {
   Identification,
   Product,
   User,
+  SystemUser,
   Room,
   Application,
   Space,

@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/user.json",
-  "title": "User",
+  "$id": "https://api.kohost.app/schemas/v3/systemUser.json",
+  "title": "System User",
+  "description": "A system user is a user that originated from an external 3rd party system.",
   "type": "object",
   "required": ["firstName", "lastName"],
   "properties": {
@@ -10,7 +11,7 @@
     },
     "type": {
       "type": "string",
-      "default": "user"
+      "default": "systemUser"
     },
     "firstName": {
       "type": "string"
@@ -22,21 +23,12 @@
       "type": ["string", "null"],
       "pattern": "^\\+[0-9]{1,14}$"
     },
-    "phoneVerified": {
-      "type": "boolean"
-    },
     "email": {
       "type": ["string", "null"],
       "format": "email"
     },
-    "emailVerified": {
-      "type": "boolean"
-    },
     "address": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/address"
-    },
-    "secretKey": {
-      "type": "string"
     },
     "photo": {
       "type": "string"
@@ -55,32 +47,6 @@
       "type": "string",
       "minLength": 2,
       "maxLength": 2
-    },
-    "permissions": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "organization": {
-            "type": "string",
-            "description": "The ID of the organization the permission is applies to."
-          },
-          "property": {
-            "type": "string",
-            "description": "The ID of the property the permission is applies to."
-          },
-          "role": {
-            "type": "string",
-            "enum": ["Guest", "User", "Manager", "Administrator", "SuperAdmin"]
-          },
-          "customPermissions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      }
     },
     "notes": {
       "type": "array",
@@ -106,25 +72,6 @@
         "$ref": "https://api.kohost.app/schemas/v3/payment.json#"
       }
     },
-    "location": {
-      "type": "object",
-      "required": ["accuracy", "latitude", "longitude", "timestamp"],
-      "additionalProperties": false,
-      "properties": {
-        "accuracy": {
-          "type": ["number", "null"]
-        },
-        "latitude": {
-          "type": ["number", "null"]
-        },
-        "longitude": {
-          "type": ["number", "null"]
-        },
-        "timestamp": {
-          "type": ["number", "null"]
-        }
-      }
-    },
     "createdAt": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
@@ -132,10 +79,7 @@
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/updatedAt"
     },
     "systemData": {
-      "type": "array",
-      "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
-      }
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
     }
   }
 }
