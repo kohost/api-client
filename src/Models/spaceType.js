@@ -28,3 +28,4 @@ Object.defineProperty(SpaceType, "validProperties", {
 });
 
 module.exports = SpaceType;
+

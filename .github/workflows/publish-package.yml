@@ -5,14 +5,15 @@ name: Publish Package to NPM
 on:
   release:
     types: [published]
+  pull_request:
 
 permissions:
   id-token: write
   contents: read
 
 jobs:
-  publish:
-    name: Update version and publish to NPM
+  build:
+    name: Build and Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,9 +27,28 @@ jobs:
           cache: "npm"
 
       - run: npm ci
-      - run: npm version ${{ github.event.release.tag_name }} -m "Upgrade to %s"
-      - run: git push && git push --tags
+      - run: npm run lint
       - run: npm run build
+
+  publish:
+    name: Publish to NPM
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm run build
+      # check if package.json version matches release tag
+      - run: |
+          if [ $(jq -r .version package.json) != "${{ github.event.release.tag_name }}" ]; then
+            echo "package.json version does not match release tag"
+            exit 1
+          fi
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
