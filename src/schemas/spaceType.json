@@ -1,33 +1,21 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/product.json",
-  "title": "Product",
+  "$id": "https://api.kohost.app/schemas/v3/spaceType.json",
+  "title": "Space Type",
   "type": "object",
-  "required": ["name", "price", "currency"], 
   "properties": {
     "id": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
     },
     "type": {
-      "type": "string" 
-    },
-    "name": {
       "type": "string"
     },
-    "description": {
-      "string": "string"
-    },
-    "price": {
-      "type": "number"
-    },
-    "currency": { 
+    "name": {
       "type": "string",
-      "description": "ISO 4217 format", 
-      "minLength": 3,
-      "maxLength": 3
+      "minLength": 1
     },
-    "image": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/file"
+    "description": {
+      "type":"string"
     },
     "imageUrl": {
       "format": "uri",

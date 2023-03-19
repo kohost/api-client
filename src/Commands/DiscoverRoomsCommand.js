@@ -1,20 +1,9 @@
 const Command = require("./Command");
 
 class DiscoverRoomsCommand extends Command {
-<<<<<<< Updated upstream
   constructor({ id }) {
     super({ id });
-=======
-  constructor({
-    id,
-    types,
-    startDate,
-    endDate,
-    serviceStatus,
-    housekeepingStatus,
-  }) {
-    super({ id, types, startDate, endDate, serviceStatus, housekeepingStatus });
->>>>>>> Stashed changes
+
   }
 
   get name() {
@@ -29,7 +18,7 @@ class DiscoverRoomsCommand extends Command {
 
   get replyTo() {
     return "system.response.users";
-  }
+  } 
 }
 
 module.exports = DiscoverRoomsCommand;

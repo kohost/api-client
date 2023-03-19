@@ -20,12 +20,9 @@
         "type": "string"
       }
     },
-<<<<<<< Updated upstream
-=======
     "spaceType": {
       "type": "string"
     },
->>>>>>> Stashed changes
     "space": {
       "type": "string"
     },
@@ -48,7 +45,7 @@
       "enum": [
         "ready",
         "blocked",
-        "preArrivalStepsRequired",
+        "preArrivalStepsRequired", 
         "spaceNotAssigned",
         "spaceNotReady",
         "checkInTimeNotStarted"
@@ -65,7 +62,7 @@
       "format": "date-time"
     },
     "checkOutDateTime": {
-      "type": ["string", "object"],
+      "type": ["string", "object"], 
       "format": "date-time"
     },
     "adultCount": {
@@ -77,8 +74,6 @@
       "type": "number",
       "default": 0
     },
-<<<<<<< Updated upstream
-=======
     "revenue": {
       "type": "array",
       "items": {
@@ -86,29 +81,28 @@
         "properties": {
           "date": {
             "type": "string",
-            "format": "date"
+            "format": "date" 
           },
           "amount": {
-            "type": "number"
+            "type": "number" 
           },
           "type": {
-            "type": "string"
+            "type": "string" 
           }
         }
       }
     },
->>>>>>> Stashed changes
     "rateSuppressed": {
-      "type": "boolean"
+      "type": "boolean" 
     },
     "payment": {
-      "type": "string"
+      "type": "string" 
     },
     "company": {
       "type": "string"
     },
     "travelAgent": {
-      "type": "string"
+      "type": "string" 
     },
     "systemData": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"

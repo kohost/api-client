@@ -14,6 +14,7 @@ const Room = require("./room");
 const Reservation = require("./reservation");
 const Application = require("./application");
 const Space = require("./space");
+const SpaceType = require("./spaceType");
 const Ticket = require("./ticket");
 const Scene = require("./scene");
 const Gateway = require("./gateway");
@@ -23,7 +24,7 @@ const Credential = require("./credential");
 const ShortLink = require("./shortLink");
 
 const AdminCustomer = require("./admin/customer");
-const AdminProperty = require("./admin/property");
+const AdminProperty = require("./admin/property"); 
 
 module.exports = {
   Admin: {
@@ -47,6 +48,7 @@ module.exports = {
   Room,
   Application,
   Space,
+  SpaceType,
   Ticket,
   Scene,
   DiscoveredDevice,
