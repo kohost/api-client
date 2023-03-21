@@ -58,6 +58,7 @@
     },
     "permissions": {
       "type": "array",
+      "default": [],
       "items": {
         "type": "object",
         "properties": {

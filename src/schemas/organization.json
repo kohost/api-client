@@ -22,6 +22,10 @@
         "type": "string"
       }
     },
+    "credentials": {
+      "type": "object",
+      "additionalProperties": true
+    },
     "createdAt": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
     },

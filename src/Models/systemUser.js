@@ -1,10 +1,8 @@
 // Create the User Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/systemUser.json");
-const paymentSchema = require("../schemas/payment.json");
 const Kohost = require("./kohost");
 
-schemas.add(paymentSchema);
 schemas.add(schema);
 
 const validator = schemas.compile(schema);
