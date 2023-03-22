@@ -61,6 +61,7 @@
       "default": [],
       "items": {
         "type": "object",
+        "required": ["organization", "property", "role"],
         "properties": {
           "organization": {
             "type": "string",

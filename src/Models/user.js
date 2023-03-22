@@ -53,4 +53,16 @@ Object.defineProperty(User.prototype, "fullName", {
   },
 });
 
+Object.defineProperty(User.prototype, "roles", {
+  get: function () {
+    const roles = new Set();
+    if (this.permissions) {
+      for (const permission of this.permissions) {
+        roles.add(permission.role);
+      }
+    }
+    return Array.from(roles);
+  },
+});
+
 module.exports = User;

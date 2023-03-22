@@ -137,6 +137,10 @@ let useCasePlugin = {
 };
 
 const entryPoints = [
+  {
+    in: path.resolve(__dirname, "../src/SocketIoClient/"),
+    out: "SocketIoClient",
+  },
   { in: path.resolve(__dirname, "../src/Models/"), out: "Models" },
   { in: path.resolve(__dirname, "../src/Errors/"), out: "Errors" },
   { in: path.resolve(__dirname, "../src/Commands/"), out: "Commands" },
@@ -239,6 +243,7 @@ async function main() {
   fs.writeFileSync(
     path.resolve(__dirname, "../dist/esm/index.js"),
     `import Client from "./Client";
+    import SocketIoClient from "./SocketIoClient";
     import Commands from "./Commands";
     import Events from "./Events";
     import Models from "./Models";
@@ -247,7 +252,7 @@ async function main() {
     import utils from "./utils";
     
     export
-     { Client, Commands, Events, Models, Errors, defs, utils };
+     { Client, SocketIoClient, Commands, Events, Models, Errors, defs, utils };
     `
   );
   const watch = process.argv.includes("--watch");
