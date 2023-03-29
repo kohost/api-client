@@ -10,14 +10,13 @@ module.exports = class SocketIoClient extends EventEmitter {
     this.propertyId = config.propertyId;
     this.options = {
       autoConnect: false,
-      extraHeaders: {
-        "X-Property-Id": this.propertyId,
-      },
       forceNew: false,
       reconnection: true,
       reconnectionAttempts: Infinity,
       reconnectionDelay: 1000,
       withCredentials: true,
+      transports: ["websocket", "polling"],
+      upgrade: true,
       ...config.options,
     };
 
@@ -69,7 +68,7 @@ module.exports = class SocketIoClient extends EventEmitter {
     this.socket.off(event, callback);
   }
 
-  send(event, { data = {}, query = {} }) {
-    this.socket.emit(event, { data, query });
+  send(event, { data = {}, query = {}, ...rest }) {
+    this.socket.emit(event, { data, query, ...rest });
   }
 };
