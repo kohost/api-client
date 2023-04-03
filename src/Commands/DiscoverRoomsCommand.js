@@ -24,7 +24,7 @@ class DiscoverRoomsCommand extends Command {
 
   get replyTo() {
     return "system.response.users";
-  }
+  } 
 }
 
 module.exports = DiscoverRoomsCommand;

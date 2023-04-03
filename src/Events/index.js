@@ -1,3 +1,4 @@
+const SystemGatewayUpdatedEvent = require("./SystemGatewayUpdatedEvent");
 const SystemThermostatUpdatedEvent = require("./SystemThermostatUpdatedEvent");
 const SystemDimmerUpdatedEvent = require("./SystemDimmerUpdatedEvent");
 const SystemSwitchUpdatedEvent = require("./SystemSwitchUpdatedEvent");
@@ -11,6 +12,8 @@ const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
 const SystemUserUpdatedEvent = require("./SystemUserUpdatedEvent");
 const SystemSpaceUpdatedEvent = require("./SystemSpaceUpdatedEvent");
 const SystemSpaceTypeUpdatedEvent = require("./SystemSpaceTypeUpdatedEvent");
+const SystemProductUpdatedEvent = require("./SystemProductUpdatedEvent");
+
 const SystemReservationUpdatedEvent = require("./SystemReservationUpdatedEvent");
 
 const SMSSentEvent = require("./SMSSentEvent");
@@ -18,6 +21,7 @@ const EmailSentEvent = require("./EmailSentEvent");
 const ShortLinkCreatedEvent = require("./ShortLinkCreatedEvent");
 
 module.exports = {
+  SystemGatewayUpdatedEvent,
   SystemThermostatUpdatedEvent,
   SystemDimmerUpdatedEvent,
   SystemSwitchUpdatedEvent,
@@ -30,6 +34,7 @@ module.exports = {
   SystemUserUpdatedEvent,
   SystemSpaceUpdatedEvent,
   SystemSpaceTypeUpdatedEvent,
+  SystemProductUpdatedEvent,
   SystemReservationUpdatedEvent,
   SMSSentEvent,
   EmailSentEvent,
