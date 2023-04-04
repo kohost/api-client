@@ -5,6 +5,7 @@ const Events = require("./Events");
 const defs = require("./defs");
 const utils = require("./utils");
 const Client = require("./Client");
+const SocketIoClient = require("./SocketIoClient");
 
 const Kohost = {
   Models,
@@ -12,6 +13,7 @@ const Kohost = {
   Commands,
   Events,
   Client,
+  SocketIoClient,
   defs,
   utils: utils,
 };

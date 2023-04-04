@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/admin/customer.json",
-  "title": "Customer",
+  "$id": "https://api.kohost.app/schemas/v3/admin/organization.json",
+  "title": "Organization",
   "type": "object",
-  "description": "A Kohost customer",
+  "description": "An organization is a group or entity that subscribes to Kohost software.",
   "required": ["accountNumber", "name"],
   "properties": {
     "id": {
@@ -21,6 +21,10 @@
       "items": {
         "type": "string"
       }
+    },
+    "credentials": {
+      "type": "object",
+      "additionalProperties": true
     },
     "createdAt": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"

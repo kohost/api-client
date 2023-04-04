@@ -1,3 +1,4 @@
+const SystemGatewayUpdatedEvent = require("./SystemGatewayUpdatedEvent");
 const SystemThermostatUpdatedEvent = require("./SystemThermostatUpdatedEvent");
 const SystemDimmerUpdatedEvent = require("./SystemDimmerUpdatedEvent");
 const SystemSwitchUpdatedEvent = require("./SystemSwitchUpdatedEvent");
@@ -20,6 +21,7 @@ const EmailSentEvent = require("./EmailSentEvent");
 const ShortLinkCreatedEvent = require("./ShortLinkCreatedEvent");
 
 module.exports = {
+  SystemGatewayUpdatedEvent,
   SystemThermostatUpdatedEvent,
   SystemDimmerUpdatedEvent,
   SystemSwitchUpdatedEvent,

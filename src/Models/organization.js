@@ -1,29 +1,28 @@
-// create the ACL model
 const schemas = require("../utils/schema");
-const schema = require("../schemas/acl.json");
+const schema = require("../schemas/organization.json");
 const Kohost = require("./kohost");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class ACL extends Kohost {
+class Organization extends Kohost {
   constructor(data) {
     super(data);
   }
 }
 
-Object.defineProperty(ACL.prototype, "schema", {
+Object.defineProperty(Organization.prototype, "schema", {
   value: schema,
 });
 
-Object.defineProperty(ACL.prototype, "validator", {
+Object.defineProperty(Organization.prototype, "validator", {
   get: function () {
     return validator;
   },
 });
 
-Object.defineProperty(ACL, "validProperties", {
+Object.defineProperty(Organization, "validProperties", {
   value: Object.keys(schema.properties),
 });
 
-module.exports = ACL;
+module.exports = Organization;

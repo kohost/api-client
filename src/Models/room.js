@@ -53,6 +53,31 @@ class Room extends Kohost {
     }
   }
 
+  static getDeviceTypeFromPath(path) {
+    const validPaths = [
+      "dimmers",
+      "switches",
+      "thermostats",
+      "locks",
+      "windowCoverings",
+      "courtesy",
+      "cameras",
+      "sources",
+      "motionSensors",
+      "alarms",
+    ];
+    if (!validPaths.includes(path))
+      throw new Error("Invalid device path:" + path);
+    switch (path) {
+      case "courtesy":
+        return path;
+      case "switches":
+        return "switch";
+      default:
+        return path.slice(0, -1);
+    }
+  }
+
   get hasDimmer() {
     return this.dimmers?.length > 0;
   }
@@ -129,7 +154,7 @@ function mapRoomData(data) {
   });
 
   roomData.thermostats?.map((thermostat) => {
-    if (thermostat instanceof Thermostat) return thermostat; 
+    if (thermostat instanceof Thermostat) return thermostat;
     else return new Thermostat(thermostat);
   });
 
