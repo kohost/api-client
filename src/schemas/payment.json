@@ -24,6 +24,9 @@
         "vpay"
       ]
     },
+    "storageData": {
+      "type": ["string", "null"]
+    },
     "maskedNumber": {
       "string": "string"
     },

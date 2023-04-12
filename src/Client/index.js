@@ -14,6 +14,7 @@ class KohostApiClient extends EventEmitter {
     options = {
       url: "",
       propertyId: "",
+      apiKey: "",
       headers: {},
     }
   ) {
@@ -24,7 +25,7 @@ class KohostApiClient extends EventEmitter {
     // eslint-disable-next-line no-undef
     this.isBrowser = typeof window !== "undefined";
 
-    this._http = axios.create({
+    const config = {
       baseURL: options.url,
       responseType: "json",
       withCredentials: true,
@@ -34,25 +35,23 @@ class KohostApiClient extends EventEmitter {
         [KohostApiClient.defs.propertyHeader]: options.propertyId,
         ...options.headers,
       },
-    });
+    };
+
+    if (options.apiKey) {
+      config.headers[KohostApiClient.defs.apiKeyHeader] = options.apiKey;
+    }
+
+    this._http = axios.create(config);
 
     this._http.interceptors.response.use(
       this._handleResponse.bind(this),
       this._handleResponseError.bind(this)
     );
-
-    this._http.interceptors.request.use((config) => {
-      if (!this.isBrowser) {
-        config.headers[KohostApiClient.defs.authTokenHeader] = this.authToken;
-      }
-      return config;
-    });
   }
 
   static get defs() {
     return {
-      authTokenHeader: "X-Auth-Token",
-      refreshTokenHeader: "X-Refresh-Token",
+      apiKeyHeader: "X-Api-Key",
       propertyHeader: "X-Property-Id",
     };
   }
@@ -63,13 +62,6 @@ class KohostApiClient extends EventEmitter {
         response.query = response.data.query;
         response.pagination = response.data.pagination;
         response.data = response.data.data;
-      }
-      if (!this.isBrowser && response.headers[this.authTokenHeaderKey]) {
-        this.authToken = response.headers[this.authTokenHeaderKey];
-      }
-
-      if (!this.isBrowser && response.headers[this.refreshTokenHeaderKey]) {
-        this.refreshToken = response.headers[this.refreshTokenHeaderKey];
       }
       return response;
     } catch (error) {
@@ -117,30 +109,10 @@ class KohostApiClient extends EventEmitter {
     return Promise.reject(error);
   }
 
-  get authTokenHeaderKey() {
-    return KohostApiClient.defs.authTokenHeader.toLowerCase();
-  }
-
-  get refreshTokenHeaderKey() {
-    return KohostApiClient.defs.refreshTokenHeader.toLowerCase();
-  }
-
-  get lsTokenKey() {
-    return `${this.options.propertyId}_${KohostApiClient.defs.authTokenHeader}`;
-  }
-
-  get authToken() {
-    return this._authToken;
-  }
-
   /* 
   @param {String} token - The token to set
   @returns undefined
   */
-
-  set authToken(token) {
-    this._authToken = token;
-  }
 
   _onLoginRequired() {
     this.emit("LoginRequired");

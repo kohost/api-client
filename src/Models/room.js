@@ -90,8 +90,16 @@ class Room extends Kohost {
     return this.windowCoverings?.length > 0;
   }
 
+  get hasShade() {
+    return this.hasWindowCovering;
+  }
+
   get hasThermostat() {
     return this.thermostats?.length > 0;
+  }
+
+  get hasClimate() {
+    return this.hasThermostat;
   }
 
   get hasLock() {
@@ -112,6 +120,13 @@ class Room extends Kohost {
 
   get hasMedia() {
     return this.sources?.length > 0;
+  }
+
+  get hasLight() {
+    const hasSubTypeLight = this.switches?.some((sw) => {
+      return sw.subType === "light" || sw.subType === "fan";
+    });
+    return this.hasDimmer || hasSubTypeLight;
   }
 
   get occupied() {

@@ -1,125 +1,5 @@
 [
   [
-    "AdminCreateCustomer",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/admin/customers"
-      }
-    }
-  ],
-  [
-    "AdminUpdateCustomer",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/admin/customers/:id"
-      }
-    }
-  ],
-  [
-    "AdminDescribeCustomer",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/admin/customers/:id"
-      }
-    }
-  ],
-  [
-    "AdminListCustomers",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/admin/customers"
-      }
-    }
-  ],
-  [
-    "AdminListProperties",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/admin/properties"
-      }
-    }
-  ],
-  [
-    "AdminUpdateProperty",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/admin/properties/:id"
-      }
-    }
-  ],
-  [
-    "AdminDescribeProperty",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/admin/properties/:id"
-      }
-    }
-  ],
-  [
-    "AdminCreateProperty",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/admin/properties"
-      }
-    }
-  ],
-  [
-    "AdminCreateAdminUser",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/admin/users"
-      }
-    }
-  ],
-  [
-    "AdminListAdminUsers",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/admin/users"
-      }
-    }
-  ],
-  [
-    "AdminRequestLoginLink",
-    {
-      "http": {
-        "disableAuth": true,
-        "method": "POST",
-        "path": "/admin/auth/loginToken"
-      }
-    }
-  ],
-  [
-    "AdminLoginUser",
-    {
-      "http": {
-        "disableAuth": true,
-        "method": "POST",
-        "path": "/admin/auth/user"
-      }
-    }
-  ],
-  [
-    "AdminRefreshToken",
-    {
-      "http": {
-        "disableAuth": true,
-        "method": "POST",
-        "path": "/admin/auth/refresh"
-      }
-    }
-  ],
-  [
     "LoginUser",
     {
       "http": {
@@ -146,6 +26,16 @@
         "disableAuth": true,
         "method": "POST",
         "path": "/auth/loginToken"
+      }
+    }
+  ],
+  [
+    "LogoutUser",
+    {
+      "http": {
+        "disableAuth": true,
+        "method": "POST",
+        "path": "/auth/user/:id/logout"
       }
     }
   ],
@@ -257,6 +147,12 @@
   ],
   [
     "BatchUpsertSystemUser",
+    {
+      "http": false
+    }
+  ],
+  [
+    "SeedSuperAdminUsers",
     {
       "http": false
     }
@@ -1072,60 +968,6 @@
     }
   ],
   [
-    "CreateIntegration",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/integrations"
-      }
-    }
-  ],
-  [
-    "UpdateIntegration",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/integrations/:id"
-      }
-    }
-  ],
-  [
-    "CreateIntegrationDeviceMapEntry",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/integrations/:id/deviceMap"
-      }
-    }
-  ],
-  [
-    "DescribeIntegration",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/integrations/:id"
-      }
-    }
-  ],
-  [
-    "DeleteIntegration",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/integrations/:id"
-      }
-    }
-  ],
-  [
-    "ListIntegrations",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/integrations/"
-      }
-    }
-  ],
-  [
     "UpsertSystemDevice",
     {
       "http": false
@@ -1213,6 +1055,15 @@
     }
   ],
   [
+    "SendCheckInSMS",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/sendCheckInSMS"
+      }
+    }
+  ],
+  [
     "SendPreArrivalSMS",
     {
       "http": {
@@ -1280,6 +1131,46 @@
     }
   ],
   [
+    "CreateOrganization",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/organizations"
+      },
+      "useAdminDb": true
+    }
+  ],
+  [
+    "AdminUpdateCustomer",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/organizations/:id"
+      },
+      "useAdminDb": true
+    }
+  ],
+  [
+    "DescribeOrganization",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/organizations/:id"
+      },
+      "useAdminDb": true
+    }
+  ],
+  [
+    "ListOrganizations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/organizations"
+      },
+      "useAdminDb": true
+    }
+  ],
+  [
     "DescribeMyProperty",
     {
       "http": {
@@ -1287,6 +1178,46 @@
         "path": "/properties/mine",
         "disableAuth": true
       }
+    }
+  ],
+  [
+    "ListProperties",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/properties"
+      },
+      "useAdminDb": true
+    }
+  ],
+  [
+    "CreateProperty",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/properties"
+      },
+      "useAdminDb": true
+    }
+  ],
+  [
+    "UpdateProperty",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/properties/:id"
+      },
+      "useAdminDb": true
+    }
+  ],
+  [
+    "DescribeProperty",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/properties/:id"
+      },
+      "useAdminDb": true
     }
   ],
   [
