@@ -18,6 +18,9 @@
     "subType": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/subType"
     },
+    "offline": { 
+      "type":"boolean"
+    },
     "supportedNotifications": {
       "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
     },
