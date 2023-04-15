@@ -17,6 +17,7 @@ const DiscoverRoomTypesCommand = require("./DiscoverRoomTypesCommand");
 const CreateShortLinkCommand = require("./CreateShortLinkCommand");
 const UpdateReservationCommand = require("./UpdateReservationCommand");
 const UpdateUserCommand = require("./UpdateUserCommand");
+const GetMobileKeyCommand = require("./GetMobileKeyCommand");
 
 module.exports = {
   SetAlarmCommand,
@@ -38,4 +39,5 @@ module.exports = {
   CreateShortLinkCommand,
   UpdateReservationCommand,
   UpdateUserCommand,
+  GetMobileKeyCommand,
 };

@@ -30,6 +30,15 @@
     }
   ],
   [
+    "RequestMyKeyToken",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/auth/myKeyToken"
+      }
+    }
+  ],
+  [
     "LogoutUser",
     {
       "http": {
@@ -1126,7 +1135,8 @@
       "http": {
         "method": "POST",
         "path": "/documents/ocr",
-        "maxSize": "2mb"
+        "maxSize": "2mb",
+        "disableAuth": true
       }
     }
   ],
