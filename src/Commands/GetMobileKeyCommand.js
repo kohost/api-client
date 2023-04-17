@@ -1,8 +1,15 @@
 const Command = require("./Command");
 
 class GetMobileKeyCommand extends Command {
-  constructor({ id, startDate, endDate }) {
-    super({ id, startDate, endDate });
+  constructor({
+    id,
+    phone,
+    beginDateTime,
+    endDateTime,
+    keyToReplace,
+    ...rest
+  }) {
+    super({ id, phone, beginDateTime, endDateTime, keyToReplace, ...rest });
   }
 
   get name() {
