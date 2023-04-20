@@ -168,6 +168,7 @@
         "CheckIn": {},
         "CheckOut": {},
         "Concierge": {},
+        "DigitalKey": {},
         "Elevator": {}
       },
       "additionalProperties": false,
