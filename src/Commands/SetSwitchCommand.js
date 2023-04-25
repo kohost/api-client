@@ -12,10 +12,6 @@ class SetSwitchCommand extends Command {
   get routingKey() {
     return `switch.${this.data.id}.set`;
   }
-
-  get replyTo() {
-    return "system.response.devices";
-  }
 }
 
 module.exports = SetSwitchCommand;

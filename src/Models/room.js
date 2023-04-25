@@ -37,7 +37,7 @@ class Room extends Kohost {
       "windowCovering",
       "courtesy",
       "camera",
-      "source",
+      "mediaSource",
       "motionSensor",
       "alarm",
     ];
@@ -62,7 +62,7 @@ class Room extends Kohost {
       "windowCoverings",
       "courtesy",
       "cameras",
-      "sources",
+      "mediaSources",
       "motionSensors",
       "alarms",
     ];
@@ -119,7 +119,7 @@ class Room extends Kohost {
   }
 
   get hasMedia() {
-    return this.sources?.length > 0;
+    return this.mediaSources?.length > 0;
   }
 
   get hasLight() {

@@ -14,10 +14,6 @@ class CheckInReservationCommand extends Command {
   get routingKey() {
     return `reservation.${this.data.id}.checkin`;
   }
-
-  get replyTo() {
-    return "system.response.reservations";
-  }
 }
 
 module.exports = CheckInReservationCommand;

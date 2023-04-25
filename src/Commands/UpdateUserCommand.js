@@ -34,10 +34,6 @@ class UpdateUserCommand extends Command {
   get routingKey() {
     return `user.${this.data.id}.update`;
   }
-
-  get replyTo() {
-    return "system.response.users";
-  }
 }
 
 module.exports = UpdateUserCommand;

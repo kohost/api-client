@@ -1,9 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/definitions/common.json",
+  "$id": "https://api.kohost.io/schemas/v3/definitions/common.json",
   "definitions": {
     "id": {
-      "type": "string"
+      "type": "string",
+      "not": {
+        "enum": ["global", "system"]
+      }
     },
     "systemData": {
       "type": "object",
@@ -22,53 +25,75 @@
       "format": "date-time"
     },
     "file": {
-      "type":"object",
+      "type": "object",
       "required": ["name", "type", "data"],
       "properties": {
         "name": {
-          "type":"string",
+          "type": "string",
           "description": "Name of the file."
         },
         "type": {
-          "type":"string",
+          "type": "string",
           "description": "MIME type of the file (e.g. application/pdf)."
         },
         "data": {
-          "type":"string",
+          "type": "string",
           "description": "Base64-encoded data of the file."
         }
       }
     },
     "address": {
-      "type":"object",
+      "type": "object",
       "properties": {
         "id": {
-          "type":"string"
+          "type": "string"
         },
         "line1": {
-          "type":"string"
+          "type": "string"
         },
         "line2": {
-          "type":"string"
+          "type": "string"
         },
         "line3": {
-          "type":"string"
+          "type": "string"
         },
         "city": {
-          "type":"string"
+          "type": "string"
         },
         "state": {
-          "type":"string"
+          "type": "string"
         },
         "postalCode": {
-          "type":"string"
+          "type": "string"
         },
         "countryCode": {
-          "type":"string",
+          "type": "string",
           "minLength": 2,
           "maxLength": 2
         }
       }
+    },
+    "driver": {
+      "type": "string",
+      "enum": [
+        "aws-kinesis",
+        "butler",
+        "crestron",
+        "ecobee",
+        "igor",
+        "kohost-k7",
+        "kohost-pms",
+        "lirc",
+        "mews",
+        "pelican-wireless",
+        "rebrandly",
+        "salto",
+        "salto-irn",
+        "se",
+        "sendgrid",
+        "stay-n-touch",
+        "twilio"
+      ]
     }
   }
 }

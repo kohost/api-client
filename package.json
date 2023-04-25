@@ -28,6 +28,7 @@
     "prepare": "node prepare.js",
     "build": "node scripts/build.js",
     "build:watch": "node scripts/build.js --watch",
+    "start": "node scripts/build.js --watch",
     "clean": "rm -rf ./dist"
   },
   "files": [
@@ -47,7 +48,9 @@
   "dependencies": {
     "ajv": "^8.11.0",
     "ajv-formats": "^2.1.1",
+    "amqplib": "^0.10.3",
     "axios": "^1.0.0",
+    "debug": "^4.3.4",
     "events": "^3.3.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.findlast": "^4.6.0",

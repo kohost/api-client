@@ -1,17 +1,17 @@
 const Event = require("./Event");
 
-class SystemSourceUpdatedEvent extends Event {
-  constructor(source) {
-    super(source);
+class SystemMediaSourceUpdatedEvent extends Event {
+  constructor(mediaSource) {
+    super(mediaSource);
   }
 
   get name() {
-    return "SystemSourceUpdated";
+    return "SystemMediaSourceUpdated";
   }
 
   get routingKey() {
-    return `source.${this.keyId}.updated`;
+    return `mediaSource.${this.keyId}.updated`;
   }
 }
 
-module.exports = SystemSourceUpdatedEvent;
+module.exports = SystemMediaSourceUpdatedEvent;

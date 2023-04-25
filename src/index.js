@@ -6,6 +6,7 @@ const defs = require("./defs");
 const utils = require("./utils");
 const Client = require("./Client");
 const SocketIoClient = require("./SocketIoClient");
+const AMQPClient = require("./AMQPClient");
 
 const Kohost = {
   Models,
@@ -14,6 +15,7 @@ const Kohost = {
   Events,
   Client,
   SocketIoClient,
+  AMQPClient,
   defs,
   utils: utils,
 };

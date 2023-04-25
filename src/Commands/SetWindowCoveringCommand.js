@@ -12,10 +12,6 @@ class SetWindowCoveringCommand extends Command {
   get routingKey() {
     return `windowCovering.${this.data.id}.set`;
   }
-
-  get replyTo() {
-    return "system.response.devices";
-  }
 }
 
 module.exports = SetWindowCoveringCommand;

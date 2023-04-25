@@ -1,31 +1,34 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/thermostat.json",
+  "$id": "https://api.kohost.io/schemas/v3/thermostat.json",
   "title": "Thermostat",
   "description": "Any smart thermostat",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/id"
     },
     "name": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/name"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/name"
     },
     "type": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/type",
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/type",
       "default": "thermostat"
     },
     "subType": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/subType"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/subType"
     },
-    "offline": { 
-      "type":"boolean"
+    "driver": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
+    },
+    "offline": {
+      "type": "boolean"
     },
     "supportedNotifications": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
     },
     "notification": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/notification"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/notification"
     },
     "currentTemperature": {
       "type": "number"
@@ -49,7 +52,7 @@
     },
     "fanState": {
       "type": "string",
-      "enum": ["off", "low", "medium", "high"] 
+      "enum": ["off", "low", "medium", "high"]
     },
     "temperatureScale": {
       "type": "string",
@@ -72,7 +75,7 @@
       "type": "array",
       "uniqueItems": true,
       "items": {
-        "enum": ["auto", "low", "medium", "high", "off", "on"] 
+        "enum": ["auto", "low", "medium", "high", "off", "on"]
       }
     },
     "setpoints": {
@@ -86,18 +89,18 @@
           "$ref": "#/$defs/setpoint"
         },
         "auto": {
-          "$ref": "#/$defs/setpoint" 
+          "$ref": "#/$defs/setpoint"
         }
       }
     },
-    "minAutoDelta": { 
+    "minAutoDelta": {
       "type": "number"
     },
     "batteryLevel": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/batteryLevel"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/batteryLevel"
     },
     "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData",
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/systemData",
       "default": {}
     }
   },
@@ -140,6 +143,7 @@
     "setpoints",
     "temperatureScale",
     "supportedHvacModes",
-    "supportedFanModes" 
+    "supportedFanModes",
+    "driver"
   ]
 }

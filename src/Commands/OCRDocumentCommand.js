@@ -10,10 +10,6 @@ class OCRDocumentCommand extends Command {
   get name() {
     return "OCRDocument";
   }
-
-  get routingKey() {
-    return `document.${this.data.type}.ocr`;
-  }
 }
 
 module.exports = OCRDocumentCommand;

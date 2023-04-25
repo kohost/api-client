@@ -14,6 +14,7 @@ class KohostApiClient extends EventEmitter {
     options = {
       url: "",
       propertyId: "",
+      organizationId: "",
       apiKey: "",
       headers: {},
     }
@@ -91,7 +92,10 @@ class KohostApiClient extends EventEmitter {
         return Promise.reject(error);
       }
 
-      if (expectedError && errorMessage === "No token provided") {
+      if (
+        expectedError &&
+        errorMessage === "No auth header or cookie provided"
+      ) {
         this._onLoginRequired();
         return Promise.reject(error);
       }

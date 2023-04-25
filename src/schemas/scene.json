@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/scene.json",
+  "$id": "https://api.kohost.io/schemas/v3/scene.json",
   "title": "Scene",
   "description": "A room represents a physical space of controllable IoT devices",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "name": {
       "type": "string"
@@ -20,10 +20,10 @@
             "type": "object",
             "properties": {
               "id": {
-                "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+                "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
               },
               "state": {
-                "$ref": "https://api.kohost.app/schemas/v3/switch.json#/properties/state"
+                "$ref": "https://api.kohost.io/schemas/v3/switch.json#/properties/state"
               }
             },
             "default": []
@@ -35,10 +35,10 @@
             "type": "object",
             "properties": {
               "id": {
-                "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+                "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
               },
               "level": {
-                "$ref": "https://api.kohost.app/schemas/v3/dimmer.json#/properties/level"
+                "$ref": "https://api.kohost.io/schemas/v3/dimmer.json#/properties/level"
               }
             }
           },
@@ -50,10 +50,10 @@
             "type": "object",
             "properties": {
               "id": {
-                "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+                "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
               },
               "position": {
-                "$ref": "https://api.kohost.app/schemas/v3/windowCovering.json#/properties/position"
+                "$ref": "https://api.kohost.io/schemas/v3/windowCovering.json#/properties/position"
               }
             }
           },
@@ -65,16 +65,16 @@
             "type": "object",
             "properties": {
               "id": {
-                "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+                "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
               },
               "hvacMode": {
-                "$ref": "https://api.kohost.app/schemas/v3/thermostat.json#/properties/hvacMode"
+                "$ref": "https://api.kohost.io/schemas/v3/thermostat.json#/properties/hvacMode"
               },
               "setpoints": {
-                "$ref": "https://api.kohost.app/schemas/v3/thermostat.json#/properties/setpoints"
+                "$ref": "https://api.kohost.io/schemas/v3/thermostat.json#/properties/setpoints"
               },
               "fanMode": {
-                "$ref": "https://api.kohost.app/schemas/v3/thermostat.json#/properties/fanMode"
+                "$ref": "https://api.kohost.io/schemas/v3/thermostat.json#/properties/fanMode"
               }
             }
           },
@@ -86,7 +86,7 @@
             "type": "object",
             "properties": {
               "id": {
-                "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+                "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
               },
               "volume": {
                 "type": "number",

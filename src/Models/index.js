@@ -13,7 +13,6 @@ const MotionSensor = require("./motionSensor");
 const MediaSource = require("./mediaSource");
 const Room = require("./room");
 const Reservation = require("./reservation");
-const Application = require("./application");
 const Space = require("./space");
 const SpaceType = require("./spaceType");
 const Ticket = require("./ticket");
@@ -46,7 +45,6 @@ module.exports = {
   User,
   SystemUser,
   Room,
-  Application,
   Space,
   SpaceType,
   Ticket,

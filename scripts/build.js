@@ -141,6 +141,10 @@ const entryPoints = [
     in: path.resolve(__dirname, "../src/SocketIoClient/"),
     out: "SocketIoClient",
   },
+  {
+    in: path.resolve(__dirname, "../src/AMQPClient/"),
+    out: "AMQPClient",
+  },
   { in: path.resolve(__dirname, "../src/Models/"), out: "Models" },
   { in: path.resolve(__dirname, "../src/Errors/"), out: "Errors" },
   { in: path.resolve(__dirname, "../src/Commands/"), out: "Commands" },
@@ -163,7 +167,7 @@ async function main() {
   });
 
   const build2 = await esbuild.context({
-    entryPoints: entryPoints,
+    entryPoints: entryPoints.filter((entry) => entry.out !== "AMQPClient"),
     bundle: true,
     sourcemap: true,
     minify: false,
