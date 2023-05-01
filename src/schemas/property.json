@@ -27,7 +27,7 @@
     },
     "organization": {
       "type": "string",
-      "description": "Reference to the organization that owns this property"
+      "description": "Reference (id) to the organization that owns this property"
     },
     "address": {
       "type": "object",
@@ -197,7 +197,7 @@
                     "type": "string",
                     "pattern": "^(?!#ffffff)(#[0-9a-fA-F]{6})$"
                   },
-                  "minItems": 3,
+                  "minItems": 2,
                   "maxItems": 3
                 }
               }

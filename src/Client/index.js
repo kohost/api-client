@@ -23,8 +23,8 @@ class KohostApiClient extends EventEmitter {
     if (!options.url) throw new Error("options.url is required");
     if (!options.propertyId) throw new Error("options.property is required");
     this.options = options;
-    // eslint-disable-next-line no-undef
     this.isBrowser = typeof window !== "undefined";
+    this.isRefreshingToken = false;
 
     const config = {
       baseURL: options.url,
@@ -101,10 +101,19 @@ class KohostApiClient extends EventEmitter {
       }
 
       if (expectedError && newTokensNeeded) {
-        return this.RefreshToken().then(() => {
-          // retry the original request with the new token
-          return this._http(originalReq);
-        });
+        while (!this.isRefreshingToken) {
+          this.isRefreshingToken = true;
+          return this.RefreshToken()
+            .then(() => {
+              // retry the original request with the new token
+              this.isRefreshingToken = false;
+              return this._http(originalReq);
+            })
+            .catch((err) => {
+              this.isRefreshingToken = false;
+              return Promise.reject(err);
+            });
+        }
       }
     } catch (error) {
       console.log(error);
@@ -112,11 +121,6 @@ class KohostApiClient extends EventEmitter {
 
     return Promise.reject(error);
   }
-
-  /* 
-  @param {String} token - The token to set
-  @returns undefined
-  */
 
   _onLoginRequired() {
     this.emit("LoginRequired");
