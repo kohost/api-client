@@ -84,6 +84,9 @@
       "items": {
         "$ref": "#/properties/supportedTroubles/items"
       }
+    },
+    "watts":{
+      "#ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/watts"
     }
   },
   "additionalProperties": false,

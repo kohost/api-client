@@ -72,6 +72,11 @@
       "type": "number",
       "minimum": 0,
       "maximum": 100
+    },
+    "watts": {
+      "type": "number",
+      "minimum" : 0,
+      "default" : 0
     }
   }
 }

@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://api.kohost.io/schemas/v3/energyReportDaily.json",
+    "title": "Energy Report Daily",
+    "description": "Daily Report for Energy based on energy report shards",
+    "type": "object",
+    "required": ["id", "type", "roomId", "first", "last", "consumption", "totals", "costPerKw"],
+    "properties": {
+        "id": {
+            "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/id"
+        }, 
+        "type": {
+            "type":"string",
+            "enum":[
+                "energyReportDaily" 
+            ],
+            "default": "energyReportDaily"
+          },
+        "roomId": {
+            "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+        },  
+        "first": {
+            "type": ["string", "object"],
+            "format": "date-time"
+        }, 
+        "last":{
+            "type": ["string", "object"],
+            "format": "date-time"
+        },   
+        "consumption":{
+           "type": "array",
+           "items": {
+                "type": "object",
+                "required": ["id", "type", "kwh"],
+                    "properties":{
+                        "id": {
+                            "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+                        }, 
+                        "type": {
+                            "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/type"
+                        },
+                        "kwh" : {
+                            "type": "number",
+                            "minimum": 0
+                        }
+                    }
+           }
+        },
+        "totals":{
+            "type": "array",
+            "items": {
+                 "type": "object",
+                 "required": ["lights", "climate", "media"],
+                     "properties":{
+                         "lights": {
+                            "type": "number",
+                            "minimum": 0
+                         }, 
+                         "climate": {
+                            "type": "number",
+                            "minimum": 0                        
+                         },
+                         "media" : {
+                             "type": "number",
+                             "minimum": 0
+                         }
+                     }
+            }
+         },
+        "costPerKw":{
+            "type": "number",
+            "minimum": 0
+        }
+    }
+}
