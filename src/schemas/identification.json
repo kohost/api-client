@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/identification.json",
+  "$id": "https://api.kohost.io/schemas/v3/identification.json",
   "title": "Identification",
   "type": "object",
   "required": ["type", "number"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "type": {
       "type": "string",
@@ -41,7 +41,7 @@
       "maxLength": 2
     },
     "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"
     }
   }
 }

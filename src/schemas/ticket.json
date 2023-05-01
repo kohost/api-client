@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/ticket.json",
+  "$id": "https://api.kohost.io/schemas/v3/ticket.json",
   "title": "Ticket",
   "description": "A ticket is a request for help from a user.",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "conversation": {
       "type": "array",
@@ -22,7 +22,7 @@
             "type": "string"
           },
           "timestamp": {
-            "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
+            "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
           },
           "body": {
             "type": "string"
@@ -57,16 +57,16 @@
       }
     },
     "createdAt": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
     "updatedAt": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
     "solvedAt": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
     "closedAt": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
     }
   },
   "required": [

@@ -1,18 +1,21 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/product.json",
+  "$id": "https://api.kohost.io/schemas/v3/product.json",
   "title": "Product",
   "type": "object",
-  "required": ["name", "price", "currency"], 
+  "required": ["name", "price", "currency", "driver"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "type": {
-      "type": "string" 
+      "type": "string"
     },
     "name": {
       "type": "string"
+    },
+    "driver": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
     },
     "description": {
       "string": "string"
@@ -20,21 +23,21 @@
     "price": {
       "type": "number"
     },
-    "currency": { 
+    "currency": {
       "type": "string",
-      "description": "ISO 4217 format", 
+      "description": "ISO 4217 format",
       "minLength": 3,
       "maxLength": 3
     },
     "image": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/file"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/file"
     },
     "imageUrl": {
       "format": "uri",
       "pattern": "^https?://"
     },
     "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"
     }
   }
 }

@@ -12,10 +12,6 @@ class SetThermostatCommand extends Command {
   get routingKey() {
     return `thermostat.${this.data.id}.set`;
   }
-
-  get replyTo() {
-    return "system.response.devices";
-  }
 }
 
 module.exports = SetThermostatCommand;

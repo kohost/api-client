@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/room.json",
+  "$id": "https://api.kohost.io/schemas/v3/room.json",
   "title": "Room",
   "description": "A room represents a physical space of controllable IoT devices",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "name": {
       "type": "string"
@@ -18,70 +18,70 @@
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/dimmer.json"
+        "$ref": "https://api.kohost.io/schemas/v3/dimmer.json"
       }
     },
     "switches": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/switch.json"
+        "$ref": "https://api.kohost.io/schemas/v3/switch.json"
       }
     },
     "thermostats": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/thermostat.json"
+        "$ref": "https://api.kohost.io/schemas/v3/thermostat.json"
       }
     },
     "locks": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/lock.json"
+        "$ref": "https://api.kohost.io/schemas/v3/lock.json"
       }
     },
     "windowCoverings": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/windowCovering.json"
+        "$ref": "https://api.kohost.io/schemas/v3/windowCovering.json"
       }
     },
     "courtesy": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/courtesy.json"
+        "$ref": "https://api.kohost.io/schemas/v3/courtesy.json"
       }
     },
     "cameras": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/camera.json" 
+        "$ref": "https://api.kohost.io/schemas/v3/camera.json"
       }
     },
-    "sources": {
+    "mediaSources": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/mediaSource.json"
+        "$ref": "https://api.kohost.io/schemas/v3/mediaSource.json"
       }
     },
     "motionSensors": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/motionSensor.json"
+        "$ref": "https://api.kohost.io/schemas/v3/motionSensor.json"
       }
     },
     "alarms": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.app/schemas/v3/alarm.json"
+        "$ref": "https://api.kohost.io/schemas/v3/alarm.json"
       }
     },
     "media": {
@@ -109,22 +109,22 @@
         "description": "A list of scene IDs for later population, or entire scene objects",
         "oneOf": [
           {
-            "$ref": "https://api.kohost.app/schemas/v3/scene.json"
+            "$ref": "https://api.kohost.io/schemas/v3/scene.json"
           },
           {
-            "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+            "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
           }
         ]
       }
     },
     "occupiedAt": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
     "createdAt": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
     },
     "updatedAt": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/updatedAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/updatedAt"
     }
   },
   "additionalProperties": false

@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/admin/property.json",
+  "$id": "https://api.kohost.io/schemas/v3/admin/property.json",
   "title": "Property",
   "type": "object",
   "description": "A property is a physical asset or building",
   "required": ["id", "name", "type", "hostname", "organization"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "name": {
       "type": "string"
@@ -27,7 +27,7 @@
     },
     "organization": {
       "type": "string",
-      "description": "Reference to the organization that owns this property"
+      "description": "Reference (id) to the organization that owns this property"
     },
     "address": {
       "type": "object",
@@ -168,6 +168,42 @@
         "CheckIn": {},
         "CheckOut": {},
         "Concierge": {},
+        "DigitalKey": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string",
+              "enum": ["salto"]
+            },
+            "branding": {
+              "type": "object",
+              "properties": {
+                "logo": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "gradient": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(?!#ffffff)(#[0-9a-fA-F]{6})$"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "highlightedGradient": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(?!#ffffff)(#[0-9a-fA-F]{6})$"
+                  },
+                  "minItems": 2,
+                  "maxItems": 3
+                }
+              }
+            }
+          }
+        },
         "Elevator": {}
       },
       "additionalProperties": false,

@@ -14,10 +14,6 @@ class DiscoverRoomTypesCommand extends Command {
     if (Array.isArray(this.data.id)) return "rooms.batch.get";
     return "rooms.get";
   }
-
-  get replyTo() {
-    return "system.response.users";
-  }
 }
 
 module.exports = DiscoverRoomTypesCommand;

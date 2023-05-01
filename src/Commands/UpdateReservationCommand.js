@@ -14,10 +14,6 @@ class UpdateReservationCommand extends Command {
   get routingKey() {
     return `reservation.${this.data.id}.update`;
   }
-
-  get replyTo() {
-    return "system.response.reservations";
-  }
 }
 
 module.exports = UpdateReservationCommand;

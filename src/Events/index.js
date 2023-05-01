@@ -6,9 +6,13 @@ const SystemLockUpdatedEvent = require("./SystemLockUpdatedEvent");
 const SystemCameraUpdatedEvent = require("./SystemCameraUpdatedEvent");
 const SystemSceneControllerUpdatedEvent = require("./SystemSceneControllerUpdatedEvent");
 const SystemWindowCoveringUpdatedEvent = require("./SystemWindowCoveringUpdatedEvent");
-const SystemSourceUpdatedEvent = require("./SystemSourceUpdatedEvent");
-const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
 const SystemMediaSourceUpdatedEvent = require("./SystemMediaSourceUpdatedEvent");
+const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
+<<<<<<< HEAD
+const SystemMediaSourceUpdatedEvent = require("./SystemMediaSourceUpdatedEvent");
+=======
+const SystemMotionSensorUpdatedEvent = require("./SystemMotionSensorUpdatedEvent");
+>>>>>>> master
 
 const SystemUserUpdatedEvent = require("./SystemUserUpdatedEvent");
 const SystemSpaceUpdatedEvent = require("./SystemSpaceUpdatedEvent");
@@ -21,6 +25,9 @@ const SMSSentEvent = require("./SMSSentEvent");
 const EmailSentEvent = require("./EmailSentEvent");
 const ShortLinkCreatedEvent = require("./ShortLinkCreatedEvent");
 
+const ApplicationInUseEvent = require("./ApplicationInUseEvent");
+const ApplicationOutOfUseEvent = require("./ApplicationOutOfUseEvent");
+
 module.exports = {
   SystemGatewayUpdatedEvent,
   SystemThermostatUpdatedEvent,
@@ -30,7 +37,8 @@ module.exports = {
   SystemCameraUpdatedEvent,
   SystemSceneControllerUpdatedEvent,
   SystemWindowCoveringUpdatedEvent,
-  SystemSourceUpdatedEvent,
+  SystemMediaSourceUpdatedEvent,
+  SystemMotionSensorUpdatedEvent,
   SystemCourtesyUpdatedEvent,
   SystemMediaSourceUpdatedEvent, 
   SystemUserUpdatedEvent,
@@ -41,4 +49,6 @@ module.exports = {
   SMSSentEvent,
   EmailSentEvent,
   ShortLinkCreatedEvent,
+  ApplicationInUseEvent,
+  ApplicationOutOfUseEvent,
 };

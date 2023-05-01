@@ -1,36 +1,39 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/lock.json", 
+  "$id": "https://api.kohost.io/schemas/v3/lock.json",
   "title": "Lock",
   "description": "Any smart lock",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/id"
     },
     "name": {
       "type": "string"
     },
     "type": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/type"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/type"
     },
     "supportedNotifications": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
     },
     "notification": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/notification"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/notification"
+    },
+    "driver": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
     },
     "state": {
       "type": ["string", "null"],
-      "enum": ["locked", "unlocked", null]  
+      "enum": ["locked", "unlocked", null]
     },
-    "batteryLevel": { 
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/batteryLevel"
+    "batteryLevel": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/batteryLevel"
     },
     "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/systemData"
     }
   },
   "additionalProperties": false,
-  "required": ["id", "type", "systemData", "state"] 
+  "required": ["id", "type", "systemData", "state", "driver"]
 }

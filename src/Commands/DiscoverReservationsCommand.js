@@ -15,10 +15,6 @@ class DiscoverReservationsCommand extends Command {
   get routingKey() {
     return "reservation.discover";
   }
-
-  get replyTo() {
-    return "system.response.reservations";
-  }
 }
 
 module.exports = DiscoverReservationsCommand;

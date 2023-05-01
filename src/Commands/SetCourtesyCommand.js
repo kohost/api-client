@@ -12,10 +12,6 @@ class SetCourtesyCommand extends Command {
   get routingKey() {
     return `courtesy.${this.data.id}.set`;
   }
-
-  get replyTo() {
-    return "system.response.devices";
-  }
 }
 
 module.exports = SetCourtesyCommand;

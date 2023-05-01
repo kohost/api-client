@@ -12,10 +12,6 @@ class SetDimmerCommand extends Command {
   get routingKey() {
     return `dimmer.${this.data.id}.set`;
   }
-
-  get replyTo() {
-    return "system.response.devices";
-  }
 }
 
 module.exports = SetDimmerCommand;

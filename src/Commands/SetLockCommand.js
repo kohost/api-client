@@ -12,10 +12,6 @@ class SetLockCommand extends Command {
   get routingKey() {
     return `lock.${this.data.id}.set`;
   }
-
-  get replyTo() {
-    return "system.response.devices";
-  }
 }
 
 module.exports = SetLockCommand;

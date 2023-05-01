@@ -4,11 +4,10 @@ const types = [
   "thermostat",
   "lock",
   "windowCovering",
-  "sceneController",
   "courtesy",
   "alarm",
   "camera",
-  "source",
+  "mediaSource",
   "motionSensor",
 ];
 

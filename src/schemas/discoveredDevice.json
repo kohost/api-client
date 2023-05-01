@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/discoveredDevice.json",
+  "$id": "https://api.kohost.io/schemas/v3/discoveredDevice.json",
   "title": "Discovered Device",
   "description": "A device that has been discovered by Kohost, but not yet added to the Kohost system.",
   "type": "object",
-  "required": ["name", "deviceId", "driver", "deviceData"],
+  "required": ["name", "deviceId", "deviceData"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "name": {
       "type": "string"
@@ -25,15 +25,12 @@
         "lock",
         "camera",
         "courtesy",
-        "source",
+        "mediaSource",
         "alarm",
         "windowCovering"
       ]
     },
     "driver": {
-      "type": "string"
-    },
-    "integrationId": {
       "type": "string"
     },
     "deviceData": {

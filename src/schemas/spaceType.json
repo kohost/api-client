@@ -1,11 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/spaceType.json",
+  "$id": "https://api.kohost.io/schemas/v3/spaceType.json",
   "title": "Space Type",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "type": {
       "type": "string"
@@ -14,16 +14,18 @@
       "type": "string",
       "minLength": 1
     },
+    "driver": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
+    },
     "description": {
-      "type":"string"
+      "type": "string"
     },
     "imageUrl": {
       "format": "uri",
       "pattern": "^https?://"
     },
     "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"
     }
   }
 }
-

@@ -12,10 +12,6 @@ class SetAlarmCommand extends Command {
   get routingKey() {
     return `alarm.${this.data.id}.set`;
   }
-
-  get replyTo() {
-    return "system.response.devices";
-  }
 }
 
 module.exports = SetAlarmCommand;

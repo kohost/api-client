@@ -1,8 +1,13 @@
 const Event = require("./Event");
 
 class SystemMediaSourceUpdatedEvent extends Event {
+<<<<<<< HEAD
   constructor(lock) {
     super(lock);
+=======
+  constructor(mediaSource) {
+    super(mediaSource);
+>>>>>>> master
   }
 
   get name() {

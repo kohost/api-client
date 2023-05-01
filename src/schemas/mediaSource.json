@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/mediaSource.json",
+  "$id": "https://api.kohost.io/schemas/v3/mediaSource.json",
   "title": "Media Source",
   "description": "Any media source",
   "type": "object",
-  "required": ["id", "type", "systemData", "audio", "video"],    
+  "required": ["id", "type", "systemData", "audio", "video", "driver"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/id"
     },
     "type": {
       "type": "string",
@@ -20,11 +20,14 @@
         "uncontrolledDevice"
       ]
     },
+    "driver": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
+    },
     "audio": {
-      "type": "boolean" 
+      "type": "boolean"
     },
     "video": {
-      "type": "boolean" 
+      "type": "boolean"
     },
     "powerFeedback": {
       "type": "boolean"
@@ -33,27 +36,24 @@
       "type": "boolean"
     },
     "muted": {
-      "type":"boolean"
+      "type": "boolean"
     },
     "volume": {
-      "type":"number",
+      "type": "number",
       "minimum": 0,
-      "maximum": 100 
+      "maximum": 100
     },
     "power": {
-      "type": "string", 
-      "enum": [
-        "on",
-        "off"
-      ]
+      "type": "string",
+      "enum": ["on", "off"]
     },
     "input": {
-      "type":"string"
+      "type": "string"
     },
     "supportedInputs": {
-      "type":"array",
+      "type": "array",
       "items": {
-        "type":"string"
+        "type": "string"
       }
     },
     "command": {
@@ -99,7 +99,7 @@
         "input",
         "power",
         "enterChannel",
-        "enterVolume", 
+        "enterVolume",
         "number10",
         "number11",
         "number12",
@@ -165,13 +165,14 @@
       ]
     },
     "supportedNotifications": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
     },
     "notification": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/notification"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/notification"
     },
     "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData" 
+      "$ref": "https://api.kohost.app/schemas/v3/definitions/device.json#/definitions/systemData"
     }
-  }
+  },
+  "additionalProperties": false
 }

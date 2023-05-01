@@ -14,10 +14,6 @@ class DiscoverUsersCommand extends Command {
     if (Array.isArray(this.data.id)) return "users.batch.get";
     return "users.get";
   }
-
-  get replyTo() {
-    return "system.response.users";
-  }
 }
 
 module.exports = DiscoverUsersCommand;

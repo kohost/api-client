@@ -1,12 +1,15 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.app/schemas/v3/reservation.json",
+  "$id": "https://api.kohost.io/schemas/v3/reservation.json",
   "title": "Reservation",
   "type": "object",
   "required": ["type", "status", "checkInDateTime", "checkOutDateTime"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+    },
+    "driver": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
     },
     "primaryGuest": {
       "type": "string"
@@ -45,7 +48,7 @@
       "enum": [
         "ready",
         "blocked",
-        "preArrivalStepsRequired", 
+        "preArrivalStepsRequired",
         "spaceNotAssigned",
         "spaceNotReady",
         "checkInTimeNotStarted"
@@ -62,7 +65,7 @@
       "format": "date-time"
     },
     "checkOutDateTime": {
-      "type": ["string", "object"], 
+      "type": ["string", "object"],
       "format": "date-time"
     },
     "adultCount": {
@@ -81,34 +84,34 @@
         "properties": {
           "date": {
             "type": "string",
-            "format": "date" 
+            "format": "date"
           },
           "amount": {
-            "type": "number" 
+            "type": "number"
           },
           "type": {
-            "type": "string" 
+            "type": "string"
           }
         }
       }
     },
     "rateSuppressed": {
-      "type": "boolean" 
+      "type": "boolean"
     },
     "payment": {
-      "type": "string" 
+      "type": "string"
     },
     "company": {
       "type": "string"
     },
     "travelAgent": {
-      "type": "string" 
+      "type": "string"
     },
     "systemData": {
-      "$ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/systemData"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"
     },
     "metadata": {
-      "ref": "https://api.kohost.app/schemas/v3/definitions/common.json#/definitions/metadata"
+      "ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/metadata"
     }
   }
 }
