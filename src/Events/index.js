@@ -8,11 +8,8 @@ const SystemSceneControllerUpdatedEvent = require("./SystemSceneControllerUpdate
 const SystemWindowCoveringUpdatedEvent = require("./SystemWindowCoveringUpdatedEvent");
 const SystemMediaSourceUpdatedEvent = require("./SystemMediaSourceUpdatedEvent");
 const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
-<<<<<<< HEAD
-const SystemMediaSourceUpdatedEvent = require("./SystemMediaSourceUpdatedEvent");
-=======
+
 const SystemMotionSensorUpdatedEvent = require("./SystemMotionSensorUpdatedEvent");
->>>>>>> master
 
 const SystemUserUpdatedEvent = require("./SystemUserUpdatedEvent");
 const SystemSpaceUpdatedEvent = require("./SystemSpaceUpdatedEvent");
@@ -40,7 +37,6 @@ module.exports = {
   SystemMediaSourceUpdatedEvent,
   SystemMotionSensorUpdatedEvent,
   SystemCourtesyUpdatedEvent,
-  SystemMediaSourceUpdatedEvent, 
   SystemUserUpdatedEvent,
   SystemSpaceUpdatedEvent,
   SystemSpaceTypeUpdatedEvent,
