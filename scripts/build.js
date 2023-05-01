@@ -164,10 +164,6 @@ async function main() {
     keepNames: true,
     treeShaking: true,
     allowOverwrite: true,
-    onRebuild: function (error, result) {
-      if (error) console.error("watch build failed:", error);
-      else console.log("watch build succeeded:", result);
-    },
   });
 
   const build2 = await esbuild.context({
