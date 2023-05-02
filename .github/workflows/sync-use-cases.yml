@@ -14,9 +14,9 @@ jobs:
   sync:
     name: Save use cases to http.json
     runs-on: ubuntu-latest
-    if: github.event.client_payload.hash
+    if: github.event.client_payload.version
     env:
-      HASH: ${{ github.event.client_payload.hash }}
+      VERSION: ${{ github.event.client_payload.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -31,16 +31,16 @@ jobs:
           aws-region: us-east-1
 
       - name: Download use cases
-        run: aws s3 cp s3://cloud-v3-data/useCases/useCases-${{ env.hash }}.json ./src/useCases/http.json
+        run: aws s3 cp s3://cloud-v3-data/useCases/useCases-${{ env.VERSION }}.json ./src/useCases/http.json
 
-      - run: git commit -am "Update use cases to hash ${{ env.hash }}"
+      - run: git commit -am "Update use cases to version ${{ env.VERSION }}"
       - run: git push
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: "Update use cases to hash ${{ env.hash }}"
-          title: "[CI] Update use cases to hash ${{ env.hash }}"
-          body: "Update use cases to hash ${{ env.hash }}"
+          commit-message: "Update use cases to version ${{ env.VERSION }}"
+          title: "[CI] Update use cases to version ${{ env.VERSION }}"
+          body: "Update use cases to version ${{ env.VERSION }}"
           branch: "use-cases"
           labels: "use-cases"

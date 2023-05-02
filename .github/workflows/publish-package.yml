@@ -34,7 +34,7 @@ jobs:
     name: Publish to NPM
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
+    if: ${{ github.event_name == 'release' }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
