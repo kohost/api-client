@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   sync:
-    name: Save use cases to http.json
+    name: Fetch Use Cases and Create PR
     runs-on: ubuntu-latest
     if: github.event.client_payload.version
     env:
@@ -33,14 +33,14 @@ jobs:
       - name: Download use cases
         run: aws s3 cp s3://cloud-v3-data/useCases/useCases-${{ env.VERSION }}.json ./src/useCases/http.json
 
-      - run: git commit -am "Update use cases to version ${{ env.VERSION }}"
+      - run: git commit -am "Update use cases to API version ${{ env.VERSION }}"
       - run: git push
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: "Update use cases to version ${{ env.VERSION }}"
-          title: "[CI] Update use cases to version ${{ env.VERSION }}"
-          body: "Update use cases to version ${{ env.VERSION }}"
+          commit-message: "Update use cases to API version ${{ env.VERSION }}"
+          title: "[CI] Update use cases to API version ${{ env.VERSION }}"
+          body: "Update use cases to API version ${{ env.VERSION }}"
           branch: "use-cases"
           labels: "use-cases"
