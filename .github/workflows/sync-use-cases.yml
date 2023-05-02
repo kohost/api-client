@@ -42,6 +42,7 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
         with:
+          base: "master"
           commit-message: "Update use cases to API version ${{ env.VERSION }}"
           title: "[CI] Update use cases to API version ${{ env.VERSION }}"
           body: "Update use cases to API version ${{ env.VERSION }}"
