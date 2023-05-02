@@ -20,8 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: use-cases
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -33,18 +31,13 @@ jobs:
       - name: Download use cases
         run: aws s3 cp s3://cloud-v3-data/useCases/useCases-${{ env.VERSION }}.json ./src/useCases/http.json
 
-      - run: git config user.email github-actions@github.com
-      - run: git config user.name github-actions
-      - run: git add src/useCases/http.json
-      - run: git commit -am "Update use cases to API version ${{ env.VERSION }}"
-      - run: git push
-
       - name: Create pull request
         uses: peter-evans/create-pull-request@v5
         with:
-          base: "master"
+          base: master
           commit-message: "Update use cases to API version ${{ env.VERSION }}"
           title: "[CI] Update use cases to API version ${{ env.VERSION }}"
           body: "Update use cases to API version ${{ env.VERSION }}"
-          branch: "use-cases"
-          labels: "use-cases"
+          branch: use-cases
+          labels: use-cases
+          draft: false
