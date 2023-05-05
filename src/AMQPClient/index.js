@@ -4,9 +4,12 @@ const crypto = require("crypto");
 const isFatalError = require("amqplib/lib/connection").isFatalError;
 const debug = require("debug")("kohost:amqp-client");
 
-const HEADER_KEY_ORGANIZATION_ID = "organization-id";
-const HEADER_KEY_PROPERTY_ID = "property-id";
-const HEADER_KEY_DRIVER = "driver";
+const HEADER_KEY_ORGANIZATION_ID = "X-Organization-Id";
+const HEADER_KEY_PROPERTY_ID = "X-Property-Id";
+const HEADER_KEY_DRIVER = "X-Driver";
+const HEADER_KEY_COMMAND_NAME = "X-Command-Name";
+const HEADER_KEY_EVENT_NAME = "X-Event-Name";
+
 const exchanges = {
   // routes commands based on `command-name` header and in many cases `property-id` header
   Commands: {
@@ -102,7 +105,6 @@ class KohostAMQPClient {
 
     let error = null;
     let data = {};
-    let params = {};
     let query = {};
     let context = {};
     let headers = {};
@@ -112,8 +114,8 @@ class KohostAMQPClient {
 
     const messageHeaders = message?.properties?.headers || {};
 
-    const commandName = messageHeaders["command-name"] || null;
-    const eventName = messageHeaders["event-name"] || null;
+    const commandName = messageHeaders[HEADER_KEY_COMMAND_NAME] || null;
+    const eventName = messageHeaders[HEADER_KEY_EVENT_NAME] || null;
 
     if (message.content) {
       try {
@@ -123,7 +125,6 @@ class KohostAMQPClient {
             : message.content.toString();
         data = payload?.data || {};
         error = payload?.error;
-        params = payload?.params || {};
         query = payload?.query || {};
         context = payload?.context || {};
       } catch (error) {
@@ -157,7 +158,6 @@ class KohostAMQPClient {
     if (error) parsed.error = this.parseError(error);
 
     parsed.data = data;
-    parsed.params = params;
     parsed.query = query;
     parsed.context = context;
     parsed.headers = headers;

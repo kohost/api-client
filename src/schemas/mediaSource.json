@@ -4,17 +4,12 @@
   "title": "Media Source",
   "description": "Any media source",
   "type": "object",
+  "required": ["id", "type", "systemData", "audio", "video", "driver"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/id"
     },
     "type": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/type"
-    },
-    "driver": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
-    },
-    "subType": {
       "type": "string",
       "enum": [
         "tv",
@@ -24,6 +19,9 @@
         "mediaPlayer",
         "uncontrolledDevice"
       ]
+    },
+    "driver": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
     },
     "audio": {
       "type": "boolean"
@@ -36,6 +34,27 @@
     },
     "volumeFeedback": {
       "type": "boolean"
+    },
+    "muted": {
+      "type": "boolean"
+    },
+    "volume": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "power": {
+      "type": "string",
+      "enum": ["on", "off"]
+    },
+    "input": {
+      "type": "string"
+    },
+    "supportedInputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "command": {
       "type": ["string", "null"],
@@ -80,6 +99,7 @@
         "input",
         "power",
         "enterChannel",
+        "enterVolume",
         "number10",
         "number11",
         "number12",
@@ -136,7 +156,12 @@
         "hdmi2",
         "hdmi3",
         "cecDeviceList",
-        "mtsSap"
+        "mtsSap",
+        "red",
+        "green",
+        "yellow",
+        "blue",
+        "alert"
       ]
     },
     "supportedNotifications": {
@@ -152,6 +177,5 @@
       "#ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/watts"
     }
   },
-  "additionalProperties": false,
-  "required": ["id", "type", "systemData", "audio", "video", "driver"]
+  "additionalProperties": false
 }

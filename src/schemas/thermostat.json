@@ -102,6 +102,9 @@
     "systemData": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/systemData",
       "default": {}
+    },
+    "watts":{
+      "#ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/watts"
     }
   },
   "additionalProperties": false,
@@ -130,9 +133,6 @@
       "type": ["number", "null"],
       "minimum": 0,
       "maximum": 99
-    },
-    "watts":{
-      "#ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/watts"
     }
   },
   "required": [
