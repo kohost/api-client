@@ -13,7 +13,7 @@ const WindowCovering = require("./windowCovering");
 const Courtesy = require("./courtesy");
 const Camera = require("./camera");
 const Alarm = require("./alarm");
-const Source = require("./mediaSource");
+const MediaSource = require("./mediaSource");
 const MotionSensor = require("./motionSensor");
 
 // other dependencies
@@ -183,9 +183,9 @@ function mapRoomData(data) {
     else return new Courtesy(courtesy);
   });
 
-  roomData.sources?.map((source) => {
-    if (source instanceof Source) return source;
-    else return new Source(source);
+  roomData.mediaSources?.map((source) => {
+    if (source instanceof MediaSource) return source;
+    else return new MediaSource(source);
   });
 
   roomData.cameras?.map((camera) => {
