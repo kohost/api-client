@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/@kohost%2Fapi-client.svg)](https://badge.fury.io/js/@kohost%2Fapi-client)
+[![npm version](https://badge.fury.io/js/@kohost%2Fapi-client.svg)](https://badge.fury.io/js/@kohost%2Fapi-client) [![Use Case Synced](https://github.com/kohost/api-client/actions/workflows/sync-use-cases.yml/badge.svg?branch=master)](https://github.com/kohost/api-client/actions/workflows/sync-use-cases.yml)
 
 # Kohost API Client
 
