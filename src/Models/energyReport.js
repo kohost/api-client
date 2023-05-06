@@ -1,40 +1,41 @@
 // create the energyReportDaily Model
 const schemas = require("../utils/schema");
-const schema = require("../schemas/energyReportDaily.json");
+const schema = require("../schemas/energyReport.json");
 const Kohost = require("./kohost");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class energyReportDaily extends Kohost {
+class energyReport extends Kohost {
   constructor(data) {
     super(data);
   }
 }
 
-Object.defineProperty(energyReportDaily.prototype, "schema", {
+Object.defineProperty(energyReport.prototype, "schema", {
   value: schema,
 });
 
-Object.defineProperty(energyReportDaily.prototype, "validator", {
+Object.defineProperty(energyReport.prototype, "validator", {
   get: function () {
     return validator;
   },
 });
 
-Object.defineProperty(energyReportDaily, "validProperties", {
+Object.defineProperty(energyReport, "validProperties", {
   value: Object.keys(schema.properties),
 });
 
-Object.defineProperty(energyReportDaily, "actionProperties", {
+Object.defineProperty(energyReport, "actionProperties", {
   value: ["state"],
 });
 
-module.exports = energyReportDaily;
+module.exports = energyReport;
 
-const dailyShardReport = new energyReportDaily({
+const dailyShardReport = new energyReport({
   "id" :"RepIdHr1",
-  "type" :"energyReportDaily",
+  "type" :"energyReport",
+  "reportTime": "hourly",
   "roomId": "TestRoom",
   "first": new Date(),
   "last": new Date(),
