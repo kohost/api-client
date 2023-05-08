@@ -1,21 +1,30 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://api.kohost.io/schemas/v3/energyReportDaily.json",
-    "title": "Energy Report Daily",
-    "description": "Daily Report for Energy based on energy report shards",
+    "$id": "https://api.kohost.io/schemas/v3/energyReport.json",
+    "title": "Energy Report Hourly",
+    "description": "Hourly Report for Energy based on energy report shards",
     "type": "object",
     "required": ["id", "type", "roomId", "first", "last", "consumption", "totals", "costPerKw"],
     "properties": {
         "id": {
-            "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/id"
+            "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
         }, 
         "type": {
             "type":"string",
             "enum":[
-                "energyReportDaily" 
+                "energyReport" 
             ],
-            "default": "energyReportDaily"
-          },
+            "default": "energyReport"
+        },
+        "reportTime": {
+            "time": "string",
+            "enum":[
+                "hourly",
+                "daily",
+                "monthly"
+            ]
+
+        },
         "roomId": {
             "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
         },  

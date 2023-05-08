@@ -23,8 +23,8 @@ const DiscoveredDevice = require("./discoveredDevice");
 const Credential = require("./credential");
 const ShortLink = require("./shortLink");
 const EnergyReportShard = require("./energyReportShard");
-const EnergyReportHourly = require("./energyReportHourly");
-const EnergyReportDaily = require("./energyReportDaily");
+const EnergyReport = require("./energyReport");
+
 
 const Property = require("./property");
 const Organization = require("./organization");
@@ -57,6 +57,5 @@ module.exports = {
   Credential,
   ShortLink,
   EnergyReportShard,
-  EnergyReportHourly,
-  EnergyReportDaily
+  EnergyReport
 };
