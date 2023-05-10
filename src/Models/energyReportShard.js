@@ -31,22 +31,3 @@ Object.defineProperty(EnergyReportShard, "actionProperties", {
 });
 
 module.exports = EnergyReportShard;
-
-const shard = new EnergyReportShard({
-  "id": "ShardId1",
-  "type": "energyReportShard",
-  "roomId": "TestRoom",
-  "first": new Date(),
-  "last": new Date(),
-  "data":[{
-    "time" : new Date(),
-    "watts": 100,
-    "id": "1",
-    "type": "dimmer",
-    "value" : .1213150,
-  }],
-  "ndata": 1,
-  "expires": new Date()
-});
-
-console.log(shard);
