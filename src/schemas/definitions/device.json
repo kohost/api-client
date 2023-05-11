@@ -11,6 +11,7 @@
     "type": {
       "type": "string",
       "enum": [
+        "alarm",
         "dimmer",
         "switch",
         "motionSensor",
@@ -20,7 +21,6 @@
         "thermostat",
         "lock",
         "courtesy",
-        "sceneController",
         "gateway",
         "tv",
         "dvr",
