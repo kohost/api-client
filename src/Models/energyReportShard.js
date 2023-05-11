@@ -26,8 +26,4 @@ Object.defineProperty(EnergyReportShard, "validProperties", {
   value: Object.keys(schema.properties),
 });
 
-Object.defineProperty(EnergyReportShard, "actionProperties", {
-  value: ["state"],
-});
-
 module.exports = EnergyReportShard;
