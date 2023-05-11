@@ -21,10 +21,15 @@
         "lock",
         "courtesy",
         "sceneController",
-        "gateway"
+        "gateway",
+        "tv",
+        "dvr",
+        "appleTv",
+        "discPlayer",
+        "mediaPlayer",
+        "uncontrolledDevice"
       ]
     },
-
     "name": {
       "type": "string"
     },
@@ -75,8 +80,8 @@
     },
     "watts": {
       "type": "number",
-      "minimum" : 0,
-      "default" : 0
+      "minimum": 0,
+      "default": 0
     }
   }
 }
