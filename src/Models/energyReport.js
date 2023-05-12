@@ -35,7 +35,7 @@ module.exports = energyReport;
 const dailyShardReport = new energyReport({
   "id" :"RepIdHr1",
   "type" :"energyReport",
-  "reportTime": "hourly",
+  "reportType": "hourly",
   "roomId": "TestRoom",
   "first": new Date(),
   "last": new Date(),
@@ -44,11 +44,11 @@ const dailyShardReport = new energyReport({
     "type": "dimmer",
     "kwh" : .1213150,
   }],
-  "totals": [{
+  "totals": {
     "lights": 10,
     "climate": 10,
     "media": 10 
-  }],
+  },
   "costPerKw": .14
 });
 

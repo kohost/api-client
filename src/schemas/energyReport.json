@@ -4,7 +4,7 @@
     "title": "Energy Report Hourly",
     "description": "Hourly Report for Energy based on energy report shards",
     "type": "object",
-    "required": ["id", "type", "roomId", "first", "last", "consumption", "totals", "costPerKw"],
+    "required": ["id", "type", "reportType", "roomId", "first", "last", "consumption", "totals", "costPerKw"],
     "properties": {
         "id": {
             "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
@@ -16,7 +16,7 @@
             ],
             "default": "energyReport"
         },
-        "reportTime": {
+        "reportType": {
             "time": "string",
             "enum":[
                 "hourly",
@@ -56,24 +56,21 @@
            }
         },
         "totals":{
-            "type": "array",
-            "items": {
-                 "type": "object",
-                 "required": ["lights", "climate", "media"],
-                     "properties":{
-                         "lights": {
-                            "type": "number",
-                            "minimum": 0
-                         }, 
-                         "climate": {
-                            "type": "number",
-                            "minimum": 0                        
-                         },
-                         "media" : {
-                             "type": "number",
-                             "minimum": 0
-                         }
-                     }
+            "type": "object",
+            "required": ["lights", "climate", "media"],
+                "properties":{
+                    "lights": {
+                    "type": "number",
+                    "minimum": 0
+                    }, 
+                    "climate": {
+                    "type": "number",
+                    "minimum": 0                        
+                    },
+                    "media" : {
+                        "type": "number",
+                        "minimum": 0
+                    }
             }
          },
         "costPerKw":{
