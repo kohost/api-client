@@ -26,8 +26,8 @@
     "driver": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
     },
-    "watts":{
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/watts"
+    "watts": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/watts"
     }
   },
   "additionalProperties": false,
