@@ -9,6 +9,7 @@ const types = [
   "camera",
   "mediaSource",
   "motionSensor",
+  "gateway",
 ];
 
 module.exports = types;

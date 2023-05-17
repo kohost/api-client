@@ -171,8 +171,10 @@
       "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/notification"
     },
     "systemData": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/systemData"
-
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/systemData
+    },
+    "watts": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/watts"
     }
   },
   "additionalProperties": false

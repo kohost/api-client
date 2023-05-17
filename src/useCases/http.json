@@ -593,6 +593,15 @@
     }
   ],
   [
+    "GetMobileKey",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/locks/:id/mobileKey"
+      }
+    }
+  ],
+  [
     "CreateSwitch",
     {
       "http": {
@@ -647,56 +656,56 @@
     }
   ],
   [
-    "CreateSource",
+    "CreateMediaSource",
     {
       "http": {
         "method": "POST",
-        "path": "/rooms/:roomId/sources"
+        "path": "/rooms/:roomId/mediaSources"
       }
     }
   ],
   [
-    "ListSources",
+    "ListMediaSources",
     {
       "http": {
         "method": "GET",
-        "path": "/rooms/:roomId/sources"
+        "path": "/rooms/:roomId/mediaSources"
       }
     }
   ],
   [
-    "UpdateSource",
+    "UpdateMediaSource",
     {
       "http": {
         "method": "PUT",
-        "path": "/rooms/:roomId/sources/:id"
+        "path": "/rooms/:roomId/mediaSources/:id"
       }
     }
   ],
   [
-    "DeleteSource",
+    "DeleteMediaSource",
     {
       "http": {
         "method": "DELETE",
-        "path": "/rooms/:roomId/sources/:id"
+        "path": "/rooms/:roomId/mediaSources/:id"
       }
     }
   ],
   [
-    "DescribeSource",
+    "DescribeMediaSource",
     {
       "http": {
         "method": "GET",
-        "path": "/rooms/:roomId/sources/:id"
+        "path": "/rooms/:roomId/mediaSources/:id"
       }
     }
   ],
   [
-    "SetSource",
+    "SetMediaSource",
     {
       "http": {
         "method": "POST",
-        "path": "/rooms/:roomId/sources/:id"
+        "path": "/rooms/:roomId/mediaSources/:id"
       }
     }
   ],
@@ -868,6 +877,15 @@
       "http": {
         "method": "GET",
         "path": "/tickets"
+      }
+    }
+  ],
+  [
+    "ListMyTickets",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/mine"
       }
     }
   ],
@@ -1135,8 +1153,7 @@
       "http": {
         "method": "POST",
         "path": "/documents/ocr",
-        "maxSize": "2mb",
-        "disableAuth": true
+        "maxSize": "2mb"
       }
     }
   ],
@@ -1177,6 +1194,13 @@
         "method": "GET",
         "path": "/organizations"
       },
+      "useAdminDb": true
+    }
+  ],
+  [
+    "SeedOrganizations",
+    {
+      "http": false,
       "useAdminDb": true
     }
   ],
@@ -1231,6 +1255,13 @@
     }
   ],
   [
+    "SeedProperties",
+    {
+      "http": false,
+      "useAdminDb": true
+    }
+  ],
+  [
     "EmailUserAccountSetup",
     {
       "http": {
@@ -1241,6 +1272,12 @@
   ],
   [
     "LogEvent",
+    {
+      "http": false
+    }
+  ],
+  [
+    "BroadcastEvent",
     {
       "http": false
     }
