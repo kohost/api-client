@@ -56,7 +56,9 @@
           "softwareFailure",
           "hardwareFailureWithCode",
           "softwareFailureWithCode",
-          "motionDetection"
+          "motionDetection",
+          "airFilterNeedsCleaned",
+          "smokeDetected" 
         ]
       }
     },

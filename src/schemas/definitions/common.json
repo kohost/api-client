@@ -76,13 +76,14 @@
     "driver": {
       "type": "string",
       "enum": [
-        "aws-kinesis",
+        "aws-kinesis",  
         "butler",
         "crestron",
         "ecobee",
         "igor",
+        "inncom",  
         "kohost-k7",
-        "kohost",
+        "kohost-pms",
         "lg",
         "lirc",
         "mews",
