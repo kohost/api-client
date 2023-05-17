@@ -24,7 +24,7 @@
     "deviceData": {
       "type": "object"
     },
-    "ignored": {
+    "ignore": {
       "type": "boolean"
     }
   }
