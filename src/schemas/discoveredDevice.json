@@ -23,6 +23,9 @@
     },
     "deviceData": {
       "type": "object"
+    },
+    "ignored": {
+      "type": "boolean"
     }
   }
 }

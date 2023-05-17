@@ -47,8 +47,8 @@ Object.defineProperty(Ticket.prototype, "responseTime", {
       return msg;
     });
     const sorted = sortBy(mapped, ["timestamp"]);
-    const firstMsg = sorted.find((entry) => entry.user === requester);
-    const firstResponse = sorted.find((entry) => entry.user !== requester);
+    const firstMsg = sorted.find((entry) => entry.userId === requester);
+    const firstResponse = sorted.find((entry) => entry.userId !== requester);
 
     if (firstMsg && firstResponse) {
       const firstMsgTime = firstMsg.timestamp.getTime() / 1000;
@@ -80,11 +80,11 @@ Object.defineProperty(Ticket.prototype, "lastResponder", {
     const sorted = sortBy(conversation, ["timestamp"]);
 
     const lastFromNonRequester = findLast(sorted, function (c) {
-      return c.user !== requester;
+      return c.userId !== requester;
     });
 
     if (!lastFromNonRequester) return null;
-    else return lastFromNonRequester.user;
+    else return lastFromNonRequester.userId;
   },
 });
 

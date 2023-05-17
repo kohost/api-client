@@ -18,7 +18,10 @@
           "id": {
             "type": "string"
           },
-          "user": {
+          "userId": {
+            "type": "string"
+          },
+          "userName": {
             "type": "string"
           },
           "timestamp": {
@@ -35,7 +38,7 @@
             }
           }
         },
-        "required": ["user", "id", "timestamp", "body"]
+        "required": ["userId", "id", "timestamp", "body"]
       }
     },
     "requester": {
