@@ -53,11 +53,13 @@
           "softwareFailureWithCode",
           "motionDetection",
           "airFilterNeedsCleaned",
-          "smokeDetected" 
+          "smokeDetected",
+          "outsideSafeTemperatureRange",
+          "outsideSafeHumidityRange"
         ]
       }
     },
-    "notification": {
+    "notification": { 
       "type": ["object", "null"],
       "properties": {
         "name": {
@@ -67,6 +69,9 @@
         "timestamp": {
           "type": "number",
           "minimum": 1655907956593
+        }, 
+        "description": {
+          "type":"string"
         }
       }
     },
