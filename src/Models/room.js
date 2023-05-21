@@ -1,6 +1,7 @@
 // create the Room model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/room.json");
+const deviceSchema = require("../schemas/definitions/device.json");
 const Kohost = require("./kohost");
 const cloneDeep = require("lodash.clonedeep");
 
@@ -13,7 +14,7 @@ const WindowCovering = require("./windowCovering");
 const Courtesy = require("./courtesy");
 const Camera = require("./camera");
 const Alarm = require("./alarm");
-const Source = require("./mediaSource");
+const MediaSource = require("./mediaSource");
 const MotionSensor = require("./motionSensor");
 
 // other dependencies
@@ -29,21 +30,18 @@ class Room extends Kohost {
   }
 
   static getDevicePath(type) {
-    const validTypes = [
-      "dimmer",
-      "switch",
-      "thermostat",
-      "lock",
-      "windowCovering",
-      "courtesy",
-      "camera",
-      "mediaSource",
-      "motionSensor",
-      "alarm",
-    ];
+    const validTypes = deviceSchema.definitions.type.enum;
     if (!validTypes.includes(type))
       throw new Error("Invalid device type:" + type);
     switch (type) {
+      case "tv":
+      case "dvr":
+      case "appleTv":
+      case "discPlayer":
+      case "mediaPlayer":
+      case "uncontrolledDevice":
+      case "mediaSource":
+        return "mediaSources";
       case "courtesy":
         return type;
       case "switch":
@@ -183,9 +181,9 @@ function mapRoomData(data) {
     else return new Courtesy(courtesy);
   });
 
-  roomData.sources?.map((source) => {
-    if (source instanceof Source) return source;
-    else return new Source(source);
+  roomData.mediaSources?.map((source) => {
+    if (source instanceof MediaSource) return source;
+    else return new MediaSource(source);
   });
 
   roomData.cameras?.map((camera) => {

@@ -84,24 +84,6 @@
         "$ref": "https://api.kohost.io/schemas/v3/alarm.json"
       }
     },
-    "media": {
-      "type": "object",
-      "additionalProperties": false,
-      "default": {
-        "volume": 0,
-        "currentSource": null
-      },
-      "properties": {
-        "volume": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "currentSource": {
-          "type": ["string", "null"]
-        }
-      }
-    },
     "scenes": {
       "type": "array",
       "default": [],
