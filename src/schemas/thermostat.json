@@ -91,7 +91,8 @@
       }
     },
     "minAutoDelta": {
-      "type": "number"
+      "type": "number",
+      "default": 3 
     },
     "cycleRate": {
       "type": "number" 
