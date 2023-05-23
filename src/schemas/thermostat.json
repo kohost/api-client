@@ -15,9 +15,6 @@
       "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/type",
       "default": "thermostat"
     },
-    "subType": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/subType"
-    },
     "driver": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
     },
@@ -52,11 +49,11 @@
     },
     "fanState": {
       "type": ["string", "null"],
-      "enum": ["off", "low", "medium", "high", null]
+      "enum": ["off", "low", "medium", "high", "on", null] 
     },
     "temperatureScale": {
       "type": "string",
-      "enum": ["celsius", "fahrenheit"],
+      "enum": ["celsius", "fahrenheit"], 
       "default": "fahrenheit"
     },
     "humidityScale": {
@@ -94,7 +91,11 @@
       }
     },
     "minAutoDelta": {
-      "type": "number"
+      "type": "number",
+      "default": 3 
+    },
+    "cycleRate": {
+      "type": "number" 
     },
     "batteryLevel": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/batteryLevel"
