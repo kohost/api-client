@@ -6,7 +6,7 @@
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "systemData": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData" 
     },
     "type": {
       "type": "string",
@@ -58,11 +58,13 @@
           "softwareFailureWithCode",
           "motionDetection",
           "airFilterNeedsCleaned",
-          "smokeDetected" 
+          "smokeDetected",
+          "outsideSafeTemperatureRange",
+          "outsideSafeHumidityRange"
         ]
       }
     },
-    "notification": {
+    "notification": { 
       "type": ["object", "null"],
       "properties": {
         "name": {
@@ -72,6 +74,9 @@
         "timestamp": {
           "type": "number",
           "minimum": 1655907956593
+        }, 
+        "description": {
+          "type":"string"
         }
       }
     },

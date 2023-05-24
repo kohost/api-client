@@ -25,8 +25,9 @@
       "http": {
         "disableAuth": true,
         "method": "POST",
-        "path": "/auth/loginToken"
-      }
+        "path": "/auth/loginLink"
+      },
+      "useAdminDb": true
     }
   ],
   [
