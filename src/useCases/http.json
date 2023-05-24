@@ -167,6 +167,15 @@
     }
   ],
   [
+    "ListTeam",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/team"
+      }
+    }
+  ],
+  [
     "ListSpaces",
     {
       "http": {
@@ -194,6 +203,15 @@
     }
   ],
   [
+    "UpdateSpace",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/spaces/:id"
+      }
+    }
+  ],
+  [
     "CreateSpace",
     {
       "http": {
@@ -217,15 +235,6 @@
       "http": {
         "method": "DELETE",
         "path": "/spaces/:id"
-      }
-    }
-  ],
-  [
-    "UpdateSpace",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/spaceTypes/:id"
       }
     }
   ],
@@ -283,6 +292,15 @@
       "http": {
         "method": "GET",
         "path": "/spaceTypes"
+      }
+    }
+  ],
+  [
+    "UpdateSpaceType",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/spaceTypes/:id"
       }
     }
   ],
@@ -863,6 +881,15 @@
     }
   ],
   [
+    "ListMyTickets",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/mine"
+      }
+    }
+  ],
+  [
     "DescribeTicket",
     {
       "http": {
@@ -877,15 +904,6 @@
       "http": {
         "method": "GET",
         "path": "/tickets"
-      }
-    }
-  ],
-  [
-    "ListMyTickets",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/tickets/mine"
       }
     }
   ],
