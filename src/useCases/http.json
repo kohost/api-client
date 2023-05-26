@@ -177,6 +177,15 @@
     }
   ],
   [
+    "DescribeMyAccessCredentials",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/me/accessCredentials"
+      }
+    }
+  ],
+  [
     "ListSpaces",
     {
       "http": {
@@ -612,11 +621,11 @@
     }
   ],
   [
-    "GetMobileKey",
+    "DescribeLockCredential",
     {
       "http": {
         "method": "POST",
-        "path": "/rooms/:roomId/locks/:id/mobileKey"
+        "path": "/rooms/:roomId/locks/:id/credential"
       }
     }
   ],
