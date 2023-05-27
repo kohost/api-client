@@ -1,10 +1,10 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://api.kohost.io/schemas/v3/energyReport.json",
-    "title": "Energy Report",
-    "description": "Report for Energy based on energy report shards",
+    "$id": "https://api.kohost.io/schemas/v3/energyReportProperty.json",
+    "title": "Property Energy Report",
+    "description": "Report for Property Energy based on energy report shards",
     "type": "object",
-    "required": ["id", "type", "reportType", "roomId", "first", "last", "consumption", "totals", "costPerKw"],
+    "required": ["id", "type", "reportType", "first", "last", "consumption", "totals", "costPerKw"],
     "properties": {
         "id": {
             "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
@@ -12,9 +12,9 @@
         "type": {
             "type":"string",
             "enum":[
-                "energyReport" 
+                "energyReportProperty" 
             ],
-            "default": "energyReport"
+            "default": "energyReportProperty"
         },
         "reportType": {
             "time": "string",
@@ -23,11 +23,7 @@
                 "daily",
                 "monthly"
             ]
-
         },
-        "roomId": {
-            "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
-        },  
         "first": {
             "type": ["string", "object"],
             "format": "date-time"

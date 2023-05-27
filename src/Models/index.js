@@ -24,6 +24,7 @@ const Credential = require("./credential");
 const ShortLink = require("./shortLink");
 const EnergyReportShard = require("./energyReportShard");
 const EnergyReport = require("./energyReport");
+const EnergyReportProperty = require("./energyReportProperty");
 
 
 const Property = require("./property");
@@ -57,5 +58,6 @@ module.exports = {
   Credential,
   ShortLink,
   EnergyReportShard,
-  EnergyReport
+  EnergyReport,
+  EnergyReportProperty
 };
