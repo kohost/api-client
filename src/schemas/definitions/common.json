@@ -16,6 +16,10 @@
       "type": "object",
       "default": {}
     },
+    "date": {
+      "type": ["string", "object"],
+      "format": "date-time"
+    },
     "createdAt": {
       "type": ["string", "object"],
       "format": "date-time"
@@ -76,12 +80,12 @@
     "driver": {
       "type": "string",
       "enum": [
-        "aws-kinesis",  
+        "aws-kinesis",
         "butler",
         "crestron",
         "ecobee",
         "igor",
-        "inncom",  
+        "inncom",
         "kohost-k7",
         "kohost-pms",
         "lg",

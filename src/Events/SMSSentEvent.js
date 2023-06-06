@@ -1,8 +1,8 @@
 const Event = require("./Event");
 
 class SMSSentEvent extends Event {
-  constructor(email, context) {
-    super(email, context);
+  constructor(sms, context) {
+    super(sms, context);
   }
 
   get name() {
