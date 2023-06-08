@@ -15,6 +15,7 @@ const Room = require("./room");
 const Reservation = require("./reservation");
 const Space = require("./space");
 const SpaceType = require("./spaceType");
+const MediaFile = require("./mediaFile");
 const Ticket = require("./ticket");
 const Scene = require("./scene");
 const Gateway = require("./gateway");
@@ -59,4 +60,5 @@ module.exports = {
   EnergyReportShard,
   EnergyReport,
   SMSMessage,
+  MediaFile,
 };

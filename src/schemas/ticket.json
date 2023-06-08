@@ -30,16 +30,15 @@
           "body": {
             "type": "string"
           },
-          "mediaUrl": {
-            "type": "string",
-            "format": "uri"
-          },
           "readBy": {
             "type": "array",
             "default": [],
             "items": {
               "type": "string"
             }
+          },
+          "media": {
+            "$ref": "https://api.kohost.io/schemas/v3/mediaFile.json"
           }
         },
         "required": ["userId", "id", "timestamp", "body"]
@@ -72,16 +71,16 @@
       "type": "string"
     },
     "createdAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/date"
     },
     "updatedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/date"
     },
     "solvedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/date"
     },
     "closedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/date"
     }
   },
   "required": [

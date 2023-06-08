@@ -26,8 +26,7 @@
         "disableAuth": true,
         "method": "POST",
         "path": "/auth/loginLink"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -146,6 +145,15 @@
       "http": {
         "method": "GET",
         "path": "/users/:id/reservations"
+      }
+    }
+  ],
+  [
+    "ListUserSpaces",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/:id/spaces"
       }
     }
   ],
@@ -945,6 +953,18 @@
     }
   ],
   [
+    "NotifyTicketUpdate",
+    {
+      "http": false
+    }
+  ],
+  [
+    "NotifyTicketCreated",
+    {
+      "http": false
+    }
+  ],
+  [
     "CreateDefaultScenes",
     {
       "http": {
@@ -1248,8 +1268,7 @@
       "http": {
         "method": "GET",
         "path": "/properties"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1258,8 +1277,7 @@
       "http": {
         "method": "POST",
         "path": "/properties"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1308,6 +1326,32 @@
     "BroadcastEvent",
     {
       "http": false
+    }
+  ],
+  [
+    "HandleMessageData",
+    {
+      "http": false,
+      "useAdminDb": true,
+      "allowPropertyDb": true
+    }
+  ],
+  [
+    "CreateImageUploadEndpoint",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/mediaFiles/imageUploadEndpoint"
+      }
+    }
+  ],
+  [
+    "DeleteMediaFile",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/mediaFiles/:id"
+      }
     }
   ]
 ]

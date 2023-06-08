@@ -18,6 +18,8 @@ const CreateShortLinkCommand = require("./CreateShortLinkCommand");
 const UpdateReservationCommand = require("./UpdateReservationCommand");
 const UpdateUserCommand = require("./UpdateUserCommand");
 const GetMobileKeyCommand = require("./GetMobileKeyCommand");
+const CreateImageUploadEndpointCommand = require("./CreateImageUploadEndpointCommand");
+const UploadImageCommand = require("./UploadImageCommand");
 
 module.exports = {
   SetAlarmCommand,
@@ -40,4 +42,6 @@ module.exports = {
   UpdateReservationCommand,
   UpdateUserCommand,
   GetMobileKeyCommand,
+  CreateImageUploadEndpointCommand,
+  UploadImageCommand,
 };

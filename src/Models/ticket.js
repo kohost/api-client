@@ -2,18 +2,21 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/ticket.json");
 const Kohost = require("./kohost");
+const MediaFile = require("./mediaFile");
 
 const sortBy = require("lodash.sortby");
 const findLast = require("lodash.findlast");
 
 const { nanoid } = require("nanoid");
+const cloneDeep = require("lodash.clonedeep");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Ticket extends Kohost {
   constructor(data) {
-    super(data);
+    const ticketData = mapConversationData(data);
+    super(ticketData);
   }
 
   static generateMessageId(len = 16) {
@@ -87,5 +90,16 @@ Object.defineProperty(Ticket.prototype, "lastResponder", {
     else return lastFromNonRequester.userId;
   },
 });
+
+function mapConversationData(data) {
+  const ticketData = cloneDeep(data);
+  ticketData.conversation = ticketData.conversation.map((msg) => {
+    if (msg.media) {
+      msg.media = new MediaFile(msg.media);
+    }
+    return msg;
+  });
+  return ticketData;
+}
 
 module.exports = Ticket;
