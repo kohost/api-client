@@ -13,5 +13,5 @@ class SystemMediaSourceUpdatedEvent extends Event {
     return `mediaSource.${this.keyId}.updated`;
   }
 }
-
+ 
 module.exports = SystemMediaSourceUpdatedEvent;

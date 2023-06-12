@@ -16,6 +16,10 @@
       "type": "object",
       "default": {}
     },
+    "date": {
+      "type": ["string", "object"],
+      "format": "date-time"
+    },
     "createdAt": {
       "type": ["string", "object"],
       "format": "date-time"
@@ -81,8 +85,9 @@
         "crestron",
         "ecobee",
         "igor",
+        "inncom",
         "kohost-k7",
-        "kohost",
+        "kohost-pms",
         "lg",
         "lirc",
         "mews",

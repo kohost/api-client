@@ -15,6 +15,7 @@ const Room = require("./room");
 const Reservation = require("./reservation");
 const Space = require("./space");
 const SpaceType = require("./spaceType");
+const MediaFile = require("./mediaFile");
 const Ticket = require("./ticket");
 const Scene = require("./scene");
 const Gateway = require("./gateway");
@@ -26,6 +27,7 @@ const EnergyReportShard = require("./energyReportShard");
 const EnergyReport = require("./energyReport");
 const EnergyReportProperty = require("./energyReportProperty");
 
+const SMSMessage = require("./smsMessage");
 
 const Property = require("./property");
 const Organization = require("./organization");
@@ -59,5 +61,7 @@ module.exports = {
   ShortLink,
   EnergyReportShard,
   EnergyReport,
-  EnergyReportProperty
+  EnergyReportProperty,
+  SMSMessage,
+  MediaFile,
 };

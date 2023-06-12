@@ -2,18 +2,21 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/ticket.json");
 const Kohost = require("./kohost");
+const MediaFile = require("./mediaFile");
 
 const sortBy = require("lodash.sortby");
 const findLast = require("lodash.findlast");
 
 const { nanoid } = require("nanoid");
+const cloneDeep = require("lodash.clonedeep");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Ticket extends Kohost {
   constructor(data) {
-    super(data);
+    const ticketData = mapConversationData(data);
+    super(ticketData);
   }
 
   static generateMessageId(len = 16) {
@@ -47,8 +50,8 @@ Object.defineProperty(Ticket.prototype, "responseTime", {
       return msg;
     });
     const sorted = sortBy(mapped, ["timestamp"]);
-    const firstMsg = sorted.find((entry) => entry.user === requester);
-    const firstResponse = sorted.find((entry) => entry.user !== requester);
+    const firstMsg = sorted.find((entry) => entry.userId === requester);
+    const firstResponse = sorted.find((entry) => entry.userId !== requester);
 
     if (firstMsg && firstResponse) {
       const firstMsgTime = firstMsg.timestamp.getTime() / 1000;
@@ -80,12 +83,23 @@ Object.defineProperty(Ticket.prototype, "lastResponder", {
     const sorted = sortBy(conversation, ["timestamp"]);
 
     const lastFromNonRequester = findLast(sorted, function (c) {
-      return c.user !== requester;
+      return c.userId !== requester;
     });
 
     if (!lastFromNonRequester) return null;
-    else return lastFromNonRequester.user;
+    else return lastFromNonRequester.userId;
   },
 });
+
+function mapConversationData(data) {
+  const ticketData = cloneDeep(data);
+  ticketData.conversation = ticketData.conversation.map((msg) => {
+    if (msg.media) {
+      msg.media = new MediaFile(msg.media);
+    }
+    return msg;
+  });
+  return ticketData;
+}
 
 module.exports = Ticket;

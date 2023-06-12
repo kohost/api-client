@@ -3,9 +3,9 @@ const SetDimmerCommand = require("./SetDimmerCommand");
 const SetSwitchCommand = require("./SetSwitchCommand");
 const SetThermostatCommand = require("./SetThermostatCommand");
 const SetLockCommand = require("./SetLockCommand");
-const SetSceneControllerCommand = require("./SetSceneControllerCommand");
 const SetWindowCoveringCommand = require("./SetWindowCoveringCommand");
 const SetCourtesyCommand = require("./SetCourtesyCommand");
+const SetMediaCommand = require("./SetMediaCommand");
 const DiscoverUsersCommand = require("./DiscoverUsersCommand");
 const OCRDocumentCommand = require("./OCRDocumentCommand");
 const CheckInReservationCommand = require("./CheckInReservationCommand");
@@ -18,6 +18,8 @@ const CreateShortLinkCommand = require("./CreateShortLinkCommand");
 const UpdateReservationCommand = require("./UpdateReservationCommand");
 const UpdateUserCommand = require("./UpdateUserCommand");
 const GetMobileKeyCommand = require("./GetMobileKeyCommand");
+const CreateImageUploadEndpointCommand = require("./CreateImageUploadEndpointCommand");
+const UploadImageCommand = require("./UploadImageCommand");
 
 module.exports = {
   SetAlarmCommand,
@@ -25,9 +27,9 @@ module.exports = {
   SetSwitchCommand,
   SetThermostatCommand,
   SetLockCommand,
-  SetSceneControllerCommand,
   SetWindowCoveringCommand,
   SetCourtesyCommand,
+  SetMediaCommand,
   OCRDocumentCommand,
   DiscoverUsersCommand,
   CheckInReservationCommand,
@@ -40,4 +42,6 @@ module.exports = {
   UpdateReservationCommand,
   UpdateUserCommand,
   GetMobileKeyCommand,
+  CreateImageUploadEndpointCommand,
+  UploadImageCommand,
 };

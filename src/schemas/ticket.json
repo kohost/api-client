@@ -18,7 +18,10 @@
           "id": {
             "type": "string"
           },
-          "user": {
+          "userId": {
+            "type": "string"
+          },
+          "userName": {
             "type": "string"
           },
           "timestamp": {
@@ -33,9 +36,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "media": {
+            "$ref": "https://api.kohost.io/schemas/v3/mediaFile.json"
           }
         },
-        "required": ["user", "id", "timestamp", "body"]
+        "required": ["userId", "id", "timestamp", "body"]
       }
     },
     "requester": {
@@ -56,17 +62,25 @@
         "type": "string"
       }
     },
+    "rating": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "ratingComment": {
+      "type": "string"
+    },
     "createdAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/date"
     },
     "updatedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/date"
     },
     "solvedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/date"
     },
     "closedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/date"
     }
   },
   "required": [

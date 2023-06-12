@@ -25,7 +25,7 @@
       "http": {
         "disableAuth": true,
         "method": "POST",
-        "path": "/auth/loginToken"
+        "path": "/auth/loginLink"
       }
     }
   ],
@@ -149,6 +149,15 @@
     }
   ],
   [
+    "ListUserSpaces",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/:id/spaces"
+      }
+    }
+  ],
+  [
     "UpsertSystemUser",
     {
       "http": false
@@ -164,6 +173,24 @@
     "SeedSuperAdminUsers",
     {
       "http": false
+    }
+  ],
+  [
+    "ListTeam",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/team"
+      }
+    }
+  ],
+  [
+    "DescribeMyAccessCredentials",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/me/accessCredentials"
+      }
     }
   ],
   [
@@ -194,6 +221,15 @@
     }
   ],
   [
+    "UpdateSpace",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/spaces/:id"
+      }
+    }
+  ],
+  [
     "CreateSpace",
     {
       "http": {
@@ -217,15 +253,6 @@
       "http": {
         "method": "DELETE",
         "path": "/spaces/:id"
-      }
-    }
-  ],
-  [
-    "UpdateSpace",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/spaceTypes/:id"
       }
     }
   ],
@@ -283,6 +310,15 @@
       "http": {
         "method": "GET",
         "path": "/spaceTypes"
+      }
+    }
+  ],
+  [
+    "UpdateSpaceType",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/spaceTypes/:id"
       }
     }
   ],
@@ -593,11 +629,11 @@
     }
   ],
   [
-    "GetMobileKey",
+    "DescribeLockCredential",
     {
       "http": {
         "method": "POST",
-        "path": "/rooms/:roomId/locks/:id/mobileKey"
+        "path": "/rooms/:roomId/locks/:id/credential"
       }
     }
   ],
@@ -863,6 +899,15 @@
     }
   ],
   [
+    "ListMyTickets",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/mine"
+      }
+    }
+  ],
+  [
     "DescribeTicket",
     {
       "http": {
@@ -877,15 +922,6 @@
       "http": {
         "method": "GET",
         "path": "/tickets"
-      }
-    }
-  ],
-  [
-    "ListMyTickets",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/tickets/mine"
       }
     }
   ],
@@ -914,6 +950,18 @@
         "method": "PUT",
         "path": "/tickets/:id/status"
       }
+    }
+  ],
+  [
+    "NotifyTicketUpdate",
+    {
+      "http": false
+    }
+  ],
+  [
+    "NotifyTicketCreated",
+    {
+      "http": false
     }
   ],
   [
@@ -1220,8 +1268,7 @@
       "http": {
         "method": "GET",
         "path": "/properties"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1230,8 +1277,7 @@
       "http": {
         "method": "POST",
         "path": "/properties"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1280,6 +1326,32 @@
     "BroadcastEvent",
     {
       "http": false
+    }
+  ],
+  [
+    "HandleMessageData",
+    {
+      "http": false,
+      "useAdminDb": true,
+      "allowPropertyDb": true
+    }
+  ],
+  [
+    "CreateImageUploadEndpoint",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/mediaFiles/imageUploadEndpoint"
+      }
+    }
+  ],
+  [
+    "DeleteMediaFile",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/mediaFiles/:id"
+      }
     }
   ]
 ]

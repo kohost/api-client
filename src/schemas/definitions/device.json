@@ -6,11 +6,12 @@
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "systemData": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData" 
     },
     "type": {
       "type": "string",
       "enum": [
+        "alarm",
         "dimmer",
         "switch",
         "motionSensor",
@@ -20,11 +21,15 @@
         "thermostat",
         "lock",
         "courtesy",
-        "sceneController",
-        "gateway"
+        "gateway",
+        "tv",
+        "dvr",
+        "appleTv",
+        "discPlayer",
+        "mediaPlayer",
+        "uncontrolledDevice"
       ]
     },
-
     "name": {
       "type": "string"
     },
@@ -51,11 +56,15 @@
           "softwareFailure",
           "hardwareFailureWithCode",
           "softwareFailureWithCode",
-          "motionDetection"
+          "motionDetection",
+          "airFilterNeedsCleaned",
+          "smokeDetected",
+          "outsideSafeTemperatureRange",
+          "outsideSafeHumidityRange"
         ]
       }
     },
-    "notification": {
+    "notification": { 
       "type": ["object", "null"],
       "properties": {
         "name": {
@@ -65,6 +74,9 @@
         "timestamp": {
           "type": "number",
           "minimum": 1655907956593
+        }, 
+        "description": {
+          "type":"string"
         }
       }
     },
@@ -75,8 +87,7 @@
     },
     "watts": {
       "type": "number",
-      "minimum" : 0,
-      "default" : 0
+      "minimum": 0
     }
   }
 }

@@ -2,11 +2,11 @@ const Command = require("./Command");
 const RequestError = require("../Errors/RequestError");
 
 class SendSMSCommand extends Command {
-  constructor({ body, to, from, eventData }) {
+  constructor({ id, body, to, from, ...rest }) {
     if (!body) throw new RequestError("sms body is required");
     if (!to) throw new RequestError("sms to is required");
     if (!from) throw new RequestError("sms from is required");
-    super({ body, to, from, eventData });
+    super({ id, body, to, from, ...rest });
   }
 
   get name() {

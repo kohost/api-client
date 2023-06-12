@@ -1,6 +1,7 @@
 // create the Room model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/room.json");
+const deviceSchema = require("../schemas/definitions/device.json");
 const Kohost = require("./kohost");
 const cloneDeep = require("lodash.clonedeep");
 
@@ -29,21 +30,18 @@ class Room extends Kohost {
   }
 
   static getDevicePath(type) {
-    const validTypes = [
-      "dimmer",
-      "switch",
-      "thermostat",
-      "lock",
-      "windowCovering",
-      "courtesy",
-      "camera",
-      "mediaSource",
-      "motionSensor",
-      "alarm",
-    ];
+    const validTypes = deviceSchema.definitions.type.enum;
     if (!validTypes.includes(type))
       throw new Error("Invalid device type:" + type);
     switch (type) {
+      case "tv":
+      case "dvr":
+      case "appleTv":
+      case "discPlayer":
+      case "mediaPlayer":
+      case "uncontrolledDevice":
+      case "mediaSource":
+        return "mediaSources";
       case "courtesy":
         return type;
       case "switch":

@@ -16,25 +16,16 @@
       "type": "string"
     },
     "type": {
-      "type": "string",
-      "enum": [
-        "dimmer",
-        "switch",
-        "motionSensor",
-        "thermostat",
-        "lock",
-        "camera",
-        "courtesy",
-        "mediaSource",
-        "alarm",
-        "windowCovering"
-      ]
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/type"
     },
     "driver": {
       "type": "string"
     },
     "deviceData": {
       "type": "object"
+    },
+    "ignore": {
+      "type": "boolean"
     }
   }
 }
