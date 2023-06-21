@@ -20,6 +20,9 @@
         "uncontrolledDevice"
       ]
     },
+    "name": {
+      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/name"
+    },
     "driver": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
     },
