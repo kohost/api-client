@@ -1196,6 +1196,33 @@
     }
   ],
   [
+    "DescribeReservationEarlyCheckInProducts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/:id/products/earlyCheckIn"
+      }
+    }
+  ],
+  [
+    "SellReservationEarlyCheckInProducts",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/products/earlyCheckIn"
+      }
+    }
+  ],
+  [
+    "DescribeReservationRoomUpgrades",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/products/roomUpgrades"
+      }
+    }
+  ],
+  [
     "OCRDocument",
     {
       "http": {
@@ -1286,8 +1313,7 @@
       "http": {
         "method": "PUT",
         "path": "/properties/:id"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1296,15 +1322,13 @@
       "http": {
         "method": "GET",
         "path": "/properties/:id"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
     "SeedProperties",
     {
-      "http": false,
-      "useAdminDb": true
+      "http": false
     }
   ],
   [
@@ -1352,6 +1376,30 @@
         "method": "DELETE",
         "path": "/mediaFiles/:id"
       }
+    }
+  ],
+  [
+    "UploadImage",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/mediaFiles/uploadImage"
+      }
+    }
+  ],
+  [
+    "DescribeProduct",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/products/:id"
+      }
+    }
+  ],
+  [
+    "BatchUpsertSystemProduct",
+    {
+      "http": false
     }
   ]
 ]
