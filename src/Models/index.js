@@ -26,6 +26,7 @@ const ShortLink = require("./shortLink");
 const EnergyReportShard = require("./energyReportShard");
 const EnergyReport = require("./energyReport");
 const SMSMessage = require("./smsMessage");
+const EmailMessage = require("./emailMessage");
 
 const Property = require("./property");
 const Organization = require("./organization");
@@ -60,5 +61,6 @@ module.exports = {
   EnergyReportShard,
   EnergyReport,
   SMSMessage,
+  EmailMessage,
   MediaFile,
 };

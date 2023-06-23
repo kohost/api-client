@@ -169,7 +169,15 @@
           "properties": {
             "payment": {},
             "identification": {},
-            "earlyCheckIn": {}
+            "earlyCheckIn": {
+              "properties": {
+                "dynamic": {
+                  "type": "boolean",
+                  "default": false
+                }
+              }
+            },
+            "roomUpgrades": {}
           }
         },
         "CheckOut": {},

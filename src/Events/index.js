@@ -19,8 +19,7 @@ const SystemProductUpdatedEvent = require("./SystemProductUpdatedEvent");
 const SystemReservationUpdatedEvent = require("./SystemReservationUpdatedEvent");
 
 const SMSEvent = require("./SMSEvent");
-const SMSSentEvent = require("./SMSSentEvent");
-const EmailSentEvent = require("./EmailSentEvent");
+const EmailEvent = require("./EmailEvent");
 const ShortLinkCreatedEvent = require("./ShortLinkCreatedEvent");
 
 const ApplicationInUseEvent = require("./ApplicationInUseEvent");
@@ -44,8 +43,7 @@ module.exports = {
   SystemProductUpdatedEvent,
   SystemReservationUpdatedEvent,
   SMSEvent,
-  SMSSentEvent,
-  EmailSentEvent,
+  EmailEvent,
   ShortLinkCreatedEvent,
   ApplicationInUseEvent,
   ApplicationOutOfUseEvent,

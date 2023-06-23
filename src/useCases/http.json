@@ -1205,7 +1205,7 @@
     }
   ],
   [
-    "SellReservationEarlyCheckInProducts",
+    "PurchaseReservationEarlyCheckInProducts",
     {
       "http": {
         "method": "POST",
@@ -1215,6 +1215,15 @@
   ],
   [
     "DescribeReservationRoomUpgrades",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/:id/products/roomUpgrades"
+      }
+    }
+  ],
+  [
+    "PurchaseReservationRoomUpgrades",
     {
       "http": {
         "method": "POST",

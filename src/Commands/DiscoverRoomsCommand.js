@@ -8,8 +8,17 @@ class DiscoverRoomsCommand extends Command {
     endDate,
     serviceStatus,
     housekeepingStatus,
+    ...rest
   }) {
-    super({ id, types, startDate, endDate, serviceStatus, housekeepingStatus });
+    super({
+      id,
+      types,
+      startDate,
+      endDate,
+      serviceStatus,
+      housekeepingStatus,
+      ...rest,
+    });
   }
 
   get name() {
