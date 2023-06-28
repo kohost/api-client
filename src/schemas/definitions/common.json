@@ -99,7 +99,9 @@
         "se",
         "sendgrid",
         "stay-n-touch",
-        "twilio"
+        "twilio",
+        "cloudflare-images",
+        "cloudflare-stream"
       ]
     }
   }
