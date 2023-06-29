@@ -79,6 +79,8 @@
         "aws-kinesis",  
         "butler",
         "crestron",
+        "dmp",
+        "dsc",
         "ecobee",
         "igor",
         "inncom",  

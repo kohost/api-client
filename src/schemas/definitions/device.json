@@ -60,7 +60,17 @@
           "airFilterNeedsCleaned",
           "smokeDetected",
           "outsideSafeTemperatureRange",
-          "outsideSafeHumidityRange"
+          "outsideSafeHumidityRange",
+          "systemTamper",
+          "systemTamperRestored",
+          "bellTrouble",
+          "bellTroubleRestored",
+          "fireTrouble",
+          "fireTroubleRestored",
+          "phoneTrouble",
+          "phoneTroubleRestored",
+          "zoneTamper",
+          "zoneTamperRestore"
         ]
       }
     },
