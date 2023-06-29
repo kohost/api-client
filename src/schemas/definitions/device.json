@@ -70,7 +70,8 @@
           "phoneTrouble",
           "phoneTroubleRestored",
           "zoneTamper",
-          "zoneTamperRestore"
+          "zoneTamperRestore",
+          "communicationTrouble"
         ]
       }
     },
