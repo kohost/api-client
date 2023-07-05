@@ -1,45 +1,55 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/smsMessage.json",
-  "title": "SMS Message",
+  "$id": "https://api.kohost.io/schemas/v3/emailMessage.json",
+  "title": "Email Message",
   "type": "object",
-  "required": ["to", "from", "body", "status"],
+  "required": ["to", "from", "status", "subject"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
     },
     "type": {
       "type": "string",
-      "default": "smsMessage"
+      "default": "emailMessage"
     },
     "to": {
       "type": "string",
-      "pattern": "^\\+[0-9]{1,14}$"
+      "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
     },
     "from": {
       "type": "string",
-      "pattern": "^\\+[0-9]{1,14}$"
+      "pattern": ".*<[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+>.*",
+      "description": "Must be in the format of 'Sender <email@example.com>"
     },
-    "media": {
-      "type": "string",
-      "format": "uri"
+    "subject": {
+      "type": "string"
     },
     "status": {
       "type": "string",
       "enum": [
         "queued",
-        "accepted",
         "sending",
         "sent",
-        "failed",
+        "deferred",
         "delivered",
         "undelivered",
+        "bounced",
+        "blocked",
         "receiving",
         "received",
-        "read"
+        "opened",
+        "clicked",
+        "unsubscribed",
+        "spamReport"
       ]
     },
-    "body": {
+    "statusMessage": {
+      "type": "string"
+    },
+    "html": {
+      "type": "string"
+    },
+    "text": {
       "type": "string"
     },
     "driver": {

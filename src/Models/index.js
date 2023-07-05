@@ -28,6 +28,7 @@ const EnergyReport = require("./energyReport");
 const EnergyReportProperty = require("./energyReportProperty");
 
 const SMSMessage = require("./smsMessage");
+const EmailMessage = require("./emailMessage");
 
 const Property = require("./property");
 const Organization = require("./organization");
@@ -63,5 +64,6 @@ module.exports = {
   EnergyReport,
   EnergyReportProperty,
   SMSMessage,
+  EmailMessage,
   MediaFile,
 };

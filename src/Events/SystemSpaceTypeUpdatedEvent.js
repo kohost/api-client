@@ -10,10 +10,8 @@ class SystemSpaceTypeUpdatedEvent extends Event {
   }
 
   get routingKey() {
-
-    return `spaceType.${this.keyId}.updated`; 
+    return `spaceType.${this.keyId}.updated`;
   }
 }
 
-module.exports = SystemSpaceTypeUpdatedEvent; 
- 
+module.exports = SystemSpaceTypeUpdatedEvent;

@@ -84,13 +84,14 @@
         "properties": {
           "date": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "amount": {
             "type": "number"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": ["service", "product"]
           }
         }
       }

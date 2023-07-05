@@ -165,7 +165,21 @@
       "type": "object",
       "properties": {
         "RoomControl": {},
-        "CheckIn": {},
+        "CheckIn": {
+          "properties": {
+            "payment": {},
+            "identification": {},
+            "earlyCheckIn": {
+              "properties": {
+                "dynamic": {
+                  "type": "boolean",
+                  "default": false
+                }
+              }
+            },
+            "roomUpgrades": {}
+          }
+        },
         "CheckOut": {},
         "Concierge": {},
         "DigitalKey": {

@@ -3,7 +3,7 @@
   "$id": "https://api.kohost.io/schemas/v3/product.json",
   "title": "Product",
   "type": "object",
-  "required": ["name", "price", "currency", "driver"],
+  "required": ["name", "price", "driver"],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
@@ -23,14 +23,11 @@
     "price": {
       "type": "number"
     },
-    "currency": {
-      "type": "string",
-      "description": "ISO 4217 format",
-      "minLength": 3,
-      "maxLength": 3
-    },
     "image": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/file"
+    },
+    "category": {
+      "type": "string"
     },
     "imageUrl": {
       "format": "uri",

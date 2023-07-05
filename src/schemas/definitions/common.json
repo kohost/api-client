@@ -91,6 +91,7 @@
         "lg",
         "lirc",
         "mews",
+        "paxton",
         "pelican-wireless",
         "rebrandly",
         "salto",
@@ -98,7 +99,10 @@
         "se",
         "sendgrid",
         "stay-n-touch",
-        "twilio"
+        "twilio",
+        "cloudflare-images",
+        "cloudflare-stream",
+        "insperia-privacy"
       ]
     }
   }
