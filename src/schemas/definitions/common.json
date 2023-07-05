@@ -101,7 +101,8 @@
         "stay-n-touch",
         "twilio",
         "cloudflare-images",
-        "cloudflare-stream"
+        "cloudflare-stream",
+        "insperia-privacy"
       ]
     }
   }
