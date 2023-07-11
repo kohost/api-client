@@ -189,6 +189,10 @@
               "type": "string",
               "enum": ["salto"]
             },
+            "systemOnline": {
+              "type": "boolean",
+              "default": false
+            },
             "branding": {
               "type": "object",
               "properties": {
