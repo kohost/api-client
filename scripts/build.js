@@ -164,14 +164,14 @@ async function main() {
     treeShaking: false,
     keepNames: true,
     allowOverwrite: true,
-    minify: false,
+    minify: true,
   });
 
   const build2 = await esbuild.context({
     entryPoints: entryPoints.filter((entry) => entry.out !== "AMQPClient"),
     bundle: true,
     sourcemap: true,
-    minify: false,
+    minify: true,
     keepNames: true,
     format: "esm",
     target: "esnext",
@@ -184,7 +184,7 @@ async function main() {
     entryPoints: [path.resolve(__dirname, "../src/Client/")],
     bundle: true,
     sourcemap: true,
-    minify: false,
+    minify: true,
     format: "esm",
     target: "esnext",
     outdir: "dist/esm",
@@ -214,7 +214,7 @@ async function main() {
     ],
     bundle: true,
     sourcemap: true,
-    minify: false,
+    minify: true,
     format: "esm",
     target: "esnext",
     outdir: "dist/esm",
@@ -247,17 +247,23 @@ async function main() {
 
   fs.writeFileSync(
     path.resolve(__dirname, "../dist/esm/index.js"),
-    `import Client from "./Client";
-    import SocketIoClient from "./SocketIoClient";
-    import Commands from "./Commands";
-    import Events from "./Events";
-    import Models from "./Models";
-    import Errors from "./Errors";
-    import defs from "./defs";
-    import utils from "./utils";
-    
-    export
-     { Client, SocketIoClient, Commands, Events, Models, Errors, defs, utils };
+    `import ClientBundle from "./Client";
+    import SocketIoClientBundle from "./SocketIoClient";
+    import CommandsBundle from "./Commands";
+    import EventsBundle from "./Events";
+    import ModelsBundle from "./Models";
+    import ErrorsBundle from "./Errors";
+    import defsBundle from "./defs";
+    import utilsBundle from "./utils";
+
+    export const Client = ClientBundle;
+    export const SocketIoClient = SocketIoClientBundle;
+    export const Commands = CommandsBundle;
+    export const Events = EventsBundle;
+    export const Models = ModelsBundle;
+    export const Errors = ErrorsBundle;
+    export const defs = defsBundle;
+    export const utils = utilsBundle;
     `
   );
   const watch = process.argv.includes("--watch");
