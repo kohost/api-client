@@ -20,9 +20,8 @@
     "description": {
       "type": "string"
     },
-    "imageUrl": {
-      "format": "uri",
-      "pattern": "^https?://"
+    "image": {
+      "$ref": "https://api.kohost.io/schemas/v3/mediaFile.json"
     },
     "systemData": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"

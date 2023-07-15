@@ -159,19 +159,19 @@ async function main() {
     bundle: true,
     platform: "node",
     packages: "external",
-    target: ["es2022"],
+    target: ["esnext"],
     outdir: "dist/cjs",
     treeShaking: false,
     keepNames: true,
     allowOverwrite: true,
-    minify: true,
+    minify: false,
   });
 
   const build2 = await esbuild.context({
     entryPoints: entryPoints.filter((entry) => entry.out !== "AMQPClient"),
     bundle: true,
     sourcemap: true,
-    minify: true,
+    minify: false,
     keepNames: true,
     format: "esm",
     target: "esnext",
@@ -184,7 +184,7 @@ async function main() {
     entryPoints: [path.resolve(__dirname, "../src/Client/")],
     bundle: true,
     sourcemap: true,
-    minify: true,
+    minify: false,
     format: "esm",
     target: "esnext",
     outdir: "dist/esm",
@@ -214,7 +214,7 @@ async function main() {
     ],
     bundle: true,
     sourcemap: true,
-    minify: true,
+    minify: false,
     format: "esm",
     target: "esnext",
     outdir: "dist/esm",
@@ -225,7 +225,7 @@ async function main() {
 
   const build6 = await esbuild.context({
     entryPoints: [path.resolve(__dirname, "../src/index.js")],
-    bundle: false,
+    bundle: true,
     platform: "node",
     packages: "external",
     target: ["es2022"],
@@ -236,7 +236,7 @@ async function main() {
 
   const build7 = await esbuild.context({
     entryPoints: [path.resolve(__dirname, "../src/index.js")],
-    bundle: false,
+    bundle: true,
     platform: "node",
     packages: "external",
     target: ["es2022"],
