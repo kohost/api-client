@@ -1,3 +1,4 @@
+const Reservation = require("./reservation");
 const MediaFile = require("./mediaFile");
 const Switch = require("./switch");
 const Alarm = require("./alarm");
@@ -13,7 +14,7 @@ const Camera = require("./camera");
 const MotionSensor = require("./motionSensor");
 const MediaSource = require("./mediaSource");
 const Room = require("./room");
-const Reservation = require("./reservation");
+
 const Space = require("./space");
 const SpaceType = require("./spaceType");
 

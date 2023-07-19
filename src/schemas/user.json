@@ -39,7 +39,7 @@
       "type": "string"
     },
     "photo": {
-      "type": "string"
+      "$ref": "https://api.kohost.io/schemas/v3/mediaFile.json#"
     },
     "jobTitle": {
       "type": "string"
@@ -126,6 +126,15 @@
           "type": ["number", "null"]
         }
       }
+    },
+    "reservations": {
+      "type": "array",
+      "items": {
+        "$ref": "https://api.kohost.io/schemas/v3/reservation.json"
+      }
+    },
+    "spaceName": {
+      "type": "string"
     },
     "createdAt": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"

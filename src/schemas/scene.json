@@ -75,12 +75,15 @@
               },
               "fanMode": {
                 "$ref": "https://api.kohost.io/schemas/v3/thermostat.json#/properties/fanMode"
+              },
+              "setpointDelta": {
+                "type": "number"
               }
             }
           },
           "default": []
         },
-        "media": {
+        "mediaSources": {
           "type": "array",
           "items": {
             "type": "object",
