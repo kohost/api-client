@@ -23,6 +23,9 @@
     "driver": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
     },
+    "offline": {
+      "type": "boolean"
+    },
     "supportedStates": {
       "type": "array",
       "uniqueItems": true,
