@@ -11,7 +11,7 @@ class Scene extends Kohost {
     super(data);
   }
 
-  static createSceneCommandPayload(room, scene) {
+  static createSceneCommandPayload(room, scene, restore) {
     const commandsByDriver = [];
 
     const sceneDevices = scene?.devices || {};
@@ -21,6 +21,9 @@ class Scene extends Kohost {
       const sceneData = sceneDevices[deviceType];
 
       const roomDevices = room[deviceType];
+
+      if (sceneId === "1" && restore && deviceType !== "thermostats") continue;
+
       for (const data of sceneData) {
         const { id, ...deviceProps } = data;
         if (id === "*") {
@@ -38,10 +41,18 @@ class Scene extends Kohost {
                 const currentSetpoint = setpoints[currentMode];
 
                 if (currentMode === "heat") {
-                  const setpointValue = Math.min(
+                  let setpointValue = Math.min(
                     currentSetpoint.min,
                     currentSetpoint.value - delta
                   );
+
+                  if (restore) {
+                    setpointValue = Math.min(
+                      currentSetpoint.max,
+                      currentSetpoint.value + delta
+                    );
+                  }
+
                   deviceCmd.setpoints = {
                     heat: {
                       value: setpointValue,
@@ -49,10 +60,17 @@ class Scene extends Kohost {
                   };
                 }
                 if (currentMode === "cool") {
-                  const setpointValue = Math.max(
+                  let setpointValue = Math.max(
                     currentSetpoint.max,
                     currentSetpoint.value + delta
                   );
+
+                  if (restore) {
+                    setpointValue = Math.max(
+                      currentSetpoint.min,
+                      currentSetpoint.value - delta
+                    );
+                  }
                   deviceCmd.setpoints = {
                     cool: {
                       value: setpointValue,
@@ -62,15 +80,27 @@ class Scene extends Kohost {
 
                 if (currentMode === "auto") {
                   if (!currentSetpoint && setpoints.cool && setpoints.heat) {
-                    const heatSetpoint = Math.min(
+                    let heatSetpoint = Math.min(
                       setpoints.heat.min,
                       setpoints.heat.value - delta
                     );
 
-                    const coolSetpoint = Math.max(
+                    let coolSetpoint = Math.max(
                       setpoints.cool.max,
                       setpoints.cool.value + delta
                     );
+
+                    if (restore) {
+                      heatSetpoint = Math.min(
+                        setpoints.heat.max,
+                        setpoints.heat.value + delta
+                      );
+
+                      coolSetpoint = Math.max(
+                        setpoints.cool.min,
+                        setpoints.cool.value - delta
+                      );
+                    }
 
                     // make sure the delta is not less than the minAutoDelta
                     if (Math.abs(heatSetpoint - coolSetpoint) < minAutoDelta) {
