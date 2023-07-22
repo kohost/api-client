@@ -2,17 +2,22 @@
 // A group of rooms -> rooms could become a space later...
 const schemas = require("../utils/schema");
 const schema = require("../schemas/space.json");
-const Kohost = require("./kohost");
-const cloneDeep = require("lodash.clonedeep");
+const Kohost = require("./Kohost");
 
-const Room = require("./room");
+const Room = require("./Room");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Space extends Kohost {
-  constructor(data) {
-    const spaceData = mapSpaceData(data);
+  /**
+   * @typedef {import("../schemas/SpaceSchema").Space} SpaceSchema
+   * Create a Dimmer instance.
+   * @constructor
+   * @param {SpaceSchema} space - The dimmer object of type Dimmer.
+   */
+  constructor(space) {
+    const spaceData = mapSpaceData(space);
     super(spaceData);
   }
 
@@ -78,7 +83,7 @@ Object.defineProperty(Space, "validProperties", {
 });
 
 function mapSpaceData(data) {
-  const spaceData = cloneDeep(data);
+  const spaceData = structuredClone(data);
   if (spaceData.rooms?.length) {
     spaceData.rooms.map((room) => {
       if (typeof room === "string") return room;

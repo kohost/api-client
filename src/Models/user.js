@@ -2,9 +2,9 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/user.json");
 const paymentSchema = require("../schemas/payment.json");
-const Kohost = require("./kohost");
-const MediaFile = require("./mediaFile");
-const Reservation = require("./reservation");
+const Kohost = require("./Kohost");
+const MediaFile = require("./MediaFile");
+const Reservation = require("./Reservation");
 
 const { nanoid } = require("nanoid/async");
 

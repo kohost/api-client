@@ -1,15 +1,15 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/reservation.json",
+  "$id": "reservation.json",
   "title": "Reservation",
   "type": "object",
   "required": ["type", "status", "checkInDateTime", "checkOutDateTime"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "driver": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
+      "$ref": "definitions.json#/definitions/driver"
     },
     "primaryGuest": {
       "type": "string"
@@ -109,10 +109,10 @@
       "type": "string"
     },
     "systemData": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"
+      "$ref": "definitions.json#/definitions/systemData"
     },
     "metadata": {
-      "ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/metadata"
+      "ref": "definitions.json#/definitions/metadata"
     }
   }
 }

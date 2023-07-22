@@ -1,7 +1,7 @@
 // Create the Lock Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/lock.json");
-const Kohost = require("./kohost");
+const Kohost = require("./Kohost");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);

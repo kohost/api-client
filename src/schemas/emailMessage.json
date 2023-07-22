@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/emailMessage.json",
+  "$id": "emailMessage.json",
   "title": "Email Message",
   "type": "object",
   "required": ["to", "from", "status", "subject"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "type": {
       "type": "string",
@@ -59,13 +59,13 @@
       "type": "object"
     },
     "createdAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/date"
+      "$ref": "definitions.json#/definitions/date"
     },
     "updatedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/date"
+      "$ref": "definitions.json#/definitions/date"
     },
     "systemData": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"
+      "$ref": "definitions.json#/definitions/systemData"
     }
   }
 }

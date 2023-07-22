@@ -13,10 +13,10 @@ class Kohost {
 
     const isNew = data?.id ? false : true;
 
-    this._setId(data);
-    this._validate(data);
-    this._setProperties(data);
-    this._setTimestamps(isNew);
+    this.#_setId(data);
+    this.#_validate(data);
+    this.#_setProperties(data);
+    this.#_setTimestamps(isNew);
   }
 
   static get validProperties() {
@@ -27,7 +27,7 @@ class Kohost {
     return Object.keys(this.validator.schema.properties);
   }
 
-  _setId(data) {
+  #_setId(data) {
     if (data._id) data.id = data._id;
     if (!data.id) {
       data.id = this.constructor.generateId();
@@ -35,13 +35,13 @@ class Kohost {
     delete data._id;
   }
 
-  _setProperties(data) {
+  #_setProperties(data) {
     this.schemaProperties.forEach((key) => {
       if (data[key] !== undefined) this[key] = data[key];
     });
   }
 
-  _setTimestamps(isNew) {
+  #_setTimestamps(isNew) {
     const now = new Date();
     if (
       isNew &&
@@ -52,7 +52,7 @@ class Kohost {
     }
   }
 
-  _validate(data) {
+  #_validate(data) {
     const valid = this.validator(data);
     if (!valid) {
       throw new ValidationError(`Invalid ${this.constructor.name}`, {

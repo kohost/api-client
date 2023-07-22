@@ -1,6 +1,6 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/scene.json");
-const Kohost = require("./kohost");
+const Kohost = require("./Kohost");
 const SetSceneCommand = require("../Commands/SetSceneCommand");
 
 schemas.add(schema);

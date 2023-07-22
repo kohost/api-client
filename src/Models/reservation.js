@@ -1,6 +1,6 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/reservation.json");
-const Kohost = require("./kohost");
+const Kohost = require("./Kohost");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
@@ -19,7 +19,7 @@ class Reservation extends Kohost {
   }
 
   range(tz) {
-    const start = new Date(this.checkInDateTime); 
+    const start = new Date(this.checkInDateTime);
     const end = new Date(this.checkOutDateTime);
 
     // output Dec 19 if same day in timezone

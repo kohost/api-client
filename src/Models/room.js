@@ -1,24 +1,24 @@
 // create the Room model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/room.json");
-const deviceSchema = require("../schemas/definitions/device.json");
-const Kohost = require("./kohost");
+const deviceSchema = require("../schemas/definitions.json");
+const Kohost = require("./Kohost");
 const cloneDeep = require("lodash.clonedeep");
 
 // device dependencies
-const Switch = require("./switch");
-const Dimmer = require("./dimmer");
-const Thermostat = require("./thermostat");
-const Lock = require("./lock");
-const WindowCovering = require("./windowCovering");
-const Courtesy = require("./courtesy");
-const Camera = require("./camera");
-const Alarm = require("./alarm");
-const MediaSource = require("./mediaSource");
-const MotionSensor = require("./motionSensor");
+const Switch = require("./Switch");
+const Dimmer = require("./Dimmer");
+const Thermostat = require("./Thermostat");
+const Lock = require("./Lock");
+const WindowCovering = require("./WindowCovering");
+const Courtesy = require("./Courtesy");
+const Camera = require("./Camera");
+const Alarm = require("./Alarm");
+const MediaSource = require("./MediaSource");
+const MotionSensor = require("./MotionSensor");
 
 // other dependencies
-const Scene = require("./scene");
+const Scene = require("./Scene");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);

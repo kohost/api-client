@@ -1,14 +1,26 @@
 // Create the Dimmer Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/dimmer.json");
-const Kohost = require("./kohost");
+const Kohost = require("./Kohost");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
+/**
+ * Represents a Dimmer device.
+ * @class
+ * @extends Kohost
+ */
+
 class Dimmer extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/DimmerSchema").Dimmer} DimmerType
+   * Create a Dimmer instance.
+   * @constructor
+   * @param {DimmerType} dimmer - The dimmer object of type Dimmer.
+   */
+  constructor(dimmer) {
+    super(dimmer);
   }
 
   static getActionDelta(old, _new) {

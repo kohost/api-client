@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/admin/organization.json",
+  "$id": "admin/organization.json",
   "title": "Organization",
   "type": "object",
   "description": "An organization is a group or entity that subscribes to Kohost software.",
   "required": ["accountNumber", "name"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "accountNumber": {
       "type": "number",
@@ -27,10 +27,10 @@
       "additionalProperties": true
     },
     "createdAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "definitions.json#/definitions/createdAt"
     },
     "updatedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/updatedAt"
+      "$ref": "definitions.json#/definitions/updatedAt"
     }
   }
 }

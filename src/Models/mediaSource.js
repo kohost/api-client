@@ -1,7 +1,7 @@
 // create the Media Source Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/mediaSource.json");
-const Kohost = require("./kohost");
+const Kohost = require("./Kohost");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);

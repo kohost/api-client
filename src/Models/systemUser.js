@@ -1,7 +1,7 @@
 // Create the User Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/systemUser.json");
-const Kohost = require("./kohost");
+const Kohost = require("./Kohost");
 
 schemas.add(schema);
 

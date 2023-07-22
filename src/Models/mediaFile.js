@@ -1,6 +1,6 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/mediaFile.json");
-const Kohost = require("./kohost");
+const Kohost = require("./Kohost");
 const { RequestError } = require("../Errors");
 
 schemas.add(schema);

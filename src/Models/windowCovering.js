@@ -1,7 +1,7 @@
 // Create the WindowCovering Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/windowCovering.json");
-const Kohost = require("./kohost");
+const Kohost = require("./Kohost");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
@@ -11,7 +11,7 @@ class WindowCovering extends Kohost {
     super(data);
   }
 
-  static getActionDelta(old, _new) {  
+  static getActionDelta(old, _new) {
     const delta = {};
     for (const action in _new) {
       if (this.actionProperties?.includes(action)) {

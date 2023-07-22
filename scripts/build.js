@@ -1,6 +1,15 @@
 const esbuild = require("esbuild");
 const path = require("node:path");
+const { promisify } = require("node:util");
 const fs = require("node:fs");
+
+const readdirAsync = promisify(fs.readdir);
+const statAsync = promisify(fs.stat);
+const copyFileAsync = promisify(fs.copyFile);
+const mkdirAsync = promisify(fs.mkdir);
+
+const { compileFromFile } = require("json-schema-to-typescript");
+
 const useCases = require("../src/useCases/http.json");
 const useCaseMap = new Map(useCases);
 
@@ -10,6 +19,70 @@ if (!fs.existsSync(path.resolve(__dirname, "../dist/cjs"))) {
 
 if (!fs.existsSync(path.resolve(__dirname, "../dist/esm"))) {
   fs.mkdirSync(path.resolve(__dirname, "../dist/esm"), { recursive: true });
+}
+
+if (!fs.existsSync(path.resolve(__dirname, "../dist/schemas"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist/schemas"), { recursive: true });
+}
+
+async function copyFilesToDistCjs(srcDir, distCjsDir, ignoredFolders = []) {
+  try {
+    // Create the dist/cjs directory if it doesn't exist
+    if (!fs.existsSync(distCjsDir)) {
+      await mkdirAsync(distCjsDir, { recursive: true });
+    }
+
+    // Read the contents of the src directory
+    const files = await readdirAsync(srcDir);
+
+    // Loop through the files
+    for (const file of files) {
+      const srcFilePath = path.join(srcDir, file);
+      const distCjsFilePath = path.join(distCjsDir, file);
+
+      // Check if the file is a directory
+      const isDirectory = (await statAsync(srcFilePath)).isDirectory();
+
+      if (isDirectory) {
+        // If it's a directory and not in the ignoredFolders list, copy the directory
+        if (!ignoredFolders.includes(file)) {
+          await copyFilesToDistCjs(
+            srcFilePath,
+            distCjsFilePath,
+            ignoredFolders
+          );
+        }
+      } else {
+        // If it's a file, copy the file
+        await copyFileAsync(srcFilePath, distCjsFilePath);
+      }
+    }
+  } catch (err) {
+    console.error("Error while copying files:", err);
+  }
+}
+
+function getAllFilesInDirectory(dirPath) {
+  const files = [];
+
+  function readFilesRecursively(directory) {
+    const entries = fs.readdirSync(directory, { withFileTypes: true });
+
+    entries.forEach((entry) => {
+      const entryPath = path.join(directory, entry.name);
+
+      if (entry.isDirectory()) {
+        readFilesRecursively(entryPath); // Recursively read subdirectories
+      } else if (entry.isFile() && entry.name.endsWith(".json")) {
+        const relativePath = path.relative(dirPath, entryPath);
+        files.push(relativePath); // Add relative file path to the files array if it's a JSON file
+      }
+    });
+  }
+
+  readFilesRecursively(dirPath);
+
+  return files;
 }
 
 let useCasePlugin = {
@@ -154,6 +227,68 @@ const entryPoints = [
 ];
 
 async function main() {
+  let schemas = getAllFilesInDirectory(
+    path.resolve(__dirname, "../src/schemas")
+  );
+
+  // compile each schema to a typescript interface
+  for (const schema of schemas) {
+    const schemaPath = path.resolve(__dirname, `../src/schemas/${schema}`);
+    compileFromFile(schemaPath, {
+      cwd: path.resolve(__dirname, "../src/schemas"),
+    })
+      .then((ts) => {
+        // replace .json with .d.ts and remove any parent directory
+        const typeName = schema.replace(".json", "").split("/").pop();
+        const typeNameUpper =
+          typeName.charAt(0).toUpperCase() + typeName.slice(1);
+        fs.writeFileSync(
+          path.resolve(__dirname, `../dist/cjs/models/${typeNameUpper}.d.ts`),
+          ts
+        );
+      })
+      .catch((e) => {
+        console.log(schema, e);
+      });
+  }
+
+  const modelsDir = "../src/Models";
+
+  const modelFiles = fs
+    .readdirSync(path.resolve(__dirname, modelsDir))
+    .filter((f) => f.endsWith(".js") && f !== "index.js");
+
+  modelFiles.forEach((file) => {
+    const fileUpperFirst = file.charAt(0).toUpperCase() + file.slice(1);
+    esbuild
+      .build({
+        entryPoints: [path.resolve(__dirname, modelsDir, file)],
+        outfile: `dist/cjs/odels/${fileUpperFirst}`,
+        format: "cjs",
+        bundle: false,
+        treeShaking: false,
+        keepNames: true,
+        allowOverwrite: true,
+        minify: false,
+        platform: "node",
+        packages: "external",
+        target: ["esnext"],
+      })
+      .catch(() => process.exit(1));
+  });
+
+  // Create an index.js that exports all models
+  const indexContent = modelFiles
+    .map((file) => {
+      const modelName = file.replace(".js", "");
+      const modelUpperFirst =
+        modelName.charAt(0).toUpperCase() + modelName.slice(1) + "Schema";
+      return `const ${modelUpperFirst} = require('./${modelUpperFirst}');\nexports.${modelUpperFirst} = ${modelUpperFirst};`;
+    })
+    .join("\n");
+
+  fs.writeFileSync("./dist/cjs/models/index.js", indexContent);
+
   const build1 = await esbuild.context({
     entryPoints: entryPoints,
     bundle: true,
@@ -303,4 +438,107 @@ async function main() {
   }
 }
 
-main();
+async function main2() {
+  const srcFolder = path.resolve(__dirname, "../src");
+  const distCjsFolder = path.resolve(__dirname, "../dist/cjs");
+  copyFilesToDistCjs(srcFolder, distCjsFolder, ["useCases", "Client"]);
+
+  let schemas = getAllFilesInDirectory(
+    path.resolve(__dirname, "../src/schemas")
+  );
+
+  // compile each schema to a typescript interface
+  for (const schema of schemas) {
+    const schemaPath = path.resolve(__dirname, `../src/schemas/${schema}`);
+    compileFromFile(schemaPath, {
+      cwd: path.resolve(__dirname, "../src/schemas"),
+    })
+      .then((ts) => {
+        // replace .json with .d.ts and remove any parent directory
+        const typeName = schema.replace(".json", "").split("/").pop();
+        const typeNameUpper =
+          typeName.charAt(0).toUpperCase() + typeName.slice(1) + "Schema";
+        fs.writeFileSync(
+          path.resolve(__dirname, `../dist/cjs/schemas/${typeNameUpper}.d.ts`),
+          ts
+        );
+      })
+      .catch((e) => {
+        console.log(schema, e);
+      });
+  }
+
+  const ESMBuild = await esbuild.context({
+    entryPoints: entryPoints.filter((entry) => entry.out !== "AMQPClient"),
+    bundle: true,
+    sourcemap: true,
+    minify: false,
+    keepNames: true,
+    format: "esm",
+    target: "esnext",
+    outdir: "dist/esm",
+    define: { global: "window" },
+  });
+
+  const HttpClientESMBuild = await esbuild.context({
+    plugins: [useCasePlugin],
+    entryPoints: [path.resolve(__dirname, "../src/Client/")],
+    bundle: true,
+    sourcemap: true,
+    minify: false,
+    format: "esm",
+    target: "esnext",
+    outdir: "dist/esm",
+    keepNames: true,
+    define: { global: "window" },
+  });
+
+  const HttpClientCJSBuild = await esbuild.context({
+    plugins: [useCasePlugin],
+    entryPoints: [
+      { in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
+    ],
+    bundle: true,
+    platform: "node",
+    target: ["es2022"],
+    format: "cjs",
+    outfile: "dist/cjs/Client/index.js",
+    packages: "external",
+    keepNames: true,
+    allowOverwrite: true,
+  });
+
+  await HttpClientESMBuild.rebuild();
+  await HttpClientCJSBuild.rebuild();
+  await ESMBuild.rebuild();
+
+  fs.writeFileSync(
+    path.resolve(__dirname, "../dist/esm/index.js"),
+    `import ClientBundle from "./Client";
+    import SocketIoClientBundle from "./SocketIoClient";
+    import CommandsBundle from "./Commands";
+    import EventsBundle from "./Events";
+    import ModelsBundle from "./Models";
+    import ErrorsBundle from "./Errors";
+    import defsBundle from "./defs";
+    import utilsBundle from "./utils";
+
+    export const Client = ClientBundle;
+    export const SocketIoClient = SocketIoClientBundle;
+    export const Commands = CommandsBundle;
+    export const Events = EventsBundle;
+    export const Models = ModelsBundle;
+    export const Errors = ErrorsBundle;
+    export const defs = defsBundle;
+    export const utils = utilsBundle;
+    `
+  );
+
+  HttpClientESMBuild.dispose();
+  HttpClientCJSBuild.dispose();
+  ESMBuild.dispose();
+}
+
+main2();
+
+//main();

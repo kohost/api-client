@@ -1,7 +1,7 @@
 // create the Motion Sensor Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/motionSensor.json");
-const Kohost = require("./kohost");
+const Kohost = require("./Kohost");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);

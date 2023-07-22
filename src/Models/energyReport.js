@@ -1,7 +1,7 @@
 // create the energyReportDaily Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/energyReport.json");
-const Kohost = require("./kohost");
+const Kohost = require("./Kohost");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);

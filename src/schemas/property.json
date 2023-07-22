@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/admin/property.json",
+  "$id": "admin/property.json",
   "title": "Property",
   "type": "object",
   "description": "A property is a physical asset or building",
   "required": ["id", "name", "type", "hostname", "organization"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "name": {
       "type": "string"

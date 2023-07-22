@@ -1,8 +1,8 @@
 // Create the User Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/ticket.json");
-const Kohost = require("./kohost");
-const MediaFile = require("./mediaFile");
+const Kohost = require("./Kohost");
+const MediaFile = require("./MediaFile");
 
 const sortBy = require("lodash.sortby");
 const findLast = require("lodash.findlast");
