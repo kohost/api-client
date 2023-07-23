@@ -27,13 +27,13 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "origin": {
+        "iframe": {
           "type": ["string", "null"]
         },
-        "local": {
+        "hls": {
           "type": ["string", "null"]
         },
-        "remote": {
+        "webRTC": {
           "type": ["string", "null"]
         }
       }

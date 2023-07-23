@@ -3,6 +3,8 @@ const schemas = require("../utils/schema");
 const schema = require("../schemas/user.json");
 const paymentSchema = require("../schemas/payment.json");
 const Kohost = require("./kohost");
+const MediaFile = require("./mediaFile");
+const Reservation = require("./reservation");
 
 const { nanoid } = require("nanoid/async");
 
@@ -13,6 +15,9 @@ const validator = schemas.compile(schema);
 
 class User extends Kohost {
   constructor(data) {
+    if (data.photo) data.photo = new MediaFile(data.photo);
+    if (data.reservations)
+      data.reservations = data.reservations.map((res) => new Reservation(res));
     super(data);
   }
 

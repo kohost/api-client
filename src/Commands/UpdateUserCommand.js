@@ -12,6 +12,7 @@ class UpdateUserCommand extends Command {
     nationality,
     file,
     payment,
+    ...rest
   }) {
     if (!id) throw new RequestError("document type is required");
     super({
@@ -24,6 +25,7 @@ class UpdateUserCommand extends Command {
       nationality,
       file,
       payment,
+      ...rest,
     });
   }
 

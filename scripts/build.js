@@ -159,7 +159,7 @@ async function main() {
     bundle: true,
     platform: "node",
     packages: "external",
-    target: ["es2022"],
+    target: ["esnext"],
     outdir: "dist/cjs",
     treeShaking: false,
     keepNames: true,
@@ -225,7 +225,7 @@ async function main() {
 
   const build6 = await esbuild.context({
     entryPoints: [path.resolve(__dirname, "../src/index.js")],
-    bundle: false,
+    bundle: true,
     platform: "node",
     packages: "external",
     target: ["es2022"],
@@ -236,7 +236,7 @@ async function main() {
 
   const build7 = await esbuild.context({
     entryPoints: [path.resolve(__dirname, "../src/index.js")],
-    bundle: false,
+    bundle: true,
     platform: "node",
     packages: "external",
     target: ["es2022"],
@@ -247,17 +247,23 @@ async function main() {
 
   fs.writeFileSync(
     path.resolve(__dirname, "../dist/esm/index.js"),
-    `import Client from "./Client";
-    import SocketIoClient from "./SocketIoClient";
-    import Commands from "./Commands";
-    import Events from "./Events";
-    import Models from "./Models";
-    import Errors from "./Errors";
-    import defs from "./defs";
-    import utils from "./utils";
-    
-    export
-     { Client, SocketIoClient, Commands, Events, Models, Errors, defs, utils };
+    `import ClientBundle from "./Client";
+    import SocketIoClientBundle from "./SocketIoClient";
+    import CommandsBundle from "./Commands";
+    import EventsBundle from "./Events";
+    import ModelsBundle from "./Models";
+    import ErrorsBundle from "./Errors";
+    import defsBundle from "./defs";
+    import utilsBundle from "./utils";
+
+    export const Client = ClientBundle;
+    export const SocketIoClient = SocketIoClientBundle;
+    export const Commands = CommandsBundle;
+    export const Events = EventsBundle;
+    export const Models = ModelsBundle;
+    export const Errors = ErrorsBundle;
+    export const defs = defsBundle;
+    export const utils = utilsBundle;
     `
   );
   const watch = process.argv.includes("--watch");

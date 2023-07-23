@@ -1,3 +1,5 @@
+const Reservation = require("./reservation");
+const MediaFile = require("./mediaFile");
 const Switch = require("./switch");
 const Alarm = require("./alarm");
 const Dimmer = require("./dimmer");
@@ -12,10 +14,10 @@ const Camera = require("./camera");
 const MotionSensor = require("./motionSensor");
 const MediaSource = require("./mediaSource");
 const Room = require("./room");
-const Reservation = require("./reservation");
+
 const Space = require("./space");
 const SpaceType = require("./spaceType");
-const MediaFile = require("./mediaFile");
+
 const Ticket = require("./ticket");
 const Scene = require("./scene");
 const Gateway = require("./gateway");
@@ -35,6 +37,7 @@ const Organization = require("./organization");
 module.exports = {
   Organization,
   Property,
+  MediaFile,
   Gateway,
   Switch,
   Alarm,
@@ -63,5 +66,4 @@ module.exports = {
   EnergyReport,
   SMSMessage,
   EmailMessage,
-  MediaFile,
 };

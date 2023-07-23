@@ -84,21 +84,6 @@
         "$ref": "https://api.kohost.io/schemas/v3/alarm.json"
       }
     },
-    "scenes": {
-      "type": "array",
-      "default": [],
-      "items": {
-        "description": "A list of scene IDs for later population, or entire scene objects",
-        "oneOf": [
-          {
-            "$ref": "https://api.kohost.io/schemas/v3/scene.json"
-          },
-          {
-            "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
-          }
-        ]
-      }
-    },
     "occupiedAt": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
     },

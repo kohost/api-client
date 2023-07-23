@@ -89,7 +89,8 @@
     {
       "http": {
         "method": "PUT",
-        "path": "/users/me"
+        "path": "/users/me",
+        "maxSize": "2mb"
       }
     }
   ],
@@ -269,6 +270,15 @@
     "BatchUpsertSystemSpace",
     {
       "http": false
+    }
+  ],
+  [
+    "SetSpaceScene",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/spaces/:spaceId/scenes/:id"
+      }
     }
   ],
   [
@@ -854,6 +864,15 @@
     }
   ],
   [
+    "SetRoomScene",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/scenes/:id"
+      }
+    }
+  ],
+  [
     "AddScenesToRoom",
     {
       "http": {
@@ -965,6 +984,15 @@
     }
   ],
   [
+    "ListScenes",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/scenes"
+      }
+    }
+  ],
+  [
     "CreateDefaultScenes",
     {
       "http": {
@@ -974,7 +1002,7 @@
     }
   ],
   [
-    "ScheduleSpaceEcoScenes",
+    "ScheduleSpaceScenes",
     {
       "http": false
     }
@@ -1364,9 +1392,7 @@
   [
     "HandleMessageData",
     {
-      "http": false,
-      "useAdminDb": true,
-      "allowPropertyDb": true
+      "http": false
     }
   ],
   [

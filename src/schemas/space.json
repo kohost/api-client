@@ -40,6 +40,9 @@
         "type": "string"
       }
     },
+    "occupied": {
+      "type": "boolean"
+    },
     "eco": {
       "type": "object",
       "additionalProperties": false,

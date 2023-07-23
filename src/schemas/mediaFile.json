@@ -28,6 +28,9 @@
         "application/pdf"
       ]
     },
+    "data": {
+      "type": "string"
+    },
     "url": {
       "type": "string",
       "format": "uri"

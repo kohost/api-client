@@ -3,7 +3,15 @@
   "$id": "https://api.kohost.io/schemas/v3/identification.json",
   "title": "Identification",
   "type": "object",
-  "required": ["type", "number"],
+  "required": ["type"],
+  "oneOf": [
+    {
+      "required": ["number"]
+    },
+    {
+      "required": ["encryptedNumber"]
+    }
+  ],
   "properties": {
     "id": {
       "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
@@ -13,6 +21,12 @@
       "enum": ["driversLicense", "passport", "identityCard", "visa"]
     },
     "number": {
+      "string": "string"
+    },
+    "maskedNumber": {
+      "string": "string"
+    },
+    "encryptedNumber": {
       "string": "string"
     },
     "issued": {

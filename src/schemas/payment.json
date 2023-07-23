@@ -24,6 +24,10 @@
         "vpay"
       ]
     },
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    },
     "storageData": {
       "type": ["string", "null"]
     },

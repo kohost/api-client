@@ -67,7 +67,7 @@
     "files": {
       "type": "array",
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/file"
+        "$ref": "https://api.kohost.io/schemas/v3/mediaFile.json#"
       }
     },
     "identifications": {

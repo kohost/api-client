@@ -170,10 +170,18 @@
             "payment": {},
             "identification": {},
             "earlyCheckIn": {
+              "type": "object",
+              "required": ["dynamic", "checkInTime", "checkOutTime"],
               "properties": {
                 "dynamic": {
                   "type": "boolean",
                   "default": false
+                },
+                "checkInTime": {
+                  "type": "string"
+                },
+                "checkOutTime": {
+                  "type": "string"
                 }
               }
             },
@@ -188,6 +196,10 @@
             "system": {
               "type": "string",
               "enum": ["salto"]
+            },
+            "systemOnline": {
+              "type": "boolean",
+              "default": false
             },
             "branding": {
               "type": "object",
