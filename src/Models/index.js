@@ -25,7 +25,6 @@ const Credential = require("./credential");
 const ShortLink = require("./shortLink");
 const EnergyReportShard = require("./energyReportShard");
 const EnergyReport = require("./energyReport");
-const EnergyReportProperty = require("./energyReportProperty");
 
 const SMSMessage = require("./smsMessage");
 const EmailMessage = require("./emailMessage");
@@ -62,7 +61,6 @@ module.exports = {
   ShortLink,
   EnergyReportShard,
   EnergyReport,
-  EnergyReportProperty,
   SMSMessage,
   EmailMessage,
   MediaFile,
