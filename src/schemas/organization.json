@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "admin/organization.json",
+  "$id": "organization.json",
   "title": "Organization",
   "type": "object",
   "description": "An organization is a group or entity that subscribes to Kohost software.",
