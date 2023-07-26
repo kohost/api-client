@@ -11,10 +11,10 @@ const validator = schemas.compile(schema);
 
 class Space extends Kohost {
   /**
-   * @typedef {import("../schemas/SpaceSchema").Space} SpaceSchema
-   * Create a Dimmer instance.
+   * @typedef {import("../schemas/SpaceSchema").Space} SpaceType
+   * Create a Space instance.
    * @constructor
-   * @param {SpaceSchema} space - The dimmer object of type Dimmer.
+   * @param {SpaceType} space - The space object of type Space.
    */
   constructor(space) {
     const spaceData = mapSpaceData(space);

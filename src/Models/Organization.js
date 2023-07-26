@@ -6,8 +6,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Organization extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/OrganizationSchema").Organization} OrganizationType
+   * Create a Organization instance.
+   * @constructor
+   * @param {OrganizationType} organization - The organization object of type Organization.
+   */
+  constructor(organization) {
+    super(organization);
   }
 }
 

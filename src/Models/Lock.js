@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Lock extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/LockSchema").Lock} LockType
+   * Create a Lock instance.
+   * @constructor
+   * @param {LockType} lock - The lock object of type Lock.
+   */
+  constructor(lock) {
+    super(lock);
   }
 }
 

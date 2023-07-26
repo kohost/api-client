@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class WindowCovering extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/WindowCoveringSchema").WindowCovering} WindowCoveringType
+   * Create a WindowCovering instance.
+   * @constructor
+   * @param {WindowCoveringType} windowCovering - The windowCovering object of type WindowCovering.
+   */
+  constructor(windowCovering) {
+    super(windowCovering);
   }
 
   static getActionDelta(old, _new) {

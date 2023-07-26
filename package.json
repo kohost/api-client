@@ -13,13 +13,24 @@
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
-      "types": "./dist/esm/index.d.ts",
       "require": "./dist/cjs/index.js"
     },
     "./Models/*": {
       "import": "./dist/esm/Models/*.js",
       "types": "./dist/esm/Models/*.d.ts",
       "require": "./dist/cjs/Models/*.js"
+    },
+    "./Commands/*": {
+      "import": "./dist/esm/Commands/*.js",
+      "require": "./dist/cjs/Commands/*.js"
+    },
+    "./Events/*": {
+      "import": "./dist/esm/Events/*.js",
+      "require": "./dist/cjs/Events/*.js"
+    },
+    "./Errors/*": {
+      "import": "./dist/esm/Errors/*.js",
+      "require": "./dist/cjs/Errors/*.js"
     }
   },
   "scripts": {

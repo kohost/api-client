@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Gateway extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/GatewaySchema").Gateway} GatewayType
+   * Create a Gateway instance.
+   * @constructor
+   * @param {GatewayType} gateway - The gateway object of type Gateway.
+   */
+  constructor(gateway) {
+    super(gateway);
   }
 }
 

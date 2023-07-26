@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class SMSMessage extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/SmsMessageSchema").SmsMessage} SmsMessageType
+   * Create a SmsMessage instance.
+   * @constructor
+   * @param {SmsMessageType} message - The message object of type SmsMessage.
+   */
+  constructor(message) {
+    super(message);
   }
 }
 

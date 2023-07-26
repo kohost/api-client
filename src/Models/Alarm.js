@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Alarm extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/AlarmSchema").Alarm} AlarmType
+   * Create a Alarm instance.
+   * @constructor
+   * @param {AlarmType} alarm - The alarm object of type Alarm.
+   */
+  constructor(alarm) {
+    super(alarm);
   }
 }
 

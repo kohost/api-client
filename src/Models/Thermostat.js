@@ -6,8 +6,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Thermostat extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/ThermostatSchema").Thermostat} ThermostatType
+   * Create a Thermostat instance.
+   * @constructor
+   * @param {ThermostatType} thermostat - The thermostat object of type Thermostat.
+   */
+  constructor(thermostat) {
+    super(thermostat);
   }
 
   toCelsius() {

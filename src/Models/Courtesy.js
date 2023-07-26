@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Courtesy extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/CourtesySchema").Courtesy} CourtesyType
+   * Create a Courtesy instance.
+   * @constructor
+   * @param {CourtesyType} courtesy - The courtesy object of type Courtesy.
+   */
+  constructor(courtesy) {
+    super(courtesy);
   }
 }
 

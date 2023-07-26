@@ -8,7 +8,7 @@ const SystemSceneControllerUpdatedEvent = require("./SystemSceneControllerUpdate
 const SystemWindowCoveringUpdatedEvent = require("./SystemWindowCoveringUpdatedEvent");
 const SystemMediaSourceUpdatedEvent = require("./SystemMediaSourceUpdatedEvent");
 const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
-
+const SystemAlarmUpdatedEvent = require("./SystemAlarmUpdatedEvent");
 const SystemMotionSensorUpdatedEvent = require("./SystemMotionSensorUpdatedEvent");
 
 const SystemUserUpdatedEvent = require("./SystemUserUpdatedEvent");
@@ -26,6 +26,7 @@ const ApplicationInUseEvent = require("./ApplicationInUseEvent");
 const ApplicationOutOfUseEvent = require("./ApplicationOutOfUseEvent");
 
 module.exports = {
+  SystemAlarmUpdatedEvent,
   SystemGatewayUpdatedEvent,
   SystemThermostatUpdatedEvent,
   SystemDimmerUpdatedEvent,

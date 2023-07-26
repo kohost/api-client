@@ -14,11 +14,17 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class User extends Kohost {
-  constructor(data) {
-    if (data.photo) data.photo = new MediaFile(data.photo);
-    if (data.reservations)
-      data.reservations = data.reservations.map((res) => new Reservation(res));
-    super(data);
+  /**
+   * @typedef {import("../schemas/UserSchema").User} UserType
+   * Create a User instance.
+   * @constructor
+   * @param {UserType} user - The user object of type User.
+   */
+  constructor(user) {
+    if (user.photo) user.photo = new MediaFile(user.photo);
+    if (user.reservations)
+      user.reservations = user.reservations.map((res) => new Reservation(res));
+    super(user);
   }
 
   static validatePhone(phoneNumber) {

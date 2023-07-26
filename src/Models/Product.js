@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Product extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/ProductSchema").Product} ProductType
+   * Create a Product instance.
+   * @constructor
+   * @param {ProductType} product - The product object of type Product.
+   */
+  constructor(product) {
+    super(product);
   }
 }
 

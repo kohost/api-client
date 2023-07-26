@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Switch extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/SwitchSchema").Switch} SwitchType
+   * Create a Switch instance.
+   * @constructor
+   * @param {SwitchType} _switch - The _switch object of type Switch.
+   */
+  constructor(_switch) {
+    super(_switch);
   }
 }
 

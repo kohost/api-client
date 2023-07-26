@@ -14,8 +14,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Ticket extends Kohost {
-  constructor(data) {
-    const ticketData = mapConversationData(data);
+  /**
+   * @typedef {import("../schemas/TicketSchema").Ticket} TicketType
+   * Create a Ticket instance.
+   * @constructor
+   * @param {TicketType} ticket - The ticket object of type Ticket.
+   */
+  constructor(ticket) {
+    const ticketData = mapConversationData(ticket);
     super(ticketData);
   }
 

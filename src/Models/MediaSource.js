@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class MediaSource extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/MediaSourceSchema").MediaSource} MediaSourceType
+   * Create a MediaSource instance.
+   * @constructor
+   * @param {MediaSourceType} mediaSource - The mediaSource object of type MediaSource.
+   */
+  constructor(mediaSource) {
+    super(mediaSource);
   }
 }
 

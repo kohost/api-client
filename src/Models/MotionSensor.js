@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class MotionSensor extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/MotionSensorSchema").MotionSensor} MotionSensorType
+   * Create a MotionSensor instance.
+   * @constructor
+   * @param {MotionSensorType} motionSensor - The motionSensor object of type MotionSensor.
+   */
+  constructor(motionSensor) {
+    super(motionSensor);
   }
 }
 

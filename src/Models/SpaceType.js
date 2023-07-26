@@ -8,8 +8,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class SpaceType extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/SpaceTypeSchema").SpaceType} SpaceTypeType
+   * Create a SpaceType instance.
+   * @constructor
+   * @param {SpaceTypeType} spaceType - The spaceType object of type SpaceType.
+   */
+  constructor(spaceType) {
+    super(spaceType);
   }
 }
 

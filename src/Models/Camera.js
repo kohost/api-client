@@ -1,4 +1,4 @@
-// create the Alarm Model
+// create the Camera Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/camera.json");
 const Kohost = require("./Kohost");
@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Camera extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/CameraSchema").Camera} CameraType
+   * Create a Camera instance.
+   * @constructor
+   * @param {CameraType} camera - The camera object of type Camera.
+   */
+  constructor(camera) {
+    super(camera);
   }
 }
 

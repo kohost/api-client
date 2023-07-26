@@ -8,8 +8,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class DiscoveredDevice extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/DiscoveredDeviceSchema").DiscoveredDevice} DiscoveredDeviceType
+   * Create a DiscoveredDevice instance.
+   * @constructor
+   * @param {DiscoveredDeviceType} device - The dd object of type DiscoveredDevice.
+   */
+  constructor(device) {
+    super(device);
   }
 }
 

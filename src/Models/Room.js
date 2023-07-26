@@ -24,8 +24,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Room extends Kohost {
-  constructor(data) {
-    const roomData = mapRoomData(data);
+  /**
+   * @typedef {import("../schemas/RoomSchema").Room} RoomType
+   * Create a Room instance.
+   * @constructor
+   * @param {RoomType} room - The room object of type Room.
+   */
+  constructor(room) {
+    const roomData = mapRoomData(room);
     super(roomData);
   }
 

@@ -6,8 +6,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Property extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/PropertySchema").Property} PropertyType
+   * Create a Property instance.
+   * @constructor
+   * @param {PropertyType} property - The property object of type Property.
+   */
+  constructor(property) {
+    super(property);
   }
 }
 

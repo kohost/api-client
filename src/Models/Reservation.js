@@ -6,8 +6,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Reservation extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/ReservationSchema").Reservation} ReservationType
+   * Create a Reservation instance.
+   * @constructor
+   * @param {ReservationType} reservation - The reservation object of type Reservation.
+   */
+  constructor(reservation) {
+    super(reservation);
   }
 
   get peopleCount() {
@@ -81,17 +87,17 @@ class Reservation extends Kohost {
   }
 }
 
-Object.defineProperty(Reservation.prototype, "schema", {
+Object.defineReservation(Reservation.prototype, "schema", {
   value: schema,
 });
 
-Object.defineProperty(Reservation.prototype, "validator", {
+Object.defineReservation(Reservation.prototype, "validator", {
   get: function () {
     return validator;
   },
 });
 
-Object.defineProperty(Reservation, "validProperties", {
+Object.defineReservation(Reservation, "validProperties", {
   value: Object.keys(schema.properties),
 });
 

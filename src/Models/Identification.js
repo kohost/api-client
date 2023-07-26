@@ -6,8 +6,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Identification extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/IdentificationSchema").Identification} IdentificationType
+   * Create a Identification instance.
+   * @constructor
+   * @param {IdentificationType} identification - The identification object of type Identification.
+   */
+  constructor(identification) {
+    super(identification);
   }
 
   get isExpired() {

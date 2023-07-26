@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class EnergyReport extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/EnergyReportSchema").EnergyReport} EnergyReportType
+   * Create a EnergyReport instance.
+   * @constructor
+   * @param {EnergyReportType} energyReport - The energyReport object of type EnergyReport.
+   */
+  constructor(energyReport) {
+    super(energyReport);
   }
 }
 

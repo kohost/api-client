@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Scene extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/SceneSchema").Scene} SceneType
+   * Create a Scene instance.
+   * @constructor
+   * @param {SceneType} scene - The scene object of type Scene.
+   */
+  constructor(scene) {
+    super(scene);
   }
 
   static createSceneCommandPayload(room, scene, restore) {

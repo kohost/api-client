@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class MediaFile extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/MediaFileSchema").MediaFile} MediaFileType
+   * Create a MediaFile instance.
+   * @constructor
+   * @param {MediaFileType} mediaFile - The mediaFile object of type MediaFile.
+   */
+  constructor(mediaFile) {
+    super(mediaFile);
   }
 
   createImageVariant(params) {

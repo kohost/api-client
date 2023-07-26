@@ -8,8 +8,15 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class SystemUser extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/SystemUserSchema").SystemUser} SystemUserType
+   * Create a SystemUser instance.
+   * @constructor
+   * @param {SystemUserType} user - The user object of type SystemUser.
+   */
+
+  constructor(user) {
+    super(user);
   }
 
   static validatePhone(phoneNumber) {

@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class Credential extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/CredentialSchema").Credential} CredentialType
+   * Create a Credential instance.
+   * @constructor
+   * @param {CredentialType} credential - The credential object of type Credential.
+   */
+  constructor(credential) {
+    super(credential);
   }
 }
 

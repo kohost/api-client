@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class ShortLink extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/ShortLinkSchema").ShortLink} ShortLinkType
+   * Create a ShortLink instance.
+   * @constructor
+   * @param {ShortLinkType} shortlink - The shortlink object of type ShortLink.
+   */
+  constructor(shortlink) {
+    super(shortlink);
   }
 }
 

@@ -7,8 +7,14 @@ schemas.add(schema);
 const validator = schemas.compile(schema);
 
 class EmailMessage extends Kohost {
-  constructor(data) {
-    super(data);
+  /**
+   * @typedef {import("../schemas/EmailMessageSchema").EmailMessage} EmailMessageType
+   * Create a EmailMessage instance.
+   * @constructor
+   * @param {EmailMessageType} message - The message object of type EmailMessage.
+   */
+  constructor(message) {
+    super(message);
   }
 }
 
