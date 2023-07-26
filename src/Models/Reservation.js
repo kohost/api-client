@@ -87,17 +87,17 @@ class Reservation extends Kohost {
   }
 }
 
-Object.defineReservation(Reservation.prototype, "schema", {
+Object.defineProperty(Reservation.prototype, "schema", {
   value: schema,
 });
 
-Object.defineReservation(Reservation.prototype, "validator", {
+Object.defineProperty(Reservation.prototype, "validator", {
   get: function () {
     return validator;
   },
 });
 
-Object.defineReservation(Reservation, "validProperties", {
+Object.defineProperty(Reservation, "validProperties", {
   value: Object.keys(schema.properties),
 });
 
