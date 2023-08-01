@@ -164,7 +164,23 @@
     "appFeatures": {
       "type": "object",
       "properties": {
-        "RoomControl": {},
+        "RoomControl": {
+          "type": "object",
+          "properties": {
+            "commonAreas": {
+              "type": "object",
+              "properties": {
+                "spaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "additionalProperties": false
+        },
         "CheckIn": {
           "properties": {
             "payment": {},
@@ -235,6 +251,50 @@
       "additionalProperties": false,
       "default": {
         "RoomControl": {}
+      }
+    },
+    "notifications": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "sms": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "push": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "default": {
+        "email": {
+          "enabled": false
+        },
+        "sms": {
+          "enabled": false
+        },
+        "push": {
+          "enabled": false
+        }
       }
     },
     "credentials": {
