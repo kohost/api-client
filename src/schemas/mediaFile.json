@@ -12,6 +12,9 @@
       "type": "string",
       "default": "mediaFile"
     },
+    "name": {
+      "type": "string"
+    },
     "fileHash": {
       "type": "string"
     },
@@ -63,5 +66,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["id", "type"]
+  "required": ["type"]
 }
