@@ -1,3 +1,4 @@
+const SetSceneCommand = require("./SetSceneCommand");
 const SetAlarmCommand = require("./SetAlarmCommand");
 const SetDimmerCommand = require("./SetDimmerCommand");
 const SetSwitchCommand = require("./SetSwitchCommand");
@@ -12,14 +13,20 @@ const CheckInReservationCommand = require("./CheckInReservationCommand");
 const SendEmailCommand = require("./SendEmailCommand");
 const SendSMSCommand = require("./SendSMSCommand");
 const DiscoverReservationsCommand = require("./DiscoverReservationsCommand");
+const DiscoverReservationRoomTypeUpsellOptionsCommand = require("./DiscoverReservationRoomTypeUpsellOptionsCommand");
 const DiscoverRoomsCommand = require("./DiscoverRoomsCommand");
 const DiscoverRoomTypesCommand = require("./DiscoverRoomTypesCommand");
 const CreateShortLinkCommand = require("./CreateShortLinkCommand");
 const UpdateReservationCommand = require("./UpdateReservationCommand");
 const UpdateUserCommand = require("./UpdateUserCommand");
 const GetMobileKeyCommand = require("./GetMobileKeyCommand");
+const CreateImageUploadEndpointCommand = require("./CreateImageUploadEndpointCommand");
+const UploadImageCommand = require("./UploadImageCommand");
+const GetProductsCommand = require("./GetProductsCommand");
+const SellProductsCommand = require("./SellProductsCommand");
 
 module.exports = {
+  SetSceneCommand,
   SetAlarmCommand,
   SetDimmerCommand,
   SetSwitchCommand,
@@ -34,10 +41,15 @@ module.exports = {
   SendSMSCommand,
   SendEmailCommand,
   DiscoverReservationsCommand,
+  DiscoverReservationRoomTypeUpsellOptionsCommand,
   DiscoverRoomsCommand,
   DiscoverRoomTypesCommand,
   CreateShortLinkCommand,
   UpdateReservationCommand,
   UpdateUserCommand,
   GetMobileKeyCommand,
+  CreateImageUploadEndpointCommand,
+  UploadImageCommand,
+  GetProductsCommand,
+  SellProductsCommand,
 };

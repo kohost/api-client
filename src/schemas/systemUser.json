@@ -1,20 +1,20 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/systemUser.json",
+  "$id": "systemUser.json",
   "title": "System User",
   "description": "A system user is a user that originated from an external 3rd party system.",
   "type": "object",
   "required": ["firstName", "lastName"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "type": {
       "type": "string",
       "default": "systemUser"
     },
     "driver": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
+      "$ref": "definitions.json#/definitions/driver"
     },
     "firstName": {
       "type": "string"
@@ -31,7 +31,7 @@
       "format": "email"
     },
     "address": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/address"
+      "$ref": "definitions.json#/definitions/address"
     },
     "photo": {
       "type": "string"
@@ -67,29 +67,29 @@
     "files": {
       "type": "array",
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/file"
+        "$ref": "mediaFile.json#"
       }
     },
     "identifications": {
       "type": "array",
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/identification.json#"
+        "$ref": "identification.json#"
       }
     },
     "payments": {
       "type": "array",
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/payment.json#"
+        "$ref": "payment.json#"
       }
     },
     "createdAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "definitions.json#/definitions/createdAt"
     },
     "updatedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/updatedAt"
+      "$ref": "definitions.json#/definitions/updatedAt"
     },
     "systemData": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"
+      "$ref": "definitions.json#/definitions/systemData"
     }
   }
 }

@@ -1,11 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/space.json",
+  "$id": "space.json",
   "title": "Space",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "name": {
       "type": "string",
@@ -23,7 +23,7 @@
       ]
     },
     "driver": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
+      "$ref": "definitions.json#/definitions/driver"
     },
     "subType": {
       "type": "string"
@@ -39,6 +39,9 @@
       "items": {
         "type": "string"
       }
+    },
+    "occupied": {
+      "type": "boolean"
     },
     "eco": {
       "type": "object",
@@ -81,7 +84,7 @@
       "enum": ["inService", "outOfOrder", "outOfService"]
     },
     "systemData": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/systemData"
+      "$ref": "definitions.json#/definitions/systemData"
     }
   },
   "if": {

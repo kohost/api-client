@@ -1,37 +1,42 @@
-const Switch = require("./switch");
-const Alarm = require("./alarm");
-const Dimmer = require("./dimmer");
-const Lock = require("./lock");
-const Thermostat = require("./thermostat");
-const WindowCovering = require("./windowCovering");
-const Identification = require("./identification");
-const User = require("./user");
-const SystemUser = require("./systemUser");
-const Courtesy = require("./courtesy");
-const Camera = require("./camera");
-const MotionSensor = require("./motionSensor");
-const MediaSource = require("./mediaSource");
-const Room = require("./room");
-const Reservation = require("./reservation");
-const Space = require("./space");
-const SpaceType = require("./spaceType");
-const Ticket = require("./ticket");
-const Scene = require("./scene");
-const Gateway = require("./gateway");
-const Product = require("./product");
-const DiscoveredDevice = require("./discoveredDevice");
-const Credential = require("./credential");
-const ShortLink = require("./shortLink");
-const EnergyReportShard = require("./energyReportShard");
-const EnergyReport = require("./energyReport");
+const Reservation = require("./Reservation");
+const MediaFile = require("./MediaFile");
+const Switch = require("./Switch");
+const Alarm = require("./Alarm");
+const Dimmer = require("./Dimmer");
+const Lock = require("./Lock");
+const Thermostat = require("./Thermostat");
+const WindowCovering = require("./WindowCovering");
+const Identification = require("./Identification");
+const User = require("./User");
+const SystemUser = require("./SystemUser");
+const Courtesy = require("./Courtesy");
+const Camera = require("./Camera");
+const MotionSensor = require("./MotionSensor");
+const MediaSource = require("./MediaSource");
+const Room = require("./Room");
 
+const Space = require("./Space");
+const SpaceType = require("./SpaceType");
 
-const Property = require("./property");
-const Organization = require("./organization");
+const Ticket = require("./Ticket");
+const Scene = require("./Scene");
+const Gateway = require("./Gateway");
+const Product = require("./Product");
+const DiscoveredDevice = require("./DiscoveredDevice");
+const Credential = require("./Credential");
+const ShortLink = require("./ShortLink");
+const EnergyReportShard = require("./EnergyReportShard");
+const EnergyReport = require("./EnergyReport");
+const SMSMessage = require("./SmsMessage");
+const EmailMessage = require("./EmailMessage");
+
+const Property = require("./Property");
+const Organization = require("./Organization");
 
 module.exports = {
   Organization,
   Property,
+  MediaFile,
   Gateway,
   Switch,
   Alarm,
@@ -57,5 +62,7 @@ module.exports = {
   Credential,
   ShortLink,
   EnergyReportShard,
-  EnergyReport
+  EnergyReport,
+  SMSMessage,
+  EmailMessage,
 };

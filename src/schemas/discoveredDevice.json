@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/discoveredDevice.json",
+  "$id": "discoveredDevice.json",
   "title": "Discovered Device",
   "description": "A device that has been discovered by Kohost, but not yet added to the Kohost system.",
   "type": "object",
   "required": ["name", "deviceId", "deviceData"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "name": {
       "type": "string"
@@ -16,7 +16,7 @@
       "type": "string"
     },
     "type": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/type"
+      "$ref": "definitions.json#/definitions/type"
     },
     "driver": {
       "type": "string"

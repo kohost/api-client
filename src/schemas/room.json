@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/room.json",
+  "$id": "room.json",
   "title": "Room",
   "description": "A room represents a physical space of controllable IoT devices",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "name": {
       "type": "string"
@@ -18,95 +18,80 @@
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/dimmer.json"
+        "$ref": "dimmer.json"
       }
     },
     "switches": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/switch.json"
+        "$ref": "switch.json"
       }
     },
     "thermostats": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/thermostat.json"
+        "$ref": "thermostat.json"
       }
     },
     "locks": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/lock.json"
+        "$ref": "lock.json"
       }
     },
     "windowCoverings": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/windowCovering.json"
+        "$ref": "windowCovering.json"
       }
     },
     "courtesy": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/courtesy.json"
+        "$ref": "courtesy.json"
       }
     },
     "cameras": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/camera.json"
+        "$ref": "camera.json"
       }
     },
     "mediaSources": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/mediaSource.json"
+        "$ref": "mediaSource.json"
       }
     },
     "motionSensors": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/motionSensor.json"
+        "$ref": "motionSensor.json"
       }
     },
     "alarms": {
       "type": "array",
       "default": [],
       "items": {
-        "$ref": "https://api.kohost.io/schemas/v3/alarm.json"
-      }
-    },
-    "scenes": {
-      "type": "array",
-      "default": [],
-      "items": {
-        "description": "A list of scene IDs for later population, or entire scene objects",
-        "oneOf": [
-          {
-            "$ref": "https://api.kohost.io/schemas/v3/scene.json"
-          },
-          {
-            "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
-          }
-        ]
+        "$ref": "alarm.json"
       }
     },
     "occupiedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "definitions.json#/definitions/createdAt"
     },
     "createdAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "definitions.json#/definitions/createdAt"
     },
     "updatedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/updatedAt"
+      "$ref": "definitions.json#/definitions/updatedAt"
     }
   },
   "additionalProperties": false

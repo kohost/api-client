@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/ticket.json",
+  "$id": "ticket.json",
   "title": "Ticket",
   "description": "A ticket is a request for help from a user.",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "conversation": {
       "type": "array",
@@ -18,11 +18,14 @@
           "id": {
             "type": "string"
           },
-          "user": {
+          "userId": {
+            "type": "string"
+          },
+          "userName": {
             "type": "string"
           },
           "timestamp": {
-            "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+            "$ref": "definitions.json#/definitions/createdAt"
           },
           "body": {
             "type": "string"
@@ -33,9 +36,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "media": {
+            "$ref": "mediaFile.json"
           }
         },
-        "required": ["user", "id", "timestamp", "body"]
+        "required": ["userId", "id", "timestamp", "body"]
       }
     },
     "requester": {
@@ -56,17 +62,25 @@
         "type": "string"
       }
     },
+    "rating": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "ratingComment": {
+      "type": "string"
+    },
     "createdAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "definitions.json#/definitions/date"
     },
     "updatedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "definitions.json#/definitions/date"
     },
     "solvedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "definitions.json#/definitions/date"
     },
     "closedAt": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/createdAt"
+      "$ref": "definitions.json#/definitions/date"
     }
   },
   "required": [

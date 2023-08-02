@@ -1,15 +1,90 @@
 const esbuild = require("esbuild");
 const path = require("node:path");
+const { promisify } = require("node:util");
 const fs = require("node:fs");
+
+const readdirAsync = promisify(fs.readdir);
+const statAsync = promisify(fs.stat);
+const copyFileAsync = promisify(fs.copyFile);
+const mkdirAsync = promisify(fs.mkdir);
+
+const { compileFromFile } = require("json-schema-to-typescript");
+
 const useCases = require("../src/useCases/http.json");
 const useCaseMap = new Map(useCases);
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist/cjs"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist/cjs"), { recursive: true });
+if (!fs.existsSync(path.resolve(__dirname, "../dist/cjs/schemas"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist/cjs/schemas"), {
+    recursive: true,
+  });
 }
 
 if (!fs.existsSync(path.resolve(__dirname, "../dist/esm"))) {
   fs.mkdirSync(path.resolve(__dirname, "../dist/esm"), { recursive: true });
+}
+
+if (!fs.existsSync(path.resolve(__dirname, "../dist/schemas"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist/schemas"), { recursive: true });
+}
+
+async function copyFilesToDistCjs(srcDir, distCjsDir, ignoredFolders = []) {
+  try {
+    // Create the dist/cjs directory if it doesn't exist
+    if (!fs.existsSync(distCjsDir)) {
+      await mkdirAsync(distCjsDir, { recursive: true });
+    }
+
+    // Read the contents of the src directory
+    const files = await readdirAsync(srcDir);
+
+    // Loop through the files
+    for (const file of files) {
+      const srcFilePath = path.join(srcDir, file);
+      const distCjsFilePath = path.join(distCjsDir, file);
+
+      // Check if the file is a directory
+      const isDirectory = (await statAsync(srcFilePath)).isDirectory();
+
+      if (isDirectory) {
+        // If it's a directory and not in the ignoredFolders list, copy the directory
+        if (!ignoredFolders.includes(file)) {
+          await copyFilesToDistCjs(
+            srcFilePath,
+            distCjsFilePath,
+            ignoredFolders
+          );
+        }
+      } else {
+        // If it's a file, copy the file
+        await copyFileAsync(srcFilePath, distCjsFilePath);
+      }
+    }
+  } catch (err) {
+    console.error("Error while copying files:", err);
+  }
+}
+
+function getAllFilesInDirectory(dirPath) {
+  const files = [];
+
+  function readFilesRecursively(directory) {
+    const entries = fs.readdirSync(directory, { withFileTypes: true });
+
+    entries.forEach((entry) => {
+      const entryPath = path.join(directory, entry.name);
+
+      if (entry.isDirectory()) {
+        readFilesRecursively(entryPath); // Recursively read subdirectories
+      } else if (entry.isFile() && entry.name.endsWith(".json")) {
+        const relativePath = path.relative(dirPath, entryPath);
+        files.push(relativePath); // Add relative file path to the files array if it's a JSON file
+      }
+    });
+  }
+
+  readFilesRecursively(dirPath);
+
+  return files;
 }
 
 let useCasePlugin = {
@@ -153,21 +228,37 @@ const entryPoints = [
   { in: path.resolve(__dirname, "../src/defs/"), out: "defs" },
 ];
 
-async function main() {
-  const build1 = await esbuild.context({
-    entryPoints: entryPoints,
-    bundle: true,
-    platform: "node",
-    packages: "external",
-    target: ["es2022"],
-    outdir: "dist/cjs",
-    treeShaking: false,
-    keepNames: true,
-    allowOverwrite: true,
-    minify: false,
-  });
+async function main2() {
+  const srcFolder = path.resolve(__dirname, "../src");
+  const distCjsFolder = path.resolve(__dirname, "../dist/cjs");
+  copyFilesToDistCjs(srcFolder, distCjsFolder, ["useCases", "Client"]);
 
-  const build2 = await esbuild.context({
+  let schemas = getAllFilesInDirectory(
+    path.resolve(__dirname, "../src/schemas")
+  );
+
+  // compile each schema to a typescript interface
+  for (const schema of schemas) {
+    const schemaPath = path.resolve(__dirname, `../src/schemas/${schema}`);
+    compileFromFile(schemaPath, {
+      cwd: path.resolve(__dirname, "../src/schemas"),
+    })
+      .then((ts) => {
+        // replace .json with .d.ts and remove any parent directory
+        const typeName = schema.replace(".json", "").split("/").pop();
+        const typeNameUpper =
+          typeName.charAt(0).toUpperCase() + typeName.slice(1) + "Schema";
+        fs.writeFileSync(
+          path.resolve(__dirname, `../dist/cjs/schemas/${typeNameUpper}.d.ts`),
+          ts
+        );
+      })
+      .catch((e) => {
+        console.log(schema, e);
+      });
+  }
+
+  const ESMBuild = await esbuild.context({
     entryPoints: entryPoints.filter((entry) => entry.out !== "AMQPClient"),
     bundle: true,
     sourcemap: true,
@@ -179,7 +270,7 @@ async function main() {
     define: { global: "window" },
   });
 
-  const build3 = await esbuild.context({
+  const HttpClientESMBuild = await esbuild.context({
     plugins: [useCasePlugin],
     entryPoints: [path.resolve(__dirname, "../src/Client/")],
     bundle: true,
@@ -192,7 +283,7 @@ async function main() {
     define: { global: "window" },
   });
 
-  const build4 = await esbuild.context({
+  const HttpClientCJSBuild = await esbuild.context({
     plugins: [useCasePlugin],
     entryPoints: [
       { in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
@@ -201,100 +292,43 @@ async function main() {
     platform: "node",
     target: ["es2022"],
     format: "cjs",
-    outfile: "dist/cjs/Client.js",
+    outfile: "dist/cjs/Client/index.js",
     packages: "external",
     keepNames: true,
     allowOverwrite: true,
   });
 
-  const build5 = await esbuild.context({
-    plugins: [useCasePlugin],
-    entryPoints: [
-      { in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
-    ],
-    bundle: true,
-    sourcemap: true,
-    minify: false,
-    format: "esm",
-    target: "esnext",
-    outdir: "dist/esm",
-    define: { global: "window" },
-    keepNames: true,
-    allowOverwrite: true,
-  });
-
-  const build6 = await esbuild.context({
-    entryPoints: [path.resolve(__dirname, "../src/index.js")],
-    bundle: false,
-    platform: "node",
-    packages: "external",
-    target: ["es2022"],
-    outfile: "dist/cjs/index.cjs.js",
-    keepNames: true,
-    format: "cjs",
-  });
-
-  const build7 = await esbuild.context({
-    entryPoints: [path.resolve(__dirname, "../src/index.js")],
-    bundle: false,
-    platform: "node",
-    packages: "external",
-    target: ["es2022"],
-    outfile: "dist/cjs/index.cjs.js",
-    keepNames: true,
-    format: "cjs",
-  });
+  await HttpClientESMBuild.rebuild();
+  await HttpClientCJSBuild.rebuild();
+  await ESMBuild.rebuild();
 
   fs.writeFileSync(
     path.resolve(__dirname, "../dist/esm/index.js"),
-    `import Client from "./Client";
-    import SocketIoClient from "./SocketIoClient";
-    import Commands from "./Commands";
-    import Events from "./Events";
-    import Models from "./Models";
-    import Errors from "./Errors";
-    import defs from "./defs";
-    import utils from "./utils";
-    
-    export
-     { Client, SocketIoClient, Commands, Events, Models, Errors, defs, utils };
+    `import ClientBundle from "./Client";
+    import SocketIoClientBundle from "./SocketIoClient";
+    import CommandsBundle from "./Commands";
+    import EventsBundle from "./Events";
+    import ModelsBundle from "./Models";
+    import ErrorsBundle from "./Errors";
+    import defsBundle from "./defs";
+    import utilsBundle from "./utils";
+
+    export const Client = ClientBundle;
+    export const SocketIoClient = SocketIoClientBundle;
+    export const Commands = CommandsBundle;
+    export const Events = EventsBundle;
+    export const Models = ModelsBundle;
+    export const Errors = ErrorsBundle;
+    export const defs = defsBundle;
+    export const utils = utilsBundle;
     `
   );
-  const watch = process.argv.includes("--watch");
-  if (watch) {
-    console.log("Watching for changes...");
-    const watcher = async () => {
-      await build1.watch();
-      await build2.watch();
-      await build3.watch();
-      await build4.watch();
-      await build5.watch();
-      await build6.watch();
-      await build7.watch();
-    };
 
-    watcher();
-  } else {
-    // run the build
-    console.log("building...");
-    await build1.rebuild();
-    await build2.rebuild();
-    await build3.rebuild();
-    await build4.rebuild();
-    await build5.rebuild();
-    await build6.rebuild();
-    await build7.rebuild();
-
-    build1.dispose();
-    build2.dispose();
-    build3.dispose();
-    build4.dispose();
-    build5.dispose();
-    build6.dispose();
-    build7.dispose();
-
-    console.log("done");
-  }
+  HttpClientESMBuild.dispose();
+  HttpClientCJSBuild.dispose();
+  ESMBuild.dispose();
 }
 
-main();
+main2();
+
+//main();

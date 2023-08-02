@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/admin/property.json",
+  "$id": "property.json",
   "title": "Property",
   "type": "object",
   "description": "A property is a physical asset or building",
   "required": ["id", "name", "type", "hostname", "organization"],
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "name": {
       "type": "string"
@@ -164,8 +164,46 @@
     "appFeatures": {
       "type": "object",
       "properties": {
-        "RoomControl": {},
-        "CheckIn": {},
+        "RoomControl": {
+          "type": "object",
+          "properties": {
+            "commonAreas": {
+              "type": "object",
+              "properties": {
+                "spaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "CheckIn": {
+          "properties": {
+            "payment": {},
+            "identification": {},
+            "earlyCheckIn": {
+              "type": "object",
+              "required": ["dynamic", "checkInTime", "checkOutTime"],
+              "properties": {
+                "dynamic": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "checkInTime": {
+                  "type": "string"
+                },
+                "checkOutTime": {
+                  "type": "string"
+                }
+              }
+            },
+            "roomUpgrades": {}
+          }
+        },
         "CheckOut": {},
         "Concierge": {},
         "DigitalKey": {
@@ -174,6 +212,10 @@
             "system": {
               "type": "string",
               "enum": ["salto"]
+            },
+            "systemOnline": {
+              "type": "boolean",
+              "default": false
             },
             "branding": {
               "type": "object",
@@ -209,6 +251,50 @@
       "additionalProperties": false,
       "default": {
         "RoomControl": {}
+      }
+    },
+    "notifications": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "sms": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "push": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "default": {
+        "email": {
+          "enabled": false
+        },
+        "sms": {
+          "enabled": false
+        },
+        "push": {
+          "enabled": false
+        }
       }
     },
     "credentials": {

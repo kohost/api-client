@@ -25,7 +25,7 @@
       "http": {
         "disableAuth": true,
         "method": "POST",
-        "path": "/auth/loginToken"
+        "path": "/auth/loginLink"
       }
     }
   ],
@@ -89,7 +89,8 @@
     {
       "http": {
         "method": "PUT",
-        "path": "/users/me"
+        "path": "/users/me",
+        "maxSize": "2mb"
       }
     }
   ],
@@ -149,6 +150,15 @@
     }
   ],
   [
+    "ListUserSpaces",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/:id/spaces"
+      }
+    }
+  ],
+  [
     "UpsertSystemUser",
     {
       "http": false
@@ -164,6 +174,24 @@
     "SeedSuperAdminUsers",
     {
       "http": false
+    }
+  ],
+  [
+    "ListTeam",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/team"
+      }
+    }
+  ],
+  [
+    "DescribeMyAccessCredentials",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/me/accessCredentials"
+      }
     }
   ],
   [
@@ -190,6 +218,15 @@
       "http": {
         "method": "GET",
         "path": "/spaces/:id/rooms"
+      }
+    }
+  ],
+  [
+    "UpdateSpace",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/spaces/:id"
       }
     }
   ],
@@ -221,15 +258,6 @@
     }
   ],
   [
-    "UpdateSpace",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/spaceTypes/:id"
-      }
-    }
-  ],
-  [
     "CreateRoomInSpace",
     {
       "http": {
@@ -242,6 +270,15 @@
     "BatchUpsertSystemSpace",
     {
       "http": false
+    }
+  ],
+  [
+    "SetSpaceScene",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/spaces/:spaceId/scenes/:id"
+      }
     }
   ],
   [
@@ -283,6 +320,15 @@
       "http": {
         "method": "GET",
         "path": "/spaceTypes"
+      }
+    }
+  ],
+  [
+    "UpdateSpaceType",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/spaceTypes/:id"
       }
     }
   ],
@@ -593,11 +639,11 @@
     }
   ],
   [
-    "GetMobileKey",
+    "DescribeLockCredential",
     {
       "http": {
         "method": "POST",
-        "path": "/rooms/:roomId/locks/:id/mobileKey"
+        "path": "/rooms/:roomId/locks/:id/credential"
       }
     }
   ],
@@ -818,6 +864,15 @@
     }
   ],
   [
+    "SetRoomScene",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/scenes/:id"
+      }
+    }
+  ],
+  [
     "AddScenesToRoom",
     {
       "http": {
@@ -863,6 +918,15 @@
     }
   ],
   [
+    "ListMyTickets",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/mine"
+      }
+    }
+  ],
+  [
     "DescribeTicket",
     {
       "http": {
@@ -877,15 +941,6 @@
       "http": {
         "method": "GET",
         "path": "/tickets"
-      }
-    }
-  ],
-  [
-    "ListMyTickets",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/tickets/mine"
       }
     }
   ],
@@ -917,6 +972,27 @@
     }
   ],
   [
+    "NotifyTicketUpdate",
+    {
+      "http": false
+    }
+  ],
+  [
+    "NotifyTicketCreated",
+    {
+      "http": false
+    }
+  ],
+  [
+    "ListScenes",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/scenes"
+      }
+    }
+  ],
+  [
     "CreateDefaultScenes",
     {
       "http": {
@@ -926,7 +1002,7 @@
     }
   ],
   [
-    "ScheduleSpaceEcoScenes",
+    "ScheduleSpaceScenes",
     {
       "http": false
     }
@@ -1148,6 +1224,42 @@
     }
   ],
   [
+    "DescribeReservationEarlyCheckInProducts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/:id/products/earlyCheckIn"
+      }
+    }
+  ],
+  [
+    "PurchaseReservationEarlyCheckInProducts",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/products/earlyCheckIn"
+      }
+    }
+  ],
+  [
+    "DescribeReservationRoomUpgrades",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/:id/products/roomUpgrades"
+      }
+    }
+  ],
+  [
+    "PurchaseReservationRoomUpgrades",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/products/roomUpgrades"
+      }
+    }
+  ],
+  [
     "OCRDocument",
     {
       "http": {
@@ -1220,8 +1332,7 @@
       "http": {
         "method": "GET",
         "path": "/properties"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1230,8 +1341,7 @@
       "http": {
         "method": "POST",
         "path": "/properties"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1240,8 +1350,7 @@
       "http": {
         "method": "PUT",
         "path": "/properties/:id"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1250,15 +1359,13 @@
       "http": {
         "method": "GET",
         "path": "/properties/:id"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
     "SeedProperties",
     {
-      "http": false,
-      "useAdminDb": true
+      "http": false
     }
   ],
   [
@@ -1278,6 +1385,54 @@
   ],
   [
     "BroadcastEvent",
+    {
+      "http": false
+    }
+  ],
+  [
+    "HandleMessageData",
+    {
+      "http": false
+    }
+  ],
+  [
+    "CreateImageUploadEndpoint",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/mediaFiles/imageUploadEndpoint"
+      }
+    }
+  ],
+  [
+    "DeleteMediaFile",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/mediaFiles/:id"
+      }
+    }
+  ],
+  [
+    "UploadImage",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/mediaFiles/uploadImage"
+      }
+    }
+  ],
+  [
+    "DescribeProduct",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/products/:id"
+      }
+    }
+  ],
+  [
+    "BatchUpsertSystemProduct",
     {
       "http": false
     }
