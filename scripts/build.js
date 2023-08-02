@@ -13,8 +13,10 @@ const { compileFromFile } = require("json-schema-to-typescript");
 const useCases = require("../src/useCases/http.json");
 const useCaseMap = new Map(useCases);
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist/cjs"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist/cjs"), { recursive: true });
+if (!fs.existsSync(path.resolve(__dirname, "../dist/cjs/schemas"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist/cjs/schemas"), {
+    recursive: true,
+  });
 }
 
 if (!fs.existsSync(path.resolve(__dirname, "../dist/esm"))) {
