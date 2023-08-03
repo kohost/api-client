@@ -22,6 +22,7 @@ const Ticket = require("./Ticket");
 const Scene = require("./Scene");
 const Gateway = require("./Gateway");
 const Product = require("./Product");
+const Order = require("./Order");
 const DiscoveredDevice = require("./DiscoveredDevice");
 const Credential = require("./Credential");
 const ShortLink = require("./ShortLink");
@@ -65,4 +66,5 @@ module.exports = {
   EnergyReport,
   SMSMessage,
   EmailMessage,
+  Order,
 };

@@ -76,4 +76,34 @@ Object.defineProperty(User.prototype, "roles", {
   },
 });
 
+Object.defineProperty(User.prototype, "isSuperAdmin", {
+  get: function () {
+    return this.roles.includes("SuperAdmin");
+  },
+});
+
+Object.defineProperty(User.prototype, "isAdmin", {
+  get: function () {
+    return this.roles.includes("Admin") || this.roles.includes("Administrator");
+  },
+});
+
+Object.defineProperty(User.prototype, "isManager", {
+  get: function () {
+    return this.roles.includes("Manager");
+  },
+});
+
+Object.defineProperty(User.prototype, "isUser", {
+  get: function () {
+    return this.roles.includes("User");
+  },
+});
+
+Object.defineProperty(User.prototype, "isGuest", {
+  get: function () {
+    return this.roles.includes("Guest");
+  },
+});
+
 module.exports = User;
