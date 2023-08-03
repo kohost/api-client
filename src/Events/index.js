@@ -10,7 +10,6 @@ const SystemMediaSourceUpdatedEvent = require("./SystemMediaSourceUpdatedEvent")
 const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
 const SystemAlarmUpdatedEvent = require("./SystemAlarmUpdatedEvent");
 const SystemMotionSensorUpdatedEvent = require("./SystemMotionSensorUpdatedEvent");
-const SystemAlarmUpdatedEvent = require("./SystemAlarmUpdatedEvent");
 
 const SystemUserUpdatedEvent = require("./SystemUserUpdatedEvent");
 const SystemSpaceUpdatedEvent = require("./SystemSpaceUpdatedEvent");
