@@ -19,7 +19,11 @@
         "office",
         "building",
         "commonArea",
-        "other"
+        "conferenceRoom",
+        "lobby",
+        "gym",
+        "pool",
+        "restaurant"
       ]
     },
     "driver": {
