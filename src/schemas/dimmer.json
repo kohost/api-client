@@ -26,6 +26,9 @@
     "driver": {
       "$ref": "definitions.json#/definitions/driver"
     },
+    "offline": {
+      "type": "boolean"
+    },
     "level": {
       "type": "number",
       "minimum": 0,

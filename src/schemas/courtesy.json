@@ -23,6 +23,9 @@
     "driver": {
       "$ref": "definitions.json#/definitions/driver"
     },
+    "offline": {
+      "type": "boolean"
+    },
     "supportedStates": {
       "type": "array",
       "uniqueItems": true,

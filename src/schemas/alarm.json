@@ -10,6 +10,9 @@
     },
     "name": {
       "type": "string"
+    }, 
+    "offline": {
+      "type": "boolean"
     },
     "type": {
       "$ref": "definitions.json#/definitions/type"
@@ -38,11 +41,11 @@
             "type": "string"
           },
           "securityMode": {
-            "type": "string",
-            "enum": ["arming", "disarming", "armed", "disarmed", "alarm"]
+            "type": ["string", "null"],
+            "enum": ["arming", "disarming", "armed", "disarmed", "alarm", null]
           },
           "readyToArm": {
-            "type": "boolean"
+            "type": ["boolean", "null"]
           }
         },
         "additionalProperties": false
@@ -64,25 +67,10 @@
             "type": "boolean"
           },
           "bypassed": {
-            "type": "boolean"
+            "type": ["boolean", "null"]
           }
         },
         "additionalProperties": false
-      }
-    },
-    "supportedTroubles": {
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
-        "type": "string",
-        "enum": ["battery", "ac", "phone", "bell", "fire"]
-      }
-    },
-    "troubles": {
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
-        "$ref": "#/properties/supportedTroubles/items"
       }
     },
     "watts": {
@@ -96,8 +84,6 @@
     "systemData",
     "areas",
     "zones",
-    "supportedTroubles",
-    "troubles",
     "driver"
   ]
 }

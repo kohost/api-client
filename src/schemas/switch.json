@@ -26,6 +26,9 @@
     "driver": {
       "$ref": "definitions.json#/definitions/driver"
     },
+    "offline": {
+      "type": "boolean"
+    },
     "state": {
       "type": "string",
       "enum": ["on", "off"]
