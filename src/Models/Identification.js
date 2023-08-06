@@ -17,7 +17,7 @@ class Identification extends Kohost {
   }
 
   get isExpired() {
-    return new Date(this.expirationDate) < new Date();
+    return new Date(this.expires) < new Date();
   }
 }
 

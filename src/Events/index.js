@@ -11,6 +11,8 @@ const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
 const SystemAlarmUpdatedEvent = require("./SystemAlarmUpdatedEvent");
 const SystemMotionSensorUpdatedEvent = require("./SystemMotionSensorUpdatedEvent");
 
+const SceneSetEvent = require("./SceneSetEvent");
+
 const SystemUserUpdatedEvent = require("./SystemUserUpdatedEvent");
 const SystemSpaceUpdatedEvent = require("./SystemSpaceUpdatedEvent");
 const SystemSpaceTypeUpdatedEvent = require("./SystemSpaceTypeUpdatedEvent");
@@ -43,6 +45,7 @@ module.exports = {
   SystemSpaceTypeUpdatedEvent,
   SystemProductUpdatedEvent,
   SystemReservationUpdatedEvent,
+  SceneSetEvent,
   SMSEvent,
   EmailEvent,
   ShortLinkCreatedEvent,

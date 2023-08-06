@@ -25,6 +25,10 @@ class Order extends Kohost {
   getTaxTotal() {}
 
   getTotal() {}
+
+  getDeliveryTotal() {}
+
+  getFeesTotal() {}
 }
 
 Object.defineProperty(Order.prototype, "schema", {

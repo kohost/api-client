@@ -5,6 +5,7 @@ const paymentSchema = require("../schemas/payment.json");
 const Kohost = require("./Kohost");
 const MediaFile = require("./MediaFile");
 const Reservation = require("./Reservation");
+const Identification = require("./Identification");
 
 const { nanoid } = require("nanoid/async");
 
@@ -24,6 +25,11 @@ class User extends Kohost {
     if (user.photo) user.photo = new MediaFile(user.photo);
     if (user.reservations)
       user.reservations = user.reservations.map((res) => new Reservation(res));
+    if (user.identifications)
+      user.identifications = user.identifications.map(
+        (id) => new Identification(id)
+      );
+
     super(user);
   }
 

@@ -24,6 +24,16 @@ class Reservation extends Kohost {
     return this.paymentId?.length > 0;
   }
 
+  get nights() {
+    const start = new Date(this.checkInDateTime);
+    const end = new Date(this.checkOutDateTime);
+    let nights = Math.round((end - start) / (1000 * 60 * 60 * 24));
+    if (nights <= 0) {
+      nights = 1;
+    }
+    return nights;
+  }
+
   range(tz) {
     const start = new Date(this.checkInDateTime);
     const end = new Date(this.checkOutDateTime);

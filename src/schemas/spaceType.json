@@ -23,6 +23,12 @@
     "image": {
       "$ref": "mediaFile.json"
     },
+    "rating": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 9
+    },
     "systemData": {
       "$ref": "definitions.json#/definitions/systemData"
     }

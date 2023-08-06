@@ -30,6 +30,7 @@ const EnergyReportShard = require("./EnergyReportShard");
 const EnergyReport = require("./EnergyReport");
 const SMSMessage = require("./SmsMessage");
 const EmailMessage = require("./EmailMessage");
+const Notification = require("./Notification");
 
 const Property = require("./Property");
 const Organization = require("./Organization");
@@ -67,4 +68,5 @@ module.exports = {
   SMSMessage,
   EmailMessage,
   Order,
+  Notification,
 };
