@@ -1,7 +1,6 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/scene.json");
 const Kohost = require("./Kohost");
-const SetSceneCommand = require("../Commands/SetSceneCommand");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
@@ -17,8 +16,8 @@ class Scene extends Kohost {
     super(scene);
   }
 
-  static createSceneCommandPayload(room, scene, restore) {
-    const commandsByDriver = [];
+  static getRoomSceneDeviceData(room, scene, restore) {
+    const deviceData = [];
 
     const sceneDevices = scene?.devices || {};
     const sceneId = scene.id;
@@ -34,9 +33,12 @@ class Scene extends Kohost {
         const { id, ...deviceProps } = data;
         if (id === "*") {
           for (const device of roomDevices) {
-            const driver = device.driver;
             const deviceCmd = {
-              id: device.systemData?.id,
+              id: device.id,
+              systemId: device.systemData?.id,
+              type: device.type,
+              driver: device.driver,
+              commandData: {},
             };
             for (const prop in deviceProps) {
               if (prop === "setpointDelta") {
@@ -59,7 +61,7 @@ class Scene extends Kohost {
                     );
                   }
 
-                  deviceCmd.setpoints = {
+                  deviceCmd.commandData.setpoints = {
                     heat: {
                       value: setpointValue,
                     },
@@ -77,7 +79,7 @@ class Scene extends Kohost {
                       currentSetpoint.value - delta
                     );
                   }
-                  deviceCmd.setpoints = {
+                  deviceCmd.commandData.setpoints = {
                     cool: {
                       value: setpointValue,
                     },
@@ -113,7 +115,7 @@ class Scene extends Kohost {
                       continue;
                     }
 
-                    deviceCmd.setpoints = {
+                    deviceCmd.commandData.setpoints = {
                       heat: {
                         value: heatSetpoint,
                       },
@@ -129,29 +131,16 @@ class Scene extends Kohost {
                   continue;
                 }
               } else {
-                deviceCmd[prop] = deviceProps[prop];
+                deviceCmd.commandData[prop] = deviceProps[prop];
               }
             }
 
-            // move to next loop if the only key in deviceCmd is id
-            if (Object.keys(deviceCmd).length === 1) {
+            // move to next loop if no keys in command data
+            if (Object.keys(deviceCmd.commandData).length === 0) {
               continue;
             }
 
-            const driverIndex = commandsByDriver.findIndex(
-              (c) => c.driver === driver
-            );
-            if (driverIndex >= 0) {
-              commandsByDriver[driverIndex].command.devices.push(deviceCmd);
-            } else {
-              commandsByDriver.push({
-                driver,
-                command: {
-                  id: sceneId,
-                  devices: [deviceCmd],
-                },
-              });
-            }
+            deviceData.push(deviceCmd);
           }
         }
         /**
@@ -159,16 +148,7 @@ class Scene extends Kohost {
          */
       }
     }
-
-    const commands = commandsByDriver.map((c) => {
-      const command = new SetSceneCommand(c.command);
-      return {
-        driver: c.driver,
-        command,
-      };
-    });
-
-    return commands;
+    return deviceData;
   }
 }
 

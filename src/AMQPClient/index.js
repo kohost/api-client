@@ -225,6 +225,7 @@ class Message {
     this.content = content;
     this.options = {
       contentType: "application/json",
+      timestamp: Date.now(),
     };
     this.routingKey = "";
   }
