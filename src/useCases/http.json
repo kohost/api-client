@@ -39,6 +39,15 @@
     }
   ],
   [
+    "RequestPWAToken",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/auth/pwaToken"
+      }
+    }
+  ],
+  [
     "LogoutUser",
     {
       "http": {
@@ -1391,6 +1400,12 @@
   ],
   [
     "HandleMessageData",
+    {
+      "http": false
+    }
+  ],
+  [
+    "HandleSceneDevices",
     {
       "http": false
     }
