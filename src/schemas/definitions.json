@@ -1,0 +1,191 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "definitions.json",
+  "title": "Definitions",
+  "definitions": {
+    "id": {
+      "type": "string",
+      "not": {
+        "enum": ["global", "system"]
+      }
+    },
+    "systemData": {
+      "type": "object",
+      "default": {}
+    },
+    "metadata": {
+      "type": "object",
+      "default": {}
+    },
+    "date": {
+      "type": ["string", "object"],
+      "format": "date-time"
+    },
+    "createdAt": {
+      "type": ["string", "object"],
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": ["string", "object"],
+      "format": "date-time"
+    },
+    "file": {
+      "type": "object",
+      "required": ["name", "type", "data"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the file."
+        },
+        "type": {
+          "type": "string",
+          "description": "MIME type of the file (e.g. application/pdf)."
+        },
+        "data": {
+          "type": "string",
+          "description": "Base64-encoded data of the file."
+        }
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "line3": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2
+        }
+      }
+    },
+    "driver": {
+      "type": "string",
+      "enum": [
+        "aws-kinesis",
+        "butler",
+        "crestron",
+        "ecobee",
+        "igor",
+        "inncom",
+        "kohost-k7",
+        "kohost-pms",
+        "lg",
+        "lirc",
+        "mews",
+        "paxton",
+        "pelican-wireless",
+        "rebrandly",
+        "salto",
+        "salto-irn",
+        "se",
+        "sendgrid",
+        "stay-n-touch",
+        "twilio",
+        "cloudflare-images",
+        "cloudflare-stream",
+        "insperia-privacy"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "alarm",
+        "dimmer",
+        "switch",
+        "motionSensor",
+        "windowCovering",
+        "camera",
+        "mediaSource",
+        "thermostat",
+        "lock",
+        "courtesy",
+        "gateway",
+        "tv",
+        "dvr",
+        "appleTv",
+        "discPlayer",
+        "mediaPlayer",
+        "uncontrolledDevice"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "subType": {
+      "type": ["string", "null"]
+    },
+    "supportedNotifications": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "button 1",
+          "button 2",
+          "button 3",
+          "button 4",
+          "button 5",
+          "idle",
+          "powerHasBeedApplied",
+          "acMainsDisconnected",
+          "acMainsReconnected",
+          "replaceBatterySoon",
+          "replaceBatteryNow",
+          "hardwareFailure",
+          "softwareFailure",
+          "hardwareFailureWithCode",
+          "softwareFailureWithCode",
+          "motionDetection",
+          "airFilterNeedsCleaned",
+          "smokeDetected",
+          "outsideSafeTemperatureRange",
+          "outsideSafeHumidityRange"
+        ]
+      }
+    },
+    "notification": {
+      "type": ["object", "null"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "$ref": "#/definitions/supportedNotifications/items"
+        },
+        "timestamp": {
+          "type": "number",
+          "minimum": 1655907956593
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "batteryLevel": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "watts": {
+      "type": "number",
+      "minimum": 0
+    }
+  }
+}

@@ -1,33 +1,33 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://api.kohost.io/schemas/v3/iotGateway.json",
+  "$id": "iotGateway.json",
   "title": "IoT Gateway",
   "description": "Any smart gateway that is an entrypoint for controlling devices",
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/id"
+      "$ref": "definitions.json#/definitions/id"
     },
     "type": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/type"
+      "$ref": "definitions.json#/definitions/type"
     },
     "supportedNotifications": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/supportedNotifications"
+      "$ref": "definitions.json#/definitions/supportedNotifications"
     },
     "notification": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/notification"
+      "$ref": "definitions.json#/definitions/notification"
     },
     "status": {
       "type": "string"
     },
     "systemData": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/systemData"
+      "$ref": "definitions.json#/definitions/systemData"
     },
     "driver": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/common.json#/definitions/driver"
+      "$ref": "definitions.json#/definitions/driver"
     },
     "watts": {
-      "$ref": "https://api.kohost.io/schemas/v3/definitions/device.json#/definitions/watts"
+      "$ref": "definitions.json#/definitions/watts"
     }
   },
   "additionalProperties": false,
