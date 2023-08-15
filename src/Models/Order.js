@@ -18,17 +18,66 @@ class Order extends Kohost {
 
   getSubTotal() {
     return this.items.reduce((acc, item) => {
-      return acc + item.price;
+      const qty = item.quantity || 1;
+      return acc + item.price * qty;
     }, 0);
   }
 
-  getTaxTotal() {}
+  getTaxTotal() {
+    const taxes = this.taxes;
+    if (!taxes) return 0;
+    return this.items.reduce((acc, item) => {
+      if (!item.taxClass) return acc;
+      const tax = taxes.find((t) => t.class === item.taxClass);
+      if (!tax) return acc;
+      const { rateType, rate } = tax;
+      if (rateType === "percentage") {
+        return acc + item.price * rate;
+      }
+      return acc + rate;
+    }, 0);
+  }
 
-  getTotal() {}
+  getDeliveryTotal() {
+    const delivery = this.delivery;
+    if (!delivery) return 0;
+    return this.items.reduce((acc, item) => {
+      if (!item.deliveryClass) return acc;
+      const d = delivery.find((d) => d.class === item.deliveryClass);
+      if (!d) return acc;
+      const { rateType, rate } = d;
+      if (rateType === "percentage") {
+        return acc + item.price * rate;
+      }
+      return acc + rate;
+    }, 0);
+  }
 
-  getDeliveryTotal() {}
+  getFeesTotal() {
+    const fees = this.fees;
+    return fees.reduce((acc, fee) => {
+      return acc + fee.price;
+    }, 0);
+  }
 
-  getFeesTotal() {}
+  getTotal() {
+    return (
+      this.getSubTotal() +
+      this.getTaxTotal() +
+      this.getDeliveryTotal() +
+      this.getFeesTotal()
+    );
+  }
+
+  getPaymentsTotal() {
+    return this.payments.reduce((acc, payment) => {
+      return acc + payment.amount;
+    }, 0);
+  }
+
+  getBalance() {
+    return this.getTotal() - this.getPaymentsTotal();
+  }
 }
 
 Object.defineProperty(Order.prototype, "schema", {

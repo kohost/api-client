@@ -168,6 +168,15 @@
     }
   ],
   [
+    "ListUserOrders",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/:id/orders"
+      }
+    }
+  ],
+  [
     "UpsertSystemUser",
     {
       "http": false
@@ -1450,6 +1459,21 @@
     "BatchUpsertSystemProduct",
     {
       "http": false
+    }
+  ],
+  [
+    "CreateLoginLink",
+    {
+      "http": false
+    }
+  ],
+  [
+    "ListOrders",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/orders"
+      }
     }
   ]
 ]

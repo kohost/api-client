@@ -13,6 +13,9 @@
       "type": "string",
       "default": "order"
     },
+    "orderNumber": {
+      "type": "string"
+    },
     "status": {
       "type": "string",
       "enum": [
