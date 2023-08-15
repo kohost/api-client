@@ -62,7 +62,6 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@kohost/api-client": "^3.0.0-beta.52",
     "ajv": "^8.11.0",
     "ajv-formats": "^2.1.1",
     "amqplib": "^0.10.3",
