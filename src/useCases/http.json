@@ -1475,5 +1475,14 @@
         "path": "/orders"
       }
     }
+  ],
+  [
+    "ListMyOrders",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/orders/mine"
+      }
+    }
   ]
 ]

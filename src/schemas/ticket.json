@@ -38,7 +38,7 @@
             }
           },
           "media": {
-            "$ref": "mediaFile.json"
+            "anyOf": [{ "$ref": "mediaFile.json" }, { "type": "null" }]
           }
         },
         "required": ["userId", "id", "timestamp", "body"]
