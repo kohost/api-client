@@ -177,13 +177,7 @@
     }
   ],
   [
-    "UpsertSystemUser",
-    {
-      "http": false
-    }
-  ],
-  [
-    "BatchUpsertSystemUser",
+    "UpsertSystemUsers",
     {
       "http": false
     }
@@ -285,7 +279,7 @@
     }
   ],
   [
-    "BatchUpsertSystemSpace",
+    "UpsertSystemSpaces",
     {
       "http": false
     }
@@ -300,7 +294,7 @@
     }
   ],
   [
-    "BatchUpsertSystemSpaceType",
+    "UpsertSystemSpaceTypes",
     {
       "http": false
     }
@@ -1089,7 +1083,7 @@
     }
   ],
   [
-    "UpsertSystemDevice",
+    "UpsertSystemDevices",
     {
       "http": false
     }
@@ -1212,13 +1206,7 @@
     }
   ],
   [
-    "UpsertSystemReservation",
-    {
-      "http": false
-    }
-  ],
-  [
-    "BatchUpsertSystemReservations",
+    "UpsertSystemReservations",
     {
       "http": false
     }
@@ -1456,7 +1444,7 @@
     }
   ],
   [
-    "BatchUpsertSystemProduct",
+    "UpsertSystemProducts",
     {
       "http": false
     }
