@@ -82,7 +82,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": 
+          "id": {
             "type": "string"
           },
           "price": {
