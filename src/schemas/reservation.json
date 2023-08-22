@@ -77,6 +77,25 @@
       "type": "number",
       "default": 0
     },
+    "spaceTypeUpgradeOptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": 
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "min": 0 
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["night"]
+          }
+        }   
+      }
+    },
     "revenue": {
       "type": "array",
       "items": {

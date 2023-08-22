@@ -30,7 +30,8 @@
       "$ref": "definitions.json#/definitions/driver"
     },
     "spaceType": {
-      "type": "string"
+      "type": "string",
+      "description": "This is the spaceType id"
     },
     "rooms": {
       "type": "array",
