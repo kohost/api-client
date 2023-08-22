@@ -77,6 +77,9 @@
       "type": "number",
       "default": 0
     },
+    "updatedAt": {
+      "$ref": "definitions.json#/definitions/updatedAt"
+    },
     "spaceCategoryAvailabilites": {
       "type": "array",
       "items": {
@@ -91,9 +94,6 @@
           "unit": {
             "type": "string",
             "enum": ["night", "stay", "hour"]
-          },
-          "updatedAt": {
-            "$ref": "definitions.json#/definitions/updatedAt"
           }
         }   
       }

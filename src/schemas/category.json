@@ -3,6 +3,7 @@
   "$id": "category.json",
   "title": "Category",
   "type": "object",
+  "required": ["type", "discriminator"],
   "properties": {
     "id": {
       "$ref": "definitions.json#/definitions/id"
@@ -28,6 +29,10 @@
       "minimum": 0,
       "maximum": 10,
       "default": 9
+    },
+    "discriminator": {
+      "type": "string",
+      "enum": ["space", "product"]
     },
     "systemData": {
       "$ref": "definitions.json#/definitions/systemData"
