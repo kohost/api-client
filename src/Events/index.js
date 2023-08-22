@@ -15,7 +15,7 @@ const SceneSetEvent = require("./SceneSetEvent");
 
 const SystemUserUpdatedEvent = require("./SystemUserUpdatedEvent");
 const SystemSpaceUpdatedEvent = require("./SystemSpaceUpdatedEvent");
-const SystemSpaceTypeUpdatedEvent = require("./SystemSpaceTypeUpdatedEvent");
+const SystemCategoryUpdatedEvent = require("./SystemCategoryUpdatedEvent");
 const SystemProductUpdatedEvent = require("./SystemProductUpdatedEvent");
 
 const SystemReservationUpdatedEvent = require("./SystemReservationUpdatedEvent");
@@ -42,7 +42,7 @@ module.exports = {
   SystemCourtesyUpdatedEvent,
   SystemUserUpdatedEvent,
   SystemSpaceUpdatedEvent,
-  SystemSpaceTypeUpdatedEvent,
+  SystemCategoryUpdatedEvent,
   SystemProductUpdatedEvent,
   SystemReservationUpdatedEvent,
   SceneSetEvent,

@@ -29,9 +29,9 @@
     "driver": {
       "$ref": "definitions.json#/definitions/driver"
     },
-    "spaceType": {
+    "category": {
       "type": "string",
-      "description": "This is the spaceType id"
+      "description": "This is the category id"
     },
     "rooms": {
       "type": "array",
