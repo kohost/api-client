@@ -9,7 +9,8 @@
       "$ref": "definitions.json#/definitions/id"
     },
     "type": {
-      "type": "string"
+      "type": "string",
+      "default": "product"
     },
     "name": {
       "type": "string"
