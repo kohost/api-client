@@ -20,6 +20,7 @@ class MediaFile extends Kohost {
   createImageVariant(params) {
     if (this.mimeType != "image/*")
       throw new RequestError("Only dynamic images can have variants");
+    if (!this.url) throw new RequestError("MediaFile has no url");
     // convert params to "key=value" pairs
     const query = Object.keys(params)
       .map((key) => `${key}=${params[key]}`)

@@ -217,6 +217,9 @@
               "type": "boolean",
               "default": false
             },
+            "enableApp": {
+              "type": "boolean"
+            },
             "branding": {
               "type": "object",
               "properties": {
