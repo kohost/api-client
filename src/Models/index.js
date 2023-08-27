@@ -16,7 +16,7 @@ const MediaSource = require("./MediaSource");
 const Room = require("./Room");
 
 const Space = require("./Space");
-const SpaceType = require("./SpaceType");
+const Category = require("./Category");
 
 const Ticket = require("./Ticket");
 const Scene = require("./Scene");
@@ -56,7 +56,7 @@ module.exports = {
   SystemUser,
   Room,
   Space,
-  SpaceType,
+  Category,
   Ticket,
   Scene,
   DiscoveredDevice,

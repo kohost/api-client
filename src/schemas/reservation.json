@@ -15,7 +15,8 @@
       "type": "string"
     },
     "type": {
-      "type": "string"
+      "type": "string",
+      "default": "reservation"
     },
     "sharedGuests": {
       "type": "array",
@@ -23,7 +24,7 @@
         "type": "string"
       }
     },
-    "spaceType": {
+    "spaceCategory": {
       "type": "string"
     },
     "space": {
@@ -76,6 +77,27 @@
     "childCount": {
       "type": "number",
       "default": 0
+    },
+    "updatedAt": {
+      "$ref": "definitions.json#/definitions/updatedAt"
+    },
+    "spaceCategoryAvailabilites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["night", "stay", "hour"]
+          }
+        }   
+      }
     },
     "revenue": {
       "type": "array",
