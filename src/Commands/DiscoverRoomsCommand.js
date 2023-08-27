@@ -4,7 +4,7 @@ class DiscoverRoomsCommand extends Command {
   constructor({
     id,
     types,
-    spaceTypes,
+    categories,
     startDate,
     endDate,
     serviceStatus,
@@ -14,7 +14,7 @@ class DiscoverRoomsCommand extends Command {
     super({
       id,
       types,
-      spaceTypes,
+      categories,
       startDate,
       endDate,
       serviceStatus,

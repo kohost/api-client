@@ -1,17 +1,17 @@
 const Event = require("./Event");
 
-class SystemSpaceTypeUpdatedEvent extends Event {
+class SystemCategoryUpdatedEvent extends Event {
   constructor(space) {
     super(space);
   }
 
   get name() {
-    return "SystemSpaceTypeUpdated";
+    return "SystemCategoryUpdated";
   }
 
   get routingKey() {
-    return `spaceType.${this.keyId}.updated`;
+    return `category.${this.keyId}.updated`;
   }
 }
 
-module.exports = SystemSpaceTypeUpdatedEvent;
+module.exports = SystemCategoryUpdatedEvent;
