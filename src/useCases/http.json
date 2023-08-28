@@ -1275,6 +1275,24 @@
     }
   ],
   [
+    "DescribeReservationLateCheckOutProducts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/:id/products/lateCheckOut"
+      }
+    }
+  ],
+  [
+    "PurchaseReservationLateCheckOutProducts",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/products/lateCheckOut"
+      }
+    }
+  ],
+  [
     "OCRDocument",
     {
       "http": {
