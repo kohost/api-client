@@ -98,7 +98,7 @@
       }
     },
     "revenue": {
-      "$ref": "definitions.json#/definitions/updatedAt"
+      "$ref": "definitions.json#/definitions/revenue"
     },
     "rateSuppressed": {
       "type": "boolean"
