@@ -207,6 +207,15 @@
     }
   ],
   [
+    "TipUser",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/users/:id/tip"
+      }
+    }
+  ],
+  [
     "ListSpaces",
     {
       "http": {
@@ -294,53 +303,53 @@
     }
   ],
   [
-    "UpsertSystemSpaceTypes",
+    "UpsertSystemCategories",
     {
       "http": false
     }
   ],
   [
-    "CreateSpaceType",
+    "CreateCateory",
     {
       "http": {
         "method": "POST",
-        "path": "/spaceTypes"
+        "path": "/categories"
       }
     }
   ],
   [
-    "DeleteSpaceType",
+    "DeleteCategory",
     {
       "http": {
         "method": "DELETE",
-        "path": "/spaceTypes/:id"
+        "path": "/categories/:id"
       }
     }
   ],
   [
-    "DescribeSpaceType",
+    "DescribeCategory",
     {
       "http": {
         "method": "GET",
-        "path": "/spaceTypes/:id"
+        "path": "/categories/:id"
       }
     }
   ],
   [
-    "ListSpaceTypes",
+    "ListCategories",
     {
       "http": {
         "method": "GET",
-        "path": "/spaceTypes"
+        "path": "/categories"
       }
     }
   ],
   [
-    "UpdateSpaceType",
+    "UpdateCategory",
     {
       "http": {
         "method": "PUT",
-        "path": "/spaceTypes/:id"
+        "path": "/categories/:id"
       }
     }
   ],
@@ -1262,6 +1271,24 @@
       "http": {
         "method": "POST",
         "path": "/reservations/:id/products/roomUpgrades"
+      }
+    }
+  ],
+  [
+    "DescribeReservationLateCheckOutProducts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/:id/products/lateCheckOut"
+      }
+    }
+  ],
+  [
+    "PurchaseReservationLateCheckOutProducts",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/products/lateCheckOut"
       }
     }
   ],

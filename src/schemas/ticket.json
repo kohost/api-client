@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "ticket.json",
   "title": "Ticket",
-  "description": "A ticket is a request for help from a user.",
+  "description": "A ticket is a request from a user.",
   "type": "object",
   "properties": {
     "id": {
@@ -45,10 +45,52 @@
       }
     },
     "requester": {
-      "type": "string"
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "userPhoto": {
+          "anyOf": [
+            { "$ref": "mediaFile.json" },
+            { "type": "null" },
+            { "type": "string" }
+          ]
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "roomId": {
+          "type": "string"
+        },
+        "spaceId": {
+          "type": "string"
+        },
+        "spaceName": {
+          "type": "string"
+        }
+      }
     },
     "assignedTo": {
-      "type": ["string", "null"]
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "userPhoto": {
+          "anyOf": [
+            { "$ref": "mediaFile.json" },
+            { "type": "null" },
+            { "type": "string" }
+          ]
+        }
+      }
     },
     "status": {
       "type": "string",
@@ -68,6 +110,9 @@
       "maximum": 5
     },
     "ratingComment": {
+      "type": "string"
+    },
+    "tipAmount": {
       "type": "string"
     },
     "createdAt": {

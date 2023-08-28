@@ -99,6 +99,7 @@ Object.defineProperty(Ticket.prototype, "lastResponder", {
 
 function mapConversationData(data) {
   const ticketData = cloneDeep(data);
+  if (!ticketData.conversation) ticketData.conversation = [];
   ticketData.conversation = ticketData.conversation.map((msg) => {
     if (msg.media) {
       msg.media = new MediaFile(msg.media);
