@@ -100,23 +100,7 @@
       }
     },
     "revenue": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "amount": {
-            "type": "number"
-          },
-          "type": {
-            "type": "string",
-            "enum": ["service", "product"]
-          }
-        }
-      }
+      "$ref": "definitions.json#/definitions/updatedAt"
     },
     "rateSuppressed": {
       "type": "boolean"

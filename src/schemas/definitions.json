@@ -189,6 +189,27 @@
     "watts": {
       "type": "number",
       "minimum": 0
+    },
+    "revenue": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "definitions.json#/definitions/id"
+          },
+          "name": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "price": {
+            "type": "number"
+          }
+        }
+      }
     }
   }
 }

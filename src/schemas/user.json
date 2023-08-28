@@ -136,6 +136,9 @@
     "spaceName": {
       "type": "string"
     },
+    "revenue": {
+      "$ref": "definitions.json#/definitions/revenue"
+    },
     "createdAt": {
       "$ref": "definitions.json#/definitions/createdAt"
     },
