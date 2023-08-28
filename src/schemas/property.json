@@ -29,6 +29,12 @@
       "type": "string",
       "description": "Reference (id) to the organization that owns this property"
     },
+    "checkInTime": {
+      "type": "string"
+    },
+    "checkOutTime": {
+      "type": "string"
+    },
     "address": {
       "type": "object",
       "properties": {
@@ -187,24 +193,55 @@
             "identification": {},
             "earlyCheckIn": {
               "type": "object",
-              "required": ["dynamic", "checkInTime", "checkOutTime"],
+              "required": ["dynamic"],
               "properties": {
                 "dynamic": {
                   "type": "boolean",
                   "default": false
                 },
-                "checkInTime": {
-                  "type": "string"
+                "minimumPrice": {
+                  "type": "number",
+                  "default": 10
                 },
-                "checkOutTime": {
-                  "type": "string"
+                "maximumPrice": {
+                  "type": "number",
+                  "default": 50
+                },
+                "priceRatioPerHour": {
+                  "type": "number",
+                  "default": 0.1
                 }
               }
             },
             "roomUpgrades": {}
           }
         },
-        "CheckOut": {},
+        "CheckOut": {
+          "properties": {
+            "lateCheckOut": {
+              "type": "object",
+              "required": ["dynamic"],
+              "properties": {
+                "dynamic": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "minimumPrice": {
+                  "type": "number",
+                  "default": 10
+                },
+                "maximumPrice": {
+                  "type": "number",
+                  "default": 50
+                },
+                "priceRatioPerHour": {
+                  "type": "number",
+                  "default": 0.1
+                }
+              }
+            }
+          }
+        },
         "Concierge": {},
         "DigitalKey": {
           "type": "object",
