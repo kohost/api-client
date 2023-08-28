@@ -1,7 +1,7 @@
 const { RequestError } = require("../Errors");
 const Command = require("./Command");
 
-class DiscoverReservationRoomTypeUpsellOptionsCommand extends Command {
+class DiscoverReservationSpaceCategoryAvailabilitiesCommand extends Command {
   constructor(options) {
     if (!options) throw new RequestError("options are required");
     const { id, ...rest } = options;
@@ -9,7 +9,7 @@ class DiscoverReservationRoomTypeUpsellOptionsCommand extends Command {
   }
 
   get name() {
-    return "DiscoverReservationRoomTypeUpsellOptions";
+    return "DiscoverReservationSpaceCategoryAvailabilities";
   }
 
   get routingKey() {
@@ -17,4 +17,4 @@ class DiscoverReservationRoomTypeUpsellOptionsCommand extends Command {
   }
 }
 
-module.exports = DiscoverReservationRoomTypeUpsellOptionsCommand;
+module.exports = DiscoverReservationSpaceCategoryAvailabilitiesCommand;
