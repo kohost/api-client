@@ -10,8 +10,7 @@
       }
     },
     "systemData": {
-      "type": "object",
-      "default": {}
+      "type": "string"
     },
     "metadata": {
       "type": "object",

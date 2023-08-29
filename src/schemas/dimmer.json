@@ -42,5 +42,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["id", "type", "systemData", "level", "driver"]
+  "required": ["id", "type", "level", "driver"]
 }

@@ -28,5 +28,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["id", "type", "systemData", "driver"]
+  "required": ["id", "type", "driver"]
 }
