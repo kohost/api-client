@@ -1,8 +1,8 @@
 const Command = require("./Command");
 
 class DiscoverUsersCommand extends Command {
-  constructor({ id }) {
-    super({ id });
+  constructor({ id, ...rest }) {
+    super({ id, ...rest });
   }
 
   get name() {

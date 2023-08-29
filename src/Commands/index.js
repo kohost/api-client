@@ -15,7 +15,7 @@ const SendSMSCommand = require("./SendSMSCommand");
 const DiscoverReservationsCommand = require("./DiscoverReservationsCommand");
 const DiscoverReservationSpaceCategoryAvailabilitiesCommand = require("./DiscoverReservationSpaceCategoryAvailabilitiesCommand");
 const DiscoverRoomsCommand = require("./DiscoverRoomsCommand");
-const DiscoverRoomTypesCommand = require("./DiscoverRoomTypesCommand");
+const DiscoverCategoriesCommand = require("./DiscoverCategoriesCommand");
 const CreateShortLinkCommand = require("./CreateShortLinkCommand");
 const UpdateReservationCommand = require("./UpdateReservationCommand");
 const UpdateUserCommand = require("./UpdateUserCommand");
@@ -43,7 +43,7 @@ module.exports = {
   DiscoverReservationsCommand,
   DiscoverReservationSpaceCategoryAvailabilitiesCommand,
   DiscoverRoomsCommand,
-  DiscoverRoomTypesCommand,
+  DiscoverCategoriesCommand,
   CreateShortLinkCommand,
   UpdateReservationCommand,
   UpdateUserCommand,
