@@ -4,7 +4,7 @@
   "title": "Media Source",
   "description": "Any media source",
   "type": "object",
-  "required": ["id", "type", "systemData", "audio", "video", "driver"],
+  "required": ["id", "type", "audio", "video", "driver"],
   "properties": {
     "id": {
       "$ref": "definitions.json#/definitions/id"

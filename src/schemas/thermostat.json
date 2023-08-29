@@ -139,7 +139,6 @@
   "required": [
     "id",
     "type",
-    "systemData",
     "hvacMode",
     "fanMode",
     "hvacState",
