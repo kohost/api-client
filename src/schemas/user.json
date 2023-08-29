@@ -81,7 +81,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "additionalProperties": false
       }
     },
     "notes": {
@@ -145,10 +146,24 @@
     "updatedAt": {
       "$ref": "definitions.json#/definitions/updatedAt"
     },
-    "systemData": {
+    "systems": {
       "type": "array",
+      "default": [],
       "items": {
-        "$ref": "definitions.json#/definitions/systemData"
+        "type": "object",
+        "properties": {
+          "systemId": {
+            "type": "string"
+          },
+          "property": {
+            "type": "string"
+          },
+          "driver": {
+            "type": "string"
+          }
+        },
+        "required": ["systemId", "property", "driver"],
+        "additionalProperties": false
       }
     }
   }

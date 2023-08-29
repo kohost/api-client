@@ -54,8 +54,8 @@
       "minLength": 2,
       "maxLength": 2
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     }
   }
 }

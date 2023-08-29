@@ -37,8 +37,8 @@
       "type": "string",
       "$ref": "#/properties/supportedStates/items"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     },
     "watts": {
       "$ref": "definitions.json#/definitions/watts"

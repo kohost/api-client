@@ -14,8 +14,8 @@
     "driver": {
       "$ref": "definitions.json#/definitions/driver"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     },
     "supportedNotifications": {
       "$ref": "definitions.json#/definitions/supportedNotifications"

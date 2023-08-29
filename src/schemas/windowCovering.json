@@ -14,7 +14,7 @@
     "type": {
       "$ref": "definitions.json#/definitions/type"
     },
-   "supportedNotifications": {
+    "supportedNotifications": {
       "$ref": "definitions.json#/definitions/supportedNotifications"
     },
     "notification": {
@@ -31,8 +31,8 @@
       "minimum": 0,
       "maximum": 100
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     },
     "watts": {
       "$ref": "definitions.json#/definitions/watts"

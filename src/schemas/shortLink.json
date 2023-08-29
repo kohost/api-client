@@ -23,8 +23,8 @@
       "string": "string",
       "format": "uri"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     }
   }
 }

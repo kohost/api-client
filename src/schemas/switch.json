@@ -33,8 +33,8 @@
       "type": "string",
       "enum": ["on", "off"]
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     },
     "watts": {
       "$ref": "definitions.json#/definitions/watts"

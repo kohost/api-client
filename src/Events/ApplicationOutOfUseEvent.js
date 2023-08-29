@@ -9,6 +9,10 @@ class ApplicationOutOfUseEvent extends Event {
     return "ApplicationOutOfUse";
   }
 
+  get exchange() {
+    return "AppEvents";
+  }
+
   get routingKey() {
     return `app.${this.data[0].propertyId}.notInUse`;
   }

@@ -27,7 +27,7 @@
       "$ref": "definitions.json#/definitions/driver"
     },
     "offline": {
-      "type": "boolean" 
+      "type": "boolean"
     },
     "audio": {
       "type": "boolean"
@@ -176,8 +176,8 @@
     "notification": {
       "$ref": "definitions.json#/definitions/notification"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     },
     "watts": {
       "$ref": "definitions.json#/definitions/watts"

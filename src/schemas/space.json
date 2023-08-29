@@ -17,13 +17,7 @@
     },
     "discriminator": {
       "type": "string",
-      "enum": [
-        "classRoom",
-        "hotelRoom",
-        "office",
-        "building",
-        "commonArea"
-      ]
+      "enum": ["classRoom", "hotelRoom", "office", "building", "commonArea"]
     },
     "driver": {
       "$ref": "definitions.json#/definitions/driver"
@@ -87,8 +81,8 @@
       "type": "string",
       "enum": ["inService", "outOfOrder", "outOfService"]
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     }
   },
   "if": {

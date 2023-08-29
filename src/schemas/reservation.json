@@ -112,8 +112,8 @@
     "travelAgent": {
       "type": "string"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     },
     "metadata": {
       "ref": "definitions.json#/definitions/metadata"

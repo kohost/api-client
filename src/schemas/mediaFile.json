@@ -61,8 +61,8 @@
     "createdBy": {
       "type": "string"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     }
   },
   "additionalProperties": false,

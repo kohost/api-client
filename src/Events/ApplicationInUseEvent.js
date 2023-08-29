@@ -9,6 +9,10 @@ class ApplicationInUseEvent extends Event {
     return "ApplicationInUse";
   }
 
+  get exchange() {
+    return "AppEvents";
+  }
+
   get routingKey() {
     return `app.${this.data[0].propertyId}.inUse`;
   }

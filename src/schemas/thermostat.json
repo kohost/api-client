@@ -100,9 +100,8 @@
     "batteryLevel": {
       "$ref": "definitions.json#/definitions/batteryLevel"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData",
-      "default": {}
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     },
     "watts": {
       "$ref": "definitions.json#/definitions/watts"

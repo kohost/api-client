@@ -20,8 +20,15 @@ const exchanges = {
     },
   },
   // routes events based on routing keys
-  Events: {
-    name: "kohost.events",
+  DriverEvents: {
+    name: "kohost.events.drivers",
+    type: "topic",
+    options: {
+      durable: true,
+    },
+  },
+  AppEvents: {
+    name: "kohost.events.app",
     type: "topic",
     options: {
       durable: true,

@@ -10,15 +10,15 @@
     },
     "name": {
       "type": "string"
-    }, 
+    },
     "offline": {
       "type": "boolean"
     },
     "type": {
       "$ref": "definitions.json#/definitions/type"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     },
     "supportedNotifications": {
       "$ref": "definitions.json#/definitions/supportedNotifications"
@@ -78,11 +78,5 @@
     }
   },
   "additionalProperties": false,
-  "required": [
-    "id",
-    "type",
-    "areas",
-    "zones",
-    "driver"
-  ]
+  "required": ["id", "type", "areas", "zones", "driver"]
 }

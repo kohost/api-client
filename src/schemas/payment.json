@@ -40,8 +40,8 @@
     "expires": {
       "string": "string"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     }
   }
 }

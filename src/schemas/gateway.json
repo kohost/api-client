@@ -20,8 +20,8 @@
     "status": {
       "type": "string"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     },
     "driver": {
       "$ref": "definitions.json#/definitions/driver"

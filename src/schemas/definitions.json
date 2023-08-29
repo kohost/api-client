@@ -9,8 +9,11 @@
         "enum": ["global", "system"]
       }
     },
-    "systemData": {
+    "systemId": {
       "type": "string"
+    },
+    "systemData": {
+      "type": "object"
     },
     "metadata": {
       "type": "object",

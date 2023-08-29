@@ -44,7 +44,7 @@ class Event {
   }
 
   get exchange() {
-    return "Events";
+    return "DriverEvents";
   }
 
   build() {

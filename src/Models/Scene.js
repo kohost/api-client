@@ -35,7 +35,7 @@ class Scene extends Kohost {
           for (const device of roomDevices) {
             const deviceCmd = {
               id: device.id,
-              systemId: device.systemData?.id,
+              systemId: device.systemId,
               type: device.type,
               driver: device.driver,
               commandData: {},

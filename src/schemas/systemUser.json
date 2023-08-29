@@ -91,8 +91,8 @@
     "updatedAt": {
       "$ref": "definitions.json#/definitions/updatedAt"
     },
-    "systemData": {
-      "$ref": "definitions.json#/definitions/systemData"
+    "systemId": {
+      "$ref": "definitions.json#/definitions/systemId"
     }
   }
 }
