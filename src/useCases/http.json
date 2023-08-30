@@ -1293,6 +1293,15 @@
     }
   ],
   [
+    "UpdateReservationExpectedArrivalTime",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/reservations/:id/expectedArrivalTime"
+      }
+    }
+  ],
+  [
     "OCRDocument",
     {
       "http": {
