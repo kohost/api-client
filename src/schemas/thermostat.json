@@ -107,7 +107,6 @@
       "$ref": "definitions.json#/definitions/watts"
     }
   },
-  "additionalProperties": false,
   "$defs": {
     "setpoint": {
       "type": "object",
