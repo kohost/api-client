@@ -40,6 +40,5 @@
       "$ref": "definitions.json#/definitions/watts"
     }
   },
-  "additionalProperties": false,
   "required": ["id", "type", "state", "driver"]
 }

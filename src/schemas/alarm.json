@@ -77,6 +77,5 @@
       "$ref": "definitions.json#/definitions/watts"
     }
   },
-  "additionalProperties": false,
   "required": ["id", "type", "areas", "zones", "driver"]
 }
