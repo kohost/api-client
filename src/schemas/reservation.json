@@ -61,6 +61,11 @@
     "confirmationNumber": {
       "type": "string"
     },
+    "expectedCheckInDateTime": {
+      "type": ["string", "object"],
+      "format": "date-time",
+      "description": "Expected arrival time of guest."
+    },
     "checkInDateTime": {
       "type": ["string", "object"],
       "format": "date-time"
