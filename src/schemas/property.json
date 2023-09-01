@@ -13,7 +13,9 @@
       "type": "string"
     },
     "type": {
-      "type": "string",
+      "type": "string"
+    },
+    "discriminator": {
       "enum": ["hospitality", "education", "commercial"]
     },
     "timezone": {
@@ -23,10 +25,10 @@
       "type": "string"
     },
     "hostname": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "organization": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "Reference (id) to the organization that owns this property"
     },
     "checkInTime": {
@@ -36,24 +38,8 @@
       "type": "string"
     },
     "address": {
-      "type": "object",
-      "properties": {
-        "street": {
-          "type": "string"
-        },
-        "city": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "zip": {
-          "type": "string"
-        },
-        "country": {
-          "type": "string"
-        }
-      }
+      "$ref": "definitions.json#/definitions/address"
+     }
     },
     "latitude": {
       "type": "number"
@@ -340,7 +326,5 @@
     "credentials": {
       "type": "object",
       "additionalProperties": true
-    },
-    "additionalProperties": false
-  }
+    }
 }

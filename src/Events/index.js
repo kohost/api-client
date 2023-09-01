@@ -27,6 +27,10 @@ const ShortLinkCreatedEvent = require("./ShortLinkCreatedEvent");
 const ApplicationInUseEvent = require("./ApplicationInUseEvent");
 const ApplicationOutOfUseEvent = require("./ApplicationOutOfUseEvent");
 
+// Delete Events
+const SystemEntityDeletedEvent = require("./SystemEntityDeletedEvent");
+
+
 module.exports = {
   SystemAlarmUpdatedEvent,
   SystemGatewayUpdatedEvent,
@@ -45,6 +49,7 @@ module.exports = {
   SystemCategoryUpdatedEvent,
   SystemProductUpdatedEvent,
   SystemReservationUpdatedEvent,
+  SystemEntityDeletedEvent,
   SceneSetEvent,
   SMSEvent,
   EmailEvent,

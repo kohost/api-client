@@ -10,7 +10,7 @@
       "$ref": "definitions.json#/definitions/id"
     },
     "accountNumber": {
-      "type": "number",
+      "type": ["number", "null"],
       "minimum": 10000
     },
     "name": {
