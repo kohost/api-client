@@ -14,8 +14,13 @@
     },
     "type": {
       "type": "string",
+      "default": "property"
+    },
+    "discriminator": {
+      "type": "string",
       "enum": ["hospitality", "education", "commercial"]
     },
+ 
     "timezone": {
       "type": "string"
     },
@@ -23,7 +28,7 @@
       "type": "string"
     },
     "hostname": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "organization": {
       "type": "string",
@@ -36,24 +41,7 @@
       "type": "string"
     },
     "address": {
-      "type": "object",
-      "properties": {
-        "street": {
-          "type": "string"
-        },
-        "city": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "zip": {
-          "type": "string"
-        },
-        "country": {
-          "type": "string"
-        }
-      }
+      "$ref": "definitions.json#/definitions/address"
     },
     "latitude": {
       "type": "number"

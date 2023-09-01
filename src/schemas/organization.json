@@ -9,8 +9,12 @@
     "id": {
       "$ref": "definitions.json#/definitions/id"
     },
+    "type": {
+      "type": "string",
+      "default": "organization" 
+    },
     "accountNumber": {
-      "type": "number",
+      "type": ["number", "null"],
       "minimum": 10000
     },
     "name": {
