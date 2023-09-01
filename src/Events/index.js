@@ -10,6 +10,8 @@ const SystemMediaSourceUpdatedEvent = require("./SystemMediaSourceUpdatedEvent")
 const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
 const SystemAlarmUpdatedEvent = require("./SystemAlarmUpdatedEvent");
 const SystemMotionSensorUpdatedEvent = require("./SystemMotionSensorUpdatedEvent");
+const SystemPropertyUpdatedEvent = require("./SystemPropertyUpdatedEvent");
+const SystemOrganizationUpdatedEvent = require("./SystemOrganizationUpdatedEvent");
 
 const SceneSetEvent = require("./SceneSetEvent");
 
@@ -48,6 +50,8 @@ module.exports = {
   SystemSpaceUpdatedEvent,
   SystemCategoryUpdatedEvent,
   SystemProductUpdatedEvent,
+  SystemPropertyUpdatedEvent,
+  SystemOrganizationUpdatedEvent,
   SystemReservationUpdatedEvent,
   SystemEntityDeletedEvent,
   SceneSetEvent,

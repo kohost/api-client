@@ -13,11 +13,14 @@
       "type": "string"
     },
     "type": {
-      "type": "string"
+     "type": "string",
+      "default": "property"
     },
     "discriminator": {
+      "type": "string",
       "enum": ["hospitality", "education", "commercial"]
     },
+ 
     "timezone": {
       "type": "string"
     },
