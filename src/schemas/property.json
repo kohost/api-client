@@ -13,14 +13,14 @@
       "type": "string"
     },
     "type": {
-     "type": "string",
+      "type": "string",
       "default": "property"
     },
     "discriminator": {
       "type": "string",
       "enum": ["hospitality", "education", "commercial"]
     },
- 
+
     "timezone": {
       "type": "string"
     },
@@ -42,7 +42,6 @@
     },
     "address": {
       "$ref": "definitions.json#/definitions/address"
-     }
     },
     "latitude": {
       "type": "number"
@@ -330,4 +329,5 @@
       "type": "object",
       "additionalProperties": true
     }
+  }
 }
