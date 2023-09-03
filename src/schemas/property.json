@@ -20,7 +20,9 @@
       "type": "string",
       "enum": ["hospitality", "education", "commercial"]
     },
-
+    "testModeEnabled": {
+      "type": "boolean"
+    },
     "timezone": {
       "type": "string"
     },
