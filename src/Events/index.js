@@ -12,6 +12,7 @@ const SystemAlarmUpdatedEvent = require("./SystemAlarmUpdatedEvent");
 const SystemMotionSensorUpdatedEvent = require("./SystemMotionSensorUpdatedEvent");
 const SystemPropertyUpdatedEvent = require("./SystemPropertyUpdatedEvent");
 const SystemOrganizationUpdatedEvent = require("./SystemOrganizationUpdatedEvent");
+const SystemCredentialUpdatedEvent = require("./SystemCredentialUpdatedEvent");
 
 const SceneSetEvent = require("./SceneSetEvent");
 
@@ -35,6 +36,7 @@ const SystemEntityDeletedEvent = require("./SystemEntityDeletedEvent");
 
 module.exports = {
   SystemAlarmUpdatedEvent,
+  SystemCredentialUpdatedEvent,
   SystemGatewayUpdatedEvent,
   SystemThermostatUpdatedEvent,
   SystemDimmerUpdatedEvent,
