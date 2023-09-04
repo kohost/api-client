@@ -17,7 +17,18 @@
     },
     "discriminator": {
       "type": "string",
-      "enum": ["classRoom", "hotelRoom", "office", "building", "commonArea"]
+      "enum": [
+        "classRoom",
+        "hotelRoom",
+        "office",
+        "building",
+        "commonArea",
+        "conferenceRoom",
+        "lobby",
+        "gym",
+        "pool",
+        "restaurant"
+      ]
     },
     "driver": {
       "$ref": "definitions.json#/definitions/driver"
