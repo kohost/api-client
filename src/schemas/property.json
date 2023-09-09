@@ -23,6 +23,18 @@
     "testModeEnabled": {
       "type": "boolean"
     },
+    "testMode": {
+      "type": "object",
+      "properties": {
+        "notificationEmailDomains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Only users with email addreses ending in these domains will receive notifications in test mode, including sms, email, or push."
+        }
+      }
+    },
     "timezone": {
       "type": "string"
     },

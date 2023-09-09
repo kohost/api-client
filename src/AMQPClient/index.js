@@ -108,8 +108,6 @@ class KohostAMQPClient {
   }
 
   static parseMessage(message) {
-    debug("parseMessage input %o", message);
-
     let error = null;
     let data = {};
     let query = {};
