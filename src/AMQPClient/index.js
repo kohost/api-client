@@ -170,7 +170,7 @@ class KohostAMQPClient {
     if (isEvent && eventName) parsed.event = eventName;
     else if (isCommand && commandName) parsed.command = commandName;
 
-    debug("parseMessage parsed %o", parsed);
+    debug("amqp parsed %o", parsed);
 
     return parsed;
   }
