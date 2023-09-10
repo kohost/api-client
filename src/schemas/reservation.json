@@ -28,7 +28,7 @@
       "type": "string"
     },
     "space": {
-      "type": "string"
+      "type": ["string", "null"]
     },
     "status": {
       "type": "string",
