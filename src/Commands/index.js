@@ -10,6 +10,7 @@ const SetMediaCommand = require("./SetMediaCommand");
 const DiscoverUsersCommand = require("./DiscoverUsersCommand");
 const OCRDocumentCommand = require("./OCRDocumentCommand");
 const CheckInReservationCommand = require("./CheckInReservationCommand");
+const CheckOutReservationCommand = require("./CheckOutReservationCommand");
 const SendEmailCommand = require("./SendEmailCommand");
 const SendSMSCommand = require("./SendSMSCommand");
 const DiscoverReservationsCommand = require("./DiscoverReservationsCommand");
@@ -38,6 +39,7 @@ module.exports = {
   OCRDocumentCommand,
   DiscoverUsersCommand,
   CheckInReservationCommand,
+  CheckOutReservationCommand,
   SendSMSCommand,
   SendEmailCommand,
   DiscoverReservationsCommand,

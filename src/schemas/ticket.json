@@ -47,6 +47,9 @@
     "requester": {
       "type": "object",
       "properties": {
+        "systemId": {
+          "type": "string"
+        },
         "userId": {
           "type": "string"
         },

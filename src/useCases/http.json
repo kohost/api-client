@@ -51,7 +51,6 @@
     "LogoutUser",
     {
       "http": {
-        "disableAuth": true,
         "method": "POST",
         "path": "/auth/user/:id/logout"
       }
@@ -1005,6 +1004,12 @@
     }
   ],
   [
+    "NotifyTicketResolved",
+    {
+      "http": false
+    }
+  ],
+  [
     "ListScenes",
     {
       "http": {
@@ -1161,20 +1166,20 @@
     }
   ],
   [
-    "DescribeReservationCheckinStatus",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/reservations/:id/checkinStatus"
-      }
-    }
-  ],
-  [
     "CheckInReservation",
     {
       "http": {
         "method": "POST",
         "path": "/reservations/:id/checkin"
+      }
+    }
+  ],
+  [
+    "CheckOutReservation",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/checkout"
       }
     }
   ],
@@ -1206,6 +1211,15 @@
     }
   ],
   [
+    "SendRoomControlSMS",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/sendRoomControlSMS"
+      }
+    }
+  ],
+  [
     "BatchNotifyPreArrival",
     {
       "http": {
@@ -1226,6 +1240,24 @@
       "http": {
         "method": "POST",
         "path": "/reservations/batchNotifyCheckIn"
+      }
+    }
+  ],
+  [
+    "BatchNotifyCheckOut",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/batchNotifyCheckIn"
+      }
+    }
+  ],
+  [
+    "BatchNotifyMissedCheckOut",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/batchNotifyMissedCheckOut"
       }
     }
   ],
