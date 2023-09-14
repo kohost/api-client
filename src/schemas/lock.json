@@ -30,6 +30,12 @@
       "type": ["string", "null"],
       "enum": ["locked", "unlocked", null]
     },
+    "mode": {
+      "type": ["string", "null"],
+      "enum": ["normal", "autoLock", null],
+      "description": "AutoLock: Lock automatically locks after set time. Normal - Lock needs told to lock or unlock.",
+      "default": "normal"
+    },
     "batteryLevel": {
       "$ref": "definitions.json#/definitions/batteryLevel"
     },

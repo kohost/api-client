@@ -162,9 +162,11 @@
           "softwareFailureWithCode",
           "motionDetection",
           "airFilterNeedsCleaned",
+          "airFilterNeedsReplaced",
           "smokeDetected",
           "outsideSafeTemperatureRange",
-          "outsideSafeHumidityRange"
+          "outsideSafeHumidityRange",
+          "scheduleMaintenance"
         ]
       }
     },
