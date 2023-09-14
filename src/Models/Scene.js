@@ -49,7 +49,7 @@ class Scene extends Kohost {
                 const currentSetpoint = setpoints[currentMode];
 
                 if (currentMode === "heat") {
-                  let setpointValue = Math.min(
+                  let setpointValue = Math.max(
                     currentSetpoint.min,
                     currentSetpoint.value - delta
                   );
@@ -68,7 +68,7 @@ class Scene extends Kohost {
                   };
                 }
                 if (currentMode === "cool") {
-                  let setpointValue = Math.max(
+                  let setpointValue = Math.min(
                     currentSetpoint.max,
                     currentSetpoint.value + delta
                   );
@@ -88,12 +88,12 @@ class Scene extends Kohost {
 
                 if (currentMode === "auto") {
                   if (!currentSetpoint && setpoints.cool && setpoints.heat) {
-                    let heatSetpoint = Math.min(
+                    let heatSetpoint = Math.max(
                       setpoints.heat.min,
                       setpoints.heat.value - delta
                     );
 
-                    let coolSetpoint = Math.max(
+                    let coolSetpoint = Math.min(
                       setpoints.cool.max,
                       setpoints.cool.value + delta
                     );

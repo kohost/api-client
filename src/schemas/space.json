@@ -65,7 +65,7 @@
           "default": false
         },
         "activatedAt": {
-          "type": "string",
+          "type": ["string", "object"],
           "format": "date-time"
         },
         "allowed": {
