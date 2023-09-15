@@ -14,9 +14,6 @@
     "type": {
       "$ref": "definitions.json#/definitions/type"
     },
-    "subType": {
-      "$ref": "definitions.json#/definitions/subType"
-    },
     "supportedNotifications": {
       "$ref": "definitions.json#/definitions/supportedNotifications"
     },
