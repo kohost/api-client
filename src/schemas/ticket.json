@@ -47,7 +47,14 @@
             "anyOf": [{ "$ref": "mediaFile.json" }, { "type": "null" }]
           }
         },
-        "required": ["userId", "id", "timestamp", "body"]
+        "anyOf": [
+          {
+            "required": ["id", "userId", "timestamp", "body"]
+          },
+          {
+            "required": ["id", "systemId", "timestamp", "body"]
+          }
+        ]
       }
     },
     "requester": {
