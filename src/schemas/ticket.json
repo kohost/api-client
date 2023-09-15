@@ -24,6 +24,12 @@
           "userName": {
             "type": "string"
           },
+          "systemId": {
+            "type": "string"
+          },
+          "systemName": {
+            "type": "string"
+          },
           "timestamp": {
             "$ref": "definitions.json#/definitions/createdAt"
           },
@@ -49,6 +55,16 @@
       "properties": {
         "systemId": {
           "type": "string"
+        },
+        "systemName": {
+          "type": "string"
+        },
+        "systemPhoto": {
+          "anyOf": [
+            { "$ref": "mediaFile.json" },
+            { "type": "null" },
+            { "type": "string" }
+          ]
         },
         "userId": {
           "type": "string"
