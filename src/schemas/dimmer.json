@@ -27,7 +27,7 @@
       "type": "boolean"
     },
     "level": {
-      "type": "number",
+      "type": ["number", "null"],
       "minimum": 0,
       "maximum": 100
     },
