@@ -212,6 +212,9 @@
           },
           "price": {
             "type": "number"
+          },
+          "tax": {
+            "type": ["number", "null"] 
           }
         }
       }
