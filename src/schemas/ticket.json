@@ -57,6 +57,15 @@
         ]
       }
     },
+
+    "openedBy": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
     "requester": {
       "type": "object",
       "properties": {
