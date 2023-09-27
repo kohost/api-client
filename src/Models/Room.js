@@ -3,7 +3,6 @@ const schemas = require("../utils/schema");
 const schema = require("../schemas/room.json");
 const deviceSchema = require("../schemas/definitions.json");
 const Kohost = require("./Kohost");
-const cloneDeep = require("lodash.clonedeep");
 
 // device dependencies
 const Switch = require("./Switch");
@@ -157,7 +156,7 @@ Object.defineProperty(Room, "validProperties", {
 });
 
 function mapRoomData(data) {
-  const roomData = cloneDeep(data);
+  const roomData = structuredClone(data);
   roomData.dimmers?.map((dimmer) => {
     if (dimmer instanceof Dimmer) return dimmer;
     else return new Dimmer(dimmer);
