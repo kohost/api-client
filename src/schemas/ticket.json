@@ -8,6 +8,11 @@
     "id": {
       "$ref": "definitions.json#/definitions/id"
     },
+    "type": {
+      "type": "string",
+      "enum": ["ticket"],
+      "default": "ticket"
+    },
     "conversation": {
       "type": "array",
       "default": [],

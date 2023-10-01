@@ -6,6 +6,11 @@
   "type": "object",
   "properties": {
     "id": { "$ref": "definitions.json#/definitions/id" },
+    "type": {
+      "type": "string",
+      "enum": ["announcement"],
+      "default": "announcement"
+    },
     "users": {
       "type": "array",
       "items": {
