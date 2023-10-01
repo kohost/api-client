@@ -18,6 +18,9 @@
       },
       "minItems": 1
     },
+    "group": {
+      "type": "string"
+    },
     "body": {
       "type": "string"
     },
@@ -27,8 +30,11 @@
     "sentBy": {
       "type": "string"
     },
-    "tag": {
-      "type": "string"
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "createdAt": {
       "$ref": "definitions.json#/definitions/date"

@@ -3,7 +3,7 @@
   "$id": "smsMessage.json",
   "title": "SMS Message",
   "type": "object",
-  "required": ["to", "from", "body", "status"],
+  "required": ["to", "from", "status"],
   "properties": {
     "id": {
       "$ref": "definitions.json#/definitions/id"
