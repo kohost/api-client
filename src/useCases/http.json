@@ -1220,6 +1220,15 @@
     }
   ],
   [
+    "SendCheckOutSMS",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/sendCheckOutSMS"
+      }
+    }
+  ],
+  [
     "BatchNotifyPreArrival",
     {
       "http": {
@@ -1369,8 +1378,7 @@
       "http": {
         "method": "GET",
         "path": "/organizations/:id"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1538,6 +1546,51 @@
       "http": {
         "method": "GET",
         "path": "/orders/mine"
+      }
+    }
+  ],
+  [
+    "CreateAnnouncement",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/announcements"
+      }
+    }
+  ],
+  [
+    "UpdateAnnouncement",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/announcements/:id"
+      }
+    }
+  ],
+  [
+    "DescribeAnnouncement",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/announcements/:id"
+      }
+    }
+  ],
+  [
+    "DeleteAnnouncement",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/announcements/:id"
+      }
+    }
+  ],
+  [
+    "ListAnnouncements",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/announcements"
       }
     }
   ]
