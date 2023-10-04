@@ -61,6 +61,7 @@ module.exports = {
   Ticket,
   Scene,
   DiscoveredDevice,
+  DeviceRouter,
   Reservation,
   Credential,
   ShortLink,
