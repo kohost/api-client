@@ -26,6 +26,10 @@
     },
     "ignore": {
       "type": "boolean"
+    },
+    "organization": {
+      "type": ["string", "null"],
+      "description": "Reference (id) to the organization that owns this device"
     }
   }
 }

@@ -24,6 +24,7 @@ const Gateway = require("./Gateway");
 const Product = require("./Product");
 const Order = require("./Order");
 const DiscoveredDevice = require("./DiscoveredDevice");
+const DeviceRouter = require("./DeviceRouter");
 const Credential = require("./Credential");
 const ShortLink = require("./ShortLink");
 const EnergyReportShard = require("./EnergyReportShard");
