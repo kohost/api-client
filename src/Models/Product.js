@@ -1,12 +1,12 @@
 // Create the Product Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/product.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Product extends Kohost {
+class Product extends Entity {
   /**
    * @typedef {import("../schemas/ProductSchema").Product} ProductType
    * Create a Product instance.

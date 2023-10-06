@@ -36,7 +36,10 @@ const Announcement = require("./Announcement");
 const Property = require("./Property");
 const Organization = require("./Organization");
 
+const Entity = require("./Entity");
+
 module.exports = {
+  Entity,
   Organization,
   Property,
   MediaFile,

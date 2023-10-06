@@ -1,7 +1,7 @@
 const { ValidationError } = require("../Errors");
 const { customAlphabet: generate } = require("nanoid");
 
-class Kohost {
+class Entity {
   constructor(data) {
     if (!this.schema) {
       throw new Error("Schema is not defined");
@@ -93,4 +93,4 @@ class Kohost {
   }
 }
 
-module.exports = Kohost;
+module.exports = Entity;

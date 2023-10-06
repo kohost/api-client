@@ -1,12 +1,12 @@
 // create the Camera Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/camera.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Camera extends Kohost {
+class Camera extends Entity {
   /**
    * @typedef {import("../schemas/CameraSchema").Camera} CameraType
    * Create a Camera instance.

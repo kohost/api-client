@@ -1,12 +1,12 @@
 // create the energyReportShard Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/energyReportShard.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class EnergyReportShard extends Kohost {
+class EnergyReportShard extends Entity {
   /**
    * @typedef {import("../schemas/EnergyReportShardSchema").EnergyReportShard} EnergyReportShardType
    * Create a EnergyReportShard instance.

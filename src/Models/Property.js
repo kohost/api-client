@@ -1,11 +1,11 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/property.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Property extends Kohost {
+class Property extends Entity {
   /**
    * @typedef {import("../schemas/PropertySchema").Property} PropertyType
    * Create a Property instance.

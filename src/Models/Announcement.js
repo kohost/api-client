@@ -1,11 +1,11 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/announcement.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Announcement extends Kohost {
+class Announcement extends Entity {
   /**
    * @typedef {import("../schemas/AnnouncementSchema").Announcement} AnnouncementType
    * Create a Announcement instance.

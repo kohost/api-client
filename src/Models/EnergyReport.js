@@ -1,12 +1,12 @@
 // create the energyReportDaily Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/energyReport.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class EnergyReport extends Kohost {
+class EnergyReport extends Entity {
   /**
    * @typedef {import("../schemas/EnergyReportSchema").EnergyReport} EnergyReportType
    * Create a EnergyReport instance.

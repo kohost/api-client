@@ -2,12 +2,12 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/discoveredDevice.json");
 
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class DiscoveredDevice extends Kohost {
+class DiscoveredDevice extends Entity {
   /**
    * @typedef {import("../schemas/DiscoveredDeviceSchema").DiscoveredDevice} DiscoveredDeviceType
    * Create a DiscoveredDevice instance.

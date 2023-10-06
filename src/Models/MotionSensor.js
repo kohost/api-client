@@ -1,12 +1,12 @@
 // create the Motion Sensor Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/motionSensor.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class MotionSensor extends Kohost {
+class MotionSensor extends Entity {
   /**
    * @typedef {import("../schemas/MotionSensorSchema").MotionSensor} MotionSensorType
    * Create a MotionSensor instance.

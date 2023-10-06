@@ -1,12 +1,12 @@
 // Create the Lock Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/shortLink.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class ShortLink extends Kohost {
+class ShortLink extends Entity {
   /**
    * @typedef {import("../schemas/ShortLinkSchema").ShortLink} ShortLinkType
    * Create a ShortLink instance.

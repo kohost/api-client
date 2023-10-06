@@ -1,12 +1,12 @@
 // Create the Lock Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/lock.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Lock extends Kohost {
+class Lock extends Entity {
   /**
    * @typedef {import("../schemas/LockSchema").Lock} LockType
    * Create a Lock instance.

@@ -1,12 +1,12 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/mediaFile.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 const { RequestError } = require("../Errors");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class MediaFile extends Kohost {
+class MediaFile extends Entity {
   /**
    * @typedef {import("../schemas/MediaFileSchema").MediaFile} MediaFileType
    * Create a MediaFile instance.

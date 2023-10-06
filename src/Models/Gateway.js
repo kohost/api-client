@@ -1,12 +1,12 @@
 // Create the Gateway Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/gateway.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Gateway extends Kohost {
+class Gateway extends Entity {
   /**
    * @typedef {import("../schemas/GatewaySchema").Gateway} GatewayType
    * Create a Gateway instance.

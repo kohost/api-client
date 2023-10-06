@@ -2,7 +2,7 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/user.json");
 const paymentSchema = require("../schemas/payment.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 const MediaFile = require("./MediaFile");
 const Reservation = require("./Reservation");
 const Identification = require("./Identification");
@@ -14,7 +14,7 @@ schemas.add(schema);
 
 const validator = schemas.compile(schema);
 
-class User extends Kohost {
+class User extends Entity {
   /**
    * @typedef {import("../schemas/UserSchema").User} UserType
    * Create a User instance.

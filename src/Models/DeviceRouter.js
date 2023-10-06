@@ -2,12 +2,12 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/deviceRouter.json");
 
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class DeviceRouter extends Kohost {
+class DeviceRouter extends Entity {
   /**
    * @typedef {import("../schemas/DeviceRouterSchema").DeviceRouter} DeviceRouterType
    * Create a DeviceRouter instance.

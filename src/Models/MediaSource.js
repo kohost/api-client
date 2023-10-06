@@ -1,12 +1,12 @@
 // create the Media Source Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/mediaSource.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class MediaSource extends Kohost {
+class MediaSource extends Entity {
   /**
    * @typedef {import("../schemas/MediaSourceSchema").MediaSource} MediaSourceType
    * Create a MediaSource instance.

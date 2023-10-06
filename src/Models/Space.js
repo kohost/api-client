@@ -2,14 +2,14 @@
 // A group of rooms -> rooms could become a space later...
 const schemas = require("../utils/schema");
 const schema = require("../schemas/space.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 const Room = require("./Room");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Space extends Kohost {
+class Space extends Entity {
   /**
    * @typedef {import("../schemas/SpaceSchema").Space} SpaceType
    * Create a Space instance.

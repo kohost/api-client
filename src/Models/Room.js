@@ -2,7 +2,7 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/room.json");
 const deviceSchema = require("../schemas/definitions.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 // device dependencies
 const Switch = require("./Switch");
@@ -22,7 +22,7 @@ const Scene = require("./Scene");
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Room extends Kohost {
+class Room extends Entity {
   /**
    * @typedef {import("../schemas/RoomSchema").Room} RoomType
    * Create a Room instance.

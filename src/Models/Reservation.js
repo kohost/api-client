@@ -1,11 +1,11 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/reservation.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Reservation extends Kohost {
+class Reservation extends Entity {
   /**
    * @typedef {import("../schemas/ReservationSchema").Reservation} ReservationType
    * Create a Reservation instance.

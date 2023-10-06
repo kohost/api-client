@@ -1,12 +1,12 @@
 // Create the WindowCovering Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/windowCovering.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class WindowCovering extends Kohost {
+class WindowCovering extends Entity {
   /**
    * @typedef {import("../schemas/WindowCoveringSchema").WindowCovering} WindowCoveringType
    * Create a WindowCovering instance.

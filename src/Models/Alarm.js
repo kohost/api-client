@@ -1,12 +1,12 @@
 // create the Alarm Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/alarm.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Alarm extends Kohost {
+class Alarm extends Entity {
   /**
    * @typedef {import("../schemas/AlarmSchema").Alarm} AlarmType
    * Create a Alarm instance.

@@ -1,12 +1,12 @@
 // create the Courtesy Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/courtesy.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Courtesy extends Kohost {
+class Courtesy extends Entity {
   /**
    * @typedef {import("../schemas/CourtesySchema").Courtesy} CourtesyType
    * Create a Courtesy instance.

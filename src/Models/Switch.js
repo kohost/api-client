@@ -1,12 +1,12 @@
 // create the Switch model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/switch.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Switch extends Kohost {
+class Switch extends Entity {
   /**
    * @typedef {import("../schemas/SwitchSchema").Switch} SwitchType
    * Create a Switch instance.

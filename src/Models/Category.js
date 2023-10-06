@@ -2,12 +2,12 @@
 // Originally used for hotel room category e.g. Double Queen
 const schemas = require("../utils/schema");
 const schema = require("../schemas/category.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Category extends Kohost {
+class Category extends Entity {
   /**
    * @typedef {import("../schemas/CategorySchema").Category} CategoryType
    * Create a Category instance.

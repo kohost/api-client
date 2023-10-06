@@ -1,7 +1,7 @@
 // Create the User Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/ticket.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 const MediaFile = require("./MediaFile");
 
 const { nanoid } = require("nanoid");
@@ -9,7 +9,7 @@ const { nanoid } = require("nanoid");
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Ticket extends Kohost {
+class Ticket extends Entity {
   /**
    * @typedef {import("../schemas/TicketSchema").Ticket} TicketType
    * Create a Ticket instance.

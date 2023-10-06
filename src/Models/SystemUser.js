@@ -1,13 +1,13 @@
 // Create the User Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/systemUser.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 
 const validator = schemas.compile(schema);
 
-class SystemUser extends Kohost {
+class SystemUser extends Entity {
   /**
    * @typedef {import("../schemas/SystemUserSchema").SystemUser} SystemUserType
    * Create a SystemUser instance.

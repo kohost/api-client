@@ -1,11 +1,11 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/thermostat.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Thermostat extends Kohost {
+class Thermostat extends Entity {
   /**
    * @typedef {import("../schemas/ThermostatSchema").Thermostat} ThermostatType
    * Create a Thermostat instance.

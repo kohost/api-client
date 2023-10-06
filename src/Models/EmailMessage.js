@@ -1,12 +1,12 @@
 // Create the SMS Message Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/emailMessage.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class EmailMessage extends Kohost {
+class EmailMessage extends Entity {
   /**
    * @typedef {import("../schemas/EmailMessageSchema").EmailMessage} EmailMessageType
    * Create a EmailMessage instance.

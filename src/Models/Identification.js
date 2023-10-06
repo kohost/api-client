@@ -1,11 +1,11 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/identification.json");
-const Kohost = require("./Kohost");
+const Entity = require("./Entity");
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Identification extends Kohost {
+class Identification extends Entity {
   /**
    * @typedef {import("../schemas/IdentificationSchema").Identification} IdentificationType
    * Create a Identification instance.
