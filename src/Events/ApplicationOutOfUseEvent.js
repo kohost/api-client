@@ -2,10 +2,8 @@ const Event = require("./Event");
 
 class ApplicationOutOfUseEvent extends Event {
   constructor({ propertyId, organizationId, ...rest }) {
-    if (!propertyId && !organizationId)
-      throw new Error(
-        "propertyId or organizationId required for ApplicationOutOfUseEvent"
-      );
+    if (!propertyId)
+      throw new Error("propertyId required for ApplicationOutOfUseEvent");
     super({ propertyId, organizationId, ...rest });
     this._propertyId = propertyId;
     this._organizationId = organizationId;
@@ -20,8 +18,7 @@ class ApplicationOutOfUseEvent extends Event {
   }
 
   get routingKey() {
-    if (this._propertyId) return `app.${this._propertyId}.outOfUse`;
-    else return `app.org.${this._organizationId}.outOfUse`;
+    return `app.${this._propertyId}.outOfUse`;
   }
 }
 
