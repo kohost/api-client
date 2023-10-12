@@ -1,8 +1,8 @@
 const Command = require("./Command");
 
 class SetWindowCoveringCommand extends Command {
-  constructor({ id, position }) {
-    super({ id, position });
+  constructor({ id, position, ...rest }) {
+    super({ id, position, ...rest });
   }
 
   get name() {

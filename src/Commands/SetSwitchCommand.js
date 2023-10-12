@@ -1,8 +1,8 @@
 const Command = require("./Command");
 
 class SetSwitchCommand extends Command {
-  constructor({ id, state }) {
-    super({ id, state });
+  constructor({ id, state, ...rest }) {
+    super({ id, state, ...rest });
   }
 
   get name() {

@@ -2,10 +2,10 @@ const Command = require("./Command");
 const RequestError = require("../Errors/RequestError");
 
 class CreateShortLinkCommand extends Command {
-  constructor({ title, destination }) {
+  constructor({ title, destination, ...rest }) {
     if (!title) throw new RequestError("title is required");
     if (!destination) throw new RequestError("destination to is required");
-    super({ title, destination });
+    super({ title, destination, ...rest });
   }
 
   get name() {

@@ -1,8 +1,8 @@
 const Command = require("./Command");
 
 class SetThermostatCommand extends Command {
-  constructor({ id, setpoints, hvacMode, fanMode }) {
-    super({ id, setpoints, hvacMode, fanMode });
+  constructor({ id, setpoints, hvacMode, fanMode, ...rest }) {
+    super({ id, setpoints, hvacMode, fanMode, ...rest });
   }
 
   get name() {

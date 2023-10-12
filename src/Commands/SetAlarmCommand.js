@@ -1,8 +1,8 @@
 const Command = require("./Command");
 
 class SetAlarmCommand extends Command {
-  constructor({ id, zones, areas }) {
-    super({ id, zones, areas });
+  constructor({ id, zones, areas, code, ...rest }) {
+    super({ id, zones, areas, code, ...rest });
   }
 
   get name() {

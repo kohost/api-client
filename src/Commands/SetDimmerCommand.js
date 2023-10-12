@@ -1,8 +1,8 @@
 const Command = require("./Command");
 
 class SetDimmerCommand extends Command {
-  constructor({ id, level }) {
-    super({ id, level });
+  constructor({ id, level, ...rest }) {
+    super({ id, level, ...rest });
   }
 
   get name() {
