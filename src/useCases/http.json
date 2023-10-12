@@ -443,11 +443,11 @@
     }
   ],
   [
-    "SetLock",
+    "SetAlarm",
     {
       "http": {
         "method": "POST",
-        "path": "/rooms/:roomId/locks/:id"
+        "path": "/rooms/:roomId/alarms/:id"
       }
     }
   ],
@@ -654,6 +654,15 @@
     {
       "http": {
         "method": "GET",
+        "path": "/rooms/:roomId/locks/:id"
+      }
+    }
+  ],
+  [
+    "SetLock",
+    {
+      "http": {
+        "method": "POST",
         "path": "/rooms/:roomId/locks/:id"
       }
     }
