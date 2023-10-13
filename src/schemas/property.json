@@ -288,7 +288,13 @@
             }
           }
         },
-        "Elevator": {}
+        "Elevator": {},
+        "Experiences": {},
+        "Dining": {},
+        "Rentals": {},
+        "Shop": {},
+        "Spa": {},
+        "Valet": {}
       },
       "additionalProperties": false,
       "default": {
