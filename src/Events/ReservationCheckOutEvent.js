@@ -6,11 +6,11 @@ class ReservationCheckOutEvent extends Event {
   }
 
   get name() {
-    return constructor.name;
+    return "ReservationCheckInEvent";
   }
 
   get routingKey() {
-    return `${this.data[0].organizationId || "#"}.${this.data[0].propertyId || "#"}.reservation.${constructor.name}`;
+    return `${this.data[0].organizationId || "#"}.${this.data[0].propertyId || "#"}.reservation.ReservationCheckOutEvent`;
   }
 
   static get entity() {
