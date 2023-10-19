@@ -21,7 +21,6 @@ class KohostApiClient extends EventEmitter {
   ) {
     super();
     if (!options.url) throw new Error("options.url is required");
-    if (!options.propertyId) throw new Error("options.property is required");
     this.options = options;
     this.isBrowser = typeof window !== "undefined";
     this.isRefreshingToken = false;
@@ -33,13 +32,21 @@ class KohostApiClient extends EventEmitter {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        [KohostApiClient.defs.propertyHeader]: options.propertyId,
         ...options.headers,
       },
     };
 
     if (options.apiKey) {
       config.headers[KohostApiClient.defs.apiKeyHeader] = options.apiKey;
+    }
+
+    if (options.propertyId) {
+      config.headers[KohostApiClient.defs.propertyHeader] = options.propertyId;
+    }
+
+    if (options.organizationId) {
+      config.headers[KohostApiClient.defs.organizationHeader] =
+        options.organizationId;
     }
 
     this._http = axios.create(config);
@@ -54,6 +61,7 @@ class KohostApiClient extends EventEmitter {
     return {
       apiKeyHeader: "X-Api-Key",
       propertyHeader: "X-Property-Id",
+      organizationHeader: "X-Organization-Id",
     };
   }
 

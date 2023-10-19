@@ -5,7 +5,6 @@ module.exports = class SocketIoClient extends EventEmitter {
   constructor(config = { url: null, propertyId: null, options: {} }) {
     super();
     if (!config.url) throw new Error("Websocket URL / endpoint not provided");
-    if (!config.propertyId) throw new Error("Property ID not provided");
     this.url = config.url;
     this.propertyId = config.propertyId;
     this.options = {
