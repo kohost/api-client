@@ -9,8 +9,8 @@ class ApplicationInUseEvent extends Event {
     this._organizationId = organizationId;
   }
 
-  get name() {
-    return "ApplicationInUse";
+  get name () {
+    return constructor.name; 
   }
 
   get exchange() {
@@ -18,8 +18,14 @@ class ApplicationInUseEvent extends Event {
   }
 
   get routingKey() {
-    return `app.${this._propertyId}.inUse`;
+    return `${this.organizationId || "#"}.${this._propertyId}.app.${constructor.name}`;
   }
+
+  static get entity() {
+    return "app"
+  }
+
+  
 }
 
 module.exports = ApplicationInUseEvent;
