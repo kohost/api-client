@@ -6,7 +6,7 @@ class ApplicationOutOfUseEvent extends Event {
   }
 
   get name() {
-    return "ApplicationOutOfUseEvent";
+    return "ApplicationOutOfUse";
   }
 
   get exchange() {
@@ -14,7 +14,7 @@ class ApplicationOutOfUseEvent extends Event {
   }
 
   get routingKey() {
-    return `${this.data[0].organizationId || "#"}.${this.data[0].propertyId || "#"}.app.ApplicationOutOfUseEvent`;
+    return `${this.data[0].organizationId || "#"}.${this.data[0].propertyId || "#"}.app.ApplicationOutOfUse`;
   }
 
   static get entity() {

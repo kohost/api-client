@@ -10,7 +10,7 @@ class ApplicationInUseEvent extends Event {
   }
 
   get name () {
-    return "ApplicationInUseEvent"; 
+    return "ApplicationInUse"; 
   }
 
   get exchange() {
@@ -18,7 +18,7 @@ class ApplicationInUseEvent extends Event {
   }
 
   get routingKey() {
-    return `${this.organizationId || "#"}.${this._propertyId}.app.ApplicationInUseEvent`;
+    return `${this.organizationId || "#"}.${this._propertyId}.app.ApplicationInUse`;
   }
 
   static get entity() {
