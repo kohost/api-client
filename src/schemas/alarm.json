@@ -75,6 +75,9 @@
     },
     "watts": {
       "$ref": "definitions.json#/definitions/watts"
+    },
+    "address": {
+      "$ref": "definitions.json#/definitions/address"
     }
   },
   "required": ["id", "type", "areas", "zones", "driver"]

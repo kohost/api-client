@@ -30,6 +30,10 @@ const ShortLinkCreatedEvent = require("./ShortLinkCreatedEvent");
 const ApplicationInUseEvent = require("./ApplicationInUseEvent");
 const ApplicationOutOfUseEvent = require("./ApplicationOutOfUseEvent");
 
+const ReservationCheckInEvent = require("./ReservationCheckInEvent");
+const ReservationCheckOutEvent = require("./ReservationCheckOutEvent");
+
+
 // Delete Events
 const SystemEntityDeletedEvent = require("./SystemEntityDeletedEvent");
 
@@ -62,4 +66,6 @@ module.exports = {
   ShortLinkCreatedEvent,
   ApplicationInUseEvent,
   ApplicationOutOfUseEvent,
+  ReservationCheckInEvent,
+  ReservationCheckOutEvent
 };

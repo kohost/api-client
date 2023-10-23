@@ -12,7 +12,13 @@
       "type": "string"
     },
     "type": {
-      "$ref": "definitions.json#/definitions/type"
+      "$ref": "definitions.json#/definitions/type",
+      "default": "windowCovering"
+    },
+    "discriminator": {
+      "type": "string",
+      "enum": ["basic", "variable"],
+      "default": "variable"
     },
     "supportedNotifications": {
       "$ref": "definitions.json#/definitions/supportedNotifications"
@@ -27,7 +33,7 @@
       "type": "boolean"
     },
     "position": {
-      "type": "number",
+      "type": ["number", "null"],
       "minimum": 0,
       "maximum": 100
     },

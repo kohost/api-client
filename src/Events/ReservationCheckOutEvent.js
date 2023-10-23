@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class ReservationCheckInEvent extends Event {
+class ReservationCheckOutEvent extends Event {
   constructor(reservation) {
     super(reservation);
   }
@@ -12,7 +12,7 @@ class ReservationCheckInEvent extends Event {
   get routingKey() {
     return `${this.data[0].organizationId || "#"}.${
       this.data[0].propertyId || "#"
-    }.reservation.ReservationCheckIn`;
+    }.reservation.ReservationCheckOut`;
   }
 
   static get entity() {
@@ -20,4 +20,4 @@ class ReservationCheckInEvent extends Event {
   }
 }
 
-module.exports = ReservationCheckInEvent;
+module.exports = ReservationCheckOutEvent;
