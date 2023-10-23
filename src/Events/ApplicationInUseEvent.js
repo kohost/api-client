@@ -18,13 +18,7 @@ class ApplicationInUseEvent extends Event {
   }
 
   get routingKey() {
-    return `${this.organizationId || "#"}.${
-      this._propertyId
-    }.app.ApplicationInUse`;
-  }
-
-  static get entity() {
-    return "app";
+    return `app.${this._propertyId}.inUse`;
   }
 }
 
