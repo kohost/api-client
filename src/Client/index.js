@@ -3,8 +3,9 @@ const { EventEmitter } = require("events");
 const axios = require("axios");
 
 class KohostApiClient extends EventEmitter {
-  /* 
+  /** 
   @param {Object} options - The options to create the client
+  @param {String} options.organizationId - The organization ID
   @param {String} options.propertyId - The property ID
   @param {String} options.url - The base URL for the API endpint
   @param {Object} options.headers - Additional headers to send with each request
@@ -55,6 +56,31 @@ class KohostApiClient extends EventEmitter {
       this._handleResponse.bind(this),
       this._handleResponseError.bind(this)
     );
+  }
+
+  /**
+   * @param {string} orgId
+   * @returns {void}
+   * @memberof KohostApiClient
+   * @example
+   * client.organizationId = "1234";
+   */
+  set organizationId(orgId) {
+    const key = KohostApiClient.defs.organizationHeader;
+    this._http.defaults.headers.common[key] = orgId;
+  }
+
+  /**
+   * @param {string} propertyId
+   * @returns {void}
+   * @memberof KohostApiClient
+   * @example
+   * client.propertyId = "1234";
+   */
+
+  set propertyId(propertyId) {
+    const key = KohostApiClient.defs.propertyHeader;
+    this._http.defaults.headers.common[key] = propertyId;
   }
 
   static get defs() {

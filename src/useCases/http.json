@@ -1,11 +1,11 @@
 [
   [
-    "LoginUser",
+    "LoginStart",
     {
       "http": {
         "disableAuth": true,
         "method": "POST",
-        "path": "/auth/user"
+        "path": "/auth/start"
       }
     }
   ],
@@ -20,30 +20,21 @@
     }
   ],
   [
-    "RequestLoginLink",
+    "LoginFinish",
     {
       "http": {
         "disableAuth": true,
         "method": "POST",
-        "path": "/auth/loginLink"
+        "path": "/auth/finish"
       }
     }
   ],
   [
-    "RequestMyKeyToken",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/auth/myKeyToken"
-      }
-    }
-  ],
-  [
-    "RequestPWAToken",
+    "RequestLoginToken",
     {
       "http": {
         "method": "GET",
-        "path": "/auth/pwaToken"
+        "path": "/auth/loginToken"
       }
     }
   ],
@@ -53,6 +44,24 @@
       "http": {
         "method": "POST",
         "path": "/auth/user/:id/logout"
+      }
+    }
+  ],
+  [
+    "StartRegisterPasskey",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/auth/registerPasskey/start"
+      }
+    }
+  ],
+  [
+    "FinishRegisterPasskey",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/auth/registerPasskey/finish"
       }
     }
   ],
@@ -202,6 +211,15 @@
       "http": {
         "method": "GET",
         "path": "/users/me/accessCredentials"
+      }
+    }
+  ],
+  [
+    "DescribeMyPasskeyRegistrations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/me/passkeyRegistrations"
       }
     }
   ],
@@ -1414,8 +1432,7 @@
       "http": {
         "method": "GET",
         "path": "/organizations"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1423,6 +1440,16 @@
     {
       "http": false,
       "useAdminDb": true
+    }
+  ],
+  [
+    "DescribeMyOrganization",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/organizations/mine",
+        "disableAuth": true
+      }
     }
   ],
   [
@@ -1441,6 +1468,15 @@
       "http": {
         "method": "GET",
         "path": "/properties"
+      }
+    }
+  ],
+  [
+    "ListMyProperties",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/properties/list"
       }
     }
   ],
