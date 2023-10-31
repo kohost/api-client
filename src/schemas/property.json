@@ -4,7 +4,7 @@
   "title": "Property",
   "type": "object",
   "description": "A property is a physical asset or building",
-  "required": ["id", "name", "type", "hostname", "organization"],
+  "required": ["id", "name", "type", "organization"],
   "properties": {
     "id": {
       "$ref": "definitions.json#/definitions/id"
@@ -19,6 +19,10 @@
     "discriminator": {
       "type": "string",
       "enum": ["hospitality", "education", "commercial"]
+    },
+    "organization": {
+      "type": ["string", "null"],
+      "description": "Reference (id) to the organization that owns this property"
     },
     "testModeEnabled": {
       "type": "boolean"
@@ -41,13 +45,6 @@
     "smsNumber": {
       "type": "string"
     },
-    "hostname": {
-      "type": ["string", "null"]
-    },
-    "organization": {
-      "type": ["string", "null"],
-      "description": "Reference (id) to the organization that owns this property"
-    },
     "checkInTime": {
       "type": "string"
     },
@@ -62,112 +59,6 @@
     },
     "longitude": {
       "type": "number"
-    },
-    "appManifest": {
-      "type": "object",
-
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "short_name": {
-          "type": "string"
-        },
-        "scope": {
-          "type": "string"
-        },
-        "start_url": {
-          "type": "string"
-        },
-        "themeColor": {
-          "type": "string"
-        },
-        "backgroundColor": {
-          "type": "string"
-        },
-        "display": {
-          "type": "string",
-          "enum": ["fullscreen", "standalone", "minimal-ui", "browser"],
-          "default": "fullscreen"
-        },
-        "orientation": {
-          "type": "string",
-          "enum": ["portrait", "landscape"],
-          "default": "portrait"
-        },
-        "splash": {
-          "type": "object",
-          "properties": {
-            "src": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            },
-            "sizes": {
-              "type": "string"
-            }
-          }
-        },
-        "icons": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "src": {
-                "type": "string"
-              },
-              "sizes": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "logo": {
-          "type": "object",
-          "properties": {
-            "src": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            },
-            "sizes": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "default": {
-        "name": "Kohost",
-        "short_name": "Kohost",
-        "start_url": "/",
-        "scope": "/",
-        "display": "fullscreen",
-        "orientation": "portrait",
-        "theme_color": "#1d1f22",
-        "background_color": "#1d1f22",
-        "icons": [
-          {
-            "src": "https://cdn.kohost.app/defaultIcon.png",
-            "sizes": "512x512",
-            "type": "image/png"
-          }
-        ],
-        "splash": {
-          "src": "https://cdn.kohost.app/defaultSplash.jpg",
-          "sizes": "1500x800",
-          "type": "image/jpg"
-        },
-        "logo": {
-          "src": "https://cdn.kohost.app/defaultLogo.png",
-          "sizes": "300x75",
-          "type": "image/png"
-        }
-      }
     },
     "appFeatures": {
       "type": "object",
@@ -185,6 +76,32 @@
                   }
                 }
               }
+            },
+            "alarmConfig": {
+              "type": "object",
+              "patternProperties": {
+                "^[a-zA-Z0-9]+$": {
+                  "type": "object",
+                  "properties": {
+                    "zoneLockMap": {
+                      "type": "object",
+                      "description": "Maps zone numbers to lock ids",
+                      "additionalProperties": { "type": "string" }
+                    }
+                  }
+                }
+              },
+              "examples": [
+                {
+                  "wZz7hucY": {
+                    "zoneLockMap": {
+                      "1": "wc87hucc",
+                      "2": "bc86hzxc",
+                      "3": "zv5ah5jv"
+                    }
+                  }
+                }
+              ]
             }
           },
           "additionalProperties": false

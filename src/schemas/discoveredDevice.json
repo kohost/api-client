@@ -30,6 +30,10 @@
     "organization": {
       "type": ["string", "null"],
       "description": "Reference (id) to the organization that owns this device"
+    },
+    "property": {
+      "type": ["string", "null"],
+      "description": "Reference (id) to the property that this device belongs to"
     }
   }
 }
