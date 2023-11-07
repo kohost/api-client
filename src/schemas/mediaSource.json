@@ -24,6 +24,12 @@
         "uncontrolledDevice"
       ]
     },
+    "remote": {
+      "type": "string",
+      "enum": [
+        "MR22GA"
+      ]
+    },
     "name": {
       "$ref": "definitions.json#/definitions/name"
     },
