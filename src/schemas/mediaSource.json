@@ -11,6 +11,10 @@
     },
     "type": {
       "type": "string",
+      "default": "mediaSource"
+    },
+    "discriminator": {
+      "type": "string",
       "enum": [
         "tv",
         "dvr",
