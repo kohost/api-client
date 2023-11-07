@@ -4,12 +4,16 @@
   "title": "Media Source",
   "description": "Any media source",
   "type": "object",
-  "required": ["id", "type", "audio", "video", "driver"],
+  "required": ["id", "type", "discriminator", "audio", "video", "driver"],
   "properties": {
     "id": {
       "$ref": "definitions.json#/definitions/id"
     },
     "type": {
+      "type": "string",
+      "default": "mediaSource"
+    },
+    "discriminator": {
       "type": "string",
       "enum": [
         "tv",
@@ -18,6 +22,12 @@
         "discPlayer",
         "mediaPlayer",
         "uncontrolledDevice"
+      ]
+    },
+    "remote": {
+      "type": "string",
+      "enum": [
+        "MR22GA"
       ]
     },
     "name": {
