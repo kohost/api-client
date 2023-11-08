@@ -43,9 +43,6 @@
           "securityMode": {
             "type": ["string", "null"],
             "enum": ["arming", "disarming", "armed", "disarmed", "alarm", null]
-          },
-          "readyToArm": {
-            "type": ["boolean", "null"]
           }
         },
         "additionalProperties": false
