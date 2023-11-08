@@ -61,7 +61,7 @@
             "type": "string"
           },
           "secure": {
-            "type": "boolean"
+            "type": ["boolean", "null"]
           },
           "bypassed": {
             "type": ["boolean", "null"]
