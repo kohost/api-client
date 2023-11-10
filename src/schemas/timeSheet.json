@@ -3,7 +3,7 @@
   "$id": "timeSheet.json",
   "title": "Time Sheet",
   "type": "object",
-  "required": ["userId"],
+  "required": ["userId", "day"],
   "properties": {
     "id": {
       "$ref": "definitions.json#/definitions/id"
@@ -31,7 +31,7 @@
           },
           "discriminator": {
             "type": "string",
-            "enum": ["labor", "driving"]
+            "enum": ["working", "driving", "meeting"]
           },
           "start": {
             "type": ["string", "object"],
