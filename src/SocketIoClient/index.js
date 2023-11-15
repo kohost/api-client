@@ -2,11 +2,15 @@ const io = require("socket.io-client");
 const { EventEmitter } = require("events");
 
 module.exports = class SocketIoClient extends EventEmitter {
-  constructor(config = { url: null, propertyId: null, options: {} }) {
+  constructor(
+    config = {
+      url: null,
+      options: {},
+    }
+  ) {
     super();
-    if (!config.url) throw new Error("Websocket URL / endpoint not provided");
+    if (!config.url) throw new Error("config.url is required");
     this.url = config.url;
-    this.propertyId = config.propertyId;
     this.options = {
       autoConnect: false,
       forceNew: false,
@@ -36,6 +40,16 @@ module.exports = class SocketIoClient extends EventEmitter {
     this.socket.on("connect_error", (error) => {
       this.emit("connect_error", error);
     });
+  }
+
+  #url = null;
+
+  get url() {
+    return this.#url;
+  }
+
+  set url(url) {
+    this.#url = url;
   }
 
   get connected() {
@@ -69,5 +83,11 @@ module.exports = class SocketIoClient extends EventEmitter {
 
   send(event, { data = {}, query = {}, ...rest }) {
     this.socket.emit(event, { data, query, ...rest });
+  }
+
+  destroy() {
+    this.disconnect();
+    this.socket.removeAllListeners();
+    this.socket = null;
   }
 };
