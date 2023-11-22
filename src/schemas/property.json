@@ -167,7 +167,7 @@
           "properties": {
             "system": {
               "type": "string",
-              "enum": ["salto"]
+              "enum": ["salto", "legic"]
             },
             "systemOnline": {
               "type": "boolean",
