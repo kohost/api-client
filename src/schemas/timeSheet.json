@@ -18,7 +18,12 @@
     },
     "day": {
       "type": ["string", "object"],
-      "format": "date"
+      "format": "date-time"
+    },
+    "locked": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, the time sheet is locked and cannot be modified"
     },
     "timeEntries": {
       "type": "array",
@@ -35,11 +40,11 @@
           },
           "start": {
             "type": ["string", "object"],
-            "format": "date"
+            "format": "date-time"
           },
           "end": {
             "type": ["string", "object"],
-            "format": "date"
+            "format": "date-time"
           },
           "comment": {
             "type": "string"

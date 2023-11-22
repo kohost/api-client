@@ -161,7 +161,15 @@
             }
           }
         },
-        "Concierge": {},
+        "Concierge": {
+          "type": "object",
+          "properties": {
+            "timeTracking": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
         "DigitalKey": {
           "type": "object",
           "properties": {
