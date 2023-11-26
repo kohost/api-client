@@ -175,7 +175,7 @@
           "properties": {
             "system": {
               "type": "string",
-              "enum": ["salto"]
+              "enum": ["salto", "dormakaba"]
             },
             "systemOnline": {
               "type": "boolean",
