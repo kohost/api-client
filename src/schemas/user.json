@@ -82,19 +82,9 @@
               "properties": {
                 "discriminator": {
                   "type": "string",
-                  "enum": [
-                    "RoomControl.spaces",
-                    "RoomControl.rooms",
-                    "Concierge.timeTracking"
-                  ]
+                  "enum": ["RoomControl.spaces", "Concierge.timeTracking"]
                 },
-                "includeIds": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "excludeIds": {
+                "onlyIncludeIds": {
                   "type": "array",
                   "items": {
                     "type": "string"

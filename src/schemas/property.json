@@ -167,6 +167,10 @@
             "timeTracking": {
               "type": "boolean",
               "default": false
+            },
+            "tipping": {
+              "type": "boolean",
+              "default": false
             }
           }
         },
