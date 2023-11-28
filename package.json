@@ -39,7 +39,6 @@
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
     "prepare": "node prepare.js",
-    "postinstall": "node scripts/build.js",
     "build": "node scripts/build.js",
     "build:watch": "node scripts/build.js --watch",
     "start": "node scripts/build.js --watch",
