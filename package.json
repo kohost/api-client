@@ -1,6 +1,6 @@
 {
   "name": "@kohost/api-client",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "API client, models, schemas, commands, and events for Kohost applications",
   "author": "Ian Rogers",
   "readme": "README.md",
