@@ -32,6 +32,7 @@ const EnergyReport = require("./EnergyReport");
 const SMSMessage = require("./SmsMessage");
 const EmailMessage = require("./EmailMessage");
 const Announcement = require("./Announcement");
+const TimeSheet = require("./TimeSheet");
 
 const Property = require("./Property");
 const Organization = require("./Organization");
@@ -74,4 +75,5 @@ module.exports = {
   EmailMessage,
   Order,
   Announcement,
+  TimeSheet,
 };

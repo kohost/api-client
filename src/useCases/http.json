@@ -956,6 +956,15 @@
     }
   ],
   [
+    "DescribeTicketStats",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/stats"
+      }
+    }
+  ],
+  [
     "CreateTicket",
     {
       "http": {
@@ -1422,8 +1431,7 @@
       "http": {
         "method": "POST",
         "path": "/organizations"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1432,8 +1440,7 @@
       "http": {
         "method": "PUT",
         "path": "/organizations/:id"
-      },
-      "useAdminDb": true
+      }
     }
   ],
   [
@@ -1457,8 +1464,7 @@
   [
     "SeedOrganizations",
     {
-      "http": false,
-      "useAdminDb": true
+      "http": false
     }
   ],
   [
@@ -1653,6 +1659,96 @@
       "http": {
         "method": "GET",
         "path": "/announcements"
+      }
+    }
+  ],
+  [
+    "DescribeTimeSheetStats",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/timesheets/stats"
+      }
+    }
+  ],
+  [
+    "ListMyTimeSheets",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/timesheets/mine"
+      }
+    }
+  ],
+  [
+    "DescribeTimeSheet",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/timesheets/:id"
+      }
+    }
+  ],
+  [
+    "ListTimeSheets",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/timesheets"
+      }
+    }
+  ],
+  [
+    "CreateTimeSheet",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/timesheets"
+      }
+    }
+  ],
+  [
+    "DeleteTimeSheet",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/timesheets/:id"
+      }
+    }
+  ],
+  [
+    "UpdateTimeSheet",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/timesheets/:id"
+      }
+    }
+  ],
+  [
+    "CreateTimeSheetTimeEntry",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/timesheets/:timeSheetId/timeEntries"
+      }
+    }
+  ],
+  [
+    "DeleteTimeSheetTimeEntry",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/timesheets/:timeSheetId/timeEntries/:id"
+      }
+    }
+  ],
+  [
+    "UpdateTimeSheetTimeEntry",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/timesheets/:timeSheetId/timeEntries/:id"
       }
     }
   ]

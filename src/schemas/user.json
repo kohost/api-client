@@ -78,7 +78,19 @@
           "customPermissions": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "object",
+              "properties": {
+                "discriminator": {
+                  "type": "string",
+                  "enum": ["RoomControl.spaces", "Concierge.timeTracking"]
+                },
+                "onlyIncludeIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
         },
