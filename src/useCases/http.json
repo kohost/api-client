@@ -66,6 +66,16 @@
     }
   ],
   [
+    "DescribeMyAuth",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/auth/me",
+        "disableAuth": true
+      }
+    }
+  ],
+  [
     "DescribeSelf",
     {
       "http": {
@@ -206,15 +216,6 @@
     }
   ],
   [
-    "DescribeMyAccessCredentials",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/users/me/accessCredentials"
-      }
-    }
-  ],
-  [
     "DescribeMyPasskeyRegistrations",
     {
       "http": {
@@ -229,6 +230,33 @@
       "http": {
         "method": "POST",
         "path": "/users/:id/tip"
+      }
+    }
+  ],
+  [
+    "CreateUserMobileKey",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/users/:id/mobileKeys"
+      }
+    }
+  ],
+  [
+    "DescribeMyMobileKeyApp",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/me/accessCredentials"
+      }
+    }
+  ],
+  [
+    "ListUserMobileKeys",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/:id/mobileKeys"
       }
     }
   ],
