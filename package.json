@@ -10,14 +10,15 @@
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
     },
     "./Models/*": {
       "import": "./dist/esm/Models/*.js",
-      "types": "./dist/esm/Models/*.d.ts",
       "require": "./dist/cjs/Models/*.js"
     },
     "./Commands/*": {
@@ -42,13 +43,15 @@
     "build": "node scripts/build.js",
     "build:watch": "node scripts/build.js --watch",
     "start": "node scripts/build.js --watch",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "gendts": "dts-gen --expression-file src/index.js -o -f dist/types/index.d.ts"
   },
   "files": [
     "dist",
     "README.md"
   ],
   "devDependencies": {
+    "@aminya/dts-gen": "^0.6.1-aminya.2",
     "@kohost/eslint-config": "^1.0.0",
     "esbuild": "^0.19.5",
     "eslint": "^8.6.0",

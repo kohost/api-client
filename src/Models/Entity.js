@@ -20,7 +20,7 @@ class Entity {
   }
 
   static get validProperties() {
-    throw new Error("validProperties is not defined");
+    return [];
   }
 
   get schemaProperties() {

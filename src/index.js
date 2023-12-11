@@ -8,16 +8,16 @@ const Client = require("./Client");
 const SocketIoClient = require("./SocketIoClient");
 const AMQPClient = require("./AMQPClient");
 
-const Kohost = {
-  Models,
-  Errors,
-  Commands,
-  Events,
-  Client,
-  SocketIoClient,
-  AMQPClient,
-  defs,
-  utils: utils,
-};
+class Kohost {
+  static Models = Models;
+  static Errors = Errors;
+  static Commands = Commands;
+  static Events = Events;
+  static Client = Client;
+  static SocketIoClient = SocketIoClient;
+  static AMQPClient = AMQPClient;
+  static defs = defs;
+  static utils = utils;
+}
 
 module.exports = Kohost;

@@ -27,6 +27,10 @@ if (!fs.existsSync(path.resolve(__dirname, "../dist/schemas"))) {
   fs.mkdirSync(path.resolve(__dirname, "../dist/schemas"), { recursive: true });
 }
 
+if (!fs.existsSync(path.resolve(__dirname, "../dist/types"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist/types"), { recursive: true });
+}
+
 async function copyFilesToDistCjs(srcDir, distCjsDir, ignoredFolders = []) {
   try {
     // Create the dist/cjs directory if it doesn't exist
@@ -250,6 +254,11 @@ async function main2() {
           typeName.charAt(0).toUpperCase() + typeName.slice(1) + "Schema";
         fs.writeFileSync(
           path.resolve(__dirname, `../dist/cjs/schemas/${typeNameUpper}.d.ts`),
+          ts
+        );
+
+        fs.writeFileSync(
+          path.resolve(__dirname, `../dist/types/${typeNameUpper}.d.ts`),
           ts
         );
       })
