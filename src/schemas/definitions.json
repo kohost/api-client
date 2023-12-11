@@ -189,7 +189,7 @@
       }
     },
     "batteryLevel": {
-      "type": "number",
+      "type": ["number", "null"],
       "minimum": 0,
       "maximum": 100
     },
@@ -216,7 +216,7 @@
             "type": "number"
           },
           "tax": {
-            "type": ["number", "null"] 
+            "type": ["number", "null"]
           }
         }
       }
