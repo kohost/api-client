@@ -1,44 +1,36 @@
-const SystemGatewayUpdatedEvent = require("./SystemGatewayUpdatedEvent");
-const SystemThermostatUpdatedEvent = require("./SystemThermostatUpdatedEvent");
-const SystemDimmerUpdatedEvent = require("./SystemDimmerUpdatedEvent");
-const SystemSwitchUpdatedEvent = require("./SystemSwitchUpdatedEvent");
-const SystemLockUpdatedEvent = require("./SystemLockUpdatedEvent");
-const SystemCameraUpdatedEvent = require("./SystemCameraUpdatedEvent");
-const SystemSceneControllerUpdatedEvent = require("./SystemSceneControllerUpdatedEvent");
-const SystemWindowCoveringUpdatedEvent = require("./SystemWindowCoveringUpdatedEvent");
-const SystemMediaSourceUpdatedEvent = require("./SystemMediaSourceUpdatedEvent");
-const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
-const SystemAlarmUpdatedEvent = require("./SystemAlarmUpdatedEvent");
-const SystemMotionSensorUpdatedEvent = require("./SystemMotionSensorUpdatedEvent");
-const SystemPropertyUpdatedEvent = require("./SystemPropertyUpdatedEvent");
-const SystemOrganizationUpdatedEvent = require("./SystemOrganizationUpdatedEvent");
-const SystemCredentialUpdatedEvent = require("./SystemCredentialUpdatedEvent");
+import SystemGatewayUpdatedEvent from "./SystemGatewayUpdatedEvent";
+import SystemThermostatUpdatedEvent from "./SystemThermostatUpdatedEvent";
+import SystemDimmerUpdatedEvent from "./SystemDimmerUpdatedEvent";
+import SystemSwitchUpdatedEvent from "./SystemSwitchUpdatedEvent";
+import SystemLockUpdatedEvent from "./SystemLockUpdatedEvent";
+import SystemCameraUpdatedEvent from "./SystemCameraUpdatedEvent";
+import SystemWindowCoveringUpdatedEvent from "./SystemWindowCoveringUpdatedEvent";
+import SystemMediaSourceUpdatedEvent from "./SystemMediaSourceUpdatedEvent";
+import SystemCourtesyUpdatedEvent from "./SystemCourtesyUpdatedEvent";
+import SystemAlarmUpdatedEvent from "./SystemAlarmUpdatedEvent";
+import SystemMotionSensorUpdatedEvent from "./SystemMotionSensorUpdatedEvent";
+import SystemPropertyUpdatedEvent from "./SystemPropertyUpdatedEvent";
+import SystemOrganizationUpdatedEvent from "./SystemOrganizationUpdatedEvent";
+import SystemCredentialUpdatedEvent from "./SystemCredentialUpdatedEvent";
 
-const SceneSetEvent = require("./SceneSetEvent");
+import SystemUserUpdatedEvent from "./SystemUserUpdatedEvent";
+import SystemSpaceUpdatedEvent from "./SystemSpaceUpdatedEvent";
+import SystemCategoryUpdatedEvent from "./SystemCategoryUpdatedEvent";
+import SystemProductUpdatedEvent from "./SystemProductUpdatedEvent";
 
-const SystemUserUpdatedEvent = require("./SystemUserUpdatedEvent");
-const SystemSpaceUpdatedEvent = require("./SystemSpaceUpdatedEvent");
-const SystemCategoryUpdatedEvent = require("./SystemCategoryUpdatedEvent");
-const SystemProductUpdatedEvent = require("./SystemProductUpdatedEvent");
+import SystemReservationUpdatedEvent from "./SystemReservationUpdatedEvent";
 
-const SystemReservationUpdatedEvent = require("./SystemReservationUpdatedEvent");
+import SMSEvent from "./SMSEvent";
+import EmailEvent from "./EmailEvent";
+import ShortLinkCreatedEvent from "./ShortLinkCreatedEvent";
 
-const SMSEvent = require("./SMSEvent");
-const EmailEvent = require("./EmailEvent");
-const ShortLinkCreatedEvent = require("./ShortLinkCreatedEvent");
-
-const ApplicationInUseEvent = require("./ApplicationInUseEvent");
-const ApplicationOutOfUseEvent = require("./ApplicationOutOfUseEvent");
-
-const ReservationCheckInEvent = require("./ReservationCheckInEvent");
-const ReservationCheckOutEvent = require("./ReservationCheckOutEvent");
-
+import ApplicationInUseEvent from "./ApplicationInUseEvent";
+import ApplicationOutOfUseEvent from "./ApplicationOutOfUseEvent";
 
 // Delete Events
-const SystemEntityDeletedEvent = require("./SystemEntityDeletedEvent");
+import SystemEntityDeletedEvent from "./SystemEntityDeletedEvent";
 
-
-module.exports = {
+export default {
   SystemAlarmUpdatedEvent,
   SystemCredentialUpdatedEvent,
   SystemGatewayUpdatedEvent,
@@ -47,7 +39,6 @@ module.exports = {
   SystemSwitchUpdatedEvent,
   SystemLockUpdatedEvent,
   SystemCameraUpdatedEvent,
-  SystemSceneControllerUpdatedEvent,
   SystemWindowCoveringUpdatedEvent,
   SystemMediaSourceUpdatedEvent,
   SystemMotionSensorUpdatedEvent,
@@ -60,12 +51,9 @@ module.exports = {
   SystemOrganizationUpdatedEvent,
   SystemReservationUpdatedEvent,
   SystemEntityDeletedEvent,
-  SceneSetEvent,
   SMSEvent,
   EmailEvent,
   ShortLinkCreatedEvent,
   ApplicationInUseEvent,
   ApplicationOutOfUseEvent,
-  ReservationCheckInEvent,
-  ReservationCheckOutEvent
 };

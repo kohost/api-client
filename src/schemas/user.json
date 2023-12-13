@@ -39,7 +39,7 @@
       "type": "string"
     },
     "photo": {
-      "$ref": "mediaFile.json#"
+      "$ref": "mediaFile.json"
     },
     "jobTitle": {
       "type": "string"

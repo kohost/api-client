@@ -1,4 +1,4 @@
-const Events = require("../Events");
+const Events = require("../Events").default;
 
 function eventFactory(eventName) {
   const AllEvents = Object.values(Events);

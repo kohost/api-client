@@ -8,6 +8,7 @@ const validator = compile(schema);
 
 type MediaFileType = import("../types/MediaFileSchema").MediaFile;
 class MediaFile extends Entity {
+  type: string = "mediaFile";
   constructor(mediaFile: MediaFileType) {
     super(mediaFile);
   }

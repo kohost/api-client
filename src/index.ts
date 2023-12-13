@@ -7,3 +7,7 @@ import utils from "./utils";
 import Client from "./Client";
 import SocketIoClient from "./SocketIoClient";
 import AMQPClient from "./AMQPClient";
+
+declare module "kohost" {
+  import Models from "./Models";
+}

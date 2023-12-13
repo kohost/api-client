@@ -17,12 +17,6 @@ const validator = compile(schema);
 type UserType = import("../types/UserSchema").User;
 
 class User extends Entity {
-  /**
-   * @typedef {import("../schemas/UserSchema").User} UserType
-   * Create a User instance.
-   * @constructor
-   * @param {UserType} user - The user object of type User.
-   */
   constructor(user: UserType) {
     if (user.photo) user.photo = new MediaFile(user.photo);
     if (user.reservations)
