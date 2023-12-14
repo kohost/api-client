@@ -6,6 +6,7 @@ import Entity from "./Entity";
 import { nanoid } from "nanoid";
 
 type TimeSheetType = import("../types/TimeSheetSchema").TimeSheet;
+// extend the type to include the id property
 
 add(schema);
 const validator = compile(schema);

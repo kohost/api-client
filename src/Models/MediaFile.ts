@@ -1,7 +1,7 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/mediaFile.json";
 import Entity from "./Entity";
-import { RequestError } from "../Errors";
+import { RequestError } from "../Errors/error";
 
 add(schema);
 const validator = compile(schema);

@@ -16,9 +16,6 @@ import Alarm from "./Alarm";
 import MediaSource from "./MediaSource";
 import MotionSensor from "./MotionSensor";
 
-// other dependencies
-import Scene from "./Scene";
-
 add(schema);
 const validator = compile(schema);
 

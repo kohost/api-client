@@ -1,4 +1,4 @@
-const Errors = require("../Errors");
+const Errors = require("../Errors/error");
 const amqp = require("amqplib");
 const crypto = require("crypto");
 const isFatalError = require("amqplib/lib/connection").isFatalError;

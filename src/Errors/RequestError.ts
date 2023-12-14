@@ -1,0 +1,9 @@
+import AppError from "./AppError";
+
+export default class RequestError extends AppError {
+  constructor(message = "Bad Request", options = {}) {
+    super(message, options);
+    this.statusCode = 400;
+    Object.setPrototypeOf(this, RequestError.prototype);
+  }
+}

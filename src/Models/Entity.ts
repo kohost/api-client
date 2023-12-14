@@ -1,4 +1,4 @@
-import { ValidationError } from "../Errors";
+import { ValidationError } from "../Errors/error";
 import { customAlphabet as generate } from "nanoid";
 
 type ValidateFunction = import("ajv").ValidateFunction;

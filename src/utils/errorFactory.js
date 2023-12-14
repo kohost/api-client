@@ -1,4 +1,4 @@
-const Errors = require("../Errors");
+const Errors = require("../Errors/error");
 
 module.exports = function errorFactory(errName) {
   const AllErrors = Object.values(Errors);
