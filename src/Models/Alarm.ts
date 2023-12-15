@@ -1,15 +1,13 @@
 // create the Alarm Model
 import schemas from "../utils/schema";
-import alarmSchemaDef from "../schemas/alarm.json";
+import alarmSchemaDef, { AlarmEntity } from "../schemas/alarmSchema";
 import Entity from "./Entity";
 
 schemas.add(alarmSchemaDef);
 const validator = schemas.compile(alarmSchemaDef);
 
-type AlarmType = import("../types/AlarmSchema").Alarm;
-
 class Alarm extends Entity {
-  constructor(alarm: AlarmType) {
+  constructor(alarm: AlarmEntity) {
     super(alarm);
   }
 
