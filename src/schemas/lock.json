@@ -28,11 +28,11 @@
     },
     "state": {
       "type": ["string", "null"],
-      "enum": ["locked", "unlocked", null]
+      "enum": ["locked", "unlocked"]
     },
     "mode": {
       "type": ["string", "null"],
-      "enum": ["normal", "autoLock", null],
+      "enum": ["normal", "autoLock"],
       "description": "AutoLock: Lock automatically locks after set time. Normal - Lock needs told to lock or unlock.",
       "default": "normal"
     },

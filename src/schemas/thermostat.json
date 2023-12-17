@@ -41,7 +41,7 @@
     },
     "hvacState": {
       "type": ["string", "null"],
-      "enum": ["cooling", "heating", "off", null]
+      "enum": ["cooling", "heating", "off"]
     },
     "fanMode": {
       "type": "string",
@@ -49,7 +49,7 @@
     },
     "fanState": {
       "type": ["string", "null"],
-      "enum": ["off", "low", "medium", "high", "on", null]
+      "enum": ["off", "low", "medium", "high", "on"]
     },
     "temperatureScale": {
       "type": "string",
@@ -58,7 +58,7 @@
     },
     "humidityScale": {
       "type": ["string", "null"],
-      "enum": ["absolute", "relative", null]
+      "enum": ["absolute", "relative"]
     },
     "supportedHvacModes": {
       "type": "array",

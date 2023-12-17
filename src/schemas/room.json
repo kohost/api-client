@@ -17,6 +17,7 @@
     "dimmers": {
       "type": "array",
       "default": [],
+
       "items": {
         "$ref": "dimmer.json"
       }
@@ -24,6 +25,7 @@
     "switches": {
       "type": "array",
       "default": [],
+
       "items": {
         "$ref": "switch.json"
       }
@@ -31,6 +33,7 @@
     "thermostats": {
       "type": "array",
       "default": [],
+
       "items": {
         "$ref": "thermostat.json"
       }
@@ -38,6 +41,7 @@
     "locks": {
       "type": "array",
       "default": [],
+
       "items": {
         "$ref": "lock.json"
       }
@@ -45,6 +49,7 @@
     "windowCoverings": {
       "type": "array",
       "default": [],
+
       "items": {
         "$ref": "windowCovering.json"
       }
@@ -52,6 +57,7 @@
     "courtesy": {
       "type": "array",
       "default": [],
+
       "items": {
         "$ref": "courtesy.json"
       }
@@ -59,6 +65,7 @@
     "cameras": {
       "type": "array",
       "default": [],
+
       "items": {
         "$ref": "camera.json"
       }
@@ -66,6 +73,7 @@
     "mediaSources": {
       "type": "array",
       "default": [],
+
       "items": {
         "$ref": "mediaSource.json"
       }
@@ -73,6 +81,7 @@
     "motionSensors": {
       "type": "array",
       "default": [],
+
       "items": {
         "$ref": "motionSensor.json"
       }
@@ -80,6 +89,7 @@
     "alarms": {
       "type": "array",
       "default": [],
+
       "items": {
         "$ref": "alarm.json"
       }

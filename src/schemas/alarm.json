@@ -31,6 +31,7 @@
     },
     "areas": {
       "type": "array",
+      "properties": {},
       "items": {
         "type": "object",
         "properties": {
@@ -42,14 +43,14 @@
           },
           "securityMode": {
             "type": ["string", "null"],
-            "enum": ["arming", "disarming", "armed", "disarmed", "alarm", null]
+            "enum": ["arming", "disarming", "armed", "disarmed", "alarm"]
           }
-        },
-        "additionalProperties": false
+        }
       }
     },
     "zones": {
       "type": "array",
+      "properties": {},
       "items": {
         "type": "object",
         "properties": {
@@ -66,8 +67,7 @@
           "bypassed": {
             "type": ["boolean", "null"]
           }
-        },
-        "additionalProperties": false
+        }
       }
     },
     "watts": {
