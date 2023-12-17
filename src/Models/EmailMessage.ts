@@ -6,10 +6,11 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type EmailMessageType = import("../types/EmailMessageSchema").EmailMessage;
+type EmailMessageSchema =
+  import("../types/EmailMessageSchema").EmailMessageSchema;
 
 class EmailMessage extends Entity {
-  constructor(message: EmailMessageType) {
+  constructor(message: EmailMessageSchema) {
     super(message);
   }
 

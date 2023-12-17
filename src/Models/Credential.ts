@@ -6,10 +6,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type CredentialType = import("../types/CredentialSchema").Credential;
+type CredentialSchema = import("../types/CredentialSchema").CredentialSchema;
 
 class Credential extends Entity {
-  constructor(credential: CredentialType) {
+  constructor(credential: CredentialSchema) {
     super(credential);
   }
 

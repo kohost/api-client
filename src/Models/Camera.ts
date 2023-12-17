@@ -6,10 +6,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type CameraType = import("../types/CameraSchema").Camera;
+type CameraSchema = import("../types/CameraSchema").CameraSchema;
 
 class Camera extends Entity {
-  constructor(camera: CameraType) {
+  constructor(camera: CameraSchema) {
     super(camera);
   }
 

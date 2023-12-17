@@ -5,10 +5,11 @@ import Entity from "./Entity";
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-type AnnouncementType = import("../types/AnnouncementSchema").Announcement;
+type AnnouncementSchema =
+  import("../types/AnnouncementSchema").AnnouncementSchema;
 
 class Announcement extends Entity {
-  constructor(announcement: AnnouncementType) {
+  constructor(announcement: AnnouncementSchema) {
     super(announcement);
   }
 

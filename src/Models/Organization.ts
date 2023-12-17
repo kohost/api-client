@@ -5,10 +5,11 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type OrganizationType = import("../types/OrganizationSchema").Organization;
+type OrganizationSchema =
+  import("../types/OrganizationSchema").OrganizationSchema;
 
 class Organization extends Entity {
-  constructor(organization: OrganizationType) {
+  constructor(organization: OrganizationSchema) {
     super(organization);
   }
 

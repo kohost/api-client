@@ -14,10 +14,10 @@ add(schema);
 
 const validator = compile(schema);
 
-type UserType = import("../types/UserSchema").User;
+type UserSchema = import("../types/UserSchema").UserSchema;
 
 class User extends Entity {
-  constructor(user: UserType) {
+  constructor(user: UserSchema) {
     if (user.photo) user.photo = new MediaFile(user.photo);
     if (user.reservations)
       user.reservations = user.reservations.map((res) => new Reservation(res));

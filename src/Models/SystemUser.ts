@@ -7,10 +7,10 @@ add(schema);
 
 const validator = compile(schema);
 
-type SystemUserType = import("../types/SystemUserSchema").SystemUser;
+type SystemUserSchema = import("../types/SystemUserSchema").SystemUserSchema;
 
 class SystemUser extends Entity {
-  constructor(user: SystemUserType) {
+  constructor(user: SystemUserSchema) {
     super(user);
   }
 

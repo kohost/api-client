@@ -6,10 +6,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type CourtesyType = import("../types/CourtesySchema").Courtesy;
+type CourtesySchema = import("../types/CourtesySchema").CourtesySchema;
 
 class Courtesy extends Entity {
-  constructor(courtesy: CourtesyType) {
+  constructor(courtesy: CourtesySchema) {
     super(courtesy);
   }
 

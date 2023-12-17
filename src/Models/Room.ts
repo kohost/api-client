@@ -19,10 +19,10 @@ import MotionSensor from "./MotionSensor";
 add(schema);
 const validator = compile(schema);
 
-type RoomType = import("../types/RoomSchema").Room;
+type RoomSchema = import("../types/RoomSchema").RoomSchema;
 
 class Room extends Entity {
-  constructor(room: RoomType) {
+  constructor(room: RoomSchema) {
     const roomData = mapRoomData(room);
     super(roomData);
   }
@@ -138,7 +138,7 @@ class Room extends Entity {
   }
 }
 
-function mapRoomData(data: RoomType) {
+function mapRoomData(data: RoomSchema) {
   const roomData = structuredClone(data);
   roomData.dimmers?.map((dimmer: any) => {
     return new Dimmer(dimmer);

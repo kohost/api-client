@@ -1,15 +1,15 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/mediaFile.json";
 import Entity from "./Entity";
-import { RequestError } from "../Errors/error";
+import RequestError from "../Errors/RequestError";
 
 add(schema);
 const validator = compile(schema);
 
-type MediaFileType = import("../types/MediaFileSchema").MediaFile;
+type MediaFileSchema = import("../types/MediaFileSchema").MediaFileSchema;
 class MediaFile extends Entity {
   type: string = "mediaFile";
-  constructor(mediaFile: MediaFileType) {
+  constructor(mediaFile: MediaFileSchema) {
     super(mediaFile);
   }
 

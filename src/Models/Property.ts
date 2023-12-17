@@ -5,10 +5,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type PropertyType = import("../types/PropertySchema").Property;
+type PropertySchema = import("../types/PropertySchema").PropertySchema;
 
 class Property extends Entity {
-  constructor(property: PropertyType) {
+  constructor(property: PropertySchema) {
     super(property);
   }
 

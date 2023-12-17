@@ -6,10 +6,11 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type MotionSensorType = import("../types/MotionSensorSchema").MotionSensor;
+type MotionSensorSchema =
+  import("../types/MotionSensorSchema").MotionSensorSchema;
 
 class MotionSensor extends Entity {
-  constructor(motionSensor: MotionSensorType) {
+  constructor(motionSensor: MotionSensorSchema) {
     super(motionSensor);
   }
 

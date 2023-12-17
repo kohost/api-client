@@ -5,11 +5,11 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type SceneType = import("../types/SceneSchema").Scene;
-type RoomType = import("../types/RoomSchema").Room;
+type SceneSchema = import("../types/SceneSchema").SceneSchema;
+type RoomSchema = import("../types/RoomSchema").RoomSchema;
 
 class Scene extends Entity {
-  constructor(scene: SceneType) {
+  constructor(scene: SceneSchema) {
     super(scene);
   }
 
@@ -18,8 +18,8 @@ class Scene extends Entity {
   validProperties = Object.keys(properties);
 
   static getRoomSceneDeviceData(
-    room: RoomType,
-    scene: SceneType,
+    room: RoomSchema,
+    scene: SceneSchema,
     restore: boolean
   ) {
     const deviceData = [];
@@ -28,9 +28,10 @@ class Scene extends Entity {
     const sceneId = scene.id;
 
     for (const deviceType in sceneDevices) {
-      const sceneData = sceneDevices[deviceType as keyof SceneType["devices"]];
+      const sceneData =
+        sceneDevices[deviceType as keyof SceneSchema["devices"]];
 
-      const roomDevices = room[deviceType as keyof RoomType];
+      const roomDevices = room[deviceType as keyof RoomSchema];
 
       if (sceneId === "1" && restore && deviceType !== "thermostats") continue;
 

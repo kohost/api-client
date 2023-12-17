@@ -6,10 +6,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type LockType = import("../types/LockSchema").Lock;
+type LockSchema = import("../types/LockSchema").LockSchema;
 
 class Lock extends Entity {
-  constructor(lock: LockType) {
+  constructor(lock: LockSchema) {
     super(lock);
   }
 

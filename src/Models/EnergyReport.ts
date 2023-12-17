@@ -6,11 +6,11 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type EnergyReportType =
-  import("../types/EnergyReportSchema").EnergyReportHourly;
+type EnergyReportHourlySchema =
+  import("../types/EnergyReportHourlySchema").EnergyReportHourlySchema;
 
 class EnergyReport extends Entity {
-  constructor(energyReport: EnergyReportType) {
+  constructor(energyReport: EnergyReportHourlySchema) {
     super(energyReport);
   }
 

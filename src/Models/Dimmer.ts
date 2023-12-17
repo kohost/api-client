@@ -6,9 +6,9 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type DimmerType = import("../types/DimmerSchema").Dimmer;
+type DimmerSchema = import("../types/DimmerSchema").DimmerSchema;
 class Dimmer extends Entity {
-  constructor(dimmer: DimmerType) {
+  constructor(dimmer: DimmerSchema) {
     super(dimmer);
   }
 

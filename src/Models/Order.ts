@@ -5,10 +5,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type OrderType = import("../types/OrderSchema").Order;
+type OrderSchema = import("../types/OrderSchema").OrderSchema;
 
 class Order extends Entity {
-  constructor(order: OrderType) {
+  constructor(order: OrderSchema) {
     super(order);
   }
 

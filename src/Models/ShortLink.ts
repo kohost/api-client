@@ -6,10 +6,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type ShortLinkType = import("../types/ShortLinkSchema").ShortLink;
+type ShortLinkSchema = import("../types/ShortLinkSchema").ShortLinkSchema;
 
 class ShortLink extends Entity {
-  constructor(shortlink: ShortLinkType) {
+  constructor(shortlink: ShortLinkSchema) {
     super(shortlink);
   }
 

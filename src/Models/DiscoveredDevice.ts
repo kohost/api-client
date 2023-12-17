@@ -6,17 +6,11 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type DiscoveredDeviceType =
-  import("../types/DiscoveredDeviceSchema").DiscoveredDevice;
+type DiscoveredDeviceSchema =
+  import("../types/DiscoveredDeviceSchema").DiscoveredDeviceSchema;
 
 class DiscoveredDevice extends Entity {
-  /**
-   * @typedef {import("../schemas/DiscoveredDeviceSchema").DiscoveredDevice} DiscoveredDeviceType
-   * Create a DiscoveredDevice instance.
-   * @constructor
-   * @param {DiscoveredDeviceType} device - The dd object of type DiscoveredDevice.
-   */
-  constructor(device: DiscoveredDeviceType) {
+  constructor(device: DiscoveredDeviceSchema) {
     super(device);
   }
 

@@ -5,20 +5,14 @@ import Entity from "./Entity";
 
 import { nanoid } from "nanoid";
 
-type TimeSheetType = import("../types/TimeSheetSchema").TimeSheet;
+type TimeSheetSchema = import("../types/TimeSheetSchema").TimeSheetSchema;
 // extend the type to include the id property
 
 add(schema);
 const validator = compile(schema);
 
 class TimeSheet extends Entity {
-  /**
-   * @typedef {import("../schemas/TimeSheetSchema").TimeSheet} TimeSheetType
-   * Create a TimeSheet instance.
-   * @constructor
-   * @param {TimeSheetType} timesheet - The timesheet object of type TimeSheet.
-   */
-  constructor(timesheet: TimeSheetType) {
+  constructor(timesheet: TimeSheetSchema) {
     if (timesheet.day) {
       timesheet.day = new Date(timesheet.day);
     }

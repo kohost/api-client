@@ -6,10 +6,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type MediaSourceType = import("../types/MediaSourceSchema").MediaSource;
+type MediaSourceSchema = import("../types/MediaSourceSchema").MediaSourceSchema;
 
 class MediaSource extends Entity {
-  constructor(mediaSource: MediaSourceType) {
+  constructor(mediaSource: MediaSourceSchema) {
     super(mediaSource);
   }
 

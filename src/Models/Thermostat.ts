@@ -5,10 +5,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type ThermostatType = import("../types/ThermostatSchema").Thermostat;
+type ThermostatSchema = import("../types/ThermostatSchema").ThermostatSchema;
 
 class Thermostat extends Entity {
-  constructor(thermostat: ThermostatType) {
+  constructor(thermostat: ThermostatSchema) {
     super(thermostat);
   }
 

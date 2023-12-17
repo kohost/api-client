@@ -8,10 +8,10 @@ import Room from "./Room";
 add(schema);
 const validator = compile(schema);
 
-type SpaceType = import("../types/SpaceSchema").Space;
+type SpaceSchema = import("../types/SpaceSchema").SpaceSchema;
 
 class Space extends Entity {
-  constructor(space: SpaceType) {
+  constructor(space: SpaceSchema) {
     const spaceData = mapSpaceData(space);
     super(spaceData);
   }
@@ -67,7 +67,7 @@ class Space extends Entity {
   }
 }
 
-function mapSpaceData(data: SpaceType) {
+function mapSpaceData(data: SpaceSchema) {
   const spaceData = structuredClone(data);
   if (spaceData.rooms?.length) {
     spaceData.rooms.map((room: any) => {

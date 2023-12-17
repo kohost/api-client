@@ -16,10 +16,6 @@ const reader = getJsonSchemaReader();
 const writer = getTypeScriptWriter({ unsupported: "ignore" });
 const { convert } = makeConverter(reader, writer);
 
-const allSchemas = {
-  definitions: {},
-};
-
 function getAllSchemas(dirPath) {
   const files = [];
 
@@ -71,7 +67,11 @@ parseAndBundleSchemas(schemaFiles).then(async (schemas) => {
       await convert({ data: { definitions: { [title]: schema } } }).then(
         (result) => {
           console.log(`${title} completed successfully`);
-          console.log(result.data);
+          // write to file at /src/types/{title}.d.ts and allow overwrites
+          fs.writeFileSync(
+            path.resolve(__dirname, `../src/types/${title}.d.ts`),
+            result.data
+          );
           return result;
         }
       );

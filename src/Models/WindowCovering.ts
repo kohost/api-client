@@ -6,11 +6,11 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type WindowCoveringType =
-  import("../types/WindowCoveringSchema").WindowCovering;
+type WindowCoveringSchema =
+  import("../types/WindowCoveringSchema").WindowCoveringSchema;
 
 class WindowCovering extends Entity {
-  constructor(windowCovering: WindowCoveringType) {
+  constructor(windowCovering: WindowCoveringSchema) {
     super(windowCovering);
   }
 

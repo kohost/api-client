@@ -7,10 +7,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type CategoryType = import("../types/CategorySchema").Category;
+type CategorySchema = import("../types/CategorySchema").CategorySchema;
 
 class Category extends Entity {
-  constructor(category: CategoryType) {
+  constructor(category: CategorySchema) {
     super(category);
   }
 

@@ -6,10 +6,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type GatewayType = import("../types/GatewaySchema").IoTGateway;
+type IoTGatewaySchema = import("../types/IoTGatewaySchema").IoTGatewaySchema;
 
 class Gateway extends Entity {
-  constructor(gateway: GatewayType) {
+  constructor(gateway: IoTGatewaySchema) {
     super(gateway);
   }
 

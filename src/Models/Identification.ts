@@ -5,11 +5,11 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type IdentificationType =
-  import("../types/IdentificationSchema").Identification;
+type IdentificationSchema =
+  import("../types/IdentificationSchema").IdentificationSchema;
 
 class Identification extends Entity {
-  constructor(identification: IdentificationType) {
+  constructor(identification: IdentificationSchema) {
     super(identification);
   }
 

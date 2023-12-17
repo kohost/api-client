@@ -7,14 +7,15 @@
  *  - {@link https://github.com/grantila/typeconv}
  */
 
-/** Shard used for Energy Reports */
-export interface EnergyReportShardSchema {
+/** Hourly Report for Energy based on energy report shards */
+export interface EnergyReportHourlySchema {
     id: string;
     /**
      * @default
-     *     energyReportShard
+     *     energyReport
      */
-    type: "energyReportShard";
+    type: "energyReport";
+    reportTime?: "hourly" | "daily" | "monthly";
     roomId: string;
     first: string | {
         [key: string]: any;
@@ -22,19 +23,18 @@ export interface EnergyReportShardSchema {
     last: string | {
         [key: string]: any;
     };
-    data: {
-        time: string | {
-            [key: string]: any;
-        };
-        watts: number;
+    consumption: {
         id: string;
         type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        value: number;
+        kwh: number;
         [key: string]: any;
     }[];
-    ndata: number;
-    expires: string | {
+    totals: {
+        lights: number;
+        climate: number;
+        media: number;
         [key: string]: any;
-    };
+    }[];
+    costPerKw: number;
     [key: string]: any;
 }

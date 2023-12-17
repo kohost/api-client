@@ -6,10 +6,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type SMSMessageType = import("../types/SmsMessageSchema").SMSMessage;
+type SMSMessageSchema = import("../types/SmsMessageSchema").SMSMessageSchema;
 
 class SMSMessage extends Entity {
-  constructor(message: SMSMessageType) {
+  constructor(message: SMSMessageSchema) {
     super(message);
   }
 

@@ -7,10 +7,11 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type DeviceRouterType = import("../types/DeviceRouterSchema").DeviceRouter;
+type DeviceRouterSchema =
+  import("../types/DeviceRouterSchema").DeviceRouterSchema;
 
 class DeviceRouter extends Entity {
-  constructor(device: DeviceRouterType) {
+  constructor(device: DeviceRouterSchema) {
     super(device);
   }
 

@@ -6,10 +6,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type SwitchType = import("../types/SwitchSchema").Switch;
+type SwitchSchema = import("../types/SwitchSchema").SwitchSchema;
 
 class Switch extends Entity {
-  constructor(_switch: SwitchType) {
+  constructor(_switch: SwitchSchema) {
     super(_switch);
   }
 

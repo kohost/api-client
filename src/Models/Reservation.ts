@@ -5,10 +5,10 @@ import Entity from "./Entity";
 add(schema);
 const validator = compile(schema);
 
-type ReservationType = import("../types/ReservationSchema").Reservation;
+type ReservationSchema = import("../types/ReservationSchema").ReservationSchema;
 
 class Reservation extends Entity {
-  constructor(reservation: ReservationType) {
+  constructor(reservation: ReservationSchema) {
     super(reservation);
   }
 

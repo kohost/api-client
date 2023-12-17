@@ -6,13 +6,13 @@ import MediaFile from "./MediaFile";
 
 import { nanoid } from "nanoid";
 
-type TicketType = import("../types/TicketSchema").Ticket;
+type TicketSchema = import("../types/TicketSchema").TicketSchema;
 
 add(schema);
 const validator = compile(schema);
 
 class Ticket extends Entity {
-  constructor(ticket: TicketType) {
+  constructor(ticket: TicketSchema) {
     const ticketData = mapConversationData(ticket);
     super(ticketData);
   }
@@ -26,7 +26,7 @@ class Ticket extends Entity {
   }
 }
 
-function mapConversationData(data: TicketType) {
+function mapConversationData(data: TicketSchema) {
   const ticketData = structuredClone(data);
   if (!ticketData.conversation) ticketData.conversation = [];
   ticketData.conversation = ticketData.conversation.map((msg) => {
