@@ -73,6 +73,13 @@
         "RoomControl": {
           "type": "object",
           "properties": {
+            "disabledSystems": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["climate", "lights", "shades", "tv", "doors"]
+              }
+            },
             "commonAreas": {
               "type": "object",
               "properties": {
