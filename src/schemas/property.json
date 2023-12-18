@@ -30,6 +30,13 @@
     "testMode": {
       "type": "object",
       "properties": {
+        "notificationEmails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Only users with these email addresses will receive notifications in test mode, including sms, email, or push."
+        },
         "notificationEmailDomains": {
           "type": "array",
           "items": {
