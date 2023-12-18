@@ -1,8 +1,20 @@
-const Errors = require("../Errors/error");
-const amqp = require("amqplib");
-const crypto = require("crypto");
-const isFatalError = require("amqplib/lib/connection").isFatalError;
-const debug = require("debug")("kohost:amqp-client");
+import amqp, {
+  Channel,
+  Message as AMQPMessage,
+  Connection as AMQPConnection,
+} from "amqplib";
+import crypto from "node:crypto";
+import debug from "debug";
+
+import { isFatalError } from "amqplib/lib/connection";
+
+import RequestError from "./Errors/RequestError";
+import AuthenticationError from "./Errors/AuthenticationError";
+import ValidationError from "./Errors/ValidationError";
+import NotFoundError from "./Errors/NotFoundError";
+import UnprocessableRequestError from "./Errors/UnprocessableRequestError";
+
+const dbg = debug("kohost:amqp-client");
 
 const HEADER_KEY_ORGANIZATION_ID = "X-Organization-Id";
 const HEADER_KEY_PROPERTY_ID = "X-Property-Id";
@@ -67,11 +79,11 @@ class KohostAMQPClient {
     return crypto.randomUUID();
   }
 
-  static validateMessage(message) {
+  static validateMessage(message: Message) {
     if (!message) throw new Error("Message is required");
   }
 
-  static parseError(err) {
+  static parseError(err: any) {
     let type;
     let message;
     let options = {};
@@ -84,40 +96,40 @@ class KohostAMQPClient {
       message = "Unknown Error";
     }
 
-    debug("parseError", type, message, options);
+    dbg("parsing error", type, message, options);
 
     switch (type) {
       case "RequestError":
-        return new Errors.RequestError(message, options);
+        return new RequestError(message, options);
 
       case "AuthenticationError":
-        return new Errors.AuthenticationError(message, options);
+        return new AuthenticationError(message, options);
 
       case "ValidationError":
-        return new Errors.ValidationError(message, options);
+        return new ValidationError(message, options);
 
       case "NotFoundError":
-        return new Errors.NotFoundError(message, options);
+        return new NotFoundError(message, options);
 
       case "UnprocessableRequestError":
-        return new Errors.UnprocessableRequestError(message, options);
+        return new UnprocessableRequestError(message, options);
 
       default:
         return new Error(message, options);
     }
   }
 
-  static parseMessage(message) {
+  static parseMessage(message: AMQPMessage) {
     let error = null;
     let data = {};
     let query = {};
-    let context = {};
-    let headers = {};
+    let context = {} as any;
+    let headers = {} as any;
 
-    const isCommand = message?.properties?.type === "Command";
-    const isEvent = message?.properties?.type === "Event";
+    const isCommand = message?.properties.type === "Command";
+    const isEvent = message?.properties.type === "Event";
 
-    const messageHeaders = message?.properties?.headers || {};
+    const messageHeaders = message?.properties.headers || {};
 
     const commandName = messageHeaders[HEADER_KEY_COMMAND_NAME] || null;
     const eventName = messageHeaders[HEADER_KEY_EVENT_NAME] || null;
@@ -158,7 +170,7 @@ class KohostAMQPClient {
       }
     }
 
-    const parsed = {};
+    const parsed = {} as any;
 
     if (error) parsed.error = this.parseError(error);
 
@@ -170,59 +182,67 @@ class KohostAMQPClient {
     if (isEvent && eventName) parsed.event = eventName;
     else if (isCommand && commandName) parsed.command = commandName;
 
-    debug("amqp parsed %o", parsed);
+    dbg("amqp parsed %o", parsed);
 
     return parsed;
   }
 
-  static getMessage(message) {
+  static getMessage(message: AMQPMessage) {
     if (!message?.content) return null;
     const payload = JSON.parse(message.content.toString());
     const data = payload?.data;
     return data;
   }
 
-  static isFatalError(err) {
+  static isFatalError(err: any) {
     return isFatalError(err);
   }
 
-  async createConnection(connection, options = {}) {
+  async createConnection(connection: string, options = {}) {
     return await amqp.connect(connection, options);
   }
 
-  static createMessage(content) {
+  static createMessage(content: any) {
     return new Message(content);
   }
 
-  async createChannel(connection) {
+  async createChannel(connection: AMQPConnection) {
     const channel = await connection.createChannel();
     return channel;
   }
 
-  async assertExchange(channel, { exchange, type, options }) {
+  async assertExchange(channel: Channel, { exchange, type, options }) {
     return await channel.assertExchange(exchange, type, options);
   }
 
-  async assertQueue(channel, { queue, options }) {
+  async assertQueue(channel: Channel, { queue, options }) {
     return await channel.assertQueue(queue, options);
   }
 
-  async bindQueue(channel, { queue, exchange, routingKey, args }) {
+  async bindQueue(channel: Channel, { queue, exchange, routingKey, args }) {
     return await channel.bindQueue(queue, exchange, routingKey, args);
   }
 
-  async bindExchange(channel, { source, destination, routingKey, args }) {
+  async bindExchange(
+    channel: Channel,
+    { source, destination, routingKey, args }
+  ) {
     return await channel.bindExchange(destination, source, routingKey, args);
   }
 
-  async subscribeToQueue(channel, { queue, cb, options }) {
+  async subscribeToQueue(channel: Channel, { queue, cb, options }) {
     return await channel.consume(queue, cb, options);
   }
 
-  publishToExchange(channel, { exchange, routingKey, content, options }) {
+  publishToExchange(
+    channel: Channel,
+    { exchange, routingKey, content, options }
+  ) {
     return channel.publish(exchange, routingKey, content, options);
   }
 }
+
+interface MessageContent {}
 
 class Message {
   constructor(content) {
@@ -269,7 +289,7 @@ class Message {
     return this;
   }
 
-  withCorrelationId(correlationId) {
+  withCorrelationId(correlationId: string) {
     this.options.correlationId = correlationId;
     return this;
   }

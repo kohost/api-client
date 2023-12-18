@@ -1,16 +1,33 @@
 /* Add Use Cases Here */
-const { EventEmitter } = require("events");
-const axios = require("axios");
+import { EventEmitter } from "events";
+import defs from "./utils/defs";
+import axios, {
+  AxiosError,
+  AxiosResponse,
+  AxiosRequestConfig,
+  AxiosInstance,
+} from "axios";
+
+interface KohostApiClientOptions {
+  url: string;
+  propertyId?: string;
+  organizationId?: string;
+  apiKey?: string;
+  headers?: Record<string, string>;
+}
+
+interface KohostApiResponse {
+  data?: any;
+  error?: any;
+  query?: any;
+  pagination?: any;
+}
 
 class KohostApiClient extends EventEmitter {
-  /** 
-  @param {Object} options - The options to create the client
-  @param {String} options.organizationId - The organization ID
-  @param {String} options.propertyId - The property ID
-  @param {String} options.url - The base URL for the API endpint
-  @param {Object} options.headers - Additional headers to send with each request
-
-  */
+  options: KohostApiClientOptions;
+  isBrowser: boolean;
+  isRefreshingToken: boolean;
+  private transport: AxiosInstance;
   constructor(
     options = {
       url: "",
@@ -18,7 +35,7 @@ class KohostApiClient extends EventEmitter {
       organizationId: "",
       apiKey: "",
       headers: {},
-    }
+    } as KohostApiClientOptions
   ) {
     super();
     if (!options.url) throw new Error("options.url is required");
@@ -26,7 +43,7 @@ class KohostApiClient extends EventEmitter {
     this.isBrowser = typeof window !== "undefined";
     this.isRefreshingToken = false;
 
-    const config = {
+    const config: AxiosRequestConfig = {
       baseURL: options.url,
       responseType: "json",
       withCredentials: true,
@@ -37,24 +54,25 @@ class KohostApiClient extends EventEmitter {
       },
     };
 
+    if (!config.headers) config.headers = {};
+
     if (options.apiKey) {
-      config.headers[KohostApiClient.defs.apiKeyHeader] = options.apiKey;
+      config.headers[defs.HEADER_KEY_API_KEY] = options.apiKey;
     }
 
     if (options.propertyId) {
-      config.headers[KohostApiClient.defs.propertyHeader] = options.propertyId;
+      config.headers[defs.HEADER_KEY_PROPERTY_ID] = options.propertyId;
     }
 
     if (options.organizationId) {
-      config.headers[KohostApiClient.defs.organizationHeader] =
-        options.organizationId;
+      config.headers[defs.HEADER_KEY_ORGANIZATION_ID] = options.organizationId;
     }
 
-    this._http = axios.create(config);
+    this.transport = axios.create(config);
 
-    this._http.interceptors.response.use(
-      this._handleResponse.bind(this),
-      this._handleResponseError.bind(this)
+    this.transport.interceptors.response.use(
+      this.handleResponse.bind(this),
+      this.handleResponseError.bind(this)
     );
   }
 
@@ -65,9 +83,9 @@ class KohostApiClient extends EventEmitter {
    * @example
    * client.organizationId = "1234";
    */
-  set organizationId(orgId) {
-    const key = KohostApiClient.defs.organizationHeader;
-    this._http.defaults.headers.common[key] = orgId;
+  set organizationId(orgId: string) {
+    const key = defs.HEADER_KEY_ORGANIZATION_ID;
+    this.transport.defaults.headers.common[key] = orgId;
   }
 
   /**
@@ -78,24 +96,14 @@ class KohostApiClient extends EventEmitter {
    * client.propertyId = "1234";
    */
 
-  set propertyId(propertyId) {
-    const key = KohostApiClient.defs.propertyHeader;
-    this._http.defaults.headers.common[key] = propertyId;
+  set propertyId(propertyId: string) {
+    const key = defs.HEADER_KEY_PROPERTY_ID;
+    this.transport.defaults.headers.common[key] = propertyId;
   }
 
-  static get defs() {
-    return {
-      apiKeyHeader: "X-Api-Key",
-      propertyHeader: "X-Property-Id",
-      organizationHeader: "X-Organization-Id",
-    };
-  }
-
-  _handleResponse(response) {
+  handleResponse(response: AxiosResponse): AxiosResponse | Promise<any> {
     try {
-      if (response?.data?.data) {
-        response.query = response.data.query;
-        response.pagination = response.data.pagination;
+      if (response.data.data) {
         response.data = response.data.data;
       }
       return response;
@@ -104,10 +112,13 @@ class KohostApiClient extends EventEmitter {
     }
   }
 
-  _handleResponseError(error) {
+  handleResponseError(error: AxiosError) {
     const { config: originalReq } = error;
     if (!error.response) return Promise.reject(error);
-    const { status, data } = error.response;
+
+    const data = error.response.data as KohostApiResponse;
+    const status: number = error.response.status;
+
     const errorType = data?.error?.type;
     const errorMessage = data?.error?.message;
 
@@ -134,16 +145,16 @@ class KohostApiClient extends EventEmitter {
         return Promise.reject(error);
       }
 
-      if (expectedError && newTokensNeeded) {
+      if (expectedError && newTokensNeeded && originalReq) {
         while (!this.isRefreshingToken) {
           this.isRefreshingToken = true;
           return this.RefreshToken()
             .then(() => {
               // retry the original request with the new token
               this.isRefreshingToken = false;
-              return this._http(originalReq);
+              return this.transport(originalReq);
             })
-            .catch((err) => {
+            .catch((err: AxiosError) => {
               this.isRefreshingToken = false;
               return Promise.reject(err);
             });
@@ -165,4 +176,4 @@ class KohostApiClient extends EventEmitter {
   }
 }
 
-module.exports = KohostApiClient;
+export default KohostApiClient;

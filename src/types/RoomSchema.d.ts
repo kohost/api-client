@@ -1,3 +1,4 @@
+import { DimmerSchema } from "./DimmerSchema.d";
 /* tslint:disable */
 /* eslint-disable */
 /**
@@ -9,337 +10,1352 @@
 
 /** A room represents a physical space of controllable IoT devices */
 export interface RoomSchema {
-    id?: string;
+  id?: string;
+  name?: string;
+  floor?: string;
+  /**
+   * @default
+   *     []
+   */
+  dimmers?: {
+    id: string;
     name?: string;
-    floor?: string;
+    type:
+      | "alarm"
+      | "dimmer"
+      | "switch"
+      | "motionSensor"
+      | "windowCovering"
+      | "camera"
+      | "mediaSource"
+      | "thermostat"
+      | "lock"
+      | "courtesy"
+      | "gateway"
+      | "tv"
+      | "dvr"
+      | "appleTv"
+      | "discPlayer"
+      | "mediaPlayer"
+      | "uncontrolledDevice";
+    supportedNotifications?: (
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance"
+    )[];
+    notification?: {
+      name?:
+        | "button 1"
+        | "button 2"
+        | "button 3"
+        | "button 4"
+        | "button 5"
+        | "idle"
+        | "powerHasBeedApplied"
+        | "acMainsDisconnected"
+        | "acMainsReconnected"
+        | "replaceBatterySoon"
+        | "replaceBatteryNow"
+        | "hardwareFailure"
+        | "softwareFailure"
+        | "hardwareFailureWithCode"
+        | "softwareFailureWithCode"
+        | "motionDetection"
+        | "airFilterNeedsCleaned"
+        | "airFilterNeedsReplaced"
+        | "smokeDetected"
+        | "outsideSafeTemperatureRange"
+        | "outsideSafeHumidityRange"
+        | "scheduleMaintenance";
+      timestamp?: number;
+      description?: string;
+      [key: string]: any;
+    } | null;
+    driver:
+      | "aws-kinesis"
+      | "butler"
+      | "crestron"
+      | "dmp"
+      | "dormakaba"
+      | "dsc"
+      | "ecobee"
+      | "igor"
+      | "inncom"
+      | "kohost-k7"
+      | "kohost-pms"
+      | "lg"
+      | "lirc"
+      | "mews"
+      | "mht"
+      | "paxton"
+      | "pelican-wireless"
+      | "power-shades"
+      | "rebrandly"
+      | "salto"
+      | "salto-irn"
+      | "se"
+      | "sendgrid"
+      | "sonifi"
+      | "stay-n-touch"
+      | "twilio"
+      | "cloudflare-images"
+      | "cloudflare-stream"
+      | "insperia-privacy";
+    offline?: boolean;
+    level: number | null;
+    systemId?: string;
+    watts?: number;
+    [key: string]: any;
+  }[];
+  /**
+   * @default
+   *     []
+   */
+  switches?: {
+    id: string;
+    name?: string;
+    type:
+      | "alarm"
+      | "dimmer"
+      | "switch"
+      | "motionSensor"
+      | "windowCovering"
+      | "camera"
+      | "mediaSource"
+      | "thermostat"
+      | "lock"
+      | "courtesy"
+      | "gateway"
+      | "tv"
+      | "dvr"
+      | "appleTv"
+      | "discPlayer"
+      | "mediaPlayer"
+      | "uncontrolledDevice";
+    subType?: string | null;
+    supportedNotifications?: (
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance"
+    )[];
+    notification?: {
+      name?:
+        | "button 1"
+        | "button 2"
+        | "button 3"
+        | "button 4"
+        | "button 5"
+        | "idle"
+        | "powerHasBeedApplied"
+        | "acMainsDisconnected"
+        | "acMainsReconnected"
+        | "replaceBatterySoon"
+        | "replaceBatteryNow"
+        | "hardwareFailure"
+        | "softwareFailure"
+        | "hardwareFailureWithCode"
+        | "softwareFailureWithCode"
+        | "motionDetection"
+        | "airFilterNeedsCleaned"
+        | "airFilterNeedsReplaced"
+        | "smokeDetected"
+        | "outsideSafeTemperatureRange"
+        | "outsideSafeHumidityRange"
+        | "scheduleMaintenance";
+      timestamp?: number;
+      description?: string;
+      [key: string]: any;
+    } | null;
+    driver:
+      | "aws-kinesis"
+      | "butler"
+      | "crestron"
+      | "dmp"
+      | "dormakaba"
+      | "dsc"
+      | "ecobee"
+      | "igor"
+      | "inncom"
+      | "kohost-k7"
+      | "kohost-pms"
+      | "lg"
+      | "lirc"
+      | "mews"
+      | "mht"
+      | "paxton"
+      | "pelican-wireless"
+      | "power-shades"
+      | "rebrandly"
+      | "salto"
+      | "salto-irn"
+      | "se"
+      | "sendgrid"
+      | "sonifi"
+      | "stay-n-touch"
+      | "twilio"
+      | "cloudflare-images"
+      | "cloudflare-stream"
+      | "insperia-privacy";
+    offline?: boolean;
+    state: "on" | "off";
+    systemId?: string;
+    watts?: number;
+    [key: string]: any;
+  }[];
+  /**
+   * @default
+   *     []
+   */
+  thermostats?: {
+    id: string;
+    name?: string;
     /**
      * @default
-     *     []
+     *     thermostat
      */
-    dimmers?: {
-        id: string;
-        name?: string;
-        type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-        notification?: {
-            name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-            timestamp?: number;
-            description?: string;
-            [key: string]: any;
-        } | null;
-        driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-        offline?: boolean;
-        level: number | null;
-        systemId?: string;
-        watts?: number;
-        [key: string]: any;
-    }[];
+    type:
+      | "alarm"
+      | "dimmer"
+      | "switch"
+      | "motionSensor"
+      | "windowCovering"
+      | "camera"
+      | "mediaSource"
+      | "thermostat"
+      | "lock"
+      | "courtesy"
+      | "gateway"
+      | "tv"
+      | "dvr"
+      | "appleTv"
+      | "discPlayer"
+      | "mediaPlayer"
+      | "uncontrolledDevice";
+    driver:
+      | "aws-kinesis"
+      | "butler"
+      | "crestron"
+      | "dmp"
+      | "dormakaba"
+      | "dsc"
+      | "ecobee"
+      | "igor"
+      | "inncom"
+      | "kohost-k7"
+      | "kohost-pms"
+      | "lg"
+      | "lirc"
+      | "mews"
+      | "mht"
+      | "paxton"
+      | "pelican-wireless"
+      | "power-shades"
+      | "rebrandly"
+      | "salto"
+      | "salto-irn"
+      | "se"
+      | "sendgrid"
+      | "sonifi"
+      | "stay-n-touch"
+      | "twilio"
+      | "cloudflare-images"
+      | "cloudflare-stream"
+      | "insperia-privacy";
+    offline?: boolean;
+    supportedNotifications?: (
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance"
+    )[];
+    notification?: {
+      name?:
+        | "button 1"
+        | "button 2"
+        | "button 3"
+        | "button 4"
+        | "button 5"
+        | "idle"
+        | "powerHasBeedApplied"
+        | "acMainsDisconnected"
+        | "acMainsReconnected"
+        | "replaceBatterySoon"
+        | "replaceBatteryNow"
+        | "hardwareFailure"
+        | "softwareFailure"
+        | "hardwareFailureWithCode"
+        | "softwareFailureWithCode"
+        | "motionDetection"
+        | "airFilterNeedsCleaned"
+        | "airFilterNeedsReplaced"
+        | "smokeDetected"
+        | "outsideSafeTemperatureRange"
+        | "outsideSafeHumidityRange"
+        | "scheduleMaintenance";
+      timestamp?: number;
+      description?: string;
+      [key: string]: any;
+    } | null;
+    currentTemperature?: number;
+    currentHumidity?: number;
+    hvacMode: "cool" | "heat" | "auto" | "off";
+    hvacState: ("cooling" | "heating" | "off") | null;
+    fanMode: "auto" | "low" | "medium" | "high" | "off" | "on";
+    fanState: ("off" | "low" | "medium" | "high" | "on") | null;
     /**
      * @default
-     *     []
+     *     fahrenheit
      */
-    switches?: {
-        id: string;
-        name?: string;
-        type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        subType?: string | null;
-        supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-        notification?: {
-            name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-            timestamp?: number;
-            description?: string;
-            [key: string]: any;
-        } | null;
-        driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-        offline?: boolean;
-        state: "on" | "off";
-        systemId?: string;
-        watts?: number;
-        [key: string]: any;
-    }[];
-    /**
-     * @default
-     *     []
-     */
-    thermostats?: {
-        id: string;
-        name?: string;
-        /**
-         * @default
-         *     thermostat
-         */
-        type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-        offline?: boolean;
-        supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-        notification?: {
-            name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-            timestamp?: number;
-            description?: string;
-            [key: string]: any;
-        } | null;
-        currentTemperature?: number;
-        currentHumidity?: number;
-        hvacMode: "cool" | "heat" | "auto" | "off";
-        hvacState: ("cooling" | "heating" | "off") | null;
-        fanMode: "auto" | "low" | "medium" | "high" | "off" | "on";
-        fanState: ("off" | "low" | "medium" | "high" | "on") | null;
-        /**
-         * @default
-         *     fahrenheit
-         */
-        temperatureScale: "celsius" | "fahrenheit";
-        humidityScale?: ("absolute" | "relative") | null;
-        supportedHvacModes: ("cool" | "heat" | "auto" | "off")[];
-        supportedFanModes: ("auto" | "low" | "medium" | "high" | "off" | "on")[];
-        setpoints: {
-            cool?: {
-                value?: number;
-                min?: number | null;
-                max?: number | null;
-            };
-            heat?: {
-                value?: number;
-                min?: number | null;
-                max?: number | null;
-            };
-            auto?: {
-                value?: number;
-                min?: number | null;
-                max?: number | null;
-            };
-        };
-        /**
-         * @default
-         *     3
-         */
-        minAutoDelta?: number;
-        cycleRate?: number;
-        batteryLevel?: number;
-        systemId?: string;
-        watts?: number;
-        [key: string]: any;
-    }[];
-    /**
-     * @default
-     *     []
-     */
-    locks?: {
-        id: string;
-        name?: string;
-        type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        offline?: boolean;
-        supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-        notification?: {
-            name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-            timestamp?: number;
-            description?: string;
-            [key: string]: any;
-        } | null;
-        driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-        state: ("locked" | "unlocked") | null;
-        mode?: (/**
-         * AutoLock: Lock automatically locks after set time. Normal - Lock needs told to lock or unlock.
-         *
-         * @default
-         *     normal
-         */
-        "normal" | "autoLock") | /**
-         * AutoLock: Lock automatically locks after set time. Normal - Lock needs told to lock or unlock.
-         *
-         * @default
-         *     normal
-         */
-        null;
-        batteryLevel?: number;
-        systemId?: string;
-        watts?: number;
-        [key: string]: any;
-    }[];
-    /**
-     * @default
-     *     []
-     */
-    windowCoverings?: {
-        id: string;
-        name?: string;
-        /**
-         * @default
-         *     windowCovering
-         */
-        type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        /**
-         * @default
-         *     variable
-         */
-        discriminator?: "basic" | "variable";
-        supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-        notification?: {
-            name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-            timestamp?: number;
-            description?: string;
-            [key: string]: any;
-        } | null;
-        driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-        offline?: boolean;
-        position: number | null;
-        systemId?: string;
-        watts?: number;
-        [key: string]: any;
-    }[];
-    /**
-     * @default
-     *     []
-     */
-    courtesy?: {
-        id: string;
-        name?: string;
-        type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-        notification?: {
-            name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-            timestamp?: number;
-            description?: string;
-            [key: string]: any;
-        } | null;
-        driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-        offline?: boolean;
-        supportedStates: ("privacy" | "service" | "none")[];
-        state: "privacy" | "service" | "none";
-        systemId?: string;
-        watts?: number;
-        [key: string]: any;
-    }[];
-    /**
-     * @default
-     *     []
-     */
-    cameras?: {
-        id: string;
-        name?: string;
-        type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-        notification?: {
-            name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-            timestamp?: number;
-            description?: string;
-            [key: string]: any;
-        } | null;
-        driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-        liveStreams: {
-            iframe?: string | null;
-            hls?: string | null;
-            webRTC?: string | null;
-        };
-        systemId?: string;
-        watts?: number;
-    }[];
-    /**
-     * @default
-     *     []
-     */
-    mediaSources?: {
-        id: string;
-        /**
-         * @default
-         *     mediaSource
-         */
-        type: string;
-        discriminator: "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        remote?: "MR22GA";
-        name?: string;
-        driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-        offline?: boolean;
-        audio: boolean;
-        video: boolean;
-        powerFeedback?: boolean;
-        volumeFeedback?: boolean;
-        muted?: boolean;
-        volume?: number;
-        power?: "on" | "off";
-        input?: string;
-        supportedInputs?: string[];
-        command?: ("mute" | "volumeUp" | "volumeDown" | "channelUp" | "channelDown" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "lastChannel" | "display" | "favoriteChannel" | "play" | "stop" | "pause" | "fastForward" | "rewind" | "instantReplay" | "record" | "ac3" | "pvrMenu" | "guide" | "menu" | "menuUp" | "menuDown" | "menuLeft" | "menuRight" | "pageUp" | "pageDown" | "select" | "exit" | "input" | "power" | "enterChannel" | "enterVolume" | "number10" | "number11" | "number12" | "number13" | "number14" | "number15" | "number16" | "number10Plus" | "number20Plus" | "number100" | "dash" | "threeChan" | "threeD" | "sixChan" | "a" | "add" | "alarm" | "am" | "analog" | "angle" | "antenna" | "antennaEast" | "antennaWest" | "aspect" | "audio1" | "audio2" | "audio3" | "audioDumming" | "audioLevelDown" | "audioLevelUp" | "b" | "back" | "c" | "component1" | "component2" | "component3" | "d" | "home" | "list" | "liveTv" | "discreteInputCable" | "powerOff" | "powerOn" | "setupMenu" | "skipForward" | "skipReverse" | "video1" | "video2" | "video3" | "video4" | "video5" | "details" | "hdmi1" | "hdmi2" | "hdmi3" | "cecDeviceList" | "mtsSap" | "red" | "green" | "yellow" | "blue" | "alert" | "order") | null;
-        supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-        notification?: {
-            name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-            timestamp?: number;
-            description?: string;
-            [key: string]: any;
-        } | null;
-        systemId?: string;
-        watts?: number;
-    }[];
-    /**
-     * @default
-     *     []
-     */
-    motionSensors?: {
-        id: string;
-        type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-        systemId?: string;
-        supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-        notification?: {
-            name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-            timestamp?: number;
-            description?: string;
-            [key: string]: any;
-        } | null;
-        watts?: number;
-    }[];
-    /**
-     * @default
-     *     []
-     */
-    alarms?: {
-        id: string;
-        name?: string;
-        offline?: boolean;
-        type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-        systemId?: string;
-        supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-        notification?: {
-            name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-            timestamp?: number;
-            description?: string;
-            [key: string]: any;
-        } | null;
-        driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-        areas: {
-            number?: number;
-            name?: string;
-            securityMode?: ("arming" | "disarming" | "armed" | "disarmed" | "alarm") | null;
-            [key: string]: any;
-        }[];
-        zones: {
-            number?: number;
-            name?: string;
-            secure?: boolean | null;
-            bypassed?: boolean | null;
-            [key: string]: any;
-        }[];
-        watts?: number;
-        address?: {
-            id?: string;
-            line1?: string;
-            line2?: string;
-            line3?: string;
-            city?: string;
-            state?: string;
-            postalCode?: string;
-            countryCode?: string;
-            [key: string]: any;
-        };
-        [key: string]: any;
-    }[];
-    occupiedAt?: string | {
-        [key: string]: any;
+    temperatureScale: "celsius" | "fahrenheit";
+    humidityScale?: ("absolute" | "relative") | null;
+    supportedHvacModes: ("cool" | "heat" | "auto" | "off")[];
+    supportedFanModes: ("auto" | "low" | "medium" | "high" | "off" | "on")[];
+    setpoints: {
+      cool?: {
+        value?: number;
+        min?: number | null;
+        max?: number | null;
+      };
+      heat?: {
+        value?: number;
+        min?: number | null;
+        max?: number | null;
+      };
+      auto?: {
+        value?: number;
+        min?: number | null;
+        max?: number | null;
+      };
     };
-    createdAt?: string | {
-        [key: string]: any;
+    /**
+     * @default
+     *     3
+     */
+    minAutoDelta?: number;
+    cycleRate?: number;
+    batteryLevel?: number;
+    systemId?: string;
+    watts?: number;
+    [key: string]: any;
+  }[];
+  /**
+   * @default
+   *     []
+   */
+  locks?: {
+    id: string;
+    name?: string;
+    type:
+      | "alarm"
+      | "dimmer"
+      | "switch"
+      | "motionSensor"
+      | "windowCovering"
+      | "camera"
+      | "mediaSource"
+      | "thermostat"
+      | "lock"
+      | "courtesy"
+      | "gateway"
+      | "tv"
+      | "dvr"
+      | "appleTv"
+      | "discPlayer"
+      | "mediaPlayer"
+      | "uncontrolledDevice";
+    offline?: boolean;
+    supportedNotifications?: (
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance"
+    )[];
+    notification?: {
+      name?:
+        | "button 1"
+        | "button 2"
+        | "button 3"
+        | "button 4"
+        | "button 5"
+        | "idle"
+        | "powerHasBeedApplied"
+        | "acMainsDisconnected"
+        | "acMainsReconnected"
+        | "replaceBatterySoon"
+        | "replaceBatteryNow"
+        | "hardwareFailure"
+        | "softwareFailure"
+        | "hardwareFailureWithCode"
+        | "softwareFailureWithCode"
+        | "motionDetection"
+        | "airFilterNeedsCleaned"
+        | "airFilterNeedsReplaced"
+        | "smokeDetected"
+        | "outsideSafeTemperatureRange"
+        | "outsideSafeHumidityRange"
+        | "scheduleMaintenance";
+      timestamp?: number;
+      description?: string;
+      [key: string]: any;
+    } | null;
+    driver:
+      | "aws-kinesis"
+      | "butler"
+      | "crestron"
+      | "dmp"
+      | "dormakaba"
+      | "dsc"
+      | "ecobee"
+      | "igor"
+      | "inncom"
+      | "kohost-k7"
+      | "kohost-pms"
+      | "lg"
+      | "lirc"
+      | "mews"
+      | "mht"
+      | "paxton"
+      | "pelican-wireless"
+      | "power-shades"
+      | "rebrandly"
+      | "salto"
+      | "salto-irn"
+      | "se"
+      | "sendgrid"
+      | "sonifi"
+      | "stay-n-touch"
+      | "twilio"
+      | "cloudflare-images"
+      | "cloudflare-stream"
+      | "insperia-privacy";
+    state: ("locked" | "unlocked") | null;
+    mode?:
+      | /**
+       * AutoLock: Lock automatically locks after set time. Normal - Lock needs told to lock or unlock.
+       *
+       * @default
+       *     normal
+       */
+      ("normal" | "autoLock") /**
+       * AutoLock: Lock automatically locks after set time. Normal - Lock needs told to lock or unlock.
+       *
+       * @default
+       *     normal
+       */
+      | null;
+    batteryLevel?: number;
+    systemId?: string;
+    watts?: number;
+    [key: string]: any;
+  }[];
+  /**
+   * @default
+   *     []
+   */
+  windowCoverings?: {
+    id: string;
+    name?: string;
+    /**
+     * @default
+     *     windowCovering
+     */
+    type:
+      | "alarm"
+      | "dimmer"
+      | "switch"
+      | "motionSensor"
+      | "windowCovering"
+      | "camera"
+      | "mediaSource"
+      | "thermostat"
+      | "lock"
+      | "courtesy"
+      | "gateway"
+      | "tv"
+      | "dvr"
+      | "appleTv"
+      | "discPlayer"
+      | "mediaPlayer"
+      | "uncontrolledDevice";
+    /**
+     * @default
+     *     variable
+     */
+    discriminator?: "basic" | "variable";
+    supportedNotifications?: (
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance"
+    )[];
+    notification?: {
+      name?:
+        | "button 1"
+        | "button 2"
+        | "button 3"
+        | "button 4"
+        | "button 5"
+        | "idle"
+        | "powerHasBeedApplied"
+        | "acMainsDisconnected"
+        | "acMainsReconnected"
+        | "replaceBatterySoon"
+        | "replaceBatteryNow"
+        | "hardwareFailure"
+        | "softwareFailure"
+        | "hardwareFailureWithCode"
+        | "softwareFailureWithCode"
+        | "motionDetection"
+        | "airFilterNeedsCleaned"
+        | "airFilterNeedsReplaced"
+        | "smokeDetected"
+        | "outsideSafeTemperatureRange"
+        | "outsideSafeHumidityRange"
+        | "scheduleMaintenance";
+      timestamp?: number;
+      description?: string;
+      [key: string]: any;
+    } | null;
+    driver:
+      | "aws-kinesis"
+      | "butler"
+      | "crestron"
+      | "dmp"
+      | "dormakaba"
+      | "dsc"
+      | "ecobee"
+      | "igor"
+      | "inncom"
+      | "kohost-k7"
+      | "kohost-pms"
+      | "lg"
+      | "lirc"
+      | "mews"
+      | "mht"
+      | "paxton"
+      | "pelican-wireless"
+      | "power-shades"
+      | "rebrandly"
+      | "salto"
+      | "salto-irn"
+      | "se"
+      | "sendgrid"
+      | "sonifi"
+      | "stay-n-touch"
+      | "twilio"
+      | "cloudflare-images"
+      | "cloudflare-stream"
+      | "insperia-privacy";
+    offline?: boolean;
+    position: number | null;
+    systemId?: string;
+    watts?: number;
+    [key: string]: any;
+  }[];
+  /**
+   * @default
+   *     []
+   */
+  courtesy?: {
+    id: string;
+    name?: string;
+    type:
+      | "alarm"
+      | "dimmer"
+      | "switch"
+      | "motionSensor"
+      | "windowCovering"
+      | "camera"
+      | "mediaSource"
+      | "thermostat"
+      | "lock"
+      | "courtesy"
+      | "gateway"
+      | "tv"
+      | "dvr"
+      | "appleTv"
+      | "discPlayer"
+      | "mediaPlayer"
+      | "uncontrolledDevice";
+    supportedNotifications?: (
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance"
+    )[];
+    notification?: {
+      name?:
+        | "button 1"
+        | "button 2"
+        | "button 3"
+        | "button 4"
+        | "button 5"
+        | "idle"
+        | "powerHasBeedApplied"
+        | "acMainsDisconnected"
+        | "acMainsReconnected"
+        | "replaceBatterySoon"
+        | "replaceBatteryNow"
+        | "hardwareFailure"
+        | "softwareFailure"
+        | "hardwareFailureWithCode"
+        | "softwareFailureWithCode"
+        | "motionDetection"
+        | "airFilterNeedsCleaned"
+        | "airFilterNeedsReplaced"
+        | "smokeDetected"
+        | "outsideSafeTemperatureRange"
+        | "outsideSafeHumidityRange"
+        | "scheduleMaintenance";
+      timestamp?: number;
+      description?: string;
+      [key: string]: any;
+    } | null;
+    driver:
+      | "aws-kinesis"
+      | "butler"
+      | "crestron"
+      | "dmp"
+      | "dormakaba"
+      | "dsc"
+      | "ecobee"
+      | "igor"
+      | "inncom"
+      | "kohost-k7"
+      | "kohost-pms"
+      | "lg"
+      | "lirc"
+      | "mews"
+      | "mht"
+      | "paxton"
+      | "pelican-wireless"
+      | "power-shades"
+      | "rebrandly"
+      | "salto"
+      | "salto-irn"
+      | "se"
+      | "sendgrid"
+      | "sonifi"
+      | "stay-n-touch"
+      | "twilio"
+      | "cloudflare-images"
+      | "cloudflare-stream"
+      | "insperia-privacy";
+    offline?: boolean;
+    supportedStates: ("privacy" | "service" | "none")[];
+    state: "privacy" | "service" | "none";
+    systemId?: string;
+    watts?: number;
+    [key: string]: any;
+  }[];
+  /**
+   * @default
+   *     []
+   */
+  cameras?: {
+    id: string;
+    name?: string;
+    type:
+      | "alarm"
+      | "dimmer"
+      | "switch"
+      | "motionSensor"
+      | "windowCovering"
+      | "camera"
+      | "mediaSource"
+      | "thermostat"
+      | "lock"
+      | "courtesy"
+      | "gateway"
+      | "tv"
+      | "dvr"
+      | "appleTv"
+      | "discPlayer"
+      | "mediaPlayer"
+      | "uncontrolledDevice";
+    supportedNotifications?: (
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance"
+    )[];
+    notification?: {
+      name?:
+        | "button 1"
+        | "button 2"
+        | "button 3"
+        | "button 4"
+        | "button 5"
+        | "idle"
+        | "powerHasBeedApplied"
+        | "acMainsDisconnected"
+        | "acMainsReconnected"
+        | "replaceBatterySoon"
+        | "replaceBatteryNow"
+        | "hardwareFailure"
+        | "softwareFailure"
+        | "hardwareFailureWithCode"
+        | "softwareFailureWithCode"
+        | "motionDetection"
+        | "airFilterNeedsCleaned"
+        | "airFilterNeedsReplaced"
+        | "smokeDetected"
+        | "outsideSafeTemperatureRange"
+        | "outsideSafeHumidityRange"
+        | "scheduleMaintenance";
+      timestamp?: number;
+      description?: string;
+      [key: string]: any;
+    } | null;
+    driver:
+      | "aws-kinesis"
+      | "butler"
+      | "crestron"
+      | "dmp"
+      | "dormakaba"
+      | "dsc"
+      | "ecobee"
+      | "igor"
+      | "inncom"
+      | "kohost-k7"
+      | "kohost-pms"
+      | "lg"
+      | "lirc"
+      | "mews"
+      | "mht"
+      | "paxton"
+      | "pelican-wireless"
+      | "power-shades"
+      | "rebrandly"
+      | "salto"
+      | "salto-irn"
+      | "se"
+      | "sendgrid"
+      | "sonifi"
+      | "stay-n-touch"
+      | "twilio"
+      | "cloudflare-images"
+      | "cloudflare-stream"
+      | "insperia-privacy";
+    liveStreams: {
+      iframe?: string | null;
+      hls?: string | null;
+      webRTC?: string | null;
     };
-    updatedAt?: string | {
-        [key: string]: any;
+    systemId?: string;
+    watts?: number;
+  }[];
+  /**
+   * @default
+   *     []
+   */
+  mediaSources?: {
+    id: string;
+    /**
+     * @default
+     *     mediaSource
+     */
+    type: string;
+    discriminator:
+      | "tv"
+      | "dvr"
+      | "appleTv"
+      | "discPlayer"
+      | "mediaPlayer"
+      | "uncontrolledDevice";
+    remote?: "MR22GA";
+    name?: string;
+    driver:
+      | "aws-kinesis"
+      | "butler"
+      | "crestron"
+      | "dmp"
+      | "dormakaba"
+      | "dsc"
+      | "ecobee"
+      | "igor"
+      | "inncom"
+      | "kohost-k7"
+      | "kohost-pms"
+      | "lg"
+      | "lirc"
+      | "mews"
+      | "mht"
+      | "paxton"
+      | "pelican-wireless"
+      | "power-shades"
+      | "rebrandly"
+      | "salto"
+      | "salto-irn"
+      | "se"
+      | "sendgrid"
+      | "sonifi"
+      | "stay-n-touch"
+      | "twilio"
+      | "cloudflare-images"
+      | "cloudflare-stream"
+      | "insperia-privacy";
+    offline?: boolean;
+    audio: boolean;
+    video: boolean;
+    powerFeedback?: boolean;
+    volumeFeedback?: boolean;
+    muted?: boolean;
+    volume?: number;
+    power?: "on" | "off";
+    input?: string;
+    supportedInputs?: string[];
+    command?:
+      | (
+          | "mute"
+          | "volumeUp"
+          | "volumeDown"
+          | "channelUp"
+          | "channelDown"
+          | "number0"
+          | "number1"
+          | "number2"
+          | "number3"
+          | "number4"
+          | "number5"
+          | "number6"
+          | "number7"
+          | "number8"
+          | "number9"
+          | "lastChannel"
+          | "display"
+          | "favoriteChannel"
+          | "play"
+          | "stop"
+          | "pause"
+          | "fastForward"
+          | "rewind"
+          | "instantReplay"
+          | "record"
+          | "ac3"
+          | "pvrMenu"
+          | "guide"
+          | "menu"
+          | "menuUp"
+          | "menuDown"
+          | "menuLeft"
+          | "menuRight"
+          | "pageUp"
+          | "pageDown"
+          | "select"
+          | "exit"
+          | "input"
+          | "power"
+          | "enterChannel"
+          | "enterVolume"
+          | "number10"
+          | "number11"
+          | "number12"
+          | "number13"
+          | "number14"
+          | "number15"
+          | "number16"
+          | "number10Plus"
+          | "number20Plus"
+          | "number100"
+          | "dash"
+          | "threeChan"
+          | "threeD"
+          | "sixChan"
+          | "a"
+          | "add"
+          | "alarm"
+          | "am"
+          | "analog"
+          | "angle"
+          | "antenna"
+          | "antennaEast"
+          | "antennaWest"
+          | "aspect"
+          | "audio1"
+          | "audio2"
+          | "audio3"
+          | "audioDumming"
+          | "audioLevelDown"
+          | "audioLevelUp"
+          | "b"
+          | "back"
+          | "c"
+          | "component1"
+          | "component2"
+          | "component3"
+          | "d"
+          | "home"
+          | "list"
+          | "liveTv"
+          | "discreteInputCable"
+          | "powerOff"
+          | "powerOn"
+          | "setupMenu"
+          | "skipForward"
+          | "skipReverse"
+          | "video1"
+          | "video2"
+          | "video3"
+          | "video4"
+          | "video5"
+          | "details"
+          | "hdmi1"
+          | "hdmi2"
+          | "hdmi3"
+          | "cecDeviceList"
+          | "mtsSap"
+          | "red"
+          | "green"
+          | "yellow"
+          | "blue"
+          | "alert"
+          | "order"
+        )
+      | null;
+    supportedNotifications?: (
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance"
+    )[];
+    notification?: {
+      name?:
+        | "button 1"
+        | "button 2"
+        | "button 3"
+        | "button 4"
+        | "button 5"
+        | "idle"
+        | "powerHasBeedApplied"
+        | "acMainsDisconnected"
+        | "acMainsReconnected"
+        | "replaceBatterySoon"
+        | "replaceBatteryNow"
+        | "hardwareFailure"
+        | "softwareFailure"
+        | "hardwareFailureWithCode"
+        | "softwareFailureWithCode"
+        | "motionDetection"
+        | "airFilterNeedsCleaned"
+        | "airFilterNeedsReplaced"
+        | "smokeDetected"
+        | "outsideSafeTemperatureRange"
+        | "outsideSafeHumidityRange"
+        | "scheduleMaintenance";
+      timestamp?: number;
+      description?: string;
+      [key: string]: any;
+    } | null;
+    systemId?: string;
+    watts?: number;
+  }[];
+  /**
+   * @default
+   *     []
+   */
+  motionSensors?: {
+    id: string;
+    type:
+      | "alarm"
+      | "dimmer"
+      | "switch"
+      | "motionSensor"
+      | "windowCovering"
+      | "camera"
+      | "mediaSource"
+      | "thermostat"
+      | "lock"
+      | "courtesy"
+      | "gateway"
+      | "tv"
+      | "dvr"
+      | "appleTv"
+      | "discPlayer"
+      | "mediaPlayer"
+      | "uncontrolledDevice";
+    driver:
+      | "aws-kinesis"
+      | "butler"
+      | "crestron"
+      | "dmp"
+      | "dormakaba"
+      | "dsc"
+      | "ecobee"
+      | "igor"
+      | "inncom"
+      | "kohost-k7"
+      | "kohost-pms"
+      | "lg"
+      | "lirc"
+      | "mews"
+      | "mht"
+      | "paxton"
+      | "pelican-wireless"
+      | "power-shades"
+      | "rebrandly"
+      | "salto"
+      | "salto-irn"
+      | "se"
+      | "sendgrid"
+      | "sonifi"
+      | "stay-n-touch"
+      | "twilio"
+      | "cloudflare-images"
+      | "cloudflare-stream"
+      | "insperia-privacy";
+    systemId?: string;
+    supportedNotifications?: (
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance"
+    )[];
+    notification?: {
+      name?:
+        | "button 1"
+        | "button 2"
+        | "button 3"
+        | "button 4"
+        | "button 5"
+        | "idle"
+        | "powerHasBeedApplied"
+        | "acMainsDisconnected"
+        | "acMainsReconnected"
+        | "replaceBatterySoon"
+        | "replaceBatteryNow"
+        | "hardwareFailure"
+        | "softwareFailure"
+        | "hardwareFailureWithCode"
+        | "softwareFailureWithCode"
+        | "motionDetection"
+        | "airFilterNeedsCleaned"
+        | "airFilterNeedsReplaced"
+        | "smokeDetected"
+        | "outsideSafeTemperatureRange"
+        | "outsideSafeHumidityRange"
+        | "scheduleMaintenance";
+      timestamp?: number;
+      description?: string;
+      [key: string]: any;
+    } | null;
+    watts?: number;
+  }[];
+  /**
+   * @default
+   *     []
+   */
+  alarms?: {
+    id: string;
+    name?: string;
+    offline?: boolean;
+    type:
+      | "alarm"
+      | "dimmer"
+      | "switch"
+      | "motionSensor"
+      | "windowCovering"
+      | "camera"
+      | "mediaSource"
+      | "thermostat"
+      | "lock"
+      | "courtesy"
+      | "gateway"
+      | "tv"
+      | "dvr"
+      | "appleTv"
+      | "discPlayer"
+      | "mediaPlayer"
+      | "uncontrolledDevice";
+    systemId?: string;
+    supportedNotifications?: (
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance"
+    )[];
+    notification?: {
+      name?:
+        | "button 1"
+        | "button 2"
+        | "button 3"
+        | "button 4"
+        | "button 5"
+        | "idle"
+        | "powerHasBeedApplied"
+        | "acMainsDisconnected"
+        | "acMainsReconnected"
+        | "replaceBatterySoon"
+        | "replaceBatteryNow"
+        | "hardwareFailure"
+        | "softwareFailure"
+        | "hardwareFailureWithCode"
+        | "softwareFailureWithCode"
+        | "motionDetection"
+        | "airFilterNeedsCleaned"
+        | "airFilterNeedsReplaced"
+        | "smokeDetected"
+        | "outsideSafeTemperatureRange"
+        | "outsideSafeHumidityRange"
+        | "scheduleMaintenance";
+      timestamp?: number;
+      description?: string;
+      [key: string]: any;
+    } | null;
+    driver:
+      | "aws-kinesis"
+      | "butler"
+      | "crestron"
+      | "dmp"
+      | "dormakaba"
+      | "dsc"
+      | "ecobee"
+      | "igor"
+      | "inncom"
+      | "kohost-k7"
+      | "kohost-pms"
+      | "lg"
+      | "lirc"
+      | "mews"
+      | "mht"
+      | "paxton"
+      | "pelican-wireless"
+      | "power-shades"
+      | "rebrandly"
+      | "salto"
+      | "salto-irn"
+      | "se"
+      | "sendgrid"
+      | "sonifi"
+      | "stay-n-touch"
+      | "twilio"
+      | "cloudflare-images"
+      | "cloudflare-stream"
+      | "insperia-privacy";
+    areas: {
+      number?: number;
+      name?: string;
+      securityMode?:
+        | ("arming" | "disarming" | "armed" | "disarmed" | "alarm")
+        | null;
+      [key: string]: any;
+    }[];
+    zones: {
+      number?: number;
+      name?: string;
+      secure?: boolean | null;
+      bypassed?: boolean | null;
+      [key: string]: any;
+    }[];
+    watts?: number;
+    address?: {
+      id?: string;
+      line1?: string;
+      line2?: string;
+      line3?: string;
+      city?: string;
+      state?: string;
+      postalCode?: string;
+      countryCode?: string;
+      [key: string]: any;
     };
+    [key: string]: any;
+  }[];
+  occupiedAt?:
+    | string
+    | {
+        [key: string]: any;
+      };
+  createdAt?:
+    | string
+    | {
+        [key: string]: any;
+      };
+  updatedAt?:
+    | string
+    | {
+        [key: string]: any;
+      };
 }

@@ -43,7 +43,7 @@
     "build:watch": "node scripts/build.js --watch",
     "start": "node scripts/build.js --watch",
     "clean": "rm -rf ./dist",
-    "gendts": "dts-gen --expression-file src/index.js -o -f dist/types/index.d.ts"
+    "build:tsc": "tsc"
   },
   "files": [
     "dist",
@@ -52,6 +52,8 @@
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.1.0",
     "@kohost/eslint-config": "^1.0.0",
+    "@types/amqplib": "^0.10.4",
+    "@types/debug": "^4.1.12",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "esbuild": "^0.19.5",
