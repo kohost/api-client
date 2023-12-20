@@ -1,6 +1,6 @@
 import Command from "./Command";
 
-type MediaSource = import("../types/MediaSourceSchema").MediaSource;
+type MediaSource = import("../types/MediaSourceSchema").MediaSourceSchema;
 
 interface SetMediaCommandOptions {
   id: string;

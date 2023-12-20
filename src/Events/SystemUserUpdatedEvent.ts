@@ -1,6 +1,5 @@
+import SystemUser from "../Models/SystemUser";
 import Event from "./Event";
-
-type SystemUser = import("../types/SystemUserSchema").SystemUser;
 
 class SystemUserUpdatedEvent extends Event {
   constructor(systemUser: SystemUser) {

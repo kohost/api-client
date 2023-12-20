@@ -1,6 +1,5 @@
+import Reservation from "../Models/Reservation";
 import Event from "./Event";
-
-type Reservation = import("../types/ReservationSchema").Reservation;
 
 class SystemReservationUpdatedEvent extends Event {
   constructor(reservation: Reservation) {

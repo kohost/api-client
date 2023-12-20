@@ -1,7 +1,7 @@
 import Command from "./Command";
 import RequestError from "../Errors/RequestError";
 
-type MediaFile = import("../types/MediaFileSchema").MediaFile;
+type MediaFile = import("../types/MediaFileSchema").MediaFileSchema;
 
 interface BaseSendSMSCommandOptions {
   to: string;

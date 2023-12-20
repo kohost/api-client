@@ -1,6 +1,6 @@
+import Lock from "../Models/Lock";
 import Event from "./Event";
 
-type Lock = import("../types/LockSchema").Lock;
 class SystemLockUpdatedEvent extends Event {
   constructor(lock: Lock) {
     super(lock);

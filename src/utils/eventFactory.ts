@@ -1,10 +1,10 @@
-const Events = require("../Events").default;
+import Events from "../Events";
 
-function eventFactory(eventName) {
+function eventFactory(eventName: string) {
   const AllEvents = Object.values(Events);
   const Event = AllEvents.find((E) => E.prototype.name === eventName);
   if (!Event) throw new Error("Invalid event name: " + eventName);
   return Event;
 }
 
-module.exports = eventFactory;
+export default eventFactory;

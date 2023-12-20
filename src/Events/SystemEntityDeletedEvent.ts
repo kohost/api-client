@@ -1,6 +1,5 @@
+import Entity from "../Models/Entity";
 import Event from "./Event";
-
-type Entity = typeof import("../Models/Entity");
 
 class SystemEntityDeletedEvent extends Event {
   constructor(entity: Entity) {

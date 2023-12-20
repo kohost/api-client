@@ -28,10 +28,11 @@ class Scene extends Entity {
     const sceneId = scene.id;
 
     for (const deviceType in sceneDevices) {
-      const sceneData =
-        sceneDevices[deviceType as keyof SceneSchema["devices"]];
+      const sceneData = sceneDevices[
+        deviceType as keyof SceneSchema["devices"]
+      ] as any;
 
-      const roomDevices = room[deviceType as keyof RoomSchema];
+      const roomDevices = room[deviceType as keyof RoomSchema] as any;
 
       if (sceneId === "1" && restore && deviceType !== "thermostats") continue;
 
@@ -39,12 +40,15 @@ class Scene extends Entity {
         const { id, ...deviceProps } = data;
         if (id === "*") {
           for (const device of roomDevices) {
+            interface CommandData {
+              [key: string]: any;
+            }
             const deviceCmd = {
               id: device.id,
               systemId: device.systemId,
               type: device.type,
               driver: device.driver,
-              commandData: {},
+              commandData: {} as CommandData,
             };
             for (const prop in deviceProps) {
               if (prop === "setpointDelta") {

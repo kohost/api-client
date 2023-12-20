@@ -1,6 +1,5 @@
+import EmailMessage from "../Models/EmailMessage";
 import Event from "./Event";
-
-type EmailMessage = import("../types/EmailMessageSchema").EmailMessage;
 
 class EmailEvent extends Event {
   constructor(email: EmailMessage, context = {}) {

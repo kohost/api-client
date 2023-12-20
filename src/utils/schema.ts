@@ -1,9 +1,7 @@
-import Ajv from "ajv";
+import Ajv, { AnySchema } from "ajv";
 
 import addFormats from "ajv-formats";
 import defininitions from "../schemas/definitions.json";
-
-type AnySchema = import("ajv").AnySchema;
 
 const ajv = new Ajv({
   allErrors: true,

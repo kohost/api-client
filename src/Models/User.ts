@@ -4,8 +4,6 @@ import schema, { properties } from "../schemas/user.json";
 import paymentSchema from "../schemas/payment.json";
 import Entity from "./Entity";
 import MediaFile from "./MediaFile";
-import Reservation from "./Reservation";
-import Identification from "./Identification";
 
 import { nanoid } from "nanoid/async";
 
@@ -19,13 +17,6 @@ type UserSchema = import("../types/UserSchema").UserSchema;
 class User extends Entity {
   constructor(user: UserSchema) {
     if (user.photo) user.photo = new MediaFile(user.photo);
-    if (user.reservations)
-      user.reservations = user.reservations.map((res) => new Reservation(res));
-    if (user.identifications)
-      user.identifications = user.identifications.map(
-        (id) => new Identification(id)
-      );
-
     super(user);
   }
 

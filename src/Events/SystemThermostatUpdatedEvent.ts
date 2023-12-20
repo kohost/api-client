@@ -1,6 +1,5 @@
+import Thermostat from "../Models/Thermostat";
 import Event from "./Event";
-
-type Thermostat = import("../types/ThermostatSchema").Thermostat;
 
 class SystemThermostatUpdatedEvent extends Event {
   constructor(thermostat: Thermostat) {

@@ -1,6 +1,5 @@
+import Dimmer from "../Models/Dimmer";
 import Event from "./Event";
-
-type Dimmer = import("../types/DimmerSchema").Dimmer;
 
 class SystemDimmerUpdatedEvent extends Event {
   constructor(dimmer: Dimmer) {

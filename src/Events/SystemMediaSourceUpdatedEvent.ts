@@ -1,9 +1,8 @@
+import MediaSource from "../Models/MediaSource";
 import Event from "./Event";
 
-type MediaSoure = import("../types/MediaSourceSchema").MediaSource;
-
 class SystemMediaSourceUpdatedEvent extends Event {
-  constructor(mediaSource: MediaSoure) {
+  constructor(mediaSource: MediaSource) {
     super(mediaSource);
   }
 

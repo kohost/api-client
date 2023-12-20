@@ -1,6 +1,5 @@
+import Alarm from "../Models/Alarm";
 import Event from "./Event";
-
-type Alarm = import("../types/AlarmSchema").Alarm;
 
 class SystemAlarmUpdatedEvent extends Event {
   constructor(alarm: Alarm) {

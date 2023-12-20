@@ -1,6 +1,5 @@
+import Gateway from "../Models/Gateway";
 import Event from "./Event";
-
-type Gateway = import("../types/GatewaySchema").IoTGateway;
 
 class SystemGatewayUpdatedEvent extends Event {
   constructor(gateway: Gateway) {

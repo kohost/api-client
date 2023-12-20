@@ -1,6 +1,5 @@
+import ShortLink from "../Models/ShortLink";
 import Event from "./Event";
-
-type ShortLink = import("../types/ShortLinkSchema").ShortLink;
 
 class ShortLinkCreatedEvent extends Event {
   constructor(shortLink: ShortLink, context = {}) {

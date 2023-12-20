@@ -1,6 +1,5 @@
+import Credential from "../Models/Credential";
 import Event from "./Event";
-
-type Credential = import("../types/CredentialSchema").Credential;
 
 class SystemCredentialUpdatedEvent extends Event {
   constructor(credential: Credential) {

@@ -6,7 +6,7 @@ import amqp, {
 import crypto from "node:crypto";
 import debug from "debug";
 
-import { isFatalError } from "amqplib/lib/connection";
+import defs from "./utils/defs";
 
 import RequestError from "./Errors/RequestError";
 import AuthenticationError from "./Errors/AuthenticationError";
@@ -14,7 +14,7 @@ import ValidationError from "./Errors/ValidationError";
 import NotFoundError from "./Errors/NotFoundError";
 import UnprocessableRequestError from "./Errors/UnprocessableRequestError";
 
-const dbg = debug("kohost:amqp-client");
+const amqpDebugger = debug("kohost:amqp-client");
 
 const HEADER_KEY_ORGANIZATION_ID = "X-Organization-Id";
 const HEADER_KEY_PROPERTY_ID = "X-Property-Id";
@@ -22,50 +22,43 @@ const HEADER_KEY_DRIVER = "X-Driver";
 const HEADER_KEY_COMMAND_NAME = "X-Command-Name";
 const HEADER_KEY_EVENT_NAME = "X-Event-Name";
 
-const exchanges = {
-  // routes commands based on `command-name` header and in many cases `property-id` header
-  Commands: {
-    name: "kohost.commands",
-    type: "headers",
-    options: {
-      durable: true,
-    },
-  },
-  // routes events based on routing keys
-  DriverEvents: {
-    name: "kohost.events.drivers",
-    type: "topic",
-    options: {
-      durable: true,
-    },
-  },
-  AppEvents: {
-    name: "kohost.events.app",
-    type: "topic",
-    options: {
-      durable: true,
-    },
-  },
-  Direct: {
-    name: "kohost.direct",
-    type: "direct",
-    options: {
-      durable: true,
-    },
-  },
-  Replies: {
-    name: "kohost.replies",
-    type: "topic",
-    options: {
-      durable: true,
-    },
-  },
-  // dead letter exchange
-  dlx: {
-    name: "kohost.dlx",
-    type: "direct",
-  },
-};
+interface PublishToExchangeOptions {
+  exchange: string;
+  routingKey: string;
+  content: Buffer;
+  options: any;
+}
+
+interface SubscribeToQueueOptions {
+  queue: string;
+  cb: () => void;
+  options?: amqp.Options.Consume;
+}
+
+interface BindExchangeOptions {
+  source: string;
+  destination: string;
+  routingKey: string;
+  args?: any;
+}
+
+interface AssertExchangeOptions {
+  exchange: string;
+  type: string;
+  options: amqp.Options.AssertExchange;
+}
+
+interface AssertQueueOptions {
+  queue: string;
+  options: amqp.Options.AssertQueue;
+}
+
+interface BindQueueOptions {
+  queue: string;
+  exchange: string;
+  routingKey: string;
+  args?: any;
+}
 
 class KohostAMQPClient {
   static get Message() {
@@ -73,7 +66,7 @@ class KohostAMQPClient {
   }
 
   static get exchanges() {
-    return exchanges;
+    return defs.amqp.exchanges;
   }
   static generateCorrelationId() {
     return crypto.randomUUID();
@@ -96,7 +89,7 @@ class KohostAMQPClient {
       message = "Unknown Error";
     }
 
-    dbg("parsing error", type, message, options);
+    amqpDebugger("parsing error", type, message, options);
 
     switch (type) {
       case "RequestError":
@@ -182,7 +175,7 @@ class KohostAMQPClient {
     if (isEvent && eventName) parsed.event = eventName;
     else if (isCommand && commandName) parsed.command = commandName;
 
-    dbg("amqp parsed %o", parsed);
+    amqpDebugger("amqp parsed %o", parsed);
 
     return parsed;
   }
@@ -195,7 +188,13 @@ class KohostAMQPClient {
   }
 
   static isFatalError(err: any) {
-    return isFatalError(err);
+    switch (err && err.code) {
+      case 320:
+      case 200:
+        return false;
+      default:
+        return true;
+    }
   }
 
   async createConnection(connection: string, options = {}) {
@@ -211,46 +210,115 @@ class KohostAMQPClient {
     return channel;
   }
 
-  async assertExchange(channel: Channel, { exchange, type, options }) {
-    return await channel.assertExchange(exchange, type, options);
+  async assertExchange(
+    channel: Channel,
+    exchangeOpts = {
+      exchange: "",
+      type: "",
+      options: {},
+    } as AssertExchangeOptions
+  ) {
+    return await channel.assertExchange(
+      exchangeOpts.exchange,
+      exchangeOpts.type,
+      exchangeOpts.options
+    );
   }
 
-  async assertQueue(channel: Channel, { queue, options }) {
-    return await channel.assertQueue(queue, options);
+  async assertQueue(
+    channel: Channel,
+    queueOpts = { queue: "", options: {} } as AssertQueueOptions
+  ) {
+    return await channel.assertQueue(queueOpts.queue, queueOpts.options);
   }
 
-  async bindQueue(channel: Channel, { queue, exchange, routingKey, args }) {
-    return await channel.bindQueue(queue, exchange, routingKey, args);
+  async bindQueue(
+    channel: Channel,
+    queueOpts = {
+      queue: "",
+      exchange: "",
+      routingKey: "",
+      args: {},
+    } as BindQueueOptions
+  ) {
+    return await channel.bindQueue(
+      queueOpts.queue,
+      queueOpts.exchange,
+      queueOpts.routingKey,
+      queueOpts.args
+    );
   }
 
   async bindExchange(
     channel: Channel,
-    { source, destination, routingKey, args }
+    options = {
+      source: "",
+      destination: "",
+      routingKey: "",
+      args: {},
+    } as BindExchangeOptions
   ) {
-    return await channel.bindExchange(destination, source, routingKey, args);
+    return await channel.bindExchange(
+      options.destination,
+      options.source,
+      options.routingKey,
+      options.args
+    );
   }
 
-  async subscribeToQueue(channel: Channel, { queue, cb, options }) {
-    return await channel.consume(queue, cb, options);
+  async subscribeToQueue(
+    channel: Channel,
+    opts = {
+      queue: "",
+      cb: function () {},
+      options: {},
+    } as SubscribeToQueueOptions
+  ) {
+    return await channel.consume(opts.queue, opts.cb, opts.options);
   }
 
   publishToExchange(
     channel: Channel,
-    { exchange, routingKey, content, options }
+    opts = {
+      exchange: "",
+      routingKey: "",
+      content: Buffer.from(JSON.stringify({})),
+      options: {},
+    } as PublishToExchangeOptions
   ) {
-    return channel.publish(exchange, routingKey, content, options);
+    return channel.publish(
+      opts.exchange,
+      opts.routingKey,
+      opts.content,
+      opts.options
+    );
   }
 }
 
-interface MessageContent {}
-
 class Message {
-  constructor(content) {
+  toExchange?: string | null;
+  content: any;
+  options: {
+    contentType: string;
+    timestamp: number;
+    correlationId: string | null;
+    type?: string;
+    replyTo?: string;
+    headers: {
+      [key: string]: string;
+    };
+  };
+  routingKey: string;
+
+  constructor(content: any) {
     this.toExchange = null;
     this.content = content;
     this.options = {
       contentType: "application/json",
       timestamp: Date.now(),
+      correlationId: null,
+      headers: {},
+      replyTo: "",
     };
     this.routingKey = "";
   }
@@ -259,33 +327,31 @@ class Message {
     return this.options.correlationId || null;
   }
 
-  to({ exchange }) {
-    if (typeof exchange === "undefined")
+  to(options = { exchange: undefined }): Message {
+    if (typeof options.exchange === "undefined")
       throw new Error("Exchange is required");
-    this.toExchange = exchange;
+    this.toExchange = options.exchange;
     return this;
   }
 
-  withType(type) {
+  withType(type: string): Message {
     this.options.type = type;
     return this;
   }
 
-  withRoutingKey(routingKey) {
+  withRoutingKey(routingKey: string): Message {
     this.routingKey = routingKey;
     return this;
   }
 
-  withHeaders(headers) {
+  withHeaders(headers = {}): Message {
     if (!this.options.headers) this.options.headers = {};
     this.options.headers = { ...this.options.headers, ...headers };
     return this;
   }
 
-  withContext(context) {
-    for (let key in context) {
-      this.withHeaders({ [key]: context[key] });
-    }
+  withContext(context = {}) {
+    this.withHeaders(context);
     return this;
   }
 
@@ -294,7 +360,7 @@ class Message {
     return this;
   }
 
-  withReplyTo(queue) {
+  withReplyTo(queue: string) {
     this.options.replyTo = queue;
     return this;
   }

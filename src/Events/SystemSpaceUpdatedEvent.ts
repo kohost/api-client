@@ -1,6 +1,5 @@
+import Space from "../Models/Space";
 import Event from "./Event";
-
-type Space = import("../types/SpaceSchema").Space;
 
 class SystemSpaceUpdatedEvent extends Event {
   constructor(space: Space) {

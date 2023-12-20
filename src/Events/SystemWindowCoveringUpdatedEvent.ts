@@ -1,6 +1,5 @@
+import WindowCovering from "../Models/WindowCovering";
 import Event from "./Event";
-
-type WindowCovering = import("../types/WindowCoveringSchema").WindowCovering;
 
 class SystemWindowCoveringUpdatedEvent extends Event {
   constructor(windowCovering: WindowCovering) {

@@ -15,12 +15,8 @@ export interface TimeSheetSchema {
    */
   type?: "timeSheet";
   userId: string;
-  day:
-    | string
-    | Date
-    | {
-        [key: string]: any;
-      };
+  day: string | Date | number;
+
   /** If true, the time sheet is locked and cannot be modified */
   locked?: boolean;
   /**
@@ -30,16 +26,8 @@ export interface TimeSheetSchema {
   timeEntries?: {
     id?: string;
     discriminator: "working" | "driving" | "meeting";
-    start:
-      | string
-      | {
-          [key: string]: any;
-        };
-    end?:
-      | string
-      | {
-          [key: string]: any;
-        };
+    start: string | Date;
+    end?: string | Date;
     comment?: string;
     ticketId?: string;
   }[];

@@ -28,6 +28,9 @@ class KohostApiClient extends EventEmitter {
   isBrowser: boolean;
   isRefreshingToken: boolean;
   private transport: AxiosInstance;
+
+  RefreshToken!: () => Promise<any>;
+
   constructor(
     options = {
       url: "",

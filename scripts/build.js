@@ -168,7 +168,7 @@ let useCasePlugin = {
             if (query) config.params = query;
             if (headers) config.headers = headers;
             
-            return this._http.request(config);
+            return this.transport.request(config);
             }`;
 
             const bundle = await esbuild.transform(codeTemplate, {

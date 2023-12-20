@@ -1,6 +1,5 @@
+import SMSMessage from "../Models/SmsMessage";
 import Event from "./Event";
-
-type SMSMessage = import("../types/SmsMessageSchema").SMSMessage;
 
 class SMSEvent extends Event {
   constructor(sms: SMSMessage, context = {}) {

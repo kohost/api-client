@@ -1,6 +1,5 @@
+import Switch from "../Models/Switch";
 import Event from "./Event";
-
-type Switch = import("../types/SwitchSchema").Switch;
 
 class SystemSwitchUpdatedEvent extends Event {
   constructor(_switch: Switch) {

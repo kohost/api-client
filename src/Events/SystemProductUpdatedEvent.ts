@@ -1,6 +1,5 @@
+import Product from "../Models/Product";
 import Event from "./Event";
-
-type Product = import("../types/ProductSchema").Product;
 
 class SystemProductUpdatedEvent extends Event {
   constructor(product: Product) {

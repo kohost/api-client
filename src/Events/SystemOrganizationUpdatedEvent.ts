@@ -1,6 +1,5 @@
+import Organization from "../Models/Organization";
 import Event from "./Event";
-
-type Organization = import("../types/OrganizationSchema").Organization;
 
 class SystemOrganizationUpdatedEvent extends Event {
   constructor(organization: Organization) {

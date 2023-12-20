@@ -1,6 +1,5 @@
+import Camera from "../Models/Camera";
 import Event from "./Event";
-
-type Camera = import("../types/CameraSchema").Camera;
 
 class SystemCameraUpdatedEvent extends Event {
   constructor(camera: Camera) {

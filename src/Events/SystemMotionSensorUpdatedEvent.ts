@@ -1,6 +1,5 @@
+import MotionSensor from "../Models/MotionSensor";
 import Event from "./Event";
-
-type MotionSensor = import("../types/MotionSensorSchema").MotionSensor;
 
 class SystemMotionSensorUpdatedEvent extends Event {
   constructor(motionSensor: MotionSensor) {

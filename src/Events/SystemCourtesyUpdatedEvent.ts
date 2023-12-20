@@ -1,7 +1,5 @@
+import Courtesy from "../Models/Courtesy";
 import Event from "./Event";
-
-type Courtesy = import("../types/CourtesySchema").Courtesy;
-
 class SystemCourtesyUpdatedEvent extends Event {
   constructor(courtesy: Courtesy) {
     super(courtesy);

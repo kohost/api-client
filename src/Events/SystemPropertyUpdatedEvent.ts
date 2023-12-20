@@ -1,6 +1,5 @@
+import Property from "../Models/Property";
 import Event from "./Event";
-
-type Property = import("../types/PropertySchema").Property;
 
 class SystemPropertyUpdatedEvent extends Event {
   constructor(property: Property) {

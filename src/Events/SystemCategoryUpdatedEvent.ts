@@ -1,10 +1,9 @@
+import Category from "../Models/Category";
 import Event from "./Event";
 
-type Space = import("../types/SpaceSchema").Space;
-
 class SystemCategoryUpdatedEvent extends Event {
-  constructor(space: Space) {
-    super(space);
+  constructor(category: Category) {
+    super(category);
   }
 
   get name() {
