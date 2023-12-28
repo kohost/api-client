@@ -26,7 +26,7 @@ import UploadImageCommand from "./UploadImageCommand";
 import GetProductsCommand from "./GetProductsCommand";
 import SellProductsCommand from "./SellProductsCommand";
 
-export default {
+export {
   SetSceneCommand,
   SetAlarmCommand,
   SetDimmerCommand,

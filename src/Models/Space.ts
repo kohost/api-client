@@ -4,11 +4,10 @@ import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/space.json";
 import Entity from "./Entity";
 import Room from "./Room";
+import { SpaceSchema } from "../types/SpaceSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type SpaceSchema = import("../types/SpaceSchema").SpaceSchema;
 
 class Space extends Entity {
   constructor(space: SpaceSchema) {

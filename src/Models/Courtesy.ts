@@ -2,11 +2,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/courtesy.json";
 import Entity from "./Entity";
+import { CourtesySchema } from "../types/CourtesySchema";
 
 add(schema);
 const validator = compile(schema);
-
-type CourtesySchema = import("../types/CourtesySchema").CourtesySchema;
 
 class Courtesy extends Entity {
   constructor(courtesy: CourtesySchema) {

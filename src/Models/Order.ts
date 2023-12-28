@@ -1,11 +1,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/order.json";
 import Entity from "./Entity";
+import { OrderSchema } from "../types/OrderSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type OrderSchema = import("../types/OrderSchema").OrderSchema;
 
 class Order extends Entity {
   constructor(order: OrderSchema) {

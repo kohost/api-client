@@ -30,7 +30,7 @@ import ApplicationOutOfUseEvent from "./ApplicationOutOfUseEvent";
 // Delete Events
 import SystemEntityDeletedEvent from "./SystemEntityDeletedEvent";
 
-export default {
+export {
   SystemAlarmUpdatedEvent,
   SystemCredentialUpdatedEvent,
   SystemGatewayUpdatedEvent,

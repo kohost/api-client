@@ -1,11 +1,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/reservation.json";
 import Entity from "./Entity";
+import { ReservationSchema } from "../types/ReservationSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type ReservationSchema = import("../types/ReservationSchema").ReservationSchema;
 
 class Reservation extends Entity {
   constructor(reservation: ReservationSchema) {

@@ -1,4 +1,4 @@
-import Events from "../Events";
+import * as Events from "../Events";
 
 function eventFactory(eventName: string) {
   const AllEvents = Object.values(Events);

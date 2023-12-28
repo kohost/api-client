@@ -1,4 +1,3 @@
-import { DimmerSchema } from "./DimmerSchema.d";
 /* tslint:disable */
 /* eslint-disable */
 /**

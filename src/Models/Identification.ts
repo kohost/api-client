@@ -1,12 +1,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/identification.json";
 import Entity from "./Entity";
+import { IdentificationSchema } from "../types/IdentificationSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type IdentificationSchema =
-  import("../types/IdentificationSchema").IdentificationSchema;
 
 class Identification extends Entity {
   constructor(identification: IdentificationSchema) {

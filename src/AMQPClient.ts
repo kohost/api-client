@@ -16,12 +16,6 @@ import UnprocessableRequestError from "./Errors/UnprocessableRequestError";
 
 const amqpDebugger = debug("kohost:amqp-client");
 
-const HEADER_KEY_ORGANIZATION_ID = "X-Organization-Id";
-const HEADER_KEY_PROPERTY_ID = "X-Property-Id";
-const HEADER_KEY_DRIVER = "X-Driver";
-const HEADER_KEY_COMMAND_NAME = "X-Command-Name";
-const HEADER_KEY_EVENT_NAME = "X-Event-Name";
-
 interface PublishToExchangeOptions {
   exchange: string;
   routingKey: string;
@@ -60,7 +54,7 @@ interface BindQueueOptions {
   args?: any;
 }
 
-class KohostAMQPClient {
+export class KohostAMQPClient {
   static get Message() {
     return Message;
   }
@@ -124,8 +118,8 @@ class KohostAMQPClient {
 
     const messageHeaders = message?.properties.headers || {};
 
-    const commandName = messageHeaders[HEADER_KEY_COMMAND_NAME] || null;
-    const eventName = messageHeaders[HEADER_KEY_EVENT_NAME] || null;
+    const commandName = messageHeaders[defs.HEADER_KEY_COMMAND_NAME] || null;
+    const eventName = messageHeaders[defs.HEADER_KEY_EVENT_NAME] || null;
 
     if (message.content) {
       try {
@@ -143,23 +137,25 @@ class KohostAMQPClient {
     }
 
     if (message?.properties?.headers) {
-      const orgHeader = message.properties.headers[HEADER_KEY_ORGANIZATION_ID];
-      const propertyHeader = message.properties.headers[HEADER_KEY_PROPERTY_ID];
-      const driverHeader = message.properties.headers[HEADER_KEY_DRIVER];
+      const orgHeader =
+        message.properties.headers[defs.HEADER_KEY_ORGANIZATION_ID];
+      const propertyHeader =
+        message.properties.headers[defs.HEADER_KEY_PROPERTY_ID];
+      const driverHeader = message.properties.headers[defs.HEADER_KEY_DRIVER];
 
       if (orgHeader) {
         context.organizationId = orgHeader;
-        headers[HEADER_KEY_ORGANIZATION_ID] = orgHeader;
+        headers[defs.HEADER_KEY_ORGANIZATION_ID] = orgHeader;
       }
 
       if (propertyHeader) {
         context.propertyId = propertyHeader;
-        headers[HEADER_KEY_PROPERTY_ID] = propertyHeader;
+        headers[defs.HEADER_KEY_PROPERTY_ID] = propertyHeader;
       }
 
       if (driverHeader) {
         context.driver = driverHeader;
-        headers[HEADER_KEY_DRIVER] = driverHeader;
+        headers[defs.HEADER_KEY_DRIVER] = driverHeader;
       }
     }
 
@@ -378,5 +374,3 @@ class Message {
     };
   }
 }
-
-module.exports = KohostAMQPClient;

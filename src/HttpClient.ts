@@ -23,7 +23,7 @@ interface KohostApiResponse {
   pagination?: any;
 }
 
-class KohostApiClient extends EventEmitter {
+export class KohostApiClient extends EventEmitter {
   options: KohostApiClientOptions;
   isBrowser: boolean;
   isRefreshingToken: boolean;
@@ -79,25 +79,10 @@ class KohostApiClient extends EventEmitter {
     );
   }
 
-  /**
-   * @param {string} orgId
-   * @returns {void}
-   * @memberof KohostApiClient
-   * @example
-   * client.organizationId = "1234";
-   */
   set organizationId(orgId: string) {
     const key = defs.HEADER_KEY_ORGANIZATION_ID;
     this.transport.defaults.headers.common[key] = orgId;
   }
-
-  /**
-   * @param {string} propertyId
-   * @returns {void}
-   * @memberof KohostApiClient
-   * @example
-   * client.propertyId = "1234";
-   */
 
   set propertyId(propertyId: string) {
     const key = defs.HEADER_KEY_PROPERTY_ID;
@@ -178,5 +163,3 @@ class KohostApiClient extends EventEmitter {
     this.emit("PhoneVerificationRequired");
   }
 }
-
-export default KohostApiClient;

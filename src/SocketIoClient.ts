@@ -5,7 +5,7 @@ interface ClientOptions {
   url: string;
 }
 
-export default class SocketIoClient extends EventEmitter {
+export class SocketIoClient extends EventEmitter {
   socket: Socket;
   constructor(config: ClientOptions = { url: "" }) {
     super();

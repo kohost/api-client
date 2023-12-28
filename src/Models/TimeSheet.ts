@@ -2,10 +2,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/timeSheet.json";
 import Entity from "./Entity";
+import { TimeSheetSchema } from "../types/TimeSheetSchema";
 
 import { nanoid } from "nanoid";
 
-type TimeSheetSchema = import("../types/TimeSheetSchema").TimeSheetSchema;
 // extend the type to include the id property
 
 add(schema);

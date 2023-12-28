@@ -16,10 +16,10 @@ import Alarm from "./Alarm";
 import MediaSource from "./MediaSource";
 import MotionSensor from "./MotionSensor";
 
+import { RoomSchema } from "../types/RoomSchema";
+
 add(schema);
 const validator = compile(schema);
-
-type RoomSchema = import("../types/RoomSchema").RoomSchema;
 
 class Room extends Entity {
   constructor(room: RoomSchema) {

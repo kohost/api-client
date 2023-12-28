@@ -4,6 +4,7 @@ import schema, { properties } from "../schemas/user.json";
 import paymentSchema from "../schemas/payment.json";
 import Entity from "./Entity";
 import MediaFile from "./MediaFile";
+import { UserSchema } from "../types/UserSchema";
 
 import { nanoid } from "nanoid/async";
 
@@ -11,8 +12,6 @@ add(paymentSchema);
 add(schema);
 
 const validator = compile(schema);
-
-type UserSchema = import("../types/UserSchema").UserSchema;
 
 class User extends Entity {
   constructor(user: UserSchema) {

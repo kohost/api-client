@@ -2,12 +2,11 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/systemUser.json";
 import Entity from "./Entity";
+import { SystemUserSchema } from "../types/SystemUserSchema";
 
 add(schema);
 
 const validator = compile(schema);
-
-type SystemUserSchema = import("../types/SystemUserSchema").SystemUserSchema;
 
 class SystemUser extends Entity {
   constructor(user: SystemUserSchema) {

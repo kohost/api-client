@@ -1,12 +1,10 @@
 import schemas from "../utils/schema";
 import schema from "../schemas/announcement.json";
 import Entity from "./Entity";
+import { AnnouncementSchema } from "../types/AnnouncementSchema";
 
 schemas.add(schema);
 const validator = schemas.compile(schema);
-
-type AnnouncementSchema =
-  import("../types/AnnouncementSchema").AnnouncementSchema;
 
 class Announcement extends Entity {
   constructor(announcement: AnnouncementSchema) {

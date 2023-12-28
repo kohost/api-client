@@ -2,12 +2,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/motionSensor.json";
 import Entity from "./Entity";
+import { MotionSensorSchema } from "../types/MotionSensorSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type MotionSensorSchema =
-  import("../types/MotionSensorSchema").MotionSensorSchema;
 
 class MotionSensor extends Entity {
   constructor(motionSensor: MotionSensorSchema) {

@@ -2,12 +2,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/discoveredDevice.json";
 import Entity from "./Entity";
+import { DiscoveredDeviceSchema } from "../types/DiscoveredDeviceSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type DiscoveredDeviceSchema =
-  import("../types/DiscoveredDeviceSchema").DiscoveredDeviceSchema;
 
 class DiscoveredDevice extends Entity {
   constructor(device: DiscoveredDeviceSchema) {

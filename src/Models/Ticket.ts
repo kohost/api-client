@@ -3,10 +3,8 @@ import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/ticket.json";
 import Entity from "./Entity";
 import MediaFile from "./MediaFile";
-
 import { nanoid } from "nanoid";
-
-type TicketSchema = import("../types/TicketSchema").TicketSchema;
+import { TicketSchema } from "../types/TicketSchema";
 
 add(schema);
 const validator = compile(schema);

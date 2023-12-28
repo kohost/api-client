@@ -1,14 +1,12 @@
 // Create the Device Router Model
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/deviceRouter.json";
+import { DeviceRouterSchema } from "../types/DeviceRouterSchema";
 
 import Entity from "./Entity";
 
 add(schema);
 const validator = compile(schema);
-
-type DeviceRouterSchema =
-  import("../types/DeviceRouterSchema").DeviceRouterSchema;
 
 class DeviceRouter extends Entity {
   constructor(device: DeviceRouterSchema) {

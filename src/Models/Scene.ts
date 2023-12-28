@@ -8,6 +8,9 @@ const validator = compile(schema);
 type SceneSchema = import("../types/SceneSchema").SceneSchema;
 type RoomSchema = import("../types/RoomSchema").RoomSchema;
 
+interface CommandData {
+  [key: string]: any;
+}
 class Scene extends Entity {
   constructor(scene: SceneSchema) {
     super(scene);
@@ -40,9 +43,6 @@ class Scene extends Entity {
         const { id, ...deviceProps } = data;
         if (id === "*") {
           for (const device of roomDevices) {
-            interface CommandData {
-              [key: string]: any;
-            }
             const deviceCmd = {
               id: device.id,
               systemId: device.systemId,

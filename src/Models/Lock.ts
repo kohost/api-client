@@ -2,11 +2,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/lock.json";
 import Entity from "./Entity";
+import { LockSchema } from "../types/LockSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type LockSchema = import("../types/LockSchema").LockSchema;
 
 class Lock extends Entity {
   constructor(lock: LockSchema) {

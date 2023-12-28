@@ -2,12 +2,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/energyReportShard.json";
 import Entity from "./Entity";
+import { EnergyReportShardSchema } from "../types/EnergyReportShardSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type EnergyReportShardSchema =
-  import("../types/EnergyReportShardSchema").EnergyReportShardSchema;
 
 class EnergyReportShard extends Entity {
   constructor(energyReportShard: EnergyReportShardSchema) {

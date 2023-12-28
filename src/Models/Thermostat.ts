@@ -1,11 +1,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/thermostat.json";
 import Entity from "./Entity";
+import { ThermostatSchema } from "../types/ThermostatSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type ThermostatSchema = import("../types/ThermostatSchema").ThermostatSchema;
 
 class Thermostat extends Entity {
   constructor(thermostat: ThermostatSchema) {

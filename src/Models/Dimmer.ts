@@ -2,11 +2,11 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/dimmer.json";
 import Entity from "./Entity";
+import { DimmerSchema } from "../types/DimmerSchema";
 
 add(schema);
 const validator = compile(schema);
 
-type DimmerSchema = import("../types/DimmerSchema").DimmerSchema;
 class Dimmer extends Entity {
   constructor(dimmer: DimmerSchema) {
     super(dimmer);

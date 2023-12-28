@@ -1,8 +1,6 @@
 import ValidationError from "../Errors/ValidationError";
 import { customAlphabet as generate } from "nanoid";
-
-type ValidateFunction = import("ajv").ValidateFunction;
-type AnySchema = import("ajv").AnySchema;
+import { ValidateFunction, AnySchema } from "ajv";
 
 interface EntityData {
   [key: string]: any;

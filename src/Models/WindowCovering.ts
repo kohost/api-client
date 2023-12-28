@@ -2,12 +2,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/windowCovering.json";
 import Entity from "./Entity";
+import { WindowCoveringSchema } from "../types/WindowCoveringSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type WindowCoveringSchema =
-  import("../types/WindowCoveringSchema").WindowCoveringSchema;
 
 class WindowCovering extends Entity {
   constructor(windowCovering: WindowCoveringSchema) {

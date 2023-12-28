@@ -2,11 +2,10 @@
 import { add, compile } from "../utils/schema";
 import schema, { properties } from "../schemas/smsMessage.json";
 import Entity from "./Entity";
+import { SMSMessageSchema } from "../types/SmsMessageSchema";
 
 add(schema);
 const validator = compile(schema);
-
-type SMSMessageSchema = import("../types/SmsMessageSchema").SMSMessageSchema;
 
 class SMSMessage extends Entity {
   constructor(message: SMSMessageSchema) {
