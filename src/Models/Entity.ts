@@ -2,60 +2,89 @@ import ValidationError from "../Errors/ValidationError";
 import { customAlphabet as generate } from "nanoid";
 import { ValidateFunction, AnySchema } from "ajv";
 
-interface EntityData {
-  [key: string]: any;
-}
+type EntityData = {
+  id?: string;
+  _id?: string;
+  [x: string]: any;
+};
+/**
+ * @class Entity
+ * @description
+ * Base class for all Kohost entities. Provides a common interface for
+ * interacting with entities. Validates constructor data against the
+ * entity's schema.
+ * @abstract
+ *
+ * @param {EntityData} data - Data to construct the entity with.
+ *
+ */
 
 abstract class Entity {
-  abstract schema: AnySchema;
-  abstract validator: ValidateFunction;
-  abstract validProperties: string[];
-  [key: string]: any;
+  static validator: ValidateFunction<unknown>;
+  static schema: AnySchema;
+  static validProperties: string[];
+  static actionProperties?: string[];
+
+  id!: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  #_validator: ValidateFunction;
 
   constructor(data: EntityData) {
-    const isNew = data?.id ? false : true;
+    if (!Entity.schema) throw new Error("Entity schema not defined");
+    if (!Entity.validProperties)
+      throw new Error("Entity validProperties not defined");
+    if (!Entity.validator) throw new Error("Entity validator not defined");
+    const isNew = data.id ? false : true;
+    const dataCopy = { ...data };
 
-    this.#_setId(data);
-    this.#_validate(data);
-    this.#_setProperties(data);
-    this.#_setTimestamps(isNew);
+    // copy the validator from the static class
+    this.#_validator = Entity.validator;
+    this.#validate(dataCopy);
+    this.#setId(dataCopy);
+    if (isNew) this.#setCreatedAt(dataCopy);
+    this.#setUpdatedAt(dataCopy);
+    Object.assign(this, dataCopy);
   }
 
-  #_setId(data: EntityData) {
-    if (data._id) data.id = data._id;
-    if (!data.id) {
-      data.id = Entity.generateId();
-    }
+  set #validator(validator: ValidateFunction) {
+    this.#_validator = validator;
+  }
+
+  get #validator(): ValidateFunction {
+    return this.#_validator;
+  }
+
+  #setId(data: EntityData): void {
+    let id = data.id;
+    if (!id && data._id) id = data._id;
+    if (!id) id = Entity.#generateId();
     delete data._id;
+    data.id = id;
   }
 
-  #_setProperties(this: Entity, data: EntityData) {
-    this.validProperties.forEach((key: string) => {
-      if (data[key] !== undefined) this[key] = data[key];
-    });
-  }
-
-  #_setTimestamps(isNew: boolean) {
-    const now = new Date();
-    if (
-      isNew &&
-      this.validProperties.includes("createdAt") &&
-      !this.createdAt
-    ) {
-      this.createdAt = now;
+  #setCreatedAt(data: EntityData) {
+    if (Entity.validProperties.includes("createdAt")) {
+      data.createdAt = new Date();
     }
   }
 
-  #_validate(data: EntityData) {
-    const valid = this.validator(data);
+  #setUpdatedAt(data: EntityData) {
+    if (Entity.validProperties.includes("updatedAt")) {
+      data.updatedAt = new Date();
+    }
+  }
+
+  #validate(data: EntityData): void {
+    const valid = this.#validator(data);
     if (!valid) {
       throw new ValidationError(`Invalid ${Entity.name}`, {
-        cause: this.validator.errors,
+        cause: this.#validator.errors || [],
       });
     }
   }
 
-  static generateId() {
+  static #generateId(): string {
     const length = 8;
     const characters =
       "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -66,17 +95,13 @@ abstract class Entity {
   static getActionDelta(old: any, _new: any) {
     const delta = {} as any;
     for (const action in _new) {
-      if (this.actionProperties?.includes(action)) {
+      if (Entity.actionProperties?.includes(action)) {
         if (old[action] !== _new[action]) {
           delta[action] = 1;
         }
       }
     }
     return delta;
-  }
-
-  static get actionProperties(): string[] {
-    return [];
   }
 }
 

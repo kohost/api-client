@@ -9,20 +9,110 @@
 
 /** Any smart dimmer */
 export interface DimmerSchema {
-    id: string;
-    name?: string;
-    type: "alarm" | "dimmer" | "switch" | "motionSensor" | "windowCovering" | "camera" | "mediaSource" | "thermostat" | "lock" | "courtesy" | "gateway" | "tv" | "dvr" | "appleTv" | "discPlayer" | "mediaPlayer" | "uncontrolledDevice";
-    supportedNotifications?: ("button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance")[];
-    notification?: {
-        name?: "button 1" | "button 2" | "button 3" | "button 4" | "button 5" | "idle" | "powerHasBeedApplied" | "acMainsDisconnected" | "acMainsReconnected" | "replaceBatterySoon" | "replaceBatteryNow" | "hardwareFailure" | "softwareFailure" | "hardwareFailureWithCode" | "softwareFailureWithCode" | "motionDetection" | "airFilterNeedsCleaned" | "airFilterNeedsReplaced" | "smokeDetected" | "outsideSafeTemperatureRange" | "outsideSafeHumidityRange" | "scheduleMaintenance";
-        timestamp?: number;
-        description?: string;
-        [key: string]: any;
-    } | null;
-    driver: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-    offline?: boolean;
-    level: number | null;
-    systemId?: string;
-    watts?: number;
+  id: string;
+  name?: string;
+  type:
+    | "alarm"
+    | "dimmer"
+    | "switch"
+    | "motionSensor"
+    | "windowCovering"
+    | "camera"
+    | "mediaSource"
+    | "thermostat"
+    | "lock"
+    | "courtesy"
+    | "gateway"
+    | "tv"
+    | "dvr"
+    | "appleTv"
+    | "discPlayer"
+    | "mediaPlayer"
+    | "uncontrolledDevice";
+  supportedNotifications?: (
+    | "button 1"
+    | "button 2"
+    | "button 3"
+    | "button 4"
+    | "button 5"
+    | "idle"
+    | "powerHasBeedApplied"
+    | "acMainsDisconnected"
+    | "acMainsReconnected"
+    | "replaceBatterySoon"
+    | "replaceBatteryNow"
+    | "hardwareFailure"
+    | "softwareFailure"
+    | "hardwareFailureWithCode"
+    | "softwareFailureWithCode"
+    | "motionDetection"
+    | "airFilterNeedsCleaned"
+    | "airFilterNeedsReplaced"
+    | "smokeDetected"
+    | "outsideSafeTemperatureRange"
+    | "outsideSafeHumidityRange"
+    | "scheduleMaintenance"
+  )[];
+  notification?: {
+    name?:
+      | "button 1"
+      | "button 2"
+      | "button 3"
+      | "button 4"
+      | "button 5"
+      | "idle"
+      | "powerHasBeedApplied"
+      | "acMainsDisconnected"
+      | "acMainsReconnected"
+      | "replaceBatterySoon"
+      | "replaceBatteryNow"
+      | "hardwareFailure"
+      | "softwareFailure"
+      | "hardwareFailureWithCode"
+      | "softwareFailureWithCode"
+      | "motionDetection"
+      | "airFilterNeedsCleaned"
+      | "airFilterNeedsReplaced"
+      | "smokeDetected"
+      | "outsideSafeTemperatureRange"
+      | "outsideSafeHumidityRange"
+      | "scheduleMaintenance";
+    timestamp?: number;
+    description?: string;
     [key: string]: any;
+  } | null;
+  driver:
+    | "aws-kinesis"
+    | "butler"
+    | "crestron"
+    | "dmp"
+    | "dormakaba"
+    | "dsc"
+    | "ecobee"
+    | "igor"
+    | "inncom"
+    | "kohost-k7"
+    | "kohost-pms"
+    | "lg"
+    | "lirc"
+    | "mews"
+    | "mht"
+    | "paxton"
+    | "pelican-wireless"
+    | "power-shades"
+    | "rebrandly"
+    | "salto"
+    | "salto-irn"
+    | "se"
+    | "sendgrid"
+    | "sonifi"
+    | "stay-n-touch"
+    | "twilio"
+    | "cloudflare-images"
+    | "cloudflare-stream"
+    | "insperia-privacy";
+  offline?: boolean;
+  level: number | null;
+  systemId?: string;
+  watts?: number;
 }

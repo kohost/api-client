@@ -8,45 +8,84 @@
  */
 
 export interface CategorySchema {
+  id?: string;
+  /**
+   * @default
+   *     category
+   */
+  type: string;
+  name?: string;
+  driver?:
+    | "aws-kinesis"
+    | "butler"
+    | "crestron"
+    | "dmp"
+    | "dormakaba"
+    | "dsc"
+    | "ecobee"
+    | "igor"
+    | "inncom"
+    | "kohost-k7"
+    | "kohost-pms"
+    | "lg"
+    | "lirc"
+    | "mews"
+    | "mht"
+    | "paxton"
+    | "pelican-wireless"
+    | "power-shades"
+    | "rebrandly"
+    | "salto"
+    | "salto-irn"
+    | "se"
+    | "sendgrid"
+    | "sonifi"
+    | "stay-n-touch"
+    | "twilio"
+    | "cloudflare-images"
+    | "cloudflare-stream"
+    | "insperia-privacy";
+  description?: string;
+  /** Any media file */
+  image?: {
     id?: string;
     /**
      * @default
-     *     category
+     *     mediaFile
      */
     type: string;
     name?: string;
-    driver?: "aws-kinesis" | "butler" | "crestron" | "dmp" | "dormakaba" | "dsc" | "ecobee" | "igor" | "inncom" | "kohost-k7" | "kohost-pms" | "lg" | "lirc" | "mews" | "mht" | "paxton" | "pelican-wireless" | "power-shades" | "rebrandly" | "salto" | "salto-irn" | "se" | "sendgrid" | "sonifi" | "stay-n-touch" | "twilio" | "cloudflare-images" | "cloudflare-stream" | "insperia-privacy";
-    description?: string;
-    /** Any media file */
-    image?: {
-        id?: string;
-        /**
-         * @default
-         *     mediaFile
-         */
-        type: string;
-        name?: string;
-        fileHash?: string;
-        mimeType?: "image/*" | "image/jpeg" | "image/png" | "image/gif" | "image/webp" | "image/avif" | "image/svg+xml" | "application/pdf";
-        data?: string;
-        url?: string;
-        width?: number;
-        height?: number;
-        /** Size in bytes */
-        size?: number;
-        uploadUrl?: string;
-        uploadUrlExpires?: string | {
-            [key: string]: any;
+    fileHash?: string;
+    mimeType?:
+      | "image/*"
+      | "image/jpeg"
+      | "image/png"
+      | "image/gif"
+      | "image/webp"
+      | "image/avif"
+      | "image/svg+xml"
+      | "application/pdf";
+    data?: string;
+    url?: string;
+    width?: number;
+    height?: number;
+    /** Size in bytes */
+    size?: number;
+    uploadUrl?: string;
+    uploadUrlExpires?:
+      | string
+      | {
+          [key: string]: any;
         };
-        createdBy?: string;
-        systemId?: string;
-    };
-    /**
-     * @default
-     *     9
-     */
-    rating?: number;
-    discriminator: "space" | "product";
+    createdBy?: string;
     systemId?: string;
-    [key: string]: any;
+  };
+  /**
+   * @default
+   *     9
+   */
+  rating?: number;
+  discriminator: "space" | "product";
+  systemId?: string;
+  [key: string]: any;
 }

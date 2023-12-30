@@ -4,8 +4,9 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true,
-    "target": "ES2022",
+    "target": "ES6",
     "moduleResolution": "node",
+    "useUnknownInCatchVariables": true,
     "outDir": "./build",
     "strict": true,
     "declaration": true
