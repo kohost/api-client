@@ -1,26 +1,20 @@
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/reservation.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type ReservationSchema } from "../schemas/reservation.json";
 import Entity from "./Entity";
-import { ReservationSchema } from "../types/ReservationSchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
+
+interface Reservation extends ReservationSchema {}
 
 class Reservation extends Entity {
   constructor(reservation: ReservationSchema) {
     super(reservation);
   }
 
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
-
-  get peopleCount() {
-    return this.adultCount + this.childCount;
-  }
-
-  get hasPayment() {
-    return this.paymentId?.length > 0;
+  get peopleCount(): number {
+    const adultCount = this.adultCount || 0;
+    const childCount = this.childCount || 0;
+    return adultCount + childCount;
   }
 
   get nights() {
@@ -95,5 +89,9 @@ class Reservation extends Entity {
     });
   }
 }
+
+Reservation.schema = schema;
+Reservation.validator = compileSchema(schema);
+Reservation.validProperties = Object.keys(schema.properties);
 
 export default Reservation;

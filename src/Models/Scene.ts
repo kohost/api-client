@@ -1,30 +1,23 @@
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/scene.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type SceneSchema } from "../schemas/scene.json";
+import { type RoomSchema } from "../schemas/room.json";
 import Entity from "./Entity";
+import Room from "./Room";
 
-add(schema);
-const validator = compile(schema);
-
-type SceneSchema = import("../types/SceneSchema").SceneSchema;
-type RoomSchema = import("../types/RoomSchema").RoomSchema;
+registerSchema(schema);
+const validator = compileSchema(schema);
 
 interface CommandData {
   [key: string]: any;
 }
+
+interface Scene extends SceneSchema {}
 class Scene extends Entity {
   constructor(scene: SceneSchema) {
     super(scene);
   }
 
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
-
-  static getRoomSceneDeviceData(
-    room: RoomSchema,
-    scene: SceneSchema,
-    restore: boolean
-  ) {
+  static getRoomSceneDeviceData(room: Room, scene: Scene, restore: boolean) {
     const deviceData = [];
 
     const sceneDevices = scene?.devices || {};
@@ -161,5 +154,9 @@ class Scene extends Entity {
     return deviceData;
   }
 }
+
+Scene.validator = validator;
+Scene.schema = schema;
+Scene.validProperties = Object.keys(schema.properties);
 
 export default Scene;

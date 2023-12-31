@@ -1,15 +1,12 @@
 // Create the TimeSheet Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/timeSheet.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type TimeSheetSchema } from "../schemas/timeSheet.json";
 import Entity from "./Entity";
-import { TimeSheetSchema } from "../types/TimeSheetSchema";
-
 import { nanoid } from "nanoid";
 
-// extend the type to include the id property
+registerSchema(schema);
 
-add(schema);
-const validator = compile(schema);
+interface TimeSheet extends TimeSheetSchema {}
 
 class TimeSheet extends Entity {
   constructor(timesheet: TimeSheetSchema) {
@@ -35,13 +32,13 @@ class TimeSheet extends Entity {
     super(timesheet);
   }
 
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
-
-  static generateTimeEntryId(len = 16) {
+  static generateTimeEntryId(len: number = 16): string {
     return nanoid(len);
   }
 }
+
+TimeSheet.validator = compileSchema(schema);
+TimeSheet.schema = schema;
+TimeSheet.validProperties = Object.keys(schema.properties);
 
 export default TimeSheet;

@@ -1,23 +1,31 @@
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/identification.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import {
+  schema,
+  type IdentificationSchema,
+} from "../schemas/identification.json";
 import Entity from "./Entity";
-import { IdentificationSchema } from "../types/IdentificationSchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
+const validator = compileSchema(schema);
+
+interface Identification extends IdentificationSchema {}
 
 class Identification extends Entity {
   constructor(identification: IdentificationSchema) {
     super(identification);
   }
 
-  get isExpired() {
-    return new Date(this.expires) < new Date();
+  get isExpired(): boolean {
+    if (!this.expires) return false;
+    if (this.expires instanceof Date) return this.expires < new Date();
+    if (typeof this.expires === "string")
+      return new Date(this.expires) < new Date();
+    return false;
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 }
+
+Identification.schema = schema;
+Identification.validator = validator;
+Identification.validProperties = Object.keys(schema.properties);
 
 export default Identification;

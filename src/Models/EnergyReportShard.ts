@@ -1,20 +1,23 @@
 // create the energyReportShard Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/energyReportShard.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import {
+  schema,
+  type EnergyReportShardSchema,
+} from "../schemas/energyReportShard.json";
 import Entity from "./Entity";
-import { EnergyReportShardSchema } from "../types/EnergyReportShardSchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
+
+interface EnergyReportShard extends EnergyReportShardSchema {}
 
 class EnergyReportShard extends Entity {
   constructor(energyReportShard: EnergyReportShardSchema) {
     super(energyReportShard);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 }
+
+EnergyReportShard.validator = compileSchema(schema);
+EnergyReportShard.schema = schema;
+EnergyReportShard.validProperties = Object.keys(schema.properties);
 
 export default EnergyReportShard;

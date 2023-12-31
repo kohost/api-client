@@ -1,11 +1,10 @@
 import Command from "./Command";
-
-type MediaSource = import("../types/MediaSourceSchema").MediaSourceSchema;
+import { type MediaSourceSchema } from "../schemas/mediaSource.json";
 
 interface SetMediaCommandOptions {
   id: string;
   // any of the MediaSource command types
-  command: keyof MediaSource["command"];
+  command: MediaSourceSchema["command"];
   data?: any;
   [key: string]: any;
 }

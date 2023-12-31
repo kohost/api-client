@@ -1,13 +1,9 @@
 // Create the Dimmer Model
-import { add, compile } from "../utils/schema";
-import { schema } from "../schemas/dimmer";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type DimmerSchema } from "../schemas/dimmer.json";
 import Entity from "./Entity";
-import { Static } from "@sinclair/typebox";
-// import { DimmerSchema } from "../types/DimmerSchema";
 
-add(schema);
-
-type DimmerSchema = Static<typeof schema>;
+registerSchema(schema);
 
 interface Dimmer extends DimmerSchema {}
 /**
@@ -16,7 +12,7 @@ interface Dimmer extends DimmerSchema {}
  * Dimmer entity class. Represents a dimmer device.
  * @extends Entity
  * @example
- * const dimmer = new Dimmer({ id: "1", level: 50, type: "dimmer" });
+ * const dimmer = new Dimmer({ id: "1", level: 50, type: "dimmer", driver: "crestron" });
  */
 class Dimmer extends Entity {
   constructor(dimmer: DimmerSchema) {
@@ -40,9 +36,9 @@ class Dimmer extends Entity {
   }
 }
 
-Dimmer.validator = compile(schema);
+Dimmer.validator = compileSchema(schema);
 Dimmer.schema = schema;
-Dimmer.validProperties = Object.keys(properties);
+Dimmer.validProperties = Object.keys(schema.properties);
 Dimmer.actionProperties = ["level"];
 
 export default Dimmer;

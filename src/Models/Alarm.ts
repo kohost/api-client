@@ -1,20 +1,20 @@
 // create the Alarm Model
-import schemas from "../utils/schema";
-import schema from "../schemas/alarm.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type AlarmSchema } from "../schemas/alarm.json";
 import Entity from "./Entity";
-import { AlarmSchema } from "../types/AlarmSchema";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+registerSchema(schema);
+
+interface Alarm extends AlarmSchema {}
 
 class Alarm extends Entity {
   constructor(alarm: AlarmSchema) {
     super(alarm);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(schema.properties);
 }
+
+Alarm.validator = compileSchema(schema);
+Alarm.schema = schema;
+Alarm.validProperties = Object.keys(schema.properties);
 
 export default Alarm;

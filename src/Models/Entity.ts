@@ -19,15 +19,20 @@ type EntityData = {
  *
  */
 
+interface EntitySchema {
+  validator: ValidateFunction<unknown>;
+  schema: AnySchema;
+  validProperties: string[];
+}
+
+interface Entity extends EntitySchema {}
+
 abstract class Entity {
   static validator: ValidateFunction<unknown>;
   static schema: AnySchema;
   static validProperties: string[];
   static actionProperties?: string[];
 
-  id!: string;
-  createdAt?: Date;
-  updatedAt?: Date;
   #_validator: ValidateFunction;
 
   constructor(data: EntityData) {

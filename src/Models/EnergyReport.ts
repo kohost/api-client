@@ -1,20 +1,19 @@
 // create the energyReportDaily Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/energyReport.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type EnergyReportSchema } from "../schemas/energyReport.json";
 import Entity from "./Entity";
-import { EnergyReportHourlySchema } from "../types/EnergyReportHourlySchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
 
+interface EnergyReport extends EnergyReportSchema {}
 class EnergyReport extends Entity {
-  constructor(energyReport: EnergyReportHourlySchema) {
+  constructor(energyReport: EnergyReportSchema) {
     super(energyReport);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 }
+
+EnergyReport.validator = compileSchema(schema);
+EnergyReport.schema = schema;
+EnergyReport.validProperties = Object.keys(schema.properties);
 
 export default EnergyReport;

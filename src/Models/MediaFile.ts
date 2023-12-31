@@ -1,21 +1,17 @@
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/mediaFile.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type MediaFileSchema } from "../schemas/mediaFile.json";
 import Entity from "./Entity";
 import RequestError from "../Errors/RequestError";
-import { MediaFileSchema } from "../types/MediaFileSchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
+const validator = compileSchema(schema);
+
+interface MediaFile extends MediaFileSchema {}
 
 class MediaFile extends Entity {
-  type: string = "mediaFile";
   constructor(mediaFile: MediaFileSchema) {
     super(mediaFile);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 
   createImageVariant(params: any) {
     if (this.mimeType != "image/*")
@@ -30,5 +26,9 @@ class MediaFile extends Entity {
     return this.url.replace(/\/public$/, `/${query}`);
   }
 }
+
+MediaFile.validator = validator;
+MediaFile.schema = schema;
+MediaFile.validProperties = Object.keys(schema.properties);
 
 export default MediaFile;

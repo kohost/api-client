@@ -1,21 +1,21 @@
 // Create the Category Model
 // Originally used for hotel room category e.g. Double Queen
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/category.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type CategorySchema } from "../schemas/category.json";
 import Entity from "./Entity";
-import { CategorySchema } from "../types/CategorySchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
+
+interface Category extends CategorySchema {}
 
 class Category extends Entity {
   constructor(category: CategorySchema) {
     super(category);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 }
+
+Category.validator = compileSchema(schema);
+Category.schema = schema;
+Category.validProperties = Object.keys(schema.properties);
 
 export default Category;

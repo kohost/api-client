@@ -1,28 +1,27 @@
 // Create the Ticket Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/ticket.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type TicketSchema } from "../schemas/ticket.json";
 import Entity from "./Entity";
 import MediaFile from "./MediaFile";
 import { nanoid } from "nanoid";
-import { TicketSchema } from "../types/TicketSchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
 
+interface Ticket extends TicketSchema {}
 class Ticket extends Entity {
   constructor(ticket: TicketSchema) {
     const ticketData = mapConversationData(ticket);
     super(ticketData);
   }
 
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
-
-  static generateMessageId(len = 16) {
+  static generateMessageId(len: number = 16): string {
     return nanoid(len);
   }
 }
+
+Ticket.validator = compileSchema(schema);
+Ticket.schema = schema;
+Ticket.validProperties = Object.keys(schema.properties);
 
 function mapConversationData(data: TicketSchema) {
   const ticketData = structuredClone(data);

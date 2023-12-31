@@ -1,9 +1,9 @@
 import Ajv, { AnySchema } from "ajv";
 
 import addFormats from "ajv-formats";
-import defininitions from "../schemas/definitions.json";
+import { definitions } from "../schemas/definitions.json";
 
-const ajv = new Ajv({
+const validation = new Ajv({
   allErrors: true,
   useDefaults: true,
   strict: false,
@@ -11,18 +11,20 @@ const ajv = new Ajv({
   allowUnionTypes: true,
   strictRequired: false,
 });
-addFormats(ajv);
-ajv.addSchema(defininitions);
 
-export function add(schema: AnySchema) {
-  ajv.addSchema(schema);
+addFormats(validation);
+
+registerSchema(definitions);
+
+export function registerSchema(schema: AnySchema) {
+  validation.addSchema(schema);
 }
 
-export function compile(schema: AnySchema) {
-  return ajv.compile(schema);
+export function compileSchema(schema: AnySchema) {
+  return validation.compile(schema);
 }
 
 export default {
-  add,
-  compile,
+  add: registerSchema,
+  compile: compileSchema,
 };

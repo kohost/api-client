@@ -1,42 +1,44 @@
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/thermostat.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type ThermostatSchema } from "../schemas/thermostat.json";
 import Entity from "./Entity";
-import { ThermostatSchema } from "../types/ThermostatSchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
+
+interface Thermostat extends ThermostatSchema {}
 
 class Thermostat extends Entity {
   constructor(thermostat: ThermostatSchema) {
     super(thermostat);
   }
 
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
-
-  get actionProperties() {
-    return ["hvacMode", "fanMode", "setpoints"];
-  }
-
-  toCelsius(): number {
-    if (this.temperatureScale === "fahrenheit")
+  toCelsius(): number | undefined {
+    if (
+      this.temperatureScale === "fahrenheit" &&
+      this.currentTemperature !== undefined
+    ) {
       this.currentTemperature = ((this.currentTemperature - 32) * 5) / 9;
-    this.temperatureScale = "celsius";
+      this.temperatureScale = "celsius";
+    }
+
     return this.currentTemperature;
   }
 
-  toFahrenheit(): number {
-    if (this.temperatureScale === "celsius")
+  toFahrenheit(): number | undefined {
+    if (
+      this.temperatureScale === "celsius" &&
+      this.currentTemperature !== undefined
+    ) {
       this.currentTemperature = (this.currentTemperature * 9) / 5 + 32;
-    this.temperatureScale = "fahrenheit";
+      this.temperatureScale = "fahrenheit";
+    }
+
     return this.currentTemperature;
   }
 
   static getActionDelta(old: any, _new: any) {
     const delta = {} as any;
     for (const action in _new) {
-      if (this.actionProperties.includes(action)) {
+      if (this.actionProperties?.includes(action)) {
         switch (action) {
           case "hvacMode":
           case "fanMode": {
@@ -67,5 +69,10 @@ class Thermostat extends Entity {
     return delta;
   }
 }
+
+Thermostat.validator = compileSchema(schema);
+Thermostat.schema = schema;
+Thermostat.validProperties = Object.keys(schema.properties);
+Thermostat.actionProperties = ["hvacMode", "fanMode", "setpoints"];
 
 export default Thermostat;

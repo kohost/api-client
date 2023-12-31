@@ -1,20 +1,19 @@
 // Create the Gateway Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/gateway.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type IoTGatewaySchema } from "../schemas/iotGateway.json";
 import Entity from "./Entity";
-import { IoTGatewaySchema } from "../types/IoTGatewaySchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
 
+interface Gateway extends IoTGatewaySchema {}
 class Gateway extends Entity {
   constructor(gateway: IoTGatewaySchema) {
     super(gateway);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 }
+
+Gateway.validator = compileSchema(schema);
+Gateway.schema = schema;
+Gateway.validProperties = Object.keys(schema.properties);
 
 export default Gateway;

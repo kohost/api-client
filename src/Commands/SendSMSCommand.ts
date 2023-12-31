@@ -1,6 +1,5 @@
+import { type MediaFileSchema } from "../schemas/mediaFile.json";
 import Command from "./Command";
-
-type MediaFile = import("../types/MediaFileSchema").MediaFileSchema;
 
 interface BaseSendSMSCommandOptions {
   to: string;
@@ -10,12 +9,12 @@ interface BaseSendSMSCommandOptions {
 
 interface BodySendSMSCommandOptions extends BaseSendSMSCommandOptions {
   body: string;
-  media?: MediaFile;
+  media?: MediaFileSchema;
 }
 
 interface MediaSendSMSCommandOptions extends BaseSendSMSCommandOptions {
   body?: string;
-  media: MediaFile;
+  media: MediaFileSchema;
 }
 
 type SendSMSCommandOptions =

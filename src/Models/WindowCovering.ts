@@ -1,23 +1,16 @@
 // Create the WindowCovering Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/windowCovering.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import {
+  schema,
+  type WindowCoveringSchema,
+} from "../schemas/windowCovering.json";
 import Entity from "./Entity";
-import { WindowCoveringSchema } from "../types/WindowCoveringSchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
 
 class WindowCovering extends Entity {
   constructor(windowCovering: WindowCoveringSchema) {
     super(windowCovering);
-  }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
-
-  get actionProperties() {
-    return ["position"];
   }
 
   static getActionDelta(old: any, _new: any) {
@@ -36,5 +29,10 @@ class WindowCovering extends Entity {
     return delta;
   }
 }
+
+WindowCovering.validator = compileSchema(schema);
+WindowCovering.schema = schema;
+WindowCovering.validProperties = Object.keys(schema.properties);
+WindowCovering.actionProperties = ["position"];
 
 export default WindowCovering;

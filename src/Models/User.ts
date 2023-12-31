@@ -1,27 +1,22 @@
 // Create the User Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/user.json";
-import paymentSchema from "../schemas/payment.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type UserSchema } from "../schemas/user.json";
+import { schema as paymentSchema } from "../schemas/payment.json";
 import Entity from "./Entity";
 import MediaFile from "./MediaFile";
-import { UserSchema } from "../types/UserSchema";
 
 import { nanoid } from "nanoid/async";
 
-add(paymentSchema);
-add(schema);
+registerSchema(paymentSchema);
+registerSchema(schema);
 
-const validator = compile(schema);
+interface User extends UserSchema {}
 
 class User extends Entity {
   constructor(user: UserSchema) {
     if (user.photo) user.photo = new MediaFile(user.photo);
     super(user);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 
   static validatePhone(phoneNumber: string): boolean {
     const regex = /^\+?[1-9]\d{1,14}$/;
@@ -38,54 +33,44 @@ class User extends Entity {
   static async generatePassword(len: number = 16): Promise<string> {
     return await nanoid(len);
   }
-}
 
-Object.defineProperty(User.prototype, "fullName", {
-  get: function () {
+  get fullName(): string {
     return `${this.firstName} ${this.lastName}`;
-  },
-});
+  }
 
-Object.defineProperty(User.prototype, "roles", {
-  get: function () {
-    const roles = new Set();
+  get isSuperAdmin(): boolean {
+    return this.roles.includes("SuperAdmin");
+  }
+
+  get isAdmin(): boolean {
+    return this.roles.includes("Admin") || this.roles.includes("Administrator");
+  }
+
+  get isManager(): boolean {
+    return this.roles.includes("Manager");
+  }
+
+  get isUser(): boolean {
+    return this.roles.includes("User");
+  }
+
+  get isGuest(): boolean {
+    return this.roles.includes("Guest");
+  }
+
+  get roles(): string[] {
+    const roles = new Set<string>();
     if (this.permissions) {
       for (const permission of this.permissions) {
         roles.add(permission.role);
       }
     }
     return Array.from(roles);
-  },
-});
+  }
+}
 
-Object.defineProperty(User.prototype, "isSuperAdmin", {
-  get: function () {
-    return this.roles.includes("SuperAdmin");
-  },
-});
-
-Object.defineProperty(User.prototype, "isAdmin", {
-  get: function () {
-    return this.roles.includes("Admin") || this.roles.includes("Administrator");
-  },
-});
-
-Object.defineProperty(User.prototype, "isManager", {
-  get: function () {
-    return this.roles.includes("Manager");
-  },
-});
-
-Object.defineProperty(User.prototype, "isUser", {
-  get: function () {
-    return this.roles.includes("User");
-  },
-});
-
-Object.defineProperty(User.prototype, "isGuest", {
-  get: function () {
-    return this.roles.includes("Guest");
-  },
-});
+User.validator = compileSchema(schema);
+User.schema = schema;
+User.validProperties = Object.keys(schema.properties);
 
 export default User;

@@ -1,0 +1,56 @@
+import { type Definitions } from "./definitions.json";
+
+export const schema = {
+  $schema: "http://json-schema.org/draft-07/schema",
+  $id: "product.json",
+  title: "Product",
+  type: "object",
+  required: ["name", "price", "driver"],
+  properties: {
+    id: {
+      $ref: "definitions.json#/definitions/id",
+    },
+    type: {
+      type: "string",
+      default: "product",
+    },
+    name: {
+      type: "string",
+    },
+    driver: {
+      $ref: "definitions.json#/definitions/driver",
+    },
+    description: {
+      string: "string",
+    },
+    price: {
+      type: "number",
+    },
+    image: {
+      $ref: "definitions.json#/definitions/file",
+    },
+    category: {
+      type: "string",
+    },
+    imageUrl: {
+      format: "uri",
+      pattern: "^https?://",
+    },
+    systemId: {
+      $ref: "definitions.json#/definitions/systemId",
+    },
+  },
+};
+
+export interface ProductSchema {
+  id: Definitions["id"];
+  type: "product";
+  name: string;
+  driver: Definitions["driver"];
+  description?: string;
+  price: number;
+  image?: Definitions["file"];
+  category?: string;
+  imageUrl?: string;
+  systemId?: Definitions["systemId"];
+}

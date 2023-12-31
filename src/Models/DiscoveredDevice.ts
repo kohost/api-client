@@ -1,20 +1,23 @@
 // Create the Discovered Device Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/discoveredDevice.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import {
+  schema,
+  type DiscoveredDeviceSchema,
+} from "../schemas/discoveredDevice.json";
 import Entity from "./Entity";
-import { DiscoveredDeviceSchema } from "../types/DiscoveredDeviceSchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
+
+interface DiscoveredDevice extends DiscoveredDeviceSchema {}
 
 class DiscoveredDevice extends Entity {
   constructor(device: DiscoveredDeviceSchema) {
     super(device);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 }
+
+DiscoveredDevice.validator = compileSchema(schema);
+DiscoveredDevice.schema = schema;
+DiscoveredDevice.validProperties = Object.keys(schema.properties);
 
 export default DiscoveredDevice;

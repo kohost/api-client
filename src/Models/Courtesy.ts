@@ -1,24 +1,21 @@
 // create the Courtesy Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/courtesy.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type CourtesySchema } from "../schemas/courtesy.json";
 import Entity from "./Entity";
-import { CourtesySchema } from "../types/CourtesySchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
+
+interface Courtesy extends CourtesySchema {}
 
 class Courtesy extends Entity {
   constructor(courtesy: CourtesySchema) {
     super(courtesy);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
-
-  static get actionProperties() {
-    return ["state"];
-  }
 }
+
+Courtesy.validator = compileSchema(schema);
+Courtesy.schema = schema;
+Courtesy.validProperties = Object.keys(schema.properties);
+Courtesy.actionProperties = ["state"];
 
 export default Courtesy;

@@ -1,7 +1,8 @@
 // create the Room model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/room.json";
-import { definitions } from "../schemas/definitions.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type RoomSchema } from "../schemas/room.json";
+import { definitions, type Definitions } from "../schemas/definitions.json";
+import { type SwitchSchema } from "../schemas/switch.json";
 import Entity from "./Entity";
 
 // device dependencies
@@ -16,10 +17,9 @@ import Alarm from "./Alarm";
 import MediaSource from "./MediaSource";
 import MotionSensor from "./MotionSensor";
 
-import { RoomSchema } from "../types/RoomSchema";
+registerSchema(schema);
 
-add(schema);
-const validator = compile(schema);
+interface Room extends RoomSchema {}
 
 class Room extends Entity {
   constructor(room: RoomSchema) {
@@ -27,12 +27,8 @@ class Room extends Entity {
     super(roomData);
   }
 
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
-
-  static getDevicePath(type: string) {
-    const validTypes = definitions.type.enum;
+  static getDevicePath(type: Definitions["type"]) {
+    const validTypes = definitions.definitions.type.enum;
     if (!validTypes.includes(type))
       throw new Error("Invalid device type:" + type);
     switch (type) {
@@ -78,58 +74,70 @@ class Room extends Entity {
     }
   }
 
-  get hasDimmer() {
-    return this.dimmers?.length > 0;
+  get hasDimmer(): boolean {
+    if (!this.dimmers) return false;
+    return this.dimmers.length > 0;
   }
 
-  get hasSwitch() {
-    return this.switches?.length > 0;
+  get hasSwitch(): boolean {
+    if (!this.switches) return false;
+    return this.switches.length > 0;
   }
 
-  get hasWindowCovering() {
-    return this.windowCoverings?.length > 0;
+  get hasWindowCovering(): boolean {
+    if (!this.windowCoverings) return false;
+    return this.windowCoverings.length > 0;
   }
 
-  get hasShade() {
+  get hasShade(): boolean {
     return this.hasWindowCovering;
   }
 
-  get hasThermostat() {
-    return this.thermostats?.length > 0;
+  get hasThermostat(): boolean {
+    if (!this.thermostats) return false;
+    return this.thermostats.length > 0;
   }
 
-  get hasClimate() {
+  get hasClimate(): boolean {
     return this.hasThermostat;
   }
 
-  get hasLock() {
-    return this.locks?.length > 0;
+  get hasLock(): boolean {
+    if (!this.locks) return false;
+    return this.locks.length > 0;
   }
 
-  get hasCourtesy() {
-    return this.courtesy?.length > 0;
+  get hasCourtesy(): boolean {
+    if (!this.courtesy) return false;
+    return this.courtesy.length > 0;
   }
 
-  get hasCamera() {
-    return this.cameras?.length > 0;
+  get hasCamera(): boolean {
+    if (!this.cameras) return false;
+    return this.cameras.length > 0;
   }
 
-  get hasAlarm() {
+  get hasAlarm(): boolean {
+    if (!this.alarms) return false;
     return this.alarms?.length > 0;
   }
 
-  get hasMedia() {
-    return this.mediaSources?.length > 0;
+  get hasMedia(): boolean {
+    if (!this.mediaSources) return false;
+    return this.mediaSources.length > 0;
   }
 
-  get hasLight() {
-    const hasSubTypeLight = this.switches?.some((sw: Switch) => {
-      return sw.subType === "light" || sw.subType === "fan";
-    });
+  get hasLight(): boolean {
+    const hasSubTypeLight = this.switches
+      ? this.switches.some((sw: Switch | SwitchSchema) => {
+          return sw.subType === "light" || sw.subType === "fan";
+        })
+      : false;
     return this.hasDimmer || hasSubTypeLight;
   }
 
   get occupied() {
+    if (typeof this.occupiedAt === "undefined") return false;
     const now = new Date().getTime();
     const lastOccupied = new Date(this.occupiedAt).getTime();
     const diff = now - lastOccupied;
@@ -181,5 +189,9 @@ function mapRoomData(data: RoomSchema) {
 
   return roomData;
 }
+
+Room.validator = compileSchema(schema);
+Room.schema = schema;
+Room.validProperties = Object.keys(schema.properties);
 
 export default Room;

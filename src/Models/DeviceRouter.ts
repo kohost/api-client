@@ -1,21 +1,20 @@
 // Create the Device Router Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/deviceRouter.json";
-import { DeviceRouterSchema } from "../types/DeviceRouterSchema";
-
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type DeviceRouterSchema } from "../schemas/deviceRouter.json";
 import Entity from "./Entity";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
+
+interface DeviceRouter extends DeviceRouterSchema {}
 
 class DeviceRouter extends Entity {
   constructor(device: DeviceRouterSchema) {
     super(device);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 }
+
+DeviceRouter.validator = compileSchema(schema);
+DeviceRouter.schema = schema;
+DeviceRouter.validProperties = Object.keys(schema.properties);
 
 export default DeviceRouter;

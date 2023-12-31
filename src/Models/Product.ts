@@ -1,20 +1,19 @@
 // Create the Product Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/product.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type ProductSchema } from "../schemas/product.json";
 import Entity from "./Entity";
-import { ProductSchema } from "../types/ProductSchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
 
+interface Product extends ProductSchema {}
 class Product extends Entity {
   constructor(product: ProductSchema) {
     super(product);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 }
+
+Product.validator = compileSchema(schema);
+Product.schema = schema;
+Product.validProperties = Object.keys(schema.properties);
 
 export default Product;

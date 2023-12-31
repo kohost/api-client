@@ -1,21 +1,16 @@
 // Create the User Model
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/systemUser.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import { schema, type SystemUserSchema } from "../schemas/systemUser.json";
 import Entity from "./Entity";
-import { SystemUserSchema } from "../types/SystemUserSchema";
 
-add(schema);
+registerSchema(schema);
 
-const validator = compile(schema);
+interface SystemUser extends SystemUserSchema {}
 
 class SystemUser extends Entity {
   constructor(user: SystemUserSchema) {
     super(user);
   }
-
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
 
   get fullName(): string {
     return `${this.firstName} ${this.lastName}`;
@@ -33,5 +28,9 @@ class SystemUser extends Entity {
     return regex.test(email);
   }
 }
+
+SystemUser.validator = compileSchema(schema);
+SystemUser.schema = schema;
+SystemUser.validProperties = Object.keys(schema.properties);
 
 export default SystemUser;

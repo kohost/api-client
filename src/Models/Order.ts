@@ -1,22 +1,26 @@
-import { add, compile } from "../utils/schema";
-import schema, { properties } from "../schemas/order.json";
+import { registerSchema, compileSchema } from "../utils/schema";
+import {
+  schema,
+  type OrderSchema,
+  type OrderTax,
+  type OrderItem,
+  type OrderFee,
+  type OrderDelivery,
+} from "../schemas/order.json";
 import Entity from "./Entity";
-import { OrderSchema } from "../types/OrderSchema";
 
-add(schema);
-const validator = compile(schema);
+registerSchema(schema);
+
+interface Order extends OrderSchema {}
 
 class Order extends Entity {
   constructor(order: OrderSchema) {
     super(order);
   }
 
-  schema = schema;
-  validator = validator;
-  validProperties = Object.keys(properties);
-
   getSubTotal(): number {
-    return this.items.reduce((acc: number, item: any) => {
+    if (!this.items) return 0;
+    return this.items.reduce((acc: number, item: OrderItem) => {
       const qty = item.quantity || 1;
       return acc + item.price * qty;
     }, 0);
@@ -25,9 +29,10 @@ class Order extends Entity {
   getTaxTotal(): number {
     const taxes = this.taxes;
     if (!taxes) return 0;
-    return this.items.reduce((acc: number, item: any) => {
+    if (!this.items) return 0;
+    return this.items.reduce((acc: number, item: OrderItem) => {
       if (!item.taxClass) return acc;
-      const tax = taxes.find((t: any) => t.class === item.taxClass);
+      const tax = taxes.find((t: OrderTax) => t.class === item.taxClass);
       if (!tax) return acc;
       const { rateType, rate } = tax;
       if (rateType === "percentage") {
@@ -40,9 +45,12 @@ class Order extends Entity {
   getDeliveryTotal(): number {
     const delivery = this.delivery;
     if (!delivery) return 0;
-    return this.items.reduce((acc: number, item: any) => {
+    if (!this.items) return 0;
+    return this.items.reduce((acc: number, item: OrderItem) => {
       if (!item.deliveryClass) return acc;
-      const d = delivery.find((d: any) => d.class === item.deliveryClass);
+      const d = delivery.find(
+        (d: OrderDelivery) => d.class === item.deliveryClass
+      );
       if (!d) return acc;
       const { rateType, rate } = d;
       if (rateType === "percentage") {
@@ -54,7 +62,8 @@ class Order extends Entity {
 
   getFeesTotal(): number {
     const fees = this.fees;
-    return fees.reduce((acc: number, fee: any) => {
+    if (!fees) return 0;
+    return fees.reduce((acc: number, fee: OrderFee) => {
       return acc + fee.price;
     }, 0);
   }
@@ -69,14 +78,19 @@ class Order extends Entity {
   }
 
   getPaymentsTotal(): number {
+    if (!this.payments) return 0;
     return this.payments.reduce((acc: number, payment: any) => {
       return acc + payment.amount;
     }, 0);
   }
 
-  getBalance() {
+  getBalance(): number {
     return this.getTotal() - this.getPaymentsTotal();
   }
 }
+
+Order.validator = compileSchema(schema);
+Order.schema = schema;
+Order.validProperties = Object.keys(schema.properties);
 
 export default Order;
