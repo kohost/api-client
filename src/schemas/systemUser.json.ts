@@ -20,7 +20,7 @@ export const schema = {
   description:
     "A system user is a user that originated from an external 3rd party system.",
   type: "object",
-  required: ["firstName", "lastName"],
+  required: ["firstName", "lastName", "driver"],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -119,7 +119,7 @@ type Genders = (typeof genders)[number];
 export interface SystemUserSchema {
   id: Definitions["id"];
   type: "systemUser";
-  driver?: Definitions["driver"];
+  driver: Definitions["driver"];
   firstName: string;
   lastName: string;
   phone?: string | null;

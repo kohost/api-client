@@ -2,6 +2,8 @@ import amqp, {
   Channel,
   Message as AMQPMessage,
   Connection as AMQPConnection,
+  XDeath,
+  MessageProperties,
 } from "amqplib";
 import crypto from "node:crypto";
 import debug from "debug";
@@ -25,7 +27,7 @@ interface PublishToExchangeOptions {
 
 interface SubscribeToQueueOptions {
   queue: string;
-  cb: () => void;
+  cb: (msg: AMQPMessage | null) => void | Promise<void>;
   options?: amqp.Options.Consume;
 }
 
@@ -54,7 +56,17 @@ interface BindQueueOptions {
   args?: any;
 }
 
-export class KohostAMQPClient {
+interface ParsedMessage {
+  error?: Error;
+  data?: string | Record<string, unknown>;
+  query?: Record<string, unknown>;
+  context?: Record<string, unknown>;
+  headers?: Record<string, unknown>;
+  event?: string;
+  command?: string;
+}
+
+export class Client {
   static get Message() {
     return Message;
   }
@@ -106,7 +118,8 @@ export class KohostAMQPClient {
     }
   }
 
-  static parseMessage(message: AMQPMessage) {
+  static parseMessage(message: AMQPMessage): ParsedMessage {
+    if (!message) throw new Error("Message is required");
     let error = null;
     let data = {};
     let query = {};
@@ -136,7 +149,7 @@ export class KohostAMQPClient {
       }
     }
 
-    if (message?.properties?.headers) {
+    if (message.properties?.headers) {
       const orgHeader =
         message.properties.headers[defs.HEADER_KEY_ORGANIZATION_ID];
       const propertyHeader =
@@ -193,7 +206,10 @@ export class KohostAMQPClient {
     }
   }
 
-  async createConnection(connection: string, options = {}) {
+  async createConnection(
+    connection: string,
+    options = {}
+  ): Promise<AMQPConnection> {
     return await amqp.connect(connection, options);
   }
 
@@ -291,7 +307,7 @@ export class KohostAMQPClient {
   }
 }
 
-class Message {
+export class Message {
   toExchange?: string | null;
   content: any;
   options: {
@@ -374,3 +390,6 @@ class Message {
     };
   }
 }
+
+// re-export AMQPConnection
+export { AMQPConnection, Channel, AMQPMessage, MessageProperties };

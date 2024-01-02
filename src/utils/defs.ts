@@ -61,9 +61,10 @@ const defs = {
       dlx: {
         name: "kohost.dlx",
         type: "direct",
+        options: {},
       },
     },
   },
-};
+} as const;
 
 export default defs;

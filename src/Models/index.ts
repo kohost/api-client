@@ -9,7 +9,7 @@ import DiscoveredDevice from "./DiscoveredDevice";
 import EmailMessage from "./EmailMessage";
 import EnergyReport from "./EnergyReport";
 import EnergyReportShard from "./EnergyReportShard";
-import Entity from "./Entity";
+import Entity, { EntityClass } from "./Entity";
 import Gateway from "./Gateway";
 import Identification from "./Identification";
 import Lock from "./Lock";
@@ -68,4 +68,5 @@ export {
   TimeSheet,
   User,
   WindowCovering,
+  EntityClass,
 };
