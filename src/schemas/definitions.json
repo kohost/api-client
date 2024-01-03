@@ -109,6 +109,7 @@
         "sonifi",
         "stay-n-touch",
         "twilio",
+        "vizio",
         "cloudflare-images",
         "cloudflare-stream",
         "insperia-privacy"
@@ -189,7 +190,7 @@
       }
     },
     "batteryLevel": {
-      "type": ["number", "null"],
+      "type": "number",
       "minimum": 0,
       "maximum": 100
     },
@@ -216,7 +217,7 @@
             "type": "number"
           },
           "tax": {
-            "type": ["number", "null"]
+            "type": ["number", "null"] 
           }
         }
       }
