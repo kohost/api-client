@@ -1,3 +1,4 @@
+import { Definitions } from "../schemas/definitions.json";
 import ValidationError from "../Errors/ValidationError";
 import { customAlphabet as generate } from "nanoid";
 import { ValidateFunction, AnySchema } from "ajv";
@@ -9,12 +10,21 @@ type EntityData = {
 };
 
 export interface EntityClass {
-  new (data: EntityData): Entity;
   validator: ValidateFunction<unknown>;
   schema: AnySchema;
   validProperties: string[];
+  actionProperties?: string[];
   getActionDelta(old: any, _new: any): any;
 }
+
+type BaseEntity = {
+  id?: Definitions["id"];
+  _id?: Definitions["id"];
+  type: string;
+  createdAt?: Definitions["createdAt"];
+  updatedAt?: Definitions["updatedAt"];
+  [x: string]: any;
+};
 
 /**
  * @class Entity
@@ -28,15 +38,15 @@ export interface EntityClass {
  *
  */
 
-abstract class Entity {
+class Entity {
   static validator: ValidateFunction<unknown>;
   static schema: AnySchema;
   static validProperties: string[];
   static actionProperties?: string[];
 
-  // id!: string;
-  // createdAt!: Definitions["date"];
-  // updatedAt!: Definitions["date"];
+  // id?: Definitions["id"];
+  // createdAt?: Definitions["createdAt"];
+  // updatedAt?: Definitions["updatedAt"];
 
   #_validator: ValidateFunction;
 
@@ -114,5 +124,8 @@ abstract class Entity {
     return delta;
   }
 }
+
+Entity.schema = {};
+Entity.validProperties = [];
 
 export default Entity;
