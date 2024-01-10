@@ -27,6 +27,8 @@
     "remote": {
       "type": "string",
       "enum": [
+        "XRT260",
+        "XRT270",
         "MR22GA"
       ]
     },

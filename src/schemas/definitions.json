@@ -169,7 +169,8 @@
           "smokeDetected",
           "outsideSafeTemperatureRange",
           "outsideSafeHumidityRange",
-          "scheduleMaintenance"
+          "scheduleMaintenance",
+          "doorAjar"
         ]
       }
     },
