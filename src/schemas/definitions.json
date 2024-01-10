@@ -93,7 +93,7 @@
         "igor",
         "inncom",
         "kohost-k7",
-        "kohost-pms",
+        "kohost",
         "lg",
         "lirc",
         "mews",
@@ -218,7 +218,7 @@
             "type": "number"
           },
           "tax": {
-            "type": ["number", "null"] 
+            "type": ["number", "null"]
           }
         }
       }
