@@ -89,6 +89,12 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "excludeSubSystems": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
