@@ -155,6 +155,9 @@
     "tipAmount": {
       "type": "string"
     },
+    "scheduleDate": {
+      "$ref": "definitions.json#/definitions/date"
+    },
     "createdAt": {
       "$ref": "definitions.json#/definitions/date"
     },
