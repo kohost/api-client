@@ -13,6 +13,9 @@
       "enum": ["ticket"],
       "default": "ticket"
     },
+    "number": {
+      "type": "string"
+    },
     "conversation": {
       "type": "array",
       "default": [],

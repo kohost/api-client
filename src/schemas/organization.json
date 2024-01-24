@@ -135,6 +135,15 @@
         }
       }
     },
+    "tickets": {
+      "type": "object",
+      "properties": {
+        "nextTicketNumber": {
+          "type": "string",
+          "default": "10000"
+        }
+      }
+    },
     "credentials": {
       "type": "object",
       "additionalProperties": true
