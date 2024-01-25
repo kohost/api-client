@@ -147,9 +147,6 @@
         "type": "string"
       }
     },
-    "propertyId": {
-      "type": "string"
-    },
     "rating": {
       "type": "number",
       "minimum": 0,
