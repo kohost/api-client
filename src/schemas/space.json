@@ -75,10 +75,11 @@
       }
     },
     "features": {
-      "type": "string",
-      "enum": [
-        "pet"
-      ]
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["pet"]
+      }
     },
     "maximumOccupancy": {
       "type": "number",
