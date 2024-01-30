@@ -3,6 +3,7 @@ module.exports = class AppError extends Error {
     super(message, options);
     this.type = this.constructor.name;
     this.statusCode = 500;
+    this.name = "AppError";
     Object.setPrototypeOf(this, AppError.prototype);
   }
 };
