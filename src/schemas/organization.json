@@ -140,7 +140,7 @@
       "properties": {
         "nextTicketNumber": {
           "type": "string",
-          "default": "10000"
+          "default": "1"
         }
       }
     },
