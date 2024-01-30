@@ -81,7 +81,7 @@ class KohostAMQPClient {
       message = errMessage;
       options = rest;
     } else {
-      message = "Unknown Error";
+      message = err.message || "Unknown Error";
     }
 
     debug("parseError", type, message, options);
