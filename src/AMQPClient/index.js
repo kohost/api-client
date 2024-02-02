@@ -86,25 +86,11 @@ class KohostAMQPClient {
 
     debug("parseError", type, message, options);
 
-    switch (type) {
-      case "RequestError":
-        return new Errors.RequestError(message, options);
-
-      case "AuthenticationError":
-        return new Errors.AuthenticationError(message, options);
-
-      case "ValidationError":
-        return new Errors.ValidationError(message, options);
-
-      case "NotFoundError":
-        return new Errors.NotFoundError(message, options);
-
-      case "UnprocessableRequestError":
-        return new Errors.UnprocessableRequestError(message, options);
-
-      default:
-        return new Error(message, options);
+    if (type && Errors[type]) {
+      return new Errors[type](message, options);
     }
+
+    return new Error(message, options);
   }
 
   static parseMessage(message) {
