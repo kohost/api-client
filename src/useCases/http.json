@@ -1092,6 +1092,12 @@
     }
   ],
   [
+    "NotifyTicketAssigned",
+    {
+      "http": false
+    }
+  ],
+  [
     "ListScenes",
     {
       "http": {
@@ -1463,7 +1469,7 @@
     }
   ],
   [
-    "AdminUpdateCustomer",
+    "UpdateOrganization",
     {
       "http": {
         "method": "PUT",
@@ -1777,6 +1783,33 @@
       "http": {
         "method": "PUT",
         "path": "/timesheets/:timeSheetId/timeEntries/:id"
+      }
+    }
+  ],
+  [
+    "StartSOS",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/sos/start"
+      }
+    }
+  ],
+  [
+    "StopSOS",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/sos/stop"
+      }
+    }
+  ],
+  [
+    "DescribeSOS",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sos"
       }
     }
   ]

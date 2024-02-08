@@ -231,6 +231,28 @@
             }
           }
         },
+        "SOS": {
+          "type": "object",
+          "properties": {
+            "active": {
+              "type": "boolean"
+            },
+            "activeEmergencies": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "medical",
+                  "fire",
+                  "suspiciousPerson",
+                  "other",
+                  "conflict",
+                  "shooter"
+                ]
+              }
+            }
+          }
+        },
         "Elevator": {},
         "Experiences": {},
         "Dining": {},
