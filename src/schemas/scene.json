@@ -107,6 +107,23 @@
               }
             }
           }
+        },
+        "locks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "definitions.json#/definitions/id"
+              },
+              "state": {
+                "$ref": "lock.json#/properties/state"
+              },
+              "mode": {
+                "$ref": "lock.json#/properties/mode"
+              }
+            }
+          }
         }
       },
       "additionalProperties": false
