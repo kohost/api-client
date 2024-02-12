@@ -32,7 +32,7 @@
     },
     "mode": {
       "type": ["string", "null"],
-      "enum": ["normal", "autoLock", null],
+      "enum": ["normal", "autoLock", "EmergencyOpen", "EmergencyClose", null],
       "description": "AutoLock: Lock automatically locks after set time. Normal - Lock needs told to lock or unlock.",
       "default": "normal"
     },
