@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "permissionPreset.json",
+  "title": "Permission Preset",
+  "description": "A permission preset is a set of permissions that can be applied to a user or a group of users.",
+  "type": "object",
+  "required": ["name", "type", "organaizationId", "propertyId", "permissions"],
+  "properties": {
+    "id": {
+      "$ref": "definitions.json#/definitions/id"
+    },
+    "type": {
+      "type": "string",
+      "default": "permissionPreset",
+      "enum": ["permissionPreset"]
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "organizationId": {
+      "type": "string"
+    },
+    "propertyId": {
+      "type": "string"
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["resource", "action"],
+        "properties": {
+          "resource": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "action": {
+            "type": "string",
+            "enum": ["allow", "deny"]
+          }
+        }
+      }
+    }
+  }
+}
