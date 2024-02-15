@@ -18,6 +18,10 @@
     "fileHash": {
       "type": "string"
     },
+    "category": {
+      "type": "string",
+      "description": "This is the category id"
+    },
     "mimeType": {
       "type": "string",
       "enum": [

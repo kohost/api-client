@@ -33,7 +33,7 @@
     },
     "discriminator": {
       "type": "string",
-      "enum": ["space", "product"]
+      "enum": ["space", "product", "mediaFile"]
     },
     "systemId": {
       "$ref": "definitions.json#/definitions/systemId"
