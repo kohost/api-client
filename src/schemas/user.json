@@ -75,8 +75,11 @@
             "type": "string",
             "enum": ["Guest", "User", "Manager", "Administrator", "SuperAdmin"]
           },
-          "permissionPresetId": {
-            "type": "string"
+          "permissionPolicies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "customPermissions": {
             "type": "array",

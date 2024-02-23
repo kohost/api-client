@@ -8,6 +8,7 @@ const Thermostat = require("./Thermostat");
 const WindowCovering = require("./WindowCovering");
 const Identification = require("./Identification");
 const User = require("./User");
+const Policy = require("./Policy");
 const SystemUser = require("./SystemUser");
 const Courtesy = require("./Courtesy");
 const Camera = require("./Camera");
@@ -76,4 +77,5 @@ module.exports = {
   Order,
   Announcement,
   TimeSheet,
+  Policy,
 };

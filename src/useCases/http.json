@@ -261,6 +261,51 @@
     }
   ],
   [
+    "CreatePermissionPolicy",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/permission-policies"
+      }
+    }
+  ],
+  [
+    "ListPermissionPolicies",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/permission-policies"
+      }
+    }
+  ],
+  [
+    "UpdatePermissionPolicy",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/permission-policies/:id"
+      }
+    }
+  ],
+  [
+    "DeletePermissionPolicy",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/permission-policies/:id"
+      }
+    }
+  ],
+  [
+    "DescribePermissionPolicy",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/permission-policies/:id"
+      }
+    }
+  ],
+  [
     "ListSpaces",
     {
       "http": {
@@ -957,15 +1002,6 @@
     }
   ],
   [
-    "SetCustomScene",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/scenes/:id"
-      }
-    }
-  ],
-  [
     "AddScenesToRoom",
     {
       "http": {
@@ -1128,6 +1164,15 @@
     "ScheduleSpaceScenes",
     {
       "http": false
+    }
+  ],
+  [
+    "SetScene",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/scenes/:id"
+      }
     }
   ],
   [
