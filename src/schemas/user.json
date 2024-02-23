@@ -75,34 +75,11 @@
             "type": "string",
             "enum": ["Guest", "User", "Manager", "Administrator", "SuperAdmin"]
           },
-          "permissionPolicies": {
+          "policies": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
-          },
-          "customPermissions": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "discriminator": {
-                  "type": "string",
-                  "enum": ["RoomControl.spaces", "Concierge.timeTracking"]
-                },
-                "onlyIncludeIds": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "excludeSubSystems": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
+              "type": "string",
+              "description": "ID of a policy that is applied to this role."
             }
           }
         },

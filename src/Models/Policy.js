@@ -5,7 +5,7 @@ const Entity = require("./Entity");
 schemas.add(schema);
 const validator = schemas.compile(schema);
 
-class Polcy extends Entity {
+class Policy extends Entity {
   /**
    * @typedef {import("../schemas/PolicySchema").Policy} PolicyType
    * Create a Permission Policy instance.
@@ -17,18 +17,18 @@ class Polcy extends Entity {
   }
 }
 
-Object.defineProperty(Polcy.prototype, "schema", {
+Object.defineProperty(Policy.prototype, "schema", {
   value: schema,
 });
 
-Object.defineProperty(Polcy.prototype, "validator", {
+Object.defineProperty(Policy.prototype, "validator", {
   get: function () {
     return validator;
   },
 });
 
-Object.defineProperty(Polcy, "validProperties", {
+Object.defineProperty(Policy, "validProperties", {
   value: Object.keys(schema.properties),
 });
 
-module.exports = Polcy;
+module.exports = Policy;

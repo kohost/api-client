@@ -261,47 +261,47 @@
     }
   ],
   [
-    "CreatePermissionPolicy",
+    "CreatePolicy",
     {
       "http": {
         "method": "POST",
-        "path": "/permission-policies"
+        "path": "/policies"
       }
     }
   ],
   [
-    "ListPermissionPolicies",
+    "ListPolicies",
     {
       "http": {
         "method": "GET",
-        "path": "/permission-policies"
+        "path": "/policies"
       }
     }
   ],
   [
-    "UpdatePermissionPolicy",
+    "UpdatePolicy",
     {
       "http": {
         "method": "PUT",
-        "path": "/permission-policies/:id"
+        "path": "/policies/:id"
       }
     }
   ],
   [
-    "DeletePermissionPolicy",
+    "DeletePolicy",
     {
       "http": {
         "method": "DELETE",
-        "path": "/permission-policies/:id"
+        "path": "/policies/:id"
       }
     }
   ],
   [
-    "DescribePermissionPolicy",
+    "DescribePolicy",
     {
       "http": {
         "method": "GET",
-        "path": "/permission-policies/:id"
+        "path": "/policies/:id"
       }
     }
   ],
