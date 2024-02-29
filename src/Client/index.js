@@ -3,6 +3,9 @@ const { EventEmitter } = require("events");
 const axios = require("axios");
 
 class KohostApiClient extends EventEmitter {
+  #onSuccess;
+  #onError;
+
   /** 
   @param {Object} options - The options to create the client
   @param {String} options.organizationId - The organization ID
@@ -18,12 +21,17 @@ class KohostApiClient extends EventEmitter {
       organizationId: "",
       apiKey: "",
       headers: {},
+      onSuccess: (response) => {
+        return response;
+      },
+      onError: (error) => {
+        return error;
+      },
     }
   ) {
     super();
     if (!options.url) throw new Error("options.url is required");
     this.options = options;
-    this.isBrowser = typeof window !== "undefined";
     this.isRefreshingToken = false;
 
     const config = {
@@ -50,11 +58,14 @@ class KohostApiClient extends EventEmitter {
         options.organizationId;
     }
 
+    this.#onSuccess = options.onSuccess;
+    this.#onError = options.onError;
+
     this._http = axios.create(config);
 
     this._http.interceptors.response.use(
-      this._handleResponse.bind(this),
-      this._handleResponseError.bind(this)
+      this.#handleResponse.bind(this),
+      this.#handleResponseError.bind(this)
     );
   }
 
@@ -91,20 +102,31 @@ class KohostApiClient extends EventEmitter {
     };
   }
 
-  _handleResponse(response) {
+  #onLoginRequired() {
+    this.emit("LoginRequired");
+  }
+
+  #onPhoneVerificationRequired() {
+    this.emit("PhoneVerificationRequired");
+  }
+
+  #handleResponse(response) {
     try {
       if (response?.data?.data) {
         response.query = response.data.query;
         response.pagination = response.data.pagination;
         response.data = response.data.data;
       }
+
+      response = this.#onSuccess(response);
+
       return response;
     } catch (error) {
       return Promise.reject(error);
     }
   }
 
-  _handleResponseError(error) {
+  #handleResponseError(error) {
     const { config: originalReq } = error;
     if (!error.response) return Promise.reject(error);
     const { status, data } = error.response;
@@ -117,12 +139,12 @@ class KohostApiClient extends EventEmitter {
         expectedError && errorType === "TokenExpiredError";
 
       if (expectedError && errorMessage === "Phone Verification is required") {
-        this._onPhoneVerificationRequired();
+        this.#onPhoneVerificationRequired();
         return Promise.reject(error);
       }
 
       if (expectedError && errorMessage === "Login Required") {
-        this._onLoginRequired();
+        this.#onLoginRequired();
         return Promise.reject(error);
       }
 
@@ -130,7 +152,7 @@ class KohostApiClient extends EventEmitter {
         expectedError &&
         errorMessage === "No auth header or cookie provided"
       ) {
-        this._onLoginRequired();
+        this.#onLoginRequired();
         return Promise.reject(error);
       }
 
@@ -153,15 +175,9 @@ class KohostApiClient extends EventEmitter {
       console.log(error);
     }
 
+    error = this.#onError(error);
+
     return Promise.reject(error);
-  }
-
-  _onLoginRequired() {
-    this.emit("LoginRequired");
-  }
-
-  _onPhoneVerificationRequired() {
-    this.emit("PhoneVerificationRequired");
   }
 }
 

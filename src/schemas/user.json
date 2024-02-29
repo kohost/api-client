@@ -61,13 +61,13 @@
       "default": [],
       "items": {
         "type": "object",
-        "required": ["organization", "property", "role"],
+        "required": ["organizationId", "propertyId", "role"],
         "properties": {
-          "organization": {
+          "organizationId": {
             "type": "string",
             "description": "The ID of the organization the permission is applies to."
           },
-          "property": {
+          "propertyId": {
             "type": "string",
             "description": "The ID of the property the permission is applies to."
           },
@@ -75,11 +75,18 @@
             "type": "string",
             "enum": ["Guest", "User", "Manager", "Administrator", "SuperAdmin"]
           },
-          "policies": {
+          "policyIds": {
             "type": "array",
             "items": {
               "type": "string",
               "description": "ID of a policy that is applied to this role."
+            }
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "description": "A policy object populated from the policyIds array.",
+              "$ref": "policy.json"
             }
           }
         },
@@ -156,14 +163,14 @@
           "systemId": {
             "type": "string"
           },
-          "property": {
+          "propertyId": {
             "type": "string"
           },
           "driver": {
             "type": "string"
           }
         },
-        "required": ["systemId", "property", "driver"],
+        "required": ["systemId", "propertyId", "driver"],
         "additionalProperties": false
       }
     }

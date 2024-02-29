@@ -5,6 +5,7 @@ const paymentSchema = require("../schemas/payment.json");
 const Entity = require("./Entity");
 const MediaFile = require("./MediaFile");
 const Reservation = require("./Reservation");
+const Policy = require("./Policy");
 const Identification = require("./Identification");
 
 const { nanoid } = require("nanoid/async");
@@ -23,12 +24,26 @@ class User extends Entity {
    */
   constructor(user) {
     if (user.photo) user.photo = new MediaFile(user.photo);
-    if (user.reservations)
+    if (user.reservations) {
       user.reservations = user.reservations.map((res) => new Reservation(res));
-    if (user.identifications)
+    }
+
+    if (user.identifications) {
       user.identifications = user.identifications.map(
         (id) => new Identification(id)
       );
+    }
+
+    if (user.permissions) {
+      user.permissions = user.permissions.map((permission) => {
+        if (permission.policies && Array.isArray(permission.policies)) {
+          permission.policies = permission.policies.map(
+            (policy) => new Policy(policy)
+          );
+        }
+        return permission;
+      });
+    }
 
     super(user);
   }

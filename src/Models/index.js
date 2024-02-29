@@ -7,18 +7,16 @@ const Lock = require("./Lock");
 const Thermostat = require("./Thermostat");
 const WindowCovering = require("./WindowCovering");
 const Identification = require("./Identification");
-const User = require("./User");
 const Policy = require("./Policy");
+const User = require("./User");
 const SystemUser = require("./SystemUser");
 const Courtesy = require("./Courtesy");
 const Camera = require("./Camera");
 const MotionSensor = require("./MotionSensor");
 const MediaSource = require("./MediaSource");
 const Room = require("./Room");
-
 const Space = require("./Space");
 const Category = require("./Category");
-
 const Ticket = require("./Ticket");
 const Scene = require("./Scene");
 const Gateway = require("./Gateway");

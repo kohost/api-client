@@ -228,7 +228,7 @@ const entryPoints = [
   { in: path.resolve(__dirname, "../src/defs/"), out: "defs" },
 ];
 
-async function main2() {
+async function build() {
   const srcFolder = path.resolve(__dirname, "../src");
   const distCjsFolder = path.resolve(__dirname, "../dist/cjs");
   copyFilesToDistCjs(srcFolder, distCjsFolder, ["useCases", "Client"]);
@@ -329,6 +329,4 @@ async function main2() {
   ESMBuild.dispose();
 }
 
-main2();
-
-//main();
+build();

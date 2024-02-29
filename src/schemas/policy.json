@@ -42,12 +42,13 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["resource", "effect"],
+        "required": ["entities", "effect"],
         "properties": {
-          "resource": {
+          "entities": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "pattern": "^[^:]+(:.+)+$"
             }
           },
           "effect": {

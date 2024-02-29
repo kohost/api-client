@@ -17,7 +17,7 @@ const Kohost = {
   SocketIoClient,
   AMQPClient,
   defs,
-  utils: utils,
+  utils,
 };
 
 module.exports = Kohost;
