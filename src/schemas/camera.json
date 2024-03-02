@@ -12,7 +12,8 @@
       "type": "string"
     },
     "type": {
-      "$ref": "definitions.json#/definitions/type"
+      "$ref": "definitions.json#/definitions/type",
+      "default": "camera"
     },
     "supportedNotifications": {
       "$ref": "definitions.json#/definitions/supportedNotifications"

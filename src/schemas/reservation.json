@@ -16,7 +16,8 @@
     },
     "type": {
       "type": "string",
-      "default": "reservation"
+      "default": "reservation",
+      "enum": ["reservation"]
     },
     "sharedGuests": {
       "type": "array",

@@ -13,7 +13,8 @@
     },
     "type": {
       "type": "string",
-      "default": "space"
+      "default": "space",
+      "enum": ["space"]
     },
     "discriminator": {
       "type": "string",

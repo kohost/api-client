@@ -10,7 +10,8 @@
     },
     "type": {
       "type": "string",
-      "default": "mediaFile"
+      "default": "mediaFile",
+      "enum": ["mediaFile"]
     },
     "name": {
       "type": "string"

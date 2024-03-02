@@ -11,7 +11,8 @@
     },
     "type": {
       "type": "string",
-      "default": "mediaSource"
+      "default": "mediaSource",
+      "enum": ["mediaSource"]
     },
     "discriminator": {
       "type": "string",

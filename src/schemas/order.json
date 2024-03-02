@@ -11,7 +11,8 @@
     },
     "type": {
       "type": "string",
-      "default": "order"
+      "default": "order",
+      "enum": ["order"]
     },
     "orderNumber": {
       "type": "string"

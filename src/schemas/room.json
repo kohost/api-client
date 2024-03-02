@@ -8,6 +8,11 @@
     "id": {
       "$ref": "definitions.json#/definitions/id"
     },
+    "type": {
+      "type": "string",
+      "enum": ["room"],
+      "default": "room"
+    },
     "name": {
       "type": "string"
     },

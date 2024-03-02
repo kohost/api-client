@@ -11,7 +11,8 @@
     },
     "type": {
       "type": "string",
-      "default": "deviceRouter"
+      "default": "deviceRouter",
+      "enum": ["deviceRouter"]
     },
     "driver": {
       "type": "string"

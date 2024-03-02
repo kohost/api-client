@@ -10,7 +10,8 @@
     },
     "type": {
       "type": "string",
-      "default": "smsMessage"
+      "default": "smsMessage",
+      "enum": ["smsMessage"]
     },
     "to": {
       "type": "string",

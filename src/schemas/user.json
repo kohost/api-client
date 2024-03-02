@@ -73,7 +73,14 @@
           },
           "role": {
             "type": "string",
-            "enum": ["Guest", "User", "Manager", "Administrator", "SuperAdmin"]
+            "enum": [
+              "Guest",
+              "User",
+              "Manager",
+              "Maintenance",
+              "Administrator",
+              "SuperAdmin"
+            ]
           },
           "policyIds": {
             "type": "array",

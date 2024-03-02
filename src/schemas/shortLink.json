@@ -10,7 +10,8 @@
     },
     "type": {
       "type": "string",
-      "default": "shortLink"
+      "default": "shortLink",
+      "enum": ["shortLink"]
     },
     "title": {
       "type": "string"

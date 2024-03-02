@@ -11,7 +11,8 @@
     },
     "type": {
       "type": "string",
-      "default": "systemUser"
+      "default": "systemUser",
+      "enum": ["systemUser"]
     },
     "driver": {
       "$ref": "definitions.json#/definitions/driver"
@@ -50,7 +51,14 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["Guest", "User", "Manager", "Administrator", "SuperAdmin"]
+        "enum": [
+          "Guest",
+          "User",
+          "Manager",
+          "Maintenance",
+          "Administrator",
+          "SuperAdmin"
+        ]
       }
     },
     "nationality": {

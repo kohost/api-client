@@ -10,7 +10,8 @@
     },
     "type": {
       "type": "string",
-      "default": "emailMessage"
+      "default": "emailMessage",
+      "enum": ["emailMessage"]
     },
     "to": {
       "type": "string",

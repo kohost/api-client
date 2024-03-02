@@ -10,7 +10,8 @@
     },
     "type": {
       "type": "string",
-      "default": "product"
+      "default": "product",
+      "enum": ["product"]
     },
     "name": {
       "type": "string"

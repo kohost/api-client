@@ -11,7 +11,8 @@
     },
     "type": {
       "type": "string",
-      "default": "organization"
+      "default": "organization",
+      "enum": ["organization"]
     },
     "accountNumber": {
       "type": ["number", "null"],

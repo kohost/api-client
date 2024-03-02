@@ -14,7 +14,8 @@
     },
     "type": {
       "type": "string",
-      "default": "property"
+      "default": "property",
+      "enum": ["property"]
     },
     "discriminator": {
       "type": "string",

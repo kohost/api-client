@@ -58,8 +58,10 @@ class KohostApiClient extends EventEmitter {
         options.organizationId;
     }
 
-    this.#onSuccess = options.onSuccess;
-    this.#onError = options.onError;
+    this.#onSuccess = options.onSuccess
+      ? options.onSuccess
+      : (response) => response;
+    this.#onError = options.onError ? options.onError : (error) => error;
 
     this._http = axios.create(config);
 
