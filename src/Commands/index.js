@@ -23,7 +23,7 @@ const UpdateUserCommand = require("./UpdateUserCommand");
 const GetMobileKeyCommand = require("./GetMobileKeyCommand");
 const CreateImageUploadEndpointCommand = require("./CreateImageUploadEndpointCommand");
 const UploadImageCommand = require("./UploadImageCommand");
-const GetProductsCommand = require("./GetProductsCommand");
+const DiscoverProductsCommand = require("./DiscoverProductsCommand");
 const SellProductsCommand = require("./SellProductsCommand");
 
 module.exports = {
@@ -52,6 +52,6 @@ module.exports = {
   GetMobileKeyCommand,
   CreateImageUploadEndpointCommand,
   UploadImageCommand,
-  GetProductsCommand,
+  DiscoverProductsCommand,
   SellProductsCommand,
 };
