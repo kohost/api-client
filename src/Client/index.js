@@ -12,7 +12,9 @@ class KohostApiClient extends EventEmitter {
   @param {String} options.propertyId - The property ID
   @param {String} options.url - The base URL for the API endpint
   @param {Object} options.headers - Additional headers to send with each request
-
+  @param {String} options.apiKey - The API key to use for requests
+  @param {Function} options.onSuccess - A callback to handle successful responses
+  @param {Function} options.onError - A callback to handle errors
   */
   constructor(
     options = {
@@ -21,12 +23,8 @@ class KohostApiClient extends EventEmitter {
       organizationId: "",
       apiKey: "",
       headers: {},
-      onSuccess: (response) => {
-        return response;
-      },
-      onError: (error) => {
-        return error;
-      },
+      onSuccess: (response) => response,
+      onError: (error) => error,
     }
   ) {
     super();
@@ -61,6 +59,7 @@ class KohostApiClient extends EventEmitter {
     this.#onSuccess = options.onSuccess
       ? options.onSuccess
       : (response) => response;
+
     this.#onError = options.onError ? options.onError : (error) => error;
 
     this._http = axios.create(config);

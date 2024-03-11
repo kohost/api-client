@@ -81,6 +81,10 @@ module.exports = class SocketIoClient extends EventEmitter {
     this.socket.off(event, callback);
   }
 
+  getSubscriptions(event) {
+    return this.socket.listeners(event);
+  }
+
   send(event, { data = {}, query = {}, ...rest }) {
     this.socket.emit(event, { data, query, ...rest });
   }
