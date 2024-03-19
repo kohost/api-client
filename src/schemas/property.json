@@ -147,7 +147,9 @@
                 }
               }
             },
-            "roomUpgrades": {}
+            "roomUpgrades": {},
+            "pet": {},
+            "promo": {}
           }
         },
         "CheckOut": {
