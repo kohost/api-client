@@ -81,7 +81,8 @@
       "http": {
         "method": "GET",
         "path": "/users/me"
-      }
+      },
+      "entity": "user"
     }
   ],
   [
@@ -90,7 +91,8 @@
       "http": {
         "method": "GET",
         "path": "/users/:id"
-      }
+      },
+      "entity": "user"
     }
   ],
   [
@@ -99,7 +101,8 @@
       "http": {
         "method": "POST",
         "path": "/users"
-      }
+      },
+      "entity": "user"
     }
   ],
   [
@@ -108,7 +111,8 @@
       "http": {
         "method": "GET",
         "path": "/users"
-      }
+      },
+      "entity": "user"
     }
   ],
   [
@@ -136,7 +140,8 @@
       "http": {
         "method": "DELETE",
         "path": "/users/:id"
-      }
+      },
+      "entity": "user"
     }
   ],
   [
@@ -164,7 +169,8 @@
         "method": "POST",
         "path": "/users/:id/identifications/match",
         "maxSize": "2mb"
-      }
+      },
+      "entity": "user"
     }
   ],
   [
@@ -173,7 +179,8 @@
       "http": {
         "method": "GET",
         "path": "/users/:id/reservations"
-      }
+      },
+      "entity": "reservation"
     }
   ],
   [
@@ -191,7 +198,8 @@
       "http": {
         "method": "GET",
         "path": "/users/:id/orders"
-      }
+      },
+      "entity": "order"
     }
   ],
   [
@@ -203,7 +211,8 @@
   [
     "SeedSuperAdminUsers",
     {
-      "http": false
+      "http": false,
+      "entity": "user"
     }
   ],
   [
@@ -212,7 +221,8 @@
       "http": {
         "method": "GET",
         "path": "/team"
-      }
+      },
+      "entity": "user"
     }
   ],
   [
@@ -221,7 +231,8 @@
       "http": {
         "method": "GET",
         "path": "/users/me/passkeyRegistrations"
-      }
+      },
+      "entity": "credential"
     }
   ],
   [
@@ -239,7 +250,8 @@
       "http": {
         "method": "POST",
         "path": "/users/:id/mobileKeys"
-      }
+      },
+      "entity": "credential"
     }
   ],
   [
@@ -257,7 +269,8 @@
       "http": {
         "method": "GET",
         "path": "/users/:id/mobileKeys"
-      }
+      },
+      "entity": "credential"
     }
   ],
   [
@@ -1245,6 +1258,12 @@
     }
   ],
   [
+    "DeleteEntity",
+    {
+      "http": false
+    }
+  ],
+  [
     "DiscoverReservations",
     {
       "http": {
@@ -1485,6 +1504,42 @@
     }
   ],
   [
+    "DescribeReservationPetProducts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/:id/products/pet"
+      }
+    }
+  ],
+  [
+    "PurchaseReservationPetProducts",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/products/pet"
+      }
+    }
+  ],
+  [
+    "DescribeReservationPromos",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/reservations/:id/products/promo"
+      }
+    }
+  ],
+  [
+    "PurchaseReservationPromos",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/reservations/:id/products/promo"
+      }
+    }
+  ],
+  [
     "OCRDocument",
     {
       "http": {
@@ -1670,6 +1725,15 @@
     "UpsertSystemProducts",
     {
       "http": false
+    }
+  ],
+  [
+    "ListProducts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/products"
+      }
     }
   ],
   [

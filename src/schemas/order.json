@@ -34,6 +34,10 @@
       "$ref": "definitions.json#/definitions/id",
       "description": "User id of purchaser"
     },
+    "reservationId": {
+      "$ref": "definitions.json#/definitions/id",
+      "description": "Reservation id if the order is for a reservation"
+    },
     "date": {
       "$ref": "definitions.json#/definitions/date"
     },
@@ -62,6 +66,9 @@
             "type": "string"
           },
           "deliveryClass": {
+            "type": "string"
+          },
+          "productId": {
             "type": "string"
           }
         }
