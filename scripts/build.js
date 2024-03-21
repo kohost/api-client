@@ -118,6 +118,7 @@ let useCasePlugin = {
         
             /* 
               Creates a method for each use case in the API
+              @memberof KohostApiClient
               @param {Object} requestData - The options to send to the API
               @param {Object} requestData.headers - The headers to send to the API
               @param {Object} requestData.data - The body to send to the API. Valid for POST and PUT requests

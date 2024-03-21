@@ -30,7 +30,7 @@
         "refunded"
       ]
     },
-    "user": {
+    "userId": {
       "$ref": "definitions.json#/definitions/id",
       "description": "User id of purchaser"
     },
