@@ -21,6 +21,7 @@
         "appleTv",
         "discPlayer",
         "mediaPlayer",
+        "paSystem",
         "uncontrolledDevice"
       ]
     },
