@@ -25,6 +25,20 @@
         "uncontrolledDevice"
       ]
     },
+    "playlists": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "definitions.json#/definitions/id"
+          },
+          "name": {
+            "$ref": "definitions.json#/definitions/name"
+          }
+        }
+      }
+    },
     "remote": {
       "type": "string",
       "enum": ["MR22GA", "XRT260", "XRT270"]
