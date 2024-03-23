@@ -109,6 +109,7 @@
         "play",
         "playing",
         "stop",
+        "stopped",
         "pause",
         "paused",
         "fastForward",
