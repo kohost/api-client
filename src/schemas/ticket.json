@@ -140,6 +140,11 @@
       "enum": ["open", "pending", "solved", "closed"],
       "default": "open"
     },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "normal", "high"],
+      "default": "normal"
+    },
     "tags": {
       "type": "array",
       "default": [],
