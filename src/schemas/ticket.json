@@ -71,6 +71,9 @@
       "properties": {
         "userId": {
           "type": "string"
+        },
+        "systemId": {
+          "type": "string"
         }
       }
     },
@@ -107,6 +110,9 @@
           "type": "string"
         },
         "roomId": {
+          "type": "string"
+        },
+        "reservationId": {
           "type": "string"
         },
         "spaceId": {
