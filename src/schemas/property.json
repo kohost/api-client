@@ -202,6 +202,22 @@
               "type": "boolean",
               "default": false
             },
+            "systemConfig": {
+              "type": "object",
+              "properties": {
+                "legicAppId": {
+                  "type": "string"
+                },
+                "legicTechUsername": {
+                  "type": "string"
+                },
+                "legicTechPassword": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
             "enableApp": {
               "type": "boolean"
             },
