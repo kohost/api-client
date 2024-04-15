@@ -205,6 +205,13 @@
             "systemConfig": {
               "type": "object",
               "properties": {
+                "legicUrl": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "legicWalletName": {
+                  "type": "string"
+                },
                 "legicAppId": {
                   "type": "string"
                 },
