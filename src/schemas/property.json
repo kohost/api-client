@@ -213,7 +213,7 @@
                   "type": "string"
                 },
                 "legicAppId": {
-                  "type": "string"
+                  "type": "number"
                 },
                 "legicTechUsername": {
                   "type": "string"
