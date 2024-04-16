@@ -281,7 +281,28 @@
         },
         "Elevator": {},
         "Experiences": {},
-        "Dining": {},
+        "Dining": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string",
+              "enum": ["gotab"]
+            },
+            "systemConfig": {
+              "type": "object",
+              "properties": {
+                "landingUrl": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "includeUserDetails": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
         "Rentals": {},
         "Shop": {},
         "Spa": {},
