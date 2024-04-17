@@ -36,6 +36,9 @@
         },
         "webRTC": {
           "type": ["string", "null"]
+        },
+        "rtsp": {
+          "type": ["string", "null"]
         }
       }
     },
