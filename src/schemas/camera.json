@@ -15,6 +15,9 @@
       "$ref": "definitions.json#/definitions/type",
       "default": "camera"
     },
+    "offline": {
+      "type": "boolean"
+    },
     "supportedNotifications": {
       "$ref": "definitions.json#/definitions/supportedNotifications"
     },
