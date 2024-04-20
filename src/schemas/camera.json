@@ -30,6 +30,7 @@
     "liveStreams": {
       "type": "object",
       "additionalProperties": false,
+      "$comment": "This is now deprecated. Use liveStream instead. This will remain here for backwards compatibility.",
       "properties": {
         "iframe": {
           "type": ["string", "null"]
@@ -45,6 +46,42 @@
         }
       }
     },
+    "liveStream": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "driver": {
+          "type": "string",
+          "enum": ["cloudflare-stream", "aws-kinesis", "digital-watchdog"]
+        },
+        "allowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "iframe": {
+          "type": ["string", "null"]
+        },
+        "hls": {
+          "type": ["string", "null"]
+        },
+        "webRTC": {
+          "type": ["string", "null"]
+        },
+        "rtsp": {
+          "type": ["string", "null"],
+          "description": "Local RTSP stream URL",
+          "examples": [
+            "rtsp://192.168.1.4:544/channels/1",
+            "rtsp://10.145.6.129:8554/unicast"
+          ]
+        }
+      }
+    },
     "systemId": {
       "$ref": "definitions.json#/definitions/systemId"
     },
@@ -53,5 +90,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["id", "type", "liveStreams", "driver"]
+  "required": ["id", "type", "driver"]
 }
