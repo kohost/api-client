@@ -63,6 +63,9 @@
             "type": "string"
           }
         },
+        "authRequired": {
+          "type": "boolean"
+        },
         "iframe": {
           "type": ["string", "null"]
         },
