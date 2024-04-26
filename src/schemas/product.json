@@ -25,6 +25,9 @@
     "price": {
       "type": "number"
     },
+    "tax": {
+      "type": ["number", "null"]
+    },
     "image": {
       "$ref": "mediaFile.json"
     },
