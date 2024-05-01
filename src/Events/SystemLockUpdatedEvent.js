@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemLockUpdatedEvent extends Event {
-  constructor(lock) {
-    super(lock);
+  constructor(lock, context) {
+    super(lock, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemLockUpdated";
   }
 
-  get routingKey() {
-    return `lock.${this.keyId}.updated`;
+  static get entity() {
+    return "lock";
   }
 }
 

@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemSpaceUpdatedEvent extends Event {
-  constructor(space) {
-    super(space);
+  constructor(space, context) {
+    super(space, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemSpaceUpdated";
   }
 
-  get routingKey() {
-    return `space.${this.keyId}.updated`;
+  static get entity() {
+    return "space";
   }
 }
 

@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SceneSetEvent extends Event {
-  constructor(scene) {
-    super(scene);
+  constructor(scene, context) {
+    super(scene, context);
   }
 
-  get name() {
+  static get name() {
     return "SceneSet";
   }
 
-  get routingKey() {
-    return `scene.${this.keyId}.updated`;
+  static get entity() {
+    return "scene";
   }
 }
 

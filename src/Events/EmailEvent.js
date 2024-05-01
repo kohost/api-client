@@ -3,15 +3,14 @@ const Event = require("./Event");
 class EmailEvent extends Event {
   constructor(email, context) {
     super(email, context);
-    this.status = email.status;
   }
 
-  get name() {
+  static get name() {
     return "EmailEvent";
   }
 
-  get routingKey() {
-    return `comm.email.${this.status}`;
+  static get entity() {
+    return "emailMessage";
   }
 }
 

@@ -1,24 +1,17 @@
 const Event = require("./Event");
+const AMQPClient = require("../AMQPClient");
 
 class ApplicationInUseEvent extends Event {
-  constructor({ propertyId, organizationId, ...rest }) {
-    if (!propertyId)
-      throw new Error("propertyId is required for ApplicationInUseEvent");
-    super({ propertyId, organizationId, ...rest });
-    this._propertyId = propertyId;
-    this._organizationId = organizationId;
+  constructor(data = {}, context) {
+    super(data, context);
   }
 
-  get name() {
+  static get name() {
     return "ApplicationInUse";
   }
 
-  get exchange() {
-    return "AppEvents";
-  }
-
-  get routingKey() {
-    return `app.${this._propertyId}.inUse`;
+  static get exchange() {
+    return AMQPClient.exchanges.AppEvents.name;
   }
 }
 

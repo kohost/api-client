@@ -4,7 +4,6 @@ const SystemDimmerUpdatedEvent = require("./SystemDimmerUpdatedEvent");
 const SystemSwitchUpdatedEvent = require("./SystemSwitchUpdatedEvent");
 const SystemLockUpdatedEvent = require("./SystemLockUpdatedEvent");
 const SystemCameraUpdatedEvent = require("./SystemCameraUpdatedEvent");
-const SystemSceneControllerUpdatedEvent = require("./SystemSceneControllerUpdatedEvent");
 const SystemWindowCoveringUpdatedEvent = require("./SystemWindowCoveringUpdatedEvent");
 const SystemMediaSourceUpdatedEvent = require("./SystemMediaSourceUpdatedEvent");
 const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
@@ -33,10 +32,8 @@ const ApplicationOutOfUseEvent = require("./ApplicationOutOfUseEvent");
 const ReservationCheckInEvent = require("./ReservationCheckInEvent");
 const ReservationCheckOutEvent = require("./ReservationCheckOutEvent");
 
-
 // Delete Events
 const SystemEntityDeletedEvent = require("./SystemEntityDeletedEvent");
-
 
 module.exports = {
   SystemAlarmUpdatedEvent,
@@ -47,7 +44,6 @@ module.exports = {
   SystemSwitchUpdatedEvent,
   SystemLockUpdatedEvent,
   SystemCameraUpdatedEvent,
-  SystemSceneControllerUpdatedEvent,
   SystemWindowCoveringUpdatedEvent,
   SystemMediaSourceUpdatedEvent,
   SystemMotionSensorUpdatedEvent,
@@ -67,5 +63,5 @@ module.exports = {
   ApplicationInUseEvent,
   ApplicationOutOfUseEvent,
   ReservationCheckInEvent,
-  ReservationCheckOutEvent
+  ReservationCheckOutEvent,
 };

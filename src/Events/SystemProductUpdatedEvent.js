@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemProductUpdatedEvent extends Event {
-  constructor(product) {
-    super(product);
+  constructor(product, context) {
+    super(product, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemProductUpdated";
   }
 
-  get routingKey() {
-    return `product.${this.keyId}.updated`;
+  static get entity() {
+    return "product";
   }
 }
 

@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemGatewayUpdatedEvent extends Event {
-  constructor(space) {
-    super(space);
+  constructor(gateway, context) {
+    super(gateway, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemGatewayUpdated";
   }
 
-  get routingKey() {
-    return `gateway.${this.keyId}.updated`;
+  static get entity() {
+    return "gateway";
   }
 }
 

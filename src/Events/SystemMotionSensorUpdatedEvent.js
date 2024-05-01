@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemMotionSensorUpdatedEvent extends Event {
-  constructor(mediaSource) {
-    super(mediaSource);
+  constructor(motion, context) {
+    super(motion, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemMotionSensorUpdated";
   }
 
-  get routingKey() {
-    return `mediaSource.${this.keyId}.updated`;
+  static get entity() {
+    return "motionSensor";
   }
 }
 

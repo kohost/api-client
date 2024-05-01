@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemThermostatUpdatedEvent extends Event {
-  constructor(thermostat) {
-    super(thermostat);
+  constructor(thermostat, context) {
+    super(thermostat, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemThermostatUpdated";
   }
 
-  get routingKey() {
-    return `thermostat.${this.keyId}.updated`;
+  static get entity() {
+    return "thermostat";
   }
 }
 

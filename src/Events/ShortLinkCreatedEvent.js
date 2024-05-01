@@ -5,12 +5,12 @@ class ShortLinkCreatedEvent extends Event {
     super(shortLink, context);
   }
 
-  get name() {
+  static get name() {
     return "ShortLinkCreated";
   }
 
-  get routingKey() {
-    return `shortlink.${this.keyId}.created`;
+  static get entity() {
+    return "shortLink";
   }
 }
 

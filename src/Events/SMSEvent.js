@@ -3,15 +3,14 @@ const Event = require("./Event");
 class SMSEvent extends Event {
   constructor(sms, context) {
     super(sms, context);
-    this.status = sms.status;
   }
 
-  get name() {
+  static get name() {
     return "SMSEvent";
   }
 
-  get routingKey() {
-    return `comm.sms.${this.status}`;
+  static get entity() {
+    return "smsMessage";
   }
 }
 

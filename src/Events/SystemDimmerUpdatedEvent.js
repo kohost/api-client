@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemDimmerUpdatedEvent extends Event {
-  constructor(dimmer) {
-    super(dimmer);
+  constructor(dimmer, context) {
+    super(dimmer, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemDimmerUpdated";
   }
 
-  get routingKey() {
-    return `dimmer.${this.keyId}.updated`;
+  static get entity() {
+    return "dimmer";
   }
 }
 

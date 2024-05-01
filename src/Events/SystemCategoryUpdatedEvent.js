@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemCategoryUpdatedEvent extends Event {
-  constructor(space) {
-    super(space);
+  constructor(category, context) {
+    super(category, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemCategoryUpdated";
   }
 
-  get routingKey() {
-    return `category.${this.keyId}.updated`;
+  static get entity() {
+    return "category";
   }
 }
 

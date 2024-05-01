@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemSwitchUpdatedEvent extends Event {
-  constructor(_switch) {
-    super(_switch);
+  constructor(_switch, context) {
+    super(_switch, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemSwitchUpdated";
   }
 
-  get routingKey() {
-    return `switch.${this.keyId}.updated`;  
+  static get entity() {
+    return "switch";
   }
 }
 

@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemUserUpdatedEvent extends Event {
-  constructor(user) {
-    super(user);
+  constructor(user, context) {
+    super(user, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemUserUpdated";
   }
 
-  get routingKey() {
-    return `user.${this.keyId}.updated`;
+  static get entity() {
+    return "user";
   }
 }
 

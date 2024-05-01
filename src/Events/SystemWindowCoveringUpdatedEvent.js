@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemWindowCoveringUpdatedEvent extends Event {
-  constructor(wc) {
-    super(wc);
+  constructor(wc, context) {
+    super(wc, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemWindowCoveringUpdated";
   }
 
-  get routingKey() {
-    return `windowCovering.${this.keyId}.updated`;
+  static get entity() {
+    return "windowCovering";
   }
 }
 

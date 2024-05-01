@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemPropertyUpdatedEvent extends Event {
-  constructor(property) {
-    super(property);
+  constructor(property, context) {
+    super(property, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemPropertyUpdated";
   }
 
-  get routingKey() {
-    return `property.${this.keyId}.updated`;
+  static get entity() {
+    return "property";
   }
 }
 

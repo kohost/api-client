@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemReservationUpdatedEvent extends Event {
-  constructor(reservation) {
-    super(reservation);
+  constructor(reservation, context) {
+    super(reservation, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemReservationUpdated";
   }
 
-  get routingKey() {
-    return `reservation.${this.keyId}.updated`;
+  static get entity() {
+    return "reservation";
   }
 }
 

@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemCourtesyUpdatedEvent extends Event {
-  constructor(courtesy) {
-    super(courtesy);
+  constructor(courtesy, context) {
+    super(courtesy, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemCourtesyUpdated";
   }
 
-  get routingKey() {
-    return `courtesy.${this.keyId}.updated`;
+  static get entity() {
+    return "courtesy";
   }
 }
 

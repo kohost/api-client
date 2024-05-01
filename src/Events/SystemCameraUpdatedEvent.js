@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemCameraUpdatedEvent extends Event {
-  constructor(camera) {
-    super(camera);
+  constructor(camera, context) {
+    super(camera, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemCameraUpdated";
   }
 
-  get routingKey() {
-    return `camera.${this.keyId}.updated`;
+  static get entity() {
+    return "camera";
   }
 }
 

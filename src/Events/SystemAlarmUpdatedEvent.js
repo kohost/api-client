@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemAlarmUpdatedEvent extends Event {
-  constructor(alarm) {
-    super(alarm);
+  constructor(alarm, context) {
+    super(alarm, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemAlarmUpdated";
   }
 
-  get routingKey() {
-    return `alarm.${this.keyId}.updated`;
+  static get entity() {
+    return "alarm";
   }
 }
 

@@ -1,3 +1,5 @@
+const AMQPClient = require("../AMQPClient");
+
 class Event {
   constructor(data, context) {
     this.data = [];
@@ -9,46 +11,37 @@ class Event {
     if (!Array.isArray(data)) this.data = [data];
     else this.data = data;
 
-    this.data = this.data.map((d) => {
-      if (d.eventData) {
-        if (!d.eventData.timestamp) d.eventData.timestamp = new Date();
-        if (!d.eventData.name) d.eventData.name = this.name;
-        if (!d.eventData.type) d.eventData.type = this.type;
-      }
-      return d;
-    });
-
     if (context) {
       for (const key in context) {
         this.context[key] = context[key];
       }
     }
+    this.organizationId = this.context.organizationId || "*";
+    this.propertyId = this.context.propertyId || "*";
   }
 
-  get keyId() {
-    if (Array.isArray(this.data)) return "batch";
-    if (this.data.id) return this.data.id;
-    return "unknown";
-  }
-
-  get name() {
+  static get name() {
     throw new Error("Event name is required");
   }
 
-  get type() {
+  static get type() {
     return "Event";
   }
 
-  get routingKey() {
-    return "";
+  static get exchange() {
+    return AMQPClient.exchanges.DriverEvents.name;
   }
 
-  get exchange() {
-    return "DriverEvents";
+  static get entity() {
+    throw new Error("Event entity is required");
   }
 
   build() {
     return { data: { ...this.data } };
+  }
+
+  get routingKey() {
+    return `${this.organizationId}.${this.propertyId}.${this.entity}.${this.name}`;
   }
 }
 

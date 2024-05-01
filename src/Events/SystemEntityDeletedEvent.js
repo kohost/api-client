@@ -1,16 +1,16 @@
 const Event = require("./Event");
 
 class SystemEntityDeletedEvent extends Event {
-  constructor(data) {
-    super(data);
+  constructor(data, context) {
+    super(data, context);
   }
 
-  get name() {
+  static get name() {
     return "SystemEntityDeleted";
   }
 
-  get routingKey() {
-    return `entity.${this.keyId}.deleted`;
+  static get entity() {
+    return "entity";
   }
 }
 
