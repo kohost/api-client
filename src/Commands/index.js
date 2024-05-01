@@ -1,3 +1,4 @@
+const Command = require("./Command");
 const SetSceneCommand = require("./SetSceneCommand");
 const SetAlarmCommand = require("./SetAlarmCommand");
 const SetDimmerCommand = require("./SetDimmerCommand");
@@ -27,6 +28,7 @@ const DiscoverProductsCommand = require("./DiscoverProductsCommand");
 const SellProductsCommand = require("./SellProductsCommand");
 
 module.exports = {
+  Command,
   SetSceneCommand,
   SetAlarmCommand,
   SetDimmerCommand,

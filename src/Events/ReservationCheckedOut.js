@@ -1,12 +1,12 @@
 const Event = require("./Event");
 
-class ReservationCheckInEvent extends Event {
+class ReservationCheckedOut extends Event {
   constructor(reservation, context) {
     super(reservation, context);
   }
 
   static get name() {
-    return "ReservationCheckIn";
+    return "ReservationCheckedIn";
   }
 
   static get entity() {
@@ -14,4 +14,4 @@ class ReservationCheckInEvent extends Event {
   }
 }
 
-module.exports = ReservationCheckInEvent;
+module.exports = ReservationCheckedOut;

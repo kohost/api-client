@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SystemWindowCoveringUpdatedEvent extends Event {
+class SystemWindowCoveringUpdate extends Event {
   constructor(wc, context) {
     super(wc, context);
   }
@@ -14,4 +14,4 @@ class SystemWindowCoveringUpdatedEvent extends Event {
   }
 }
 
-module.exports = SystemWindowCoveringUpdatedEvent;
+module.exports = SystemWindowCoveringUpdate;

@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SystemGatewayUpdatedEvent extends Event {
+class SystemGatewayUpdated extends Event {
   constructor(gateway, context) {
     super(gateway, context);
   }
@@ -14,4 +14,4 @@ class SystemGatewayUpdatedEvent extends Event {
   }
 }
 
-module.exports = SystemGatewayUpdatedEvent;
+module.exports = SystemGatewayUpdated;

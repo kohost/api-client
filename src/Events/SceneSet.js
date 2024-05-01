@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SceneSetEvent extends Event {
+class SceneSet extends Event {
   constructor(scene, context) {
     super(scene, context);
   }
@@ -14,4 +14,4 @@ class SceneSetEvent extends Event {
   }
 }
 
-module.exports = SceneSetEvent;
+module.exports = SceneSet;

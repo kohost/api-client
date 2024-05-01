@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SystemCategoryUpdatedEvent extends Event {
+class SystemCategoryUpdated extends Event {
   constructor(category, context) {
     super(category, context);
   }
@@ -14,4 +14,4 @@ class SystemCategoryUpdatedEvent extends Event {
   }
 }
 
-module.exports = SystemCategoryUpdatedEvent;
+module.exports = SystemCategoryUpdated;

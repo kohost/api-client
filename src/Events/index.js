@@ -1,67 +1,69 @@
-const SystemGatewayUpdatedEvent = require("./SystemGatewayUpdatedEvent");
-const SystemThermostatUpdatedEvent = require("./SystemThermostatUpdatedEvent");
-const SystemDimmerUpdatedEvent = require("./SystemDimmerUpdatedEvent");
-const SystemSwitchUpdatedEvent = require("./SystemSwitchUpdatedEvent");
-const SystemLockUpdatedEvent = require("./SystemLockUpdatedEvent");
-const SystemCameraUpdatedEvent = require("./SystemCameraUpdatedEvent");
-const SystemWindowCoveringUpdatedEvent = require("./SystemWindowCoveringUpdatedEvent");
-const SystemMediaSourceUpdatedEvent = require("./SystemMediaSourceUpdatedEvent");
-const SystemCourtesyUpdatedEvent = require("./SystemCourtesyUpdatedEvent");
-const SystemAlarmUpdatedEvent = require("./SystemAlarmUpdatedEvent");
-const SystemMotionSensorUpdatedEvent = require("./SystemMotionSensorUpdatedEvent");
-const SystemPropertyUpdatedEvent = require("./SystemPropertyUpdatedEvent");
-const SystemOrganizationUpdatedEvent = require("./SystemOrganizationUpdatedEvent");
-const SystemCredentialUpdatedEvent = require("./SystemCredentialUpdatedEvent");
+const Event = require("./Event");
+const SystemGatewayUpdated = require("./SystemGatewayUpdated");
+const SystemThermostatUpdated = require("./SystemThermostatUpdated");
+const SystemDimmerUpdated = require("./SystemDimmerUpdated");
+const SystemSwitchUpdated = require("./SystemSwitchUpdated");
+const SystemLockUpdated = require("./SystemLockUpdated");
+const SystemCameraUpdated = require("./SystemCameraUpdated");
+const SystemWindowCoveringUpdated = require("./SystemWindowCoveringUpdated");
+const SystemMediaSourceUpdated = require("./SystemMediaSourceUpdated");
+const SystemCourtesyUpdated = require("./SystemCourtesyUpdated");
+const SystemAlarmUpdated = require("./SystemAlarmUpdated");
+const SystemMotionSensorUpdated = require("./SystemMotionSensorUpdated");
+const SystemPropertyUpdated = require("./SystemPropertyUpdated");
+const SystemOrganizationUpdated = require("./SystemOrganizationUpdated");
+const SystemCredentialUpdated = require("./SystemCredentialUpdated");
 
-const SceneSetEvent = require("./SceneSetEvent");
+const SceneSetEvent = require("./SceneSet");
 
-const SystemUserUpdatedEvent = require("./SystemUserUpdatedEvent");
-const SystemSpaceUpdatedEvent = require("./SystemSpaceUpdatedEvent");
-const SystemCategoryUpdatedEvent = require("./SystemCategoryUpdatedEvent");
-const SystemProductUpdatedEvent = require("./SystemProductUpdatedEvent");
+const SystemUserUpdated = require("./SystemUserUpdated");
+const SystemSpaceUpdated = require("./SystemSpaceUpdated");
+const SystemCategoryUpdated = require("./SystemCategoryUpdated");
+const SystemProductUpdated = require("./SystemProductUpdated");
 
-const SystemReservationUpdatedEvent = require("./SystemReservationUpdatedEvent");
+const SystemReservationUpdated = require("./SystemReservationUpdated");
 
 const SMSEvent = require("./SMSEvent");
 const EmailEvent = require("./EmailEvent");
-const ShortLinkCreatedEvent = require("./ShortLinkCreatedEvent");
+const ShortLinkCreated = require("./ShortLinkCreated");
 
-const ApplicationInUseEvent = require("./ApplicationInUseEvent");
-const ApplicationOutOfUseEvent = require("./ApplicationOutOfUseEvent");
+const ApplicationInUse = require("./ApplicationInUse");
+const ApplicationOutOfUse = require("./ApplicationOutOfUse");
 
-const ReservationCheckInEvent = require("./ReservationCheckInEvent");
-const ReservationCheckOutEvent = require("./ReservationCheckOutEvent");
+const ReservationCheckedIn = require("./ReservationCheckedIn");
+const ReservationCheckedOut = require("./ReservationCheckedOut");
 
 // Delete Events
-const SystemEntityDeletedEvent = require("./SystemEntityDeletedEvent");
+const SystemEntityDeleted = require("./SystemEntityDeleted");
 
 module.exports = {
-  SystemAlarmUpdatedEvent,
-  SystemCredentialUpdatedEvent,
-  SystemGatewayUpdatedEvent,
-  SystemThermostatUpdatedEvent,
-  SystemDimmerUpdatedEvent,
-  SystemSwitchUpdatedEvent,
-  SystemLockUpdatedEvent,
-  SystemCameraUpdatedEvent,
-  SystemWindowCoveringUpdatedEvent,
-  SystemMediaSourceUpdatedEvent,
-  SystemMotionSensorUpdatedEvent,
-  SystemCourtesyUpdatedEvent,
-  SystemUserUpdatedEvent,
-  SystemSpaceUpdatedEvent,
-  SystemCategoryUpdatedEvent,
-  SystemProductUpdatedEvent,
-  SystemPropertyUpdatedEvent,
-  SystemOrganizationUpdatedEvent,
-  SystemReservationUpdatedEvent,
-  SystemEntityDeletedEvent,
+  Event,
+  SystemAlarmUpdated,
+  SystemCredentialUpdated,
+  SystemGatewayUpdated,
+  SystemThermostatUpdated,
+  SystemDimmerUpdated,
+  SystemSwitchUpdated,
+  SystemLockUpdated,
+  SystemCameraUpdated,
+  SystemWindowCoveringUpdated,
+  SystemMediaSourceUpdated,
+  SystemMotionSensorUpdated,
+  SystemCourtesyUpdated,
+  SystemUserUpdated,
+  SystemSpaceUpdated,
+  SystemCategoryUpdated,
+  SystemProductUpdated,
+  SystemPropertyUpdated,
+  SystemOrganizationUpdated,
+  SystemReservationUpdated,
+  SystemEntityDeleted,
   SceneSetEvent,
   SMSEvent,
   EmailEvent,
-  ShortLinkCreatedEvent,
-  ApplicationInUseEvent,
-  ApplicationOutOfUseEvent,
-  ReservationCheckInEvent,
-  ReservationCheckOutEvent,
+  ShortLinkCreated,
+  ApplicationInUse,
+  ApplicationOutOfUse,
+  ReservationCheckedIn,
+  ReservationCheckedOut,
 };

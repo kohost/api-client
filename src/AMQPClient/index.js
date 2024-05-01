@@ -1,6 +1,7 @@
 const Errors = require("../Errors");
 const amqp = require("amqplib");
 const crypto = require("crypto");
+const exchanges = require("../defs/amqpExchanges");
 const isFatalError = require("amqplib/lib/connection").isFatalError;
 const debug = require("debug")("kohost:amqp-client");
 
@@ -9,51 +10,6 @@ const HEADER_KEY_PROPERTY_ID = "X-Property-Id";
 const HEADER_KEY_DRIVER = "X-Driver";
 const HEADER_KEY_COMMAND_NAME = "X-Command-Name";
 const HEADER_KEY_EVENT_NAME = "X-Event-Name";
-
-const exchanges = {
-  // routes commands based on `command-name` header and in many cases `property-id` header
-  Commands: {
-    name: "kohost.commands",
-    type: "headers",
-    options: {
-      durable: true,
-    },
-  },
-  // routes events based on routing keys
-  DriverEvents: {
-    name: "kohost.events.drivers",
-    type: "topic",
-    options: {
-      durable: true,
-    },
-  },
-  AppEvents: {
-    name: "kohost.events.app",
-    type: "topic",
-    options: {
-      durable: true,
-    },
-  },
-  Direct: {
-    name: "kohost.direct",
-    type: "direct",
-    options: {
-      durable: true,
-    },
-  },
-  Replies: {
-    name: "kohost.replies",
-    type: "topic",
-    options: {
-      durable: true,
-    },
-  },
-  // dead letter exchange
-  dlx: {
-    name: "kohost.dlx",
-    type: "direct",
-  },
-};
 
 class KohostAMQPClient {
   static get Message() {

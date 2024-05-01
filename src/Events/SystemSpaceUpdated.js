@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SystemSpaceUpdatedEvent extends Event {
+class SystemSpaceUpdate extends Event {
   constructor(space, context) {
     super(space, context);
   }
@@ -14,4 +14,4 @@ class SystemSpaceUpdatedEvent extends Event {
   }
 }
 
-module.exports = SystemSpaceUpdatedEvent;
+module.exports = SystemSpaceUpdate;

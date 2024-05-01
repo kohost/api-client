@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SystemThermostatUpdatedEvent extends Event {
+class SystemThermostatUpdate extends Event {
   constructor(thermostat, context) {
     super(thermostat, context);
   }
@@ -14,4 +14,4 @@ class SystemThermostatUpdatedEvent extends Event {
   }
 }
 
-module.exports = SystemThermostatUpdatedEvent;
+module.exports = SystemThermostatUpdate;

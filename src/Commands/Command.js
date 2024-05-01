@@ -1,3 +1,5 @@
+const exchanges = require("../defs/amqpExchanges");
+
 class Command {
   constructor(data) {
     this.data = {};
@@ -23,7 +25,7 @@ class Command {
   }
 
   get exchange() {
-    return "Commands";
+    return exchanges.Commands.name;
   }
 
   build() {

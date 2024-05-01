@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SystemMotionSensorUpdatedEvent extends Event {
+class SystemMotionSensorUpdated extends Event {
   constructor(motion, context) {
     super(motion, context);
   }
@@ -14,4 +14,4 @@ class SystemMotionSensorUpdatedEvent extends Event {
   }
 }
 
-module.exports = SystemMotionSensorUpdatedEvent;
+module.exports = SystemMotionSensorUpdated;

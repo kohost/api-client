@@ -1,7 +1,7 @@
+const exchanges = require("../defs/amqpExchanges");
 const Event = require("./Event");
-const AMQPClient = require("../AMQPClient");
 
-class ApplicationOutOfUseEvent extends Event {
+class ApplicationOutOfUse extends Event {
   constructor(data = {}, context = {}) {
     super(data, context);
   }
@@ -15,8 +15,8 @@ class ApplicationOutOfUseEvent extends Event {
   }
 
   static get exchange() {
-    return AMQPClient.exchanges.AppEvents.name;
+    return exchanges.AppEvents.name;
   }
 }
 
-module.exports = ApplicationOutOfUseEvent;
+module.exports = ApplicationOutOfUse;

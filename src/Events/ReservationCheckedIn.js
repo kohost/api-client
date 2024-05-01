@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class ReservationCheckOutEvent extends Event {
+class ReservationCheckedIn extends Event {
   constructor(reservation, context) {
     super(reservation, context);
   }
@@ -14,4 +14,4 @@ class ReservationCheckOutEvent extends Event {
   }
 }
 
-module.exports = ReservationCheckOutEvent;
+module.exports = ReservationCheckedIn;

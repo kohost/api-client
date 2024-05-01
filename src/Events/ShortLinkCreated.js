@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class ShortLinkCreatedEvent extends Event {
+class ShortLinkCreated extends Event {
   constructor(shortLink, context) {
     super(shortLink, context);
   }
@@ -14,4 +14,4 @@ class ShortLinkCreatedEvent extends Event {
   }
 }
 
-module.exports = ShortLinkCreatedEvent;
+module.exports = ShortLinkCreated;

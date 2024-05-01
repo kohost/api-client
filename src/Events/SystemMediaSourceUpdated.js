@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SystemMediaSourceUpdatedEvent extends Event {
+class SystemMediaSourceUpdated extends Event {
   constructor(mediaSource, context) {
     super(mediaSource, context);
   }
@@ -14,4 +14,4 @@ class SystemMediaSourceUpdatedEvent extends Event {
   }
 }
 
-module.exports = SystemMediaSourceUpdatedEvent;
+module.exports = SystemMediaSourceUpdated;

@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SystemProductUpdatedEvent extends Event {
+class SystemProductUpdated extends Event {
   constructor(product, context) {
     super(product, context);
   }
@@ -14,4 +14,4 @@ class SystemProductUpdatedEvent extends Event {
   }
 }
 
-module.exports = SystemProductUpdatedEvent;
+module.exports = SystemProductUpdated;

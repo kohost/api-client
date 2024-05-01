@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SystemEntityDeletedEvent extends Event {
+class SystemEntityDeleted extends Event {
   constructor(data, context) {
     super(data, context);
   }
@@ -14,4 +14,4 @@ class SystemEntityDeletedEvent extends Event {
   }
 }
 
-module.exports = SystemEntityDeletedEvent;
+module.exports = SystemEntityDeleted;

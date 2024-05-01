@@ -1,6 +1,6 @@
 const Event = require("./Event");
 
-class SystemOrganizationUpdatedEvent extends Event {
+class SystemOrganizationUpdated extends Event {
   constructor(organization, context) {
     super(organization, context);
   }
@@ -14,4 +14,4 @@ class SystemOrganizationUpdatedEvent extends Event {
   }
 }
 
-module.exports = SystemOrganizationUpdatedEvent;
+module.exports = SystemOrganizationUpdated;
