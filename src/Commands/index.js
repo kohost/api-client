@@ -8,23 +8,23 @@ const SetLock = require("./SetLock");
 const SetWindowCovering = require("./SetWindowCovering");
 const SetCourtesy = require("./SetCourtesy");
 const SetMedia = require("./SetMedia");
-const DiscoverUsers = require("./DiscoverUsers");
+const GetUsers = require("./GetUsers");
 const OCRDocument = require("./OCRDocument");
 const CheckInReservation = require("./CheckInReservation");
 const CheckOutReservation = require("./CheckOutReservation");
 const SendEmail = require("./SendEmail");
 const SendSMS = require("./SendSMS");
-const DiscoverReservations = require("./DiscoverReservations");
-const DiscoverReservationSpaceCategoryAvailabilities = require("./DiscoverReservationSpaceCategoryAvailabilities");
-const DiscoverRooms = require("./DiscoverRooms");
-const DiscoverCategories = require("./DiscoverCategories");
+const GetReservations = require("./GetReservations");
+const GetReservationSpaceCategoryAvailabilities = require("./GetReservationSpaceCategoryAvailabilities");
+const GetRooms = require("./GetRooms");
+const GetCategories = require("./GetCategories");
 const CreateShortLink = require("./CreateShortLink");
 const UpdateReservation = require("./UpdateReservation");
 const UpdateUser = require("./UpdateUser");
 const GetMobileKey = require("./GetMobileKey");
 const CreateImageUploadEndpoint = require("./CreateImageUploadEndpoint");
 const UploadImage = require("./UploadImage");
-const DiscoverProducts = require("./DiscoverProducts");
+const GetProducts = require("./GetProducts");
 const SellProducts = require("./SellProducts");
 
 module.exports = {
@@ -39,21 +39,21 @@ module.exports = {
   SetCourtesy,
   SetMedia,
   OCRDocument,
-  DiscoverUsers,
+  GetUsers,
   CheckInReservation,
   CheckOutReservation,
   SendSMS,
   SendEmail,
-  DiscoverReservations,
-  DiscoverReservationSpaceCategoryAvailabilities,
-  DiscoverRooms,
-  DiscoverCategories,
+  GetReservations,
+  GetReservationSpaceCategoryAvailabilities,
+  GetRooms,
+  GetCategories,
   CreateShortLink,
   UpdateReservation,
   UpdateUser,
   GetMobileKey,
   CreateImageUploadEndpoint,
   UploadImage,
-  DiscoverProducts,
+  GetProducts,
   SellProducts,
 };

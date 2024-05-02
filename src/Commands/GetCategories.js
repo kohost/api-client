@@ -1,13 +1,13 @@
 const Command = require("./Command");
 
-class DiscoverUsers extends Command {
+class GetCategories extends Command {
   constructor({ id, ...rest }) {
     super({ id, ...rest });
   }
 
   get name() {
-    return "DiscoverUsers";
+    return "GetCategories";
   }
 }
 
-module.exports = DiscoverUsers;
+module.exports = GetCategories;

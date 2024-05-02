@@ -1,7 +1,7 @@
 const { RequestError } = require("../Errors");
 const Command = require("./Command");
 
-class DiscoverReservationsCommand extends Command {
+class GetReservations extends Command {
   constructor(options) {
     if (!options) throw new RequestError("options are required");
     const { id, startDate, endDate, status, ...rest } = options;
@@ -9,8 +9,8 @@ class DiscoverReservationsCommand extends Command {
   }
 
   get name() {
-    return "DiscoverReservations";
+    return "GetReservations";
   }
 }
 
-module.exports = DiscoverReservationsCommand;
+module.exports = GetReservations;

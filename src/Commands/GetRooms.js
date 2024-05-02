@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class DiscoverRooms extends Command {
+class GetRooms extends Command {
   constructor({
     id,
     types,
@@ -24,8 +24,8 @@ class DiscoverRooms extends Command {
   }
 
   get name() {
-    return "DiscoverRooms";
+    return "GetRooms";
   }
 }
 
-module.exports = DiscoverRooms;
+module.exports = GetRooms;
