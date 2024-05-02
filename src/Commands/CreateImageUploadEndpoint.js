@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class CreateImageUploadEndpointCommand extends Command {
+class CreateImageUploadEndpoint extends Command {
   constructor({ id, expires, ...rest }) {
     super({ id, expires, ...rest });
   }
@@ -8,10 +8,6 @@ class CreateImageUploadEndpointCommand extends Command {
   get name() {
     return "CreateImageUploadEndpoint";
   }
-
-  get routingKey() {
-    return "image.createUploadEndpoint";
-  }
 }
 
-module.exports = CreateImageUploadEndpointCommand;
+module.exports = CreateImageUploadEndpoint;

@@ -1,7 +1,7 @@
 const Command = require("./Command");
 const RequestError = require("../Errors/RequestError");
 
-class UpdateUserCommand extends Command {
+class UpdateUser extends Command {
   constructor({
     id,
     email,
@@ -32,10 +32,6 @@ class UpdateUserCommand extends Command {
   get name() {
     return "UpdateUser";
   }
-
-  get routingKey() {
-    return `user.${this.data.id}.update`;
-  }
 }
 
-module.exports = UpdateUserCommand;
+module.exports = UpdateUser;

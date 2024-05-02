@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class SetAlarmCommand extends Command {
+class SetAlarm extends Command {
   constructor({ id, zones, areas, code, ...rest }) {
     super({ id, zones, areas, code, ...rest });
   }
@@ -8,10 +8,6 @@ class SetAlarmCommand extends Command {
   get name() {
     return "SetAlarm";
   }
-
-  get routingKey() {
-    return `alarm.${this.data.id}.set`;
-  }
 }
 
-module.exports = SetAlarmCommand;
+module.exports = SetAlarm;

@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class SetDimmerCommand extends Command {
+class SetDimmer extends Command {
   constructor({ id, level, ...rest }) {
     super({ id, level, ...rest });
   }
@@ -8,10 +8,6 @@ class SetDimmerCommand extends Command {
   get name() {
     return "SetDimmer";
   }
-
-  get routingKey() {
-    return `dimmer.${this.data.id}.set`;
-  }
 }
 
-module.exports = SetDimmerCommand;
+module.exports = SetDimmer;

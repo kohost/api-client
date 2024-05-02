@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class SetSceneCommand extends Command {
+class SetScene extends Command {
   constructor({ id, devices, ...rest }) {
     super({ id, devices, ...rest });
   }
@@ -8,10 +8,6 @@ class SetSceneCommand extends Command {
   get name() {
     return "SetScene";
   }
-
-  get routingKey() {
-    return `scene.${this.data.id}.set`;
-  }
 }
 
-module.exports = SetSceneCommand;
+module.exports = SetScene;

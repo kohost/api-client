@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class SetWindowCoveringCommand extends Command {
+class SetWindowCovering extends Command {
   constructor({ id, position, ...rest }) {
     super({ id, position, ...rest });
   }
@@ -8,10 +8,6 @@ class SetWindowCoveringCommand extends Command {
   get name() {
     return "SetWindowCovering";
   }
-
-  get routingKey() {
-    return `windowCovering.${this.data.id}.set`;
-  }
 }
 
-module.exports = SetWindowCoveringCommand;
+module.exports = SetWindowCovering;

@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class SetSwitchCommand extends Command {
+class SetSwitch extends Command {
   constructor({ id, state, ...rest }) {
     super({ id, state, ...rest });
   }
@@ -8,10 +8,6 @@ class SetSwitchCommand extends Command {
   get name() {
     return "SetSwitch";
   }
-
-  get routingKey() {
-    return `switch.${this.data.id}.set`;
-  }
 }
 
-module.exports = SetSwitchCommand;
+module.exports = SetSwitch;

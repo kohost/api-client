@@ -20,10 +20,6 @@ class Command {
     return "Command";
   }
 
-  get routingKey() {
-    return "";
-  }
-
   get exchange() {
     return exchanges.Commands.name;
   }

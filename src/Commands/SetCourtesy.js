@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class SetCourtesyCommand extends Command {
+class SetCourtesy extends Command {
   constructor({ id, state, ...rest }) {
     super({ id, state, ...rest });
   }
@@ -8,10 +8,6 @@ class SetCourtesyCommand extends Command {
   get name() {
     return "SetCourtesy";
   }
-
-  get routingKey() {
-    return `courtesy.${this.data.id}.set`;
-  }
 }
 
-module.exports = SetCourtesyCommand;
+module.exports = SetCourtesy;

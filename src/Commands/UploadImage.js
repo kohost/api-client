@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class UploadImageCommand extends Command {
+class UploadImage extends Command {
   constructor({ id, url, file, ...rest }) {
     super({ id, url, file, ...rest });
   }
@@ -8,10 +8,6 @@ class UploadImageCommand extends Command {
   get name() {
     return "UploadImage";
   }
-
-  get routingKey() {
-    return `image.${this.data.id}.upload`;
-  }
 }
 
-module.exports = UploadImageCommand;
+module.exports = UploadImage;

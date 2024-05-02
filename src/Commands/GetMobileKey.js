@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class GetMobileKeyCommand extends Command {
+class GetMobileKey extends Command {
   constructor({
     id,
     phone,
@@ -15,10 +15,6 @@ class GetMobileKeyCommand extends Command {
   get name() {
     return "GetMobileKey";
   }
-
-  get routingKey() {
-    return `lock.${this.data.id}.set`;
-  }
 }
 
-module.exports = GetMobileKeyCommand;
+module.exports = GetMobileKey;

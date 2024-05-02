@@ -7,6 +7,13 @@ const exchanges = {
       durable: true,
     },
   },
+  CommandResponses: {
+    name: "kohost.commands.responses",
+    type: "topic",
+    options: {
+      durable: true,
+    },
+  },
   // routes events based on routing keys
   DriverEvents: {
     name: "kohost.events.drivers",
@@ -25,13 +32,6 @@ const exchanges = {
   Direct: {
     name: "kohost.direct",
     type: "direct",
-    options: {
-      durable: true,
-    },
-  },
-  Replies: {
-    name: "kohost.replies",
-    type: "topic",
     options: {
       durable: true,
     },

@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class DiscoverRoomsCommand extends Command {
+class DiscoverRooms extends Command {
   constructor({
     id,
     types,
@@ -26,12 +26,6 @@ class DiscoverRoomsCommand extends Command {
   get name() {
     return "DiscoverRooms";
   }
-
-  get routingKey() {
-    if (typeof this.data.id === "string") return `rooms.${this.data.id}.get`;
-    if (Array.isArray(this.data.id)) return "rooms.batch.get";
-    return "rooms.get";
-  }
 }
 
-module.exports = DiscoverRoomsCommand;
+module.exports = DiscoverRooms;

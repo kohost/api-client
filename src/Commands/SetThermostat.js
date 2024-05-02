@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class SetThermostatCommand extends Command {
+class SetThermostat extends Command {
   constructor({ id, setpoints, hvacMode, fanMode, ...rest }) {
     super({ id, setpoints, hvacMode, fanMode, ...rest });
   }
@@ -8,10 +8,6 @@ class SetThermostatCommand extends Command {
   get name() {
     return "SetThermostat";
   }
-
-  get routingKey() {
-    return `thermostat.${this.data.id}.set`;
-  }
 }
 
-module.exports = SetThermostatCommand;
+module.exports = SetThermostat;

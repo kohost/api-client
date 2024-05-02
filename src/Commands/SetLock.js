@@ -1,6 +1,6 @@
 const Command = require("./Command");
 
-class SetLockCommand extends Command {
+class SetLock extends Command {
   constructor({ id, state, ...rest }) {
     super({ id, state, ...rest });
   }
@@ -8,10 +8,6 @@ class SetLockCommand extends Command {
   get name() {
     return "SetLock";
   }
-
-  get routingKey() {
-    return `lock.${this.data.id}.set`;
-  }
 }
 
-module.exports = SetLockCommand;
+module.exports = SetLock;

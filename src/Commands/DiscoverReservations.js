@@ -11,10 +11,6 @@ class DiscoverReservationsCommand extends Command {
   get name() {
     return "DiscoverReservations";
   }
-
-  get routingKey() {
-    return "reservation.discover";
-  }
 }
 
 module.exports = DiscoverReservationsCommand;

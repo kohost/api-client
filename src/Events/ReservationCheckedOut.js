@@ -6,7 +6,7 @@ class ReservationCheckedOut extends Event {
   }
 
   static get name() {
-    return "ReservationCheckedIn";
+    return "ReservationCheckedOut";
   }
 
   static get entity() {

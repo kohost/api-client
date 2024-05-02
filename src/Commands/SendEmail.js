@@ -1,7 +1,7 @@
 const Command = require("./Command");
 const RequestError = require("../Errors/RequestError");
 
-class SendEmailCommand extends Command {
+class SendEmail extends Command {
   constructor({ text, html, to, from, subject, ...rest }) {
     if (!to) throw new RequestError("email to is required");
     if (!from) throw new RequestError("email from is required");
@@ -15,10 +15,6 @@ class SendEmailCommand extends Command {
   get name() {
     return "SendEmail";
   }
-
-  get routingKey() {
-    return "comm.email.send";
-  }
 }
 
-module.exports = SendEmailCommand;
+module.exports = SendEmail;

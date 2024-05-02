@@ -1,7 +1,7 @@
 const Command = require("./Command");
 const RequestError = require("../Errors/RequestError");
 
-class OCRDocumentCommand extends Command {
+class OCRDocument extends Command {
   constructor({ type, image, ...rest }) {
     if (!image) throw new RequestError("document image is required");
     super({ type, image, ...rest });
@@ -12,4 +12,4 @@ class OCRDocumentCommand extends Command {
   }
 }
 
-module.exports = OCRDocumentCommand;
+module.exports = OCRDocument;

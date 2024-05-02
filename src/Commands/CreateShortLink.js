@@ -11,10 +11,6 @@ class CreateShortLinkCommand extends Command {
   get name() {
     return "CreateShortLink";
   }
-
-  get routingKey() {
-    return "comm.shortlink.create";
-  }
 }
 
 module.exports = CreateShortLinkCommand;

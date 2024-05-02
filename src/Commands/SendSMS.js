@@ -1,7 +1,7 @@
 const Command = require("./Command");
 const RequestError = require("../Errors/RequestError");
 
-class SendSMSCommand extends Command {
+class SendSMS extends Command {
   constructor({ id, body, to, from, media, ...rest }) {
     if (!body && !media)
       throw new RequestError("sms body or media is required");
@@ -13,10 +13,6 @@ class SendSMSCommand extends Command {
   get name() {
     return "SendSMS";
   }
-
-  get routingKey() {
-    return "comm.sms.send";
-  }
 }
 
-module.exports = SendSMSCommand;
+module.exports = SendSMS;

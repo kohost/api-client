@@ -1,7 +1,7 @@
 const Command = require("./Command");
 const RequestError = require("../Errors/RequestError");
 
-class CheckInReservationCommand extends Command {
+class CheckInReservation extends Command {
   constructor({ id, ...rest }) {
     if (!id) throw new RequestError("reservation id is required");
     super({ id, ...rest });
@@ -10,10 +10,6 @@ class CheckInReservationCommand extends Command {
   get name() {
     return "CheckInReservation";
   }
-
-  get routingKey() {
-    return `reservation.${this.data.id}.checkin`;
-  }
 }
 
-module.exports = CheckInReservationCommand;
+module.exports = CheckInReservation;
