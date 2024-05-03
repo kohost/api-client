@@ -29,7 +29,7 @@ class Event {
   }
 
   static get entity() {
-    throw new Error("Event entity is required");
+    return "";
   }
 
   build() {

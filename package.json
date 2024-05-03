@@ -19,7 +19,8 @@
     "build": "node scripts/build.js",
     "build:watch": "node scripts/build.js --watch",
     "start": "node scripts/build.js --watch",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "tsc": "tsc"
   },
   "files": [
     "dist",
@@ -27,6 +28,7 @@
   ],
   "devDependencies": {
     "@kohost/eslint-config": "^1.0.0",
+    "dts-gen": "^0.10.2",
     "esbuild": "^0.20.1",
     "eslint": "^8.6.0",
     "eslint-plugin-jest": "^27.1.3",
