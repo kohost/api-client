@@ -13,8 +13,8 @@ const { compileFromFile } = require("json-schema-to-typescript");
 const useCases = require("../src/useCases/http.json");
 const useCaseMap = new Map(useCases);
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist/cjs/schemas"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist/cjs/schemas"), {
+if (!fs.existsSync(path.resolve(__dirname, "../dist/cjs"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist/cjs"), {
     recursive: true,
   });
 }
@@ -23,8 +23,10 @@ if (!fs.existsSync(path.resolve(__dirname, "../dist/esm"))) {
   fs.mkdirSync(path.resolve(__dirname, "../dist/esm"), { recursive: true });
 }
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist/schemas"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist/schemas"), { recursive: true });
+if (!fs.existsSync(path.resolve(__dirname, "../dist/types/schemas"))) {
+  fs.mkdirSync(path.resolve(__dirname, "../dist/types/schemas"), {
+    recursive: true,
+  });
 }
 
 async function copyFilesToDistCjs(srcDir, distCjsDir, ignoredFolders = []) {
@@ -250,7 +252,10 @@ async function build() {
         const typeNameUpper =
           typeName.charAt(0).toUpperCase() + typeName.slice(1) + "Schema";
         fs.writeFileSync(
-          path.resolve(__dirname, `../dist/cjs/schemas/${typeNameUpper}.d.ts`),
+          path.resolve(
+            __dirname,
+            `../dist/types/schemas/${typeNameUpper}.d.ts`
+          ),
           ts
         );
       })
