@@ -1,57 +1,59 @@
-const SetSceneCommand = require("./SetSceneCommand");
-const SetAlarmCommand = require("./SetAlarmCommand");
-const SetDimmerCommand = require("./SetDimmerCommand");
-const SetSwitchCommand = require("./SetSwitchCommand");
-const SetThermostatCommand = require("./SetThermostatCommand");
-const SetLockCommand = require("./SetLockCommand");
-const SetWindowCoveringCommand = require("./SetWindowCoveringCommand");
-const SetCourtesyCommand = require("./SetCourtesyCommand");
-const SetMediaCommand = require("./SetMediaCommand");
-const DiscoverUsersCommand = require("./DiscoverUsersCommand");
-const OCRDocumentCommand = require("./OCRDocumentCommand");
-const CheckInReservationCommand = require("./CheckInReservationCommand");
-const CheckOutReservationCommand = require("./CheckOutReservationCommand");
-const SendEmailCommand = require("./SendEmailCommand");
-const SendSMSCommand = require("./SendSMSCommand");
-const DiscoverReservationsCommand = require("./DiscoverReservationsCommand");
-const DiscoverReservationSpaceCategoryAvailabilitiesCommand = require("./DiscoverReservationSpaceCategoryAvailabilitiesCommand");
-const DiscoverRoomsCommand = require("./DiscoverRoomsCommand");
-const DiscoverCategoriesCommand = require("./DiscoverCategoriesCommand");
-const CreateShortLinkCommand = require("./CreateShortLinkCommand");
-const UpdateReservationCommand = require("./UpdateReservationCommand");
-const UpdateUserCommand = require("./UpdateUserCommand");
-const GetMobileKeyCommand = require("./GetMobileKeyCommand");
-const CreateImageUploadEndpointCommand = require("./CreateImageUploadEndpointCommand");
-const UploadImageCommand = require("./UploadImageCommand");
-const DiscoverProductsCommand = require("./DiscoverProductsCommand");
-const SellProductsCommand = require("./SellProductsCommand");
+const Command = require("./Command");
+const SetScene = require("./SetScene");
+const SetAlarm = require("./SetAlarm");
+const SetDimmer = require("./SetDimmer");
+const SetSwitch = require("./SetSwitch");
+const SetThermostat = require("./SetThermostat");
+const SetLock = require("./SetLock");
+const SetWindowCovering = require("./SetWindowCovering");
+const SetCourtesy = require("./SetCourtesy");
+const SetMedia = require("./SetMedia");
+const GetUsers = require("./GetUsers");
+const OCRDocument = require("./OCRDocument");
+const CheckInReservation = require("./CheckInReservation");
+const CheckOutReservation = require("./CheckOutReservation");
+const SendEmail = require("./SendEmail");
+const SendSMS = require("./SendSMS");
+const GetReservations = require("./GetReservations");
+const GetReservationSpaceCategoryAvailabilities = require("./GetReservationSpaceCategoryAvailabilities");
+const GetRooms = require("./GetRooms");
+const GetCategories = require("./GetCategories");
+const CreateShortLink = require("./CreateShortLink");
+const UpdateReservation = require("./UpdateReservation");
+const UpdateUser = require("./UpdateUser");
+const GetMobileKey = require("./GetMobileKey");
+const CreateImageUploadEndpoint = require("./CreateImageUploadEndpoint");
+const UploadImage = require("./UploadImage");
+const GetProducts = require("./GetProducts");
+const SellProducts = require("./SellProducts");
 
 module.exports = {
-  SetSceneCommand,
-  SetAlarmCommand,
-  SetDimmerCommand,
-  SetSwitchCommand,
-  SetThermostatCommand,
-  SetLockCommand,
-  SetWindowCoveringCommand,
-  SetCourtesyCommand,
-  SetMediaCommand,
-  OCRDocumentCommand,
-  DiscoverUsersCommand,
-  CheckInReservationCommand,
-  CheckOutReservationCommand,
-  SendSMSCommand,
-  SendEmailCommand,
-  DiscoverReservationsCommand,
-  DiscoverReservationSpaceCategoryAvailabilitiesCommand,
-  DiscoverRoomsCommand,
-  DiscoverCategoriesCommand,
-  CreateShortLinkCommand,
-  UpdateReservationCommand,
-  UpdateUserCommand,
-  GetMobileKeyCommand,
-  CreateImageUploadEndpointCommand,
-  UploadImageCommand,
-  DiscoverProductsCommand,
-  SellProductsCommand,
+  Command,
+  SetScene,
+  SetAlarm,
+  SetDimmer,
+  SetSwitch,
+  SetThermostat,
+  SetLock,
+  SetWindowCovering,
+  SetCourtesy,
+  SetMedia,
+  OCRDocument,
+  GetUsers,
+  CheckInReservation,
+  CheckOutReservation,
+  SendSMS,
+  SendEmail,
+  GetReservations,
+  GetReservationSpaceCategoryAvailabilities,
+  GetRooms,
+  GetCategories,
+  CreateShortLink,
+  UpdateReservation,
+  UpdateUser,
+  GetMobileKey,
+  CreateImageUploadEndpoint,
+  UploadImage,
+  GetProducts,
+  SellProducts,
 };

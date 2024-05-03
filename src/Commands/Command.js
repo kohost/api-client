@@ -1,3 +1,5 @@
+const exchanges = require("../defs/amqpExchanges");
+
 class Command {
   constructor(data) {
     this.data = {};
@@ -14,16 +16,12 @@ class Command {
     throw new Error("Command name is required");
   }
 
-  get type() {
+  static get type() {
     return "Command";
   }
 
-  get routingKey() {
-    return "";
-  }
-
-  get exchange() {
-    return "Commands";
+  static get exchange() {
+    return exchanges.Commands.name;
   }
 
   build() {

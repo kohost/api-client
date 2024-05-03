@@ -1,54 +1,43 @@
+const exchanges = require("../defs/amqpExchanges");
+
 class Event {
-  constructor(data, context) {
+  constructor(data, context = {}) {
     this.data = [];
-    this.context = {};
+    this.context = context;
     if (!data) throw new Error("Event data is required");
     if (typeof data !== "object" && !Array.isArray(data))
       throw new Error("Event data must be an object or array");
 
     if (!Array.isArray(data)) this.data = [data];
     else this.data = data;
-
-    this.data = this.data.map((d) => {
-      if (d.eventData) {
-        if (!d.eventData.timestamp) d.eventData.timestamp = new Date();
-        if (!d.eventData.name) d.eventData.name = this.name;
-        if (!d.eventData.type) d.eventData.type = this.type;
-      }
-      return d;
-    });
-
-    if (context) {
-      for (const key in context) {
-        this.context[key] = context[key];
-      }
-    }
   }
 
-  get keyId() {
-    if (Array.isArray(this.data)) return "batch";
-    if (this.data.id) return this.data.id;
-    return "unknown";
+  get organizationId() {
+    return this.context.organizationId || "*";
   }
 
-  get name() {
-    throw new Error("Event name is required");
+  get propertyId() {
+    return this.context.propertyId || "*";
   }
 
-  get type() {
+  static get type() {
     return "Event";
   }
 
-  get routingKey() {
-    return "";
+  static get exchange() {
+    return exchanges.DriverEvents.name;
   }
 
-  get exchange() {
-    return "DriverEvents";
+  static get entity() {
+    throw new Error("Event entity is required");
   }
 
   build() {
     return { data: { ...this.data } };
+  }
+
+  get routingKey() {
+    return `${this.organizationId}.${this.propertyId}.${this.constructor.entity}.${this.constructor.name}`;
   }
 }
 
