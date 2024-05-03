@@ -8,7 +8,7 @@ const exchanges = {
     },
   },
   CommandResponses: {
-    name: "kohost.commands.responses",
+    name: "kohost.commandResponses",
     type: "topic",
     options: {
       durable: true,

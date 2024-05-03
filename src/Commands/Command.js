@@ -16,11 +16,11 @@ class Command {
     throw new Error("Command name is required");
   }
 
-  get type() {
+  static get type() {
     return "Command";
   }
 
-  get exchange() {
+  static get exchange() {
     return exchanges.Commands.name;
   }
 
