@@ -32,6 +32,7 @@ const ApplicationOutOfUse = require("./ApplicationOutOfUse");
 
 const ReservationCheckedIn = require("./ReservationCheckedIn");
 const ReservationCheckedOut = require("./ReservationCheckedOut");
+const ReservationSpaceChanged = require("./ReservationSpaceChanged");
 
 // Delete Events
 const SystemEntityDeleted = require("./SystemEntityDeleted");
@@ -66,4 +67,5 @@ module.exports = {
   ApplicationOutOfUse,
   ReservationCheckedIn,
   ReservationCheckedOut,
+  ReservationSpaceChanged,
 };
