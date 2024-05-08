@@ -42,7 +42,14 @@
     },
     "remote": {
       "type": "string",
-      "enum": ["MR22GA", "XRT260", "XRT270", "HOF-16K 1.2", "219863500"]
+      "enum": [
+        "MR22GA",
+        "XRT260",
+        "XRT270",
+        "HOF-16K 1.2",
+        "219863500",
+        "SONIFI"
+      ]
     },
     "name": {
       "$ref": "definitions.json#/definitions/name"
