@@ -1,4 +1,5 @@
 const Event = require("./Event");
+const exchanges = require("../defs/amqpExchanges");
 
 class ReservationSpaceChanged extends Event {
   constructor(reservation, context) {
@@ -11,6 +12,10 @@ class ReservationSpaceChanged extends Event {
 
   static get entity() {
     return "reservation";
+  }
+
+  static get exchange() {
+    return exchanges.AppEvents.name;
   }
 }
 
