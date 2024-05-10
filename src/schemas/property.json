@@ -25,7 +25,12 @@
       "type": ["string", "null"],
       "description": "Reference (id) to the organization that owns this property"
     },
-    "testModeEnabled": {
+    "departments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "testModeEnabled": {
       "type": "boolean"
     },
     "testMode": {
@@ -279,8 +284,7 @@
             }
           }
         },
-        "Elevator": {},
-        "Experiences": {},
+        "Elevator": {}, "Experiences": {},
         "Dining": {
           "type": "object",
           "properties": {
