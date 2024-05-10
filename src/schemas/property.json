@@ -29,8 +29,9 @@
       "type": "array",
       "items": {
         "type": "string"
-      },
-      "testModeEnabled": {
+      }
+    },
+    "testModeEnabled": {
       "type": "boolean"
     },
     "testMode": {
@@ -284,7 +285,8 @@
             }
           }
         },
-        "Elevator": {}, "Experiences": {},
+        "Elevator": {},
+        "Experiences": {},
         "Dining": {
           "type": "object",
           "properties": {
