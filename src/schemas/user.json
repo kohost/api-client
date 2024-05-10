@@ -82,6 +82,10 @@
               "SuperAdmin"
             ]
           },
+          "department": {
+            "type": "string",
+            "description": "The department the user belongs to."
+          },
           "policyIds": {
             "type": "array",
             "items": {
