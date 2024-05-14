@@ -169,6 +169,9 @@
     "tipAmount": {
       "type": "string"
     },
+    "autoCloseAt": {
+      "$ref": "definitions.json#/definitions/date"
+    },
     "scheduleDate": {
       "$ref": "definitions.json#/definitions/date"
     },

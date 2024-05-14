@@ -4,7 +4,14 @@
   "title": "Property",
   "type": "object",
   "description": "A property is a physical asset or building",
-  "required": ["id", "name", "type", "organization"],
+  "required": [
+    "id",
+    "name",
+    "type",
+    "organization",
+    "timezone",
+    "discriminator"
+  ],
   "properties": {
     "id": {
       "$ref": "definitions.json#/definitions/id"
@@ -54,7 +61,10 @@
       }
     },
     "timezone": {
-      "type": "string"
+      "type": "string",
+      "description": "IANA timezone string",
+      "pattern": "^([a-zA-Z]+/[a-zA-Z_]+)$",
+      "examples": ["America/New_York", "America/Los_Angeles"]
     },
     "smsNumber": {
       "type": "string"
