@@ -98,7 +98,13 @@
         "type": "string"
       }
     },
-    "command": {
+    "supportedOutputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+   "command": {
       "type": ["string", "null"],
       "enum": [
         "mute",
