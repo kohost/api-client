@@ -85,6 +85,11 @@
       "minimum": 0,
       "maximum": 100
     },
+    "contrast": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
     "power": {
       "type": "string",
       "enum": ["on", "off"]
@@ -156,6 +161,7 @@
         "enterChannel",
         "enterVolume",
         "enterBrightness",
+        "enterContrast",
         "number10",
         "number11",
         "number12",
