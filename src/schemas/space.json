@@ -28,7 +28,8 @@
         "lobby",
         "gym",
         "pool",
-        "restaurant"
+        "restaurant",
+        "unit"
       ]
     },
     "driver": {
