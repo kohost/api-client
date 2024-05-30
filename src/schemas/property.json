@@ -26,7 +26,7 @@
     },
     "discriminator": {
       "type": "string",
-      "enum": ["hospitality", "education", "commercial"]
+      "enum": ["hospitality", "education", "commercial", "storage"]
     },
     "organization": {
       "type": ["string", "null"],
@@ -204,6 +204,27 @@
             "tipping": {
               "type": "boolean",
               "default": false
+            },
+            "quickServices": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "$ref": "mediaFile.json"
+                  }
+                },
+                "required": ["name", "description", "image"]
+              }
             }
           }
         },
