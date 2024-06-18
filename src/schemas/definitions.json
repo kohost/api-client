@@ -178,7 +178,9 @@
           "outsideSafeHumidityRange",
           "scheduleMaintenance",
           "doorAjar",
-          "communicationFailure"
+          "communicationFailure",
+          "burglarAlarm",
+          "fireAlarm"
         ]
       }
     },
