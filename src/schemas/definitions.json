@@ -166,6 +166,7 @@
           "acMainsReconnected",
           "replaceBatterySoon",
           "replaceBatteryNow",
+          "batteryOk",
           "hardwareFailure",
           "softwareFailure",
           "hardwareFailureWithCode",
