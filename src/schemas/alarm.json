@@ -70,6 +70,10 @@
         "additionalProperties": false
       }
     },
+    "chime": {
+      "type": "boolean",
+      "description": "Reflects whether console chime is enabled"
+    },
     "watts": {
       "$ref": "definitions.json#/definitions/watts"
     },
