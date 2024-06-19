@@ -180,6 +180,7 @@
           "scheduleMaintenance",
           "doorAjar",
           "communicationFailure",
+          "communicationOk",
           "burglarAlarm",
           "fireAlarm"
         ]
