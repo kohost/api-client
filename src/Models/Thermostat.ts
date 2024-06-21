@@ -255,6 +255,7 @@ export const thermostatSchema = {
     },
     type: {
       $ref: "definitions.json#/definitions/type",
+      enum: ["thermostat"],
       default: "thermostat",
     },
     driver: {
@@ -399,6 +400,7 @@ export type Thermostat = FromSchema<
 const tstat: Thermostat = {
   id: "123",
   name: "My Thermostat",
+  type: "thermostat",
   setpoints: {
     cool: {
       max: 75,
@@ -416,4 +418,50 @@ const tstat: Thermostat = {
       value: 70,
     },
   },
+  supportedHvacModes: [],
+  hvacMode: "off",
+  fanMode: "off",
+  hvacState: null,
+  fanState: null,
+  temperatureScale: "celsius",
+  supportedFanModes: [],
+  driver: "ecobee",
+  minAutoDelta: 0,
 };
+
+interface AnySchemaProperties<S> {
+  [key: string]: S[keyof S];
+}
+
+interface ValidateableEntity {
+  validator(data: any): boolean;
+}
+
+type ClassArg = string | number | symbol;
+
+export abstract class Entity<Schema extends Record<string, any>>
+  implements ValidateableEntity
+{
+  constructor(data: Schema) {
+    this.validator(data);
+    Object.assign(this, data);
+  }
+  abstract validator(data: Schema): boolean;
+  static validProperties: string[];
+}
+
+class ThermostatModel extends Entity<Thermostat> {
+  validator(data: Thermostat) {
+    if (data.hvacMode === "off" && data.hvacState !== null) {
+      throw new Error("Invalid state");
+    }
+    return true;
+  }
+  constructor(tstatData: Thermostat) {
+    super(tstatData);
+  }
+}
+
+const model = new ThermostatModel(tstat);
+
+model.id = "456";
