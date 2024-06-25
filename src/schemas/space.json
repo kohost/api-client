@@ -59,7 +59,8 @@
       "additionalProperties": false,
       "default": {
         "active": false,
-        "allowed": false
+        "allowed": false,
+        "previousState": null
       },
       "properties": {
         "active": {
@@ -73,6 +74,25 @@
         "allowed": {
           "type": "boolean",
           "default": false
+        },
+        "previousState": {
+          "type": ["object", "null"],
+          "properties": {
+            "thermostats": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "object",
+                  "properties": {
+                    "setpoints": {
+                      "$ref": "thermostat.json#/properties/setpoints"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "additionalProperties": false
         }
       }
     },
