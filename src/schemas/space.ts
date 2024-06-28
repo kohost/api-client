@@ -42,7 +42,16 @@ export const spaceSchema = {
     rooms: {
       type: "array",
       items: {
-        type: "string",
+        oneOf: [
+          {
+            $ref: "room.json",
+            description: "Array of room objects",
+          },
+          {
+            type: "string",
+            description: "Array of room ids",
+          },
+        ],
       },
     },
     subGroups: {
@@ -129,4 +138,5 @@ export const spaceSchema = {
   else: {
     required: ["name", "type"],
   },
+  additionalProperties: false,
 } as const;

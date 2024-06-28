@@ -59,4 +59,5 @@ export const smsMessageSchema = {
       $ref: "definitions.json#/definitions/systemId",
     },
   },
+  additionalProperties: false,
 } as const;

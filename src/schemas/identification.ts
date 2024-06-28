@@ -3,13 +3,12 @@ export const identificationSchema = {
   $id: "identification.json",
   title: "Identification",
   type: "object",
-  required: ["type"],
   oneOf: [
     {
-      required: ["number"],
+      required: ["type", "number"],
     },
     {
-      required: ["encryptedNumber"],
+      required: ["type", "encryptedNumber"],
     },
   ],
   properties: {
@@ -21,13 +20,13 @@ export const identificationSchema = {
       enum: ["driversLicense", "passport", "identityCard", "visa"],
     },
     number: {
-      string: "string",
+      type: "string",
     },
     maskedNumber: {
-      string: "string",
+      type: "string",
     },
     encryptedNumber: {
-      string: "string",
+      type: "string",
     },
     issued: {
       type: ["string", "object"],
@@ -50,7 +49,7 @@ export const identificationSchema = {
       type: "string",
     },
     issuingCountry: {
-      string: "string",
+      type: "string",
       minLength: 2,
       maxLength: 2,
     },
@@ -58,4 +57,5 @@ export const identificationSchema = {
       $ref: "definitions.json#/definitions/systemId",
     },
   },
+  additionalProperties: false,
 } as const;

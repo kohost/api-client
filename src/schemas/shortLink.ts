@@ -28,4 +28,5 @@ export const shortLinkSchema = {
       $ref: "definitions.json#/definitions/systemId",
     },
   },
+  additionalProperties: false,
 } as const;

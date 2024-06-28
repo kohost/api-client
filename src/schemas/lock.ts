@@ -48,4 +48,5 @@ export const lockSchema = {
     },
   },
   required: ["id", "type", "state", "driver"],
+  additionalProperties: false,
 } as const;

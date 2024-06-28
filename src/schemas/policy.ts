@@ -60,4 +60,5 @@ export const policySchema = {
       },
     },
   },
+  additionalProperties: false,
 } as const;

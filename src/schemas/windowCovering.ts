@@ -45,4 +45,5 @@ export const windowCoveringSchema = {
     },
   },
   required: ["id", "type", "position", "driver"],
+  additionalProperties: false,
 } as const;

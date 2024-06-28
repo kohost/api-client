@@ -188,4 +188,5 @@ export const userSchema = {
       },
     },
   },
+  additionalProperties: false,
 } as const;

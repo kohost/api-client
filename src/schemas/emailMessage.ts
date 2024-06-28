@@ -69,4 +69,5 @@ export const emailMessageSchema = {
       $ref: "definitions.json#/definitions/systemId",
     },
   },
+  additionalProperties: false,
 } as const;

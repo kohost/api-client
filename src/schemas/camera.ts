@@ -12,7 +12,8 @@ export const cameraSchema = {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["camera"],
       default: "camera",
     },
     offline: {

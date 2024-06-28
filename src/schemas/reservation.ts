@@ -138,10 +138,11 @@ export const reservationSchema = {
       $ref: "definitions.json#/definitions/systemId",
     },
     metadata: {
-      ref: "definitions.json#/definitions/metadata",
+      $ref: "definitions.json#/definitions/metadata",
     },
     updatedAt: {
       $ref: "definitions.json#/definitions/updatedAt",
     },
   },
+  additionalProperties: false,
 } as const;

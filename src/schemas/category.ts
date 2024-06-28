@@ -10,6 +10,7 @@ export const categorySchema = {
     },
     type: {
       type: "string",
+      enum: ["category"],
       default: "category",
     },
     name: {
@@ -39,4 +40,5 @@ export const categorySchema = {
       $ref: "definitions.json#/definitions/systemId",
     },
   },
+  additionalProperties: false,
 } as const;

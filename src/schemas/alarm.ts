@@ -15,7 +15,9 @@ export const alarmSchema = {
       type: "boolean",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["alarm"],
+      default: "alarm",
     },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
@@ -81,5 +83,6 @@ export const alarmSchema = {
       $ref: "definitions.json#/definitions/address",
     },
   },
+  additionalProperties: false,
   required: ["id", "type", "areas", "zones", "driver"],
 } as const;

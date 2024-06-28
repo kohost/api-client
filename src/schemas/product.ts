@@ -20,7 +20,7 @@ export const productSchema = {
       $ref: "definitions.json#/definitions/driver",
     },
     description: {
-      string: "string",
+      type: "string",
     },
     price: {
       type: "number",
@@ -42,4 +42,5 @@ export const productSchema = {
       $ref: "definitions.json#/definitions/systemId",
     },
   },
+  additionalProperties: false,
 } as const;

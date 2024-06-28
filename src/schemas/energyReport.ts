@@ -83,4 +83,5 @@ export const energyReportSchema = {
       minimum: 0,
     },
   },
+  additionalProperties: false,
 } as const;

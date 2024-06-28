@@ -394,4 +394,5 @@ export const propertySchema = {
       additionalProperties: true,
     },
   },
+  additionalProperties: false,
 } as const;

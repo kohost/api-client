@@ -58,4 +58,5 @@ export const timeSheetSchema = {
       },
     },
   },
+  additionalProperties: false,
 } as const;

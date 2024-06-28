@@ -11,10 +11,7 @@ export const thermostatSchema = {
     name: {
       $ref: "definitions.json#/definitions/name",
     },
-    type: {
-      $ref: "definitions.json#/definitions/type",
-      default: "thermostat",
-    },
+    type: { type: "string", enum: ["thermostat"], default: "thermostat" },
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
@@ -107,6 +104,7 @@ export const thermostatSchema = {
       $ref: "definitions.json#/definitions/watts",
     },
   },
+  additionalProperties: false,
   $defs: {
     setpoint: {
       type: "object",

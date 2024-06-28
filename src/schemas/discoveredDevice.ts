@@ -37,4 +37,5 @@ export const discoveredDeviceSchema = {
       description: "Reference (id) to the property that this device belongs to",
     },
   },
+  additionalProperties: false,
 } as const;

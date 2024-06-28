@@ -157,4 +157,5 @@ export const organizationSchema = {
       $ref: "definitions.json#/definitions/updatedAt",
     },
   },
+  additionalProperties: false,
 } as const;

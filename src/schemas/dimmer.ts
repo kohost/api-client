@@ -12,7 +12,9 @@ export const dimmerSchema = {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["dimmer"],
+      default: "dimmer",
     },
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",
@@ -39,4 +41,5 @@ export const dimmerSchema = {
     },
   },
   required: ["id", "type", "level", "driver"],
+  additionalProperties: false,
 } as const;

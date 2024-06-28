@@ -104,4 +104,5 @@ export const systemUserSchema = {
       $ref: "definitions.json#/definitions/systemId",
     },
   },
+  additionalProperties: false,
 } as const;

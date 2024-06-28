@@ -152,6 +152,7 @@ export const orderSchema = {
       default: [],
       items: {
         type: "object",
+        required: ["method", "name", "date", "amount"],
         properties: {
           method: {
             type: "string",
@@ -187,4 +188,5 @@ export const orderSchema = {
       },
     },
   },
+  additionalProperties: false,
 } as const;

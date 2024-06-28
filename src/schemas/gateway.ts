@@ -32,4 +32,5 @@ export const gatewaySchema = {
     },
   },
   required: ["id", "type", "status", "driver"],
+  additionalProperties: false,
 } as const;

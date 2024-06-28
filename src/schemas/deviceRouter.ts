@@ -27,4 +27,5 @@ export const deviceRouterSchema = {
       additionalProperties: true,
     },
   },
+  additionalProperties: false,
 } as const;

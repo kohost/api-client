@@ -12,7 +12,9 @@ export const courtesySchema = {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["courtesy"],
+      default: "courtesy",
     },
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",
@@ -45,4 +47,5 @@ export const courtesySchema = {
     },
   },
   required: ["id", "type", "driver", "supportedStates", "state"],
+  additionalProperties: false,
 } as const;

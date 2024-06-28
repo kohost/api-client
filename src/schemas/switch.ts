@@ -41,4 +41,5 @@ export const switchSchema = {
     },
   },
   required: ["id", "type", "state", "driver"],
+  additionalProperties: false,
 } as const;

@@ -72,4 +72,5 @@ export const energyReportShardSchema = {
       format: "date-time",
     },
   },
+  additionalProperties: false,
 } as const;
