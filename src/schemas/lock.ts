@@ -12,7 +12,9 @@ export const lockSchema = {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["lock"],
+      default: "lock",
     },
     offline: {
       type: "boolean",

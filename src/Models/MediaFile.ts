@@ -20,13 +20,13 @@ export class MediaFile extends Entity<MediaFileSchema> {
     super(data);
   }
 
-  createImageVariant(params): string | null {
+  createImageVariant(params: MediaFileSchema): string | null {
     if (this.data.mimeType != "image/*")
       throw new Error("Only dynamic images can have variants");
     if (!this.data.url) throw new Error("MediaFile has no url");
     // convert params to "key=value" pairs
     const query = Object.keys(params)
-      .map((key) => `${key}=${params[key]}`)
+      .map((key: string) => `${key}=${params[key]}`)
       .join(",");
 
     // replace the final /public with the query above

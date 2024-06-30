@@ -12,14 +12,19 @@ class ValidationError extends Error {
 export interface ValidateableEntity {
   validate(data: any): boolean | void;
   validator: ValidateFunction;
+  type: string;
 }
 
-export abstract class Entity<ESchema extends {}> implements ValidateableEntity {
+export abstract class Entity<ESchema extends { type: string }>
+  implements ValidateableEntity
+{
   data: ESchema;
+  type: string;
   abstract validator: ValidateFunction;
   constructor(data: ESchema) {
     this.validate(data);
     this.data = data;
+    this.type = data.type;
   }
   validate(data: ESchema): boolean | void {
     const valid = this.validator(data);

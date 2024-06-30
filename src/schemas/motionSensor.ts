@@ -9,7 +9,9 @@ export const motionSensorSchema = {
       $ref: "definitions.json#/definitions/id",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["motionSensor"],
+      default: "motionSensor",
     },
     driver: {
       $ref: "definitions.json#/definitions/driver",

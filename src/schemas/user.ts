@@ -10,6 +10,7 @@ export const userSchema = {
     },
     type: {
       type: "string",
+      enum: ["user"],
       default: "user",
     },
     firstName: {
@@ -39,7 +40,7 @@ export const userSchema = {
       type: "string",
     },
     photo: {
-      $ref: "mediaFile.json#",
+      $ref: "mediaFile.json",
     },
     jobTitle: {
       type: "string",
@@ -152,7 +153,7 @@ export const userSchema = {
     reservations: {
       type: "array",
       items: {
-        $ref: "reservation.json",
+        $ref: "reservation.json#",
       },
     },
     spaceName: {

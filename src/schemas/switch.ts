@@ -12,7 +12,9 @@ export const switchSchema = {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["switch"],
+      default: "switch",
     },
     subType: {
       $ref: "definitions.json#/definitions/subType",
