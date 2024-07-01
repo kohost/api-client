@@ -29,6 +29,7 @@
   ],
   "devDependencies": {
     "@kohost/eslint-config": "^1.0.0",
+    "@types/events": "^3.0.3",
     "dts-gen": "^0.10.2",
     "esbuild": "^0.20.1",
     "eslint": "^8.6.0",
@@ -41,6 +42,7 @@
     "typescript": "^5.5.2"
   },
   "dependencies": {
+    "@types/amqplib": "^0.10.5",
     "ajv": "^8.11.0",
     "ajv-formats": "^2.1.1",
     "amqplib": "^0.10.3",

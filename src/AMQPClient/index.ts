@@ -1,8 +1,8 @@
-const Errors = require("../Errors");
-const amqp = require("amqplib");
-const crypto = require("crypto");
-const exchanges = require("../defs/amqpExchanges");
-const isFatalError = require("amqplib/lib/connection").isFatalError;
+import { connect } from "amqplib";
+import { isFatalError } from "amqplib/lib/connection";
+import { randomUUID } from "crypto";
+import Errors from "../Errors";
+import { Context } from "../defs/defs";
 const debug = require("debug")("kohost:amqp-client");
 
 const HEADER_KEY_ORGANIZATION_ID = "X-Organization-Id";
@@ -11,23 +11,12 @@ const HEADER_KEY_DRIVER = "X-Driver";
 const HEADER_KEY_COMMAND_NAME = "X-Command-Name";
 const HEADER_KEY_EVENT_NAME = "X-Event-Name";
 
-class KohostAMQPClient {
-  static get Message() {
-    return Message;
-  }
-
-  static get exchanges() {
-    return exchanges;
-  }
+export class AMQPClient {
   static generateCorrelationId() {
-    return crypto.randomUUID();
+    return randomUUID();
   }
 
-  static validateMessage(message) {
-    if (!message) throw new Error("Message is required");
-  }
-
-  static parseError(err) {
+  static parseError(err: Error | { message: string; type: string }) {
     let type;
     let message;
     let options = {};
@@ -50,11 +39,11 @@ class KohostAMQPClient {
   }
 
   static parseMessage(message) {
-    let error = null;
-    let data = {};
-    let query = {};
-    let context = {};
-    let headers = {};
+    let error: Error | null = null;
+    let data: Record<string, any> = {};
+    let query: Record<string, any> = {};
+    let context: Context = {};
+    let headers: Record<string, any> = {};
 
     const isCommand = message?.properties?.type === "Command";
     const isEvent = message?.properties?.type === "Event";
@@ -100,7 +89,15 @@ class KohostAMQPClient {
       }
     }
 
-    const parsed = {};
+    const parsed: {
+      error?: Error | null;
+      data: Record<string, any>;
+      query: Record<string, any>;
+      context: Context;
+      headers: Record<string, any>;
+      event?: string;
+      command?: string;
+    } = {} as const;
 
     if (error) parsed.error = this.parseError(error);
 
@@ -129,7 +126,7 @@ class KohostAMQPClient {
   }
 
   async createConnection(connection, options = {}) {
-    return await amqp.connect(connection, options);
+    return await connect(connection, options);
   }
 
   static createMessage(content) {
@@ -166,7 +163,7 @@ class KohostAMQPClient {
   }
 }
 
-class Message {
+export class Message {
   constructor(content) {
     this.toExchange = null;
     this.content = content;
@@ -234,5 +231,3 @@ class Message {
     };
   }
 }
-
-module.exports = KohostAMQPClient;

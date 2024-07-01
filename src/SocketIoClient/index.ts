@@ -1,7 +1,11 @@
-const io = require("socket.io-client");
-const { EventEmitter } = require("events");
+import { EventEmitter } from "events";
+import io, { ManagerOptions, Socket, SocketOptions } from "socket.io-client";
 
-module.exports = class SocketIoClient extends EventEmitter {
+export default class SocketIoClient extends EventEmitter {
+  options: Partial<SocketOptions & ManagerOptions>;
+  socket: Socket | null;
+  url: string;
+
   constructor(
     config = {
       url: null,
@@ -42,16 +46,6 @@ module.exports = class SocketIoClient extends EventEmitter {
     });
   }
 
-  #url = null;
-
-  get url() {
-    return this.#url;
-  }
-
-  set url(url) {
-    this.#url = url;
-  }
-
   get connected() {
     return this.socket?.connected || false;
   }
@@ -61,11 +55,11 @@ module.exports = class SocketIoClient extends EventEmitter {
   }
 
   connect() {
-    this.socket.connect();
+    this.socket?.connect();
   }
 
   disconnect() {
-    this.socket.disconnect();
+    this.socket?.disconnect();
   }
 
   reconnect() {
@@ -73,25 +67,25 @@ module.exports = class SocketIoClient extends EventEmitter {
     this.connect();
   }
 
-  subscribe(event, callback) {
-    this.socket.on(event, callback);
+  subscribe(event: string, callback: () => any) {
+    this.socket?.on(event, callback);
   }
 
-  unsubscribe(event, callback) {
-    this.socket.off(event, callback);
+  unsubscribe(event: string, callback: () => any) {
+    this.socket?.off(event, callback);
   }
 
-  getSubscriptions(event) {
-    return this.socket.listeners(event);
+  getSubscriptions(event: string) {
+    return this.socket?.listeners(event);
   }
 
-  send(event, { data = {}, query = {}, ...rest }) {
-    this.socket.emit(event, { data, query, ...rest });
+  send(event: string, { data = {}, query = {}, ...rest }) {
+    this.socket?.emit(event, { data, query, ...rest });
   }
 
   destroy() {
     this.disconnect();
-    this.socket.removeAllListeners();
+    this.socket?.removeAllListeners();
     this.socket = null;
   }
-};
+}
