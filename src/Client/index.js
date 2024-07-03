@@ -1,6 +1,6 @@
 /* Add Use Cases Here */
 const { EventEmitter } = require("events");
-const axios = require("axios");
+const axios = require("axios").default;
 
 class KohostApiClient extends EventEmitter {
   #onSuccess;
