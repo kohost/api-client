@@ -32,8 +32,7 @@
     },
     "currentHumidity": {
       "type": "number",
-      "minimum": 0,
-      "maximum": 99
+      "minimum": 0
     },
     "hvacMode": {
       "type": "string",
