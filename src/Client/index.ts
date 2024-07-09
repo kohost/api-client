@@ -1,23 +1,32 @@
 /* Add Use Cases Here */
-const { EventEmitter } = require("events");
-const axios = require("axios").default;
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  RawAxiosRequestHeaders,
+} from "axios";
+import { EventEmitter } from "events";
+
+interface KohostApiClientOptions {
+  url: string;
+  propertyId: string;
+  organizationId: string;
+  apiKey?: string;
+  headers?: RawAxiosRequestHeaders;
+  onSuccess?: (response: any) => any;
+  onError?: (error: any) => any;
+}
 
 class KohostApiClient extends EventEmitter {
   #onSuccess;
   #onError;
+  isRefreshingToken: boolean;
+  options: KohostApiClientOptions;
+  _http: AxiosInstance;
 
-  /** 
-  @param {Object} options - The options to create the client
-  @param {String} options.organizationId - The organization ID
-  @param {String} options.propertyId - The property ID
-  @param {String} options.url - The base URL for the API endpint
-  @param {Object} options.headers - Additional headers to send with each request
-  @param {String} options.apiKey - The API key to use for requests
-  @param {Function} options.onSuccess - A callback to handle successful responses
-  @param {Function} options.onError - A callback to handle errors
-  */
   constructor(
-    options = {
+    options: KohostApiClientOptions = {
       url: "",
       propertyId: "",
       organizationId: "",
@@ -32,35 +41,40 @@ class KohostApiClient extends EventEmitter {
     this.options = options;
     this.isRefreshingToken = false;
 
-    const config = {
+    const config: AxiosRequestConfig = {
       baseURL: options.url,
       responseType: "json",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+
         ...options.headers,
-      },
+      } as RawAxiosRequestHeaders,
     };
 
-    if (options.apiKey) {
+    if (!config.headers) config.headers = {};
+
+    if (options.apiKey && typeof options.apiKey === "string") {
       config.headers[KohostApiClient.defs.apiKeyHeader] = options.apiKey;
     }
 
-    if (options.propertyId) {
+    if (options.propertyId && typeof options.propertyId === "string") {
       config.headers[KohostApiClient.defs.propertyHeader] = options.propertyId;
     }
 
-    if (options.organizationId) {
+    if (options.organizationId && typeof options.organizationId === "string") {
       config.headers[KohostApiClient.defs.organizationHeader] =
         options.organizationId;
     }
 
     this.#onSuccess = options.onSuccess
       ? options.onSuccess
-      : (response) => response;
+      : (response: AxiosResponse) => response;
 
-    this.#onError = options.onError ? options.onError : (error) => error;
+    this.#onError = options.onError
+      ? options.onError
+      : (error: AxiosError) => error;
 
     this._http = axios.create(config);
 
@@ -70,27 +84,12 @@ class KohostApiClient extends EventEmitter {
     );
   }
 
-  /**
-   * @param {string} orgId
-   * @returns {void}
-   * @memberof KohostApiClient
-   * @example
-   * client.organizationId = "1234";
-   */
-  set organizationId(orgId) {
+  set organizationId(orgId: string) {
     const key = KohostApiClient.defs.organizationHeader;
     this._http.defaults.headers.common[key] = orgId;
   }
 
-  /**
-   * @param {string} propertyId
-   * @returns {void}
-   * @memberof KohostApiClient
-   * @example
-   * client.propertyId = "1234";
-   */
-
-  set propertyId(propertyId) {
+  set propertyId(propertyId: string) {
     const key = KohostApiClient.defs.propertyHeader;
     this._http.defaults.headers.common[key] = propertyId;
   }
@@ -111,11 +110,9 @@ class KohostApiClient extends EventEmitter {
     this.emit("PhoneVerificationRequired");
   }
 
-  #handleResponse(response) {
+  #handleResponse(response: AxiosResponse) {
     try {
       if (response?.data?.data) {
-        response.query = response.data.query;
-        response.pagination = response.data.pagination;
         response.data = response.data.data;
       }
 
@@ -127,7 +124,7 @@ class KohostApiClient extends EventEmitter {
     }
   }
 
-  #handleResponseError(error) {
+  #handleResponseError(error: AxiosError) {
     const { config: originalReq } = error;
     if (!error.response) return Promise.reject(error);
     const { status, data } = error.response;
@@ -157,7 +154,7 @@ class KohostApiClient extends EventEmitter {
         return Promise.reject(error);
       }
 
-      if (expectedError && newTokensNeeded) {
+      if (expectedError && newTokensNeeded && originalReq) {
         while (!this.isRefreshingToken) {
           this.isRefreshingToken = true;
           return this.RefreshToken()
@@ -166,7 +163,7 @@ class KohostApiClient extends EventEmitter {
               this.isRefreshingToken = false;
               return this._http(originalReq);
             })
-            .catch((err) => {
+            .catch((err: AxiosError) => {
               this.isRefreshingToken = false;
               return Promise.reject(err);
             });
@@ -182,4 +179,4 @@ class KohostApiClient extends EventEmitter {
   }
 }
 
-module.exports = KohostApiClient;
+export default KohostApiClient;

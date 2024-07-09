@@ -1,0 +1,1918 @@
+export const useCases = new Map<
+  string,
+  {
+    http:
+      | {
+          disableAuth?: boolean;
+          maxSize?: string;
+          method: string;
+          path: string;
+        }
+      | boolean;
+  }
+>([
+  [
+    "LoginStart",
+    {
+      http: {
+        disableAuth: true,
+        method: "POST",
+        path: "/auth/start",
+      },
+    },
+  ],
+  [
+    "RefreshToken",
+    {
+      http: {
+        disableAuth: true,
+        method: "POST",
+        path: "/auth/refresh",
+      },
+    },
+  ],
+  [
+    "LoginFinish",
+    {
+      http: {
+        disableAuth: true,
+        method: "POST",
+        path: "/auth/finish",
+      },
+    },
+  ],
+  [
+    "RequestLoginToken",
+    {
+      http: {
+        method: "GET",
+        path: "/auth/loginToken",
+      },
+    },
+  ],
+  [
+    "LogoutUser",
+    {
+      http: {
+        method: "POST",
+        path: "/auth/user/:id/logout",
+      },
+    },
+  ],
+  [
+    "StartRegisterPasskey",
+    {
+      http: {
+        method: "POST",
+        path: "/auth/registerPasskey/start",
+      },
+    },
+  ],
+  [
+    "FinishRegisterPasskey",
+    {
+      http: {
+        method: "POST",
+        path: "/auth/registerPasskey/finish",
+      },
+    },
+  ],
+  [
+    "DescribeMyAuth",
+    {
+      http: {
+        method: "GET",
+        path: "/auth/me",
+        disableAuth: true,
+      },
+    },
+  ],
+  [
+    "DescribeSelf",
+    {
+      http: {
+        method: "GET",
+        path: "/users/me",
+      },
+    },
+  ],
+  [
+    "DescribeUser",
+    {
+      http: {
+        method: "GET",
+        path: "/users/:id",
+      },
+    },
+  ],
+  [
+    "CreateUser",
+    {
+      http: {
+        method: "POST",
+        path: "/users",
+      },
+    },
+  ],
+  [
+    "ListUsers",
+    {
+      http: {
+        method: "GET",
+        path: "/users",
+      },
+    },
+  ],
+  [
+    "UpdateSelf",
+    {
+      http: {
+        method: "PUT",
+        path: "/users/me",
+        maxSize: "2mb",
+      },
+    },
+  ],
+  [
+    "UpdateUser",
+    {
+      http: {
+        method: "PUT",
+        path: "/users/:id",
+      },
+    },
+  ],
+  [
+    "DeleteUser",
+    {
+      http: {
+        method: "DELETE",
+        path: "/users/:id",
+      },
+    },
+  ],
+  [
+    "SendVerificationCode",
+    {
+      http: {
+        method: "POST",
+        path: "/users/:id/sendVerificationCode",
+      },
+    },
+  ],
+  [
+    "CheckVerificationCode",
+    {
+      http: {
+        method: "POST",
+        path: "/users/:id/checkVerificationCode",
+      },
+    },
+  ],
+  [
+    "MatchUserIdentification",
+    {
+      http: {
+        method: "POST",
+        path: "/users/:id/identifications/match",
+        maxSize: "2mb",
+      },
+    },
+  ],
+  [
+    "ListUserReservations",
+    {
+      http: {
+        method: "GET",
+        path: "/users/:id/reservations",
+      },
+    },
+  ],
+  [
+    "ListUserSpaces",
+    {
+      http: {
+        method: "GET",
+        path: "/users/:id/spaces",
+      },
+    },
+  ],
+  [
+    "ListUserOrders",
+    {
+      http: {
+        method: "GET",
+        path: "/users/:id/orders",
+      },
+    },
+  ],
+  [
+    "UpsertSystemUsers",
+    {
+      http: false,
+    },
+  ],
+  [
+    "SeedSuperAdminUsers",
+    {
+      http: false,
+    },
+  ],
+  [
+    "ListTeam",
+    {
+      http: {
+        method: "GET",
+        path: "/team",
+      },
+    },
+  ],
+  [
+    "DescribeMyPasskeyRegistrations",
+    {
+      http: {
+        method: "GET",
+        path: "/users/me/passkeyRegistrations",
+      },
+    },
+  ],
+  [
+    "TipUser",
+    {
+      http: {
+        method: "POST",
+        path: "/users/:id/tip",
+      },
+    },
+  ],
+  [
+    "CreateUserMobileKey",
+    {
+      http: {
+        method: "POST",
+        path: "/users/:id/mobileKeys",
+      },
+    },
+  ],
+  [
+    "DescribeMyMobileKeyApp",
+    {
+      http: {
+        method: "GET",
+        path: "/users/me/accessCredentials",
+      },
+    },
+  ],
+  [
+    "ListUserMobileKeys",
+    {
+      http: {
+        method: "GET",
+        path: "/users/:id/mobileKeys",
+      },
+    },
+  ],
+  [
+    "CreatePolicy",
+    {
+      http: {
+        method: "POST",
+        path: "/policies",
+      },
+    },
+  ],
+  [
+    "ListPolicies",
+    {
+      http: {
+        method: "GET",
+        path: "/policies",
+      },
+    },
+  ],
+  [
+    "UpdatePolicy",
+    {
+      http: {
+        method: "PUT",
+        path: "/policies/:id",
+      },
+    },
+  ],
+  [
+    "DeletePolicy",
+    {
+      http: {
+        method: "DELETE",
+        path: "/policies/:id",
+      },
+    },
+  ],
+  [
+    "DescribePolicy",
+    {
+      http: {
+        method: "GET",
+        path: "/policies/:id",
+      },
+    },
+  ],
+  [
+    "ListSpaces",
+    {
+      http: {
+        method: "GET",
+        path: "/spaces",
+      },
+    },
+  ],
+  [
+    "ListMySpaces",
+    {
+      http: {
+        method: "GET",
+        path: "/spaces/mine",
+      },
+    },
+  ],
+  [
+    "ListRoomsInSpace",
+    {
+      http: {
+        method: "GET",
+        path: "/spaces/:id/rooms",
+      },
+    },
+  ],
+  [
+    "UpdateSpace",
+    {
+      http: {
+        method: "PUT",
+        path: "/spaces/:id",
+      },
+    },
+  ],
+  [
+    "CreateSpace",
+    {
+      http: {
+        method: "POST",
+        path: "/spaces",
+      },
+    },
+  ],
+  [
+    "DescribeSpace",
+    {
+      http: {
+        method: "GET",
+        path: "/spaces/:id",
+      },
+    },
+  ],
+  [
+    "DeleteSpace",
+    {
+      http: {
+        method: "DELETE",
+        path: "/spaces/:id",
+      },
+    },
+  ],
+  [
+    "CreateRoomInSpace",
+    {
+      http: {
+        method: "POST",
+        path: "/spaces/:id/rooms",
+      },
+    },
+  ],
+  [
+    "UpsertSystemSpaces",
+    {
+      http: false,
+    },
+  ],
+  [
+    "SetSpaceScene",
+    {
+      http: {
+        method: "POST",
+        path: "/spaces/:spaceId/scenes/:id",
+      },
+    },
+  ],
+  [
+    "UpsertSystemCategories",
+    {
+      http: false,
+    },
+  ],
+  [
+    "CreateCateory",
+    {
+      http: {
+        method: "POST",
+        path: "/categories",
+      },
+    },
+  ],
+  [
+    "DeleteCategory",
+    {
+      http: {
+        method: "DELETE",
+        path: "/categories/:id",
+      },
+    },
+  ],
+  [
+    "DescribeCategory",
+    {
+      http: {
+        method: "GET",
+        path: "/categories/:id",
+      },
+    },
+  ],
+  [
+    "ListCategories",
+    {
+      http: {
+        method: "GET",
+        path: "/categories",
+      },
+    },
+  ],
+  [
+    "UpdateCategory",
+    {
+      http: {
+        method: "PUT",
+        path: "/categories/:id",
+      },
+    },
+  ],
+  [
+    "ListRooms",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms",
+      },
+    },
+  ],
+  [
+    "DescribeRoom",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:id",
+      },
+    },
+  ],
+  [
+    "CreateRoom",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms",
+      },
+    },
+  ],
+  [
+    "UpdateRoom",
+    {
+      http: {
+        method: "PUT",
+        path: "/rooms/:id",
+      },
+    },
+  ],
+  [
+    "DeleteRoom",
+    {
+      http: {
+        method: "DELETE",
+        path: "/rooms/:id",
+      },
+    },
+  ],
+  [
+    "CreateAlarm",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/alarms",
+      },
+    },
+  ],
+  [
+    "ListAlarms",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/alarms",
+      },
+    },
+  ],
+  [
+    "UpdateAlarm",
+    {
+      http: {
+        method: "PUT",
+        path: "/rooms/:roomId/alarms/:id",
+      },
+    },
+  ],
+  [
+    "DeleteAlarm",
+    {
+      http: {
+        method: "DELETE",
+        path: "/rooms/:roomId/alarms/:id",
+      },
+    },
+  ],
+  [
+    "DescribeAlarm",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/alarms/:id",
+      },
+    },
+  ],
+  [
+    "DescribeAlarmConfig",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/alarms/:id/config",
+      },
+    },
+  ],
+  [
+    "SetAlarm",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/alarms/:id",
+      },
+    },
+  ],
+  [
+    "CreateCamera",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/cameras",
+      },
+    },
+  ],
+  [
+    "ListCameras",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/cameras",
+      },
+    },
+  ],
+  [
+    "UpdateCamera",
+    {
+      http: {
+        method: "PUT",
+        path: "/rooms/:roomId/cameras/:id",
+      },
+    },
+  ],
+  [
+    "DeleteCamera",
+    {
+      http: {
+        method: "DELETE",
+        path: "/rooms/:roomId/cameras/:id",
+      },
+    },
+  ],
+  [
+    "DescribeCamera",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/cameras/:id",
+      },
+    },
+  ],
+  [
+    "SetCamera",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/cameras/:id",
+      },
+    },
+  ],
+  [
+    "CreateCourtesy",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/courtesy",
+      },
+    },
+  ],
+  [
+    "ListCourtesy",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/courtesy",
+      },
+    },
+  ],
+  [
+    "UpdateCourtesy",
+    {
+      http: {
+        method: "PUT",
+        path: "/rooms/:roomId/courtesy/:id",
+      },
+    },
+  ],
+  [
+    "DeleteCourtesy",
+    {
+      http: {
+        method: "DELETE",
+        path: "/rooms/:roomId/courtesy/:id",
+      },
+    },
+  ],
+  [
+    "DescribeCourtesy",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/courtesy/:id",
+      },
+    },
+  ],
+  [
+    "SetCourtesy",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/courtesy/:id",
+      },
+    },
+  ],
+  [
+    "CreateDimmer",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/dimmers",
+      },
+    },
+  ],
+  [
+    "ListDimmers",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/dimmers",
+      },
+    },
+  ],
+  [
+    "UpdateDimmer",
+    {
+      http: {
+        method: "PUT",
+        path: "/rooms/:roomId/dimmers/:id",
+      },
+    },
+  ],
+  [
+    "DeleteDimmer",
+    {
+      http: {
+        method: "DELETE",
+        path: "/rooms/:roomId/dimmers/:id",
+      },
+    },
+  ],
+  [
+    "DescribeDimmer",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/dimmers/:id",
+      },
+    },
+  ],
+  [
+    "SetDimmer",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/dimmers/:id",
+      },
+    },
+  ],
+  [
+    "CreateLock",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/locks",
+      },
+    },
+  ],
+  [
+    "ListLocks",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/locks",
+      },
+    },
+  ],
+  [
+    "UpdateLock",
+    {
+      http: {
+        method: "PUT",
+        path: "/rooms/:roomId/locks/:id",
+      },
+    },
+  ],
+  [
+    "DeleteLock",
+    {
+      http: {
+        method: "DELETE",
+        path: "/rooms/:roomId/locks/:id",
+      },
+    },
+  ],
+  [
+    "DescribeLock",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/locks/:id",
+      },
+    },
+  ],
+  [
+    "SetLock",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/locks/:id",
+      },
+    },
+  ],
+  [
+    "DescribeLockCredential",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/locks/:id/credential",
+      },
+    },
+  ],
+  [
+    "CreateSwitch",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/switches",
+      },
+    },
+  ],
+  [
+    "ListSwitches",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/switches",
+      },
+    },
+  ],
+  [
+    "UpdateSwitch",
+    {
+      http: {
+        method: "PUT",
+        path: "/rooms/:roomId/switches/:id",
+      },
+    },
+  ],
+  [
+    "DeleteSwitch",
+    {
+      http: {
+        method: "DELETE",
+        path: "/rooms/:roomId/switches/:id",
+      },
+    },
+  ],
+  [
+    "DescribeSwitch",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/switches/:id",
+      },
+    },
+  ],
+  [
+    "SetSwitch",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/switches/:id",
+      },
+    },
+  ],
+  [
+    "CreateMediaSource",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/mediaSources",
+      },
+    },
+  ],
+  [
+    "ListMediaSources",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/mediaSources",
+      },
+    },
+  ],
+  [
+    "UpdateMediaSource",
+    {
+      http: {
+        method: "PUT",
+        path: "/rooms/:roomId/mediaSources/:id",
+      },
+    },
+  ],
+  [
+    "DeleteMediaSource",
+    {
+      http: {
+        method: "DELETE",
+        path: "/rooms/:roomId/mediaSources/:id",
+      },
+    },
+  ],
+  [
+    "DescribeMediaSource",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/mediaSources/:id",
+      },
+    },
+  ],
+  [
+    "SetMediaSource",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/mediaSources/:id",
+      },
+    },
+  ],
+  [
+    "CreateThermostat",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/thermostats",
+      },
+    },
+  ],
+  [
+    "ListThermostats",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/thermostats",
+      },
+    },
+  ],
+  [
+    "UpdateThermostat",
+    {
+      http: {
+        method: "PUT",
+        path: "/rooms/:roomId/thermostats/:id",
+      },
+    },
+  ],
+  [
+    "DeleteThermostat",
+    {
+      http: {
+        method: "DELETE",
+        path: "/rooms/:roomId/thermostats/:id",
+      },
+    },
+  ],
+  [
+    "DescribeThermostat",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/thermostats/:id",
+      },
+    },
+  ],
+  [
+    "SetThermostat",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/thermostats/:id",
+      },
+    },
+  ],
+  [
+    "CreateWindowCovering",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/windowCoverings",
+      },
+    },
+  ],
+  [
+    "ListWindowCoverings",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/windowCoverings",
+      },
+    },
+  ],
+  [
+    "UpdateWindowCovering",
+    {
+      http: {
+        method: "PUT",
+        path: "/rooms/:roomId/windowCoverings/:id",
+      },
+    },
+  ],
+  [
+    "DeleteWindowCovering",
+    {
+      http: {
+        method: "DELETE",
+        path: "/rooms/:roomId/windowCoverings/:id",
+      },
+    },
+  ],
+  [
+    "DescribeWindowCovering",
+    {
+      http: {
+        method: "GET",
+        path: "/rooms/:roomId/windowCoverings/:id",
+      },
+    },
+  ],
+  [
+    "SetWindowCovering",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/windowCoverings/:id",
+      },
+    },
+  ],
+  [
+    "SetRoomScene",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:roomId/scenes/:id",
+      },
+    },
+  ],
+  [
+    "AddScenesToRoom",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/:id/scenes",
+      },
+    },
+  ],
+  [
+    "AddDefaultScenesToRooms",
+    {
+      http: {
+        method: "POST",
+        path: "/rooms/scenes/default",
+      },
+    },
+  ],
+  [
+    "DescribeTicketStats",
+    {
+      http: {
+        method: "GET",
+        path: "/tickets/stats",
+      },
+    },
+  ],
+  [
+    "CreateTicket",
+    {
+      http: {
+        method: "POST",
+        path: "/tickets",
+      },
+    },
+  ],
+  [
+    "CreateTicketMessage",
+    {
+      http: {
+        method: "POST",
+        path: "/tickets/:id/messages",
+      },
+    },
+  ],
+  [
+    "DeleteTicket",
+    {
+      http: {
+        method: "DELETE",
+        path: "/tickets/:id",
+      },
+    },
+  ],
+  [
+    "ListMyTickets",
+    {
+      http: {
+        method: "GET",
+        path: "/tickets/mine",
+      },
+    },
+  ],
+  [
+    "DescribeTicket",
+    {
+      http: {
+        method: "GET",
+        path: "/tickets/:id",
+      },
+    },
+  ],
+  [
+    "ListTickets",
+    {
+      http: {
+        method: "GET",
+        path: "/tickets",
+      },
+    },
+  ],
+  [
+    "UpdateMessageReadStatus",
+    {
+      http: {
+        method: "POST",
+        path: "/tickets/:id/readAll",
+      },
+    },
+  ],
+  [
+    "UpdateTicket",
+    {
+      http: {
+        method: "PUT",
+        path: "/tickets/:id",
+      },
+    },
+  ],
+  [
+    "UpdateTicketStatus",
+    {
+      http: {
+        method: "PUT",
+        path: "/tickets/:id/status",
+      },
+    },
+  ],
+  [
+    "NotifyTicketUpdate",
+    {
+      http: false,
+    },
+  ],
+  [
+    "NotifyTicketCreated",
+    {
+      http: false,
+    },
+  ],
+  [
+    "NotifyTicketResolved",
+    {
+      http: false,
+    },
+  ],
+  [
+    "NotifyTicketAssigned",
+    {
+      http: false,
+    },
+  ],
+  [
+    "ListScenes",
+    {
+      http: {
+        method: "GET",
+        path: "/scenes",
+      },
+    },
+  ],
+  [
+    "CreateScene",
+    {
+      http: {
+        method: "POST",
+        path: "/scenes",
+      },
+    },
+  ],
+  [
+    "CreateDefaultScenes",
+    {
+      http: {
+        method: "POST",
+        path: "/scenes/default",
+      },
+    },
+  ],
+  [
+    "ScheduleSpaceScenes",
+    {
+      http: false,
+    },
+  ],
+  [
+    "SetScene",
+    {
+      http: {
+        method: "POST",
+        path: "/scenes/:id",
+      },
+    },
+  ],
+  [
+    "CreateDiscoveredDevice",
+    {
+      http: {
+        method: "POST",
+        path: "/discoveredDevices",
+      },
+    },
+  ],
+  [
+    "ListDiscoveredDevices",
+    {
+      http: {
+        method: "GET",
+        path: "/discoveredDevices",
+      },
+    },
+  ],
+  [
+    "UpdateDiscoveredDevice",
+    {
+      http: {
+        method: "PUT",
+        path: "/discoveredDevices/:id",
+      },
+    },
+  ],
+  [
+    "DeleteDiscoveredDevice",
+    {
+      http: {
+        method: "DELETE",
+        path: "/discoveredDevices/:id",
+      },
+    },
+  ],
+  [
+    "DescribeDiscoveredDevice",
+    {
+      http: {
+        method: "GET",
+        path: "/discoveredDevices/:id",
+      },
+    },
+  ],
+  [
+    "UpsertDiscoveredDevice",
+    {
+      http: {
+        method: "POST",
+        path: "/discoveredDevices/upsert",
+      },
+    },
+  ],
+  [
+    "CreateDiscoveredDeviceAssociation",
+    {
+      http: {
+        method: "POST",
+        path: "/discoveredDevices/:id/associate",
+      },
+    },
+  ],
+  [
+    "UpsertSystemDevices",
+    {
+      http: false,
+    },
+  ],
+  [
+    "DiscoverReservations",
+    {
+      http: {
+        method: "GET",
+        path: "/reservations/discover",
+      },
+    },
+  ],
+  [
+    "CreateReservation",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations",
+      },
+    },
+  ],
+  [
+    "DeleteReservation",
+    {
+      http: {
+        method: "DELETE",
+        path: "/reservations/:id",
+      },
+    },
+  ],
+  [
+    "ListReservations",
+    {
+      http: {
+        method: "GET",
+        path: "/reservations",
+      },
+    },
+  ],
+  [
+    "ListMyReservations",
+    {
+      http: {
+        method: "GET",
+        path: "/reservations/mine",
+      },
+    },
+  ],
+  [
+    "UpdateReservation",
+    {
+      http: {
+        method: "PUT",
+        path: "/reservations/:id",
+      },
+    },
+  ],
+  [
+    "DescribeReservation",
+    {
+      http: {
+        method: "GET",
+        path: "/reservations/:id",
+      },
+    },
+  ],
+  [
+    "CheckInReservation",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/checkin",
+      },
+    },
+  ],
+  [
+    "CheckOutReservation",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/checkout",
+      },
+    },
+  ],
+  [
+    "SendCheckInSMS",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/sendCheckInSMS",
+      },
+    },
+  ],
+  [
+    "SendPreArrivalSMS",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/sendPreArrivalSMS",
+      },
+    },
+  ],
+  [
+    "SendPreArrivalEmail",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/sendPreArrivalEmail",
+      },
+    },
+  ],
+  [
+    "SendRoomControlSMS",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/sendRoomControlSMS",
+      },
+    },
+  ],
+  [
+    "SendCheckOutSMS",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/sendCheckOutSMS",
+      },
+    },
+  ],
+  [
+    "BatchNotifyPreArrival",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/batchNotifyPreArrival",
+      },
+    },
+  ],
+  [
+    "UpsertSystemReservations",
+    {
+      http: false,
+    },
+  ],
+  [
+    "BatchNotifyCheckIn",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/batchNotifyCheckIn",
+      },
+    },
+  ],
+  [
+    "BatchNotifyCheckOut",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/batchNotifyCheckIn",
+      },
+    },
+  ],
+  [
+    "BatchNotifyMissedCheckOut",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/batchNotifyMissedCheckOut",
+      },
+    },
+  ],
+  [
+    "AssignSpaceToReservation",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/space",
+      },
+    },
+  ],
+  [
+    "DescribeReservationEarlyCheckInProducts",
+    {
+      http: {
+        method: "GET",
+        path: "/reservations/:id/products/earlyCheckIn",
+      },
+    },
+  ],
+  [
+    "PurchaseReservationEarlyCheckInProducts",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/products/earlyCheckIn",
+      },
+    },
+  ],
+  [
+    "DescribeReservationRoomUpgrades",
+    {
+      http: {
+        method: "GET",
+        path: "/reservations/:id/products/roomUpgrades",
+      },
+    },
+  ],
+  [
+    "PurchaseReservationRoomUpgrades",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/products/roomUpgrades",
+      },
+    },
+  ],
+  [
+    "DescribeReservationLateCheckOutProducts",
+    {
+      http: {
+        method: "GET",
+        path: "/reservations/:id/products/lateCheckOut",
+      },
+    },
+  ],
+  [
+    "PurchaseReservationLateCheckOutProducts",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/products/lateCheckOut",
+      },
+    },
+  ],
+  [
+    "UpdateReservationExpectedArrivalTime",
+    {
+      http: {
+        method: "PUT",
+        path: "/reservations/:id/expectedArrivalTime",
+      },
+    },
+  ],
+  [
+    "DescribeReservationPetProducts",
+    {
+      http: {
+        method: "GET",
+        path: "/reservations/:id/products/pet",
+      },
+    },
+  ],
+  [
+    "PurchaseReservationPetProducts",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/products/pet",
+      },
+    },
+  ],
+  [
+    "DescribeReservationPromos",
+    {
+      http: {
+        method: "GET",
+        path: "/reservations/:id/products/promo",
+      },
+    },
+  ],
+  [
+    "PurchaseReservationPromos",
+    {
+      http: {
+        method: "POST",
+        path: "/reservations/:id/products/promo",
+      },
+    },
+  ],
+  [
+    "OCRDocument",
+    {
+      http: {
+        method: "POST",
+        path: "/documents/ocr",
+        maxSize: "2mb",
+      },
+    },
+  ],
+  [
+    "DescribeMyOrganization",
+    {
+      http: {
+        method: "GET",
+        path: "/organizations/mine",
+        disableAuth: true,
+      },
+    },
+  ],
+  [
+    "CreateOrganization",
+    {
+      http: {
+        method: "POST",
+        path: "/organizations",
+      },
+    },
+  ],
+  [
+    "UpdateOrganization",
+    {
+      http: {
+        method: "PUT",
+        path: "/organizations/:id",
+      },
+    },
+  ],
+  [
+    "DescribeOrganization",
+    {
+      http: {
+        method: "GET",
+        path: "/organizations/:id",
+      },
+    },
+  ],
+  [
+    "ListOrganizations",
+    {
+      http: {
+        method: "GET",
+        path: "/organizations",
+      },
+    },
+  ],
+  [
+    "SeedOrganizations",
+    {
+      http: false,
+    },
+  ],
+  [
+    "ListProperties",
+    {
+      http: {
+        method: "GET",
+        path: "/properties",
+      },
+    },
+  ],
+  [
+    "ListMyProperties",
+    {
+      http: {
+        method: "GET",
+        path: "/properties/mine",
+      },
+    },
+  ],
+  [
+    "CreateProperty",
+    {
+      http: {
+        method: "POST",
+        path: "/properties",
+      },
+    },
+  ],
+  [
+    "UpdateProperty",
+    {
+      http: {
+        method: "PUT",
+        path: "/properties/:id",
+      },
+    },
+  ],
+  [
+    "DescribeProperty",
+    {
+      http: {
+        method: "GET",
+        path: "/properties/:id",
+      },
+    },
+  ],
+  [
+    "SeedProperties",
+    {
+      http: false,
+    },
+  ],
+  [
+    "EmailUserAccountSetup",
+    {
+      http: {
+        method: "POST",
+        path: "/users/:id/email/setup",
+      },
+    },
+  ],
+  [
+    "LogEvent",
+    {
+      http: false,
+    },
+  ],
+  [
+    "BroadcastEvent",
+    {
+      http: false,
+    },
+  ],
+  [
+    "HandleMessageData",
+    {
+      http: false,
+    },
+  ],
+  [
+    "HandleSceneDevices",
+    {
+      http: false,
+    },
+  ],
+  [
+    "CreateImageUploadEndpoint",
+    {
+      http: {
+        method: "POST",
+        path: "/mediaFiles/imageUploadEndpoint",
+      },
+    },
+  ],
+  [
+    "DeleteMediaFile",
+    {
+      http: {
+        method: "DELETE",
+        path: "/mediaFiles/:id",
+      },
+    },
+  ],
+  [
+    "UploadImage",
+    {
+      http: {
+        method: "POST",
+        path: "/mediaFiles/uploadImage",
+      },
+    },
+  ],
+  [
+    "DescribeProduct",
+    {
+      http: {
+        method: "GET",
+        path: "/products/:id",
+      },
+    },
+  ],
+  [
+    "UpsertSystemProducts",
+    {
+      http: false,
+    },
+  ],
+  [
+    "ListProducts",
+    {
+      http: {
+        method: "GET",
+        path: "/products",
+      },
+    },
+  ],
+  [
+    "CreateLoginLink",
+    {
+      http: false,
+    },
+  ],
+  [
+    "ListOrders",
+    {
+      http: {
+        method: "GET",
+        path: "/orders",
+      },
+    },
+  ],
+  [
+    "ListMyOrders",
+    {
+      http: {
+        method: "GET",
+        path: "/orders/mine",
+      },
+    },
+  ],
+  [
+    "CreateAnnouncement",
+    {
+      http: {
+        method: "POST",
+        path: "/announcements",
+      },
+    },
+  ],
+  [
+    "UpdateAnnouncement",
+    {
+      http: {
+        method: "PUT",
+        path: "/announcements/:id",
+      },
+    },
+  ],
+  [
+    "DescribeAnnouncement",
+    {
+      http: {
+        method: "GET",
+        path: "/announcements/:id",
+      },
+    },
+  ],
+  [
+    "DeleteAnnouncement",
+    {
+      http: {
+        method: "DELETE",
+        path: "/announcements/:id",
+      },
+    },
+  ],
+  [
+    "ListAnnouncements",
+    {
+      http: {
+        method: "GET",
+        path: "/announcements",
+      },
+    },
+  ],
+  [
+    "DescribeTimeSheetStats",
+    {
+      http: {
+        method: "GET",
+        path: "/timesheets/stats",
+      },
+    },
+  ],
+  [
+    "ListMyTimeSheets",
+    {
+      http: {
+        method: "GET",
+        path: "/timesheets/mine",
+      },
+    },
+  ],
+  [
+    "DescribeTimeSheet",
+    {
+      http: {
+        method: "GET",
+        path: "/timesheets/:id",
+      },
+    },
+  ],
+  [
+    "ListTimeSheets",
+    {
+      http: {
+        method: "GET",
+        path: "/timesheets",
+      },
+    },
+  ],
+  [
+    "CreateTimeSheet",
+    {
+      http: {
+        method: "POST",
+        path: "/timesheets",
+      },
+    },
+  ],
+  [
+    "DeleteTimeSheet",
+    {
+      http: {
+        method: "DELETE",
+        path: "/timesheets/:id",
+      },
+    },
+  ],
+  [
+    "UpdateTimeSheet",
+    {
+      http: {
+        method: "PUT",
+        path: "/timesheets/:id",
+      },
+    },
+  ],
+  [
+    "CreateTimeSheetTimeEntry",
+    {
+      http: {
+        method: "POST",
+        path: "/timesheets/:timeSheetId/timeEntries",
+      },
+    },
+  ],
+  [
+    "DeleteTimeSheetTimeEntry",
+    {
+      http: {
+        method: "DELETE",
+        path: "/timesheets/:timeSheetId/timeEntries/:id",
+      },
+    },
+  ],
+  [
+    "UpdateTimeSheetTimeEntry",
+    {
+      http: {
+        method: "PUT",
+        path: "/timesheets/:timeSheetId/timeEntries/:id",
+      },
+    },
+  ],
+  [
+    "StartSOS",
+    {
+      http: {
+        method: "POST",
+        path: "/sos/start",
+      },
+    },
+  ],
+  [
+    "StopSOS",
+    {
+      http: {
+        method: "POST",
+        path: "/sos/stop",
+      },
+    },
+  ],
+  [
+    "DescribeSOS",
+    {
+      http: {
+        method: "GET",
+        path: "/sos",
+      },
+    },
+  ],
+]);
