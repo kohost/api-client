@@ -245,6 +245,15 @@
     }
   ],
   [
+    "DeleteUserCredential",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/users/me/accessCredentials/:id"
+      }
+    }
+  ],
+  [
     "CreateUserMobileKey",
     {
       "http": {
@@ -1033,6 +1042,15 @@
     }
   ],
   [
+    "AutoCloseTickets",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/autoClose"
+      }
+    }
+  ],
+  [
     "DescribeTicketStats",
     {
       "http": {
@@ -1185,6 +1203,24 @@
       "http": {
         "method": "POST",
         "path": "/scenes/:id"
+      }
+    }
+  ],
+  [
+    "CreateDiscoveredDeviceAssociationMap",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/discoveredDevices/associationMap"
+      }
+    }
+  ],
+  [
+    "AutoAssociateDiscoveredDevices",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/discoveredDevices/autoAssociate"
       }
     }
   ],
@@ -1648,6 +1684,12 @@
   ],
   [
     "SeedProperties",
+    {
+      "http": false
+    }
+  ],
+  [
+    "UpsertSystemProperty",
     {
       "http": false
     }
