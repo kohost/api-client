@@ -16,7 +16,7 @@
     "test:watch": "jest --watchAll",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
-    "prepare": "node prepare.js",
+    "prepare": "husky",
     "build": "node scripts/build.js",
     "build:watch": "node scripts/build.js --watch",
     "start": "node scripts/build.js --watch",
