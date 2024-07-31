@@ -75,6 +75,7 @@ class KohostAMQPClient {
         query = payload?.query || {};
         context = payload?.context || {};
       } catch (error) {
+        debug("error parsing content", error);
         data = message.content.toString();
       }
     }

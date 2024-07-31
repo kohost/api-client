@@ -3,6 +3,9 @@ const prettierConfig = require("eslint-config-prettier");
 const globals = require("globals");
 
 module.exports = [
+  {
+    ignores: ["node_modules/", "tests/", "dist/"],
+  },
   js.configs.recommended,
   prettierConfig,
   {
@@ -21,6 +24,5 @@ module.exports = [
       semi: ["error", "always"],
       "no-console": 0,
     },
-    ignores: ["node_modules/", "tests/*"],
   },
 ];
