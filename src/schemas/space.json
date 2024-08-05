@@ -60,8 +60,7 @@
       "default": {
         "active": false,
         "allowed": false,
-        "previousState": null,
-        "allowedBy": []
+        "previousState": null
       },
       "properties": {
         "active": {
@@ -75,13 +74,6 @@
         "allowed": {
           "type": "boolean",
           "default": false
-        },
-        "allowedBy": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": ["occupancy", "automation"]
-          }
         },
         "previousState": {
           "type": ["object", "null"],
