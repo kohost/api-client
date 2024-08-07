@@ -54,6 +54,9 @@
     "occupied": {
       "type": "boolean"
     },
+    "inUse": {
+      "type": "boolean"
+    },
     "eco": {
       "type": "object",
       "additionalProperties": false,
