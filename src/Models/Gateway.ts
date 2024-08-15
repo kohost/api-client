@@ -15,8 +15,4 @@ export type GatewaySchema = FromSchema<
 export class Gateway extends Entity<GatewaySchema> {
   static schema = gatewaySchema;
   validator = validator;
-
-  constructor(data: GatewaySchema) {
-    super(data);
-  }
 }

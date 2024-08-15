@@ -14,9 +14,6 @@ export type DimmerSchema = FromSchema<
 
 export class Dimmer extends Entity<DimmerSchema> {
   static schema = dimmerSchema;
+  static actionProperties = ["level"];
   validator = validator;
-
-  constructor(data: DimmerSchema) {
-    super(data);
-  }
 }

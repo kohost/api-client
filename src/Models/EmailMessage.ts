@@ -15,8 +15,4 @@ export type EmailMessageSchema = FromSchema<
 export class EmailMessage extends Entity<EmailMessageSchema> {
   static schema = emailMessageSchema;
   validator = validator;
-
-  constructor(data: EmailMessageSchema) {
-    super(data);
-  }
 }

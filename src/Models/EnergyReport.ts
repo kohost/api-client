@@ -15,8 +15,4 @@ export type EnergyReportSchema = FromSchema<
 export class EnergyReport extends Entity<EnergyReportSchema> {
   static schema = energyReportSchema;
   validator = validator;
-
-  constructor(data: EnergyReportSchema) {
-    super(data);
-  }
 }

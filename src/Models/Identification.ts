@@ -15,8 +15,4 @@ export type IdentificationSchema = FromSchema<
 export class Identification extends Entity<IdentificationSchema> {
   static schema = identificationSchema;
   validator = validator;
-
-  constructor(data: IdentificationSchema) {
-    super(data);
-  }
 }

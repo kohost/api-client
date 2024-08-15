@@ -15,8 +15,4 @@ export type SceneSchema = FromSchema<
 export class Scene extends Entity<SceneSchema> {
   static schema = sceneSchema;
   validator = validator;
-
-  constructor(data: SceneSchema) {
-    super(data);
-  }
 }

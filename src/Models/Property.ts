@@ -15,8 +15,4 @@ export type PropertySchema = FromSchema<
 export class Property extends Entity<PropertySchema> {
   static schema = propertySchema;
   validator = validator;
-
-  constructor(data: PropertySchema) {
-    super(data);
-  }
 }

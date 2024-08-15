@@ -74,15 +74,15 @@ export class Room extends Entity<RoomSchema> {
   }
 
   get hasDimmer() {
-    return this.data.dimmers?.length > 0;
+    return this.dimmers?.length > 0;
   }
 
   get hasSwitch() {
-    return this.data.switches?.length > 0;
+    return this.switches?.length > 0;
   }
 
   get hasWindowCovering() {
-    return this.data.windowCoverings?.length > 0;
+    return this.windowCoverings?.length > 0;
   }
 
   get hasShade() {
@@ -90,7 +90,7 @@ export class Room extends Entity<RoomSchema> {
   }
 
   get hasThermostat() {
-    return this.data.thermostats?.length > 0;
+    return this.thermostats?.length > 0;
   }
 
   get hasClimate() {
@@ -98,41 +98,41 @@ export class Room extends Entity<RoomSchema> {
   }
 
   get hasLock() {
-    return this.data.locks?.length > 0;
+    return this.locks?.length > 0;
   }
 
   get hasCourtesy() {
-    return this.data.courtesy?.length > 0;
+    return this.courtesy?.length > 0;
   }
 
   get hasCamera() {
-    return this.data.cameras?.length > 0;
+    return this.cameras?.length > 0;
   }
 
   get hasAlarm() {
-    return this.data.alarms?.length > 0;
+    return this.alarms?.length > 0;
   }
 
   get hasMedia() {
-    return this.data.mediaSources?.length > 0;
+    return this.mediaSources?.length > 0;
   }
 
   get hasLight() {
-    const hasSubTypeLight = this.data.switches?.some((sw: Switch) => {
-      return sw.data.subType === "light";
+    const hasSubTypeLight = this.switches?.some((sw: Switch) => {
+      return sw.subType === "light";
     });
     return this.hasDimmer || hasSubTypeLight;
   }
 
   get occupied() {
     if (
-      typeof this.data.occupiedAt === "string" ||
-      this.data.occupiedAt instanceof Date
+      typeof this.occupiedAt === "string" ||
+      this.occupiedAt instanceof Date
     ) {
       const lastOccupied: Date =
-        typeof this.data.occupiedAt === "string"
-          ? new Date(this.data.occupiedAt)
-          : (this.data.occupiedAt as Date);
+        typeof this.occupiedAt === "string"
+          ? new Date(this.occupiedAt)
+          : (this.occupiedAt as Date);
       const now: Date = new Date();
       const diff = now.getTime() - lastOccupied.getTime();
       // check if the room has been occupied in the last 60 minutes

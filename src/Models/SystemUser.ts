@@ -15,8 +15,4 @@ export type SystemUserSchema = FromSchema<
 export class SystemUser extends Entity<SystemUserSchema> {
   static schema = systemUserSchema;
   validator = validator;
-
-  constructor(data: SystemUserSchema) {
-    super(data);
-  }
 }

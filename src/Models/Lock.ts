@@ -14,9 +14,6 @@ export type LockSchema = FromSchema<
 
 export class Lock extends Entity<LockSchema> {
   static schema = lockSchema;
+  static actionProperties: ["state"];
   validator = validator;
-
-  constructor(data: LockSchema) {
-    super(data);
-  }
 }

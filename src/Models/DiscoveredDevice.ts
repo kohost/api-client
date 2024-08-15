@@ -15,8 +15,4 @@ export type DiscoveredDeviceSchema = FromSchema<
 export class DiscoveredDevice extends Entity<DiscoveredDeviceSchema> {
   static schema = discoveredDeviceSchema;
   validator = validator;
-
-  constructor(data: DiscoveredDeviceSchema) {
-    super(data);
-  }
 }

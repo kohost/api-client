@@ -15,8 +15,4 @@ export type DeviceRouterSchema = FromSchema<
 export class DeviceRouter extends Entity<DeviceRouterSchema> {
   static schema = deviceRouterSchema;
   validator = validator;
-
-  constructor(data: DeviceRouterSchema) {
-    super(data);
-  }
 }

@@ -16,20 +16,16 @@ export class MediaFile extends Entity<MediaFileSchema> {
   static schema = mediaFileSchema;
   validator = validator;
 
-  constructor(data: MediaFileSchema) {
-    super(data);
-  }
-
-  createImageVariant(params: MediaFileSchema): string | null {
-    if (this.data.mimeType != "image/*")
+  createImageVariant(params: Record<string, string>): string | null {
+    if (this.mimeType != "image/*")
       throw new Error("Only dynamic images can have variants");
-    if (!this.data.url) throw new Error("MediaFile has no url");
+    if (!this.url) throw new Error("MediaFile has no url");
     // convert params to "key=value" pairs
     const query = Object.keys(params)
       .map((key: string) => `${key}=${params[key]}`)
       .join(",");
 
     // replace the final /public with the query above
-    return this.data.url?.replace(/\/public$/, `/${query}`) || null;
+    return this.url?.replace(/\/public$/, `/${query}`) || null;
   }
 }

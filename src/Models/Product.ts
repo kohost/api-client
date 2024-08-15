@@ -15,8 +15,4 @@ export type ProductSchema = FromSchema<
 export class Product extends Entity<ProductSchema> {
   static schema = productSchema;
   validator = validator;
-
-  constructor(data: ProductSchema) {
-    super(data);
-  }
 }

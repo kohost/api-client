@@ -14,9 +14,6 @@ export type SwitchSchema = FromSchema<
 
 export class Switch extends Entity<SwitchSchema> {
   static schema = switchSchema;
+  static actionProperties = ["state"];
   validator = validator;
-
-  constructor(data: SwitchSchema) {
-    super(data);
-  }
 }

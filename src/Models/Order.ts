@@ -16,21 +16,17 @@ export class Order extends Entity<OrderSchema> {
   static schema = orderSchema;
   validator = validator;
 
-  constructor(data: OrderSchema) {
-    super(data);
-  }
-
   getSubTotal(): number {
-    return this.data.items.reduce((acc, item) => {
+    return this.items.reduce((acc, item) => {
       const qty = item.quantity || 1;
       return acc + item.price * qty;
     }, 0);
   }
 
   getTaxTotal(): number {
-    const taxes = this.data.taxes;
+    const taxes = this.taxes;
     if (!taxes) return 0;
-    return this.data.items.reduce((acc, item) => {
+    return this.items.reduce((acc, item) => {
       if (!item.taxClass) return acc;
       const tax = taxes.find((t) => t.class === item.taxClass);
       if (!tax) return acc;
@@ -43,9 +39,9 @@ export class Order extends Entity<OrderSchema> {
   }
 
   getDeliveryTotal(): number {
-    const delivery = this.data.delivery;
+    const delivery = this.delivery;
     if (!delivery) return 0;
-    return this.data.items.reduce((acc, item) => {
+    return this.items.reduce((acc, item) => {
       if (!item.deliveryClass) return acc;
       const d = delivery.find((d) => d.class === item.deliveryClass);
       if (!d) return acc;
@@ -58,7 +54,7 @@ export class Order extends Entity<OrderSchema> {
   }
 
   getFeesTotal(): number {
-    const fees = this.data.fees;
+    const fees = this.fees;
     return fees.reduce((acc, fee) => {
       return acc + fee.price;
     }, 0);
@@ -74,7 +70,7 @@ export class Order extends Entity<OrderSchema> {
   }
 
   getPaymentsTotal(): number {
-    return this.data.payments.reduce((acc, payment) => {
+    return this.payments.reduce((acc, payment) => {
       return acc + payment.amount;
     }, 0);
   }

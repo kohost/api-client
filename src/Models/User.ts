@@ -70,13 +70,13 @@ export class User extends Entity<UserSchema> {
   }
 
   get fullName() {
-    return `${this.data.firstName} ${this.data.lastName}`;
+    return `${this.firstName} ${this.lastName}`;
   }
 
   get roles(): string[] {
-    const roles = new Set();
-    if (this.data.permissions) {
-      for (const permission of this.data.permissions) {
+    const roles = new Set<string>();
+    if (this.permissions) {
+      for (const permission of this.permissions) {
         roles.add(permission.role);
       }
     }

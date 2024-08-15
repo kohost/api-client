@@ -15,8 +15,4 @@ export type CourtesySchema = FromSchema<
 export class Courtesy extends Entity<CourtesySchema> {
   static schema = courtesySchema;
   validator = validator;
-
-  constructor(data: CourtesySchema) {
-    super(data);
-  }
 }

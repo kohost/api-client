@@ -15,8 +15,4 @@ export type AnnouncementSchema = FromSchema<
 export class Announcement extends Entity<AnnouncementSchema> {
   static schema = announcementSchema;
   validator = validator;
-
-  constructor(data: AnnouncementSchema) {
-    super(data);
-  }
 }

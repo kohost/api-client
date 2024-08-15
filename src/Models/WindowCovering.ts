@@ -14,9 +14,6 @@ export type WindowCoveringSchema = FromSchema<
 
 export class WindowCovering extends Entity<WindowCoveringSchema> {
   static schema = windowCoveringSchema;
+  static actionProperties = ["position"];
   validator = validator;
-
-  constructor(data: WindowCoveringSchema) {
-    super(data);
-  }
 }

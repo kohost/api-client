@@ -15,8 +15,4 @@ export type OrganizationSchema = FromSchema<
 export class Organization extends Entity<OrganizationSchema> {
   static schema = organizationSchema;
   validator = validator;
-
-  constructor(data: OrganizationSchema) {
-    super(data);
-  }
 }

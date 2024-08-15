@@ -1,4 +1,4 @@
-import type { Schema, ValidateFunction } from "ajv";
+import type { AnySchema, ValidateFunction } from "ajv";
 
 class ValidationError extends Error {
   cause: any;
@@ -9,31 +9,52 @@ class ValidationError extends Error {
   }
 }
 
-export interface ValidateableEntity {
-  validate(data: any): boolean | void;
-  validator: ValidateFunction;
-  type: string;
-}
-
-export abstract class Entity<ESchema extends { type: string }>
-  implements ValidateableEntity
-{
-  data: ESchema;
-  type: string;
-  abstract validator: ValidateFunction;
-  constructor(data: ESchema) {
-    this.validate(data);
-    this.data = data;
-    this.type = data.type;
+const EntityBase = class {
+  constructor(properties: object) {
+    Object.assign(this, properties);
   }
-  validate(data: ESchema): boolean | void {
-    const valid = this.validator(data);
-    if (!valid) {
+} as new <t extends object>(base: t) => t;
+
+/** @ts-expect-error (needed to extend `t`, but safe given ShallowClone's implementation) **/
+export abstract class Entity<t extends object> extends EntityBase<t> {
+  /**
+   * Validator function for the entity
+   */
+  abstract validator: ValidateFunction;
+  /**
+   * Properties that are considered actions
+   */
+  static actionProperties?: string[];
+  /**
+   * JSON schema for the entity
+   */
+  static schema: AnySchema;
+  constructor(data: t) {
+    super(data);
+    this.validate(data);
+  }
+
+  validate(data: t): void {
+    if (!data)
+      throw new ValidationError("Invalid data", { cause: "Data is empty" });
+    if (!this.validator(data)) {
       throw new ValidationError(`Invalid ${this.constructor.name}`, {
         cause: this.validator.errors,
       });
     }
   }
 
-  static schema: Schema;
+  static getActionDelta<t extends object>(old: t, _new: t) {
+    const delta = {} as { [key: string]: number };
+    for (const action in _new) {
+      if (this.actionProperties?.includes(action)) {
+        if (old[action] !== _new[action]) {
+          delta[action] = 1;
+        } else {
+          delta[action] = 0;
+        }
+      }
+    }
+    return delta;
+  }
 }

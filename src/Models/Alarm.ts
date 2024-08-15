@@ -13,10 +13,6 @@ export type AlarmSchema = FromSchema<
 >;
 
 export class Alarm extends Entity<AlarmSchema> {
-  static schema = alarmSchema;
   validator = validator;
-
-  constructor(data: AlarmSchema) {
-    super(data);
-  }
+  static schema = alarmSchema;
 }

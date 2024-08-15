@@ -15,8 +15,4 @@ export type MotionSensorSchema = FromSchema<
 export class MotionSensor extends Entity<MotionSensorSchema> {
   static schema = motionSensorSchema;
   validator = validator;
-
-  constructor(data: MotionSensorSchema) {
-    super(data);
-  }
 }

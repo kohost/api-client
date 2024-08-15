@@ -15,8 +15,4 @@ export type SmsMessageSchema = FromSchema<
 export class SmsMessage extends Entity<SmsMessageSchema> {
   static schema = smsMessageSchema;
   validator = validator;
-
-  constructor(data: SmsMessageSchema) {
-    super(data);
-  }
 }

@@ -14,9 +14,13 @@ export type MediaSourceSchema = FromSchema<
 
 export class MediaSource extends Entity<MediaSourceSchema> {
   static schema = mediaSourceSchema;
+  static actionProperties = [
+    "power",
+    "command",
+    "volume",
+    "contrast",
+    "brightness",
+    "input",
+  ];
   validator = validator;
-
-  constructor(data: MediaSourceSchema) {
-    super(data);
-  }
 }

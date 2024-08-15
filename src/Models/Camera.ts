@@ -15,8 +15,4 @@ export type CameraSchema = FromSchema<
 export class Camera extends Entity<CameraSchema> {
   static schema = cameraSchema;
   validator = validator;
-
-  constructor(data: CameraSchema) {
-    super(data);
-  }
 }

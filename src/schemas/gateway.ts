@@ -10,7 +10,9 @@ export const gatewaySchema = {
       $ref: "definitions.json#/definitions/id",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["gateway"],
+      default: "gateway",
     },
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",

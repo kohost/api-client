@@ -15,8 +15,4 @@ export type CredentialSchema = FromSchema<
 export class Credential extends Entity<CredentialSchema> {
   static schema = credentialSchema;
   validator = validator;
-
-  constructor(data: CredentialSchema) {
-    super(data);
-  }
 }

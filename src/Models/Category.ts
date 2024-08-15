@@ -15,8 +15,4 @@ export type CategorySchema = FromSchema<
 export class Category extends Entity<CategorySchema> {
   static schema = categorySchema;
   validator = validator;
-
-  constructor(data: CategorySchema) {
-    super(data);
-  }
 }

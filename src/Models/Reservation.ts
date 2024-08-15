@@ -15,8 +15,4 @@ export type ReservationSchema = FromSchema<
 export class Reservation extends Entity<ReservationSchema> {
   static schema = reservationSchema;
   validator = validator;
-
-  constructor(data: ReservationSchema) {
-    super(data);
-  }
 }
