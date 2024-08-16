@@ -18,7 +18,10 @@ export class Thermostat extends Entity<ThermostatSchema> {
   static actionProperties = ["hvacMode", "fanMode", "setpoints"];
   validator = validator;
 
-  static getActionDelta(old: ThermostatSchema, _new: ThermostatSchema) {
+  static getActionDelta(
+    old: ThermostatSchema,
+    _new: ThermostatSchema
+  ): { [key: string]: number } {
     const delta = {} as { [key: string]: number };
     for (const action in _new) {
       if (this.actionProperties.includes(action)) {
@@ -50,4 +53,5 @@ export class Thermostat extends Entity<ThermostatSchema> {
     }
 
     return delta;
+  }
 }

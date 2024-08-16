@@ -44,7 +44,10 @@ export abstract class Entity<t extends object> extends EntityBase<t> {
     }
   }
 
-  static getActionDelta<t extends object>(old: t, _new: t) {
+  static getActionDelta<t extends object>(
+    old: t,
+    _new: t
+  ): { [key: string]: number } {
     const delta = {} as { [key: string]: number };
     for (const action in _new) {
       if (this.actionProperties?.includes(action)) {
