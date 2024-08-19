@@ -116,3 +116,5 @@ function mapSpaceData(data: SpaceSchema) {
 }
 
 // module.exports = Space;
+
+export default Space;

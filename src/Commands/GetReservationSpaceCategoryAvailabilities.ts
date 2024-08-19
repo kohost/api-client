@@ -1,8 +1,16 @@
-const { RequestError } = require("../Errors");
-const Command = require("./Command");
+import { RequestError } from "../Errors/RequestError";
+import { Command } from "./Command";
 
-class GetReservationSpaceCategoryAvailabilities extends Command {
-  constructor(options) {
+export interface GetReservationSpaceCategoryAvailabilitiesOptions {
+  id?: string;
+}
+
+export class GetReservationSpaceCategoryAvailabilities extends Command {
+  constructor(
+    options: GetReservationSpaceCategoryAvailabilitiesOptions & {
+      [key: string]: any;
+    }
+  ) {
     if (!options) throw new RequestError("options are required");
     const { id, ...rest } = options;
     super({ id, ...rest });
@@ -13,4 +21,4 @@ class GetReservationSpaceCategoryAvailabilities extends Command {
   }
 }
 
-module.exports = GetReservationSpaceCategoryAvailabilities;
+export default GetReservationSpaceCategoryAvailabilities;

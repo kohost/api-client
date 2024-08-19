@@ -204,3 +204,5 @@ function createDeviceInstances(data: any) {
 
   return roomData;
 }
+
+export default Room;

@@ -1,7 +1,7 @@
 import { PropertySchema } from "../Models/Property";
 import { Event } from "./Event";
 
-class SystemPropertyUpdate extends Event {
+export class SystemPropertyUpdate extends Event {
   constructor(property: PropertySchema, context = {}) {
     super(property, context);
   }

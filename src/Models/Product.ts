@@ -16,3 +16,5 @@ export class Product extends Entity<ProductSchema> {
   static schema = productSchema;
   validator = validator;
 }
+
+export default Product;

@@ -16,3 +16,5 @@ export class Gateway extends Entity<GatewaySchema> {
   static schema = gatewaySchema;
   validator = validator;
 }
+
+export default Gateway;

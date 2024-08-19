@@ -16,3 +16,5 @@ export class Organization extends Entity<OrganizationSchema> {
   static schema = organizationSchema;
   validator = validator;
 }
+
+export default Organization;

@@ -1,7 +1,7 @@
 import { DimmerSchema } from "../Models/Dimmer";
 import { Event } from "./Event";
 
-class SystemDimmerUpdated extends Event {
+export class SystemDimmerUpdated extends Event {
   constructor(dimmer: DimmerSchema, context = {}) {
     super(dimmer, context);
   }

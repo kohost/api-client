@@ -1,7 +1,14 @@
-const Command = require("./Command");
+import { CourtesySchema } from "../Models/Courtesy";
+import { Command } from "./Command";
 
-class SetCourtesy extends Command {
-  constructor({ id, state, ...rest }) {
+export interface SetCourtesyOptions {
+  id: string;
+  state: CourtesySchema["state"];
+}
+
+export class SetCourtesy extends Command {
+  constructor(options: SetCourtesyOptions & { [key: string]: any }) {
+    const { id, state, ...rest } = options;
     super({ id, state, ...rest });
   }
 
@@ -10,4 +17,4 @@ class SetCourtesy extends Command {
   }
 }
 
-module.exports = SetCourtesy;
+export default SetCourtesy;

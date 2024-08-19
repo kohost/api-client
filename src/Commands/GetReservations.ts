@@ -11,7 +11,7 @@ export interface GetReservationsOptions {
   confirmationNumber?: string;
 }
 
-export default class GetReservations extends Command {
+export class GetReservations extends Command {
   constructor(options: GetReservationsOptions & { [key: string]: any }) {
     if (!options) throw new RequestError("options are required");
     const { id, startDate, endDate, status, ...rest } = options;
@@ -22,3 +22,5 @@ export default class GetReservations extends Command {
     return "GetReservations";
   }
 }
+
+export default GetReservations;

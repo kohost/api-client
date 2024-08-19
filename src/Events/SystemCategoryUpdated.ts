@@ -1,7 +1,7 @@
 import { CategorySchema } from "../Models/Category";
 import { Event } from "./Event";
 
-class SystemCategoryUpdated extends Event {
+export class SystemCategoryUpdated extends Event {
   constructor(category: CategorySchema, context = {}) {
     super(category, context);
   }

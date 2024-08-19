@@ -16,3 +16,5 @@ export class Property extends Entity<PropertySchema> {
   static schema = propertySchema;
   validator = validator;
 }
+
+export default Property;

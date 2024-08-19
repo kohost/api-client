@@ -24,3 +24,5 @@ export class MediaSource extends Entity<MediaSourceSchema> {
   ];
   validator = validator;
 }
+
+export default MediaSource;

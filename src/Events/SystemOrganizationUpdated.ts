@@ -1,7 +1,7 @@
 import { OrganizationSchema } from "../Models/Organization";
 import { Event } from "./Event";
 
-class SystemOrganizationUpdated extends Event {
+export class SystemOrganizationUpdated extends Event {
   constructor(organization: OrganizationSchema, context = {}) {
     super(organization, context);
   }

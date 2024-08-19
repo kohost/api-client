@@ -1,7 +1,20 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class SellProducts extends Command {
-  constructor({ reservationId, userId, products, ...rest }) {
+interface SellProductOptionsProduct {
+  id: string;
+  quantity: number;
+  price?: number;
+}
+
+export interface SellProductsOptions {
+  reservationId: string;
+  userId: string;
+  products: SellProductOptionsProduct[]; // Consider creating a more specific type for products
+}
+
+export class SellProducts extends Command {
+  constructor(options: SellProductsOptions & { [key: string]: any }) {
+    const { reservationId, userId, products, ...rest } = options;
     super({ reservationId, userId, products, ...rest });
   }
 
@@ -10,4 +23,4 @@ class SellProducts extends Command {
   }
 }
 
-module.exports = SellProducts;
+export default SellProducts;

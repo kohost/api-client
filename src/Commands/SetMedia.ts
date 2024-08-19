@@ -1,7 +1,14 @@
-const Command = require("./Command");
+import { MediaSourceSchema } from "../Models/MediaSource";
+import { Command } from "./Command";
 
-class SetMedia extends Command {
-  constructor({ id, command, ...rest }) {
+export interface SetMediaOptions {
+  id: string;
+  command: MediaSourceSchema["command"];
+}
+
+export class SetMedia extends Command {
+  constructor(options: SetMediaOptions & { [key: string]: any }) {
+    const { id, command, ...rest } = options;
     super({ id, command, ...rest });
   }
 
@@ -10,4 +17,4 @@ class SetMedia extends Command {
   }
 }
 
-module.exports = SetMedia;
+export default SetMedia;

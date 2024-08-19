@@ -17,3 +17,5 @@ export class Dimmer extends Entity<DimmerSchema> {
   static actionProperties = ["level"];
   validator = validator;
 }
+
+export default Dimmer;

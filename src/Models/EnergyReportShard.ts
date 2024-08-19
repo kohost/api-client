@@ -16,3 +16,5 @@ export class EnergyReportShard extends Entity<EnergyReportShardSchema> {
   static schema = energyReportShardSchema;
   validator = validator;
 }
+
+export default EnergyReportShard;

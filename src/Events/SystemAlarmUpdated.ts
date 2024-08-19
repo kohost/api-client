@@ -1,7 +1,7 @@
 import { AlarmSchema } from "../Models/Alarm";
 import { Event } from "./Event";
 
-class SystemAlarmUpdated extends Event {
+export class SystemAlarmUpdated extends Event {
   constructor(alarm: AlarmSchema, context = {}) {
     super(alarm, context);
   }

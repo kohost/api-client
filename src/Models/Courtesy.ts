@@ -16,3 +16,5 @@ export class Courtesy extends Entity<CourtesySchema> {
   static schema = courtesySchema;
   validator = validator;
 }
+
+export default Courtesy;

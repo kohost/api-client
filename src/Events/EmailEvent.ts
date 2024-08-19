@@ -1,7 +1,7 @@
 import { type EmailMessageSchema } from "../Models/EmailMessage";
 import { Event } from "./Event";
 
-class EmailEvent extends Event {
+export class EmailEvent extends Event {
   constructor(email: EmailMessageSchema, context = {}) {
     super(email, context);
   }

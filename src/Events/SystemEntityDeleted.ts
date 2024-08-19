@@ -1,6 +1,6 @@
 import { Event } from "./Event";
 
-class SystemEntityDeleted extends Event {
+export class SystemEntityDeleted extends Event {
   constructor(data: Record<string, any>, context = {}) {
     super(data, context);
   }

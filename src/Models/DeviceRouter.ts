@@ -16,3 +16,5 @@ export class DeviceRouter extends Entity<DeviceRouterSchema> {
   static schema = deviceRouterSchema;
   validator = validator;
 }
+
+export default DeviceRouter;

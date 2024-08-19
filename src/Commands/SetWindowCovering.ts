@@ -1,7 +1,13 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class SetWindowCovering extends Command {
-  constructor({ id, position, ...rest }) {
+export interface SetWindowCoveringOptions {
+  id: string;
+  position: number;
+}
+
+export class SetWindowCovering extends Command {
+  constructor(options: SetWindowCoveringOptions & { [key: string]: any }) {
+    const { id, position, ...rest } = options;
     super({ id, position, ...rest });
   }
 
@@ -10,4 +16,4 @@ class SetWindowCovering extends Command {
   }
 }
 
-module.exports = SetWindowCovering;
+export default SetWindowCovering;

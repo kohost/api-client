@@ -1,7 +1,14 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class UploadImage extends Command {
-  constructor({ id, url, file, ...rest }) {
+export interface UploadImageOptions {
+  id?: string;
+  url: string;
+  file?: File; // Assuming file is a File or Blob object
+}
+
+export class UploadImage extends Command {
+  constructor(options: UploadImageOptions & { [key: string]: any }) {
+    const { id, url, file, ...rest } = options;
     super({ id, url, file, ...rest });
   }
 
@@ -10,4 +17,4 @@ class UploadImage extends Command {
   }
 }
 
-module.exports = UploadImage;
+export default UploadImage;

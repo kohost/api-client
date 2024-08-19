@@ -17,3 +17,5 @@ export class Lock extends Entity<LockSchema> {
   static actionProperties: ["state"];
   validator = validator;
 }
+
+export default Lock;

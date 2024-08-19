@@ -1,5 +1,5 @@
-import AppError from "./AppError";
-export default class AuthenticationError extends AppError {
+import { AppError } from "./AppError";
+export class AuthenticationError extends AppError {
   constructor(message = "Authentication Error", options = {}) {
     super(message, options);
     this.statusCode = 401;
@@ -7,3 +7,5 @@ export default class AuthenticationError extends AppError {
     Object.setPrototypeOf(this, AuthenticationError.prototype);
   }
 }
+
+export default AuthenticationError;

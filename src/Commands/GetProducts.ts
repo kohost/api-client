@@ -14,3 +14,5 @@ export class GetProducts extends Command {
     return "GetProducts";
   }
 }
+
+export default GetProducts;

@@ -17,3 +17,5 @@ export class GetMobileKey extends Command {
     return "GetMobileKey";
   }
 }
+
+export default GetMobileKey;

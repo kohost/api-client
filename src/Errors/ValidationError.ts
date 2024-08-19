@@ -1,6 +1,6 @@
 import AppError from "./AppError";
 
-export default class ValidationError extends AppError {
+export class ValidationError extends AppError {
   constructor(message = "Validation Error", options = {}) {
     super(message, options);
     this.statusCode = 400;
@@ -8,3 +8,5 @@ export default class ValidationError extends AppError {
     Object.setPrototypeOf(this, ValidationError.prototype);
   }
 }
+
+export default ValidationError;

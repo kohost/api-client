@@ -34,3 +34,5 @@ function mapConversationData(data: TicketSchema) {
   });
   return ticketData;
 }
+
+export default Ticket;

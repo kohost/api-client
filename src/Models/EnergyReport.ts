@@ -16,3 +16,5 @@ export class EnergyReport extends Entity<EnergyReportSchema> {
   static schema = energyReportSchema;
   validator = validator;
 }
+
+export default EnergyReport;

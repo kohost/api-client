@@ -1,6 +1,6 @@
-import AppError from "./AppError";
+import { AppError } from "./AppError";
 
-export default class RequestError extends AppError {
+export class RequestError extends AppError {
   constructor(message = "Bad Request", options = {}) {
     super(message, options);
     this.statusCode = 400;
@@ -8,3 +8,5 @@ export default class RequestError extends AppError {
     Object.setPrototypeOf(this, RequestError.prototype);
   }
 }
+
+export default RequestError;

@@ -79,3 +79,5 @@ export class Order extends Entity<OrderSchema> {
     return this.getTotal() - this.getPaymentsTotal();
   }
 }
+
+export default Order;

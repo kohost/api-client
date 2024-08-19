@@ -16,3 +16,5 @@ export class MotionSensor extends Entity<MotionSensorSchema> {
   static schema = motionSensorSchema;
   validator = validator;
 }
+
+export default MotionSensor;

@@ -1,6 +1,6 @@
-import AppError from "./AppError";
+import { AppError } from "./AppError";
 
-export default class SystemCommError extends AppError {
+export class SystemCommError extends AppError {
   constructor(message = "System Communication Error", options = {}) {
     super(message, options);
     this.statusCode = 503;
@@ -8,3 +8,5 @@ export default class SystemCommError extends AppError {
     Object.setPrototypeOf(this, SystemCommError.prototype);
   }
 }
+
+export default SystemCommError;

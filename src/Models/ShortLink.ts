@@ -16,3 +16,5 @@ export class ShortLink extends Entity<ShortLinkSchema> {
   static schema = shortLinkSchema;
   validator = validator;
 }
+
+export default ShortLink;

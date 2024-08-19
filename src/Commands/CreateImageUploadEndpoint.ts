@@ -25,3 +25,5 @@ export class CreateImageUploadEndpoint extends Command {
 function isValidDate(date: DateLike): date is Date {
   return new Date(date).toString() !== "Invalid Date";
 }
+
+export default CreateImageUploadEndpoint;

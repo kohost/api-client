@@ -1,6 +1,6 @@
-import AppError from "./AppError";
+import { AppError } from "./AppError";
 
-export default class LoginError extends AppError {
+export class LoginError extends AppError {
   constructor(message = "Invalid Login information provided", options = {}) {
     super(message, options);
     this.statusCode = 401;
@@ -8,3 +8,5 @@ export default class LoginError extends AppError {
     Object.setPrototypeOf(this, LoginError.prototype);
   }
 }
+
+export default LoginError;

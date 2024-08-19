@@ -1,13 +1,5 @@
 import type { AnySchema, ValidateFunction } from "ajv";
-
-class ValidationError extends Error {
-  cause: any;
-  constructor(message: string, options: { cause: any }) {
-    super(message);
-    this.name = "ValidationError";
-    this.cause = options.cause;
-  }
-}
+import { ValidationError } from "../Errors";
 
 const EntityBase = class {
   constructor(properties: object) {
@@ -61,3 +53,5 @@ export abstract class Entity<t extends object> extends EntityBase<t> {
     return delta;
   }
 }
+
+export default Entity;

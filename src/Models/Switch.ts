@@ -17,3 +17,5 @@ export class Switch extends Entity<SwitchSchema> {
   static actionProperties = ["state"];
   validator = validator;
 }
+
+export default Switch;

@@ -1,7 +1,7 @@
 import { ShortLinkSchema } from "../Models/ShortLink";
 import { Event } from "./Event";
 
-class ShortLinkCreated extends Event {
+export class ShortLinkCreated extends Event {
   constructor(shortLink: ShortLinkSchema, context = {}) {
     super(shortLink, context);
   }

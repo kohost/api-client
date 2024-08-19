@@ -1,9 +1,18 @@
-const Command = require("./Command");
-const RequestError = require("../Errors/RequestError");
+import { RequestError } from "../Errors";
+import { Command } from "./Command";
 
-class UpdateReservation extends Command {
-  constructor({ id, ...rest }) {
-    if (!id) throw new RequestError("document type is required");
+export interface UpdateReservationOptions {
+  id: string;
+  space?: string;
+  spaceCategory?: string;
+  checkInDateTime?: string | Date;
+  checkOutDateTime?: string | Date;
+}
+
+export class UpdateReservation extends Command {
+  constructor(options: UpdateReservationOptions & { [key: string]: any }) {
+    const { id, ...rest } = options;
+    if (!id) throw new RequestError("id is required");
     super({ id, ...rest });
   }
 
@@ -12,4 +21,4 @@ class UpdateReservation extends Command {
   }
 }
 
-module.exports = UpdateReservation;
+export default UpdateReservation;

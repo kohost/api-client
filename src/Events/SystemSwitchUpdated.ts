@@ -1,7 +1,7 @@
 import { SwitchSchema } from "../Models/Switch";
 import { Event } from "./Event";
 
-class SystemSwitchUpdate extends Event {
+export class SystemSwitchUpdate extends Event {
   constructor(_switch: SwitchSchema, context = {}) {
     super(_switch, context);
   }

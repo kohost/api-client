@@ -1,7 +1,7 @@
 import { ProductSchema } from "../Models/Product";
 import { Event } from "./Event";
 
-class SystemProductUpdated extends Event {
+export class SystemProductUpdated extends Event {
   constructor(product: ProductSchema, context = {}) {
     super(product, context);
   }

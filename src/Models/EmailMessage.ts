@@ -16,3 +16,5 @@ export class EmailMessage extends Entity<EmailMessageSchema> {
   static schema = emailMessageSchema;
   validator = validator;
 }
+
+export default EmailMessage;

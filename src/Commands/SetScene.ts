@@ -1,7 +1,13 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class SetScene extends Command {
-  constructor({ id, devices, ...rest }) {
+export interface SetSceneOptions {
+  id: string;
+  devices: any[]; // Consider creating a more specific type for devices
+}
+
+export class SetScene extends Command {
+  constructor(options: SetSceneOptions & { [key: string]: any }) {
+    const { id, devices, ...rest } = options;
     super({ id, devices, ...rest });
   }
 
@@ -10,4 +16,4 @@ class SetScene extends Command {
   }
 }
 
-module.exports = SetScene;
+export default SetScene;

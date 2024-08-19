@@ -1,7 +1,7 @@
 import { SpaceSchema } from "../Models/Space";
 import { Event } from "./Event";
 
-class SystemSpaceUpdate extends Event {
+export class SystemSpaceUpdate extends Event {
   constructor(space: SpaceSchema, context = {}) {
     super(space, context);
   }

@@ -1,7 +1,16 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class GetUsers extends Command {
-  constructor({ id, ...rest }) {
+export interface GetUsersOptions {
+  id?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  includeRevenue?: boolean;
+}
+
+export class GetUsers extends Command {
+  constructor(options: GetUsersOptions & { [key: string]: any }) {
+    const { id, ...rest } = options;
     super({ id, ...rest });
   }
 
@@ -10,4 +19,4 @@ class GetUsers extends Command {
   }
 }
 
-module.exports = GetUsers;
+export default GetUsers;

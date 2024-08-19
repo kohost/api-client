@@ -2,7 +2,7 @@ import { ReservationSchema } from "../Models/Reservation";
 import { AppEvents } from "../defs/amqpExchanges";
 import { Event } from "./Event";
 
-class ReservationCheckedIn extends Event {
+export class ReservationCheckedIn extends Event {
   constructor(reservation: ReservationSchema, context = {}) {
     super(reservation, context);
   }

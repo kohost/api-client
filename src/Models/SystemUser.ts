@@ -16,3 +16,5 @@ export class SystemUser extends Entity<SystemUserSchema> {
   static schema = systemUserSchema;
   validator = validator;
 }
+
+export default SystemUser;

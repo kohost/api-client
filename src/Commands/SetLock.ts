@@ -1,7 +1,14 @@
-const Command = require("./Command");
+import { LockSchema } from "../Models/Lock";
+import { Command } from "./Command";
 
-class SetLock extends Command {
-  constructor({ id, state, ...rest }) {
+export interface SetLockOptions {
+  id: string;
+  state: LockSchema["state"];
+}
+
+export class SetLock extends Command {
+  constructor(options: SetLockOptions & { [key: string]: any }) {
+    const { id, state, ...rest } = options;
     super({ id, state, ...rest });
   }
 
@@ -10,4 +17,4 @@ class SetLock extends Command {
   }
 }
 
-module.exports = SetLock;
+export default SetLock;

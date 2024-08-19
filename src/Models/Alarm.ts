@@ -16,3 +16,5 @@ export class Alarm extends Entity<AlarmSchema> {
   validator = validator;
   static schema = alarmSchema;
 }
+
+export default Alarm;

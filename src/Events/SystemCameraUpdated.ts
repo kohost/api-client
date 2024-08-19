@@ -1,7 +1,7 @@
 import { CameraSchema } from "../Models/Camera";
 import { Event } from "./Event";
 
-class SystemCameraUpdated extends Event {
+export class SystemCameraUpdated extends Event {
   constructor(camera: CameraSchema, context = {}) {
     super(camera, context);
   }

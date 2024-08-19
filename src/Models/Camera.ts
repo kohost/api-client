@@ -16,3 +16,5 @@ export class Camera extends Entity<CameraSchema> {
   static schema = cameraSchema;
   validator = validator;
 }
+
+export default Camera;

@@ -1,7 +1,7 @@
 import { CourtesySchema } from "../Models/Courtesy";
 import { Event } from "./Event";
 
-class SystemCourtesyUpdated extends Event {
+export class SystemCourtesyUpdated extends Event {
   constructor(courtesy: CourtesySchema, context = {}) {
     super(courtesy, context);
   }

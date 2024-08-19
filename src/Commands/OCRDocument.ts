@@ -1,8 +1,14 @@
-const Command = require("./Command");
-const RequestError = require("../Errors/RequestError");
+import { RequestError } from "../Errors";
+import { Command } from "./Command";
 
-class OCRDocument extends Command {
-  constructor({ type, image, ...rest }) {
+export interface OCRDocumentOptions {
+  type?: string;
+  image: string;
+}
+
+export class OCRDocument extends Command {
+  constructor(options: OCRDocumentOptions & { [key: string]: any }) {
+    const { type, image, ...rest } = options;
     if (!image) throw new RequestError("document image is required");
     super({ type, image, ...rest });
   }
@@ -12,4 +18,4 @@ class OCRDocument extends Command {
   }
 }
 
-module.exports = OCRDocument;
+export default OCRDocument;

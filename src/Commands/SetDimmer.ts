@@ -1,7 +1,13 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class SetDimmer extends Command {
-  constructor({ id, level, ...rest }) {
+export interface SetDimmerOptions {
+  id: string;
+  level: number;
+}
+
+export class SetDimmer extends Command {
+  constructor(options: SetDimmerOptions & { [key: string]: any }) {
+    const { id, level, ...rest } = options;
     super({ id, level, ...rest });
   }
 
@@ -10,4 +16,4 @@ class SetDimmer extends Command {
   }
 }
 
-module.exports = SetDimmer;
+export default SetDimmer;

@@ -1,7 +1,7 @@
 import { SystemUserSchema } from "../Models/SystemUser";
 import { Event } from "./Event";
 
-class SystemUserUpdate extends Event {
+export class SystemUserUpdate extends Event {
   constructor(systemUser: SystemUserSchema, context = {}) {
     super(systemUser, context);
   }

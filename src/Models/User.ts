@@ -199,3 +199,5 @@ console.log("USER IS NOT IMPLEMENTED YET");
 // });
 
 // module.exports = User;
+
+export default User;

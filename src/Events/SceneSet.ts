@@ -1,7 +1,7 @@
 import { SceneSchema } from "../Models/Scene";
 import { Event } from "./Event";
 
-class SceneSet extends Event {
+export class SceneSet extends Event {
   constructor(scene: SceneSchema, context = {}) {
     super(scene, context);
   }

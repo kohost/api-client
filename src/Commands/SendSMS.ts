@@ -1,8 +1,17 @@
-const Command = require("./Command");
-const RequestError = require("../Errors/RequestError");
+import { RequestError } from "../Errors";
+import { Command } from "./Command";
 
-class SendSMS extends Command {
-  constructor({ id, body, to, from, media, ...rest }) {
+export interface SendSMSOptions {
+  id?: string;
+  body?: string;
+  to: string;
+  from: string;
+  media?: string;
+}
+
+export class SendSMS extends Command {
+  constructor(options: SendSMSOptions & { [key: string]: any }) {
+    const { id, body, to, from, media, ...rest } = options;
     if (!body && !media)
       throw new RequestError("sms body or media is required");
     if (!to) throw new RequestError("sms to is required");
@@ -15,4 +24,4 @@ class SendSMS extends Command {
   }
 }
 
-module.exports = SendSMS;
+export default SendSMS;

@@ -1,7 +1,14 @@
-const Command = require("./Command");
+import { SwitchSchema } from "../Models/Switch";
+import { Command } from "./Command";
 
-class SetSwitch extends Command {
-  constructor({ id, state, ...rest }) {
+export interface SetSwitchOptions {
+  id: string;
+  state: SwitchSchema["state"];
+}
+
+export class SetSwitch extends Command {
+  constructor(options: SetSwitchOptions & { [key: string]: any }) {
+    const { id, state, ...rest } = options;
     super({ id, state, ...rest });
   }
 
@@ -10,4 +17,4 @@ class SetSwitch extends Command {
   }
 }
 
-module.exports = SetSwitch;
+export default SetSwitch;

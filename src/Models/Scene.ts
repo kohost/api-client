@@ -16,3 +16,5 @@ export class Scene extends Entity<SceneSchema> {
   static schema = sceneSchema;
   validator = validator;
 }
+
+export default Scene;

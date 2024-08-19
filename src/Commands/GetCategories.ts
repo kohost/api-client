@@ -13,3 +13,5 @@ export class GetCategories extends Command {
     return "GetCategories";
   }
 }
+
+export default GetCategories;

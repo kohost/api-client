@@ -16,3 +16,5 @@ export class Reservation extends Entity<ReservationSchema> {
   static schema = reservationSchema;
   validator = validator;
 }
+
+export default Reservation;

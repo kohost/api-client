@@ -1,4 +1,4 @@
-import RequestError from "../Errors/RequestError";
+import { RequestError } from "../Errors";
 import { Command } from "./Command";
 
 export interface CheckOutReservationOptions {
@@ -18,3 +18,5 @@ export class CheckOutReservation extends Command {
     return "CheckOutReservation";
   }
 }
+
+export default CheckOutReservation;

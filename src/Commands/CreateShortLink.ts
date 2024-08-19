@@ -1,4 +1,4 @@
-import RequestError from "../Errors/RequestError";
+import { RequestError } from "../Errors";
 import { Command } from "./Command";
 
 export interface CreateShortLinkOptions {
@@ -17,3 +17,5 @@ export class CreateShortLink extends Command {
     return "CreateShortLink";
   }
 }
+
+export default CreateShortLink;

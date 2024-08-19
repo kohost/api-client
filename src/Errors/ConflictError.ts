@@ -1,6 +1,6 @@
-import AppError from "./AppError";
+import { AppError } from "./AppError";
 
-export default class ConflictError extends AppError {
+export class ConflictError extends AppError {
   constructor(message = "Bad Request", options = {}) {
     super(message, options);
     this.statusCode = 409;
@@ -8,3 +8,5 @@ export default class ConflictError extends AppError {
     Object.setPrototypeOf(this, ConflictError.prototype);
   }
 }
+
+export default ConflictError;

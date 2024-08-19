@@ -16,3 +16,5 @@ export class Policy extends Entity<PolicySchema> {
   static schema = policySchema;
   validator = validator;
 }
+
+export default Policy;

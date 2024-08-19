@@ -1,7 +1,7 @@
 import { MotionSensorSchema } from "../Models/MotionSensor";
 import { Event } from "./Event";
 
-class SystemMotionSensorUpdated extends Event {
+export class SystemMotionSensorUpdated extends Event {
   constructor(motion: MotionSensorSchema, context = {}) {
     super(motion, context);
   }

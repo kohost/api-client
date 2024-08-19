@@ -16,3 +16,5 @@ export class Credential extends Entity<CredentialSchema> {
   static schema = credentialSchema;
   validator = validator;
 }
+
+export default Credential;

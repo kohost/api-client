@@ -16,3 +16,5 @@ export class DiscoveredDevice extends Entity<DiscoveredDeviceSchema> {
   static schema = discoveredDeviceSchema;
   validator = validator;
 }
+
+export default DiscoveredDevice;

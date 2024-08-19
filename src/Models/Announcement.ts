@@ -16,3 +16,5 @@ export class Announcement extends Entity<AnnouncementSchema> {
   static schema = announcementSchema;
   validator = validator;
 }
+
+export default Announcement;

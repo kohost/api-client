@@ -16,3 +16,5 @@ export class SmsMessage extends Entity<SmsMessageSchema> {
   static schema = smsMessageSchema;
   validator = validator;
 }
+
+export default SmsMessage;

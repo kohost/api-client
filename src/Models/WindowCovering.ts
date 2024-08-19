@@ -17,3 +17,5 @@ export class WindowCovering extends Entity<WindowCoveringSchema> {
   static actionProperties = ["position"];
   validator = validator;
 }
+
+export default WindowCovering;

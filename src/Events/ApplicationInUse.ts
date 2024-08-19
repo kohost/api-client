@@ -1,7 +1,7 @@
 import { AppEvents } from "../defs/amqpExchanges";
 import { Event } from "./Event";
 
-class ApplicationInUse extends Event {
+export class ApplicationInUse extends Event {
   constructor(data = {}, context = {}) {
     super(data, context);
   }

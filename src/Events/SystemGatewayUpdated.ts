@@ -1,7 +1,7 @@
 import { GatewaySchema } from "../Models/Gateway";
 import { Event } from "./Event";
 
-class SystemGatewayUpdated extends Event {
+export class SystemGatewayUpdated extends Event {
   constructor(gateway: GatewaySchema, context = {}) {
     super(gateway, context);
   }

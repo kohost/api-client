@@ -96,3 +96,5 @@ console.log("TIMESHEET IS NOT IMPLEMENTED YET");
 // });
 
 // module.exports = TimeSheet;
+
+export default TimeSheet;

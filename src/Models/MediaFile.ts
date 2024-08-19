@@ -29,3 +29,5 @@ export class MediaFile extends Entity<MediaFileSchema> {
     return this.url?.replace(/\/public$/, `/${query}`) || null;
   }
 }
+
+export default MediaFile;

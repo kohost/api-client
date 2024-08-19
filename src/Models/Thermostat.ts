@@ -55,3 +55,5 @@ export class Thermostat extends Entity<ThermostatSchema> {
     return delta;
   }
 }
+
+export default Thermostat;

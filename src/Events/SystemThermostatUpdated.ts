@@ -1,7 +1,7 @@
 import { ThermostatSchema } from "../Models/Thermostat";
 import { Event } from "./Event";
 
-class SystemThermostatUpdate extends Event {
+export class SystemThermostatUpdate extends Event {
   constructor(thermostat: ThermostatSchema, context = {}) {
     super(thermostat, context);
   }

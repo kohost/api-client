@@ -22,3 +22,5 @@ export abstract class Command {
     return { data: this.data };
   }
 }
+
+export default Command;

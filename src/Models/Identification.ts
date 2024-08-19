@@ -16,3 +16,5 @@ export class Identification extends Entity<IdentificationSchema> {
   static schema = identificationSchema;
   validator = validator;
 }
+
+export default Identification;

@@ -16,3 +16,5 @@ export class Category extends Entity<CategorySchema> {
   static schema = categorySchema;
   validator = validator;
 }
+
+export default Category;
