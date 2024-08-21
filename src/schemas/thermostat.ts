@@ -120,6 +120,7 @@ export const thermostatSchema = {
           $ref: "#/$defs/setpointMinMax",
         },
       },
+      required: ["value"],
     },
     setpointValue: {
       type: "number",

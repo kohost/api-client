@@ -1,5 +1,5 @@
-import exchanges, { type ExchangeName } from "../defs/amqpExchanges";
-import type { Context, Entity } from "../defs/defs";
+import exchanges, { type ExchangeName } from "../utils/amqpExchanges";
+import type { Context, Entity } from "../utils/defs";
 
 export abstract class Event {
   //data can be any object;

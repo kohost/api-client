@@ -1,7 +1,7 @@
 import { EventEmitter } from "events";
 import io, { ManagerOptions, Socket, SocketOptions } from "socket.io-client";
 
-export default class SocketIoClient extends EventEmitter {
+export class SocketIoClient extends EventEmitter {
   options: Partial<SocketOptions & ManagerOptions>;
   socket: Socket | null;
   url: string;

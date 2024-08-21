@@ -1,5 +1,5 @@
 import { ReservationSchema } from "../Models/Reservation";
-import { AppEvents } from "../defs/amqpExchanges";
+import { AppEvents } from "../utils/amqpExchanges";
 import { Event } from "./Event";
 
 export class ReservationCheckedOut extends Event {

@@ -8,6 +8,73 @@ import axios, {
 } from "axios";
 import { EventEmitter } from "events";
 
+interface UseCaseRequestOptions {
+  data: Record<string, any> | null;
+  headers: Record<string, string> | null;
+  query: Record<string, string> | null;
+}
+
+function UseCaseExec(
+  this: KohostApiClient & {
+    useCaseConfig: { method: string; endpoint: string; pathParams: string };
+  },
+  requestData: UseCaseRequestOptions = {
+    data: null,
+    query: null,
+    headers: null,
+  },
+  httpConfigOptions: AxiosRequestConfig = {}
+): Promise<AxiosResponse> {
+  if (!requestData) {
+    requestData = {
+      data: null,
+      query: null,
+      headers: null,
+    };
+  }
+
+  const { pathParams, endpoint, method } = this.useCaseConfig;
+
+  // get parameters from path
+
+  const { data, query, headers } = requestData;
+
+  // replace path parameters with values from params
+  let url = endpoint;
+
+  if (pathParams && data !== null) {
+    for (const param of pathParams) {
+      const paramName = param.replace(":", "");
+      url = url.replace(param, data[paramName]);
+    }
+  }
+
+  // make sure all parameters have been replaced
+  if (url.match(/:[a-zA-Z0-9]+/g)) {
+    const missingParams = url.match(/:[a-zA-Z0-9]+/g);
+    // remove the colon from the parameter name
+    const missing = missingParams?.map((param: string) =>
+      param.replace(":", "")
+    );
+    if (missing && missing.length > 0)
+      return Promise.reject(
+        new Error("Missing parameters: " + missing.join(", "))
+      );
+  }
+
+  const config = {
+    method: method,
+    url: url,
+    ...httpConfigOptions,
+  };
+
+  if (data) config.data = data;
+  if (query) config.params = query;
+  if (headers) config.headers = headers;
+
+  return this.transport.request(config);
+}
+
 interface KohostApiClientOptions {
   url: string;
   propertyId: string;
@@ -18,12 +85,15 @@ interface KohostApiClientOptions {
   onError?: (error: any) => any;
 }
 
-class KohostApiClient extends EventEmitter {
+export class KohostApiClient extends EventEmitter {
   #onSuccess;
   #onError;
   isRefreshingToken: boolean;
   options: KohostApiClientOptions;
-  _http: AxiosInstance;
+  transport: AxiosInstance;
+  RefreshToken!: () => any;
+
+  // RefreshToken: () => any;
 
   constructor(
     options: KohostApiClientOptions = {
@@ -76,9 +146,9 @@ class KohostApiClient extends EventEmitter {
       ? options.onError
       : (error: AxiosError) => error;
 
-    this._http = axios.create(config);
+    this.transport = axios.create(config);
 
-    this._http.interceptors.response.use(
+    this.transport.interceptors.response.use(
       this.#handleResponse.bind(this),
       this.#handleResponseError.bind(this)
     );
@@ -86,12 +156,12 @@ class KohostApiClient extends EventEmitter {
 
   set organizationId(orgId: string) {
     const key = KohostApiClient.defs.organizationHeader;
-    this._http.defaults.headers.common[key] = orgId;
+    this.transport.defaults.headers.common[key] = orgId;
   }
 
   set propertyId(propertyId: string) {
     const key = KohostApiClient.defs.propertyHeader;
-    this._http.defaults.headers.common[key] = propertyId;
+    this.transport.defaults.headers.common[key] = propertyId;
   }
 
   static get defs() {
@@ -128,8 +198,20 @@ class KohostApiClient extends EventEmitter {
     const { config: originalReq } = error;
     if (!error.response) return Promise.reject(error);
     const { status, data } = error.response;
-    const errorType = data?.error?.type;
-    const errorMessage = data?.error?.message;
+
+    let errorType;
+    let errorMessage;
+
+    if (data !== null) {
+      if (
+        typeof data === "object" &&
+        (data as { error: { type: string; message?: string } }).error
+      ) {
+        const errorData = data as { error: { type: string; message?: string } };
+        errorType = errorData.error.type || "";
+        errorMessage = errorData.error.message || "";
+      }
+    }
 
     try {
       const expectedError = status >= 400 && status < 500;
@@ -161,7 +243,7 @@ class KohostApiClient extends EventEmitter {
             .then(() => {
               // retry the original request with the new token
               this.isRefreshingToken = false;
-              return this._http(originalReq);
+              return this.transport(originalReq);
             })
             .catch((err: AxiosError) => {
               this.isRefreshingToken = false;
@@ -170,7 +252,7 @@ class KohostApiClient extends EventEmitter {
         }
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
 
     error = this.#onError(error);
@@ -178,5 +260,3 @@ class KohostApiClient extends EventEmitter {
     return Promise.reject(error);
   }
 }
-
-export default KohostApiClient;

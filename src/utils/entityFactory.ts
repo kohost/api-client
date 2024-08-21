@@ -37,7 +37,7 @@ import {
   WindowCovering,
 } from "../Models/index";
 
-export default function entityFactory(type: string) {
+export function entityFactory(type: string) {
   switch (type) {
     case "reservation":
       return Reservation;

@@ -1,6 +1,6 @@
 import { FromSchema } from "json-schema-to-ts";
-import { DeviceType, deviceTypes } from "../defs/defs";
 import { definitionsSchema } from "../schemas/definitions";
+import { DeviceType, deviceTypes } from "../utils/defs";
 import { createValidator, registerSchema } from "../utils/validation";
 import { roomSchema } from "./../schemas/room";
 import { Alarm, AlarmSchema } from "./Alarm";

@@ -8,8 +8,6 @@ const statAsync = promisify(fs.stat);
 const copyFileAsync = promisify(fs.copyFile);
 const mkdirAsync = promisify(fs.mkdir);
 
-const { compileFromFile } = require("json-schema-to-typescript");
-
 const useCases = require("../src/useCases/http.json");
 const useCaseMap = new Map(useCases);
 
@@ -64,29 +62,6 @@ async function copyFilesToDistCjs(srcDir, distCjsDir, ignoredFolders = []) {
   } catch (err) {
     console.error("Error while copying files:", err);
   }
-}
-
-function getAllFilesInDirectory(dirPath) {
-  const files = [];
-
-  function readFilesRecursively(directory) {
-    const entries = fs.readdirSync(directory, { withFileTypes: true });
-
-    entries.forEach((entry) => {
-      const entryPath = path.join(directory, entry.name);
-
-      if (entry.isDirectory()) {
-        readFilesRecursively(entryPath); // Recursively read subdirectories
-      } else if (entry.isFile() && entry.name.endsWith(".json")) {
-        const relativePath = path.relative(dirPath, entryPath);
-        files.push(relativePath); // Add relative file path to the files array if it's a JSON file
-      }
-    });
-  }
-
-  readFilesRecursively(dirPath);
-
-  return files;
 }
 
 let useCasePlugin = {
@@ -235,34 +210,6 @@ async function build() {
   const srcFolder = path.resolve(__dirname, "../src");
   const distCjsFolder = path.resolve(__dirname, "../dist/cjs");
   copyFilesToDistCjs(srcFolder, distCjsFolder, ["useCases", "Client"]);
-
-  let schemas = getAllFilesInDirectory(
-    path.resolve(__dirname, "../src/schemas")
-  );
-
-  // compile each schema to a typescript interface
-  for (const schema of schemas) {
-    const schemaPath = path.resolve(__dirname, `../src/schemas/${schema}`);
-    compileFromFile(schemaPath, {
-      cwd: path.resolve(__dirname, "../src/schemas"),
-    })
-      .then((ts) => {
-        // replace .json with .d.ts and remove any parent directory
-        const typeName = schema.replace(".json", "").split("/").pop();
-        const typeNameUpper =
-          typeName.charAt(0).toUpperCase() + typeName.slice(1) + "Schema";
-        fs.writeFileSync(
-          path.resolve(
-            __dirname,
-            `../dist/types/schemas/${typeNameUpper}.d.ts`
-          ),
-          ts
-        );
-      })
-      .catch((e) => {
-        console.log(schema, e);
-      });
-  }
 
   const ESMBuild = await esbuild.context({
     entryPoints: entryPoints.filter((entry) => entry.out !== "AMQPClient"),

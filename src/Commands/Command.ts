@@ -1,4 +1,4 @@
-import exchanges, { ExchangeName } from "../defs/amqpExchanges";
+import exchanges, { ExchangeName } from "../utils/amqpExchanges";
 
 export abstract class Command {
   abstract name: string;

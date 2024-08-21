@@ -32,19 +32,39 @@ export class Thermostat extends Entity<ThermostatSchema> {
             break;
           }
           case "setpoints": {
-            const setpoints = _new[action];
-            for (const setpoint in setpoints) {
-              if (old[action][setpoint].value !== setpoints[setpoint].value) {
-                const min =
-                  setpoints[setpoint].min || old[action][setpoint].min;
-                const max =
-                  setpoints[setpoint].max || old[action][setpoint].max;
-                const oldValue = old[action][setpoint].value;
-                const value = setpoints[setpoint].value;
-                // get percentage change relative to min and max
-                const percentChange = (value - oldValue) / (max - min);
-                // get the delta
-                delta[`setpoints.${setpoint}`] = percentChange;
+            const newSetpoints = _new[action];
+            const oldSetpoints = old[action];
+            for (const setpoint in newSetpoints) {
+              switch (setpoint) {
+                case "cool":
+                case "heat":
+                case "auto": {
+                  if (oldSetpoints[setpoint] && newSetpoints[setpoint]) {
+                    if (
+                      oldSetpoints[setpoint].value !==
+                      newSetpoints[setpoint].value
+                    ) {
+                      const min =
+                        newSetpoints[setpoint].min ||
+                        oldSetpoints[setpoint].min;
+
+                      const max =
+                        newSetpoints[setpoint].max ||
+                        oldSetpoints[setpoint].max;
+
+                      if (typeof min !== "number" || typeof max !== "number") {
+                        delta[`setpoints.${setpoint}`] = 1;
+                      } else {
+                        const oldValue = oldSetpoints[setpoint].value;
+                        const value = newSetpoints[setpoint].value;
+                        // get percentage change relative to min and max
+                        const percentChange = (value - oldValue) / (max - min);
+                        // get the delta
+                        delta[`setpoints.${setpoint}`] = percentChange;
+                      }
+                    }
+                  }
+                }
               }
             }
           }

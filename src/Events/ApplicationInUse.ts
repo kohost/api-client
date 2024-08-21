@@ -1,4 +1,4 @@
-import { AppEvents } from "../defs/amqpExchanges";
+import { AppEvents } from "../utils/amqpExchanges";
 import { Event } from "./Event";
 
 export class ApplicationInUse extends Event {

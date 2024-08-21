@@ -23,6 +23,7 @@ export interface Context {
   deviceId?: string;
   deviceType?: DeviceType;
   driver?: Driver;
+  [key: string]: any;
 }
 
 export const deviceTypes: DeviceType[] = [
@@ -44,3 +45,5 @@ type DeviceTypeCapitalized = Capitalize<DeviceType>;
 export const formalDeviceTypes = deviceTypes.map((deviceType) => {
   return deviceType.charAt(0).toUpperCase() + deviceType.slice(1);
 }) as DeviceTypeCapitalized[];
+
+export * as amqp from "./amqpExchanges";
