@@ -17,7 +17,7 @@ export const timeSheetSchema = {
       $ref: "definitions.json#/definitions/id",
     },
     day: {
-      type: ["string", "object"],
+      type: "string",
       format: "date-time",
     },
     locked: {
@@ -39,11 +39,11 @@ export const timeSheetSchema = {
             enum: ["working", "driving", "meeting", "break"],
           },
           start: {
-            type: ["string", "object"],
+            type: "string",
             format: "date-time",
           },
           end: {
-            type: ["string", "object"],
+            type: "string",
             format: "date-time",
           },
           comment: {

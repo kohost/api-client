@@ -3,14 +3,7 @@ export const identificationSchema = {
   $id: "identification.json",
   title: "Identification",
   type: "object",
-  oneOf: [
-    {
-      required: ["type", "number"],
-    },
-    {
-      required: ["type", "encryptedNumber"],
-    },
-  ],
+  required: ["type", "number"],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

@@ -1,8 +1,11 @@
 import { connect } from "amqplib";
 import { isFatalError } from "amqplib/lib/connection";
 import { randomUUID } from "crypto";
-import Errors from "../Errors";
+import * as Errors from "../Errors";
 import { Context } from "../defs/defs";
+
+import { type Message as AMQPMessage } from "@types/amqplib";
+
 const debug = require("debug")("kohost:amqp-client");
 
 const HEADER_KEY_ORGANIZATION_ID = "X-Organization-Id";
@@ -16,7 +19,7 @@ export class AMQPClient {
     return randomUUID();
   }
 
-  static parseError(err: Error | { message: string; type: string }) {
+  static parseError(err: { message: string; type: string }) {
     let type;
     let message;
     let options = {};
@@ -38,17 +41,17 @@ export class AMQPClient {
     return new Error(message, options);
   }
 
-  static parseMessage(message) {
+  static parseMessage(message: AMQPMessage) {
     let error: Error | null = null;
-    let data: Record<string, any> = {};
+    let data: Record<string, any> | string = {};
     let query: Record<string, any> = {};
     let context: Context = {};
     let headers: Record<string, any> = {};
 
-    const isCommand = message?.properties?.type === "Command";
-    const isEvent = message?.properties?.type === "Event";
+    const isCommand = message.properties.type === "Command";
+    const isEvent = message.properties.type === "Event";
 
-    const messageHeaders = message?.properties?.headers || {};
+    const messageHeaders = message.properties.headers || {};
 
     const commandName = messageHeaders[HEADER_KEY_COMMAND_NAME] || null;
     const eventName = messageHeaders[HEADER_KEY_EVENT_NAME] || null;
@@ -56,7 +59,7 @@ export class AMQPClient {
     if (message.content) {
       try {
         const payload =
-          message.properties?.contentType === "application/json"
+          message.properties.contentType === "application/json"
             ? JSON.parse(message.content.toString())
             : message.content.toString();
         data = payload?.data || {};
@@ -68,7 +71,7 @@ export class AMQPClient {
       }
     }
 
-    if (message?.properties?.headers) {
+    if (message.properties.headers) {
       const orgHeader = message.properties.headers[HEADER_KEY_ORGANIZATION_ID];
       const propertyHeader = message.properties.headers[HEADER_KEY_PROPERTY_ID];
       const driverHeader = message.properties.headers[HEADER_KEY_DRIVER];
@@ -90,14 +93,20 @@ export class AMQPClient {
     }
 
     const parsed: {
-      error?: Error | null;
-      data: Record<string, any>;
+      error: { message: string; type: string } | null;
+      data: Record<string, any> | string;
       query: Record<string, any>;
       context: Context;
       headers: Record<string, any>;
       event?: string;
       command?: string;
-    } = {} as const;
+    } = {
+      error: null,
+      data: "",
+      query: {},
+      context: {},
+      headers: {},
+    };
 
     if (error) parsed.error = this.parseError(error);
 
@@ -121,7 +130,7 @@ export class AMQPClient {
     return data;
   }
 
-  static isFatalError(err) {
+  static isFatalError(err: Error) {
     return isFatalError(err);
   }
 
