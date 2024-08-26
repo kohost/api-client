@@ -45,7 +45,7 @@ export const credentialSchema = {
       type: "string",
     },
     expires: {
-      type: ["string", "object", "null"],
+      type: ["string", "null"],
     },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",

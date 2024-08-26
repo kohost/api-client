@@ -1,7 +1,17 @@
 import { FromSchema } from "json-schema-to-ts";
+import { alarmSchema } from "../schemas/alarm";
+import { cameraSchema } from "../schemas/camera";
+import { courtesySchema } from "../schemas/courtesy";
 import { definitionsSchema } from "../schemas/definitions";
+import { dimmerSchema } from "../schemas/dimmer";
+import { mediaSourceSchema } from "../schemas/mediaSource";
+import { motionSensorSchema } from "../schemas/motionSensor";
+import { switchSchema } from "../schemas/switch";
+import { thermostatSchema } from "../schemas/thermostat";
+import { windowCoveringSchema } from "../schemas/windowCovering";
 import { DeviceType, deviceTypes } from "../utils/defs";
 import { createValidator, registerSchema } from "../utils/validation";
+import { lockSchema } from "./../schemas/lock";
 import { roomSchema } from "./../schemas/room";
 import { Alarm, AlarmSchema } from "./Alarm";
 import { Camera, CameraSchema } from "./Camera";
@@ -21,7 +31,21 @@ const validator = createValidator(roomSchema);
 
 export type RoomSchema = FromSchema<
   typeof roomSchema,
-  { references: [typeof definitionsSchema] }
+  {
+    references: [
+      typeof definitionsSchema,
+      typeof alarmSchema,
+      typeof lockSchema,
+      typeof dimmerSchema,
+      typeof switchSchema,
+      typeof windowCoveringSchema,
+      typeof thermostatSchema,
+      typeof courtesySchema,
+      typeof cameraSchema,
+      typeof mediaSourceSchema,
+      typeof motionSensorSchema,
+    ];
+  }
 >;
 
 export class Room extends Entity<RoomSchema> {
@@ -118,7 +142,7 @@ export class Room extends Entity<RoomSchema> {
   }
 
   get hasLight() {
-    const hasSubTypeLight = this.switches?.some((sw: Switch) => {
+    const hasSubTypeLight = this.switches?.some((sw: Switch | SwitchSchema) => {
       return sw.subType === "light";
     });
     return this.hasDimmer || hasSubTypeLight;

@@ -76,16 +76,16 @@ export const reservationSchema = {
       type: "string",
     },
     expectedCheckInDateTime: {
-      type: ["string", "object"],
+      type: "string",
       format: "date-time",
       description: "Expected arrival time of guest.",
     },
     checkInDateTime: {
-      type: ["string", "object"],
+      type: "string",
       format: "date-time",
     },
     checkOutDateTime: {
-      type: ["string", "object"],
+      type: "string",
       format: "date-time",
     },
     adultCount: {
