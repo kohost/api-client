@@ -37,15 +37,10 @@
       "default": "normal"
     },
     "supportedModes": {
-      "tyep": "array",
+      "type": "array",
       "uniqueItems": true,
       "items": {
-        "enum": [ 
-          "normal",
-          "autoLock",
-          "emergencyOpen",
-          "emergencyClose"
-        ]
+        "enum": ["normal", "autoLock", "emergencyOpen", "emergencyClose"]
       }
     },
     "batteryLevel": {
