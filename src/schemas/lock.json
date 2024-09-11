@@ -36,6 +36,18 @@
       "description": "AutoLock: Lock automatically locks after set time. Normal - Lock needs told to lock or unlock.",
       "default": "normal"
     },
+    "supportedModes": {
+      "tyep": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [ 
+          "normal",
+          "autoLock",
+          "emergencyOpen",
+          "emergencyClose"
+        ]
+      }
+    },
     "batteryLevel": {
       "$ref": "definitions.json#/definitions/batteryLevel"
     },
