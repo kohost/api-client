@@ -16,6 +16,9 @@
     "number": {
       "type": "string"
     },
+    "issueId": {
+      "type": "string"
+    },
     "conversation": {
       "type": "array",
       "default": [],

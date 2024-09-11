@@ -81,8 +81,7 @@
       "http": {
         "method": "GET",
         "path": "/users/me"
-      },
-      "entity": "user"
+      }
     }
   ],
   [
@@ -91,8 +90,7 @@
       "http": {
         "method": "GET",
         "path": "/users/:id"
-      },
-      "entity": "user"
+      }
     }
   ],
   [
@@ -100,9 +98,9 @@
     {
       "http": {
         "method": "POST",
-        "path": "/users"
-      },
-      "entity": "user"
+        "path": "/users",
+        "maxSize": "1mb"
+      }
     }
   ],
   [
@@ -205,7 +203,10 @@
   [
     "UpsertSystemUsers",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["SystemUserUpdated"]
+      }
     }
   ],
   [
@@ -221,8 +222,7 @@
       "http": {
         "method": "GET",
         "path": "/team"
-      },
-      "entity": "user"
+      }
     }
   ],
   [
@@ -259,8 +259,7 @@
       "http": {
         "method": "POST",
         "path": "/users/:id/mobileKeys"
-      },
-      "entity": "credential"
+      }
     }
   ],
   [
@@ -278,8 +277,7 @@
       "http": {
         "method": "GET",
         "path": "/users/:id/mobileKeys"
-      },
-      "entity": "credential"
+      }
     }
   ],
   [
@@ -402,7 +400,10 @@
   [
     "UpsertSystemSpaces",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["SystemSpaceUpdated"]
+      }
     }
   ],
   [
@@ -415,9 +416,30 @@
     }
   ],
   [
+    "SpaceUnoccupiedEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["SpaceUnoccupied"]
+      }
+    }
+  ],
+  [
+    "SpaceInspectedEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["SpaceInspected"]
+      }
+    }
+  ],
+  [
     "UpsertSystemCategories",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["SystemCategoryUpdated"]
+      }
     }
   ],
   [
@@ -507,6 +529,33 @@
       "http": {
         "method": "DELETE",
         "path": "/rooms/:id"
+      }
+    }
+  ],
+  [
+    "DeviceUpdatedEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["RoomDeviceUpdated"]
+      }
+    }
+  ],
+  [
+    "RoomOccupiedEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["RoomOccupied"]
+      }
+    }
+  ],
+  [
+    "CourtesyServiceRequestedEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["CourtesyServiceRequested"]
       }
     }
   ],
@@ -1024,24 +1073,6 @@
     }
   ],
   [
-    "AddScenesToRoom",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:id/scenes"
-      }
-    }
-  ],
-  [
-    "AddDefaultScenesToRooms",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/scenes/default"
-      }
-    }
-  ],
-  [
     "AutoCloseTickets",
     {
       "http": {
@@ -1141,27 +1172,39 @@
     }
   ],
   [
-    "NotifyTicketUpdate",
+    "TicketUpdatedEffects",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["TicketUpdated", "TicketMessageCreated"]
+      }
     }
   ],
   [
-    "NotifyTicketCreated",
+    "TicketCreatedEffects",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["TicketCreated"]
+      }
     }
   ],
   [
-    "NotifyTicketResolved",
+    "TicketResolvedEffects",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["TicketResolved"]
+      }
     }
   ],
   [
-    "NotifyTicketAssigned",
+    "TicketAssignedEffects",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["TicketAssigned"]
+      }
     }
   ],
   [
@@ -1189,12 +1232,6 @@
         "method": "POST",
         "path": "/scenes/default"
       }
-    }
-  ],
-  [
-    "ScheduleSpaceScenes",
-    {
-      "http": false
     }
   ],
   [
@@ -1290,13 +1327,30 @@
   [
     "UpsertSystemDevices",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": [
+          "SystemAlarmUpdated",
+          "SystemThermostatUpdated",
+          "SystemDimmerUpdated",
+          "SystemSwitchUpdated",
+          "SystemCourtesyUpdated",
+          "SystemLockUpdated",
+          "SystemCameraUpdated",
+          "SystemWindowCoveringUpdated",
+          "SystemMediaSourceUpdated",
+          "SystemMotionSensorUpdated"
+        ]
+      }
     }
   ],
   [
     "DeleteEntity",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["SystemEntityDeleted"]
+      }
     }
   ],
   [
@@ -1386,6 +1440,9 @@
       "http": {
         "method": "POST",
         "path": "/reservations/:id/sendCheckInSMS"
+      },
+      "automations": {
+        "runsOn": ["ReservationCreated", "ReservationUpdated"]
       }
     }
   ],
@@ -1395,6 +1452,9 @@
       "http": {
         "method": "POST",
         "path": "/reservations/:id/sendPreArrivalSMS"
+      },
+      "automations": {
+        "runsOn": ["ReservationCreated", "ReservationUpdated"]
       }
     }
   ],
@@ -1404,6 +1464,9 @@
       "http": {
         "method": "POST",
         "path": "/reservations/:id/sendPreArrivalEmail"
+      },
+      "automations": {
+        "runsOn": ["ReservationCreated", "ReservationUpdated"]
       }
     }
   ],
@@ -1413,6 +1476,13 @@
       "http": {
         "method": "POST",
         "path": "/reservations/:id/sendRoomControlSMS"
+      },
+      "automations": {
+        "runsOn": [
+          "ReservationCreated",
+          "ReservationUpdated",
+          "ReservationStatusCheckedIn"
+        ]
       }
     }
   ],
@@ -1437,7 +1507,10 @@
   [
     "UpsertSystemReservations",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["SystemReservationUpdated"]
+      }
     }
   ],
   [
@@ -1576,6 +1649,38 @@
     }
   ],
   [
+    "CheckInReservationEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["ReservationStatusCheckedIn"]
+      }
+    }
+  ],
+  [
+    "CheckOutReservationEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["ReservationStatusCheckedOut", "ReservationStatusCancelled"]
+      }
+    }
+  ],
+  [
+    "ReservationMobileKeyEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": [
+          "ReservationSpaceChanged",
+          "ReservationCheckoutDateTimeChanged",
+          "ReservationStatusCheckedOut",
+          "ReservationStatusCancelled"
+        ]
+      }
+    }
+  ],
+  [
     "OCRDocument",
     {
       "http": {
@@ -1691,7 +1796,10 @@
   [
     "UpsertSystemProperty",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["SystemPropertyUpdated"]
+      }
     }
   ],
   [
@@ -1700,31 +1808,25 @@
       "http": {
         "method": "POST",
         "path": "/users/:id/email/setup"
+      },
+      "automations": {
+        "runsOn": ["UserCreated"]
       }
     }
   ],
   [
-    "LogEvent",
+    "BroadcastAMQPEvent",
     {
       "http": false
     }
   ],
   [
-    "BroadcastEvent",
+    "MessageEventEffects",
     {
-      "http": false
-    }
-  ],
-  [
-    "HandleMessageData",
-    {
-      "http": false
-    }
-  ],
-  [
-    "HandleSceneDevices",
-    {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["EmailEvent", "SMSEvent"]
+      }
     }
   ],
   [
@@ -1766,7 +1868,10 @@
   [
     "UpsertSystemProducts",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["SystemProductUpdated"]
+      }
     }
   ],
   [
@@ -1961,6 +2066,51 @@
       "http": {
         "method": "GET",
         "path": "/sos"
+      }
+    }
+  ],
+  [
+    "SOSActiveEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["SOSActive", "SOSInactive"]
+      }
+    }
+  ],
+  [
+    "DescribeIssue",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/issues"
+      }
+    }
+  ],
+  [
+    "DeleteIssue",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/issues/:id"
+      }
+    }
+  ],
+  [
+    "CreateIssue",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/issues"
+      }
+    }
+  ],
+  [
+    "UpdateIssue",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/issues/:id"
       }
     }
   ]
