@@ -2083,6 +2083,15 @@
     {
       "http": {
         "method": "GET",
+        "path": "/issues/:id"
+      }
+    }
+  ],
+  [
+    "ListIssues",
+    {
+      "http": {
+        "method": "GET",
         "path": "/issues"
       }
     }

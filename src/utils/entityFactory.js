@@ -74,6 +74,8 @@ module.exports = function entityFactory(type) {
       return Models.Property;
     case "organization":
       return Models.Organization;
+    case "issue":
+      return Models.Issue;
     default:
       throw new Error("Unknown entity type: " + type);
   }
