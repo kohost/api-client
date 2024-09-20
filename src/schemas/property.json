@@ -225,6 +225,14 @@
                 },
                 "required": ["name", "description", "image"]
               }
+            },
+            "issues": {
+              "type": "object",
+              "properties": {
+                "syncWithPropertyId": {
+                  "type": "string"
+                }
+              }
             }
           }
         },

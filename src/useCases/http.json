@@ -1803,6 +1803,15 @@
     }
   ],
   [
+    "UpdatePropertySettings",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/properties/:id/settings"
+      }
+    }
+  ],
+  [
     "EmailUserAccountSetup",
     {
       "http": {
