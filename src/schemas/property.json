@@ -160,6 +160,9 @@
                 "priceRatioPerHour": {
                   "type": "number",
                   "default": 0.1
+                },
+                "minimumTime": {
+                  "type": "string"
                 }
               }
             },
