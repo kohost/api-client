@@ -133,6 +133,7 @@ export const propertySchema = {
           additionalProperties: false,
         },
         CheckIn: {
+          type: "object",
           properties: {
             payment: {},
             identification: {},
@@ -164,6 +165,7 @@ export const propertySchema = {
           },
         },
         CheckOut: {
+          type: "object",
           properties: {
             lateCheckOut: {
               type: "object",

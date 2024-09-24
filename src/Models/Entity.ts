@@ -1,5 +1,9 @@
 import type { AnySchema, ValidateFunction } from "ajv";
 import { ValidationError } from "../Errors";
+import { definitionsSchema } from "../schemas/definitions";
+import { registerSchema } from "../utils/validation";
+
+registerSchema(definitionsSchema);
 
 const EntityBase = class {
   constructor(properties: object) {

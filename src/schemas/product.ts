@@ -36,6 +36,7 @@ export const productSchema = {
     },
     imageUrl: {
       format: "uri",
+      type: "string",
       pattern: "^https?://",
     },
     systemId: {

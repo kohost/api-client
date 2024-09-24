@@ -51,7 +51,7 @@ export const energyReportShardSchema = {
             $ref: "definitions.json#/definitions/id",
           },
           type: {
-            $ref: "definitions.json#/definitions/type",
+            $ref: "definitions.json#/definitions/deviceEntity",
           },
           value: {
             type: "number",

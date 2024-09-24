@@ -4,6 +4,7 @@ import { createValidator, registerSchema } from "../utils/validation";
 import { alarmSchema } from "./../schemas/alarm";
 import { Entity } from "./Entity";
 
+registerSchema(definitionsSchema);
 registerSchema(alarmSchema);
 const validator = createValidator(alarmSchema);
 

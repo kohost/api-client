@@ -22,7 +22,7 @@
     "start": "node scripts/build.js --watch",
     "clean": "rm -rf ./dist",
     "tsc": "tsc",
-    "build2": "tsup"
+    "build2": "tsup --watch"
   },
   "files": [
     "dist",

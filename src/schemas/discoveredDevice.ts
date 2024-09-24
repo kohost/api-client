@@ -17,7 +17,7 @@ export const discoveredDeviceSchema = {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      $ref: "definitions.json#/definitions/deviceEntity",
     },
     driver: {
       type: "string",

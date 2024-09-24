@@ -24,7 +24,7 @@ export const energyReportSchema = {
       default: "energyReport",
     },
     reportTime: {
-      time: "string",
+      type: "string",
       enum: ["hourly", "daily", "monthly"],
     },
     roomId: {
@@ -48,7 +48,7 @@ export const energyReportSchema = {
             $ref: "definitions.json#/definitions/id",
           },
           type: {
-            $ref: "definitions.json#/definitions/type",
+            $ref: "definitions.json#/definitions/deviceEntity",
           },
           kwh: {
             type: "number",
