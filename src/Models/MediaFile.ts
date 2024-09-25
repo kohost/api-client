@@ -7,14 +7,20 @@ import { Entity } from "./Entity";
 registerSchema(mediaFileSchema);
 const validator = createValidator(mediaFileSchema);
 
+console.log(validator)
+
 export type MediaFileSchema = FromSchema<
   typeof mediaFileSchema,
   { references: [typeof definitionsSchema] }
 >;
 
+
 export class MediaFile extends Entity<MediaFileSchema> {
   static schema = mediaFileSchema;
-  validator = validator;
+
+  validator(data: MediaFileSchema) {
+    return validator(data);
+  }
 
   createImageVariant(params: Record<string, string>): string | null {
     if (this.mimeType != "image/*")
@@ -29,5 +35,7 @@ export class MediaFile extends Entity<MediaFileSchema> {
     return this.url?.replace(/\/public$/, `/${query}`) || null;
   }
 }
+
+console.log(MediaFile);
 
 export default MediaFile;

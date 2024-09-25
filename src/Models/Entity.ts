@@ -1,4 +1,4 @@
-import type { AnySchema, ValidateFunction } from "ajv";
+import type { AnySchema } from "ajv";
 import { ValidationError } from "../Errors";
 import { definitionsSchema } from "../schemas/definitions";
 import { registerSchema } from "../utils/validation";
@@ -16,7 +16,7 @@ export abstract class Entity<t extends object> extends EntityBase<t> {
   /**
    * Validator function for the entity
    */
-  abstract validator: ValidateFunction;
+  abstract validator(data:any): unknown;
   /**
    * Properties that are considered actions
    */
@@ -33,12 +33,15 @@ export abstract class Entity<t extends object> extends EntityBase<t> {
   validate(data: t): void {
     if (!data)
       throw new ValidationError("Invalid data", { cause: "Data is empty" });
+    console.log(this); 
     if (!this.validator(data)) {
       throw new ValidationError(`Invalid ${this.constructor.name}`, {
+        /** @ts-expect-error */
         cause: this.validator.errors,
       });
     }
   }
+
 
   static getActionDelta(
     old: { [key: string]: any },
