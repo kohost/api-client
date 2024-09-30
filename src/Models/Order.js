@@ -34,6 +34,9 @@ class Order extends Entity {
       if (rateType === "percentage") {
         return acc + item.price * rate;
       }
+      if (rateType === "flat") {
+        return acc + rate;
+      }
       return acc + rate;
     }, 0);
   }
