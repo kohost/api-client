@@ -1,15 +1,15 @@
 // Create the Space Model
 // A group of rooms -> rooms could become a space later...
-const schemas = require("../utils/schema");
-const schema = require("../schemas/space.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/space.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-const Room = require("./Room");
+import { Room } from "./Room";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Space extends Entity {
+export class Space extends Entity {
   /**
    * @typedef {import("../schemas/SpaceSchema").Space} SpaceType
    * Create a Space instance.
@@ -79,7 +79,7 @@ Object.defineProperty(Space.prototype, "validator", {
 });
 
 Object.defineProperty(Space, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
 
 function mapSpaceData(data) {
@@ -93,5 +93,3 @@ function mapSpaceData(data) {
   }
   return spaceData;
 }
-
-module.exports = Space;

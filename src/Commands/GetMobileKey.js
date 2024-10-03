@@ -1,6 +1,6 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class GetMobileKey extends Command {
+export class GetMobileKey extends Command {
   constructor({
     id,
     phone,
@@ -16,5 +16,3 @@ class GetMobileKey extends Command {
     return "GetMobileKey";
   }
 }
-
-module.exports = GetMobileKey;

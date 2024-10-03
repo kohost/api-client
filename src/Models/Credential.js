@@ -1,12 +1,12 @@
 // create the Credential Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/credential.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/credential.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Credential extends Entity {
+export class Credential extends Entity {
   /**
    * @typedef {import("../schemas/CredentialSchema").Credential} CredentialType
    * Create a Credential instance.
@@ -29,7 +29,5 @@ Object.defineProperty(Credential.prototype, "validator", {
 });
 
 Object.defineProperty(Credential, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = Credential;

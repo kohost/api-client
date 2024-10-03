@@ -1,81 +1,39 @@
-const Reservation = require("./Reservation");
-const MediaFile = require("./MediaFile");
-const Switch = require("./Switch");
-const Alarm = require("./Alarm");
-const Dimmer = require("./Dimmer");
-const Lock = require("./Lock");
-const Thermostat = require("./Thermostat");
-const WindowCovering = require("./WindowCovering");
-const Identification = require("./Identification");
-const Policy = require("./Policy");
-const User = require("./User");
-const SystemUser = require("./SystemUser");
-const Courtesy = require("./Courtesy");
-const Camera = require("./Camera");
-const MotionSensor = require("./MotionSensor");
-const MediaSource = require("./MediaSource");
-const Room = require("./Room");
-const Space = require("./Space");
-const Category = require("./Category");
-const Ticket = require("./Ticket");
-const Scene = require("./Scene");
-const Gateway = require("./Gateway");
-const Product = require("./Product");
-const Order = require("./Order");
-const DiscoveredDevice = require("./DiscoveredDevice");
-const DeviceRouter = require("./DeviceRouter");
-const Credential = require("./Credential");
-const ShortLink = require("./ShortLink");
-const EnergyReportShard = require("./EnergyReportShard");
-const EnergyReport = require("./EnergyReport");
-const SMSMessage = require("./SmsMessage");
-const EmailMessage = require("./EmailMessage");
-const Announcement = require("./Announcement");
-const TimeSheet = require("./TimeSheet");
-const Issue = require("./Issue");
-
-const Property = require("./Property");
-const Organization = require("./Organization");
-
-const Entity = require("./Entity");
-
-module.exports = {
-  Entity,
-  Organization,
-  Property,
-  MediaFile,
-  Gateway,
-  Switch,
-  Alarm,
-  Dimmer,
-  Lock,
-  Courtesy,
-  Camera,
-  MotionSensor,
-  Thermostat,
-  WindowCovering,
-  MediaSource,
-  Identification,
-  Product,
-  User,
-  SystemUser,
-  Room,
-  Space,
-  Category,
-  Ticket,
-  Scene,
-  DiscoveredDevice,
-  DeviceRouter,
-  Reservation,
-  Credential,
-  ShortLink,
-  EnergyReportShard,
-  EnergyReport,
-  SMSMessage,
-  EmailMessage,
-  Order,
-  Announcement,
-  TimeSheet,
-  Policy,
-  Issue,
-};
+// dont organize imports
+export * from "./Alarm";
+export * from "./Announcement";
+export * from "./Camera";
+export * from "./Category";
+export * from "./Courtesy";
+export * from "./Credential";
+export * from "./DeviceRouter";
+export * from "./Dimmer";
+export * from "./DiscoveredDevice";
+export * from "./EmailMessage";
+export * from "./EnergyReport";
+export * from "./EnergyReportShard";
+export * from "./Entity";
+export * from "./Gateway";
+export * from "./Identification";
+export * from "./Issue";
+export * from "./Lock";
+export * from "./MediaFile";
+export * from "./MediaSource";
+export * from "./MotionSensor";
+export * from "./Order";
+export * from "./Organization";
+export * from "./Policy";
+export * from "./Product";
+export * from "./Property";
+export * from "./Reservation";
+export * from "./Room";
+export * from "./Scene";
+export * from "./ShortLink";
+export * from "./SmsMessage";
+export * from "./Space";
+export * from "./Switch";
+export * from "./SystemUser";
+export * from "./Thermostat";
+export * from "./Ticket";
+export * from "./TimeSheet";
+export * from "./User";
+export * from "./WindowCovering";

@@ -1,6 +1,6 @@
-const Event = require("./Event");
+import { Event } from "./Event";
 
-class SystemThermostatUpdate extends Event {
+export class SystemThermostatUpdate extends Event {
   constructor(thermostat, context) {
     super(thermostat, context);
   }
@@ -13,5 +13,3 @@ class SystemThermostatUpdate extends Event {
     return "thermostat";
   }
 }
-
-module.exports = SystemThermostatUpdate;

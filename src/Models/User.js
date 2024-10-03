@@ -1,21 +1,21 @@
 // Create the User Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/user.json");
-const paymentSchema = require("../schemas/payment.json");
-const Entity = require("./Entity");
-const MediaFile = require("./MediaFile");
-const Reservation = require("./Reservation");
-const Policy = require("./Policy");
-const Identification = require("./Identification");
+import paymentSchema from "../schemas/payment.json";
+import schema, { properties } from "../schemas/user.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
+import { Identification } from "./Identification";
+import { MediaFile } from "./MediaFile";
+import { Policy } from "./Policy";
+import { Reservation } from "./Reservation";
 
-const { nanoid } = require("nanoid/async");
+import { nanoid } from "nanoid/async";
 
-schemas.add(paymentSchema);
-schemas.add(schema);
+add(paymentSchema);
+add(schema);
 
-const validator = schemas.compile(schema);
+const validator = compile(schema);
 
-class User extends Entity {
+export class User extends Entity {
   /**
    * @typedef {import("../schemas/UserSchema").User} UserType
    * Create a User instance.
@@ -30,7 +30,7 @@ class User extends Entity {
 
     if (user.identifications) {
       user.identifications = user.identifications.map(
-        (id) => new Identification(id)
+        (id) => new Identification(id),
       );
     }
 
@@ -38,7 +38,7 @@ class User extends Entity {
       user.permissions = user.permissions.map((permission) => {
         if (permission.policies && Array.isArray(permission.policies)) {
           permission.policies = permission.policies.map(
-            (policy) => new Policy(policy)
+            (policy) => new Policy(policy),
           );
         }
         return permission;
@@ -54,7 +54,6 @@ class User extends Entity {
   }
 
   static validateEmail(email) {
-    //eslint-disable-next-line no-useless-escape
     const regex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(email);
@@ -76,7 +75,7 @@ Object.defineProperty(User.prototype, "validator", {
 });
 
 Object.defineProperty(User, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
 
 Object.defineProperty(User.prototype, "fullName", {
@@ -126,5 +125,3 @@ Object.defineProperty(User.prototype, "isGuest", {
     return this.roles.includes("Guest");
   },
 });
-
-module.exports = User;

@@ -1,12 +1,12 @@
 // Create the Lock Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/lock.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/lock.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Lock extends Entity {
+export class Lock extends Entity {
   /**
    * @typedef {import("../schemas/LockSchema").Lock} LockType
    * Create a Lock instance.
@@ -29,11 +29,9 @@ Object.defineProperty(Lock.prototype, "validator", {
 });
 
 Object.defineProperty(Lock, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
 
 Object.defineProperty(Lock, "actionProperties", {
   value: ["state"],
 });
-
-module.exports = Lock;

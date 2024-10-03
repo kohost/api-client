@@ -1,12 +1,12 @@
 // create the energyReportShard Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/energyReportShard.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/energyReportShard.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class EnergyReportShard extends Entity {
+export class EnergyReportShard extends Entity {
   /**
    * @typedef {import("../schemas/EnergyReportShardSchema").EnergyReportShard} EnergyReportShardType
    * Create a EnergyReportShard instance.
@@ -29,7 +29,5 @@ Object.defineProperty(EnergyReportShard.prototype, "validator", {
 });
 
 Object.defineProperty(EnergyReportShard, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = EnergyReportShard;

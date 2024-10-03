@@ -1,12 +1,12 @@
-const io = require("socket.io-client");
-const { EventEmitter } = require("events");
+import { EventEmitter } from "events";
+import io from "socket.io-client";
 
-module.exports = class SocketIoClient extends EventEmitter {
+export class SocketIoClient extends EventEmitter {
   constructor(
     config = {
       url: null,
       options: {},
-    }
+    },
   ) {
     super();
     if (!config.url) throw new Error("config.url is required");
@@ -94,4 +94,4 @@ module.exports = class SocketIoClient extends EventEmitter {
     this.socket.removeAllListeners();
     this.socket = null;
   }
-};
+}

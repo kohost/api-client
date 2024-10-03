@@ -1,12 +1,12 @@
 // Create the Product Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/product.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/product.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Product extends Entity {
+export class Product extends Entity {
   /**
    * @typedef {import("../schemas/ProductSchema").Product} ProductType
    * Create a Product instance.
@@ -29,7 +29,5 @@ Object.defineProperty(Product.prototype, "validator", {
 });
 
 Object.defineProperty(Product, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = Product;

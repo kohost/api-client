@@ -1,11 +1,11 @@
-const schemas = require("../utils/schema");
-const schema = require("../schemas/property.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/property.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Property extends Entity {
+export class Property extends Entity {
   /**
    * @typedef {import("../schemas/PropertySchema").Property} PropertyType
    * Create a Property instance.
@@ -28,7 +28,5 @@ Object.defineProperty(Property.prototype, "validator", {
 });
 
 Object.defineProperty(Property, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = Property;

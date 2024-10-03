@@ -1,12 +1,12 @@
 // Create the WindowCovering Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/windowCovering.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/windowCovering.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class WindowCovering extends Entity {
+export class WindowCovering extends Entity {
   /**
    * @typedef {import("../schemas/WindowCoveringSchema").WindowCovering} WindowCoveringType
    * Create a WindowCovering instance.
@@ -45,11 +45,9 @@ Object.defineProperty(WindowCovering.prototype, "validator", {
 });
 
 Object.defineProperty(WindowCovering, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
 
 Object.defineProperty(WindowCovering, "actionProperties", {
   value: ["position"],
 });
-
-module.exports = WindowCovering;

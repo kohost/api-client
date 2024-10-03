@@ -1,6 +1,6 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class GetRooms extends Command {
+export class GetRooms extends Command {
   constructor({
     id,
     types,
@@ -27,5 +27,3 @@ class GetRooms extends Command {
     return "GetRooms";
   }
 }
-
-module.exports = GetRooms;

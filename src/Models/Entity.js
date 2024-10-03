@@ -1,7 +1,7 @@
-const { ValidationError } = require("../Errors");
-const { customAlphabet: generate } = require("nanoid");
+import { customAlphabet as generate } from "nanoid";
+import { ValidationError } from "../Errors";
 
-class Entity {
+export class Entity {
   constructor(data) {
     if (!this.schema) {
       throw new Error("Schema is not defined");
@@ -92,5 +92,3 @@ class Entity {
     return obj;
   }
 }
-
-module.exports = Entity;

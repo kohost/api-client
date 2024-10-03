@@ -1,6 +1,6 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class SetScene extends Command {
+export class SetScene extends Command {
   constructor({ id, devices, ...rest }) {
     super({ id, devices, ...rest });
   }
@@ -9,5 +9,3 @@ class SetScene extends Command {
     return "SetScene";
   }
 }
-
-module.exports = SetScene;

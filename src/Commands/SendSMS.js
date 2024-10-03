@@ -1,7 +1,7 @@
-const Command = require("./Command");
-const RequestError = require("../Errors/RequestError");
+import { RequestError } from "../Errors";
+import { Command } from "./Command";
 
-class SendSMS extends Command {
+export class SendSMS extends Command {
   constructor({ id, body, to, from, media, ...rest }) {
     if (!body && !media)
       throw new RequestError("sms body or media is required");
@@ -14,5 +14,3 @@ class SendSMS extends Command {
     return "SendSMS";
   }
 }
-
-module.exports = SendSMS;

@@ -1,12 +1,12 @@
 // create the Camera Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/camera.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/camera.json";
+import { add, compile } from "../utils/schema";
+import Entity from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Camera extends Entity {
+export class Camera extends Entity {
   /**
    * @typedef {import("../schemas/CameraSchema").Camera} CameraType
    * Create a Camera instance.
@@ -29,7 +29,5 @@ Object.defineProperty(Camera.prototype, "validator", {
 });
 
 Object.defineProperty(Camera, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = Camera;

@@ -1,7 +1,7 @@
-const Event = require("./Event");
-const exchanges = require("../defs/amqpExchanges");
+import { exchanges } from "../defs";
+import { Event } from "./Event";
 
-class ReservationCheckedOut extends Event {
+export class ReservationCheckedOut extends Event {
   constructor(reservation, context) {
     super(reservation, context);
   }
@@ -18,5 +18,3 @@ class ReservationCheckedOut extends Event {
     return exchanges.AppEvents.name;
   }
 }
-
-module.exports = ReservationCheckedOut;

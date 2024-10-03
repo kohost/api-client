@@ -1,12 +1,12 @@
 // create the energyReportDaily Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/energyReport.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/energyReport.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class EnergyReport extends Entity {
+export class EnergyReport extends Entity {
   /**
    * @typedef {import("../schemas/EnergyReportSchema").EnergyReport} EnergyReportType
    * Create a EnergyReport instance.
@@ -29,7 +29,5 @@ Object.defineProperty(EnergyReport.prototype, "validator", {
 });
 
 Object.defineProperty(EnergyReport, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = EnergyReport;

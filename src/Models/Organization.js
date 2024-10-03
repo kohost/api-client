@@ -1,11 +1,11 @@
-const schemas = require("../utils/schema");
-const schema = require("../schemas/organization.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/organization.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Organization extends Entity {
+export class Organization extends Entity {
   /**
    * @typedef {import("../schemas/OrganizationSchema").Organization} OrganizationType
    * Create a Organization instance.
@@ -28,7 +28,5 @@ Object.defineProperty(Organization.prototype, "validator", {
 });
 
 Object.defineProperty(Organization, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = Organization;

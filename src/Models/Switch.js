@@ -1,12 +1,12 @@
 // create the Switch model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/switch.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/switch.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Switch extends Entity {
+export class Switch extends Entity {
   /**
    * @typedef {import("../schemas/SwitchSchema").Switch} SwitchType
    * Create a Switch instance.
@@ -29,11 +29,9 @@ Object.defineProperty(Switch.prototype, "validator", {
 });
 
 Object.defineProperty(Switch, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
 
 Object.defineProperty(Switch, "actionProperties", {
   value: ["state"],
 });
-
-module.exports = Switch;

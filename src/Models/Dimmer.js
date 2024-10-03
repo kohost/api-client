@@ -1,10 +1,10 @@
 // Create the Dimmer Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/dimmer.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/dimmer.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
 /**
  * Represents a Dimmer device.
@@ -12,7 +12,7 @@ const validator = schemas.compile(schema);
  * @extends Entity
  */
 
-class Dimmer extends Entity {
+export class Dimmer extends Entity {
   /**
    * @typedef {import("../schemas/DimmerSchema").Dimmer} DimmerType
    * Create a Dimmer instance.
@@ -51,11 +51,9 @@ Object.defineProperty(Dimmer.prototype, "validator", {
 });
 
 Object.defineProperty(Dimmer, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
 
 Object.defineProperty(Dimmer, "actionProperties", {
   value: ["level"],
 });
-
-module.exports = Dimmer;

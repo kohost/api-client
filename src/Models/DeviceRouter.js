@@ -1,13 +1,13 @@
 // Create the Device Router Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/deviceRouter.json");
+import schema, { properties } from "../schemas/deviceRouter.json";
+import { add, compile } from "../utils/schema";
 
-const Entity = require("./Entity");
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class DeviceRouter extends Entity {
+export class DeviceRouter extends Entity {
   /**
    * @typedef {import("../schemas/DeviceRouterSchema").DeviceRouter} DeviceRouterType
    * Create a DeviceRouter instance.
@@ -30,7 +30,5 @@ Object.defineProperty(DeviceRouter.prototype, "validator", {
 });
 
 Object.defineProperty(DeviceRouter, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = DeviceRouter;

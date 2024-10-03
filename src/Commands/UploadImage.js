@@ -1,6 +1,6 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class UploadImage extends Command {
+export class UploadImage extends Command {
   constructor({ id, url, file, ...rest }) {
     super({ id, url, file, ...rest });
   }
@@ -9,5 +9,3 @@ class UploadImage extends Command {
     return "UploadImage";
   }
 }
-
-module.exports = UploadImage;

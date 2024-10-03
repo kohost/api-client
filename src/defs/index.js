@@ -1,11 +1,7 @@
-const deviceTypes = require("./deviceTypes");
-const formalDeviceTypes = require("./formalDeviceTypes");
-const { defs: httpDefs } = require("../Client");
+import { KohostApiClient } from "../Client";
 
-const defs = {
-  http: httpDefs,
-  deviceTypes,
-  formalDeviceTypes,
-};
+export const http = KohostApiClient.defs;
 
-module.exports = defs;
+export * from "./amqpExchanges";
+export * from "./deviceTypes";
+export * from "./formalDeviceTypes";

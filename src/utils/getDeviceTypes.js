@@ -1,7 +1,5 @@
-const deviceTypes = require("../defs/deviceTypes");
+import { deviceTypes } from "../defs";
 
-function getDeviceTypes() {
+export function getDeviceTypes() {
   return deviceTypes;
 }
-
-module.exports = getDeviceTypes;

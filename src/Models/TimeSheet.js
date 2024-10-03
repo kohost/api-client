@@ -1,14 +1,14 @@
 // Create the TimeSheet Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/timeSheet.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/timeSheet.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-const { nanoid } = require("nanoid");
+import { nanoid } from "nanoid";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class TimeSheet extends Entity {
+export class TimeSheet extends Entity {
   /**
    * @typedef {import("../schemas/TimeSheetSchema").TimeSheet} TimeSheetType
    * Create a TimeSheet instance.
@@ -54,7 +54,5 @@ Object.defineProperty(TimeSheet.prototype, "validator", {
 });
 
 Object.defineProperty(TimeSheet, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = TimeSheet;

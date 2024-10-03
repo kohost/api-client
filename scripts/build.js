@@ -53,7 +53,7 @@ async function copyFilesToDistCjs(srcDir, distCjsDir, ignoredFolders = []) {
           await copyFilesToDistCjs(
             srcFilePath,
             distCjsFilePath,
-            ignoredFolders
+            ignoredFolders,
           );
         }
       } else {
@@ -105,11 +105,11 @@ let useCasePlugin = {
         for (const [useCase, data] of useCaseMap.entries()) {
           if (data.http) {
             useCaseRequireStatements.push(
-              `const ${useCase} = require("./useCases/${useCase}");`
+              `const ${useCase} = require("./useCases/${useCase}");`,
             );
 
             useCaseClassMethods.push(
-              `KohostApiClient.prototype.${useCase} = ${useCase};`
+              `KohostApiClient.prototype.${useCase} = ${useCase};`,
             );
 
             const { method, path: endpoint } = data.http;
@@ -185,7 +185,7 @@ let useCasePlugin = {
 
             fs.writeFileSync(
               path.resolve(__dirname, `../dist/useCases/${useCase}.js`),
-              bundle.code
+              bundle.code,
             );
           }
         }
@@ -193,13 +193,13 @@ let useCasePlugin = {
         // add the require statements to the top of the file
         let file = fileText.replace(
           "/* Add Use Cases Here */",
-          useCaseRequireStatements.join("\n")
+          useCaseRequireStatements.join("\n"),
         );
 
         // add the use case methods to the class
         file = file.replace(
           "module.exports = KohostApiClient;",
-          useCaseClassMethods.join("\n")
+          useCaseClassMethods.join("\n"),
         );
 
         file = file + "\nmodule.exports = KohostApiClient;";
@@ -209,7 +209,7 @@ let useCasePlugin = {
           loader: "js",
           resolveDir: path.resolve(__dirname, "../dist"),
         };
-      }
+      },
     );
   },
 };
@@ -237,7 +237,7 @@ async function build() {
   copyFilesToDistCjs(srcFolder, distCjsFolder, ["useCases", "Client"]);
 
   let schemas = getAllFilesInDirectory(
-    path.resolve(__dirname, "../src/schemas")
+    path.resolve(__dirname, "../src/schemas"),
   );
 
   // compile each schema to a typescript interface
@@ -254,9 +254,9 @@ async function build() {
         fs.writeFileSync(
           path.resolve(
             __dirname,
-            `../dist/types/schemas/${typeNameUpper}.d.ts`
+            `../dist/types/schemas/${typeNameUpper}.d.ts`,
           ),
-          ts
+          ts,
         );
       })
       .catch((e) => {
@@ -310,24 +310,29 @@ async function build() {
 
   fs.writeFileSync(
     path.resolve(__dirname, "../dist/esm/index.js"),
-    `import ClientBundle from "./Client";
-    import SocketIoClientBundle from "./SocketIoClient";
-    import CommandsBundle from "./Commands";
-    import EventsBundle from "./Events";
-    import ModelsBundle from "./Models";
-    import ErrorsBundle from "./Errors";
-    import defsBundle from "./defs";
-    import utilsBundle from "./utils";
+    `export Client from "./Client";
 
-    export const Client = ClientBundle;
-    export const SocketIoClient = SocketIoClientBundle;
-    export const Commands = CommandsBundle;
-    export const Events = EventsBundle;
-    export const Models = ModelsBundle;
-    export const Errors = ErrorsBundle;
-    export const defs = defsBundle;
-    export const utils = utilsBundle;
-    `
+// SocketIoClient.js
+export SocketIoClient from "./SocketIoClient";
+
+// Commands.js
+export Commands from "./Commands";
+
+// Events.js
+export Events from "./Events";
+
+// Models.js
+export Models from "./Models";
+
+// Errors.js
+export Errors from "./Errors";
+
+// defs.js
+export defs from "./defs";
+
+// utils.js
+export utils from "./utils";
+    `,
   );
 
   HttpClientESMBuild.dispose();

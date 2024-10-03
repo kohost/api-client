@@ -1,6 +1,6 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class SetDimmer extends Command {
+export class SetDimmer extends Command {
   constructor({ id, level, ...rest }) {
     super({ id, level, ...rest });
   }
@@ -9,5 +9,3 @@ class SetDimmer extends Command {
     return "SetDimmer";
   }
 }
-
-module.exports = SetDimmer;

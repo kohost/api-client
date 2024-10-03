@@ -1,28 +1,28 @@
 // create the Room model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/room.json");
-const deviceSchema = require("../schemas/definitions.json");
-const Entity = require("./Entity");
+import { definitions } from "../schemas/definitions.json";
+import schema, { properties } from "../schemas/room.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
 // device dependencies
-const Switch = require("./Switch");
-const Dimmer = require("./Dimmer");
-const Thermostat = require("./Thermostat");
-const Lock = require("./Lock");
-const WindowCovering = require("./WindowCovering");
-const Courtesy = require("./Courtesy");
-const Camera = require("./Camera");
-const Alarm = require("./Alarm");
-const MediaSource = require("./MediaSource");
-const MotionSensor = require("./MotionSensor");
+import { Alarm } from "./Alarm";
+import { Camera } from "./Camera";
+import { Courtesy } from "./Courtesy";
+import { Dimmer } from "./Dimmer";
+import { Lock } from "./Lock";
+import { MediaSource } from "./MediaSource";
+import { MotionSensor } from "./MotionSensor";
+import { Switch } from "./Switch";
+import { Thermostat } from "./Thermostat";
+import { WindowCovering } from "./WindowCovering";
 
 // other dependencies
-const Scene = require("./Scene");
+import { Scene } from "./Scene";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Room extends Entity {
+export class Room extends Entity {
   /**
    * @typedef {import("../schemas/RoomSchema").Room} RoomType
    * Create a Room instance.
@@ -35,7 +35,7 @@ class Room extends Entity {
   }
 
   static getDevicePath(type) {
-    const validTypes = deviceSchema.definitions.type.enum;
+    const validTypes = definitions.type.enum;
     if (!validTypes.includes(type))
       throw new Error("Invalid device type:" + type);
     switch (type) {
@@ -152,7 +152,7 @@ Object.defineProperty(Room.prototype, "validator", {
 });
 
 Object.defineProperty(Room, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
 
 function mapRoomData(data) {
@@ -213,5 +213,3 @@ function mapRoomData(data) {
 
   return roomData;
 }
-
-module.exports = Room;

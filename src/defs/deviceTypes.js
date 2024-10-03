@@ -1,4 +1,4 @@
-const types = [
+export const types = [
   "dimmer",
   "switch",
   "thermostat",
@@ -11,5 +11,3 @@ const types = [
   "motionSensor",
   "gateway",
 ];
-
-module.exports = types;

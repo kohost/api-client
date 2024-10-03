@@ -1,6 +1,6 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class SetSwitch extends Command {
+export class SetSwitch extends Command {
   constructor({ id, state, ...rest }) {
     super({ id, state, ...rest });
   }
@@ -9,5 +9,3 @@ class SetSwitch extends Command {
     return "SetSwitch";
   }
 }
-
-module.exports = SetSwitch;

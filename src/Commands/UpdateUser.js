@@ -1,7 +1,7 @@
-const Command = require("./Command");
-const RequestError = require("../Errors/RequestError");
+import { RequestError } from "../Errors";
+import { Command } from "./Command";
 
-class UpdateUser extends Command {
+export class UpdateUser extends Command {
   constructor({
     id,
     email,
@@ -33,5 +33,3 @@ class UpdateUser extends Command {
     return "UpdateUser";
   }
 }
-
-module.exports = UpdateUser;

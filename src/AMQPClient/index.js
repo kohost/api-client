@@ -1,9 +1,11 @@
-const Errors = require("../Errors");
-const amqp = require("amqplib");
-const crypto = require("crypto");
-const exchanges = require("../defs/amqpExchanges");
-const isFatalError = require("amqplib/lib/connection").isFatalError;
-const debug = require("debug")("kohost:amqp-client");
+import { connect } from "amqplib";
+import { isFatalError } from "amqplib/lib/connection";
+import { randomUUID } from "crypto";
+import dbg from "debug";
+import { exchanges } from "../defs";
+import * as Errors from "../Errors";
+
+const debug = dbg("kohost:amqp-client");
 
 const HEADER_KEY_ORGANIZATION_ID = "X-Organization-Id";
 const HEADER_KEY_PROPERTY_ID = "X-Property-Id";
@@ -11,7 +13,7 @@ const HEADER_KEY_DRIVER = "X-Driver";
 const HEADER_KEY_COMMAND_NAME = "X-Command-Name";
 const HEADER_KEY_EVENT_NAME = "X-Event-Name";
 
-class KohostAMQPClient {
+export class KohostAMQPClient {
   static get Message() {
     return Message;
   }
@@ -20,7 +22,7 @@ class KohostAMQPClient {
     return exchanges;
   }
   static generateCorrelationId() {
-    return crypto.randomUUID();
+    return randomUUID();
   }
 
   static validateMessage(message) {
@@ -130,7 +132,7 @@ class KohostAMQPClient {
   }
 
   async createConnection(connection, options = {}) {
-    return await amqp.connect(connection, options);
+    return await connect(connection, options);
   }
 
   static createMessage(content) {
@@ -235,5 +237,3 @@ class Message {
     };
   }
 }
-
-module.exports = KohostAMQPClient;

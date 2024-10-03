@@ -1,6 +1,6 @@
-const Command = require("./Command");
+import { Command } from "./Command";
 
-class SellProducts extends Command {
+export class SellProducts extends Command {
   constructor({ reservationId, userId, products, ...rest }) {
     super({ reservationId, userId, products, ...rest });
   }
@@ -9,5 +9,3 @@ class SellProducts extends Command {
     return "SellProducts";
   }
 }
-
-module.exports = SellProducts;

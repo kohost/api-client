@@ -1,15 +1,15 @@
 // Create the User Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/ticket.json");
-const Entity = require("./Entity");
-const MediaFile = require("./MediaFile");
+import schema, { properties } from "../schemas/ticket.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
+import MediaFile from "./MediaFile";
 
-const { nanoid } = require("nanoid");
+import { nanoid } from "nanoid";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Ticket extends Entity {
+export class Ticket extends Entity {
   /**
    * @typedef {import("../schemas/TicketSchema").Ticket} TicketType
    * Create a Ticket instance.
@@ -37,7 +37,7 @@ Object.defineProperty(Ticket.prototype, "validator", {
 });
 
 Object.defineProperty(Ticket, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
 
 function mapConversationData(data) {
@@ -51,5 +51,3 @@ function mapConversationData(data) {
   });
   return ticketData;
 }
-
-module.exports = Ticket;

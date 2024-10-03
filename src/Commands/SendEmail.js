@@ -1,7 +1,7 @@
-const Command = require("./Command");
-const RequestError = require("../Errors/RequestError");
+import { RequestError } from "../Errors";
+import { Command } from "./Command";
 
-class SendEmail extends Command {
+export class SendEmail extends Command {
   constructor({ text, html, to, from, subject, ...rest }) {
     if (!to) throw new RequestError("email to is required");
     if (!from) throw new RequestError("email from is required");
@@ -16,5 +16,3 @@ class SendEmail extends Command {
     return "SendEmail";
   }
 }
-
-module.exports = SendEmail;

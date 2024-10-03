@@ -1,6 +1,6 @@
-const Event = require("./Event");
+import { Event } from "./Event";
 
-class SystemCourtesyUpdated extends Event {
+export class SystemCourtesyUpdated extends Event {
   constructor(courtesy, context) {
     super(courtesy, context);
   }
@@ -13,5 +13,3 @@ class SystemCourtesyUpdated extends Event {
     return "courtesy";
   }
 }
-
-module.exports = SystemCourtesyUpdated;

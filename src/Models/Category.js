@@ -1,13 +1,13 @@
 // Create the Category Model
 // Originally used for hotel room category e.g. Double Queen
-const schemas = require("../utils/schema");
-const schema = require("../schemas/category.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/category.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Category extends Entity {
+export class Category extends Entity {
   /**
    * @typedef {import("../schemas/CategorySchema").Category} CategoryType
    * Create a Category instance.
@@ -30,7 +30,5 @@ Object.defineProperty(Category.prototype, "validator", {
 });
 
 Object.defineProperty(Category, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = Category;

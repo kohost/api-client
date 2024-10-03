@@ -1,4 +1,7 @@
-const Ajv = require("ajv");
+import Ajv from "ajv";
+import addFormats from "ajv-formats";
+import defininitions from "../schemas/definitions.json";
+
 const ajv = new Ajv({
   allErrors: true,
   useDefaults: true,
@@ -7,19 +10,15 @@ const ajv = new Ajv({
   allowUnionTypes: true,
   strictRequired: false,
 });
-const addFormats = require("ajv-formats");
-
-const defininitions = require("../schemas/definitions.json");
 
 addFormats(ajv);
 
 ajv.addSchema(defininitions);
 
-module.exports = {
-  add: function add(schema) {
-    ajv.addSchema(schema);
-  },
-  compile: function compile(schema) {
-    return ajv.compile(schema);
-  },
-};
+export function add(schema) {
+  ajv.addSchema(schema);
+}
+
+export function compile(schema) {
+  return ajv.compile(schema);
+}

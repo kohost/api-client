@@ -1,82 +1,120 @@
-const Models = require("../Models");
+import {
+  Alarm,
+  Announcement,
+  Camera,
+  Category,
+  Courtesy,
+  Credential,
+  DeviceRouter,
+  Dimmer,
+  DiscoveredDevice,
+  EmailMessage,
+  EnergyReport,
+  EnergyReportShard,
+  Gateway,
+  Identification,
+  Issue,
+  Lock,
+  MediaFile,
+  MediaSource,
+  MotionSensor,
+  Order,
+  Organization,
+  Policy,
+  Product,
+  Property,
+  Reservation,
+  Room,
+  Scene,
+  ShortLink,
+  SMSMessage,
+  Space,
+  Switch,
+  SystemUser,
+  Thermostat,
+  Ticket,
+  TimeSheet,
+  User,
+  WindowCovering,
+} from "../Models";
 
-module.exports = function entityFactory(type) {
+export function entityFactory(type) {
   switch (type) {
     case "reservation":
-      return Models.Reservation;
+      return Reservation;
     case "mediaFile":
-      return Models.MediaFile;
+      return MediaFile;
     case "switch":
-      return Models.Switch;
+      return Switch;
     case "alarm":
-      return Models.Alarm;
+      return Alarm;
     case "dimmer":
-      return Models.Dimmer;
+      return Dimmer;
     case "lock":
-      return Models.Lock;
+      return Lock;
     case "thermostat":
-      return Models.Thermostat;
+      return Thermostat;
     case "windowCovering":
-      return Models.WindowCovering;
+      return WindowCovering;
     case "identification":
-      return Models.Identification;
+      return Identification;
     case "user":
-      return Models.User;
+      return User;
     case "systemUser":
-      return Models.SystemUser;
+      return SystemUser;
     case "policy":
-      return Models.Policy;
+      return Policy;
     case "courtesy":
-      return Models.Courtesy;
+      return Courtesy;
     case "camera":
-      return Models.Camera;
+      return Camera;
     case "motionSensor":
-      return Models.MotionSensor;
+      return MotionSensor;
     case "mediaSource":
-      return Models.MediaSource;
+      return MediaSource;
     case "room":
-      return Models.Room;
+      return Room;
     case "space":
-      return Models.Space;
+      return Space;
     case "category":
-      return Models.Category;
+      return Category;
     case "ticket":
-      return Models.Ticket;
+      return Ticket;
     case "scene":
-      return Models.Scene;
+      return Scene;
     case "gateway":
-      return Models.Gateway;
+      return Gateway;
     case "product":
-      return Models.Product;
+      return Product;
     case "order":
-      return Models.Order;
+      return Order;
     case "discoveredDevice":
-      return Models.DiscoveredDevice;
+      return DiscoveredDevice;
     case "deviceRouter":
-      return Models.DeviceRouter;
+      return DeviceRouter;
     case "credential":
-      return Models.Credential;
+      return Credential;
     case "shortLink":
-      return Models.ShortLink;
+      return ShortLink;
     case "energyReportShard":
-      return Models.EnergyReportShard;
+      return EnergyReportShard;
     case "energyReport":
-      return Models.EnergyReport;
+      return EnergyReport;
     case "smsMessage":
-      return Models.SMSMessage;
+      return SMSMessage;
     case "emailMessage":
-      return Models.EmailMessage;
+      return EmailMessage;
     case "announcement":
-      return Models.Announcement;
+      return Announcement;
     case "timeSheet":
-      return Models.TimeSheet;
+      return TimeSheet;
     case "property":
-      return Models.Property;
+      return Property;
     case "organization":
-      return Models.Organization;
+      return Organization;
     case "issue":
-      return Models.Issue;
+      return Issue;
     default:
       throw new Error("Unknown entity type: " + type);
   }
-};
+}

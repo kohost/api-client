@@ -1,11 +1,11 @@
-const schemas = require("../utils/schema");
-const schema = require("../schemas/identification.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/identification.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Identification extends Entity {
+export class Identification extends Entity {
   /**
    * @typedef {import("../schemas/IdentificationSchema").Identification} IdentificationType
    * Create a Identification instance.
@@ -32,7 +32,5 @@ Object.defineProperty(Identification.prototype, "validator", {
 });
 
 Object.defineProperty(Identification, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = Identification;

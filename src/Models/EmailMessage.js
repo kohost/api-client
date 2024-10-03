@@ -1,12 +1,12 @@
 // Create the SMS Message Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/emailMessage.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/emailMessage.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class EmailMessage extends Entity {
+export class EmailMessage extends Entity {
   /**
    * @typedef {import("../schemas/EmailMessageSchema").EmailMessage} EmailMessageType
    * Create a EmailMessage instance.
@@ -29,7 +29,5 @@ Object.defineProperty(EmailMessage.prototype, "validator", {
 });
 
 Object.defineProperty(EmailMessage, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = EmailMessage;

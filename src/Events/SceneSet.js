@@ -1,6 +1,6 @@
-const Event = require("./Event");
+import { Event } from "./Event";
 
-class SceneSet extends Event {
+export class SceneSet extends Event {
   constructor(scene, context) {
     super(scene, context);
   }
@@ -13,5 +13,3 @@ class SceneSet extends Event {
     return "scene";
   }
 }
-
-module.exports = SceneSet;

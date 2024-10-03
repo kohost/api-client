@@ -1,4 +1,4 @@
-const exchanges = {
+export const exchanges = {
   // routes commands based on `command-name` header and in many cases `property-id` header
   Commands: {
     name: "kohost.commands",
@@ -42,5 +42,3 @@ const exchanges = {
     type: "direct",
   },
 };
-
-module.exports = exchanges;

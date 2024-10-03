@@ -1,11 +1,11 @@
-const schemas = require("../utils/schema");
-const schema = require("../schemas/thermostat.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/thermostat.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Thermostat extends Entity {
+export class Thermostat extends Entity {
   /**
    * @typedef {import("../schemas/ThermostatSchema").Thermostat} ThermostatType
    * Create a Thermostat instance.
@@ -76,11 +76,11 @@ Object.defineProperty(Thermostat.prototype, "validator", {
 });
 
 Object.defineProperty(Thermostat, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
 
 Object.defineProperty(Thermostat, "actionProperties", {
   value: ["hvacMode", "fanMode", "setpoints"],
 });
 
-module.exports = Thermostat;
+export default Thermostat;

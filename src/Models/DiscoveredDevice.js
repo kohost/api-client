@@ -1,13 +1,13 @@
 // Create the Discovered Device Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/discoveredDevice.json");
+import schema, { properties } from "../schemas/discoveredDevice.json";
+import { add, compile } from "../utils/schema";
 
-const Entity = require("./Entity");
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class DiscoveredDevice extends Entity {
+export class DiscoveredDevice extends Entity {
   /**
    * @typedef {import("../schemas/DiscoveredDeviceSchema").DiscoveredDevice} DiscoveredDeviceType
    * Create a DiscoveredDevice instance.
@@ -30,7 +30,5 @@ Object.defineProperty(DiscoveredDevice.prototype, "validator", {
 });
 
 Object.defineProperty(DiscoveredDevice, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = DiscoveredDevice;

@@ -1,13 +1,13 @@
 // Create the User Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/systemUser.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/systemUser.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
+add(schema);
 
-const validator = schemas.compile(schema);
+const validator = compile(schema);
 
-class SystemUser extends Entity {
+export class SystemUser extends Entity {
   /**
    * @typedef {import("../schemas/SystemUserSchema").SystemUser} SystemUserType
    * Create a SystemUser instance.
@@ -43,7 +43,7 @@ Object.defineProperty(SystemUser.prototype, "validator", {
 });
 
 Object.defineProperty(SystemUser, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
 
 Object.defineProperty(SystemUser.prototype, "fullName", {
@@ -51,5 +51,3 @@ Object.defineProperty(SystemUser.prototype, "fullName", {
     return `${this.firstName} ${this.lastName}`;
   },
 });
-
-module.exports = SystemUser;

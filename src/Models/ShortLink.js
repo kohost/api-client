@@ -1,12 +1,12 @@
 // Create the Lock Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/shortLink.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/shortLink.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class ShortLink extends Entity {
+export class ShortLink extends Entity {
   /**
    * @typedef {import("../schemas/ShortLinkSchema").ShortLink} ShortLinkType
    * Create a ShortLink instance.
@@ -29,7 +29,5 @@ Object.defineProperty(ShortLink.prototype, "validator", {
 });
 
 Object.defineProperty(ShortLink, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = ShortLink;

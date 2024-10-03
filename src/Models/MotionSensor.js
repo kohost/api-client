@@ -1,12 +1,12 @@
 // create the Motion Sensor Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/motionSensor.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/motionSensor.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class MotionSensor extends Entity {
+export class MotionSensor extends Entity {
   /**
    * @typedef {import("../schemas/MotionSensorSchema").MotionSensor} MotionSensorType
    * Create a MotionSensor instance.
@@ -29,7 +29,5 @@ Object.defineProperty(MotionSensor.prototype, "validator", {
 });
 
 Object.defineProperty(MotionSensor, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = MotionSensor;

@@ -1,6 +1,6 @@
-const exchanges = require("../defs/amqpExchanges");
+import { exchanges } from "../defs";
 
-class Command {
+export class Command {
   constructor(data) {
     this.data = {};
     if (!data) throw new Error("Command data is required");
@@ -28,5 +28,3 @@ class Command {
     return { data: { ...this.data } };
   }
 }
-
-module.exports = Command;

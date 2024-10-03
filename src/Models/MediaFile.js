@@ -1,12 +1,12 @@
-const schemas = require("../utils/schema");
-const schema = require("../schemas/mediaFile.json");
-const Entity = require("./Entity");
-const { RequestError } = require("../Errors");
+import { RequestError } from "../Errors";
+import schema, { properties } from "../schemas/mediaFile.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class MediaFile extends Entity {
+export class MediaFile extends Entity {
   /**
    * @typedef {import("../schemas/MediaFileSchema").MediaFile} MediaFileType
    * Create a MediaFile instance.
@@ -42,7 +42,5 @@ Object.defineProperty(MediaFile.prototype, "validator", {
 });
 
 Object.defineProperty(MediaFile, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = MediaFile;

@@ -1,11 +1,11 @@
-const schemas = require("../utils/schema");
-const schema = require("../schemas/announcement.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/announcement.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Announcement extends Entity {
+export class Announcement extends Entity {
   /**
    * @typedef {import("../schemas/AnnouncementSchema").Announcement} AnnouncementType
    * Create a Announcement instance.
@@ -28,7 +28,5 @@ Object.defineProperty(Announcement.prototype, "validator", {
 });
 
 Object.defineProperty(Announcement, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = Announcement;

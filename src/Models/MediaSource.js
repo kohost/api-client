@@ -1,12 +1,12 @@
 // create the Media Source Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/mediaSource.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/mediaSource.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class MediaSource extends Entity {
+export class MediaSource extends Entity {
   /**
    * @typedef {import("../schemas/MediaSourceSchema").MediaSource} MediaSourceType
    * Create a MediaSource instance.
@@ -29,7 +29,5 @@ Object.defineProperty(MediaSource.prototype, "validator", {
 });
 
 Object.defineProperty(MediaSource, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = MediaSource;

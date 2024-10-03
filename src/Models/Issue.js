@@ -1,12 +1,12 @@
 // Create the Issue Model
-const schemas = require("../utils/schema");
-const schema = require("../schemas/issue.json");
-const Entity = require("./Entity");
+import schema, { properties } from "../schemas/issue.json";
+import { add, compile } from "../utils/schema";
+import { Entity } from "./Entity";
 
-schemas.add(schema);
-const validator = schemas.compile(schema);
+add(schema);
+const validator = compile(schema);
 
-class Issue extends Entity {
+export class Issue extends Entity {
   /**
    * @typedef {import("../schemas/IssueSchema").Issue} IssueType
    * Create a Ticket instance.
@@ -29,7 +29,5 @@ Object.defineProperty(Issue.prototype, "validator", {
 });
 
 Object.defineProperty(Issue, "validProperties", {
-  value: Object.keys(schema.properties),
+  value: Object.keys(properties),
 });
-
-module.exports = Issue;
