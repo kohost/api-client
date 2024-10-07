@@ -1,4 +1,11 @@
 // dont organize imports
+export * from "./Entity";
+export * from "./MediaFile";
+export * from "./MediaSource";
+export * from "./Reservation";
+export * from "./Ticket";
+export * from "./User";
+
 export * from "./Alarm";
 export * from "./Announcement";
 export * from "./Camera";
@@ -11,29 +18,29 @@ export * from "./DiscoveredDevice";
 export * from "./EmailMessage";
 export * from "./EnergyReport";
 export * from "./EnergyReportShard";
-export * from "./Entity";
+
 export * from "./Gateway";
 export * from "./Identification";
 export * from "./Issue";
 export * from "./Lock";
-export * from "./MediaFile";
-export * from "./MediaSource";
+
 export * from "./MotionSensor";
 export * from "./Order";
 export * from "./Organization";
 export * from "./Policy";
 export * from "./Product";
 export * from "./Property";
-export * from "./Reservation";
-export * from "./Room";
-export * from "./Scene";
+
 export * from "./ShortLink";
 export * from "./SmsMessage";
 export * from "./Space";
 export * from "./Switch";
 export * from "./SystemUser";
 export * from "./Thermostat";
-export * from "./Ticket";
+
 export * from "./TimeSheet";
-export * from "./User";
+
 export * from "./WindowCovering";
+
+export * from "./Room";
+export * from "./Scene";

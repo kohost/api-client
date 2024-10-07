@@ -1,4 +1,4 @@
-import Ajv from "ajv";
+import { Ajv } from "ajv";
 import addFormats from "ajv-formats";
 import defininitions from "../schemas/definitions.json";
 

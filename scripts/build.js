@@ -1,12 +1,6 @@
 const esbuild = require("esbuild");
 const path = require("node:path");
-const { promisify } = require("node:util");
 const fs = require("node:fs");
-
-const readdirAsync = promisify(fs.readdir);
-const statAsync = promisify(fs.stat);
-const copyFileAsync = promisify(fs.copyFile);
-const mkdirAsync = promisify(fs.mkdir);
 
 const { compileFromFile } = require("json-schema-to-typescript");
 
@@ -27,43 +21,6 @@ if (!fs.existsSync(path.resolve(__dirname, "../dist/types/schemas"))) {
   fs.mkdirSync(path.resolve(__dirname, "../dist/types/schemas"), {
     recursive: true,
   });
-}
-
-async function copyFilesToDistCjs(srcDir, distCjsDir, ignoredFolders = []) {
-  try {
-    // Create the dist/cjs directory if it doesn't exist
-    if (!fs.existsSync(distCjsDir)) {
-      await mkdirAsync(distCjsDir, { recursive: true });
-    }
-
-    // Read the contents of the src directory
-    const files = await readdirAsync(srcDir);
-
-    // Loop through the files
-    for (const file of files) {
-      const srcFilePath = path.join(srcDir, file);
-      const distCjsFilePath = path.join(distCjsDir, file);
-
-      // Check if the file is a directory
-      const isDirectory = (await statAsync(srcFilePath)).isDirectory();
-
-      if (isDirectory) {
-        // If it's a directory and not in the ignoredFolders list, copy the directory
-        if (!ignoredFolders.includes(file)) {
-          await copyFilesToDistCjs(
-            srcFilePath,
-            distCjsFilePath,
-            ignoredFolders,
-          );
-        }
-      } else {
-        // If it's a file, copy the file
-        await copyFileAsync(srcFilePath, distCjsFilePath);
-      }
-    }
-  } catch (err) {
-    console.error("Error while copying files:", err);
-  }
 }
 
 function getAllFilesInDirectory(dirPath) {
@@ -88,35 +45,35 @@ function getAllFilesInDirectory(dirPath) {
 
   return files;
 }
+function attachUseCases(format) {
+  const useCasePlugin = {
+    name: "useCasePlugin",
+    setup(build) {
+      build.onLoad(
+        { filter: /src\/Client\/index.js/, namespace: "file" },
+        async (args) => {
+          const fileText = await fs.promises.readFile(args.path, "utf8");
 
-let useCasePlugin = {
-  name: "useCasePlugin",
-  setup(build) {
-    build.onLoad(
-      { filter: /src\/Client\/index.js/, namespace: "file" },
-      async (args) => {
-        const fileText = await fs.promises.readFile(args.path, "utf8");
+          // create a require statement for each use case
+          const useCaseRequireStatements = [];
+          // attached each method to the UseCase class
+          const useCaseClassMethods = [];
 
-        // create a require statement for each use case
-        const useCaseRequireStatements = [];
-        // attached each method to the UseCase class
-        const useCaseClassMethods = [];
+          for (const [useCase, data] of useCaseMap.entries()) {
+            if (data.http) {
+              useCaseRequireStatements.push(
+                `import { ${useCase} } from "./useCases/${useCase}";`,
+              );
 
-        for (const [useCase, data] of useCaseMap.entries()) {
-          if (data.http) {
-            useCaseRequireStatements.push(
-              `const ${useCase} = require("./useCases/${useCase}");`,
-            );
+              useCaseClassMethods.push(
+                `KohostApiClient.prototype.${useCase} = ${useCase};`,
+              );
 
-            useCaseClassMethods.push(
-              `KohostApiClient.prototype.${useCase} = ${useCase};`,
-            );
+              const { method, path: endpoint } = data.http;
 
-            const { method, path: endpoint } = data.http;
+              const pathParams = endpoint.match(/:[a-zA-Z0-9]+/g);
 
-            const pathParams = endpoint.match(/:[a-zA-Z0-9]+/g);
-
-            let codeTemplate = `
+              let codeTemplate = `
         
             /* 
               Creates a method for each use case in the API
@@ -129,7 +86,7 @@ let useCasePlugin = {
             */
             
             //eslint-disable-next-line no-inner-declarations
-            module.exports = function ${useCase}(requestData = {data: null, query: null, headers: null}, httpConfigOptions = {}) {
+            export function ${useCase}(requestData = {data: null, query: null, headers: null}, httpConfigOptions = {}) {
 
             if (!requestData) requestData = {};
             
@@ -170,72 +127,105 @@ let useCasePlugin = {
             return this._http.request(config);
             }`;
 
-            const bundle = await esbuild.transform(codeTemplate, {
-              sourcemap: true,
-              loader: "js",
-              target: "node16",
-              format: "cjs",
-            });
+              if (format === "esm") {
+                const esmBundle = await esbuild.transform(codeTemplate, {
+                  sourcemap: true,
+                  loader: "js",
+                  target: "node18",
+                  format: "esm",
+                });
 
-            if (!fs.existsSync(path.resolve(__dirname, "../dist/useCases"))) {
-              fs.mkdirSync(path.resolve(__dirname, "../dist/useCases"), {
-                recursive: true,
-              });
+                if (
+                  !fs.existsSync(
+                    path.resolve(__dirname, "../dist/esm/useCases"),
+                  )
+                ) {
+                  fs.mkdirSync(
+                    path.resolve(__dirname, "../dist/esm/useCases"),
+                    {
+                      recursive: true,
+                    },
+                  );
+                }
+                fs.writeFileSync(
+                  path.resolve(__dirname, `../dist/esm/useCases/${useCase}.js`),
+                  esmBundle.code,
+                );
+              } else if (format === "cjs") {
+                const cjsBundle = await esbuild.transform(codeTemplate, {
+                  sourcemap: true,
+                  loader: "js",
+                  target: "node18",
+                  format: "cjs",
+                });
+
+                if (
+                  !fs.existsSync(
+                    path.resolve(__dirname, "../dist/cjs/useCases"),
+                  )
+                ) {
+                  fs.mkdirSync(
+                    path.resolve(__dirname, "../dist/cjs/useCases"),
+                    {
+                      recursive: true,
+                    },
+                  );
+                }
+
+                fs.writeFileSync(
+                  path.resolve(__dirname, `../dist/cjs/useCases/${useCase}.js`),
+                  cjsBundle.code,
+                );
+              }
             }
-
-            fs.writeFileSync(
-              path.resolve(__dirname, `../dist/useCases/${useCase}.js`),
-              bundle.code,
-            );
           }
-        }
 
-        // add the require statements to the top of the file
-        let file = fileText.replace(
-          "/* Add Use Cases Here */",
-          useCaseRequireStatements.join("\n"),
-        );
+          // add the require statements to the top of the file
+          let file = fileText.replace(
+            "/* Add Use Cases Here */",
+            useCaseRequireStatements.join("\n"),
+          );
 
-        // add the use case methods to the class
-        file = file.replace(
-          "module.exports = KohostApiClient;",
-          useCaseClassMethods.join("\n"),
-        );
+          // add the use case methods to the class
+          file = file.replace(
+            "/* Add Prototype here */",
+            useCaseClassMethods.join("\n"),
+          );
 
-        file = file + "\nmodule.exports = KohostApiClient;";
+          return {
+            contents: file,
+            loader: "js",
+            resolveDir: path.resolve(__dirname, `../dist/${format}`),
+          };
+        },
+      );
+    },
+  };
 
-        return {
-          contents: file,
-          loader: "js",
-          resolveDir: path.resolve(__dirname, "../dist"),
-        };
-      },
-    );
-  },
-};
+  return useCasePlugin;
+}
 
 const entryPoints = [
-  {
-    in: path.resolve(__dirname, "../src/SocketIoClient/"),
-    out: "SocketIoClient",
-  },
-  {
-    in: path.resolve(__dirname, "../src/AMQPClient/"),
-    out: "AMQPClient",
-  },
-  { in: path.resolve(__dirname, "../src/Models/"), out: "Models" },
-  { in: path.resolve(__dirname, "../src/Errors/"), out: "Errors" },
-  { in: path.resolve(__dirname, "../src/Commands/"), out: "Commands" },
-  { in: path.resolve(__dirname, "../src/Events/"), out: "Events" },
-  { in: path.resolve(__dirname, "../src/utils/"), out: "utils" },
-  { in: path.resolve(__dirname, "../src/defs/"), out: "defs" },
+  { in: path.resolve(__dirname, "../src/index.js"), out: "index" },
+  // {
+  //   in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
+  // {
+  //   in: path.resolve(__dirname, "../src/SocketIoClient/"),
+  //   out: "SocketIoClient",
+  // },
+  // {
+  //   in: path.resolve(__dirname, "../src/AMQPClient/"),
+  //   out: "AMQPClient",
+  // },
+  // { in: path.resolve(__dirname, "../src/Models/"), out: "Models" },
+  // { in: path.resolve(__dirname, "../src/Errors/"), out: "Errors" },
+  // { in: path.resolve(__dirname, "../src/Commands/"), out: "Commands" },
+  // { in: path.resolve(__dirname, "../src/Events/"), out: "Events" },
+  // { in: path.resolve(__dirname, "../src/utils/"), out: "utils" },
+  // { in: path.resolve(__dirname, "../src/defs/"), out: "defs" },
 ];
 
 async function build() {
-  const srcFolder = path.resolve(__dirname, "../src");
-  const distCjsFolder = path.resolve(__dirname, "../dist/cjs");
-  copyFilesToDistCjs(srcFolder, distCjsFolder, ["useCases", "Client"]);
-
   let schemas = getAllFilesInDirectory(
     path.resolve(__dirname, "../src/schemas"),
   );
@@ -264,80 +254,64 @@ async function build() {
       });
   }
 
-  const ESMBuild = await esbuild.context({
-    entryPoints: entryPoints.filter((entry) => entry.out !== "AMQPClient"),
+  // NODE
+  await esbuild.build({
+    entryPoints: entryPoints,
+    plugins: [attachUseCases("esm")],
     bundle: true,
     sourcemap: true,
     minify: false,
     keepNames: true,
     format: "esm",
     target: "esnext",
-    outdir: "dist/esm",
-    define: { global: "window" },
-  });
-
-  const HttpClientESMBuild = await esbuild.context({
-    plugins: [useCasePlugin],
-    entryPoints: [path.resolve(__dirname, "../src/Client/")],
-    bundle: true,
-    sourcemap: true,
-    minify: false,
-    format: "esm",
-    target: "esnext",
-    outdir: "dist/esm",
-    keepNames: true,
-    define: { global: "window" },
-  });
-
-  const HttpClientCJSBuild = await esbuild.context({
-    plugins: [useCasePlugin],
-    entryPoints: [
-      { in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
-    ],
-    bundle: true,
     platform: "node",
-    target: ["es2022"],
-    format: "cjs",
-    outfile: "dist/cjs/Client/index.js",
-    packages: "external",
-    keepNames: true,
-    allowOverwrite: true,
+    outdir: "dist/esm",
+    define: { global: "window" },
   });
 
-  await HttpClientESMBuild.rebuild();
-  await HttpClientCJSBuild.rebuild();
-  await ESMBuild.rebuild();
+  await esbuild.build({
+    entryPoints: entryPoints,
+    plugins: [attachUseCases("cjs")],
+    bundle: true,
+    sourcemap: true,
+    minify: false,
+    keepNames: true,
+    format: "cjs",
+    target: "esnext",
+    platform: "node",
+    outdir: "dist/cjs",
+    define: { global: "window" },
+  });
 
-  fs.writeFileSync(
-    path.resolve(__dirname, "../dist/esm/index.js"),
-    `export Client from "./Client";
+  // const HttpClientESMBuild = await esbuild.build({
+  //   plugins: [useCasePlugin],
+  //   entryPoints: [
+  //     { in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
+  //   ],
+  //   bundle: true,
+  //   sourcemap: true,
+  //   minify: false,
+  //   format: "esm",
+  //   target: "esnext",
+  //   platform: "node",
+  //   outdir: "dist/esm",
+  //   keepNames: true,
+  //   define: { global: "window" },
+  // });
 
-// SocketIoClient.js
-export SocketIoClient from "./SocketIoClient";
-
-// Commands.js
-export Commands from "./Commands";
-
-// Events.js
-export Events from "./Events";
-
-// Models.js
-export Models from "./Models";
-
-// Errors.js
-export Errors from "./Errors";
-
-// defs.js
-export defs from "./defs";
-
-// utils.js
-export utils from "./utils";
-    `,
-  );
-
-  HttpClientESMBuild.dispose();
-  HttpClientCJSBuild.dispose();
-  ESMBuild.dispose();
+  // const HttpClientCJSBuild = await esbuild.build({
+  //   plugins: [useCasePlugin],
+  //   entryPoints: [
+  //     { in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
+  //   ],
+  //   bundle: true,
+  //   platform: "node",
+  //   target: ["es2022"],
+  //   format: "cjs",
+  //   packages: "external",
+  //   keepNames: true,
+  //   allowOverwrite: true,
+  // });
 }
 
 build();

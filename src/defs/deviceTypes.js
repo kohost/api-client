@@ -1,4 +1,4 @@
-export const types = [
+export const deviceTypes = [
   "dimmer",
   "switch",
   "thermostat",

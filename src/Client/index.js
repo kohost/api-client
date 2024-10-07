@@ -181,3 +181,5 @@ export class KohostApiClient extends EventEmitter {
     return Promise.reject(error);
   }
 }
+
+/* Add Prototype here */

@@ -1,7 +1,7 @@
 // create the Camera Model
 import schema, { properties } from "../schemas/camera.json";
 import { add, compile } from "../utils/schema";
-import Entity from "./Entity";
+import { Entity } from "./Entity";
 
 add(schema);
 const validator = compile(schema);

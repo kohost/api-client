@@ -2,7 +2,7 @@
 import schema, { properties } from "../schemas/ticket.json";
 import { add, compile } from "../utils/schema";
 import { Entity } from "./Entity";
-import MediaFile from "./MediaFile";
+import { MediaFile } from "./MediaFile";
 
 import { nanoid } from "nanoid";
 
