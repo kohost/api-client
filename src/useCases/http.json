@@ -39,6 +39,15 @@
     }
   ],
   [
+    "LogoutSelf",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/auth/user/me/logout"
+      }
+    }
+  ],
+  [
     "LogoutUser",
     {
       "http": {
@@ -2129,6 +2138,15 @@
       "http": {
         "method": "PUT",
         "path": "/issues/:id"
+      }
+    }
+  ],
+  [
+    "BulkUpdateIssue",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/issues"
       }
     }
   ]
