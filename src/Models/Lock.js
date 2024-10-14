@@ -7,12 +7,6 @@ add(schema);
 const validator = compile(schema);
 
 export class Lock extends Entity {
-  /**
-   * @typedef {import("../schemas/LockSchema").Lock} LockType
-   * Create a Lock instance.
-   * @constructor
-   * @param {LockType} lock - The lock object of type Lock.
-   */
   constructor(lock) {
     super(lock);
   }

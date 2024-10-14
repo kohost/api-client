@@ -17,12 +17,6 @@ if (!fs.existsSync(path.resolve(__dirname, "../dist/esm"))) {
   fs.mkdirSync(path.resolve(__dirname, "../dist/esm"), { recursive: true });
 }
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist/types/schemas"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist/types/schemas"), {
-    recursive: true,
-  });
-}
-
 function getAllFilesInDirectory(dirPath) {
   const files = [];
 
@@ -45,6 +39,7 @@ function getAllFilesInDirectory(dirPath) {
 
   return files;
 }
+
 function attachUseCases(format) {
   const useCasePlugin = {
     name: "useCasePlugin",
@@ -242,10 +237,7 @@ async function build() {
         const typeNameUpper =
           typeName.charAt(0).toUpperCase() + typeName.slice(1) + "Schema";
         fs.writeFileSync(
-          path.resolve(
-            __dirname,
-            `../dist/types/schemas/${typeNameUpper}.d.ts`,
-          ),
+          path.resolve(__dirname, `../dist/types/${typeNameUpper}.d.ts`),
           ts,
         );
       })
@@ -254,7 +246,7 @@ async function build() {
       });
   }
 
-  // NODE
+  // ESM
   await esbuild.build({
     entryPoints: entryPoints,
     plugins: [attachUseCases("esm")],
@@ -269,6 +261,7 @@ async function build() {
     define: { global: "window" },
   });
 
+  // CJS
   await esbuild.build({
     entryPoints: entryPoints,
     plugins: [attachUseCases("cjs")],
@@ -282,36 +275,6 @@ async function build() {
     outdir: "dist/cjs",
     define: { global: "window" },
   });
-
-  // const HttpClientESMBuild = await esbuild.build({
-  //   plugins: [useCasePlugin],
-  //   entryPoints: [
-  //     { in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
-  //   ],
-  //   bundle: true,
-  //   sourcemap: true,
-  //   minify: false,
-  //   format: "esm",
-  //   target: "esnext",
-  //   platform: "node",
-  //   outdir: "dist/esm",
-  //   keepNames: true,
-  //   define: { global: "window" },
-  // });
-
-  // const HttpClientCJSBuild = await esbuild.build({
-  //   plugins: [useCasePlugin],
-  //   entryPoints: [
-  //     { in: path.resolve(__dirname, "../src/Client/"), out: "Client" },
-  //   ],
-  //   bundle: true,
-  //   platform: "node",
-  //   target: ["es2022"],
-  //   format: "cjs",
-  //   packages: "external",
-  //   keepNames: true,
-  //   allowOverwrite: true,
-  // });
 }
 
 build();

@@ -8,7 +8,7 @@ import { MediaFile } from "./MediaFile";
 import { Policy } from "./Policy";
 import { Reservation } from "./Reservation";
 
-import { nanoid } from "nanoid/async";
+import { nanoid } from "nanoid";
 
 add(paymentSchema);
 add(schema);
