@@ -25,7 +25,7 @@ class KohostApiClient extends EventEmitter {
       headers: {},
       onSuccess: (response) => response,
       onError: (error) => error,
-    }
+    },
   ) {
     super();
     if (!options.url) throw new Error("options.url is required");
@@ -66,7 +66,7 @@ class KohostApiClient extends EventEmitter {
 
     this._http.interceptors.response.use(
       this.#handleResponse.bind(this),
-      this.#handleResponseError.bind(this)
+      this.#handleResponseError.bind(this),
     );
   }
 
@@ -82,6 +82,11 @@ class KohostApiClient extends EventEmitter {
     this._http.defaults.headers.common[key] = orgId;
   }
 
+  get organizationId() {
+    const key = KohostApiClient.defs.organizationHeader;
+    return this._http.defaults.headers.common[key];
+  }
+
   /**
    * @param {string} propertyId
    * @returns {void}
@@ -93,6 +98,11 @@ class KohostApiClient extends EventEmitter {
   set propertyId(propertyId) {
     const key = KohostApiClient.defs.propertyHeader;
     this._http.defaults.headers.common[key] = propertyId;
+  }
+
+  get propertyId() {
+    const key = KohostApiClient.defs.propertyHeader;
+    return this._http.defaults.headers.common[key];
   }
 
   static get defs() {
