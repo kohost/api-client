@@ -208,6 +208,17 @@
               "type": "boolean",
               "default": false
             },
+            "ratings": {
+              "type": "boolean",
+              "default": true
+            },
+            "newTicketCCs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
             "quickServices": {
               "type": "array",
               "items": {
