@@ -14,8 +14,13 @@
     "type": {
       "$ref": "definitions.json#/definitions/type"
     },
-    "subType": {
-      "$ref": "definitions.json#/definitions/subType"
+    "discriminator": {
+      "type": "string",
+      "enum": [
+        "light",
+        "fan",
+        "irrigation"
+      ]
     },
     "supportedNotifications": {
       "$ref": "definitions.json#/definitions/supportedNotifications"
