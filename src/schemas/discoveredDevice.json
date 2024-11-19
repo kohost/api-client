@@ -32,11 +32,11 @@
     "ignore": {
       "type": "boolean"
     },
-    "organization": {
+    "organizationId": {
       "type": ["string", "null"],
       "description": "Reference (id) to the organization that owns this device"
     },
-    "property": {
+    "propertyId": {
       "type": ["string", "null"],
       "description": "Reference (id) to the property that this device belongs to"
     }

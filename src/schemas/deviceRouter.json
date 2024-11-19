@@ -17,7 +17,7 @@
     "driver": {
       "type": "string"
     },
-    "organization": {
+    "organizationId": {
       "type": ["string", "null"],
       "description": "Reference (id) to the organization that owns this router"
     },
