@@ -126,10 +126,10 @@ class Room extends Entity {
   }
 
   get hasLight() {
-    const hasSubTypeLight = this.switches?.some((sw) => {
-      return sw.subType === "light" || sw.subType === "fan";
+    const hasDiscriminatorLight = this.switches?.some((sw) => {
+      return sw.discriminator === "light" || sw.discriminator === "fan";
     });
-    return this.hasDimmer || hasSubTypeLight;
+    return this.hasDimmer || hasDiscriminatorLight;
   }
 
   get occupied() {

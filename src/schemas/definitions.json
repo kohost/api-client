@@ -154,9 +154,6 @@
     "name": {
       "type": "string"
     },
-    "subType": {
-      "type": ["string", "null"]
-    },
     "supportedNotifications": {
       "type": "array",
       "uniqueItems": true,
