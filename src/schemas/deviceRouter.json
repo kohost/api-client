@@ -4,7 +4,7 @@
   "title": "Device Router",
   "description": "A device router contains instructions on where to route devices based on their organization and driver.",
   "type": "object",
-  "required": ["driver", "organization"],
+  "required": ["driver", "organizationId"],
   "properties": {
     "id": {
       "$ref": "definitions.json#/definitions/id"
