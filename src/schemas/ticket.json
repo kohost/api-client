@@ -35,6 +35,12 @@
           "userName": {
             "type": "string"
           },
+          "vendorId": {
+            "type": "string"
+          },
+          "vendorName": {
+            "type": "string"
+          },
           "systemId": {
             "type": "string"
           },
@@ -64,6 +70,9 @@
           },
           {
             "required": ["id", "systemId", "timestamp", "body"]
+          },
+          {
+            "required": ["id", "vendorId", "timestamp", "body"]
           }
         ]
       }
@@ -136,6 +145,19 @@
           "type": "string"
         },
         "userPhoto": {
+          "anyOf": [
+            { "$ref": "mediaFile.json" },
+            { "type": "null" },
+            { "type": "string" }
+          ]
+        },
+        "vendorId": {
+          "type": "string"
+        },
+        "vendorName": {
+          "type": "string"
+        },
+        "vendorPhoto": {
           "anyOf": [
             { "$ref": "mediaFile.json" },
             { "type": "null" },

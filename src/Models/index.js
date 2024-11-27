@@ -33,6 +33,7 @@ const EmailMessage = require("./EmailMessage");
 const Announcement = require("./Announcement");
 const TimeSheet = require("./TimeSheet");
 const Issue = require("./Issue");
+const Vendor = require("./Vendor");
 
 const Property = require("./Property");
 const Organization = require("./Organization");
@@ -78,4 +79,5 @@ module.exports = {
   TimeSheet,
   Policy,
   Issue,
+  Vendor,
 };

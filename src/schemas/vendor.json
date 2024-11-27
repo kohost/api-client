@@ -3,7 +3,7 @@
   "$id": "vendor.json",
   "title": "Vendor",
   "type": "object",
-  "required": ["name", "lastName"],
+  "required": ["name", "email"],
   "properties": {
     "id": {
       "$ref": "definitions.json#/definitions/id"

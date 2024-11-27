@@ -28,6 +28,9 @@
         "userId": {
           "type": "string"
         },
+        "vendorId": {
+          "type": "string"
+        },
         "priority": {
           "$ref": "ticket.json#/properties/priority"
         },
