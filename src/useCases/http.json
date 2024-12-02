@@ -1334,6 +1334,15 @@
     }
   ],
   [
+    "DeviceAssociatedEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["DeviceAssociated"]
+      }
+    }
+  ],
+  [
     "UpsertSystemDevices",
     {
       "http": false,
@@ -2147,6 +2156,51 @@
       "http": {
         "method": "PUT",
         "path": "/issues"
+      }
+    }
+  ],
+  [
+    "DescribeVendor",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/vendors/:id"
+      }
+    }
+  ],
+  [
+    "ListVendors",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/vendors"
+      }
+    }
+  ],
+  [
+    "DeleteVendor",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/vendors/:id"
+      }
+    }
+  ],
+  [
+    "CreateVendor",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/vendors"
+      }
+    }
+  ],
+  [
+    "UpdateVendor",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/vendors/:id"
       }
     }
   ]

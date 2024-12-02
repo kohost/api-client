@@ -41,6 +41,9 @@
           }
         }
       }
+    },
+    "systemKey": {
+      "type": "string"
     }
   },
   "required": ["id", "type", "name", "department"]
