@@ -44,6 +44,10 @@
     },
     "systemKey": {
       "type": "string"
+    },
+    "autoCreateTicket": {
+      "type": "boolean",
+      "default": true
     }
   },
   "required": ["id", "type", "name", "department"]
