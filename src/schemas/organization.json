@@ -140,8 +140,8 @@
       "type": "object",
       "properties": {
         "nextTicketNumber": {
-          "type": "string",
-          "default": "1"
+          "type": ["string", "integer"],
+          "default": 1
         }
       }
     },
