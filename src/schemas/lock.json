@@ -44,7 +44,7 @@
       }
     },
     "batteryLevel": {
-      "$ref": "definitions.json#/definitions/batteryLevel"
+     "$ref": "definitions.json#/definitions/batteryLevel"
     },
     "systemId": {
       "$ref": "definitions.json#/definitions/systemId"
