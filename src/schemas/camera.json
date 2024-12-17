@@ -82,6 +82,14 @@
             "rtsp://192.168.1.4:544/channels/1",
             "rtsp://10.145.6.129:8554/unicast"
           ]
+        },
+        "previewImage": {
+          "type": ["string", "null"],
+          "description": "Source to preview the camera stream",
+          "examples": [
+            "https://example.com/preview.jpg",
+            "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBYRXhpZgAATU0AKgAAAAgAA1EQAAEAAAABAQAAAFERAAQAAAABAAABAgABAA"
+          ]
         }
       }
     },
