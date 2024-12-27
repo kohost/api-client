@@ -1,5 +1,4 @@
-const Command = require("./Command");
-const RequestError = require("../Errors/RequestError");
+import Command from "./Command";
 
 class UpdateUser extends Command {
   constructor({
@@ -14,7 +13,6 @@ class UpdateUser extends Command {
     payment,
     ...rest
   }) {
-    if (!id) throw new RequestError("document type is required");
     super({
       id,
       email,
@@ -34,4 +32,4 @@ class UpdateUser extends Command {
   }
 }
 
-module.exports = UpdateUser;
+export default UpdateUser;

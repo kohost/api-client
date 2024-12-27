@@ -1,10 +1,10 @@
-const AppError = require("./AppError");
+import AppError from "./AppError";
 
-module.exports = class ValidationError extends AppError {
+export default class ValidationError extends AppError {
   constructor(message = "Validation Error", options = {}) {
     super(message, options);
     this.statusCode = 400;
     this.name = "ValidationError";
     Object.setPrototypeOf(this, ValidationError.prototype);
   }
-};
+}

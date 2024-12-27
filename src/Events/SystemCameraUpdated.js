@@ -1,4 +1,4 @@
-const Event = require("./Event");
+import Event from "./Event";
 
 class SystemCameraUpdated extends Event {
   constructor(camera, context) {
@@ -14,4 +14,4 @@ class SystemCameraUpdated extends Event {
   }
 }
 
-module.exports = SystemCameraUpdated;
+export default SystemCameraUpdated;

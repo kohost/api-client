@@ -1,4 +1,4 @@
-const Command = require("./Command");
+import Command from "./Command";
 
 class SetThermostat extends Command {
   constructor({ id, setpoints, hvacMode, fanMode, ...rest }) {
@@ -10,4 +10,4 @@ class SetThermostat extends Command {
   }
 }
 
-module.exports = SetThermostat;
+export default SetThermostat;

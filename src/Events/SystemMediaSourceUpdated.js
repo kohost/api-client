@@ -1,4 +1,4 @@
-const Event = require("./Event");
+import Event from "./Event";
 
 class SystemMediaSourceUpdated extends Event {
   constructor(mediaSource, context) {
@@ -14,4 +14,4 @@ class SystemMediaSourceUpdated extends Event {
   }
 }
 
-module.exports = SystemMediaSourceUpdated;
+export default SystemMediaSourceUpdated;

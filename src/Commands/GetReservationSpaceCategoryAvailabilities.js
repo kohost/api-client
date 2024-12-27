@@ -1,9 +1,7 @@
-const { RequestError } = require("../Errors");
-const Command = require("./Command");
+import Command from "./Command";
 
 class GetReservationSpaceCategoryAvailabilities extends Command {
   constructor(options) {
-    if (!options) throw new RequestError("options are required");
     const { id, ...rest } = options;
     super({ id, ...rest });
   }
@@ -13,4 +11,4 @@ class GetReservationSpaceCategoryAvailabilities extends Command {
   }
 }
 
-module.exports = GetReservationSpaceCategoryAvailabilities;
+export default GetReservationSpaceCategoryAvailabilities;

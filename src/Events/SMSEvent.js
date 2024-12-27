@@ -1,4 +1,4 @@
-const Event = require("./Event");
+import Event from "./Event";
 
 class SMSEvent extends Event {
   constructor(sms, context) {
@@ -14,4 +14,4 @@ class SMSEvent extends Event {
   }
 }
 
-module.exports = SMSEvent;
+export default SMSEvent;

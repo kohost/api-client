@@ -1,4 +1,4 @@
-const Event = require("./Event");
+import Event from "./Event";
 
 class SystemSwitchUpdate extends Event {
   constructor(_switch, context) {
@@ -14,4 +14,4 @@ class SystemSwitchUpdate extends Event {
   }
 }
 
-module.exports = SystemSwitchUpdate;
+export default SystemSwitchUpdate;

@@ -1,4 +1,4 @@
-const Command = require("./Command");
+import Command from "./Command";
 
 class GetProducts extends Command {
   constructor({ id, externalSystemId, ...rest }) {
@@ -10,4 +10,4 @@ class GetProducts extends Command {
   }
 }
 
-module.exports = GetProducts;
+export default GetProducts;

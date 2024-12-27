@@ -1,5 +1,5 @@
-const exchanges = require("../defs/amqpExchanges");
-const Event = require("./Event");
+import { amqpExchanges } from "../defs";
+import Event from "./Event";
 
 class ApplicationOutOfUse extends Event {
   constructor(data = {}, context = {}) {
@@ -15,8 +15,8 @@ class ApplicationOutOfUse extends Event {
   }
 
   static get exchange() {
-    return exchanges.AppEvents.name;
+    return amqpExchanges.AppEvents.name;
   }
 }
 
-module.exports = ApplicationOutOfUse;
+export default ApplicationOutOfUse;

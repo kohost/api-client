@@ -1,4 +1,4 @@
-const Command = require("./Command");
+import Command from "./Command";
 
 class SetMedia extends Command {
   constructor({ id, command, ...rest }) {
@@ -10,4 +10,4 @@ class SetMedia extends Command {
   }
 }
 
-module.exports = SetMedia;
+export default SetMedia;

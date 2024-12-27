@@ -1,4 +1,4 @@
-const Event = require("./Event");
+import Event from "./Event";
 
 class SystemOrganizationUpdated extends Event {
   constructor(organization, context) {
@@ -14,4 +14,4 @@ class SystemOrganizationUpdated extends Event {
   }
 }
 
-module.exports = SystemOrganizationUpdated;
+export default SystemOrganizationUpdated;

@@ -1,4 +1,4 @@
-const Event = require("./Event");
+import Event from "./Event";
 
 class SystemWindowCoveringUpdate extends Event {
   constructor(wc, context) {
@@ -14,4 +14,4 @@ class SystemWindowCoveringUpdate extends Event {
   }
 }
 
-module.exports = SystemWindowCoveringUpdate;
+export default SystemWindowCoveringUpdate;

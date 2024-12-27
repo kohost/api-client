@@ -1,4 +1,4 @@
-const Command = require("./Command");
+import Command from "./Command";
 
 class CreateImageUploadEndpoint extends Command {
   constructor({ id, expires, ...rest }) {
@@ -10,4 +10,4 @@ class CreateImageUploadEndpoint extends Command {
   }
 }
 
-module.exports = CreateImageUploadEndpoint;
+export default CreateImageUploadEndpoint;

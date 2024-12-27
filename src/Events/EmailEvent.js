@@ -1,4 +1,4 @@
-const Event = require("./Event");
+import Event from "./Event";
 
 class EmailEvent extends Event {
   constructor(email, context) {
@@ -14,4 +14,4 @@ class EmailEvent extends Event {
   }
 }
 
-module.exports = EmailEvent;
+export default EmailEvent;

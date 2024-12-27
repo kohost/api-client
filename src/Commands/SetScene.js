@@ -1,4 +1,4 @@
-const Command = require("./Command");
+import Command from "./Command";
 
 class SetScene extends Command {
   constructor({ id, devices, ...rest }) {
@@ -10,4 +10,4 @@ class SetScene extends Command {
   }
 }
 
-module.exports = SetScene;
+export default SetScene;

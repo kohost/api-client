@@ -1,4 +1,4 @@
-const Command = require("./Command");
+import Command from "./Command";
 
 class SetWindowCovering extends Command {
   constructor({ id, position, ...rest }) {
@@ -10,4 +10,4 @@ class SetWindowCovering extends Command {
   }
 }
 
-module.exports = SetWindowCovering;
+export default SetWindowCovering;

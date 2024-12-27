@@ -1,4 +1,4 @@
-const Command = require("./Command");
+import Command from "./Command";
 
 class SetAlarm extends Command {
   constructor({ id, zones, areas, code, ...rest }) {
@@ -10,4 +10,4 @@ class SetAlarm extends Command {
   }
 }
 
-module.exports = SetAlarm;
+export default SetAlarm;

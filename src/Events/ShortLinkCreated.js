@@ -1,4 +1,4 @@
-const Event = require("./Event");
+import Event from "./Event";
 
 class ShortLinkCreated extends Event {
   constructor(shortLink, context) {
@@ -14,4 +14,4 @@ class ShortLinkCreated extends Event {
   }
 }
 
-module.exports = ShortLinkCreated;
+export default ShortLinkCreated;

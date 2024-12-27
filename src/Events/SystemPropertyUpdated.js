@@ -1,4 +1,4 @@
-const Event = require("./Event");
+import Event from "./Event";
 
 class SystemPropertyUpdate extends Event {
   constructor(property, context) {
@@ -14,4 +14,4 @@ class SystemPropertyUpdate extends Event {
   }
 }
 
-module.exports = SystemPropertyUpdate;
+export default SystemPropertyUpdate;

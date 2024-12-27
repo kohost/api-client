@@ -1,4 +1,6 @@
-const exchanges = require("../defs/amqpExchanges");
+import { amqpExchanges } from "../defs";
+
+const Commands = amqpExchanges.Commands;
 
 class Command {
   constructor(data) {
@@ -21,7 +23,7 @@ class Command {
   }
 
   static get exchange() {
-    return exchanges.Commands.name;
+    return Commands.name;
   }
 
   build() {
@@ -29,4 +31,4 @@ class Command {
   }
 }
 
-module.exports = Command;
+export default Command;

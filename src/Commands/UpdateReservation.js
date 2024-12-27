@@ -1,9 +1,7 @@
-const Command = require("./Command");
-const RequestError = require("../Errors/RequestError");
+import Command from "./Command";
 
 class UpdateReservation extends Command {
   constructor({ id, ...rest }) {
-    if (!id) throw new RequestError("document type is required");
     super({ id, ...rest });
   }
 
@@ -12,4 +10,4 @@ class UpdateReservation extends Command {
   }
 }
 
-module.exports = UpdateReservation;
+export default UpdateReservation;

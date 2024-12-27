@@ -1,4 +1,4 @@
-const Command = require("./Command");
+import Command from "./Command";
 
 class SetCourtesy extends Command {
   constructor({ id, state, ...rest }) {
@@ -10,4 +10,4 @@ class SetCourtesy extends Command {
   }
 }
 
-module.exports = SetCourtesy;
+export default SetCourtesy;

@@ -1,4 +1,4 @@
-const exchanges = require("../defs/amqpExchanges");
+const { amqpExchanges } = require("../defs");
 
 class Event {
   constructor(data, context = {}) {
@@ -25,7 +25,7 @@ class Event {
   }
 
   static get exchange() {
-    return exchanges.DriverEvents.name;
+    return amqpExchanges.DriverEvents.name;
   }
 
   static get entity() {

@@ -1,4 +1,4 @@
-module.exports = class AppError extends Error {
+export default class AppError extends Error {
   constructor(message = "Internal Server Error", options) {
     super(message, options);
     this.type = this.constructor.name;
@@ -6,4 +6,4 @@ module.exports = class AppError extends Error {
     this.name = "AppError";
     Object.setPrototypeOf(this, AppError.prototype);
   }
-};
+}

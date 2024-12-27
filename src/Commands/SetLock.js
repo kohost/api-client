@@ -1,4 +1,4 @@
-const Command = require("./Command");
+import Command from "./Command";
 
 class SetLock extends Command {
   constructor({ id, state, ...rest }) {
@@ -10,4 +10,4 @@ class SetLock extends Command {
   }
 }
 
-module.exports = SetLock;
+export default SetLock;

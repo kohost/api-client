@@ -1,10 +1,7 @@
-const Command = require("./Command");
-const RequestError = require("../Errors/RequestError");
+import Command from "./Command";
 
 class CheckOutReservation extends Command {
   constructor({ reservationId, userId, ...rest }) {
-    if (!reservationId) throw new RequestError("reservation id is required");
-    if (!userId) throw new RequestError("user id is required");
     super({ reservationId, userId, ...rest });
   }
 
@@ -13,4 +10,4 @@ class CheckOutReservation extends Command {
   }
 }
 
-module.exports = CheckOutReservation;
+export default CheckOutReservation;

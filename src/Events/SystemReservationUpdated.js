@@ -1,4 +1,4 @@
-const Event = require("./Event");
+import Event from "./Event";
 
 class SystemReservationUpdate extends Event {
   constructor(reservation, context) {
@@ -14,4 +14,4 @@ class SystemReservationUpdate extends Event {
   }
 }
 
-module.exports = SystemReservationUpdate;
+export default SystemReservationUpdate;
