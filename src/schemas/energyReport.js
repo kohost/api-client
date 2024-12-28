@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "energyReport.json",
   title: "Energy Report Hourly",

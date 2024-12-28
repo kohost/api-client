@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "mediaFile.json",
   title: "Media File",
@@ -72,4 +72,21 @@ module.exports = {
   },
   additionalProperties: false,
   required: ["type"],
+};
+
+function createImageVariant(params) {
+  if (this.mimeType != "image/*")
+    throw new Error("Only dynamic images can have variants");
+  if (!this.url) throw new Error("MediaFile has no url");
+  // convert params to "key=value" pairs
+  const query = Object.keys(params)
+    .map((key) => `${key}=${params[key]}`)
+    .join(",");
+
+  // replace the final /public with the query above
+  return this.url.replace(/\/public$/, `/${query}`);
+}
+
+export const methods = {
+  createImageVariant: createImageVariant,
 };

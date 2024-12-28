@@ -1,7 +1,7 @@
 // Create the TimeSheet Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/timeSheet.json");
-const Entity = require("./Entity");
+const Entity = require("./Entity").default;
 
 const { nanoid } = require("nanoid");
 

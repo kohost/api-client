@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "camera.json",
   title: "Camera",
@@ -89,7 +89,7 @@ module.exports = {
           description: "Source to preview the camera stream",
           examples: [
             "https://example.com/preview.jpg",
-            "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBYRXhpZgAATU0AKgAAAAgAA1EQAAEAAAABAQAAAFERAAQAAAABAAABAgABAA",
+            "data:image/jpegbase64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBYRXhpZgAATU0AKgAAAAgAA1EQAAEAAAABAQAAAFERAAQAAAABAAABAgABAA",
           ],
         },
       },

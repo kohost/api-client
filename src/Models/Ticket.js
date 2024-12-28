@@ -1,7 +1,7 @@
 // Create the User Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/ticket.json");
-const Entity = require("./Entity");
+const Entity = require("./Entity").default;
 const MediaFile = require("./MediaFile");
 
 const { nanoid } = require("nanoid");

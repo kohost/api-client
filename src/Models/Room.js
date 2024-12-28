@@ -2,7 +2,7 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/room.json");
 const deviceSchema = require("../schemas/definitions.json");
-const Entity = require("./Entity");
+const Entity = require("./Entity").default;
 
 // device dependencies
 const Switch = require("./Switch");

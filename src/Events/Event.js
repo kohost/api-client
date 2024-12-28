@@ -1,4 +1,4 @@
-const { amqpExchanges } = require("../defs");
+import { amqpExchanges } from "../defs";
 
 class Event {
   constructor(data, context = {}) {
@@ -41,4 +41,4 @@ class Event {
   }
 }
 
-module.exports = Event;
+export default Event;

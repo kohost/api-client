@@ -1,9 +1,11 @@
-const esbuild = require("esbuild");
+import { build } from "esbuild";
+import { GenerateModelPlugin } from "./generate-models.js";
+import { GenerateValidatorPlugin } from "./generate-validators.js";
 
 const formats = ["esm", "cjs"];
 
 const builds = formats.map((format) => {
-  esbuild.build({
+  build({
     entryPoints: ["src/Models/Entity.js"],
     bundle: true,
     platform: "node",
@@ -12,17 +14,27 @@ const builds = formats.map((format) => {
     format,
   });
 
-  esbuild.build({
+  build({
     entryPoints: ["src/schemas/*.js"],
     bundle: false,
     platform: "node",
     target: "node20",
-    plugins: [require("./generate-models")(format)],
+    plugins: [GenerateModelPlugin({ excludeFiles: ["definitions.js"] })],
     outdir: `dist/${format}/models`,
     format,
   });
 
-  esbuild.build({
+  build({
+    entryPoints: ["src/schemas/*.js"],
+    bundle: false,
+    platform: "node",
+    target: "node20",
+    plugins: [GenerateValidatorPlugin({ excludeFiles: ["definitions.js"] })],
+    outdir: `dist/${format}/validators`,
+    format,
+  });
+
+  build({
     entryPoints: ["src/Commands/*.js"],
     bundle: false,
     platform: "node",
@@ -31,12 +43,30 @@ const builds = formats.map((format) => {
     format,
   });
 
-  esbuild.build({
+  build({
     entryPoints: ["src/Errors/*.js"],
     bundle: false,
     platform: "node",
     target: "node20",
     outdir: `dist/${format}/errors`,
+    format,
+  });
+
+  build({
+    entryPoints: ["src/Events/*.js"],
+    bundle: false,
+    platform: "node",
+    target: "node20",
+    outdir: `dist/${format}/events`,
+    format,
+  });
+
+  build({
+    entryPoints: ["src/*.js"],
+    bundle: false,
+    platform: "node",
+    target: "node20",
+    outdir: `dist/${format}`,
     format,
   });
 });

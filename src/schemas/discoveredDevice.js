@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "discoveredDevice.json",
   title: "Discovered Device",

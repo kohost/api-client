@@ -1,4 +1,4 @@
-const { ValidationError } = require("../Errors");
+import ValidationError from "../Errors/ValidationError";
 
 class Entity {
   constructor(data) {
@@ -27,4 +27,8 @@ class Entity {
   }
 }
 
-module.exports = Entity;
+Entity.prototype.transform = function (data) {
+  return data;
+};
+
+export default Entity;

@@ -1,7 +1,7 @@
 // Create the User Model
 const schemas = require("../utils/schema");
 const schema = require("../schemas/systemUser.json");
-const Entity = require("./Entity");
+const Entity = require("./Entity").default;
 
 schemas.add(schema);
 
@@ -25,7 +25,7 @@ class SystemUser extends Entity {
   }
 
   static validateEmail(email) {
-    //eslint-disable-next-line no-useless-escape
+     
     const regex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(email);

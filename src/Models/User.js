@@ -2,7 +2,7 @@
 const schemas = require("../utils/schema");
 const schema = require("../schemas/user.json");
 const paymentSchema = require("../schemas/payment.json");
-const Entity = require("./Entity");
+const Entity = require("./Entity").default;
 const MediaFile = require("./MediaFile");
 const Reservation = require("./Reservation");
 const Policy = require("./Policy");
@@ -30,7 +30,7 @@ class User extends Entity {
 
     if (user.identifications) {
       user.identifications = user.identifications.map(
-        (id) => new Identification(id)
+        (id) => new Identification(id),
       );
     }
 
@@ -38,7 +38,7 @@ class User extends Entity {
       user.permissions = user.permissions.map((permission) => {
         if (permission.policies && Array.isArray(permission.policies)) {
           permission.policies = permission.policies.map(
-            (policy) => new Policy(policy)
+            (policy) => new Policy(policy),
           );
         }
         return permission;
@@ -54,7 +54,7 @@ class User extends Entity {
   }
 
   static validateEmail(email) {
-    //eslint-disable-next-line no-useless-escape
+     
     const regex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(email);

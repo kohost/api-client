@@ -2,7 +2,7 @@
 // A group of rooms -> rooms could become a space later...
 const schemas = require("../utils/schema");
 const schema = require("../schemas/space.json");
-const Entity = require("./Entity");
+const Entity = require("./Entity").default;
 
 const Room = require("./Room");
 
