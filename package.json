@@ -34,12 +34,10 @@
     "@types/events": "^3.0.3",
     "ajv": "^8.11.0",
     "ajv-formats": "^3.0.1",
-    "dts-gen": "^0.10.2",
     "esbuild": "^0.24.2",
     "eslint": "^9.7.0",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^9.0.11",
-    "json-schema-to-typescript": "^14.0.4",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
     "typescript": "^5.1.6"

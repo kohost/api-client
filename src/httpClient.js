@@ -2,7 +2,7 @@
 import axios from "axios";
 import { EventEmitter } from "events";
 
-class KohostApiClient extends EventEmitter {
+export default class KohostApiClient extends EventEmitter {
   #onSuccess;
   #onError;
 
@@ -25,7 +25,7 @@ class KohostApiClient extends EventEmitter {
       headers: {},
       onSuccess: (response) => response,
       onError: (error) => error,
-    },
+    }
   ) {
     super();
     if (!options.url) throw new Error("options.url is required");
@@ -66,7 +66,7 @@ class KohostApiClient extends EventEmitter {
 
     this._http.interceptors.response.use(
       this.#handleResponse.bind(this),
-      this.#handleResponseError.bind(this),
+      this.#handleResponseError.bind(this)
     );
   }
 
@@ -192,4 +192,4 @@ class KohostApiClient extends EventEmitter {
   }
 }
 
-export default KohostApiClient;
+/* Add Use Case Methods Here */

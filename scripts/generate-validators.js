@@ -7,8 +7,8 @@ import path from "node:path";
 export const GenerateValidatorPlugin = ({ excludeFiles = [] }) => ({
   name: "generate-validator",
   async setup(build) {
-    const schemas = (await loadFiles(build.initialOptions.entryPoints)).map(
-      (module) => module.default,
+    const schemas = (await importFiles(build.initialOptions.entryPoints)).map(
+      (module) => module.default
     );
 
     const ajv = new Ajv({
@@ -36,7 +36,7 @@ export const GenerateValidatorPlugin = ({ excludeFiles = [] }) => ({
   },
 });
 
-function loadFiles(patterns) {
+function importFiles(patterns) {
   const files = [];
   for (const pattern of patterns) {
     const absolutePattern = path.resolve(process.cwd(), pattern);

@@ -5,7 +5,6 @@
  * validation functions.
  *
  * @param {Object} options - The options for the plugin.
- * @param {string} options.format - The module format, either "esm" or "cjs".
  * @param {string[]} [options.excludeFiles=[]] - An array of file paths to exclude from processing.
  * @returns {Object} The plugin object with a name and setup function.
  *
@@ -44,16 +43,16 @@ export const GenerateModelPlugin = ({ excludeFiles = [] }) => ({
           constructor(data) {
             super(data);
             ${Object.keys(schema.properties)
-    .map((prop) => `this.${prop} = data.${prop};`)
-    .join("\n            ")}
+              .map((prop) => `this.${prop} = data.${prop};`)
+              .join("\n            ")}
           }
 
             ${Object.entries(methods)
-    .map(
-      ([name, func]) =>
-        `${name}${func.toString().slice(func.toString().indexOf("("))}`,
-    )
-    .join("\n    ")}
+              .map(
+                ([name, func]) =>
+                  `${name}${func.toString().slice(func.toString().indexOf("("))}`
+              )
+              .join("\n    ")}
         }
  
         Object.defineProperty(${schemaTitle}.prototype, "schema", {
