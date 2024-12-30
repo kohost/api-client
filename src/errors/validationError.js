@@ -1,6 +1,6 @@
-import AppError from "./appError";
+import { AppError } from "./appError";
 
-export default class ValidationError extends AppError {
+export class ValidationError extends AppError {
   constructor(message = "Validation Error", options = {}) {
     super(message, options);
     this.statusCode = 400;

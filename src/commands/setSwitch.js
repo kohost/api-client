@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class SetSwitch extends Command {
+export class SetSwitch extends Command {
   constructor({ id, state, ...rest }) {
     super({ id, state, ...rest });
   }
@@ -9,5 +9,3 @@ class SetSwitch extends Command {
     return "SetSwitch";
   }
 }
-
-export default SetSwitch;

@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class SetAlarm extends Command {
+export class SetAlarm extends Command {
   constructor({ id, zones, areas, code, ...rest }) {
     super({ id, zones, areas, code, ...rest });
   }
@@ -9,5 +9,3 @@ class SetAlarm extends Command {
     return "SetAlarm";
   }
 }
-
-export default SetAlarm;

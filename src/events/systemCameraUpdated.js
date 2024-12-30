@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemCameraUpdated extends Event {
+export class SystemCameraUpdated extends Event {
   constructor(camera, context) {
     super(camera, context);
   }
@@ -13,5 +13,3 @@ class SystemCameraUpdated extends Event {
     return "camera";
   }
 }
-
-export default SystemCameraUpdated;

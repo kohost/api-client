@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class SetMedia extends Command {
+export class SetMedia extends Command {
   constructor({ id, command, ...rest }) {
     super({ id, command, ...rest });
   }
@@ -9,5 +9,3 @@ class SetMedia extends Command {
     return "SetMedia";
   }
 }
-
-export default SetMedia;

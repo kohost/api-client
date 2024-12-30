@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemThermostatUpdate extends Event {
+export class SystemThermostatUpdate extends Event {
   constructor(thermostat, context) {
     super(thermostat, context);
   }
@@ -13,5 +13,3 @@ class SystemThermostatUpdate extends Event {
     return "thermostat";
   }
 }
-
-export default SystemThermostatUpdate;

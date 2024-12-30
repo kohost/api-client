@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemAlarmUpdated extends Event {
+export class SystemAlarmUpdated extends Event {
   constructor(alarm, context) {
     super(alarm, context);
   }
@@ -13,5 +13,3 @@ class SystemAlarmUpdated extends Event {
     return "alarm";
   }
 }
-
-export default SystemAlarmUpdated;

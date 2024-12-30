@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemLockUpdated extends Event {
+export class SystemLockUpdated extends Event {
   constructor(lock, context) {
     super(lock, context);
   }
@@ -13,5 +13,3 @@ class SystemLockUpdated extends Event {
     return "lock";
   }
 }
-
-export default SystemLockUpdated;

@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class SendEmail extends Command {
+export class SendEmail extends Command {
   constructor({ text, html, to, from, subject, ...rest }) {
     super({ text, html, to, from, subject, ...rest });
   }
@@ -9,5 +9,3 @@ class SendEmail extends Command {
     return "SendEmail";
   }
 }
-
-export default SendEmail;

@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemOrganizationUpdated extends Event {
+export class SystemOrganizationUpdated extends Event {
   constructor(organization, context) {
     super(organization, context);
   }
@@ -13,5 +13,3 @@ class SystemOrganizationUpdated extends Event {
     return "organization";
   }
 }
-
-export default SystemOrganizationUpdated;

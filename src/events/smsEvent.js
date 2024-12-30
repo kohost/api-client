@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SMSEvent extends Event {
+export class SMSEvent extends Event {
   constructor(sms, context) {
     super(sms, context);
   }
@@ -13,5 +13,3 @@ class SMSEvent extends Event {
     return "smsMessage";
   }
 }
-
-export default SMSEvent;

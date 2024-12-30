@@ -7,5 +7,5 @@ export * as Commands from "./commands";
 export * as Errors from "./errors";
 export * as Events from "./events";
 export * as Models from "./models";
-export * as UseCases from "./UseCases";
-export * as Validators from "./Validators";
+export * as UseCases from "./useCases";
+export * as Validators from "./validators";

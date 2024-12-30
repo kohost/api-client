@@ -1,8 +1,6 @@
-export const GenerateIndexPlugin = () => ({
+export const GenerateIndexPlugin = (options = { excludeFiles: [] }) => ({
   name: "generate-index",
   async setup(build) {
-    console.log(build);
-
     const esbuild = build.esbuild;
     const outdir = build.initialOptions.outdir;
     const format = build.initialOptions.format;
@@ -10,7 +8,9 @@ export const GenerateIndexPlugin = () => ({
 
     build.onLoad({ filter: /\.js$/ }, async (args) => {
       const filename = args.path.split("/").pop();
-      files.push(filename);
+      if (!options.excludeFiles.includes(filename)) {
+        files.push(filename);
+      }
     });
 
     build.onEnd(async () => {

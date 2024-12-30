@@ -1,7 +1,7 @@
 import { amqpExchanges } from "../defs/amqpExchanges";
-import Event from "./event";
+import { Event } from "./event";
 
-class ReservationCheckedIn extends Event {
+export class ReservationCheckedIn extends Event {
   constructor(reservation, context) {
     super(reservation, context);
   }
@@ -18,5 +18,3 @@ class ReservationCheckedIn extends Event {
     return amqpExchanges.AppEvents.name;
   }
 }
-
-export default ReservationCheckedIn;

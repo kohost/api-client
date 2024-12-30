@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SceneSet extends Event {
+export class SceneSet extends Event {
   constructor(scene, context) {
     super(scene, context);
   }
@@ -13,5 +13,3 @@ class SceneSet extends Event {
     return "scene";
   }
 }
-
-export default SceneSet;

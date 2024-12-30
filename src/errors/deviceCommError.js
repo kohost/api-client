@@ -1,6 +1,6 @@
-import AppError from "./appError";
+import { AppError } from "./appError";
 
-export default class DeviceCommError extends AppError {
+export class DeviceCommError extends AppError {
   constructor(message = "Device Communication Error", options = {}) {
     super(message, options);
     this.statusCode = 503;

@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class GetCategories extends Command {
+export class GetCategories extends Command {
   constructor({ id, ...rest }) {
     super({ id, ...rest });
   }
@@ -9,5 +9,3 @@ class GetCategories extends Command {
     return "GetCategories";
   }
 }
-
-export default GetCategories;

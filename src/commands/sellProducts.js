@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class SellProducts extends Command {
+export class SellProducts extends Command {
   constructor({ reservationId, userId, products, ...rest }) {
     super({ reservationId, userId, products, ...rest });
   }
@@ -9,5 +9,3 @@ class SellProducts extends Command {
     return "SellProducts";
   }
 }
-
-export default SellProducts;

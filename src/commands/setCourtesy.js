@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class SetCourtesy extends Command {
+export class SetCourtesy extends Command {
   constructor({ id, state, ...rest }) {
     super({ id, state, ...rest });
   }
@@ -9,5 +9,3 @@ class SetCourtesy extends Command {
     return "SetCourtesy";
   }
 }
-
-export default SetCourtesy;

@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemProductUpdated extends Event {
+export class SystemProductUpdated extends Event {
   constructor(product, context) {
     super(product, context);
   }
@@ -13,5 +13,3 @@ class SystemProductUpdated extends Event {
     return "product";
   }
 }
-
-export default SystemProductUpdated;

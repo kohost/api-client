@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemReservationUpdate extends Event {
+export class SystemReservationUpdate extends Event {
   constructor(reservation, context) {
     super(reservation, context);
   }
@@ -13,5 +13,3 @@ class SystemReservationUpdate extends Event {
     return "reservation";
   }
 }
-
-export default SystemReservationUpdate;

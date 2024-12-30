@@ -29,17 +29,15 @@ export const GenerateModelPlugin = ({ excludeFiles = [] }) => ({
       const { default: schema, methods = {} } = await import(args.path);
       const schemaTitle = schema.title.replace(/\s+/g, "");
 
-      const entityImport = "import Entity from './Entity';";
+      const entityImport = "import { Entity } from './entity';";
 
-      const validatorImport = `import validate from '../Validators/${schemaTitle}';`;
-
-      const moduleExport = `export default ${schemaTitle}`;
+      const validatorImport = `import validate from '../validators/${schemaTitle}';`;
 
       const code = `
         ${entityImport}
         ${validatorImport}
  
-        class ${schemaTitle} extends Entity {
+        export class ${schemaTitle} extends Entity {
           constructor(data) {
             super(data);
             ${Object.keys(schema.properties)
@@ -62,8 +60,6 @@ export const GenerateModelPlugin = ({ excludeFiles = [] }) => ({
         Object.defineProperty(${schemaTitle}.prototype, "validator", {
           get: function() { return validate; }
         });
- 
-        ${moduleExport}
       `;
 
       return { contents: code, loader: "js" };

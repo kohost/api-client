@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemEntityDeleted extends Event {
+export class SystemEntityDeleted extends Event {
   constructor(data, context) {
     super(data, context);
   }
@@ -13,5 +13,3 @@ class SystemEntityDeleted extends Event {
     return "entity";
   }
 }
-
-export default SystemEntityDeleted;

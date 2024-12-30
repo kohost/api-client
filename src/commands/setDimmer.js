@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class SetDimmer extends Command {
+export class SetDimmer extends Command {
   constructor({ id, level, ...rest }) {
     super({ id, level, ...rest });
   }
@@ -9,5 +9,3 @@ class SetDimmer extends Command {
     return "SetDimmer";
   }
 }
-
-export default SetDimmer;

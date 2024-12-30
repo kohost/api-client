@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class CreateShortLink extends Command {
+export class CreateShortLink extends Command {
   constructor({ title, destination, ...rest }) {
     super({ title, destination, ...rest });
   }
@@ -9,5 +9,3 @@ class CreateShortLink extends Command {
     return "CreateShortLink";
   }
 }
-
-export default CreateShortLink;

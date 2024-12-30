@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class CreateImageUploadEndpoint extends Command {
+export class CreateImageUploadEndpoint extends Command {
   constructor({ id, expires, ...rest }) {
     super({ id, expires, ...rest });
   }
@@ -9,5 +9,3 @@ class CreateImageUploadEndpoint extends Command {
     return "CreateImageUploadEndpoint";
   }
 }
-
-export default CreateImageUploadEndpoint;

@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class EmailEvent extends Event {
+export class EmailEvent extends Event {
   constructor(email, context) {
     super(email, context);
   }
@@ -13,5 +13,3 @@ class EmailEvent extends Event {
     return "emailMessage";
   }
 }
-
-export default EmailEvent;

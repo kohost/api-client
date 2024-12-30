@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemCategoryUpdated extends Event {
+export class SystemCategoryUpdated extends Event {
   constructor(category, context) {
     super(category, context);
   }
@@ -13,5 +13,3 @@ class SystemCategoryUpdated extends Event {
     return "category";
   }
 }
-
-export default SystemCategoryUpdated;

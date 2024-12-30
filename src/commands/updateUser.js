@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class UpdateUser extends Command {
+export class UpdateUser extends Command {
   constructor({
     id,
     email,
@@ -31,5 +31,3 @@ class UpdateUser extends Command {
     return "UpdateUser";
   }
 }
-
-export default UpdateUser;

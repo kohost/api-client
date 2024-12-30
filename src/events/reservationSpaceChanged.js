@@ -1,7 +1,7 @@
 import { amqpExchanges } from "../defs/amqpExchanges";
-import Event from "./event";
+import { Event } from "./event";
 
-export default class ReservationSpaceChanged extends Event {
+export class ReservationSpaceChanged extends Event {
   constructor(reservation, context) {
     super(reservation, context);
   }

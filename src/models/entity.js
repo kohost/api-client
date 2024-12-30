@@ -1,6 +1,6 @@
-import ValidationError from "../errors/validationError";
+import { ValidationError } from "../errors/validationError";
 
-class Entity {
+export class Entity {
   constructor(data) {
     if (!this.schema) {
       throw new Error("Schema is not defined");

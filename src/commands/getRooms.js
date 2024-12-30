@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class GetRooms extends Command {
+export class GetRooms extends Command {
   constructor({
     id,
     types,
@@ -27,5 +27,3 @@ class GetRooms extends Command {
     return "GetRooms";
   }
 }
-
-export default GetRooms;

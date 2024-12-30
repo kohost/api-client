@@ -2,7 +2,7 @@ import { amqpExchanges } from "../defs";
 
 const Commands = amqpExchanges.Commands;
 
-class Command {
+export class Command {
   constructor(data) {
     this.data = {};
     if (!data) throw new Error("Command data is required");
@@ -30,5 +30,3 @@ class Command {
     return { data: { ...this.data } };
   }
 }
-
-export default Command;

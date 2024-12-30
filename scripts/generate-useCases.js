@@ -38,8 +38,12 @@ export const GenerateUseCases = (useCases) => ({
 
       for (const [useCase, data] of useCases.entries()) {
         if (data.http) {
+          //lowercase first letter
+          const useCaseFileName =
+            useCase.charAt(0).toLowerCase() + useCase.slice(1);
+
           useCaseImportStatements.push(
-            `import ${useCase} from "./UseCases/${useCase}"`
+            `import { ${useCase} } from "./useCases/${useCaseFileName}"`
           );
 
           useCaseClassMethods.push(
@@ -61,7 +65,7 @@ export const GenerateUseCases = (useCases) => ({
               loader: "js",
             },
             write: true,
-            outfile: `${outDir}/UseCases/${useCase}.js`,
+            outfile: `${outDir}/useCases/${useCaseFileName}.js`,
             format: options.format,
           });
         }
@@ -103,7 +107,7 @@ function generateUseCaseCode(useCase, { method, path: endpoint }) {
             */
             
             //eslint-disable-next-line no-inner-declarations
-            export default function ${useCase}(requestData = {data: null, query: null, headers: null}, httpConfigOptions = {}) {
+            export function ${useCase}(requestData = {data: null, query: null, headers: null}, httpConfigOptions = {}) {
 
             if (!requestData) requestData = {};
             

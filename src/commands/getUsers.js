@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class GetUsers extends Command {
+export class GetUsers extends Command {
   constructor({ id, ...rest }) {
     super({ id, ...rest });
   }
@@ -9,5 +9,3 @@ class GetUsers extends Command {
     return "GetUsers";
   }
 }
-
-export default GetUsers;

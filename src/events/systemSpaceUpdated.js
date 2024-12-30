@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemSpaceUpdate extends Event {
+export class SystemSpaceUpdate extends Event {
   constructor(space, context) {
     super(space, context);
   }
@@ -13,5 +13,3 @@ class SystemSpaceUpdate extends Event {
     return "space";
   }
 }
-
-export default SystemSpaceUpdate;

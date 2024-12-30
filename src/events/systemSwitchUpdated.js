@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemSwitchUpdate extends Event {
+export class SystemSwitchUpdate extends Event {
   constructor(_switch, context) {
     super(_switch, context);
   }
@@ -13,5 +13,3 @@ class SystemSwitchUpdate extends Event {
     return "switch";
   }
 }
-
-export default SystemSwitchUpdate;

@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemCredentialUpdated extends Event {
+export class SystemCredentialUpdated extends Event {
   constructor(cred, context) {
     super(cred, context);
   }
@@ -13,5 +13,3 @@ class SystemCredentialUpdated extends Event {
     return "credential";
   }
 }
-
-export default SystemCredentialUpdated;

@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemPropertyUpdate extends Event {
+export class SystemPropertyUpdate extends Event {
   constructor(property, context) {
     super(property, context);
   }
@@ -13,5 +13,3 @@ class SystemPropertyUpdate extends Event {
     return "property";
   }
 }
-
-export default SystemPropertyUpdate;

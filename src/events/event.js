@@ -1,6 +1,6 @@
 import { amqpExchanges } from "../defs";
 
-class Event {
+export class Event {
   constructor(data, context = {}) {
     this.data = [];
     this.context = context;
@@ -40,5 +40,3 @@ class Event {
     return `${this.organizationId}.${this.propertyId}.${this.constructor.entity}.${this.constructor.name}`;
   }
 }
-
-export default Event;

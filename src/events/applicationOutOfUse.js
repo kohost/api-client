@@ -1,7 +1,7 @@
 import { amqpExchanges } from "../defs";
-import Event from "./event";
+import { Event } from "./event";
 
-class ApplicationOutOfUse extends Event {
+export class ApplicationOutOfUse extends Event {
   constructor(data = {}, context = {}) {
     super(data, context);
   }
@@ -18,5 +18,3 @@ class ApplicationOutOfUse extends Event {
     return amqpExchanges.AppEvents.name;
   }
 }
-
-export default ApplicationOutOfUse;

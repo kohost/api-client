@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class GetReservations extends Command {
+export class GetReservations extends Command {
   constructor(options) {
     const { id, startDate, endDate, status, ...rest } = options;
     super({ id, startDate, endDate, status, ...rest });
@@ -10,5 +10,3 @@ class GetReservations extends Command {
     return "GetReservations";
   }
 }
-
-export default GetReservations;

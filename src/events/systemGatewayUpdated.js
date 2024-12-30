@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemGatewayUpdated extends Event {
+export class SystemGatewayUpdated extends Event {
   constructor(gateway, context) {
     super(gateway, context);
   }
@@ -13,5 +13,3 @@ class SystemGatewayUpdated extends Event {
     return "gateway";
   }
 }
-
-export default SystemGatewayUpdated;

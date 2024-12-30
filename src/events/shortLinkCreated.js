@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class ShortLinkCreated extends Event {
+export class ShortLinkCreated extends Event {
   constructor(shortLink, context) {
     super(shortLink, context);
   }
@@ -13,5 +13,3 @@ class ShortLinkCreated extends Event {
     return "shortLink";
   }
 }
-
-export default ShortLinkCreated;

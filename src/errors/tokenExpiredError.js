@@ -1,6 +1,6 @@
-import AppError from "./appError";
+import { AppError } from "./appError";
 
-export default class TokenExpiredError extends AppError {
+export class TokenExpiredError extends AppError {
   constructor(message = "Token Expired", options = {}) {
     super(message, options);
     this.statusCode = 401;

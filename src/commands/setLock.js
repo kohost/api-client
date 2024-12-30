@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class SetLock extends Command {
+export class SetLock extends Command {
   constructor({ id, state, ...rest }) {
     super({ id, state, ...rest });
   }
@@ -9,5 +9,3 @@ class SetLock extends Command {
     return "SetLock";
   }
 }
-
-export default SetLock;

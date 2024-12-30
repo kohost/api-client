@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class GetMobileKey extends Command {
+export class GetMobileKey extends Command {
   constructor({
     id,
     phone,
@@ -16,5 +16,3 @@ class GetMobileKey extends Command {
     return "GetMobileKey";
   }
 }
-
-export default GetMobileKey;

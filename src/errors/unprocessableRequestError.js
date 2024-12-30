@@ -1,6 +1,6 @@
-import AppError from "./appError";
+import { AppError } from "./appError";
 
-export default class UnprocessableRequestError extends AppError {
+export class UnprocessableRequestError extends AppError {
   constructor(message = "Unprocessable Request Error", options = {}) {
     super(message, options);
     this.statusCode = 422;

@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class OCRDocument extends Command {
+export class OCRDocument extends Command {
   constructor({ type, image, ...rest }) {
     super({ type, image, ...rest });
   }
@@ -9,5 +9,3 @@ class OCRDocument extends Command {
     return "OCRDocument";
   }
 }
-
-export default OCRDocument;

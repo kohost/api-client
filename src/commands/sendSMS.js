@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class SendSMS extends Command {
+export class SendSMS extends Command {
   constructor({ id, body, to, from, media, ...rest }) {
     super({ id, body, to, from, media, ...rest });
   }
@@ -9,5 +9,3 @@ class SendSMS extends Command {
     return "SendSMS";
   }
 }
-
-export default SendSMS;

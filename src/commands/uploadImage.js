@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class UploadImage extends Command {
+export class UploadImage extends Command {
   constructor({ id, url, file, ...rest }) {
     super({ id, url, file, ...rest });
   }
@@ -9,5 +9,3 @@ class UploadImage extends Command {
     return "UploadImage";
   }
 }
-
-export default UploadImage;

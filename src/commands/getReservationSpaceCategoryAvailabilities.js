@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class GetReservationSpaceCategoryAvailabilities extends Command {
+export class GetReservationSpaceCategoryAvailabilities extends Command {
   constructor(options) {
     const { id, ...rest } = options;
     super({ id, ...rest });
@@ -10,5 +10,3 @@ class GetReservationSpaceCategoryAvailabilities extends Command {
     return "GetReservationSpaceCategoryAvailabilities";
   }
 }
-
-export default GetReservationSpaceCategoryAvailabilities;

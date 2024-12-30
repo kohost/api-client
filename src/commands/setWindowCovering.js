@@ -1,6 +1,6 @@
-import Command from "./command";
+import { Command } from "./command";
 
-class SetWindowCovering extends Command {
+export class SetWindowCovering extends Command {
   constructor({ id, position, ...rest }) {
     super({ id, position, ...rest });
   }
@@ -9,5 +9,3 @@ class SetWindowCovering extends Command {
     return "SetWindowCovering";
   }
 }
-
-export default SetWindowCovering;

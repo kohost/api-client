@@ -1,6 +1,6 @@
-import AppError from "./appError";
+import { AppError } from "./appError";
 
-export default class AuthenticationError extends AppError {
+export class AuthenticationError extends AppError {
   constructor(message = "Authentication Error", options = {}) {
     super(message, options);
     this.statusCode = 401;

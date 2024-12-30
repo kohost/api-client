@@ -11,11 +11,11 @@ const target = "node20";
 
 const builds = formats.map((format) => {
   esbuild.build({
-    entryPoints: ["src/Models/Entity.js"],
+    entryPoints: ["src/models/entity.js"],
     bundle: true,
     platform: "node",
     target,
-    outfile: `dist/${format}/Models/Entity.js`,
+    outfile: `dist/${format}/models/entity.js`,
     keepNames: true,
     format,
   });
@@ -25,8 +25,11 @@ const builds = formats.map((format) => {
     bundle: false,
     platform: "node",
     target,
-    plugins: [GenerateModelPlugin({ excludeFiles: ["definitions.js"] })],
-    outdir: `dist/${format}/Models`,
+    plugins: [
+      GenerateIndexPlugin({ excludeFiles: ["definitions.js"] }),
+      GenerateModelPlugin({ excludeFiles: ["definitions.js"] }),
+    ],
+    outdir: `dist/${format}/models`,
     keepNames: true,
     format,
   });
@@ -36,41 +39,44 @@ const builds = formats.map((format) => {
     bundle: false,
     platform: "node",
     target,
-    plugins: [GenerateValidatorPlugin({ excludeFiles: ["definitions.js"] })],
-    outdir: `dist/${format}/Validators`,
+    plugins: [
+      GenerateIndexPlugin({ excludeFiles: ["definitions.js"] }),
+      GenerateValidatorPlugin({ excludeFiles: ["definitions.js"] }),
+    ],
+    outdir: `dist/${format}/validators`,
     keepNames: true,
     format,
   });
 
   esbuild.build({
-    entryPoints: ["src/Commands/*.js"],
+    entryPoints: ["src/commands/*.js"],
     bundle: false,
     platform: "node",
     target,
     plugins: [GenerateIndexPlugin()],
-    outdir: `dist/${format}/Commands`,
+    outdir: `dist/${format}/commands`,
     keepNames: true,
     format,
   });
 
   esbuild.build({
-    entryPoints: ["src/Errors/*.js"],
+    entryPoints: ["src/errors/*.js"],
     bundle: false,
     platform: "node",
     target,
     plugins: [GenerateIndexPlugin()],
-    outdir: `dist/${format}/Errors`,
+    outdir: `dist/${format}/errors`,
     keepNames: true,
     format,
   });
 
   esbuild.build({
-    entryPoints: ["src/Events/*.js"],
+    entryPoints: ["src/events/*.js"],
     bundle: false,
     platform: "node",
     target,
     plugins: [GenerateIndexPlugin()],
-    outdir: `dist/${format}/Events`,
+    outdir: `dist/${format}/events`,
     keepNames: true,
     format,
   });

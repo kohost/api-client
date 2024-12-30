@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemMotionSensorUpdated extends Event {
+export class SystemMotionSensorUpdated extends Event {
   constructor(motion, context) {
     super(motion, context);
   }
@@ -13,5 +13,3 @@ class SystemMotionSensorUpdated extends Event {
     return "motionSensor";
   }
 }
-
-export default SystemMotionSensorUpdated;

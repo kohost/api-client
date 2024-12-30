@@ -1,6 +1,6 @@
-import Event from "./event";
+import { Event } from "./event";
 
-class SystemDimmerUpdated extends Event {
+export class SystemDimmerUpdated extends Event {
   constructor(dimmer, context) {
     super(dimmer, context);
   }
@@ -13,5 +13,3 @@ class SystemDimmerUpdated extends Event {
     return "dimmer";
   }
 }
-
-export default SystemDimmerUpdated;
