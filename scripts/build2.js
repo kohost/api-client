@@ -1,4 +1,5 @@
 import * as esbuild from "esbuild";
+// eslint-disable-next-line
 import useCases from "../src/useCases/http.json" assert { type: "json" };
 import { GenerateIndexPlugin } from "./generate-index.js";
 import { GenerateModelPlugin } from "./generate-models.js";

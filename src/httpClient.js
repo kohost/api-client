@@ -1,8 +1,7 @@
 /* Add Use Cases Here */
 import axios from "axios";
-import { EventEmitter } from "events";
 
-export default class KohostApiClient extends EventEmitter {
+export default class KohostApiClient {
   #onSuccess;
   #onError;
 
@@ -27,7 +26,6 @@ export default class KohostApiClient extends EventEmitter {
       onError: (error) => error,
     }
   ) {
-    super();
     if (!options.url) throw new Error("options.url is required");
     this.options = options;
     this.isRefreshingToken = false;
@@ -68,6 +66,29 @@ export default class KohostApiClient extends EventEmitter {
       this.#handleResponse.bind(this),
       this.#handleResponseError.bind(this)
     );
+
+    this.callbacks = {};
+  }
+
+  /**
+   *
+   * @param {"LoginRequired" | "PhoneVerificationRequired"} event
+   * @param {Function} callback
+   */
+  on(event, callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback must be a function");
+    }
+    if (!this.callbacks[event]) {
+      this.callbacks[event] = [];
+    }
+    this.callbacks[event].push(callback);
+  }
+
+  emit(event, ...args) {
+    if (this.callbacks[event]) {
+      this.callbacks[event].forEach((callback) => callback(...args));
+    }
   }
 
   /**

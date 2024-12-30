@@ -28,10 +28,13 @@ export const GenerateModelPlugin = ({ excludeFiles = [] }) => ({
 
       const { default: schema, methods = {} } = await import(args.path);
       const schemaTitle = schema.title.replace(/\s+/g, "");
+      // schema filename has the first letter lowercase
+      const fileName =
+        schemaTitle.charAt(0).toLowerCase() + schemaTitle.slice(1);
 
       const entityImport = "import { Entity } from './entity';";
 
-      const validatorImport = `import validate from '../validators/${schemaTitle}';`;
+      const validatorImport = `import { validate } from '../validators/${fileName}';`;
 
       const code = `
         ${entityImport}

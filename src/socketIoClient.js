@@ -1,14 +1,12 @@
-import { EventEmitter } from "events";
 import { io } from "socket.io-client";
 
-export default class SocketIoClient extends EventEmitter {
+export default class SocketIoClient {
   constructor(
     config = {
       url: null,
       options: {},
-    },
+    }
   ) {
-    super();
     if (!config.url) throw new Error("config.url is required");
     this.url = config.url;
     this.options = {
@@ -40,6 +38,8 @@ export default class SocketIoClient extends EventEmitter {
     this.socket.on("connect_error", (error) => {
       this.emit("connect_error", error);
     });
+
+    this.callbacks = {};
   }
 
   #url = null;
@@ -58,6 +58,22 @@ export default class SocketIoClient extends EventEmitter {
 
   get disconnected() {
     return this.socket?.disconnected || false;
+  }
+
+  on(event, callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback must be a function");
+    }
+    if (!this.callbacks[event]) {
+      this.callbacks[event] = [];
+    }
+    this.callbacks[event].push(callback);
+  }
+
+  emit(event, ...args) {
+    if (this.callbacks[event]) {
+      this.callbacks[event].forEach((callback) => callback(...args));
+    }
   }
 
   connect() {

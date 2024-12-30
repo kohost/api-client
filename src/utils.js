@@ -1,6 +1,8 @@
-const Models = require("../Models");
+import Errors from "./errors";
+import Events from "./events";
+import Models from "./models";
 
-module.exports = function entityFactory(type) {
+export function entityFactory(type) {
   switch (type) {
     case "reservation":
       return Models.Reservation;
@@ -81,4 +83,42 @@ module.exports = function entityFactory(type) {
     default:
       throw new Error("Unknown entity type: " + type);
   }
-};
+}
+
+export function errorFactory(errName) {
+  switch (errName) {
+    case "AppError":
+      return Errors.AppError;
+    case "AuthenticationError":
+      return Errors.AuthenticationError;
+    case "AuthorizationError":
+      return Errors.AuthorizationError;
+    case "ConflictError":
+      return Errors.ConflictError;
+    case "DeviceCommError":
+      return Errors.DeviceCommError;
+    case "LoginError":
+      return Errors.LoginError;
+    case "NotFoundError":
+      return Errors.NotFoundError;
+    case "RequestError":
+      return Errors.RequestError;
+    case "SystemCommError":
+      return Errors.SystemCommError;
+    case "TokenExpiredError":
+      return Errors.TokenExpiredError;
+    case "UnprocessableRequestError":
+      return Errors.UnprocessableRequestError;
+    case "ValidationError":
+      return Errors.ValidationError;
+    default:
+      return new Error("Invalid error name: " + errName);
+  }
+}
+
+export function eventFactory(eventName) {
+  const AllEvents = Object.values(Events);
+  const Event = AllEvents.find((E) => E.prototype.name === eventName);
+  if (!Event) throw new Error("Invalid event name: " + eventName);
+  return Event;
+}

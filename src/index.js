@@ -2,6 +2,7 @@ export * as AMQPClient from "./amqpClient";
 export * as defs from "./defs";
 export * as Client from "./httpClient";
 export * as SocketIoClient from "./socketIoClient";
+export * as utils from "./utils";
 
 export * as Commands from "./commands";
 export * as Errors from "./errors";
