@@ -1,5 +1,6 @@
 import * as esbuild from "esbuild";
 import useCases from "../src/useCases/http.json" assert { type: "json" };
+import { GenerateIndexPlugin } from "./generate-index.js";
 import { GenerateModelPlugin } from "./generate-models.js";
 import { GenerateUseCases } from "./generate-useCases.js";
 import { GenerateValidatorPlugin } from "./generate-validators.js";
@@ -14,7 +15,7 @@ const builds = formats.map((format) => {
     bundle: true,
     platform: "node",
     target,
-    outfile: `dist/${format}/models/entity.js`,
+    outfile: `dist/${format}/Models/Entity.js`,
     keepNames: true,
     format,
   });
@@ -25,7 +26,7 @@ const builds = formats.map((format) => {
     platform: "node",
     target,
     plugins: [GenerateModelPlugin({ excludeFiles: ["definitions.js"] })],
-    outdir: `dist/${format}/models`,
+    outdir: `dist/${format}/Models`,
     keepNames: true,
     format,
   });
@@ -36,7 +37,7 @@ const builds = formats.map((format) => {
     platform: "node",
     target,
     plugins: [GenerateValidatorPlugin({ excludeFiles: ["definitions.js"] })],
-    outdir: `dist/${format}/validators`,
+    outdir: `dist/${format}/Validators`,
     keepNames: true,
     format,
   });
@@ -46,7 +47,8 @@ const builds = formats.map((format) => {
     bundle: false,
     platform: "node",
     target,
-    outdir: `dist/${format}/commands`,
+    plugins: [GenerateIndexPlugin()],
+    outdir: `dist/${format}/Commands`,
     keepNames: true,
     format,
   });
@@ -56,7 +58,8 @@ const builds = formats.map((format) => {
     bundle: false,
     platform: "node",
     target,
-    outdir: `dist/${format}/errors`,
+    plugins: [GenerateIndexPlugin()],
+    outdir: `dist/${format}/Errors`,
     keepNames: true,
     format,
   });
@@ -66,7 +69,8 @@ const builds = formats.map((format) => {
     bundle: false,
     platform: "node",
     target,
-    outdir: `dist/${format}/events`,
+    plugins: [GenerateIndexPlugin()],
+    outdir: `dist/${format}/Events`,
     keepNames: true,
     format,
   });
