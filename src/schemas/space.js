@@ -153,3 +153,42 @@ export default {
     required: ["name", "type"],
   },
 };
+
+export const getters = {
+  floor() {
+    const floors = new Set();
+
+    this.rooms.forEach((room) => {
+      if (room.floor) floors.add(room.floor);
+    });
+
+    return floors.size == 1 ? [...floors][0] : undefined;
+  },
+  hasDimmer() {
+    return this.rooms.some((room) => room.hasDimmer);
+  },
+  hasSwitch() {
+    return this.rooms.some((room) => room.hasSwitch);
+  },
+  hasWindowCovering() {
+    return this.rooms.some((room) => room.hasWindowCovering);
+  },
+  hasThermostat() {
+    return this.rooms.some((room) => room.hasThermostat);
+  },
+  hasLock() {
+    return this.rooms.some((room) => room.hasLock);
+  },
+  hasCourtesy() {
+    return this.rooms.some((room) => room.hasCourtesy);
+  },
+  hasCamera() {
+    return this.rooms.some((room) => room.hasCamera);
+  },
+  hasAlarm() {
+    return this.rooms.some((room) => room.hasAlarm);
+  },
+  hasMedia() {
+    return this.rooms.some((room) => room.hasMedia);
+  },
+};

@@ -13,7 +13,7 @@ const HEADER_KEY_DRIVER = "X-Driver";
 const HEADER_KEY_COMMAND_NAME = "X-Command-Name";
 const HEADER_KEY_EVENT_NAME = "X-Event-Name";
 
-class KohostAMQPClient {
+export class KohostAMQPClient {
   static get Message() {
     return Message;
   }
@@ -237,5 +237,3 @@ class Message {
     };
   }
 }
-
-export default KohostAMQPClient;

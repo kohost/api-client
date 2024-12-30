@@ -1,7 +1,7 @@
 /* Add Use Cases Here */
 import axios from "axios";
 
-export default class KohostApiClient {
+export class KohostHTTPClient {
   #onSuccess;
   #onError;
 
@@ -42,15 +42,15 @@ export default class KohostApiClient {
     };
 
     if (options.apiKey) {
-      config.headers[KohostApiClient.defs.apiKeyHeader] = options.apiKey;
+      config.headers[KohostHTTPClient.defs.apiKeyHeader] = options.apiKey;
     }
 
     if (options.propertyId) {
-      config.headers[KohostApiClient.defs.propertyHeader] = options.propertyId;
+      config.headers[KohostHTTPClient.defs.propertyHeader] = options.propertyId;
     }
 
     if (options.organizationId) {
-      config.headers[KohostApiClient.defs.organizationHeader] =
+      config.headers[KohostHTTPClient.defs.organizationHeader] =
         options.organizationId;
     }
 
@@ -99,12 +99,12 @@ export default class KohostApiClient {
    * client.organizationId = "1234";
    */
   set organizationId(orgId) {
-    const key = KohostApiClient.defs.organizationHeader;
+    const key = KohostHTTPClient.defs.organizationHeader;
     this._http.defaults.headers.common[key] = orgId;
   }
 
   get organizationId() {
-    const key = KohostApiClient.defs.organizationHeader;
+    const key = KohostHTTPClient.defs.organizationHeader;
     return this._http.defaults.headers.common[key];
   }
 
@@ -117,12 +117,12 @@ export default class KohostApiClient {
    */
 
   set propertyId(propertyId) {
-    const key = KohostApiClient.defs.propertyHeader;
+    const key = KohostHTTPClient.defs.propertyHeader;
     this._http.defaults.headers.common[key] = propertyId;
   }
 
   get propertyId() {
-    const key = KohostApiClient.defs.propertyHeader;
+    const key = KohostHTTPClient.defs.propertyHeader;
     return this._http.defaults.headers.common[key];
   }
 

@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-export default class SocketIoClient {
+export class KohostSocketIoClient {
   constructor(
     config = {
       url: null,

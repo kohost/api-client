@@ -1,7 +1,8 @@
-export * as AMQPClient from "./amqpClient";
+export { KohostAMQPClient as AMQPClient } from "./amqpClient";
+export { KohostHTTPClient as Client } from "./httpClient";
+export { KohostSocketIoClient as SocketIoClient } from "./socketIoClient";
+
 export * as defs from "./defs";
-export * as Client from "./httpClient";
-export * as SocketIoClient from "./socketIoClient";
 export * as utils from "./utils";
 
 export * as Commands from "./commands";

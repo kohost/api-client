@@ -101,3 +101,94 @@ export default {
   },
   additionalProperties: false,
 };
+
+export const getters = {
+  hasDimmer() {
+    return this.dimmers?.length > 0;
+  },
+  hasSwitch() {
+    return this.switches?.length > 0;
+  },
+  hasWindowCovering() {
+    return this.windowCoverings?.length > 0;
+  },
+  hasShade() {
+    return this.hasWindowCovering;
+  },
+  hasThermostat() {
+    return this.thermostats?.length > 0;
+  },
+  hasClimate() {
+    return this.hasThermostat;
+  },
+  hasLock() {
+    return this.locks?.length > 0;
+  },
+  hasCourtesy() {
+    return this.courtesy?.length > 0;
+  },
+  hasCamera() {
+    return this.cameras?.length > 0;
+  },
+  hasMedia() {
+    return this.mediaSources?.length > 0;
+  },
+  hasLight() {
+    const hasDiscriminatorLight = this.switches?.some((sw) => {
+      return sw.discriminator === "light" || sw.discriminator === "fan";
+    });
+    return this.hasDimmer || hasDiscriminatorLight;
+  },
+  occupied() {
+    const now = new Date();
+    const lastOccupied = new Date(this.occupiedAt);
+    const diff = now - lastOccupied;
+    // check if the room has been occupied in the last 60 minutes
+    return diff < 60 * 60 * 1000;
+  },
+};
+
+export const statics = {
+  getDevicePath(type) {
+    switch (type) {
+      case "tv":
+      case "dvr":
+      case "appleTv":
+      case "discPlayer":
+      case "mediaPlayer":
+      case "uncontrolledDevice":
+      case "mediaSource":
+        return "mediaSources";
+      case "courtesy":
+        return type;
+      case "switch":
+        return "switches";
+      default:
+        return `${type}s`;
+    }
+  },
+  getDeviceTypeFromPath(path) {
+    const validPaths = [
+      "dimmers",
+      "switches",
+      "thermostats",
+      "locks",
+      "windowCoverings",
+      "courtesy",
+      "cameras",
+      "mediaSources",
+      "motionSensors",
+      "alarms",
+    ];
+    if (!validPaths.includes(path))
+      throw new Error("Invalid device path:" + path);
+    switch (path) {
+      case "courtesy":
+        return path;
+      case "switches":
+        return "switch";
+      default:
+        return path.slice(0, -1);
+    }
+  },
+};

@@ -26,7 +26,13 @@ export const GenerateModelPlugin = ({ excludeFiles = [] }) => ({
     build.onLoad({ filter: /\.js$/ }, async (args) => {
       if (excludeFiles.some((file) => args.path.endsWith(file))) return;
 
-      const { default: schema, methods = {} } = await import(args.path);
+      const {
+        default: schema,
+        methods = {},
+        statics = {},
+        getters = {},
+        setters = {},
+      } = await import(args.path);
       const schemaTitle = schema.title.replace(/\s+/g, "");
       // schema filename has the first letter lowercase
       const fileName =
@@ -47,11 +53,33 @@ export const GenerateModelPlugin = ({ excludeFiles = [] }) => ({
               .map((prop) => `this.${prop} = data.${prop};`)
               .join("\n            ")}
           }
+            
 
+          ${Object.entries(statics)
+            .map(
+              ([name, func]) =>
+                `static ${name}${func.toString().slice(func.toString().indexOf("("))}`
+            )
+            .join("\n    ")}
+            
             ${Object.entries(methods)
               .map(
                 ([name, func]) =>
                   `${name}${func.toString().slice(func.toString().indexOf("("))}`
+              )
+              .join("\n    ")}
+
+            ${Object.entries(getters)
+              .map(
+                ([name, func]) =>
+                  `get ${name}${func.toString().slice(func.toString().indexOf("("))}`
+              )
+              .join("\n    ")}
+
+            ${Object.entries(setters)
+              .map(
+                ([name, func]) =>
+                  `set ${name}${func.toString().slice(func.toString().indexOf("("))}`
               )
               .join("\n    ")}
         }
