@@ -28,7 +28,7 @@ export const GenerateUseCases = (useCases) => ({
     const options = build.initialOptions;
     const outDir = options.outdir;
     const esbuild = build.esbuild;
-    build.onLoad({ filter: /httpClient\.js$/ }, async (args) => {
+    build.onLoad({ filter: /httpClient\.mjs$/ }, async (args) => {
       const fileText = await fs.promises.readFile(args.path, "utf-8");
 
       // create a require statement for each use case

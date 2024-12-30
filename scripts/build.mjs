@@ -12,16 +12,16 @@ const target = "esnext";
 
 function outExtension(format) {
   return {
-    ".js": format === "esm" ? ".js" : ".js",
+    ".js": ".js",
   };
 }
 
 const builds = formats.map((format) => {
   esbuild.build({
-    entryPoints: ["src/models/entity.js"],
+    entryPoints: ["src/models/entity.mjs"],
     bundle: true,
     platform: "node",
-    target,
+    target: "node20",
     outdir: `dist/${format}/models`,
     outExtension: outExtension(format),
     keepNames: true,
@@ -29,13 +29,13 @@ const builds = formats.map((format) => {
   });
 
   esbuild.build({
-    entryPoints: ["src/schemas/*.js"],
+    entryPoints: ["src/schemas/*.mjs"],
     bundle: false,
     platform: "node",
     target,
     plugins: [
-      GenerateIndexPlugin({ excludeFiles: ["definitions.js"] }),
-      GenerateModelPlugin({ excludeFiles: ["definitions.js"] }),
+      GenerateIndexPlugin({ excludeFiles: ["definitions.mjs"] }),
+      GenerateModelPlugin({ excludeFiles: ["definitions.mjs"] }),
     ],
     outdir: `dist/${format}/models`,
     outExtension: outExtension(format),
@@ -44,13 +44,13 @@ const builds = formats.map((format) => {
   });
 
   esbuild.build({
-    entryPoints: ["src/schemas/*.js"],
+    entryPoints: ["src/schemas/*.mjs"],
     bundle: false,
     platform: "node",
     target,
     plugins: [
-      GenerateIndexPlugin({ excludeFiles: ["definitions.js"] }),
-      GenerateValidatorPlugin({ excludeFiles: ["definitions.js"] }),
+      GenerateIndexPlugin({ excludeFiles: ["definitions.mjs"] }),
+      GenerateValidatorPlugin({ excludeFiles: ["definitions.mjs"] }),
     ],
     outdir: `dist/${format}/validators`,
     outExtension: outExtension(format),
@@ -59,7 +59,7 @@ const builds = formats.map((format) => {
   });
 
   esbuild.build({
-    entryPoints: ["src/commands/*.js"],
+    entryPoints: ["src/commands/*.mjs"],
     bundle: false,
     platform: "node",
     target,
@@ -71,7 +71,7 @@ const builds = formats.map((format) => {
   });
 
   esbuild.build({
-    entryPoints: ["src/errors/*.js"],
+    entryPoints: ["src/errors/*.mjs"],
     bundle: false,
     platform: "node",
     target,
@@ -83,7 +83,7 @@ const builds = formats.map((format) => {
   });
 
   esbuild.build({
-    entryPoints: ["src/events/*.js"],
+    entryPoints: ["src/events/*.mjs"],
     bundle: false,
     platform: "node",
     target,
@@ -95,7 +95,7 @@ const builds = formats.map((format) => {
   });
 
   esbuild.build({
-    entryPoints: ["src/*.js"],
+    entryPoints: ["src/*.mjs"],
     plugins: [GenerateUseCases(new Map(useCases))],
     bundle: false,
     platform: "node",

@@ -6,7 +6,7 @@ export const GenerateIndexPlugin = (options = { excludeFiles: [] }) => ({
     const format = build.initialOptions.format;
     const files = [];
 
-    build.onLoad({ filter: /\.js$/ }, async (args) => {
+    build.onLoad({ filter: /\.mjs$/ }, async (args) => {
       const filename = args.path.split("/").pop();
       if (!options.excludeFiles.includes(filename)) {
         files.push(filename);
@@ -15,7 +15,7 @@ export const GenerateIndexPlugin = (options = { excludeFiles: [] }) => ({
 
     build.onEnd(async () => {
       const code = files
-        .map((file) => `export * from "./${file.replace(/\.js$/, "")}";`)
+        .map((file) => `export * from "./${file.replace(/\.mjs$/, "")}";`)
         .join("\n");
 
       await esbuild.build({

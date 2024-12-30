@@ -24,7 +24,7 @@ export const GenerateValidatorPlugin = ({ excludeFiles = [] }) => ({
 
     addFormats(ajv);
 
-    build.onLoad({ filter: /\.js$/ }, async (args) => {
+    build.onLoad({ filter: /\.mjs$/ }, async (args) => {
       if (excludeFiles.some((file) => args.path.endsWith(file))) return;
 
       const { default: schema } = await import(args.path);

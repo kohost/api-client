@@ -23,7 +23,7 @@
 export const GenerateModelPlugin = ({ excludeFiles = [] }) => ({
   name: "generate-models",
   async setup(build) {
-    build.onLoad({ filter: /\.js$/ }, async (args) => {
+    build.onLoad({ filter: /\.mjs$/ }, async (args) => {
       if (excludeFiles.some((file) => args.path.endsWith(file))) return;
 
       const {
