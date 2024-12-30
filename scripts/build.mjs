@@ -1,14 +1,20 @@
 import * as esbuild from "esbuild";
 // eslint-disable-next-line
 import useCases from "../src/useCases/http.json" assert { type: "json" };
-import { GenerateIndexPlugin } from "./generate-index.js";
-import { GenerateModelPlugin } from "./generate-models.js";
-import { GenerateUseCases } from "./generate-useCases.js";
-import { GenerateValidatorPlugin } from "./generate-validators.js";
+import { GenerateIndexPlugin } from "./generate-index.mjs";
+import { GenerateModelPlugin } from "./generate-models.mjs";
+import { GenerateUseCases } from "./generate-useCases.mjs";
+import { GenerateValidatorPlugin } from "./generate-validators.mjs";
 
 const formats = ["esm", "cjs"];
 
 const target = "esnext";
+
+function outExtension(format) {
+  return {
+    ".js": format === "esm" ? ".js" : ".js",
+  };
+}
 
 const builds = formats.map((format) => {
   esbuild.build({
@@ -16,7 +22,8 @@ const builds = formats.map((format) => {
     bundle: true,
     platform: "node",
     target,
-    outfile: `dist/${format}/models/entity.js`,
+    outdir: `dist/${format}/models`,
+    outExtension: outExtension(format),
     keepNames: true,
     format,
   });
@@ -31,6 +38,7 @@ const builds = formats.map((format) => {
       GenerateModelPlugin({ excludeFiles: ["definitions.js"] }),
     ],
     outdir: `dist/${format}/models`,
+    outExtension: outExtension(format),
     keepNames: true,
     format,
   });
@@ -45,6 +53,7 @@ const builds = formats.map((format) => {
       GenerateValidatorPlugin({ excludeFiles: ["definitions.js"] }),
     ],
     outdir: `dist/${format}/validators`,
+    outExtension: outExtension(format),
     keepNames: true,
     format,
   });
@@ -56,6 +65,7 @@ const builds = formats.map((format) => {
     target,
     plugins: [GenerateIndexPlugin()],
     outdir: `dist/${format}/commands`,
+    outExtension: outExtension(format),
     keepNames: true,
     format,
   });
@@ -67,6 +77,7 @@ const builds = formats.map((format) => {
     target,
     plugins: [GenerateIndexPlugin()],
     outdir: `dist/${format}/errors`,
+    outExtension: outExtension(format),
     keepNames: true,
     format,
   });
@@ -78,6 +89,7 @@ const builds = formats.map((format) => {
     target,
     plugins: [GenerateIndexPlugin()],
     outdir: `dist/${format}/events`,
+    outExtension: outExtension(format),
     keepNames: true,
     format,
   });
@@ -90,6 +102,7 @@ const builds = formats.map((format) => {
     target,
     outdir: `dist/${format}`,
     keepNames: true,
+    outExtension: outExtension(format),
     format,
   });
 });

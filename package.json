@@ -8,16 +8,21 @@
     "type": "git",
     "url": "git+https://github.com/kohost/api-client.git"
   },
-  "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
     "lint": "eslint",
     "lint:fix": "eslint --fix ./",
     "prepare": "husky",
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.mjs",
     "build:watch": "node scripts/build.js --watch",
     "start": "node scripts/build.js --watch",
     "clean": "rm -rf ./dist",
