@@ -1,4 +1,4 @@
-import { Command } from "./command.mjs";
+import { Command } from "./command";
 
 export class SetThermostat extends Command {
   constructor({ id, setpoints, hvacMode, fanMode, ...rest }) {

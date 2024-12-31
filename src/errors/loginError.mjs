@@ -1,4 +1,4 @@
-import { AppError } from "./appError.mjs";
+import { AppError } from "./appError";
 
 export class LoginError extends AppError {
   constructor(message = "Invalid Login information provided", options = {}) {

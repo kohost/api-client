@@ -1,4 +1,4 @@
-import { AppError } from "./appError.mjs";
+import { AppError } from "./appError";
 
 export class UnprocessableRequestError extends AppError {
   constructor(message = "Unprocessable Request Error", options = {}) {

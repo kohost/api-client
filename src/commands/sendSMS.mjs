@@ -1,4 +1,4 @@
-import { Command } from "./command.mjs";
+import { Command } from "./command";
 
 export class SendSMS extends Command {
   constructor({ id, body, to, from, media, ...rest }) {

@@ -1,7 +1,7 @@
 export default {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "energyReport.json",
-  title: "Energy Report Hourly",
+  title: "Energy Report",
   description: "Hourly Report for Energy based on energy report shards",
   type: "object",
   required: [

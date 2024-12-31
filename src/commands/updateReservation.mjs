@@ -1,4 +1,4 @@
-import { Command } from "./command.mjs";
+import { Command } from "./command";
 
 export class UpdateReservation extends Command {
   constructor({ id, ...rest }) {

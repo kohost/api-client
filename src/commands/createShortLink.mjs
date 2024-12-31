@@ -1,4 +1,4 @@
-import { Command } from "./command.mjs";
+import { Command } from "./command";
 
 export class CreateShortLink extends Command {
   constructor({ title, destination, ...rest }) {

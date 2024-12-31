@@ -21,9 +21,10 @@ const builds = formats.map((format) => {
     entryPoints: ["src/models/entity.mjs"],
     bundle: true,
     platform: "node",
-    target: "node20",
+    target,
     outdir: `dist/${format}/models`,
     outExtension: outExtension(format),
+    resolveExtensions: [".mjs", ".js"],
     keepNames: true,
     format,
   });

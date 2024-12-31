@@ -1,4 +1,4 @@
-import { Command } from "./command.mjs";
+import { Command } from "./command";
 
 export class GetCategories extends Command {
   constructor({ id, ...rest }) {

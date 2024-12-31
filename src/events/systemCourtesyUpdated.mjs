@@ -1,4 +1,4 @@
-import { Event } from "./event.mjs";
+import { Event } from "./event";
 
 export class SystemCourtesyUpdated extends Event {
   constructor(courtesy, context) {

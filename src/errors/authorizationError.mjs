@@ -1,4 +1,4 @@
-import { AppError } from "./appError.mjs";
+import { AppError } from "./appError";
 
 export class AuthorizationError extends AppError {
   constructor(message = "Authorization Error", options = {}) {

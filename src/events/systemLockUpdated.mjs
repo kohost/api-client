@@ -1,4 +1,4 @@
-import { Event } from "./event.mjs";
+import { Event } from "./event";
 
 export class SystemLockUpdated extends Event {
   constructor(lock, context) {

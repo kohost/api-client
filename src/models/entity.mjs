@@ -1,4 +1,4 @@
-import { ValidationError } from "../errors/validationError.mjs";
+import { ValidationError } from "../errors/validationError";
 
 export class Entity {
   constructor(data) {

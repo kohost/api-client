@@ -1,4 +1,4 @@
-import { AppError } from "./appError.mjs";
+import { AppError } from "./appError";
 
 export class TokenExpiredError extends AppError {
   constructor(message = "Token Expired", options = {}) {

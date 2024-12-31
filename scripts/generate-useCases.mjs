@@ -28,6 +28,7 @@ export const GenerateUseCases = (useCases) => ({
     const options = build.initialOptions;
     const outDir = options.outdir;
     const esbuild = build.esbuild;
+
     build.onLoad({ filter: /httpClient\.mjs$/ }, async (args) => {
       const fileText = await fs.promises.readFile(args.path, "utf-8");
 
@@ -35,6 +36,7 @@ export const GenerateUseCases = (useCases) => ({
       const useCaseImportStatements = [];
       // attached each method to the UseCase class
       const useCaseClassMethods = [];
+      const indexExports = [];
 
       for (const [useCase, data] of useCases.entries()) {
         if (data.http) {
@@ -42,12 +44,14 @@ export const GenerateUseCases = (useCases) => ({
           const useCaseFileName =
             useCase.charAt(0).toLowerCase() + useCase.slice(1);
 
+          indexExports.push(useCaseFileName);
+
           useCaseImportStatements.push(
             `import { ${useCase} } from "./useCases/${useCaseFileName}"`
           );
 
           useCaseClassMethods.push(
-            `KohostApiClient.prototype.${useCase} = ${useCase};`
+            `KohostHTTPClient.prototype.${useCase} = ${useCase};`
           );
 
           const code = generateUseCaseCode(useCase, data.http);
@@ -83,6 +87,25 @@ export const GenerateUseCases = (useCases) => ({
         useCaseClassMethods.join("\n")
       );
 
+      const index = generateUseCaseIndex(indexExports);
+
+      const indexBundle = await esbuild.transform(index, {
+        loader: "js",
+        format: "esm",
+        target: options.target,
+        keepNames: true,
+      });
+
+      await esbuild.build({
+        stdin: {
+          contents: indexBundle.code,
+          loader: "js",
+        },
+        write: true,
+        outfile: `${outDir}/useCases/index.js`,
+        format: options.format,
+      });
+
       return {
         contents: file,
         loader: "js",
@@ -90,6 +113,12 @@ export const GenerateUseCases = (useCases) => ({
     });
   },
 });
+
+function generateUseCaseIndex(useCases) {
+  return `
+    ${useCases.map((useCase) => `export * from "./${useCase.charAt(0).toLowerCase() + useCase.slice(1)}"`).join("\n")}
+  `;
+}
 
 function generateUseCaseCode(useCase, { method, path: endpoint }) {
   const pathParams = endpoint.match(/:[a-zA-Z0-9]+/g);

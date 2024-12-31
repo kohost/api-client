@@ -1,4 +1,4 @@
-import { amqpExchanges } from "../defs.mjs";
+import { amqpExchanges } from "../defs";
 
 export class Event {
   constructor(data, context = {}) {

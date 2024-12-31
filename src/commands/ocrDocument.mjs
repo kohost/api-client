@@ -1,4 +1,4 @@
-import { Command } from "./command.mjs";
+import { Command } from "./command";
 
 export class OCRDocument extends Command {
   constructor({ type, image, ...rest }) {

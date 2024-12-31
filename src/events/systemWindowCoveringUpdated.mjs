@@ -1,4 +1,4 @@
-import { Event } from "./event.mjs";
+import { Event } from "./event";
 
 export class SystemWindowCoveringUpdate extends Event {
   constructor(wc, context) {

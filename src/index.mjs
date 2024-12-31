@@ -1,9 +1,9 @@
-export { KohostAMQPClient as AMQPClient } from "./amqpClient.mjs";
-export { KohostHTTPClient as Client } from "./httpClient.mjs";
-export { KohostSocketIoClient as SocketIoClient } from "./socketIoClient.mjs";
+export { KohostAMQPClient as AMQPClient } from "./amqpClient";
+export { KohostHTTPClient as Client } from "./httpClient";
+export { KohostSocketIoClient as SocketIoClient } from "./socketIoClient";
 
-export * as defs from "./defs.mjs";
-export * as utils from "./utils.mjs";
+export * as defs from "./defs";
+export * as utils from "./utils";
 
 export * as Commands from "./commands";
 export * as Errors from "./errors";

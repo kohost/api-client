@@ -1,4 +1,4 @@
-import { Command } from "./command.mjs";
+import { Command } from "./command";
 
 export class SetAlarm extends Command {
   constructor({ id, zones, areas, code, ...rest }) {

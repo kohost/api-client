@@ -1,4 +1,4 @@
-import { Event } from "./event.mjs";
+import { Event } from "./event";
 
 export class SystemDimmerUpdated extends Event {
   constructor(dimmer, context) {

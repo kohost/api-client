@@ -1,4 +1,4 @@
-import { AppError } from "./appError.mjs";
+import { AppError } from "./appError";
 
 export class SystemCommError extends AppError {
   constructor(message = "System Communication Error", options = {}) {

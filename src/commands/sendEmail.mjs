@@ -1,4 +1,4 @@
-import { Command } from "./command.mjs";
+import { Command } from "./command";
 
 export class SendEmail extends Command {
   constructor({ text, html, to, from, subject, ...rest }) {

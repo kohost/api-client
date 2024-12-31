@@ -1,4 +1,4 @@
-import { AppError } from "./appError.mjs";
+import { AppError } from "./appError";
 
 export class RequestError extends AppError {
   constructor(message = "Bad Request", options = {}) {

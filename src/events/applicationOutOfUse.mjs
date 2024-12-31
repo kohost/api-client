@@ -1,5 +1,5 @@
-import { amqpExchanges } from "../defs.mjs";
-import { Event } from "./event.mjs";
+import { amqpExchanges } from "../defs";
+import { Event } from "./event";
 
 export class ApplicationOutOfUse extends Event {
   constructor(data = {}, context = {}) {

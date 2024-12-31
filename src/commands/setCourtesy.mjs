@@ -1,4 +1,4 @@
-import { Command } from "./command.mjs";
+import { Command } from "./command";
 
 export class SetCourtesy extends Command {
   constructor({ id, state, ...rest }) {

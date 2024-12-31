@@ -1,4 +1,4 @@
-import { Command } from "./command.mjs";
+import { Command } from "./command";
 
 export class SetWindowCovering extends Command {
   constructor({ id, position, ...rest }) {

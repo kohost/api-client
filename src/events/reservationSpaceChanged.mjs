@@ -1,5 +1,5 @@
-import { amqpExchanges } from "../defs/amqpExchanges";
-import { Event } from "./event.mjs";
+import { amqpExchanges } from "../defs";
+import { Event } from "./event";
 
 export class ReservationSpaceChanged extends Event {
   constructor(reservation, context) {

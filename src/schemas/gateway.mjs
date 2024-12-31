@@ -1,7 +1,7 @@
 export default {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "iotGateway.json",
-  title: "IoT Gateway",
+  title: "Gateway",
   description:
     "Any smart gateway that is an entrypoint for controlling devices",
   type: "object",

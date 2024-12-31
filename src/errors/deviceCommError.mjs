@@ -1,4 +1,4 @@
-import { AppError } from "./appError.mjs";
+import { AppError } from "./appError";
 
 export class DeviceCommError extends AppError {
   constructor(message = "Device Communication Error", options = {}) {
