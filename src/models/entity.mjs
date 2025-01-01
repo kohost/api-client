@@ -27,8 +27,4 @@ export class Entity {
   }
 }
 
-Entity.prototype.transform = function (data) {
-  return data;
-};
-
 export default Entity;
