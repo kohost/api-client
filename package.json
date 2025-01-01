@@ -1,6 +1,6 @@
 {
   "name": "@kohost/api-client",
-  "version": "3.9.6",
+  "version": "3.9.7",
   "description": "API client, models, schemas, commands, and events for Kohost applications",
   "author": "Ian Rogers",
   "readme": "README.md",
@@ -8,9 +8,6 @@
     "type": "git",
     "url": "git+https://github.com/kohost/api-client.git"
   },
-  "main": "dist/node/cjs/index.js",
-  "module": "dist/node/esm/index.js",
-  "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
       "node": {

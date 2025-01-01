@@ -32,16 +32,32 @@ export default {
     },
     mode: {
       type: ["string", "null"],
-      enum: ["normal", "autoLock", "emergencyOpen", "emergencyClose", null],
+      enum: [
+        "normal",
+        "autoLock",
+        "emergencyOpen",
+        "emergencyClose",
+        "holdOpen",
+        "lockdown",
+        null,
+      ],
       description:
-        "AutoLock: Lock automatically locks after set time. Normal - Lock needs told to lock or unlock.",
-      default: "normal",
+        "emergencyOpen and emergencyClose are deprecated and can be removed once Salto, Paxton and Geovision drivers are updated",
+      default: null,
     },
     supportedModes: {
       type: "array",
       uniqueItems: true,
       items: {
-        enum: ["normal", "autoLock", "emergencyOpen", "emergencyClose"],
+        enum: [
+          "normal",
+          "autoLock",
+          "emergencyOpen",
+          "emergencyClose",
+          "holdOpen",
+          "lockdown",
+          null,
+        ],
       },
     },
     batteryLevel: {
