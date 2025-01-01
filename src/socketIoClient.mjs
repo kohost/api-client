@@ -110,4 +110,8 @@ export class KohostSocketIoClient {
     this.socket.removeAllListeners();
     this.socket = null;
   }
+
+  listeners(event) {
+    return this.socket.listeners(event);
+  }
 }

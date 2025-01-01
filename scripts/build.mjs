@@ -5,8 +5,10 @@ import { GenerateIndexPlugin } from "./generate-index.mjs";
 import { GenerateModelPlugin } from "./generate-models.mjs";
 import { GenerateUseCases } from "./generate-useCases.mjs";
 import { GenerateValidatorPlugin } from "./generate-validators.mjs";
+import { RemoveNodeExportsPlugin } from "./remove-node-exports.mjs";
 
 const formats = ["esm", "cjs"];
+const platforms = ["node", "browser"];
 
 const target = "esnext";
 
@@ -17,94 +19,89 @@ function outExtension(format) {
 }
 
 const builds = formats.map((format) => {
-  esbuild.build({
-    entryPoints: ["src/models/entity.mjs"],
-    bundle: true,
-    platform: "node",
-    target,
-    outdir: `dist/${format}/models`,
-    outExtension: outExtension(format),
-    resolveExtensions: [".mjs", ".js"],
-    keepNames: true,
-    format,
-  });
+  platforms.map((platform) => {
+    esbuild.build({
+      entryPoints: ["src/models/entity.mjs"],
+      bundle: true,
+      target,
+      outdir: `dist/${platform}/${format}/models`,
+      resolveExtensions: [".mjs", ".js"],
+      platform,
+      keepNames: true,
+      format,
+    });
 
-  esbuild.build({
-    entryPoints: ["src/schemas/*.mjs"],
-    bundle: false,
-    platform: "node",
-    target,
-    plugins: [
-      GenerateIndexPlugin({ excludeFiles: ["definitions.mjs"] }),
-      GenerateModelPlugin({ excludeFiles: ["definitions.mjs"] }),
-    ],
-    outdir: `dist/${format}/models`,
-    outExtension: outExtension(format),
-    keepNames: true,
-    format,
-  });
+    esbuild.build({
+      entryPoints: ["src/schemas/*.mjs"],
+      bundle: false,
+      target,
+      plugins: [
+        GenerateIndexPlugin({ excludeFiles: ["definitions.mjs"] }),
+        GenerateModelPlugin({ excludeFiles: ["definitions.mjs"] }),
+      ],
+      outdir: `dist/${platform}/${format}/models`,
+      platform,
+      keepNames: true,
+      format,
+    });
 
-  esbuild.build({
-    entryPoints: ["src/schemas/*.mjs"],
-    bundle: false,
-    platform: "node",
-    target,
-    plugins: [
-      GenerateIndexPlugin({ excludeFiles: ["definitions.mjs"] }),
-      GenerateValidatorPlugin({ excludeFiles: ["definitions.mjs"] }),
-    ],
-    outdir: `dist/${format}/validators`,
-    outExtension: outExtension(format),
-    keepNames: true,
-    format,
-  });
+    esbuild.build({
+      entryPoints: ["src/schemas/*.mjs"],
+      bundle: true,
+      target,
+      plugins: [
+        GenerateIndexPlugin({ excludeFiles: ["definitions.mjs"] }),
+        GenerateValidatorPlugin({ excludeFiles: ["definitions.mjs"] }),
+      ],
+      outdir: `dist/${platform}/${format}/validators`,
+      platform: "node",
+      keepNames: true,
+      format,
+    });
 
-  esbuild.build({
-    entryPoints: ["src/commands/*.mjs"],
-    bundle: false,
-    platform: "node",
-    target,
-    plugins: [GenerateIndexPlugin()],
-    outdir: `dist/${format}/commands`,
-    outExtension: outExtension(format),
-    keepNames: true,
-    format,
-  });
+    esbuild.build({
+      entryPoints: ["src/commands/*.mjs"],
+      bundle: false,
+      target,
+      plugins: [GenerateIndexPlugin()],
+      outdir: `dist/${platform}/${format}/commands`,
+      platform,
+      keepNames: true,
+      format,
+    });
 
-  esbuild.build({
-    entryPoints: ["src/errors/*.mjs"],
-    bundle: false,
-    platform: "node",
-    target,
-    plugins: [GenerateIndexPlugin()],
-    outdir: `dist/${format}/errors`,
-    outExtension: outExtension(format),
-    keepNames: true,
-    format,
-  });
+    esbuild.build({
+      entryPoints: ["src/errors/*.mjs"],
+      bundle: false,
+      target,
+      plugins: [GenerateIndexPlugin()],
+      outdir: `dist/${platform}/${format}/errors`,
+      platform,
+      keepNames: true,
+      format,
+    });
 
-  esbuild.build({
-    entryPoints: ["src/events/*.mjs"],
-    bundle: false,
-    platform: "node",
-    target,
-    plugins: [GenerateIndexPlugin()],
-    outdir: `dist/${format}/events`,
-    outExtension: outExtension(format),
-    keepNames: true,
-    format,
-  });
+    esbuild.build({
+      entryPoints: ["src/events/*.mjs"],
+      bundle: false,
+      target,
+      plugins: [GenerateIndexPlugin()],
+      outdir: `dist/${platform}/${format}/events`,
+      platform,
+      keepNames: true,
+      format,
+    });
 
-  esbuild.build({
-    entryPoints: ["src/*.mjs"],
-    plugins: [GenerateUseCases(new Map(useCases))],
-    bundle: false,
-    platform: "node",
-    target,
-    outdir: `dist/${format}`,
-    keepNames: true,
-    outExtension: outExtension(format),
-    format,
+    esbuild.build({
+      entryPoints: ["src/*.mjs"],
+      plugins: [GenerateUseCases(new Map(useCases)), RemoveNodeExportsPlugin],
+      bundle: false,
+      target,
+      outdir: `dist/${platform}/${format}`,
+      keepNames: true,
+      platform,
+      format,
+    });
   });
 });
 

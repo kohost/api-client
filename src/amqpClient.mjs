@@ -3,7 +3,7 @@ import { isFatalError } from "amqplib/lib/connection";
 import { randomUUID } from "crypto";
 import dbg from "debug";
 import { amqpExchanges as exchanges } from "./defs";
-import Errors from "./errors";
+import * as Errors from "./errors";
 
 const debug = dbg("kohost:amqp-client");
 

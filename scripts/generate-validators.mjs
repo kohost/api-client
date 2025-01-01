@@ -7,6 +7,8 @@ import path from "node:path";
 export const GenerateValidatorPlugin = ({ excludeFiles = [] }) => ({
   name: "generate-validator",
   async setup(build) {
+    const format = build.initialOptions.format;
+
     const schemas = (await importFiles(build.initialOptions.entryPoints)).map(
       (module) => module.default
     );
@@ -19,7 +21,12 @@ export const GenerateValidatorPlugin = ({ excludeFiles = [] }) => ({
       allowUnionTypes: true,
       strictRequired: false,
       schemas: schemas,
-      code: { source: true, es5: false, esm: true, lines: true },
+      code: {
+        source: true,
+        es5: false,
+        esm: format === "esm",
+        lines: true,
+      },
     });
 
     addFormats(ajv);
@@ -28,10 +35,17 @@ export const GenerateValidatorPlugin = ({ excludeFiles = [] }) => ({
       if (excludeFiles.some((file) => args.path.endsWith(file))) return;
 
       const { default: schema } = await import(args.path);
-      const validate = ajv.getSchema(schema.$id);
-      const moduleCode = standaloneCode(ajv, validate);
+      const moduleCode = standaloneCode(ajv, { validate: schema.$id });
 
-      return { contents: moduleCode, loader: "js" };
+      const importStatement = `import { createRequire } from 'node:module'; 
+      const require = createRequire(import.meta.url);`;
+
+      return {
+        // contents:
+        //   format === "esm" ? `${importStatement}\n${moduleCode}` : moduleCode,
+        contents: moduleCode,
+        loader: "js",
+      };
     });
   },
 });
