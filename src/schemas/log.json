@@ -23,7 +23,8 @@
     "name": {
       "type": "string",
       "description": "Event name"
-    },
+    }
+  },
     "patternProperties": {
       "^field[0-9]+$": {
         "type":"object",
@@ -39,5 +40,4 @@
       }
     },
     "additionalProperties": false
-  }
 }
