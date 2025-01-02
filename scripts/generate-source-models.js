@@ -41,6 +41,16 @@ Promise.all(schemaModules).then((modules) => {
   const validatorIndexExports = [];
   const useCaseIndexExports = [];
 
+  const validateMap = schemas.reduce((acc, schema) => {
+    if (schema.$id === "definitions.json") return acc;
+    const schemaTitle = schema.title.replace(/\s+/g, "");
+    acc[`validate${schemaTitle}`] = schema.$id;
+    return acc;
+  }, {});
+
+  const validatorCode = standaloneCode(ajv, validateMap);
+  fs.writeFileSync("src/validators/validate.js", validatorCode);
+
   for (const module of modules) {
     const schema = module.default;
     if (schema.$id === "definitions.json") continue;
@@ -50,7 +60,6 @@ Promise.all(schemaModules).then((modules) => {
     validatorIndexExports.push(fileName);
     const validatorCode = generateValidatorCode(ajv, module);
     const modelCode = generateModelCode(module);
-    fs.writeFileSync(`src/validators/${fileName}.js`, validatorCode);
     fs.writeFileSync(`src/models/${fileName}.js`, modelCode);
   }
 
@@ -75,12 +84,15 @@ Promise.all(schemaModules).then((modules) => {
 
 function generateValidatorCode(ajv, schemaModule) {
   const schema = schemaModule.default;
+  const schemaTitle = schema.title.replace(/\s+/g, "");
 
   const importStatement = `${banner}\n
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);`;
 
-  const validatorCode = standaloneCode(ajv, { validate: schema.$id });
+  const validatorCode = standaloneCode(ajv, {
+    [`validate${schemaTitle}`]: schema.$id,
+  });
   const validatorModuleCode = `${importStatement}\n${validatorCode}`;
 
   return validatorModuleCode;
@@ -100,7 +112,7 @@ function generateModelCode(schemaModule) {
 
   const entityImport = "import { Entity } from './entity';";
 
-  const validatorImport = `import { validate } from '../validators/${fileName}';`;
+  const validatorImport = `import { validate${schemaTitle} as validate } from '../validators/${fileName}';`;
 
   const code = `${banner}\n
   ${entityImport}

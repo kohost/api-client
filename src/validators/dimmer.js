@@ -3,7 +3,7 @@
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);
 "use strict";
-export const validate = validate27;
+export const validateDimmer = validate27;
 const schema59 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"dimmer.json","title":"Dimmer","description":"Any smart dimmer","type":"object","properties":{"id":{"$ref":"definitions.json#/definitions/id"},"name":{"type":"string"},"type":{"$ref":"definitions.json#/definitions/type"},"supportedNotifications":{"$ref":"definitions.json#/definitions/supportedNotifications"},"notification":{"$ref":"definitions.json#/definitions/notification"},"driver":{"$ref":"definitions.json#/definitions/driver"},"offline":{"type":"boolean"},"level":{"type":["number","null"],"minimum":0,"maximum":100},"systemId":{"$ref":"definitions.json#/definitions/systemId"},"watts":{"$ref":"definitions.json#/definitions/watts"}},"required":["id","type","level","driver"]};
 const schema13 = {"type":"string","description":"Identifier of the object.","not":{"enum":["global","system"]}};
 const schema14 = {"type":"string","enum":["alarm","dimmer","switch","motionSensor","windowCovering","camera","mediaSource","thermostat","lock","courtesy","gateway","tv","dvr","appleTv","discPlayer","mediaPlayer","uncontrolledDevice"]};

@@ -3,7 +3,7 @@
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);
 "use strict";
-export const validate = validate25;
+export const validateCredential = validate25;
 const schema53 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"credential.json","title":"Credential","type":"object","required":["type","credential","expires"],"properties":{"id":{"$ref":"definitions.json#/definitions/id"},"type":{"type":"string","default":"credential"},"driver":{"$ref":"definitions.json#/definitions/driver"},"discriminator":{"type":"string","enum":["verificationCode","token","mobileKey","pin","publicKey","passkeyChallenge"]},"credential":{"type":"string"},"userId":{"type":"string"},"organizationId":{"type":"string"},"propertyId":{"type":"string"},"deviceId":{"type":"string"},"userAgent":{"type":"string"},"expires":{"type":["string","object","null"]},"systemId":{"$ref":"definitions.json#/definitions/systemId"}}};
 const schema13 = {"type":"string","description":"Identifier of the object.","not":{"enum":["global","system"]}};
 const schema19 = {"type":"string","description":"Driver used to communicate with the object.","enum":["aws-kinesis","butler","crestron","dell","dmp","doorbird","dormakaba","dsc","ecobee","epson","geovision-rs","geovision-as-manager","honeywell-vista","igor","inncom","isapi","kohost-k7","kohost","lg","lg-webos","lapi","lirc","mews","mht","paxton","pelican-wireless","power-shades","rachio","rebrandly","rtsp","salto","salto-irn","samsung","se","sendgrid","sonifi","stay-n-touch","storable","twilio","unifi","valcom","vizio","wisenet","cloudflare-images","cloudflare-stream","insperia-privacy"]};

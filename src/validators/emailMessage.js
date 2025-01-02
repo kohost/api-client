@@ -3,7 +3,7 @@
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);
 "use strict";
-export const validate = validate31;
+export const validateEmailMessage = validate31;
 const schema71 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"emailMessage.json","title":"Email Message","type":"object","required":["to","from","status","subject"],"properties":{"id":{"$ref":"definitions.json#/definitions/id"},"type":{"type":"string","default":"emailMessage","enum":["emailMessage"]},"to":{"type":"string","pattern":"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"},"from":{"type":"string","pattern":".*<[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+>.*","description":"Must be in the format of 'Sender <email@example.com>"},"subject":{"type":"string"},"status":{"type":"string","enum":["queued","sending","sent","deferred","delivered","undelivered","bounced","blocked","receiving","received","opened","clicked","unsubscribed","spamReport"]},"statusMessage":{"type":"string"},"html":{"type":"string"},"text":{"type":"string"},"driver":{"type":"string"},"appData":{"type":"object"},"createdAt":{"$ref":"definitions.json#/definitions/date"},"updatedAt":{"$ref":"definitions.json#/definitions/date"},"systemId":{"$ref":"definitions.json#/definitions/systemId"}}};
 const schema13 = {"type":"string","description":"Identifier of the object.","not":{"enum":["global","system"]}};
 const schema26 = {"type":["string","object"],"format":"date-time"};

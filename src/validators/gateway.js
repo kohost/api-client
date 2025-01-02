@@ -3,7 +3,7 @@
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);
 "use strict";
-export const validate = validate34;
+export const validateGateway = validate34;
 const schema87 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"iotGateway.json","title":"Gateway","description":"Any smart gateway that is an entrypoint for controlling devices","type":"object","properties":{"id":{"$ref":"definitions.json#/definitions/id"},"type":{"$ref":"definitions.json#/definitions/type"},"supportedNotifications":{"$ref":"definitions.json#/definitions/supportedNotifications"},"notification":{"$ref":"definitions.json#/definitions/notification"},"status":{"type":"string"},"systemId":{"$ref":"definitions.json#/definitions/systemId"},"driver":{"$ref":"definitions.json#/definitions/driver"},"watts":{"$ref":"definitions.json#/definitions/watts"}},"required":["id","type","status","driver"]};
 const schema13 = {"type":"string","description":"Identifier of the object.","not":{"enum":["global","system"]}};
 const schema14 = {"type":"string","enum":["alarm","dimmer","switch","motionSensor","windowCovering","camera","mediaSource","thermostat","lock","courtesy","gateway","tv","dvr","appleTv","discPlayer","mediaPlayer","uncontrolledDevice"]};

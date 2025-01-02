@@ -3,7 +3,7 @@
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);
 "use strict";
-export const validate = validate20;
+export const validateCategory = validate20;
 const schema39 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"category.json","title":"Category","type":"object","required":["type","discriminator"],"properties":{"id":{"$ref":"definitions.json#/definitions/id"},"type":{"type":"string","default":"category"},"name":{"type":"string","minLength":1},"driver":{"$ref":"definitions.json#/definitions/driver"},"description":{"type":"string"},"image":{"$ref":"mediaFile.json"},"rating":{"type":"number","minimum":0,"maximum":10,"default":9},"discriminator":{"type":"string","enum":["space","product","mediaFile"]},"systemId":{"$ref":"definitions.json#/definitions/systemId"}}};
 const schema13 = {"type":"string","description":"Identifier of the object.","not":{"enum":["global","system"]}};
 const schema19 = {"type":"string","description":"Driver used to communicate with the object.","enum":["aws-kinesis","butler","crestron","dell","dmp","doorbird","dormakaba","dsc","ecobee","epson","geovision-rs","geovision-as-manager","honeywell-vista","igor","inncom","isapi","kohost-k7","kohost","lg","lg-webos","lapi","lirc","mews","mht","paxton","pelican-wireless","power-shades","rachio","rebrandly","rtsp","salto","salto-irn","samsung","se","sendgrid","sonifi","stay-n-touch","storable","twilio","unifi","valcom","vizio","wisenet","cloudflare-images","cloudflare-stream","insperia-privacy"]};

@@ -3,7 +3,7 @@
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);
 "use strict";
-export const validate = validate32;
+export const validateEnergyReport = validate32;
 const schema76 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"energyReport.json","title":"Energy Report","description":"Hourly Report for Energy based on energy report shards","type":"object","required":["id","type","roomId","first","last","consumption","totals","costPerKw"],"properties":{"id":{"$ref":"definitions.json#/definitions/id"},"type":{"type":"string","enum":["energyReport"],"default":"energyReport"},"reportTime":{"time":"string","enum":["hourly","daily","monthly"]},"roomId":{"$ref":"definitions.json#/definitions/id"},"first":{"type":["string","object"],"format":"date-time"},"last":{"type":["string","object"],"format":"date-time"},"consumption":{"type":"array","items":{"type":"object","required":["id","type","kwh"],"properties":{"id":{"$ref":"definitions.json#/definitions/id"},"type":{"$ref":"definitions.json#/definitions/type"},"kwh":{"type":"number","minimum":0}}}},"totals":{"type":"array","items":{"type":"object","required":["lights","climate","media"],"properties":{"lights":{"type":"number","minimum":0},"climate":{"type":"number","minimum":0},"media":{"type":"number","minimum":0}}}},"costPerKw":{"type":"number","minimum":0}}};
 const schema13 = {"type":"string","description":"Identifier of the object.","not":{"enum":["global","system"]}};
 const schema14 = {"type":"string","enum":["alarm","dimmer","switch","motionSensor","windowCovering","camera","mediaSource","thermostat","lock","courtesy","gateway","tv","dvr","appleTv","discPlayer","mediaPlayer","uncontrolledDevice"]};

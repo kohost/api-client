@@ -3,7 +3,7 @@
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);
 "use strict";
-export const validate = validate57;
+export const validatePolicy = validate57;
 const schema154 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"policy.json","title":"Policy","description":"A policy is a set of permissions that can be applied to a user to limit their access to resources.","type":"object","required":["name","type","organizationId","propertyId","permissions","discriminator"],"properties":{"id":{"$ref":"definitions.json#/definitions/id"},"type":{"type":"string","default":"policy","enum":["policy"]},"discriminator":{"type":"string","enum":["user"]},"name":{"type":"string","minLength":1},"description":{"type":"string"},"organizationId":{"type":"string"},"propertyId":{"type":"string"},"permissions":{"type":"array","items":{"type":"object","required":["entities","effect"],"properties":{"entities":{"type":"array","items":{"type":"string","pattern":"^[^:]+(:.+)+$"}},"effect":{"type":"string","enum":["Allow","Deny"]}}}}}};
 const schema13 = {"type":"string","description":"Identifier of the object.","not":{"enum":["global","system"]}};
 const func3 = require("ajv/dist/runtime/ucs2length").default;

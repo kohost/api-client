@@ -3,7 +3,7 @@
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);
 "use strict";
-export const validate = validate38;
+export const validateIssue = validate38;
 const schema99 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"issue.json","title":"Issue","description":"An issue associated with ticketing and concierge.","type":"object","properties":{"id":{"$ref":"definitions.json#/definitions/id"},"type":{"type":"string","enum":["issue"],"default":"issue"},"name":{"type":"string"},"description":{"type":"string"},"department":{"type":"string"},"autoAssign":{"type":"object","properties":{"userId":{"type":"string"},"vendorId":{"type":"string"},"priority":{"$ref":"ticket.json#/properties/priority"},"tags":{"type":"array","items":{"type":"string"}}}},"systemKey":{"type":"string"},"autoCreateTicket":{"type":"boolean","default":true}},"required":["id","type","name","department"]};
 const schema13 = {"type":"string","description":"Identifier of the object.","not":{"enum":["global","system"]}};
 const schema110 = {"type":"string","enum":["low","normal","high"],"default":"normal"};

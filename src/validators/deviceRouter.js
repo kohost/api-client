@@ -3,7 +3,7 @@
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);
 "use strict";
-export const validate = validate26;
+export const validateDeviceRouter = validate26;
 const schema57 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"deviceRouter.json","title":"Device Router","description":"A device router contains instructions on where to route devices based on their organization and driver.","type":"object","required":["driver","organizationId"],"properties":{"id":{"$ref":"definitions.json#/definitions/id"},"type":{"type":"string","default":"deviceRouter","enum":["deviceRouter"]},"driver":{"type":"string"},"organizationId":{"type":["string","null"],"description":"Reference (id) to the organization that owns this router"},"devices":{"type":"object","additionalProperties":true}}};
 const schema13 = {"type":"string","description":"Identifier of the object.","not":{"enum":["global","system"]}};
 

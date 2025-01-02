@@ -3,7 +3,7 @@
 	  import { createRequire } from 'node:module'; 
 	  const require = createRequire(import.meta.url);
 "use strict";
-export const validate = validate99;
+export const validateShortLink = validate99;
 const schema228 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"shortLink.json","title":"Short Link","type":"object","required":["destination","url"],"properties":{"id":{"$ref":"definitions.json#/definitions/id"},"type":{"type":"string","default":"shortLink","enum":["shortLink"]},"title":{"type":"string"},"destination":{"string":"string","format":"uri"},"url":{"string":"string","format":"uri"},"systemId":{"$ref":"definitions.json#/definitions/systemId"}}};
 const schema13 = {"type":"string","description":"Identifier of the object.","not":{"enum":["global","system"]}};
 const schema15 = {"type":"string","description":"Identifier of the object, directly related to the system."};
