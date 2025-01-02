@@ -1,7 +1,7 @@
 export default {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "smsMessage.json",
-  title: "SMS Message",
+  title: "Sms Message",
   type: "object",
   required: ["to", "from", "status"],
   properties: {

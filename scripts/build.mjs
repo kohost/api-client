@@ -1,5 +1,6 @@
 import * as esbuild from "esbuild";
 // eslint-disable-next-line
+import { dTSPathAliasPlugin } from "esbuild-plugin-d-ts-path-alias";
 import useCases from "../src/useCases/http.json" assert { type: "json" };
 import { GenerateIndexPlugin } from "./generate-index.mjs";
 import { GenerateModelPlugin } from "./generate-models.mjs";
@@ -101,6 +102,15 @@ const builds = formats.map((format) => {
       keepNames: true,
       platform,
       format,
+    });
+
+    esbuild.build({
+      bundle: true,
+      target: "es2019",
+      format: "esm",
+      entryPoints: ["./src/index.mjs"],
+      outfile: "dist/types/index.d.ts",
+      plugins: [dTSPathAliasPlugin()],
     });
   });
 });

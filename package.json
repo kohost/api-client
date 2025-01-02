@@ -8,6 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/kohost/api-client.git"
   },
+  "type": "module",
   "exports": {
     ".": {
       "node": {
@@ -35,6 +36,7 @@
     "prepare": "husky",
     "build": "node scripts/build.mjs",
     "build:watch": "node scripts/build.js --watch",
+    "generate-models": "node scripts/generate-source-models.mjs",
     "start": "node scripts/build.js --watch",
     "clean": "rm -rf ./dist",
     "tsc": "tsc",
