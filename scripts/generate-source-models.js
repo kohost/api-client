@@ -78,22 +78,6 @@ Promise.all(schemaModules).then((modules) => {
   fs.writeFileSync("src/models/index.js", modelIndexCode);
 });
 
-function generateValidatorCode(ajv, schemaModule) {
-  const schema = schemaModule.default;
-  const schemaTitle = schema.title.replace(/\s+/g, "");
-
-  const importStatement = `${banner}\n
-	  import { createRequire } from 'node:module'; 
-	  const require = createRequire(import.meta.url);`;
-
-  const validatorCode = standaloneCode(ajv, {
-    [`validate${schemaTitle}`]: schema.$id,
-  });
-  const validatorModuleCode = `${importStatement}\n${validatorCode}`;
-
-  return validatorModuleCode;
-}
-
 function generateModelCode(schemaModule) {
   const {
     default: schema,
