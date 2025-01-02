@@ -3,11 +3,7 @@
   "$id": "log.json",
   "title": "Log",
   "type": "object",
-  "required": ["id", "timestamp"],
   "properties": {
-    "id": {
-      "$ref": "definitions.json#/definitions/id"
-    },
     "type": {
       "type": "string",
       "default": "log",
@@ -17,27 +13,25 @@
       "type": "number",
       "minimum": 1655907956593
     },
-    "driver": {
-      "$ref": "definitions.json#/definitions/driver"
-    },
+
     "name": {
       "type": "string",
       "description": "Event name"
     }
   },
-    "patternProperties": {
-      "^field[0-9]+$": {
-        "type":"object",
-        "required": ["name", "value"],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
+  "patternProperties": {
+    "^field[0-9]+$": {
+      "type": "object",
+      "required": ["name", "value"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
         }
       }
-    },
-    "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
 }
