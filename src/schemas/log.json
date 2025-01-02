@@ -20,20 +20,24 @@
     "driver": {
       "$ref": "definitions.json#/definitions/driver"
     },
-    "message": {
-      "type": "string"
+    "name": {
+      "type": "string",
+      "description": "Event name"
     },
-    "field1": {
-      "type":"string"
+    "patternProperties": {
+      "^field[0-9]+$": {
+        "type":"object",
+        "required": ["name", "value"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
     },
-    "field2": {
-      "type":"string"
-    },
-    "field3": {
-      "type":"string"
-    },
-    "field4": {
-      "type":"string"
-    }
+    "additionalProperties": false
   }
 }
