@@ -17,6 +17,9 @@
       "type": "number",
       "minimum": 1655907956593
     },
+    "driver": {
+      "$ref": "definitions.json#/definitions/driver"
+    },
     "message": {
       "type": "string"
     },
