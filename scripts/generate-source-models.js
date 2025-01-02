@@ -49,7 +49,7 @@ Promise.all(schemaModules).then((modules) => {
   }, {});
 
   const validatorCode = standaloneCode(ajv, validateMap);
-  fs.writeFileSync("src/validators/validate.js", validatorCode);
+  fs.writeFileSync("src/validators.js", validatorCode);
 
   for (const module of modules) {
     const schema = module.default;
@@ -57,8 +57,6 @@ Promise.all(schemaModules).then((modules) => {
     const schemaTitle = schema.title.replace(/\s+/g, "");
     const fileName = schemaTitle.charAt(0).toLowerCase() + schemaTitle.slice(1);
     modelIndexExports.push(fileName);
-    validatorIndexExports.push(fileName);
-    const validatorCode = generateValidatorCode(ajv, module);
     const modelCode = generateModelCode(module);
     fs.writeFileSync(`src/models/${fileName}.js`, modelCode);
   }
@@ -75,11 +73,9 @@ Promise.all(schemaModules).then((modules) => {
 
   const useCaseIndexCode = generateIndexCode(useCaseIndexExports);
   const modelIndexCode = generateIndexCode(modelIndexExports);
-  const validatorIndexCode = generateIndexCode(validatorIndexExports);
 
   fs.writeFileSync("src/useCases/index.js", useCaseIndexCode);
   fs.writeFileSync("src/models/index.js", modelIndexCode);
-  fs.writeFileSync("src/validators/index.js", validatorIndexCode);
 });
 
 function generateValidatorCode(ajv, schemaModule) {
@@ -108,11 +104,10 @@ function generateModelCode(schemaModule) {
   } = schemaModule;
 
   const schemaTitle = schema.title.replace(/\s+/g, "");
-  const fileName = schemaTitle.charAt(0).toLowerCase() + schemaTitle.slice(1);
 
   const entityImport = "import { Entity } from './entity';";
 
-  const validatorImport = `import { validate${schemaTitle} as validate } from '../validators/${fileName}';`;
+  const validatorImport = `import { validate${schemaTitle} as validate } from '../validators';`;
 
   const code = `${banner}\n
   ${entityImport}
