@@ -31,7 +31,7 @@
     "start": "node scripts/build.js --watch",
     "clean": "rm -rf ./dist",
     "tsc": "tsc",
-    "tsup": ""
+    "tsup": "tsup"
   },
   "files": [
     "dist",
