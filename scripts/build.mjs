@@ -1,6 +1,5 @@
 import * as esbuild from "esbuild";
-// eslint-disable-next-line
-import { dTSPathAliasPlugin } from "esbuild-plugin-d-ts-path-alias";
+/* eslint-disable-next-line */
 import useCases from "../src/useCases/http.json" assert { type: "json" };
 import { GenerateIndexPlugin } from "./generate-index.mjs";
 import { GenerateModelPlugin } from "./generate-models.mjs";
