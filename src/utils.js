@@ -65,7 +65,7 @@ export function entityFactory(type) {
     case "energyReport":
       return Models.EnergyReport;
     case "smsMessage":
-      return Models.SMSMessage;
+      return Models.SmsMessage;
     case "emailMessage":
       return Models.EmailMessage;
     case "announcement":

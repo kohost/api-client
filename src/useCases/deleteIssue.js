@@ -1,48 +1,48 @@
 
 		  
-			  /* 
+			  /** 
 				Creates a method for each use case in the API
 				@memberof KohostApiClient
 				@param {Object} requestData - The options to send to the API
 				@param {Object} requestData.headers - The headers to send to the API
 				@param {Object} requestData.data - The body to send to the API. Valid for POST and PUT requests
-				@parms {Object} requestData.query - The query for the request to build the URL
+				@param {Object} requestData.query - The query for the request to build the URL
 				@returns {Promise} The response from the API
 			  */
 			  
-			  //eslint-disable-next-line no-inner-declarations
+			   
 			  export function DeleteIssue(requestData = {data: null, query: null, headers: null}, httpConfigOptions = {}) {
   
 			  if (!requestData) requestData = {};
 			  
 			  // get parameters from path
-			  const pathParams = [":id"]
+			  const pathParams = [":id"];
 			  
 			  const { data, query, headers } = requestData;
 			  
 			  // replace path parameters with values from params
 			  let url = "/issues/:id";
 			  if (pathParams && data) {
-				for (const param of pathParams) {
-				const paramName = param.replace(":", "");
-				url = url.replace(param, data[paramName]);
-				}
+    for (const param of pathParams) {
+      const paramName = param.replace(":", "");
+      url = url.replace(param, data[paramName]);
+    }
 			  }
 			  
 			  // make sure all parameters have been replaced
 			  if (url.match(/:[a-zA-Z0-9]+/g)) {
-				const missingParams = url.match(/:[a-zA-Z0-9]+/g);
-				// remove the colon from the parameter name
-				const missing = missingParams.map((param) => param.replace(":", ""));
-				return Promise.reject(
-				new Error("Missing parameters: " + missing.join(", "))
-				);
+    const missingParams = url.match(/:[a-zA-Z0-9]+/g);
+    // remove the colon from the parameter name
+    const missing = missingParams.map((param) => param.replace(":", ""));
+    return Promise.reject(
+      new Error("Missing parameters: " + missing.join(", "))
+    );
 			  }
 			  
 			  const config = {
-				method: "delete",
-				url: url,
-				...httpConfigOptions,
+    method: "delete",
+    url: url,
+    ...httpConfigOptions,
 			  };
 			  
 			  if (data) config.data = data;
