@@ -86,20 +86,3 @@ export default {
   },
   required: ["id", "type", "areas", "zones", "driver"],
 };
-
-/**
- * @typedef {Object} Alarm Any smart alarm system
- * @property {string} id - Identifier of the object.
- * @property {string} [name]
- * @property {boolean} [offline]
- * @property {"alarm"} type - Default: "alarm"
- * @property {string} [systemId] - Identifier of the object, directly related to the system.
- * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
- * @property {object} [notification]
- * @property {("aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
- * @property {{number: number, name: string, securityMode: ("arming"|"disarming"|"armed"|"disarmed"|"alarm")}[]} areas
- * @property {{number: number, name: string, secure: boolean, bypassed: boolean}[]} zones
- * @property {boolean} [chime] - Reflects whether console chime is enabled
- * @property {number} [watts]
- * @property {{id: string, line1: string, line2: string, line3: string, city: string, state: string, postalCode: string, countryCode: string}} [address]
- */
