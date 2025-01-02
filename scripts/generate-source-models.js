@@ -37,7 +37,7 @@ Promise.all(schemaModules).then((modules) => {
 
   addFormats(ajv);
 
-  const modelIndexExports = [];
+  const modelIndexExports = ["entity"];
   const validatorIndexExports = [];
   const useCaseIndexExports = [];
 
@@ -50,8 +50,8 @@ Promise.all(schemaModules).then((modules) => {
     validatorIndexExports.push(fileName);
     const validatorCode = generateValidatorCode(ajv, module);
     const modelCode = generateModelCode(module);
-    fs.writeFileSync(`src/validators/${fileName}.mjs`, validatorCode);
-    fs.writeFileSync(`src/models/${fileName}.mjs`, modelCode);
+    fs.writeFileSync(`src/validators/${fileName}.js`, validatorCode);
+    fs.writeFileSync(`src/models/${fileName}.js`, modelCode);
   }
 
   for (const [useCase, data] of useCases.entries()) {
@@ -60,17 +60,17 @@ Promise.all(schemaModules).then((modules) => {
         useCase.charAt(0).toLowerCase() + useCase.slice(1);
       useCaseIndexExports.push(useCaseFileName);
       const code = generateUseCaseCode(useCase, data.http);
-      fs.writeFileSync(`src/useCases/${useCaseFileName}.mjs`, code);
+      fs.writeFileSync(`src/useCases/${useCaseFileName}.js`, code);
     }
   }
 
-  const useCaseIndexCode = generateUseCaseIndexCode(useCaseIndexExports);
-  const modelIndexCode = generateModelIndexCode(modelIndexExports);
-  const validatorIndexCode = generateModelIndexCode(validatorIndexExports);
+  const useCaseIndexCode = generateIndexCode(useCaseIndexExports);
+  const modelIndexCode = generateIndexCode(modelIndexExports);
+  const validatorIndexCode = generateIndexCode(validatorIndexExports);
 
-  fs.writeFileSync("src/useCases/index.mjs", useCaseIndexCode);
-  fs.writeFileSync("src/models/index.mjs", modelIndexCode);
-  fs.writeFileSync("src/validators/index.mjs", validatorIndexCode);
+  fs.writeFileSync("src/useCases/index.js", useCaseIndexCode);
+  fs.writeFileSync("src/models/index.js", modelIndexCode);
+  fs.writeFileSync("src/validators/index.js", validatorIndexCode);
 });
 
 function generateValidatorCode(ajv, schemaModule) {
@@ -216,14 +216,8 @@ function generateUseCaseCode(useCase, { method, path: endpoint }) {
   return code;
 }
 
-function generateUseCaseIndexCode(useCases) {
+function generateIndexCode(files) {
   return `
-	  ${useCases.map((useCase) => `export * from "./${useCase.charAt(0).toLowerCase() + useCase.slice(1)}"`).join("\n")}
-	`;
-}
-
-function generateModelIndexCode(schemas) {
-  return `
-	  ${schemas.map((schema) => `export * from "./${schema.charAt(0).toLowerCase() + schema.slice(1)}"`).join("\n")}
+	  ${files.map((useCase) => `export * from "./${useCase.charAt(0).toLowerCase() + useCase.slice(1)}";`).join("\n")}
 	`;
 }
