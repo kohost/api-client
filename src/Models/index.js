@@ -37,6 +37,7 @@ const Vendor = require("./Vendor");
 
 const Property = require("./Property");
 const Organization = require("./Organization");
+const Log = require("./Log");
 
 const Entity = require("./Entity");
 
@@ -80,4 +81,5 @@ module.exports = {
   Policy,
   Issue,
   Vendor,
+  Log,
 };
