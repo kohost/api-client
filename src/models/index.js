@@ -1,5 +1,4 @@
-
-	  export * from "./entity";
+export * from "./entity";
 export * from "./alarm";
 export * from "./announcement";
 export * from "./camera";
@@ -39,4 +38,3 @@ export * from "./timeSheet";
 export * from "./user";
 export * from "./vendor";
 export * from "./windowCovering";
-	
