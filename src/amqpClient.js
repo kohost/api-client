@@ -1,9 +1,12 @@
 import { connect } from "amqplib";
 import { isFatalError } from "amqplib/lib/connection";
-import { randomUUID } from "crypto";
 import dbg from "debug";
+import { Buffer } from "node:buffer";
+import * as crypto from "node:crypto";
 import { amqpExchanges as exchanges } from "./defs";
 import * as Errors from "./errors";
+
+const randomUUID = crypto.randomUUID;
 
 const debug = dbg("kohost:amqp-client");
 

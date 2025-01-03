@@ -8,4 +8,5 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   target: "node20",
+  platform: "node",
 });
