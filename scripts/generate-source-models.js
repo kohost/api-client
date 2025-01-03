@@ -189,6 +189,8 @@ function generateUseCaseCode(useCase, { method, path: endpoint }) {
   const classId = `${useCase.charAt(0).toUpperCase() + useCase.slice(1)}Command`;
 
   let code = `
+
+        ${banner}
 		  
 			  export class ${classId} {
   
