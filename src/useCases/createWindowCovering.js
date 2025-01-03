@@ -29,7 +29,8 @@ export class CreateWindowCoveringCommand {
 
     if (pathParams && data) {
       for (const param of pathParams) {
-        url = url.replace(param, data[param]);
+        const urlParam = ":" + param;
+        url = url.replace(urlParam, data[param]);
       }
     }
 
