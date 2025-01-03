@@ -43,6 +43,7 @@
     "@types/events": "^3.0.3",
     "ajv": "^8.11.0",
     "ajv-formats": "^3.0.1",
+    "esbuild-plugins-node-modules-polyfill": "^1.6.8",
     "eslint": "^9.7.0",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^9.0.11",

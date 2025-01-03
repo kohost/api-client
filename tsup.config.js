@@ -1,3 +1,4 @@
+import { nodeModulesPolyfillPlugin } from "esbuild-plugins-node-modules-polyfill";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
@@ -7,5 +8,6 @@ export default defineConfig({
   dts: true,
   clean: true,
   sourcemap: true,
-  target: ["node20", "browser"],
+  target: "node20",
+  esbuildPlugins: [nodeModulesPolyfillPlugin({ globals: { Buffer: true } })],
 });
