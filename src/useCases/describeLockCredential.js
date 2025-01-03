@@ -4,6 +4,8 @@
 
 export class DescribeLockCredentialCommand {
   /**
+   * @description
+   * @constructor
    * @param {Object} commandConfig - The configuration for the use case command
    * @param {Object} commandConfig.headers - The headers to include in the command
    * @param {Object} commandConfig.data - The body to include in the command
@@ -37,9 +39,25 @@ export class DescribeLockCredentialCommand {
       throw new Error("Missing parameters: " + missing.join(", "));
     }
 
+    /**
+     * The full URL for the use case
+     * @type {string}
+     */
     this.url = url;
+    /**
+     * The data to send with the use case
+     * @type {object | null}
+     */
     this.data = data;
+    /**
+     * The query parameters for the use case
+     * @type {object | null}
+     */
     this.query = query;
+    /**
+     * The headers for the use case
+     * @type {object | null}
+     */
     this.headers = headers;
 
     const config = {
@@ -52,17 +70,33 @@ export class DescribeLockCredentialCommand {
     if (query) config.params = query;
     if (headers) config.headers = headers;
 
+    /**
+     * The configuration for the use case command
+     * @type {{ url: string, method: "get" | "put" | "post" | "delete", data?: object | null, query?: object | null, headers?: object | null }}
+     */
     this.config = config;
   }
 
+  /**
+   * The required parameters for the use case
+   * @type {string[]}
+   */
   static get params() {
     return ["roomId", "id"];
   }
 
+  /**
+   * The URL for the use case, with path parameters
+   * @type {string}
+   */
   static get url() {
     return "/rooms/:roomId/locks/:id/credential";
   }
 
+  /**
+   * The HTTP method for the use case
+   * @type {"get" | "put" | "post" | "delete"}
+   */
   static get method() {
     return "post";
   }

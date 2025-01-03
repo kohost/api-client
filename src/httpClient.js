@@ -1,5 +1,6 @@
 /* Add Use Cases Here */
 import axios from "axios";
+import { RefreshTokenCommand } from "./useCases";
 
 export class KohostHTTPClient {
   #onSuccess;
@@ -24,7 +25,7 @@ export class KohostHTTPClient {
       headers: {},
       onSuccess: (response) => response,
       onError: (error) => error,
-    }
+    },
   ) {
     if (!options.url) throw new Error("options.url is required");
     this.options = options;
@@ -64,7 +65,7 @@ export class KohostHTTPClient {
 
     this._http.interceptors.response.use(
       this.#handleResponse.bind(this),
-      this.#handleResponseError.bind(this)
+      this.#handleResponseError.bind(this),
     );
 
     this.callbacks = {};
@@ -134,6 +135,15 @@ export class KohostHTTPClient {
     };
   }
 
+  /**
+   * @typedef {typeof import('./useCases')} Command
+   * @param {Command} command
+   */
+  send(command) {
+    const commandConfig = command.config;
+    return this._http(commandConfig);
+  }
+
   #onLoginRequired() {
     this.emit("LoginRequired");
   }
@@ -191,7 +201,13 @@ export class KohostHTTPClient {
       if (expectedError && newTokensNeeded) {
         while (!this.isRefreshingToken) {
           this.isRefreshingToken = true;
-          return this.RefreshToken()
+          return this.send(
+            new RefreshTokenCommand({
+              data: originalReq.data,
+              query: originalReq.params,
+              headers: originalReq.headers,
+            }),
+          )
             .then(() => {
               // retry the original request with the new token
               this.isRefreshingToken = false;
