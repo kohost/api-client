@@ -6,21 +6,23 @@ export class DescribeReservationPetProductsCommand {
   /**
    * @description
    * @constructor
-   * @param {Object} commandConfig - The configuration for the use case command
-   * @param {Object} commandConfig.headers - The headers to include in the command
-   * @param {Object} commandConfig.data - The body to include in the command
-   * @param {Object} commandConfig.query - The query parameters to include in the command
+   * @typedef {object} DescribeReservationPetProductsCommandConfig
+   * @property {{[key: string]: any, id: string}} data - The body to include in the command
+   * @property {{[key:string]: any} | null} [headers] - The headers to include in the command
+   * @property {{[key:string]: any} | null} [query] - The query parameters to include in the command
    *
+   * @param {DescribeReservationPetProductsCommandConfig} commandConfig - The options to include in the command
    * @param {Object} options - The options to include in the command
    */
-  constructor(
-    commandConfig = { data: null, query: null, headers: null },
-    options = {},
-  ) {
+  constructor(commandConfig, options = {}) {
     // get parameters from path
     const pathParams = DescribeReservationPetProductsCommand.params;
 
-    const { data, query, headers } = commandConfig;
+    let { data, query, headers } = commandConfig ?? {};
+
+    if (typeof data === "undefined") data = null;
+    if (typeof query === "undefined") query = null;
+    if (typeof headers === "undefined") headers = null;
 
     // replace path parameters with values from params
     let url = DescribeReservationPetProductsCommand.url;
@@ -34,70 +36,69 @@ export class DescribeReservationPetProductsCommand {
     // make sure all parameters have been replaced
     if (url.match(/:[a-zA-Z0-9]+/g)) {
       const missingParams = url.match(/:[a-zA-Z0-9]+/g);
-      // remove the colon from the parameter name
-      const missing = missingParams.map((param) => param.replace(":", ""));
-      throw new Error("Missing parameters: " + missing.join(", "));
+
+      if (missingParams) {
+        // remove the colon from the parameter name
+        const missing = missingParams.map((param) => param.replace(":", ""));
+        throw new Error("Missing parameters: " + missing.join(", "));
+      }
     }
 
     /**
      * The full URL for the use case
      * @type {string}
+     * @public
      */
     this.url = url;
     /**
      * The data to send with the use case
-     * @type {object | null}
+     * @type {DescribeReservationPetProductsCommandConfig["data"]}
+     * @public
      */
     this.data = data;
     /**
      * The query parameters for the use case
-     * @type {object | null}
+     * @type {DescribeReservationPetProductsCommandConfig["query"]}
+     * @public
      */
     this.query = query;
     /**
      * The headers for the use case
-     * @type {object | null}
+     * @type {DescribeReservationPetProductsCommandConfig["headers"]}
+     * @public
      */
     this.headers = headers;
 
-    const config = {
-      method: DescribeReservationPetProductsCommand.method,
-      url: url,
-      ...options,
-    };
-
-    if (data) config.data = data;
-    if (query) config.params = query;
-    if (headers) config.headers = headers;
-
     /**
      * The configuration for the use case command
-     * @type {{ url: string, method: "get" | "put" | "post" | "delete", data?: object | null, query?: object | null, headers?: object | null }}
+     * @type {{ url: string, method: "get" , data: DescribeReservationPetProductsCommandConfig["data"] , params: DescribeReservationPetProductsCommandConfig["query"], headers: DescribeReservationPetProductsCommandConfig["headers"] }}
+     * @public
      */
-    this.config = config;
+    this.config = {
+      method: DescribeReservationPetProductsCommand.method,
+      url: url,
+      data: data,
+      params: query,
+      headers: headers,
+      ...options,
+    };
   }
 
   /**
    * The required parameters for the use case
    * @type {string[]}
    */
-  static get params() {
-    return ["id"];
-  }
+  static params = ["id"];
 
   /**
    * The URL for the use case, with path parameters
    * @type {string}
    */
-  static get url() {
-    return "/reservations/:id/products/pet";
-  }
+  static url = "/reservations/:id/products/pet";
 
   /**
    * The HTTP method for the use case
-   * @type {"get" | "put" | "post" | "delete"}
+   * @type {"get"}
    */
-  static get method() {
-    return "get";
-  }
+  static method = "get";
 }

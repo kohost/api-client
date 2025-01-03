@@ -126,3 +126,29 @@ function getDescriptions(prop, ajv) {
 
   return descriptions.length > 0 ? descriptions.join(". ") : "";
 }
+
+/**
+ *
+ * @param {string[]} pathParams
+ * @param {"get" | "put" | "post" | "delete"} httpMethod
+ */
+export function generateCommandDataDoc(pathParams, httpMethod) {
+  if (httpMethod === "get" && pathParams.length === 0)
+    return "@property {null} [data] - The body to include in the command";
+
+  const dataParams = pathParams.reduce(
+    (acc, param) => {
+      acc[param] = "string";
+      return acc;
+    },
+    { "[key: string]": "any" },
+  );
+
+  const dataParamsCode = Object.entries(dataParams)
+    .map(([param, type]) => `${param}: ${type}`)
+    .join(", ");
+
+  const dataParamsJsdoc = `@property {{${dataParamsCode}}} data - The body to include in the command`;
+
+  return dataParamsJsdoc;
+}

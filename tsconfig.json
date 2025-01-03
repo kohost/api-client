@@ -5,6 +5,7 @@
     "checkJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
+    "strictNullChecks": true,
     "outDir": "dist/types",
     "target": "ES2022",
     "module": "ESNext",
