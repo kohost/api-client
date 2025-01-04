@@ -1,6 +1,6 @@
 /* Add Use Cases Here */
 import axios from "axios";
-import { RefreshTokenCommand } from "./useCases";
+import { RefreshTokenCommand } from "./useCases/refreshToken";
 
 export class KohostHTTPClient {
   #onSuccess;

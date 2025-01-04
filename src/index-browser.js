@@ -1,4 +1,3 @@
-export { KohostAMQPClient as AMQPClient } from "./amqpClient";
 export { KohostHTTPClient as Client } from "./httpClient";
 export { KohostSocketIoClient as SocketIoClient } from "./socketIoClient";
 

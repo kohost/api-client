@@ -1,213 +1,433 @@
-export * from "./loginStart";
-export * from "./refreshToken";
-export * from "./loginFinish";
-export * from "./requestLoginToken";
-export * from "./logoutSelf";
-export * from "./logoutUser";
-export * from "./startRegisterPasskey";
-export * from "./finishRegisterPasskey";
-export * from "./describeMyAuth";
-export * from "./describeSelf";
-export * from "./describeUser";
-export * from "./createUser";
-export * from "./listUsers";
-export * from "./updateSelf";
-export * from "./updateUser";
-export * from "./deleteUser";
-export * from "./sendVerificationCode";
-export * from "./checkVerificationCode";
-export * from "./matchUserIdentification";
-export * from "./listUserReservations";
-export * from "./listUserSpaces";
-export * from "./listUserOrders";
-export * from "./listTeam";
-export * from "./describeMyPasskeyRegistrations";
-export * from "./tipUser";
-export * from "./deleteUserCredential";
-export * from "./createUserMobileKey";
-export * from "./describeMyMobileKeyApp";
-export * from "./listUserMobileKeys";
-export * from "./createPolicy";
-export * from "./listPolicies";
-export * from "./updatePolicy";
-export * from "./deletePolicy";
-export * from "./describePolicy";
-export * from "./listSpaces";
-export * from "./listMySpaces";
-export * from "./listRoomsInSpace";
-export * from "./updateSpace";
-export * from "./createSpace";
-export * from "./describeSpace";
-export * from "./deleteSpace";
-export * from "./createRoomInSpace";
-export * from "./setSpaceScene";
-export * from "./createCateory";
-export * from "./deleteCategory";
-export * from "./describeCategory";
-export * from "./listCategories";
-export * from "./updateCategory";
-export * from "./listRooms";
-export * from "./describeRoom";
-export * from "./createRoom";
-export * from "./updateRoom";
-export * from "./deleteRoom";
-export * from "./createAlarm";
-export * from "./listAlarms";
-export * from "./updateAlarm";
-export * from "./deleteAlarm";
-export * from "./describeAlarm";
-export * from "./describeAlarmConfig";
-export * from "./setAlarm";
-export * from "./createCamera";
-export * from "./listCameras";
-export * from "./updateCamera";
-export * from "./deleteCamera";
-export * from "./describeCamera";
-export * from "./setCamera";
-export * from "./createCourtesy";
-export * from "./listCourtesy";
-export * from "./updateCourtesy";
-export * from "./deleteCourtesy";
-export * from "./describeCourtesy";
-export * from "./setCourtesy";
-export * from "./createDimmer";
-export * from "./listDimmers";
-export * from "./updateDimmer";
-export * from "./deleteDimmer";
-export * from "./describeDimmer";
-export * from "./setDimmer";
-export * from "./createLock";
-export * from "./listLocks";
-export * from "./updateLock";
-export * from "./deleteLock";
-export * from "./describeLock";
-export * from "./setLock";
-export * from "./describeLockCredential";
-export * from "./createSwitch";
-export * from "./listSwitches";
-export * from "./updateSwitch";
-export * from "./deleteSwitch";
-export * from "./describeSwitch";
-export * from "./setSwitch";
-export * from "./createMediaSource";
-export * from "./listMediaSources";
-export * from "./updateMediaSource";
-export * from "./deleteMediaSource";
-export * from "./describeMediaSource";
-export * from "./setMediaSource";
-export * from "./createThermostat";
-export * from "./listThermostats";
-export * from "./updateThermostat";
-export * from "./deleteThermostat";
-export * from "./describeThermostat";
-export * from "./setThermostat";
-export * from "./createWindowCovering";
-export * from "./listWindowCoverings";
-export * from "./updateWindowCovering";
-export * from "./deleteWindowCovering";
-export * from "./describeWindowCovering";
-export * from "./setWindowCovering";
-export * from "./setRoomScene";
-export * from "./autoCloseTickets";
-export * from "./describeTicketStats";
-export * from "./createTicket";
-export * from "./createTicketMessage";
-export * from "./deleteTicket";
-export * from "./listMyTickets";
-export * from "./describeTicket";
-export * from "./listTickets";
-export * from "./updateMessageReadStatus";
-export * from "./updateTicket";
-export * from "./updateTicketStatus";
-export * from "./listScenes";
-export * from "./createScene";
-export * from "./createDefaultScenes";
-export * from "./setScene";
-export * from "./createDiscoveredDeviceAssociationMap";
-export * from "./autoAssociateDiscoveredDevices";
-export * from "./createDiscoveredDevice";
-export * from "./listDiscoveredDevices";
-export * from "./updateDiscoveredDevice";
-export * from "./deleteDiscoveredDevice";
-export * from "./describeDiscoveredDevice";
-export * from "./upsertDiscoveredDevice";
-export * from "./createDiscoveredDeviceAssociation";
-export * from "./discoverReservations";
-export * from "./createReservation";
-export * from "./deleteReservation";
-export * from "./listReservations";
-export * from "./listMyReservations";
-export * from "./updateReservation";
-export * from "./describeReservation";
-export * from "./checkInReservation";
-export * from "./checkOutReservation";
-export * from "./sendCheckInSMS";
-export * from "./sendPreArrivalSMS";
-export * from "./sendPreArrivalEmail";
-export * from "./sendRoomControlSMS";
-export * from "./sendCheckOutSMS";
-export * from "./batchNotifyPreArrival";
-export * from "./batchNotifyCheckIn";
-export * from "./batchNotifyCheckOut";
-export * from "./batchNotifyMissedCheckOut";
-export * from "./assignSpaceToReservation";
-export * from "./describeReservationEarlyCheckInProducts";
-export * from "./purchaseReservationEarlyCheckInProducts";
-export * from "./describeReservationRoomUpgrades";
-export * from "./purchaseReservationRoomUpgrades";
-export * from "./describeReservationLateCheckOutProducts";
-export * from "./purchaseReservationLateCheckOutProducts";
-export * from "./updateReservationExpectedArrivalTime";
-export * from "./describeReservationPetProducts";
-export * from "./purchaseReservationPetProducts";
-export * from "./describeReservationPromos";
-export * from "./purchaseReservationPromos";
-export * from "./oCRDocument";
-export * from "./describeMyOrganization";
-export * from "./createOrganization";
-export * from "./updateOrganization";
-export * from "./describeOrganization";
-export * from "./listOrganizations";
-export * from "./listProperties";
-export * from "./listMyProperties";
-export * from "./createProperty";
-export * from "./updateProperty";
-export * from "./describeProperty";
-export * from "./updatePropertySettings";
-export * from "./emailUserAccountSetup";
-export * from "./createImageUploadEndpoint";
-export * from "./deleteMediaFile";
-export * from "./uploadImage";
-export * from "./describeProduct";
-export * from "./listProducts";
-export * from "./listOrders";
-export * from "./listMyOrders";
-export * from "./createAnnouncement";
-export * from "./updateAnnouncement";
-export * from "./describeAnnouncement";
-export * from "./deleteAnnouncement";
-export * from "./listAnnouncements";
-export * from "./describeTimeSheetStats";
-export * from "./listMyTimeSheets";
-export * from "./describeTimeSheet";
-export * from "./listTimeSheets";
-export * from "./createTimeSheet";
-export * from "./deleteTimeSheet";
-export * from "./updateTimeSheet";
-export * from "./createTimeSheetTimeEntry";
-export * from "./deleteTimeSheetTimeEntry";
-export * from "./updateTimeSheetTimeEntry";
-export * from "./startSOS";
-export * from "./stopSOS";
-export * from "./describeSOS";
-export * from "./describeIssue";
-export * from "./listIssues";
-export * from "./deleteIssue";
-export * from "./createIssue";
-export * from "./updateIssue";
-export * from "./bulkUpdateIssue";
-export * from "./describeVendor";
-export * from "./listVendors";
-export * from "./deleteVendor";
-export * from "./createVendor";
-export * from "./updateVendor";
+// This file is auto-generated. Do not edit this file manually.
+// Generated on: 2025-01-04T15:44:02.151Z
+
+import { AssignSpaceToReservationCommand } from "./assignSpaceToReservation";
+import { AutoAssociateDiscoveredDevicesCommand } from "./autoAssociateDiscoveredDevices";
+import { AutoCloseTicketsCommand } from "./autoCloseTickets";
+import { BatchNotifyCheckInCommand } from "./batchNotifyCheckIn";
+import { BatchNotifyCheckOutCommand } from "./batchNotifyCheckOut";
+import { BatchNotifyMissedCheckOutCommand } from "./batchNotifyMissedCheckOut";
+import { BatchNotifyPreArrivalCommand } from "./batchNotifyPreArrival";
+import { BulkUpdateIssueCommand } from "./bulkUpdateIssue";
+import { CheckInReservationCommand } from "./checkInReservation";
+import { CheckOutReservationCommand } from "./checkOutReservation";
+import { CheckVerificationCodeCommand } from "./checkVerificationCode";
+import { CreateAlarmCommand } from "./createAlarm";
+import { CreateAnnouncementCommand } from "./createAnnouncement";
+import { CreateCameraCommand } from "./createCamera";
+import { CreateCateoryCommand } from "./createCateory";
+import { CreateCourtesyCommand } from "./createCourtesy";
+import { CreateDefaultScenesCommand } from "./createDefaultScenes";
+import { CreateDimmerCommand } from "./createDimmer";
+import { CreateDiscoveredDeviceCommand } from "./createDiscoveredDevice";
+import { CreateDiscoveredDeviceAssociationCommand } from "./createDiscoveredDeviceAssociation";
+import { CreateDiscoveredDeviceAssociationMapCommand } from "./createDiscoveredDeviceAssociationMap";
+import { CreateImageUploadEndpointCommand } from "./createImageUploadEndpoint";
+import { CreateIssueCommand } from "./createIssue";
+import { CreateLockCommand } from "./createLock";
+import { CreateMediaSourceCommand } from "./createMediaSource";
+import { CreateOrganizationCommand } from "./createOrganization";
+import { CreatePolicyCommand } from "./createPolicy";
+import { CreatePropertyCommand } from "./createProperty";
+import { CreateReservationCommand } from "./createReservation";
+import { CreateRoomCommand } from "./createRoom";
+import { CreateRoomInSpaceCommand } from "./createRoomInSpace";
+import { CreateSceneCommand } from "./createScene";
+import { CreateSpaceCommand } from "./createSpace";
+import { CreateSwitchCommand } from "./createSwitch";
+import { CreateThermostatCommand } from "./createThermostat";
+import { CreateTicketCommand } from "./createTicket";
+import { CreateTicketMessageCommand } from "./createTicketMessage";
+import { CreateTimeSheetCommand } from "./createTimeSheet";
+import { CreateTimeSheetTimeEntryCommand } from "./createTimeSheetTimeEntry";
+import { CreateUserCommand } from "./createUser";
+import { CreateUserMobileKeyCommand } from "./createUserMobileKey";
+import { CreateVendorCommand } from "./createVendor";
+import { CreateWindowCoveringCommand } from "./createWindowCovering";
+import { DeleteAlarmCommand } from "./deleteAlarm";
+import { DeleteAnnouncementCommand } from "./deleteAnnouncement";
+import { DeleteCameraCommand } from "./deleteCamera";
+import { DeleteCategoryCommand } from "./deleteCategory";
+import { DeleteCourtesyCommand } from "./deleteCourtesy";
+import { DeleteDimmerCommand } from "./deleteDimmer";
+import { DeleteDiscoveredDeviceCommand } from "./deleteDiscoveredDevice";
+import { DeleteIssueCommand } from "./deleteIssue";
+import { DeleteLockCommand } from "./deleteLock";
+import { DeleteMediaFileCommand } from "./deleteMediaFile";
+import { DeleteMediaSourceCommand } from "./deleteMediaSource";
+import { DeletePolicyCommand } from "./deletePolicy";
+import { DeleteReservationCommand } from "./deleteReservation";
+import { DeleteRoomCommand } from "./deleteRoom";
+import { DeleteSpaceCommand } from "./deleteSpace";
+import { DeleteSwitchCommand } from "./deleteSwitch";
+import { DeleteThermostatCommand } from "./deleteThermostat";
+import { DeleteTicketCommand } from "./deleteTicket";
+import { DeleteTimeSheetCommand } from "./deleteTimeSheet";
+import { DeleteTimeSheetTimeEntryCommand } from "./deleteTimeSheetTimeEntry";
+import { DeleteUserCommand } from "./deleteUser";
+import { DeleteUserCredentialCommand } from "./deleteUserCredential";
+import { DeleteVendorCommand } from "./deleteVendor";
+import { DeleteWindowCoveringCommand } from "./deleteWindowCovering";
+import { DescribeAlarmCommand } from "./describeAlarm";
+import { DescribeAlarmConfigCommand } from "./describeAlarmConfig";
+import { DescribeAnnouncementCommand } from "./describeAnnouncement";
+import { DescribeCameraCommand } from "./describeCamera";
+import { DescribeCategoryCommand } from "./describeCategory";
+import { DescribeCourtesyCommand } from "./describeCourtesy";
+import { DescribeDimmerCommand } from "./describeDimmer";
+import { DescribeDiscoveredDeviceCommand } from "./describeDiscoveredDevice";
+import { DescribeIssueCommand } from "./describeIssue";
+import { DescribeLockCommand } from "./describeLock";
+import { DescribeLockCredentialCommand } from "./describeLockCredential";
+import { DescribeMediaSourceCommand } from "./describeMediaSource";
+import { DescribeMyAuthCommand } from "./describeMyAuth";
+import { DescribeMyMobileKeyAppCommand } from "./describeMyMobileKeyApp";
+import { DescribeMyOrganizationCommand } from "./describeMyOrganization";
+import { DescribeMyPasskeyRegistrationsCommand } from "./describeMyPasskeyRegistrations";
+import { DescribeOrganizationCommand } from "./describeOrganization";
+import { DescribePolicyCommand } from "./describePolicy";
+import { DescribeProductCommand } from "./describeProduct";
+import { DescribePropertyCommand } from "./describeProperty";
+import { DescribeReservationCommand } from "./describeReservation";
+import { DescribeReservationEarlyCheckInProductsCommand } from "./describeReservationEarlyCheckInProducts";
+import { DescribeReservationLateCheckOutProductsCommand } from "./describeReservationLateCheckOutProducts";
+import { DescribeReservationPetProductsCommand } from "./describeReservationPetProducts";
+import { DescribeReservationPromosCommand } from "./describeReservationPromos";
+import { DescribeReservationRoomUpgradesCommand } from "./describeReservationRoomUpgrades";
+import { DescribeRoomCommand } from "./describeRoom";
+import { DescribeSOSCommand } from "./describeSOS";
+import { DescribeSelfCommand } from "./describeSelf";
+import { DescribeSpaceCommand } from "./describeSpace";
+import { DescribeSwitchCommand } from "./describeSwitch";
+import { DescribeThermostatCommand } from "./describeThermostat";
+import { DescribeTicketCommand } from "./describeTicket";
+import { DescribeTicketStatsCommand } from "./describeTicketStats";
+import { DescribeTimeSheetCommand } from "./describeTimeSheet";
+import { DescribeTimeSheetStatsCommand } from "./describeTimeSheetStats";
+import { DescribeUserCommand } from "./describeUser";
+import { DescribeVendorCommand } from "./describeVendor";
+import { DescribeWindowCoveringCommand } from "./describeWindowCovering";
+import { DiscoverReservationsCommand } from "./discoverReservations";
+import { EmailUserAccountSetupCommand } from "./emailUserAccountSetup";
+import { FinishRegisterPasskeyCommand } from "./finishRegisterPasskey";
+import { ListAlarmsCommand } from "./listAlarms";
+import { ListAnnouncementsCommand } from "./listAnnouncements";
+import { ListCamerasCommand } from "./listCameras";
+import { ListCategoriesCommand } from "./listCategories";
+import { ListCourtesyCommand } from "./listCourtesy";
+import { ListDimmersCommand } from "./listDimmers";
+import { ListDiscoveredDevicesCommand } from "./listDiscoveredDevices";
+import { ListIssuesCommand } from "./listIssues";
+import { ListLocksCommand } from "./listLocks";
+import { ListMediaSourcesCommand } from "./listMediaSources";
+import { ListMyOrdersCommand } from "./listMyOrders";
+import { ListMyPropertiesCommand } from "./listMyProperties";
+import { ListMyReservationsCommand } from "./listMyReservations";
+import { ListMySpacesCommand } from "./listMySpaces";
+import { ListMyTicketsCommand } from "./listMyTickets";
+import { ListMyTimeSheetsCommand } from "./listMyTimeSheets";
+import { ListOrdersCommand } from "./listOrders";
+import { ListOrganizationsCommand } from "./listOrganizations";
+import { ListPoliciesCommand } from "./listPolicies";
+import { ListProductsCommand } from "./listProducts";
+import { ListPropertiesCommand } from "./listProperties";
+import { ListReservationsCommand } from "./listReservations";
+import { ListRoomsCommand } from "./listRooms";
+import { ListRoomsInSpaceCommand } from "./listRoomsInSpace";
+import { ListScenesCommand } from "./listScenes";
+import { ListSpacesCommand } from "./listSpaces";
+import { ListSwitchesCommand } from "./listSwitches";
+import { ListTeamCommand } from "./listTeam";
+import { ListThermostatsCommand } from "./listThermostats";
+import { ListTicketsCommand } from "./listTickets";
+import { ListTimeSheetsCommand } from "./listTimeSheets";
+import { ListUserMobileKeysCommand } from "./listUserMobileKeys";
+import { ListUserOrdersCommand } from "./listUserOrders";
+import { ListUserReservationsCommand } from "./listUserReservations";
+import { ListUserSpacesCommand } from "./listUserSpaces";
+import { ListUsersCommand } from "./listUsers";
+import { ListVendorsCommand } from "./listVendors";
+import { ListWindowCoveringsCommand } from "./listWindowCoverings";
+import { LoginFinishCommand } from "./loginFinish";
+import { LoginStartCommand } from "./loginStart";
+import { LogoutSelfCommand } from "./logoutSelf";
+import { LogoutUserCommand } from "./logoutUser";
+import { MatchUserIdentificationCommand } from "./matchUserIdentification";
+import { OCRDocumentCommand } from "./oCRDocument";
+import { PurchaseReservationEarlyCheckInProductsCommand } from "./purchaseReservationEarlyCheckInProducts";
+import { PurchaseReservationLateCheckOutProductsCommand } from "./purchaseReservationLateCheckOutProducts";
+import { PurchaseReservationPetProductsCommand } from "./purchaseReservationPetProducts";
+import { PurchaseReservationPromosCommand } from "./purchaseReservationPromos";
+import { PurchaseReservationRoomUpgradesCommand } from "./purchaseReservationRoomUpgrades";
+import { RefreshTokenCommand } from "./refreshToken";
+import { RequestLoginTokenCommand } from "./requestLoginToken";
+import { SendCheckInSMSCommand } from "./sendCheckInSMS";
+import { SendCheckOutSMSCommand } from "./sendCheckOutSMS";
+import { SendPreArrivalEmailCommand } from "./sendPreArrivalEmail";
+import { SendPreArrivalSMSCommand } from "./sendPreArrivalSMS";
+import { SendRoomControlSMSCommand } from "./sendRoomControlSMS";
+import { SendVerificationCodeCommand } from "./sendVerificationCode";
+import { SetAlarmCommand } from "./setAlarm";
+import { SetCameraCommand } from "./setCamera";
+import { SetCourtesyCommand } from "./setCourtesy";
+import { SetDimmerCommand } from "./setDimmer";
+import { SetLockCommand } from "./setLock";
+import { SetMediaSourceCommand } from "./setMediaSource";
+import { SetRoomSceneCommand } from "./setRoomScene";
+import { SetSceneCommand } from "./setScene";
+import { SetSpaceSceneCommand } from "./setSpaceScene";
+import { SetSwitchCommand } from "./setSwitch";
+import { SetThermostatCommand } from "./setThermostat";
+import { SetWindowCoveringCommand } from "./setWindowCovering";
+import { StartRegisterPasskeyCommand } from "./startRegisterPasskey";
+import { StartSOSCommand } from "./startSOS";
+import { StopSOSCommand } from "./stopSOS";
+import { TipUserCommand } from "./tipUser";
+import { UpdateAlarmCommand } from "./updateAlarm";
+import { UpdateAnnouncementCommand } from "./updateAnnouncement";
+import { UpdateCameraCommand } from "./updateCamera";
+import { UpdateCategoryCommand } from "./updateCategory";
+import { UpdateCourtesyCommand } from "./updateCourtesy";
+import { UpdateDimmerCommand } from "./updateDimmer";
+import { UpdateDiscoveredDeviceCommand } from "./updateDiscoveredDevice";
+import { UpdateIssueCommand } from "./updateIssue";
+import { UpdateLockCommand } from "./updateLock";
+import { UpdateMediaSourceCommand } from "./updateMediaSource";
+import { UpdateMessageReadStatusCommand } from "./updateMessageReadStatus";
+import { UpdateOrganizationCommand } from "./updateOrganization";
+import { UpdatePolicyCommand } from "./updatePolicy";
+import { UpdatePropertyCommand } from "./updateProperty";
+import { UpdatePropertySettingsCommand } from "./updatePropertySettings";
+import { UpdateReservationCommand } from "./updateReservation";
+import { UpdateReservationExpectedArrivalTimeCommand } from "./updateReservationExpectedArrivalTime";
+import { UpdateRoomCommand } from "./updateRoom";
+import { UpdateSelfCommand } from "./updateSelf";
+import { UpdateSpaceCommand } from "./updateSpace";
+import { UpdateSwitchCommand } from "./updateSwitch";
+import { UpdateThermostatCommand } from "./updateThermostat";
+import { UpdateTicketCommand } from "./updateTicket";
+import { UpdateTicketStatusCommand } from "./updateTicketStatus";
+import { UpdateTimeSheetCommand } from "./updateTimeSheet";
+import { UpdateTimeSheetTimeEntryCommand } from "./updateTimeSheetTimeEntry";
+import { UpdateUserCommand } from "./updateUser";
+import { UpdateVendorCommand } from "./updateVendor";
+import { UpdateWindowCoveringCommand } from "./updateWindowCovering";
+import { UploadImageCommand } from "./uploadImage";
+import { UpsertDiscoveredDeviceCommand } from "./upsertDiscoveredDevice";
+
+// Namespace export
+export const UseCases = {
+  AssignSpaceToReservationCommand,
+  AutoAssociateDiscoveredDevicesCommand,
+  AutoCloseTicketsCommand,
+  BatchNotifyCheckInCommand,
+  BatchNotifyCheckOutCommand,
+  BatchNotifyMissedCheckOutCommand,
+  BatchNotifyPreArrivalCommand,
+  BulkUpdateIssueCommand,
+  CheckInReservationCommand,
+  CheckOutReservationCommand,
+  CheckVerificationCodeCommand,
+  CreateAlarmCommand,
+  CreateAnnouncementCommand,
+  CreateCameraCommand,
+  CreateCateoryCommand,
+  CreateCourtesyCommand,
+  CreateDefaultScenesCommand,
+  CreateDimmerCommand,
+  CreateDiscoveredDeviceCommand,
+  CreateDiscoveredDeviceAssociationCommand,
+  CreateDiscoveredDeviceAssociationMapCommand,
+  CreateImageUploadEndpointCommand,
+  CreateIssueCommand,
+  CreateLockCommand,
+  CreateMediaSourceCommand,
+  CreateOrganizationCommand,
+  CreatePolicyCommand,
+  CreatePropertyCommand,
+  CreateReservationCommand,
+  CreateRoomCommand,
+  CreateRoomInSpaceCommand,
+  CreateSceneCommand,
+  CreateSpaceCommand,
+  CreateSwitchCommand,
+  CreateThermostatCommand,
+  CreateTicketCommand,
+  CreateTicketMessageCommand,
+  CreateTimeSheetCommand,
+  CreateTimeSheetTimeEntryCommand,
+  CreateUserCommand,
+  CreateUserMobileKeyCommand,
+  CreateVendorCommand,
+  CreateWindowCoveringCommand,
+  DeleteAlarmCommand,
+  DeleteAnnouncementCommand,
+  DeleteCameraCommand,
+  DeleteCategoryCommand,
+  DeleteCourtesyCommand,
+  DeleteDimmerCommand,
+  DeleteDiscoveredDeviceCommand,
+  DeleteIssueCommand,
+  DeleteLockCommand,
+  DeleteMediaFileCommand,
+  DeleteMediaSourceCommand,
+  DeletePolicyCommand,
+  DeleteReservationCommand,
+  DeleteRoomCommand,
+  DeleteSpaceCommand,
+  DeleteSwitchCommand,
+  DeleteThermostatCommand,
+  DeleteTicketCommand,
+  DeleteTimeSheetCommand,
+  DeleteTimeSheetTimeEntryCommand,
+  DeleteUserCommand,
+  DeleteUserCredentialCommand,
+  DeleteVendorCommand,
+  DeleteWindowCoveringCommand,
+  DescribeAlarmCommand,
+  DescribeAlarmConfigCommand,
+  DescribeAnnouncementCommand,
+  DescribeCameraCommand,
+  DescribeCategoryCommand,
+  DescribeCourtesyCommand,
+  DescribeDimmerCommand,
+  DescribeDiscoveredDeviceCommand,
+  DescribeIssueCommand,
+  DescribeLockCommand,
+  DescribeLockCredentialCommand,
+  DescribeMediaSourceCommand,
+  DescribeMyAuthCommand,
+  DescribeMyMobileKeyAppCommand,
+  DescribeMyOrganizationCommand,
+  DescribeMyPasskeyRegistrationsCommand,
+  DescribeOrganizationCommand,
+  DescribePolicyCommand,
+  DescribeProductCommand,
+  DescribePropertyCommand,
+  DescribeReservationCommand,
+  DescribeReservationEarlyCheckInProductsCommand,
+  DescribeReservationLateCheckOutProductsCommand,
+  DescribeReservationPetProductsCommand,
+  DescribeReservationPromosCommand,
+  DescribeReservationRoomUpgradesCommand,
+  DescribeRoomCommand,
+  DescribeSOSCommand,
+  DescribeSelfCommand,
+  DescribeSpaceCommand,
+  DescribeSwitchCommand,
+  DescribeThermostatCommand,
+  DescribeTicketCommand,
+  DescribeTicketStatsCommand,
+  DescribeTimeSheetCommand,
+  DescribeTimeSheetStatsCommand,
+  DescribeUserCommand,
+  DescribeVendorCommand,
+  DescribeWindowCoveringCommand,
+  DiscoverReservationsCommand,
+  EmailUserAccountSetupCommand,
+  FinishRegisterPasskeyCommand,
+  ListAlarmsCommand,
+  ListAnnouncementsCommand,
+  ListCamerasCommand,
+  ListCategoriesCommand,
+  ListCourtesyCommand,
+  ListDimmersCommand,
+  ListDiscoveredDevicesCommand,
+  ListIssuesCommand,
+  ListLocksCommand,
+  ListMediaSourcesCommand,
+  ListMyOrdersCommand,
+  ListMyPropertiesCommand,
+  ListMyReservationsCommand,
+  ListMySpacesCommand,
+  ListMyTicketsCommand,
+  ListMyTimeSheetsCommand,
+  ListOrdersCommand,
+  ListOrganizationsCommand,
+  ListPoliciesCommand,
+  ListProductsCommand,
+  ListPropertiesCommand,
+  ListReservationsCommand,
+  ListRoomsCommand,
+  ListRoomsInSpaceCommand,
+  ListScenesCommand,
+  ListSpacesCommand,
+  ListSwitchesCommand,
+  ListTeamCommand,
+  ListThermostatsCommand,
+  ListTicketsCommand,
+  ListTimeSheetsCommand,
+  ListUserMobileKeysCommand,
+  ListUserOrdersCommand,
+  ListUserReservationsCommand,
+  ListUserSpacesCommand,
+  ListUsersCommand,
+  ListVendorsCommand,
+  ListWindowCoveringsCommand,
+  LoginFinishCommand,
+  LoginStartCommand,
+  LogoutSelfCommand,
+  LogoutUserCommand,
+  MatchUserIdentificationCommand,
+  OCRDocumentCommand,
+  PurchaseReservationEarlyCheckInProductsCommand,
+  PurchaseReservationLateCheckOutProductsCommand,
+  PurchaseReservationPetProductsCommand,
+  PurchaseReservationPromosCommand,
+  PurchaseReservationRoomUpgradesCommand,
+  RefreshTokenCommand,
+  RequestLoginTokenCommand,
+  SendCheckInSMSCommand,
+  SendCheckOutSMSCommand,
+  SendPreArrivalEmailCommand,
+  SendPreArrivalSMSCommand,
+  SendRoomControlSMSCommand,
+  SendVerificationCodeCommand,
+  SetAlarmCommand,
+  SetCameraCommand,
+  SetCourtesyCommand,
+  SetDimmerCommand,
+  SetLockCommand,
+  SetMediaSourceCommand,
+  SetRoomSceneCommand,
+  SetSceneCommand,
+  SetSpaceSceneCommand,
+  SetSwitchCommand,
+  SetThermostatCommand,
+  SetWindowCoveringCommand,
+  StartRegisterPasskeyCommand,
+  StartSOSCommand,
+  StopSOSCommand,
+  TipUserCommand,
+  UpdateAlarmCommand,
+  UpdateAnnouncementCommand,
+  UpdateCameraCommand,
+  UpdateCategoryCommand,
+  UpdateCourtesyCommand,
+  UpdateDimmerCommand,
+  UpdateDiscoveredDeviceCommand,
+  UpdateIssueCommand,
+  UpdateLockCommand,
+  UpdateMediaSourceCommand,
+  UpdateMessageReadStatusCommand,
+  UpdateOrganizationCommand,
+  UpdatePolicyCommand,
+  UpdatePropertyCommand,
+  UpdatePropertySettingsCommand,
+  UpdateReservationCommand,
+  UpdateReservationExpectedArrivalTimeCommand,
+  UpdateRoomCommand,
+  UpdateSelfCommand,
+  UpdateSpaceCommand,
+  UpdateSwitchCommand,
+  UpdateThermostatCommand,
+  UpdateTicketCommand,
+  UpdateTicketStatusCommand,
+  UpdateTimeSheetCommand,
+  UpdateTimeSheetTimeEntryCommand,
+  UpdateUserCommand,
+  UpdateVendorCommand,
+  UpdateWindowCoveringCommand,
+  UploadImageCommand,
+  UpsertDiscoveredDeviceCommand,
+};

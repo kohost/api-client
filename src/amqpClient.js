@@ -4,7 +4,7 @@ import dbg from "debug";
 import { Buffer } from "node:buffer";
 import * as crypto from "node:crypto";
 import { amqpExchanges as exchanges } from "./defs";
-import * as Errors from "./errors";
+import { Errors } from "./errors";
 
 const randomUUID = crypto.randomUUID;
 

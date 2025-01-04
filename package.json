@@ -11,14 +11,27 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
-    "import": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "require": {
-      "types": "./dist/index.d.cts",
-      "default": "./dist/index.cjs"
+    ".": {
+      "browser": {
+        "types": "./dist/index-browser.d.ts",
+        "import": "./dist/index-browser.js",
+        "require": "./dist/index-browser.cjs"
+      },
+      "node": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      },
+      "default": {
+        "types": "./dist/index-browser.d.ts",
+        "import": "./dist/index-browser.js",
+        "require": "./dist/index-browser.cjs"
+      }
     }
+  },
+  "browser": {
+    "./dist/index.js": "./dist/index-browser.js",
+    "./dist/index.cjs": "./dist/index-browser.cjs"
   },
   "scripts": {
     "test": "jest",
@@ -26,9 +39,10 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix ./",
     "prepare": "husky",
-    "prebuild": "npm run generate-models",
+    "prebuild": "npm run generate-models && npm run generate-barrels",
     "build": "tsup",
     "generate-models": "node scripts/generate-source-models",
+    "generate-barrels": "node scripts/generate-barrels",
     "start": "node scripts/build.js --watch",
     "clean": "rm -rf ./dist",
     "tsc": "tsc",
