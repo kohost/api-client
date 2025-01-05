@@ -9,11 +9,16 @@
     "url": "git+https://github.com/kohost/api-client.git"
   },
   "type": "module",
-  "types": "./dist/index.d.cts",
   "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "node": {
+        "types": "./dist/index.d.cts",
+        "require": "./dist/index.cjs"
+      }
+    },
     "./models": {
       "types": "./dist/models.d.ts",
-      "browser": "./dist/models.js",
       "import": "./dist/models.js",
       "require": "./dist/models.cjs"
     },

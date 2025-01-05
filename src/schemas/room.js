@@ -104,52 +104,116 @@ export default {
 };
 
 export const getters = {
+  /**
+   * Check if the room has any dimmers
+   * @returns {boolean} True if the room has dimmers, false otherwise
+   */
   hasDimmer() {
     return this.dimmers?.length > 0;
   },
+
+  /**
+   * Check if the room has any switches
+   * @returns {boolean} True if the room has switches, false otherwise
+   */
   hasSwitch() {
     return this.switches?.length > 0;
   },
+
+  /**
+   * Check if the room has any window coverings
+   * @returns {boolean} True if the room has window coverings, false otherwise
+   */
   hasWindowCovering() {
     return this.windowCoverings?.length > 0;
   },
+
+  /**
+   * Alias for hasWindowCovering
+   * @returns {boolean} True if the room has window coverings/shades, false otherwise
+   */
   hasShade() {
     return this.hasWindowCovering;
   },
+
+  /**
+   * Check if the room has any thermostats
+   * @returns {boolean} True if the room has thermostats, false otherwise
+   */
   hasThermostat() {
     return this.thermostats?.length > 0;
   },
+
+  /**
+   * Alias for hasThermostat
+   * @returns {boolean} True if the room has climate control, false otherwise
+   */
   hasClimate() {
     return this.hasThermostat;
   },
+
+  /**
+   * Check if the room has any locks
+   * @returns {boolean} True if the room has locks, false otherwise
+   */
   hasLock() {
     return this.locks?.length > 0;
   },
+
+  /**
+   * Check if the room has any courtesy devices
+   * @returns {boolean} True if the room has courtesy devices, false otherwise
+   */
   hasCourtesy() {
     return this.courtesy?.length > 0;
   },
+
+  /**
+   * Check if the room has any cameras
+   * @returns {boolean} True if the room has cameras, false otherwise
+   */
   hasCamera() {
     return this.cameras?.length > 0;
   },
+
+  /**
+   * Check if the room has any media sources
+   * @returns {boolean} True if the room has media sources, false otherwise
+   */
   hasMedia() {
     return this.mediaSources?.length > 0;
   },
+
+  /**
+   * Check if the room has any lighting devices (dimmers or switches marked as lights/fans)
+   * @returns {boolean} True if the room has lighting devices, false otherwise
+   */
   hasLight() {
     const hasDiscriminatorLight = this.switches?.some((sw) => {
       return sw.discriminator === "light" || sw.discriminator === "fan";
     });
     return this.hasDimmer || hasDiscriminatorLight;
   },
+
+  /**
+   * Check if the room is currently occupied (within the last 60 minutes)
+   * @returns {boolean} True if the room was occupied within the last hour, false otherwise
+   */
   occupied() {
     const now = new Date();
     const lastOccupied = new Date(this.occupiedAt);
-    const diff = now - lastOccupied;
-    // check if the room has been occupied in the last 60 minutes
+    const diff = now.getTime() - lastOccupied.getTime();
     return diff < 60 * 60 * 1000;
   },
 };
 
 export const statics = {
+  /**
+   * Get the device path for a given device type
+   * @param {string} type - The device type
+   * @returns {"mediaSources" | "courtesy" | "dimmers" | "thermostats" | "locks" | "windowCoverings" | "switches" | "cameras" | "motionSensors" | "alarms"} The device path
+   * @throws {Error} If the device type is invalid
+   */
   getDevicePath(type) {
     switch (type) {
       case "tv":
@@ -161,13 +225,33 @@ export const statics = {
       case "mediaSource":
         return "mediaSources";
       case "courtesy":
-        return type;
+        return "courtesy";
       case "switch":
         return "switches";
+      case "dimmer":
+        return "dimmers";
+      case "thermostat":
+        return "thermostats";
+      case "lock":
+        return "locks";
+      case "windowCovering":
+        return "windowCoverings";
+      case "camera":
+        return "cameras";
+      case "motionSensor":
+        return "motionSensors";
+      case "alarm":
+        return "alarms";
+
       default:
-        return `${type}s`;
+        throw new Error("Invalid device type:" + type);
     }
   },
+  /**
+   *
+   * @param {string} path
+   * @returns
+   */
   getDeviceTypeFromPath(path) {
     const validPaths = [
       "dimmers",

@@ -63,11 +63,26 @@ export class Room extends Entity {
       case "mediaSource":
         return "mediaSources";
       case "courtesy":
-        return type;
+        return "courtesy";
       case "switch":
         return "switches";
+      case "dimmer":
+        return "dimmers";
+      case "thermostat":
+        return "thermostats";
+      case "lock":
+        return "locks";
+      case "windowCovering":
+        return "windowCoverings";
+      case "camera":
+        return "cameras";
+      case "motionSensor":
+        return "motionSensors";
+      case "alarm":
+        return "alarms";
+
       default:
-        return `${type}s`;
+        throw new Error("Invalid device type:" + type);
     }
   }
   static getDeviceTypeFromPath(path) {
@@ -134,8 +149,7 @@ export class Room extends Entity {
   get occupied() {
     const now = new Date();
     const lastOccupied = new Date(this.occupiedAt);
-    const diff = now - lastOccupied;
-    // check if the room has been occupied in the last 60 minutes
+    const diff = now.getTime() - lastOccupied.getTime();
     return diff < 60 * 60 * 1000;
   }
 }
