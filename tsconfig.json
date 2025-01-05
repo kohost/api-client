@@ -4,6 +4,7 @@
     "allowJs": true,
     "checkJs": true,
     "declaration": true,
+    "declarationMap": true,
     "emitDeclarationOnly": true,
     "strictNullChecks": true,
     "outDir": "dist/types",
