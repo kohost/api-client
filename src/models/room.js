@@ -146,6 +146,9 @@ export class Room extends Entity {
     });
     return this.hasDimmer || hasDiscriminatorLight;
   }
+  get hasAlarm() {
+    return this.alarms?.length > 0;
+  }
   get occupied() {
     const now = new Date();
     const lastOccupied = new Date(this.occupiedAt);

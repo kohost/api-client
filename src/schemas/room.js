@@ -195,6 +195,10 @@ export const getters = {
     return this.hasDimmer || hasDiscriminatorLight;
   },
 
+  hasAlarm() {
+    return this.alarms?.length > 0;
+  },
+
   /**
    * Check if the room is currently occupied (within the last 60 minutes)
    * @returns {boolean} True if the room was occupied within the last hour, false otherwise
