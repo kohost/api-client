@@ -189,3 +189,30 @@ export default {
     },
   },
 };
+
+export const getters = {
+  fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  },
+  roles() {
+    const roles = new Set();
+    if (this.permissions) {
+      for (const permission of this.permissions) {
+        roles.add(permission.role);
+      }
+    }
+    return Array.from(roles);
+  },
+  isSuperAdmin() {
+    return this.roles.includes("SuperAdmin");
+  },
+  isAdmin() {
+    return this.roles.includes("Admin") || this.roles.includes("Administrator");
+  },
+  isManager() {
+    return this.roles.includes("Manager");
+  },
+  isUser() {
+    return this.roles.includes("User");
+  },
+};

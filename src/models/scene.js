@@ -8,10 +8,10 @@ import { validateScene as validate } from "../validators";
 export class Scene extends Entity {
   /**
    * @typedef {Object} SceneData A room represents a physical space of controllable IoT devices
-   * @property {string} [id] - Identifier of the object.
-   * @property {string} [name]
+   * @property {string} id - Identifier of the object.
+   * @property {string} name
    * @property {string} [description]
-   * @property {"scene"} [type] - Default: "scene"
+   * @property {"scene"} type - Default: "scene"
    * @property {{switches?: {id?: string, state?: ("on"|"off")}[], dimmers?: {id?: string, level?: number}[], windowCoverings?: {id?: string, position?: number}[], thermostats?: {id?: string, hvacMode?: string, setpoints?: {cool?: any, heat?: any, auto?: any}, fanMode?: string, setpointDelta?: number}[], mediaSources?: {id?: string, volume?: number, commands?: string[]}[], locks?: {id?: string, state?: ("locked"|"unlocked"), mode?: ("normal"|"autoLock"|"emergencyOpen"|"emergencyClose"|"holdOpen"|"lockdown")}[]}} [devices]
    * @property {{id?: string, state?: ("on"|"off")}[]} [devices.switches]
    * @property {{id?: string, level?: number}[]} [devices.dimmers] - Default: []
@@ -130,6 +130,7 @@ Object.defineProperty(Scene.prototype, "schema", {
       isDefault: { type: "boolean", default: false },
       showOnUi: { type: "boolean", default: true },
     },
+    required: ["id", "name", "type"],
     additionalProperties: false,
   },
 });

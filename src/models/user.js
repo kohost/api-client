@@ -75,6 +75,31 @@ export class User extends Entity {
     this.updatedAt = data.updatedAt;
     this.systems = data.systems;
   }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+  get roles() {
+    const roles = new Set();
+    if (this.permissions) {
+      for (const permission of this.permissions) {
+        roles.add(permission.role);
+      }
+    }
+    return Array.from(roles);
+  }
+  get isSuperAdmin() {
+    return this.roles.includes("SuperAdmin");
+  }
+  get isAdmin() {
+    return this.roles.includes("Admin") || this.roles.includes("Administrator");
+  }
+  get isManager() {
+    return this.roles.includes("Manager");
+  }
+  get isUser() {
+    return this.roles.includes("User");
+  }
 }
 
 Object.defineProperty(User.prototype, "schema", {

@@ -142,5 +142,6 @@ export default {
       default: true,
     },
   },
+  required: ["id", "name", "type"],
   additionalProperties: false,
 };

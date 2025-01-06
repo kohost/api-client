@@ -24889,6 +24889,7 @@ const schema209 = {
     isDefault: { type: "boolean", default: false },
     showOnUi: { type: "boolean", default: true },
   },
+  required: ["id", "name", "type"],
   additionalProperties: false,
 };
 const schema212 = { type: "string", enum: ["on", "off"] };
@@ -25131,6 +25132,51 @@ function validate89(
     if (data.showOnUi === undefined) {
       data.showOnUi = true;
     }
+    if (data.id === undefined) {
+      const err0 = {
+        instancePath,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: "id" },
+        message: "must have required property '" + "id" + "'",
+      };
+      if (vErrors === null) {
+        vErrors = [err0];
+      } else {
+        vErrors.push(err0);
+      }
+      errors++;
+    }
+    if (data.name === undefined) {
+      const err1 = {
+        instancePath,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: "name" },
+        message: "must have required property '" + "name" + "'",
+      };
+      if (vErrors === null) {
+        vErrors = [err1];
+      } else {
+        vErrors.push(err1);
+      }
+      errors++;
+    }
+    if (data.type === undefined) {
+      const err2 = {
+        instancePath,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: "type" },
+        message: "must have required property '" + "type" + "'",
+      };
+      if (vErrors === null) {
+        vErrors = [err2];
+      } else {
+        vErrors.push(err2);
+      }
+      errors++;
+    }
     for (const key0 in data) {
       if (
         !(
@@ -25143,7 +25189,7 @@ function validate89(
           key0 === "showOnUi"
         )
       ) {
-        const err0 = {
+        const err3 = {
           instancePath,
           schemaPath: "#/additionalProperties",
           keyword: "additionalProperties",
@@ -25151,9 +25197,9 @@ function validate89(
           message: "must NOT have additional properties",
         };
         if (vErrors === null) {
-          vErrors = [err0];
+          vErrors = [err3];
         } else {
-          vErrors.push(err0);
+          vErrors.push(err3);
         }
         errors++;
       }
@@ -25161,7 +25207,7 @@ function validate89(
     if (data.id !== undefined) {
       let data0 = data.id;
       if (typeof data0 !== "string") {
-        const err1 = {
+        const err4 = {
           instancePath: instancePath + "/id",
           schemaPath: "definitions.json#/definitions/id/type",
           keyword: "type",
@@ -25169,26 +25215,26 @@ function validate89(
           message: "must be string",
         };
         if (vErrors === null) {
-          vErrors = [err1];
+          vErrors = [err4];
         } else {
-          vErrors.push(err1);
+          vErrors.push(err4);
         }
         errors++;
       }
       const _errs5 = errors;
       const _errs6 = errors;
       if (!(data0 === "global" || data0 === "system")) {
-        const err2 = {};
+        const err5 = {};
         if (vErrors === null) {
-          vErrors = [err2];
+          vErrors = [err5];
         } else {
-          vErrors.push(err2);
+          vErrors.push(err5);
         }
         errors++;
       }
       var valid2 = _errs6 === errors;
       if (valid2) {
-        const err3 = {
+        const err6 = {
           instancePath: instancePath + "/id",
           schemaPath: "definitions.json#/definitions/id/not",
           keyword: "not",
@@ -25196,9 +25242,9 @@ function validate89(
           message: "must NOT be valid",
         };
         if (vErrors === null) {
-          vErrors = [err3];
+          vErrors = [err6];
         } else {
-          vErrors.push(err3);
+          vErrors.push(err6);
         }
         errors++;
       } else {
@@ -25214,7 +25260,7 @@ function validate89(
     }
     if (data.name !== undefined) {
       if (typeof data.name !== "string") {
-        const err4 = {
+        const err7 = {
           instancePath: instancePath + "/name",
           schemaPath: "#/properties/name/type",
           keyword: "type",
@@ -25222,16 +25268,16 @@ function validate89(
           message: "must be string",
         };
         if (vErrors === null) {
-          vErrors = [err4];
+          vErrors = [err7];
         } else {
-          vErrors.push(err4);
+          vErrors.push(err7);
         }
         errors++;
       }
     }
     if (data.description !== undefined) {
       if (typeof data.description !== "string") {
-        const err5 = {
+        const err8 = {
           instancePath: instancePath + "/description",
           schemaPath: "#/properties/description/type",
           keyword: "type",
@@ -25239,16 +25285,16 @@ function validate89(
           message: "must be string",
         };
         if (vErrors === null) {
-          vErrors = [err5];
+          vErrors = [err8];
         } else {
-          vErrors.push(err5);
+          vErrors.push(err8);
         }
         errors++;
       }
     }
     let data3 = data.type;
     if (typeof data3 !== "string") {
-      const err6 = {
+      const err9 = {
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/type",
         keyword: "type",
@@ -25256,14 +25302,14 @@ function validate89(
         message: "must be string",
       };
       if (vErrors === null) {
-        vErrors = [err6];
+        vErrors = [err9];
       } else {
-        vErrors.push(err6);
+        vErrors.push(err9);
       }
       errors++;
     }
     if (!(data3 === "scene")) {
-      const err7 = {
+      const err10 = {
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
@@ -25271,9 +25317,9 @@ function validate89(
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
-        vErrors = [err7];
+        vErrors = [err10];
       } else {
-        vErrors.push(err7);
+        vErrors.push(err10);
       }
       errors++;
     }
@@ -25300,7 +25346,7 @@ function validate89(
               key1 === "locks"
             )
           ) {
-            const err8 = {
+            const err11 = {
               instancePath: instancePath + "/devices",
               schemaPath: "#/properties/devices/additionalProperties",
               keyword: "additionalProperties",
@@ -25308,9 +25354,9 @@ function validate89(
               message: "must NOT have additional properties",
             };
             if (vErrors === null) {
-              vErrors = [err8];
+              vErrors = [err11];
             } else {
-              vErrors.push(err8);
+              vErrors.push(err11);
             }
             errors++;
           }
@@ -25325,7 +25371,7 @@ function validate89(
                 if (data6.id !== undefined) {
                   let data7 = data6.id;
                   if (typeof data7 !== "string") {
-                    const err9 = {
+                    const err12 = {
                       instancePath:
                         instancePath + "/devices/switches/" + i0 + "/id",
                       schemaPath: "definitions.json#/definitions/id/type",
@@ -25334,26 +25380,26 @@ function validate89(
                       message: "must be string",
                     };
                     if (vErrors === null) {
-                      vErrors = [err9];
+                      vErrors = [err12];
                     } else {
-                      vErrors.push(err9);
+                      vErrors.push(err12);
                     }
                     errors++;
                   }
                   const _errs23 = errors;
                   const _errs24 = errors;
                   if (!(data7 === "global" || data7 === "system")) {
-                    const err10 = {};
+                    const err13 = {};
                     if (vErrors === null) {
-                      vErrors = [err10];
+                      vErrors = [err13];
                     } else {
-                      vErrors.push(err10);
+                      vErrors.push(err13);
                     }
                     errors++;
                   }
                   var valid8 = _errs24 === errors;
                   if (valid8) {
-                    const err11 = {
+                    const err14 = {
                       instancePath:
                         instancePath + "/devices/switches/" + i0 + "/id",
                       schemaPath: "definitions.json#/definitions/id/not",
@@ -25362,9 +25408,9 @@ function validate89(
                       message: "must NOT be valid",
                     };
                     if (vErrors === null) {
-                      vErrors = [err11];
+                      vErrors = [err14];
                     } else {
-                      vErrors.push(err11);
+                      vErrors.push(err14);
                     }
                     errors++;
                   } else {
@@ -25381,7 +25427,7 @@ function validate89(
                 if (data6.state !== undefined) {
                   let data8 = data6.state;
                   if (typeof data8 !== "string") {
-                    const err12 = {
+                    const err15 = {
                       instancePath:
                         instancePath + "/devices/switches/" + i0 + "/state",
                       schemaPath: "switch.json#/properties/state/type",
@@ -25390,14 +25436,14 @@ function validate89(
                       message: "must be string",
                     };
                     if (vErrors === null) {
-                      vErrors = [err12];
+                      vErrors = [err15];
                     } else {
-                      vErrors.push(err12);
+                      vErrors.push(err15);
                     }
                     errors++;
                   }
                   if (!(data8 === "on" || data8 === "off")) {
-                    const err13 = {
+                    const err16 = {
                       instancePath:
                         instancePath + "/devices/switches/" + i0 + "/state",
                       schemaPath: "switch.json#/properties/state/enum",
@@ -25406,15 +25452,15 @@ function validate89(
                       message: "must be equal to one of the allowed values",
                     };
                     if (vErrors === null) {
-                      vErrors = [err13];
+                      vErrors = [err16];
                     } else {
-                      vErrors.push(err13);
+                      vErrors.push(err16);
                     }
                     errors++;
                   }
                 }
               } else {
-                const err14 = {
+                const err17 = {
                   instancePath: instancePath + "/devices/switches/" + i0,
                   schemaPath:
                     "#/properties/devices/properties/switches/items/type",
@@ -25423,15 +25469,15 @@ function validate89(
                   message: "must be object",
                 };
                 if (vErrors === null) {
-                  vErrors = [err14];
+                  vErrors = [err17];
                 } else {
-                  vErrors.push(err14);
+                  vErrors.push(err17);
                 }
                 errors++;
               }
             }
           } else {
-            const err15 = {
+            const err18 = {
               instancePath: instancePath + "/devices/switches",
               schemaPath: "#/properties/devices/properties/switches/type",
               keyword: "type",
@@ -25439,9 +25485,9 @@ function validate89(
               message: "must be array",
             };
             if (vErrors === null) {
-              vErrors = [err15];
+              vErrors = [err18];
             } else {
-              vErrors.push(err15);
+              vErrors.push(err18);
             }
             errors++;
           }
@@ -25455,7 +25501,7 @@ function validate89(
               if (data10.id !== undefined) {
                 let data11 = data10.id;
                 if (typeof data11 !== "string") {
-                  const err16 = {
+                  const err19 = {
                     instancePath:
                       instancePath + "/devices/dimmers/" + i1 + "/id",
                     schemaPath: "definitions.json#/definitions/id/type",
@@ -25464,26 +25510,26 @@ function validate89(
                     message: "must be string",
                   };
                   if (vErrors === null) {
-                    vErrors = [err16];
+                    vErrors = [err19];
                   } else {
-                    vErrors.push(err16);
+                    vErrors.push(err19);
                   }
                   errors++;
                 }
                 const _errs35 = errors;
                 const _errs36 = errors;
                 if (!(data11 === "global" || data11 === "system")) {
-                  const err17 = {};
+                  const err20 = {};
                   if (vErrors === null) {
-                    vErrors = [err17];
+                    vErrors = [err20];
                   } else {
-                    vErrors.push(err17);
+                    vErrors.push(err20);
                   }
                   errors++;
                 }
                 var valid14 = _errs36 === errors;
                 if (valid14) {
-                  const err18 = {
+                  const err21 = {
                     instancePath:
                       instancePath + "/devices/dimmers/" + i1 + "/id",
                     schemaPath: "definitions.json#/definitions/id/not",
@@ -25492,9 +25538,9 @@ function validate89(
                     message: "must NOT be valid",
                   };
                   if (vErrors === null) {
-                    vErrors = [err18];
+                    vErrors = [err21];
                   } else {
-                    vErrors.push(err18);
+                    vErrors.push(err21);
                   }
                   errors++;
                 } else {
@@ -25511,7 +25557,7 @@ function validate89(
               if (data10.level !== undefined) {
                 let data12 = data10.level;
                 if (!(typeof data12 == "number") && data12 !== null) {
-                  const err19 = {
+                  const err22 = {
                     instancePath:
                       instancePath + "/devices/dimmers/" + i1 + "/level",
                     schemaPath: "dimmer.json#/properties/level/type",
@@ -25520,15 +25566,15 @@ function validate89(
                     message: "must be number,null",
                   };
                   if (vErrors === null) {
-                    vErrors = [err19];
+                    vErrors = [err22];
                   } else {
-                    vErrors.push(err19);
+                    vErrors.push(err22);
                   }
                   errors++;
                 }
                 if (typeof data12 == "number") {
                   if (data12 > 100 || isNaN(data12)) {
-                    const err20 = {
+                    const err23 = {
                       instancePath:
                         instancePath + "/devices/dimmers/" + i1 + "/level",
                       schemaPath: "dimmer.json#/properties/level/maximum",
@@ -25537,14 +25583,14 @@ function validate89(
                       message: "must be <= 100",
                     };
                     if (vErrors === null) {
-                      vErrors = [err20];
+                      vErrors = [err23];
                     } else {
-                      vErrors.push(err20);
+                      vErrors.push(err23);
                     }
                     errors++;
                   }
                   if (data12 < 0 || isNaN(data12)) {
-                    const err21 = {
+                    const err24 = {
                       instancePath:
                         instancePath + "/devices/dimmers/" + i1 + "/level",
                       schemaPath: "dimmer.json#/properties/level/minimum",
@@ -25553,16 +25599,16 @@ function validate89(
                       message: "must be >= 0",
                     };
                     if (vErrors === null) {
-                      vErrors = [err21];
+                      vErrors = [err24];
                     } else {
-                      vErrors.push(err21);
+                      vErrors.push(err24);
                     }
                     errors++;
                   }
                 }
               }
             } else {
-              const err22 = {
+              const err25 = {
                 instancePath: instancePath + "/devices/dimmers/" + i1,
                 schemaPath:
                   "#/properties/devices/properties/dimmers/items/type",
@@ -25571,15 +25617,15 @@ function validate89(
                 message: "must be object",
               };
               if (vErrors === null) {
-                vErrors = [err22];
+                vErrors = [err25];
               } else {
-                vErrors.push(err22);
+                vErrors.push(err25);
               }
               errors++;
             }
           }
         } else {
-          const err23 = {
+          const err26 = {
             instancePath: instancePath + "/devices/dimmers",
             schemaPath: "#/properties/devices/properties/dimmers/type",
             keyword: "type",
@@ -25587,9 +25633,9 @@ function validate89(
             message: "must be array",
           };
           if (vErrors === null) {
-            vErrors = [err23];
+            vErrors = [err26];
           } else {
-            vErrors.push(err23);
+            vErrors.push(err26);
           }
           errors++;
         }
@@ -25602,7 +25648,7 @@ function validate89(
               if (data14.id !== undefined) {
                 let data15 = data14.id;
                 if (typeof data15 !== "string") {
-                  const err24 = {
+                  const err27 = {
                     instancePath:
                       instancePath + "/devices/windowCoverings/" + i2 + "/id",
                     schemaPath: "definitions.json#/definitions/id/type",
@@ -25611,26 +25657,26 @@ function validate89(
                     message: "must be string",
                   };
                   if (vErrors === null) {
-                    vErrors = [err24];
+                    vErrors = [err27];
                   } else {
-                    vErrors.push(err24);
+                    vErrors.push(err27);
                   }
                   errors++;
                 }
                 const _errs47 = errors;
                 const _errs48 = errors;
                 if (!(data15 === "global" || data15 === "system")) {
-                  const err25 = {};
+                  const err28 = {};
                   if (vErrors === null) {
-                    vErrors = [err25];
+                    vErrors = [err28];
                   } else {
-                    vErrors.push(err25);
+                    vErrors.push(err28);
                   }
                   errors++;
                 }
                 var valid20 = _errs48 === errors;
                 if (valid20) {
-                  const err26 = {
+                  const err29 = {
                     instancePath:
                       instancePath + "/devices/windowCoverings/" + i2 + "/id",
                     schemaPath: "definitions.json#/definitions/id/not",
@@ -25639,9 +25685,9 @@ function validate89(
                     message: "must NOT be valid",
                   };
                   if (vErrors === null) {
-                    vErrors = [err26];
+                    vErrors = [err29];
                   } else {
-                    vErrors.push(err26);
+                    vErrors.push(err29);
                   }
                   errors++;
                 } else {
@@ -25658,7 +25704,7 @@ function validate89(
               if (data14.position !== undefined) {
                 let data16 = data14.position;
                 if (!(typeof data16 == "number") && data16 !== null) {
-                  const err27 = {
+                  const err30 = {
                     instancePath:
                       instancePath +
                       "/devices/windowCoverings/" +
@@ -25670,15 +25716,15 @@ function validate89(
                     message: "must be number,null",
                   };
                   if (vErrors === null) {
-                    vErrors = [err27];
+                    vErrors = [err30];
                   } else {
-                    vErrors.push(err27);
+                    vErrors.push(err30);
                   }
                   errors++;
                 }
                 if (typeof data16 == "number") {
                   if (data16 > 100 || isNaN(data16)) {
-                    const err28 = {
+                    const err31 = {
                       instancePath:
                         instancePath +
                         "/devices/windowCoverings/" +
@@ -25691,14 +25737,14 @@ function validate89(
                       message: "must be <= 100",
                     };
                     if (vErrors === null) {
-                      vErrors = [err28];
+                      vErrors = [err31];
                     } else {
-                      vErrors.push(err28);
+                      vErrors.push(err31);
                     }
                     errors++;
                   }
                   if (data16 < 0 || isNaN(data16)) {
-                    const err29 = {
+                    const err32 = {
                       instancePath:
                         instancePath +
                         "/devices/windowCoverings/" +
@@ -25711,16 +25757,16 @@ function validate89(
                       message: "must be >= 0",
                     };
                     if (vErrors === null) {
-                      vErrors = [err29];
+                      vErrors = [err32];
                     } else {
-                      vErrors.push(err29);
+                      vErrors.push(err32);
                     }
                     errors++;
                   }
                 }
               }
             } else {
-              const err30 = {
+              const err33 = {
                 instancePath: instancePath + "/devices/windowCoverings/" + i2,
                 schemaPath:
                   "#/properties/devices/properties/windowCoverings/items/type",
@@ -25729,15 +25775,15 @@ function validate89(
                 message: "must be object",
               };
               if (vErrors === null) {
-                vErrors = [err30];
+                vErrors = [err33];
               } else {
-                vErrors.push(err30);
+                vErrors.push(err33);
               }
               errors++;
             }
           }
         } else {
-          const err31 = {
+          const err34 = {
             instancePath: instancePath + "/devices/windowCoverings",
             schemaPath: "#/properties/devices/properties/windowCoverings/type",
             keyword: "type",
@@ -25745,9 +25791,9 @@ function validate89(
             message: "must be array",
           };
           if (vErrors === null) {
-            vErrors = [err31];
+            vErrors = [err34];
           } else {
-            vErrors.push(err31);
+            vErrors.push(err34);
           }
           errors++;
         }
@@ -25760,7 +25806,7 @@ function validate89(
               if (data18.id !== undefined) {
                 let data19 = data18.id;
                 if (typeof data19 !== "string") {
-                  const err32 = {
+                  const err35 = {
                     instancePath:
                       instancePath + "/devices/thermostats/" + i3 + "/id",
                     schemaPath: "definitions.json#/definitions/id/type",
@@ -25769,26 +25815,26 @@ function validate89(
                     message: "must be string",
                   };
                   if (vErrors === null) {
-                    vErrors = [err32];
+                    vErrors = [err35];
                   } else {
-                    vErrors.push(err32);
+                    vErrors.push(err35);
                   }
                   errors++;
                 }
                 const _errs59 = errors;
                 const _errs60 = errors;
                 if (!(data19 === "global" || data19 === "system")) {
-                  const err33 = {};
+                  const err36 = {};
                   if (vErrors === null) {
-                    vErrors = [err33];
+                    vErrors = [err36];
                   } else {
-                    vErrors.push(err33);
+                    vErrors.push(err36);
                   }
                   errors++;
                 }
                 var valid26 = _errs60 === errors;
                 if (valid26) {
-                  const err34 = {
+                  const err37 = {
                     instancePath:
                       instancePath + "/devices/thermostats/" + i3 + "/id",
                     schemaPath: "definitions.json#/definitions/id/not",
@@ -25797,9 +25843,9 @@ function validate89(
                     message: "must NOT be valid",
                   };
                   if (vErrors === null) {
-                    vErrors = [err34];
+                    vErrors = [err37];
                   } else {
-                    vErrors.push(err34);
+                    vErrors.push(err37);
                   }
                   errors++;
                 } else {
@@ -25869,7 +25915,7 @@ function validate89(
               }
               if (data18.setpointDelta !== undefined) {
                 if (!(typeof data18.setpointDelta == "number")) {
-                  const err35 = {
+                  const err38 = {
                     instancePath:
                       instancePath +
                       "/devices/thermostats/" +
@@ -25882,15 +25928,15 @@ function validate89(
                     message: "must be number",
                   };
                   if (vErrors === null) {
-                    vErrors = [err35];
+                    vErrors = [err38];
                   } else {
-                    vErrors.push(err35);
+                    vErrors.push(err38);
                   }
                   errors++;
                 }
               }
             } else {
-              const err36 = {
+              const err39 = {
                 instancePath: instancePath + "/devices/thermostats/" + i3,
                 schemaPath:
                   "#/properties/devices/properties/thermostats/items/type",
@@ -25899,15 +25945,15 @@ function validate89(
                 message: "must be object",
               };
               if (vErrors === null) {
-                vErrors = [err36];
+                vErrors = [err39];
               } else {
-                vErrors.push(err36);
+                vErrors.push(err39);
               }
               errors++;
             }
           }
         } else {
-          const err37 = {
+          const err40 = {
             instancePath: instancePath + "/devices/thermostats",
             schemaPath: "#/properties/devices/properties/thermostats/type",
             keyword: "type",
@@ -25915,9 +25961,9 @@ function validate89(
             message: "must be array",
           };
           if (vErrors === null) {
-            vErrors = [err37];
+            vErrors = [err40];
           } else {
-            vErrors.push(err37);
+            vErrors.push(err40);
           }
           errors++;
         }
@@ -25935,7 +25981,7 @@ function validate89(
                 if (data25.id !== undefined) {
                   let data26 = data25.id;
                   if (typeof data26 !== "string") {
-                    const err38 = {
+                    const err41 = {
                       instancePath:
                         instancePath + "/devices/mediaSources/" + i4 + "/id",
                       schemaPath: "definitions.json#/definitions/id/type",
@@ -25944,26 +25990,26 @@ function validate89(
                       message: "must be string",
                     };
                     if (vErrors === null) {
-                      vErrors = [err38];
+                      vErrors = [err41];
                     } else {
-                      vErrors.push(err38);
+                      vErrors.push(err41);
                     }
                     errors++;
                   }
                   const _errs73 = errors;
                   const _errs74 = errors;
                   if (!(data26 === "global" || data26 === "system")) {
-                    const err39 = {};
+                    const err42 = {};
                     if (vErrors === null) {
-                      vErrors = [err39];
+                      vErrors = [err42];
                     } else {
-                      vErrors.push(err39);
+                      vErrors.push(err42);
                     }
                     errors++;
                   }
                   var valid31 = _errs74 === errors;
                   if (valid31) {
-                    const err40 = {
+                    const err43 = {
                       instancePath:
                         instancePath + "/devices/mediaSources/" + i4 + "/id",
                       schemaPath: "definitions.json#/definitions/id/not",
@@ -25972,9 +26018,9 @@ function validate89(
                       message: "must NOT be valid",
                     };
                     if (vErrors === null) {
-                      vErrors = [err40];
+                      vErrors = [err43];
                     } else {
-                      vErrors.push(err40);
+                      vErrors.push(err43);
                     }
                     errors++;
                   } else {
@@ -25992,7 +26038,7 @@ function validate89(
                   let data27 = data25.volume;
                   if (typeof data27 == "number") {
                     if (data27 > 100 || isNaN(data27)) {
-                      const err41 = {
+                      const err44 = {
                         instancePath:
                           instancePath +
                           "/devices/mediaSources/" +
@@ -26005,14 +26051,14 @@ function validate89(
                         message: "must be <= 100",
                       };
                       if (vErrors === null) {
-                        vErrors = [err41];
+                        vErrors = [err44];
                       } else {
-                        vErrors.push(err41);
+                        vErrors.push(err44);
                       }
                       errors++;
                     }
                     if (data27 < 0 || isNaN(data27)) {
-                      const err42 = {
+                      const err45 = {
                         instancePath:
                           instancePath +
                           "/devices/mediaSources/" +
@@ -26025,14 +26071,14 @@ function validate89(
                         message: "must be >= 0",
                       };
                       if (vErrors === null) {
-                        vErrors = [err42];
+                        vErrors = [err45];
                       } else {
-                        vErrors.push(err42);
+                        vErrors.push(err45);
                       }
                       errors++;
                     }
                   } else {
-                    const err43 = {
+                    const err46 = {
                       instancePath:
                         instancePath +
                         "/devices/mediaSources/" +
@@ -26045,9 +26091,9 @@ function validate89(
                       message: "must be number",
                     };
                     if (vErrors === null) {
-                      vErrors = [err43];
+                      vErrors = [err46];
                     } else {
-                      vErrors.push(err43);
+                      vErrors.push(err46);
                     }
                     errors++;
                   }
@@ -26058,7 +26104,7 @@ function validate89(
                     const len5 = data28.length;
                     for (let i5 = 0; i5 < len5; i5++) {
                       if (typeof data28[i5] !== "string") {
-                        const err44 = {
+                        const err47 = {
                           instancePath:
                             instancePath +
                             "/devices/mediaSources/" +
@@ -26072,15 +26118,15 @@ function validate89(
                           message: "must be string",
                         };
                         if (vErrors === null) {
-                          vErrors = [err44];
+                          vErrors = [err47];
                         } else {
-                          vErrors.push(err44);
+                          vErrors.push(err47);
                         }
                         errors++;
                       }
                     }
                   } else {
-                    const err45 = {
+                    const err48 = {
                       instancePath:
                         instancePath +
                         "/devices/mediaSources/" +
@@ -26093,15 +26139,15 @@ function validate89(
                       message: "must be array",
                     };
                     if (vErrors === null) {
-                      vErrors = [err45];
+                      vErrors = [err48];
                     } else {
-                      vErrors.push(err45);
+                      vErrors.push(err48);
                     }
                     errors++;
                   }
                 }
               } else {
-                const err46 = {
+                const err49 = {
                   instancePath: instancePath + "/devices/mediaSources/" + i4,
                   schemaPath:
                     "#/properties/devices/properties/mediaSources/items/type",
@@ -26110,15 +26156,15 @@ function validate89(
                   message: "must be object",
                 };
                 if (vErrors === null) {
-                  vErrors = [err46];
+                  vErrors = [err49];
                 } else {
-                  vErrors.push(err46);
+                  vErrors.push(err49);
                 }
                 errors++;
               }
             }
           } else {
-            const err47 = {
+            const err50 = {
               instancePath: instancePath + "/devices/mediaSources",
               schemaPath: "#/properties/devices/properties/mediaSources/type",
               keyword: "type",
@@ -26126,9 +26172,9 @@ function validate89(
               message: "must be array",
             };
             if (vErrors === null) {
-              vErrors = [err47];
+              vErrors = [err50];
             } else {
-              vErrors.push(err47);
+              vErrors.push(err50);
             }
             errors++;
           }
@@ -26147,7 +26193,7 @@ function validate89(
                 if (data31.id !== undefined) {
                   let data32 = data31.id;
                   if (typeof data32 !== "string") {
-                    const err48 = {
+                    const err51 = {
                       instancePath:
                         instancePath + "/devices/locks/" + i6 + "/id",
                       schemaPath: "definitions.json#/definitions/id/type",
@@ -26156,26 +26202,26 @@ function validate89(
                       message: "must be string",
                     };
                     if (vErrors === null) {
-                      vErrors = [err48];
+                      vErrors = [err51];
                     } else {
-                      vErrors.push(err48);
+                      vErrors.push(err51);
                     }
                     errors++;
                   }
                   const _errs88 = errors;
                   const _errs89 = errors;
                   if (!(data32 === "global" || data32 === "system")) {
-                    const err49 = {};
+                    const err52 = {};
                     if (vErrors === null) {
-                      vErrors = [err49];
+                      vErrors = [err52];
                     } else {
-                      vErrors.push(err49);
+                      vErrors.push(err52);
                     }
                     errors++;
                   }
                   var valid38 = _errs89 === errors;
                   if (valid38) {
-                    const err50 = {
+                    const err53 = {
                       instancePath:
                         instancePath + "/devices/locks/" + i6 + "/id",
                       schemaPath: "definitions.json#/definitions/id/not",
@@ -26184,9 +26230,9 @@ function validate89(
                       message: "must NOT be valid",
                     };
                     if (vErrors === null) {
-                      vErrors = [err50];
+                      vErrors = [err53];
                     } else {
-                      vErrors.push(err50);
+                      vErrors.push(err53);
                     }
                     errors++;
                   } else {
@@ -26203,7 +26249,7 @@ function validate89(
                 if (data31.state !== undefined) {
                   let data33 = data31.state;
                   if (typeof data33 !== "string" && data33 !== null) {
-                    const err51 = {
+                    const err54 = {
                       instancePath:
                         instancePath + "/devices/locks/" + i6 + "/state",
                       schemaPath: "lock.json#/properties/state/type",
@@ -26212,9 +26258,9 @@ function validate89(
                       message: "must be string,null",
                     };
                     if (vErrors === null) {
-                      vErrors = [err51];
+                      vErrors = [err54];
                     } else {
-                      vErrors.push(err51);
+                      vErrors.push(err54);
                     }
                     errors++;
                   }
@@ -26225,7 +26271,7 @@ function validate89(
                       data33 === null
                     )
                   ) {
-                    const err52 = {
+                    const err55 = {
                       instancePath:
                         instancePath + "/devices/locks/" + i6 + "/state",
                       schemaPath: "lock.json#/properties/state/enum",
@@ -26234,9 +26280,9 @@ function validate89(
                       message: "must be equal to one of the allowed values",
                     };
                     if (vErrors === null) {
-                      vErrors = [err52];
+                      vErrors = [err55];
                     } else {
-                      vErrors.push(err52);
+                      vErrors.push(err55);
                     }
                     errors++;
                   }
@@ -26244,7 +26290,7 @@ function validate89(
                 if (data31.mode !== undefined) {
                   let data34 = data31.mode;
                   if (typeof data34 !== "string" && data34 !== null) {
-                    const err53 = {
+                    const err56 = {
                       instancePath:
                         instancePath + "/devices/locks/" + i6 + "/mode",
                       schemaPath: "lock.json#/properties/mode/type",
@@ -26253,9 +26299,9 @@ function validate89(
                       message: "must be string,null",
                     };
                     if (vErrors === null) {
-                      vErrors = [err53];
+                      vErrors = [err56];
                     } else {
-                      vErrors.push(err53);
+                      vErrors.push(err56);
                     }
                     errors++;
                   }
@@ -26270,7 +26316,7 @@ function validate89(
                       data34 === null
                     )
                   ) {
-                    const err54 = {
+                    const err57 = {
                       instancePath:
                         instancePath + "/devices/locks/" + i6 + "/mode",
                       schemaPath: "lock.json#/properties/mode/enum",
@@ -26279,15 +26325,15 @@ function validate89(
                       message: "must be equal to one of the allowed values",
                     };
                     if (vErrors === null) {
-                      vErrors = [err54];
+                      vErrors = [err57];
                     } else {
-                      vErrors.push(err54);
+                      vErrors.push(err57);
                     }
                     errors++;
                   }
                 }
               } else {
-                const err55 = {
+                const err58 = {
                   instancePath: instancePath + "/devices/locks/" + i6,
                   schemaPath:
                     "#/properties/devices/properties/locks/items/type",
@@ -26296,15 +26342,15 @@ function validate89(
                   message: "must be object",
                 };
                 if (vErrors === null) {
-                  vErrors = [err55];
+                  vErrors = [err58];
                 } else {
-                  vErrors.push(err55);
+                  vErrors.push(err58);
                 }
                 errors++;
               }
             }
           } else {
-            const err56 = {
+            const err59 = {
               instancePath: instancePath + "/devices/locks",
               schemaPath: "#/properties/devices/properties/locks/type",
               keyword: "type",
@@ -26312,15 +26358,15 @@ function validate89(
               message: "must be array",
             };
             if (vErrors === null) {
-              vErrors = [err56];
+              vErrors = [err59];
             } else {
-              vErrors.push(err56);
+              vErrors.push(err59);
             }
             errors++;
           }
         }
       } else {
-        const err57 = {
+        const err60 = {
           instancePath: instancePath + "/devices",
           schemaPath: "#/properties/devices/type",
           keyword: "type",
@@ -26328,15 +26374,15 @@ function validate89(
           message: "must be object",
         };
         if (vErrors === null) {
-          vErrors = [err57];
+          vErrors = [err60];
         } else {
-          vErrors.push(err57);
+          vErrors.push(err60);
         }
         errors++;
       }
     }
     if (typeof data.isDefault !== "boolean") {
-      const err58 = {
+      const err61 = {
         instancePath: instancePath + "/isDefault",
         schemaPath: "#/properties/isDefault/type",
         keyword: "type",
@@ -26344,14 +26390,14 @@ function validate89(
         message: "must be boolean",
       };
       if (vErrors === null) {
-        vErrors = [err58];
+        vErrors = [err61];
       } else {
-        vErrors.push(err58);
+        vErrors.push(err61);
       }
       errors++;
     }
     if (typeof data.showOnUi !== "boolean") {
-      const err59 = {
+      const err62 = {
         instancePath: instancePath + "/showOnUi",
         schemaPath: "#/properties/showOnUi/type",
         keyword: "type",
@@ -26359,14 +26405,14 @@ function validate89(
         message: "must be boolean",
       };
       if (vErrors === null) {
-        vErrors = [err59];
+        vErrors = [err62];
       } else {
-        vErrors.push(err59);
+        vErrors.push(err62);
       }
       errors++;
     }
   } else {
-    const err60 = {
+    const err63 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -26374,9 +26420,9 @@ function validate89(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err60];
+      vErrors = [err63];
     } else {
-      vErrors.push(err60);
+      vErrors.push(err63);
     }
     errors++;
   }
