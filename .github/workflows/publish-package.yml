@@ -43,7 +43,6 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run build
-      - run: npm run tsc
       # check if package.json version matches release tag
       - run: |
           result="v$(jq -r .version package.json)"
