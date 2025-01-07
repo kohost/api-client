@@ -231,6 +231,7 @@ export class KohostHTTPClient {
     if (typeof config.headers !== "object") {
       config.headers = {};
     }
+    console.log(this.baseUrl);
     const url = new URL(config.url, this.baseUrl);
 
     if (config.params) {
