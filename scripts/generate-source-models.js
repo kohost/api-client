@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Ajv } from "ajv";
 import addFormats from "ajv-formats";
 import standaloneCode from "ajv/dist/standalone/index.js";
