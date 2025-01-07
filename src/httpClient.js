@@ -1,5 +1,3 @@
-/* Add Use Cases Here */
-import axios from "axios";
 import { RefreshTokenCommand } from "./useCases/refreshToken";
 
 export class KohostHTTPClient {
@@ -11,8 +9,8 @@ export class KohostHTTPClient {
   @param {String} options.organizationId - The organization ID
   @param {String} options.propertyId - The property ID
   @param {String} options.url - The base URL for the API endpint
-  @param {Object} options.headers - Additional headers to send with each request
   @param {String} options.apiKey - The API key to use for requests
+   @param {Headers} options.headers - Additional headers to send with each request
   @param {Function} options.onSuccess - A callback to handle successful responses
   @param {Function} options.onError - A callback to handle errors
   */
@@ -22,7 +20,10 @@ export class KohostHTTPClient {
       propertyId: "",
       organizationId: "",
       apiKey: "",
-      headers: {},
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      }),
       onSuccess: (response) => response,
       onError: (error) => error,
     },
@@ -42,17 +43,19 @@ export class KohostHTTPClient {
       },
     };
 
+    this.baseUrl = options.url;
+    this.headers = new Headers(config.headers);
+
     if (options.apiKey) {
-      config.headers[KohostHTTPClient.defs.apiKeyHeader] = options.apiKey;
+      this.headers.set(KohostHTTPClient.defs.apiKeyHeader, options.apiKey);
     }
 
     if (options.propertyId) {
-      config.headers[KohostHTTPClient.defs.propertyHeader] = options.propertyId;
+      this.propertyId = options.propertyId;
     }
 
     if (options.organizationId) {
-      config.headers[KohostHTTPClient.defs.organizationHeader] =
-        options.organizationId;
+      this.organizationId = options.organizationId;
     }
 
     this.#onSuccess = options.onSuccess
@@ -61,12 +64,7 @@ export class KohostHTTPClient {
 
     this.#onError = options.onError ? options.onError : (error) => error;
 
-    this._http = axios.create(config);
-
-    this._http.interceptors.response.use(
-      this.#handleResponse.bind(this),
-      this.#handleResponseError.bind(this),
-    );
+    this.fetch = fetch;
 
     this.callbacks = {};
   }
@@ -101,12 +99,12 @@ export class KohostHTTPClient {
    */
   set organizationId(orgId) {
     const key = KohostHTTPClient.defs.organizationHeader;
-    this._http.defaults.headers.common[key] = orgId;
+    this.headers.set(key, orgId);
   }
 
   get organizationId() {
     const key = KohostHTTPClient.defs.organizationHeader;
-    return this._http.defaults.headers.common[key];
+    return this.headers.get(key);
   }
 
   /**
@@ -119,12 +117,12 @@ export class KohostHTTPClient {
 
   set propertyId(propertyId) {
     const key = KohostHTTPClient.defs.propertyHeader;
-    this._http.defaults.headers.common[key] = propertyId;
+    this.headers.set(key, propertyId);
   }
 
   get propertyId() {
     const key = KohostHTTPClient.defs.propertyHeader;
-    return this._http.defaults.headers.common[key];
+    return this.headers.get(key);
   }
 
   static get defs() {
@@ -136,12 +134,85 @@ export class KohostHTTPClient {
   }
 
   /**
-   * @typedef {typeof import('./useCases')} Command
+   * @typedef {keyof typeof import('./useCases')} CommandName
+   * @typedef {import('./useCases')[CommandName]} Command
+   *
    * @param {Command} command
    */
-  send(command) {
+  async send(command) {
     const commandConfig = command.config;
-    return this._http(commandConfig);
+    const request = this.createRequest(commandConfig);
+    const response = await this.fetch(request);
+
+    const responseData =
+      response.headers.get("Content-Type") === "application/json"
+        ? await response.json()
+        : response;
+
+    if (!response.ok) {
+      let error = responseData?.error || new Error(response.statusText);
+
+      const status = response.status;
+      const errorType = responseData.error?.type;
+      const errorMessage = responseData?.error?.message;
+
+      try {
+        const expectedError = status >= 400 && status < 500;
+        const newTokensNeeded =
+          expectedError && errorType === "TokenExpiredError";
+
+        if (
+          expectedError &&
+          errorMessage === "Phone Verification is required"
+        ) {
+          this.#onPhoneVerificationRequired();
+          return Promise.reject(error);
+        }
+
+        if (expectedError && errorMessage === "Login Required") {
+          this.#onLoginRequired();
+          return Promise.reject(error);
+        }
+
+        if (
+          expectedError &&
+          errorMessage === "No auth header or cookie provided"
+        ) {
+          this.#onLoginRequired();
+          return Promise.reject(error);
+        }
+
+        if (expectedError && newTokensNeeded) {
+          while (!this.isRefreshingToken) {
+            this.isRefreshingToken = true;
+            return this.send(
+              new RefreshTokenCommand({
+                data: commandConfig.data,
+                query: commandConfig.params,
+                headers: commandConfig.headers,
+              }),
+            )
+              .then(() => {
+                // retry the original request with the new token
+                this.isRefreshingToken = false;
+                return this.fetch(request.clone());
+              })
+              .catch((err) => {
+                this.isRefreshingToken = false;
+                return Promise.reject(err);
+              });
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
+      error = this.#onError(error);
+
+      return Promise.reject(error);
+    }
+
+    return this.#onSuccess(responseData);
   }
 
   #onLoginRequired() {
@@ -152,81 +223,40 @@ export class KohostHTTPClient {
     this.emit("PhoneVerificationRequired");
   }
 
-  #handleResponse(response) {
-    try {
-      if (response?.data?.data) {
-        response.query = response.data.query;
-        response.pagination = response.data.pagination;
-        response.data = response.data.data;
-      }
-
-      response = this.#onSuccess(response);
-
-      return response;
-    } catch (error) {
-      return Promise.reject(error);
+  /**
+   * @param {Command} config
+   * @returns {Request}
+   */
+  createRequest(config) {
+    if (typeof config.headers !== "object") {
+      config.headers = {};
     }
-  }
+    const url = new URL(config.url, this.baseUrl);
 
-  #handleResponseError(error) {
-    const { config: originalReq } = error;
-    if (!error.response) return Promise.reject(error);
-    const { status, data } = error.response;
-    const errorType = data?.error?.type;
-    const errorMessage = data?.error?.message;
-
-    try {
-      const expectedError = status >= 400 && status < 500;
-      const newTokensNeeded =
-        expectedError && errorType === "TokenExpiredError";
-
-      if (expectedError && errorMessage === "Phone Verification is required") {
-        this.#onPhoneVerificationRequired();
-        return Promise.reject(error);
-      }
-
-      if (expectedError && errorMessage === "Login Required") {
-        this.#onLoginRequired();
-        return Promise.reject(error);
-      }
-
-      if (
-        expectedError &&
-        errorMessage === "No auth header or cookie provided"
-      ) {
-        this.#onLoginRequired();
-        return Promise.reject(error);
-      }
-
-      if (expectedError && newTokensNeeded) {
-        while (!this.isRefreshingToken) {
-          this.isRefreshingToken = true;
-          return this.send(
-            new RefreshTokenCommand({
-              data: originalReq.data,
-              query: originalReq.params,
-              headers: originalReq.headers,
-            }),
-          )
-            .then(() => {
-              // retry the original request with the new token
-              this.isRefreshingToken = false;
-              return this._http(originalReq);
-            })
-            .catch((err) => {
-              this.isRefreshingToken = false;
-              return Promise.reject(err);
-            });
-        }
-      }
-    } catch (error) {
-      console.log(error);
+    if (config.params) {
+      Object.keys(config.params).forEach((key) => {
+        url.searchParams.append(key, config.params[key]);
+      });
     }
 
-    error = this.#onError(error);
+    const headers = new Headers({
+      ...this.headers,
+      ...config.headers,
+    });
 
-    return Promise.reject(error);
+    const body = ["POST", "PUT", "PATCH"].includes(config.method)
+      ? headers.get("Content-Type") === "application/json"
+        ? JSON.stringify(config.data)
+        : config.data
+      : undefined;
+
+    const request = new Request(url, {
+      method: config.method,
+      headers: headers,
+      credentials: "include",
+      body: body,
+    });
+
+    return request;
   }
 }
-
-/* Add Use Case Methods Here */
