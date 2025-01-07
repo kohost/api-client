@@ -1,23 +1,12 @@
-const Models = require("./Models");
-const Errors = require("./Errors");
-const Commands = require("./Commands");
-const Events = require("./Events");
-const defs = require("./defs");
-const utils = require("./utils");
-const Client = require("./Client");
-const SocketIoClient = require("./SocketIoClient");
-const AMQPClient = require("./AMQPClient");
+export { KohostAMQPClient as AMQPClient } from "./amqpClient";
+export { KohostHTTPClient as Client } from "./httpClient";
+export { KohostSocketIoClient as SocketIoClient } from "./socketIoClient";
 
-const Kohost = {
-  Models,
-  Errors,
-  Commands,
-  Events,
-  Client,
-  SocketIoClient,
-  AMQPClient,
-  defs,
-  utils,
-};
+export * as Commands from "./commands";
+export * as Errors from "./errors";
+export * as Events from "./events";
+export * as Models from "./models";
+export * as UseCases from "./useCases";
 
-module.exports = Kohost;
+export * as defs from "./defs";
+export * as utils from "./utils";

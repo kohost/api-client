@@ -1,0 +1,48 @@
+export default {
+  $schema: "http://json-schema.org/draft-07/schema",
+  $id: "courtesy.json",
+  title: "Courtesy",
+  description: "Any smart courtesy system",
+  type: "object",
+  properties: {
+    id: {
+      $ref: "definitions.json#/definitions/id",
+    },
+    name: {
+      type: "string",
+    },
+    type: {
+      $ref: "definitions.json#/definitions/type",
+    },
+    supportedNotifications: {
+      $ref: "definitions.json#/definitions/supportedNotifications",
+    },
+    notification: {
+      $ref: "definitions.json#/definitions/notification",
+    },
+    driver: {
+      $ref: "definitions.json#/definitions/driver",
+    },
+    offline: {
+      type: "boolean",
+    },
+    supportedStates: {
+      type: "array",
+      uniqueItems: true,
+      items: {
+        enum: ["privacy", "service", "none"],
+      },
+    },
+    state: {
+      type: "string",
+      $ref: "#/properties/supportedStates/items",
+    },
+    systemId: {
+      $ref: "definitions.json#/definitions/systemId",
+    },
+    watts: {
+      $ref: "definitions.json#/definitions/watts",
+    },
+  },
+  required: ["id", "type", "driver", "supportedStates", "state"],
+};
