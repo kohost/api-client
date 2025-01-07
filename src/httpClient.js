@@ -8,7 +8,7 @@ export class KohostHTTPClient {
   @param {Object} options - The options to create the client
   @param {String} options.organizationId - The organization ID
   @param {String} options.propertyId - The property ID
-  @param {String} options.url - The base URL for the API endpint
+  @param {String | URL} options.url - The base URL for the API endpint
   @param {String} options.apiKey - The API key to use for requests
    @param {Headers} options.headers - Additional headers to send with each request
   @param {Function} options.onSuccess - A callback to handle successful responses
@@ -20,31 +20,22 @@ export class KohostHTTPClient {
       propertyId: "",
       organizationId: "",
       apiKey: "",
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      }),
+      headers: new Headers({}),
       onSuccess: (response) => response,
       onError: (error) => error,
     },
   ) {
     if (!options.url) throw new Error("options.url is required");
     this.options = options;
-    this.isRefreshingToken = false;
 
-    const config = {
-      baseURL: options.url,
-      responseType: "json",
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        ...options.headers,
-      },
-    };
+    this.isAuthTokenRenewalActive = false;
 
-    this.baseUrl = options.url;
-    this.headers = new Headers(config.headers);
+    this.baseUrl = new URL(options.url);
+    this.headers = new Headers({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      ...options.headers,
+    });
 
     if (options.apiKey) {
       this.headers.set(KohostHTTPClient.defs.apiKeyHeader, options.apiKey);
@@ -63,8 +54,6 @@ export class KohostHTTPClient {
       : (response) => response;
 
     this.#onError = options.onError ? options.onError : (error) => error;
-
-    this.fetch = fetch;
 
     this.callbacks = {};
   }
@@ -142,7 +131,7 @@ export class KohostHTTPClient {
   async send(command) {
     const commandConfig = command.config;
     const request = this.createRequest(commandConfig);
-    const response = await this.fetch(request);
+    const response = await fetch(request);
 
     const responseData =
       response.headers.get("Content-Type") === "application/json"
@@ -183,8 +172,8 @@ export class KohostHTTPClient {
         }
 
         if (expectedError && newTokensNeeded) {
-          while (!this.isRefreshingToken) {
-            this.isRefreshingToken = true;
+          while (!this.isAuthTokenRenewalActive) {
+            this.isAuthTokenRenewalActive = true;
             return this.send(
               new RefreshTokenCommand({
                 data: commandConfig.data,
@@ -194,11 +183,11 @@ export class KohostHTTPClient {
             )
               .then(() => {
                 // retry the original request with the new token
-                this.isRefreshingToken = false;
-                return this.fetch(request.clone());
+                this.isAuthTokenRenewalActive = false;
+                return fetch(request.clone());
               })
               .catch((err) => {
-                this.isRefreshingToken = false;
+                this.isAuthTokenRenewalActive = false;
                 return Promise.reject(err);
               });
           }
@@ -231,8 +220,14 @@ export class KohostHTTPClient {
     if (typeof config.headers !== "object") {
       config.headers = {};
     }
-    console.log(this.baseUrl);
-    const url = new URL(config.url, this.baseUrl);
+
+    let apiPath = config.url;
+
+    if (apiPath.startsWith("/")) {
+      apiPath = `.${apiPath}`;
+    }
+    const url = new URL(apiPath, this.baseUrl);
+    const method = config.method.toUpperCase() || "GET";
 
     if (config.params) {
       Object.keys(config.params).forEach((key) => {
@@ -240,19 +235,22 @@ export class KohostHTTPClient {
       });
     }
 
-    const headers = new Headers({
-      ...this.headers,
-      ...config.headers,
-    });
+    const headers = new Headers(this.headers);
+    // Add any additional headers
+    if (config.headers) {
+      Object.keys(config.headers).forEach((key) => {
+        headers.set(key, config.headers[key]);
+      });
+    }
 
-    const body = ["POST", "PUT", "PATCH"].includes(config.method)
+    const body = ["POST", "PUT", "PATCH"].includes(method)
       ? headers.get("Content-Type") === "application/json"
         ? JSON.stringify(config.data)
         : config.data
       : undefined;
 
     const request = new Request(url, {
-      method: config.method,
+      method: method,
       headers: headers,
       credentials: "include",
       body: body,
