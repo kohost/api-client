@@ -1,6 +1,6 @@
 import { Event } from "./event";
 
-export class SystemSwitchUpdate extends Event {
+export class SystemSwitchUpdated extends Event {
   constructor(_switch, context) {
     super(_switch, context);
   }

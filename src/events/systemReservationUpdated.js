@@ -1,6 +1,6 @@
 import { Event } from "./event";
 
-export class SystemReservationUpdate extends Event {
+export class SystemReservationUpdated extends Event {
   constructor(reservation, context) {
     super(reservation, context);
   }

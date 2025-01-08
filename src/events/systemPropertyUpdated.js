@@ -1,6 +1,6 @@
 import { Event } from "./event";
 
-export class SystemPropertyUpdate extends Event {
+export class SystemPropertyUpdated extends Event {
   constructor(property, context) {
     super(property, context);
   }

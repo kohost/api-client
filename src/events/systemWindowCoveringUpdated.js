@@ -1,6 +1,6 @@
 import { Event } from "./event";
 
-export class SystemWindowCoveringUpdate extends Event {
+export class SystemWindowCoveringUpdated extends Event {
   constructor(wc, context) {
     super(wc, context);
   }
