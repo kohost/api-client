@@ -133,10 +133,11 @@ export class KohostHTTPClient {
     const request = this.createRequest(commandConfig);
     const response = await fetch(request);
 
-    const responseData =
-      response.headers.get("Content-Type") === "application/json"
-        ? await response.json()
-        : response;
+    const isJsonResponse =
+      response.headers.get("Content-Type")?.includes("application/json") ||
+      false;
+
+    const responseData = isJsonResponse ? await response.json() : response.body;
 
     if (!response.ok) {
       let error = responseData?.error || new Error(response.statusText);
@@ -193,7 +194,7 @@ export class KohostHTTPClient {
           }
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
 
       error = this.#onError(error);
@@ -229,9 +230,41 @@ export class KohostHTTPClient {
     const url = new URL(apiPath, this.baseUrl);
     const method = config.method.toUpperCase() || "GET";
 
-    if (config.params) {
-      Object.keys(config.params).forEach((key) => {
-        url.searchParams.append(key, config.params[key]);
+    // Add parameters to URL if they exist
+    if (config.params && typeof config.params === "object") {
+      Object.entries(config.params).forEach(([key, value]) => {
+        // Handle array values
+        if (Array.isArray(value)) {
+          value.forEach((item) => {
+            if (typeof item === "object" && item !== null) {
+              Object.entries(item).forEach(([itemKey, itemValue]) => {
+                url.searchParams.append(`${key}[][${itemKey}]`, itemValue);
+              });
+            } else {
+              url.searchParams.append(`${key}[]`, item);
+            }
+          });
+        }
+        // Handle null/undefined
+        else if (value === null || value === undefined) {
+          url.searchParams.append(key, "");
+        }
+        // Handle nested objects
+        else if (typeof value === "object") {
+          Object.entries(value).forEach(([nestedKey, nestedValue]) => {
+            if (Array.isArray(nestedValue)) {
+              nestedValue.forEach((item) => {
+                url.searchParams.append(`${key}[${nestedKey}][]`, item);
+              });
+            } else {
+              url.searchParams.append(`${key}[${nestedKey}]`, nestedValue);
+            }
+          });
+        }
+        // Handle primitive values
+        else {
+          url.searchParams.append(key, value);
+        }
       });
     }
 

@@ -76,6 +76,10 @@ export class KohostSocketIoClient {
     }
   }
 
+  listeners(event) {
+    return this.callbacks[event] || [];
+  }
+
   connect() {
     this.socket.connect();
   }
@@ -109,9 +113,5 @@ export class KohostSocketIoClient {
     this.disconnect();
     this.socket.removeAllListeners();
     this.socket = null;
-  }
-
-  listeners(event) {
-    return this.socket.listeners(event);
   }
 }

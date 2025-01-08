@@ -23,6 +23,7 @@ export default defineConfig([
     target: "es2022",
     platform: "neutral",
     globalName: "kohost",
+    keepNames: true,
   },
   //node build
   {
@@ -35,5 +36,6 @@ export default defineConfig([
     target: "node20",
     platform: "node",
     globalName: "kohost",
+    keepNames: true,
   },
 ]);
