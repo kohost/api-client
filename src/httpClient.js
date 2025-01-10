@@ -276,11 +276,12 @@ export class KohostHTTPClient {
       });
     }
 
-    const body = ["POST", "PUT", "PATCH"].includes(method)
-      ? headers.get("Content-Type") === "application/json"
-        ? JSON.stringify(config.data)
-        : config.data
-      : undefined;
+    const body =
+      config.data !== null && ["POST", "PUT", "PATCH"].includes(method)
+        ? headers.get("Content-Type") === "application/json"
+          ? JSON.stringify(config.data)
+          : config.data
+        : undefined;
 
     const request = new Request(url, {
       method: method,
