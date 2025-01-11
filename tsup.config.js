@@ -23,7 +23,11 @@ export default defineConfig([
     target: "es2022",
     platform: "neutral",
     globalName: "kohost",
-    keepNames: true,
+    minify: "terser",
+    terserOptions: {
+      keep_fnames: true,
+      keep_classnames: true,
+    },
   },
   //node build
   {

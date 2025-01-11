@@ -45,6 +45,7 @@ Promise.all(schemaModules).then(async (modules) => {
       es5: false,
       esm: true,
       lines: true,
+      optimize: true,
     },
   });
 
