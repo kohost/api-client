@@ -18,6 +18,10 @@ export class Courtesy extends Entity {
    * @property {any} state
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
    * @property {number} [watts]
+   * @property {string} [icon]
+   * @property {string} [modelNumber]
+   * @property {string} [serialNumber]
+   * @property {string} [firmwareVersion]
    */
 
   /**
@@ -37,6 +41,10 @@ export class Courtesy extends Entity {
     this.state = data.state;
     this.systemId = data.systemId;
     this.watts = data.watts;
+    this.icon = data.icon;
+    this.modelNumber = data.modelNumber;
+    this.serialNumber = data.serialNumber;
+    this.firmwareVersion = data.firmwareVersion;
   }
 }
 
@@ -65,6 +73,10 @@ Object.defineProperty(Courtesy.prototype, "schema", {
       state: { type: "string", $ref: "#/properties/supportedStates/items" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
       watts: { $ref: "definitions.json#/definitions/watts" },
+      icon: { type: "string" },
+      modelNumber: { type: "string" },
+      serialNumber: { type: "string" },
+      firmwareVersion: { type: "string" },
     },
     required: ["id", "type", "driver", "supportedStates", "state"],
   },

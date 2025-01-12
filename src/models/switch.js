@@ -18,6 +18,10 @@ export class Switch extends Entity {
    * @property {("on"|"off")} state
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
    * @property {number} [watts]
+   * @property {string} [icon]
+   * @property {string} [modelNumber]
+   * @property {string} [serialNumber]
+   * @property {string} [firmwareVersion]
    */
 
   /**
@@ -37,6 +41,10 @@ export class Switch extends Entity {
     this.state = data.state;
     this.systemId = data.systemId;
     this.watts = data.watts;
+    this.icon = data.icon;
+    this.modelNumber = data.modelNumber;
+    this.serialNumber = data.serialNumber;
+    this.firmwareVersion = data.firmwareVersion;
   }
 }
 
@@ -61,6 +69,10 @@ Object.defineProperty(Switch.prototype, "schema", {
       state: { type: "string", enum: ["on", "off"] },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
       watts: { $ref: "definitions.json#/definitions/watts" },
+      icon: { type: "string" },
+      modelNumber: { type: "string" },
+      serialNumber: { type: "string" },
+      firmwareVersion: { type: "string" },
     },
     required: ["id", "type", "state", "driver"],
   },

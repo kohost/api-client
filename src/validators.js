@@ -54,6 +54,10 @@ const schema11 = {
       description: "Reflects whether console chime is enabled",
     },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
     address: { $ref: "definitions.json#/definitions/address" },
   },
   required: ["id", "type", "areas", "zones", "driver"],
@@ -1136,87 +1140,83 @@ function validate10(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err36 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err36];
+        } else {
+          vErrors.push(err36);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err37 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err37];
+        } else {
+          vErrors.push(err37);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err38 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err38];
+        } else {
+          vErrors.push(err38);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err39 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err39];
+        } else {
+          vErrors.push(err39);
+        }
+        errors++;
+      }
+    }
     if (data.address !== undefined) {
-      let data22 = data.address;
-      if (data22 && typeof data22 == "object" && !Array.isArray(data22)) {
-        if (data22.id !== undefined) {
-          if (typeof data22.id !== "string") {
-            const err36 = {
+      let data26 = data.address;
+      if (data26 && typeof data26 == "object" && !Array.isArray(data26)) {
+        if (data26.id !== undefined) {
+          if (typeof data26.id !== "string") {
+            const err40 = {
               instancePath: instancePath + "/address/id",
               schemaPath:
                 "definitions.json#/definitions/address/properties/id/type",
-              keyword: "type",
-              params: { type: "string" },
-              message: "must be string",
-            };
-            if (vErrors === null) {
-              vErrors = [err36];
-            } else {
-              vErrors.push(err36);
-            }
-            errors++;
-          }
-        }
-        if (data22.line1 !== undefined) {
-          if (typeof data22.line1 !== "string") {
-            const err37 = {
-              instancePath: instancePath + "/address/line1",
-              schemaPath:
-                "definitions.json#/definitions/address/properties/line1/type",
-              keyword: "type",
-              params: { type: "string" },
-              message: "must be string",
-            };
-            if (vErrors === null) {
-              vErrors = [err37];
-            } else {
-              vErrors.push(err37);
-            }
-            errors++;
-          }
-        }
-        if (data22.line2 !== undefined) {
-          if (typeof data22.line2 !== "string") {
-            const err38 = {
-              instancePath: instancePath + "/address/line2",
-              schemaPath:
-                "definitions.json#/definitions/address/properties/line2/type",
-              keyword: "type",
-              params: { type: "string" },
-              message: "must be string",
-            };
-            if (vErrors === null) {
-              vErrors = [err38];
-            } else {
-              vErrors.push(err38);
-            }
-            errors++;
-          }
-        }
-        if (data22.line3 !== undefined) {
-          if (typeof data22.line3 !== "string") {
-            const err39 = {
-              instancePath: instancePath + "/address/line3",
-              schemaPath:
-                "definitions.json#/definitions/address/properties/line3/type",
-              keyword: "type",
-              params: { type: "string" },
-              message: "must be string",
-            };
-            if (vErrors === null) {
-              vErrors = [err39];
-            } else {
-              vErrors.push(err39);
-            }
-            errors++;
-          }
-        }
-        if (data22.city !== undefined) {
-          if (typeof data22.city !== "string") {
-            const err40 = {
-              instancePath: instancePath + "/address/city",
-              schemaPath:
-                "definitions.json#/definitions/address/properties/city/type",
               keyword: "type",
               params: { type: "string" },
               message: "must be string",
@@ -1229,12 +1229,12 @@ function validate10(
             errors++;
           }
         }
-        if (data22.state !== undefined) {
-          if (typeof data22.state !== "string") {
+        if (data26.line1 !== undefined) {
+          if (typeof data26.line1 !== "string") {
             const err41 = {
-              instancePath: instancePath + "/address/state",
+              instancePath: instancePath + "/address/line1",
               schemaPath:
-                "definitions.json#/definitions/address/properties/state/type",
+                "definitions.json#/definitions/address/properties/line1/type",
               keyword: "type",
               params: { type: "string" },
               message: "must be string",
@@ -1247,12 +1247,12 @@ function validate10(
             errors++;
           }
         }
-        if (data22.postalCode !== undefined) {
-          if (typeof data22.postalCode !== "string") {
+        if (data26.line2 !== undefined) {
+          if (typeof data26.line2 !== "string") {
             const err42 = {
-              instancePath: instancePath + "/address/postalCode",
+              instancePath: instancePath + "/address/line2",
               schemaPath:
-                "definitions.json#/definitions/address/properties/postalCode/type",
+                "definitions.json#/definitions/address/properties/line2/type",
               keyword: "type",
               params: { type: "string" },
               message: "must be string",
@@ -1265,46 +1265,48 @@ function validate10(
             errors++;
           }
         }
-        if (data22.countryCode !== undefined) {
-          let data30 = data22.countryCode;
-          if (typeof data30 === "string") {
-            if (func3(data30) > 2) {
-              const err43 = {
-                instancePath: instancePath + "/address/countryCode",
-                schemaPath:
-                  "definitions.json#/definitions/address/properties/countryCode/maxLength",
-                keyword: "maxLength",
-                params: { limit: 2 },
-                message: "must NOT have more than 2 characters",
-              };
-              if (vErrors === null) {
-                vErrors = [err43];
-              } else {
-                vErrors.push(err43);
-              }
-              errors++;
-            }
-            if (func3(data30) < 2) {
-              const err44 = {
-                instancePath: instancePath + "/address/countryCode",
-                schemaPath:
-                  "definitions.json#/definitions/address/properties/countryCode/minLength",
-                keyword: "minLength",
-                params: { limit: 2 },
-                message: "must NOT have fewer than 2 characters",
-              };
-              if (vErrors === null) {
-                vErrors = [err44];
-              } else {
-                vErrors.push(err44);
-              }
-              errors++;
-            }
-          } else {
-            const err45 = {
-              instancePath: instancePath + "/address/countryCode",
+        if (data26.line3 !== undefined) {
+          if (typeof data26.line3 !== "string") {
+            const err43 = {
+              instancePath: instancePath + "/address/line3",
               schemaPath:
-                "definitions.json#/definitions/address/properties/countryCode/type",
+                "definitions.json#/definitions/address/properties/line3/type",
+              keyword: "type",
+              params: { type: "string" },
+              message: "must be string",
+            };
+            if (vErrors === null) {
+              vErrors = [err43];
+            } else {
+              vErrors.push(err43);
+            }
+            errors++;
+          }
+        }
+        if (data26.city !== undefined) {
+          if (typeof data26.city !== "string") {
+            const err44 = {
+              instancePath: instancePath + "/address/city",
+              schemaPath:
+                "definitions.json#/definitions/address/properties/city/type",
+              keyword: "type",
+              params: { type: "string" },
+              message: "must be string",
+            };
+            if (vErrors === null) {
+              vErrors = [err44];
+            } else {
+              vErrors.push(err44);
+            }
+            errors++;
+          }
+        }
+        if (data26.state !== undefined) {
+          if (typeof data26.state !== "string") {
+            const err45 = {
+              instancePath: instancePath + "/address/state",
+              schemaPath:
+                "definitions.json#/definitions/address/properties/state/type",
               keyword: "type",
               params: { type: "string" },
               message: "must be string",
@@ -1317,8 +1319,78 @@ function validate10(
             errors++;
           }
         }
+        if (data26.postalCode !== undefined) {
+          if (typeof data26.postalCode !== "string") {
+            const err46 = {
+              instancePath: instancePath + "/address/postalCode",
+              schemaPath:
+                "definitions.json#/definitions/address/properties/postalCode/type",
+              keyword: "type",
+              params: { type: "string" },
+              message: "must be string",
+            };
+            if (vErrors === null) {
+              vErrors = [err46];
+            } else {
+              vErrors.push(err46);
+            }
+            errors++;
+          }
+        }
+        if (data26.countryCode !== undefined) {
+          let data34 = data26.countryCode;
+          if (typeof data34 === "string") {
+            if (func3(data34) > 2) {
+              const err47 = {
+                instancePath: instancePath + "/address/countryCode",
+                schemaPath:
+                  "definitions.json#/definitions/address/properties/countryCode/maxLength",
+                keyword: "maxLength",
+                params: { limit: 2 },
+                message: "must NOT have more than 2 characters",
+              };
+              if (vErrors === null) {
+                vErrors = [err47];
+              } else {
+                vErrors.push(err47);
+              }
+              errors++;
+            }
+            if (func3(data34) < 2) {
+              const err48 = {
+                instancePath: instancePath + "/address/countryCode",
+                schemaPath:
+                  "definitions.json#/definitions/address/properties/countryCode/minLength",
+                keyword: "minLength",
+                params: { limit: 2 },
+                message: "must NOT have fewer than 2 characters",
+              };
+              if (vErrors === null) {
+                vErrors = [err48];
+              } else {
+                vErrors.push(err48);
+              }
+              errors++;
+            }
+          } else {
+            const err49 = {
+              instancePath: instancePath + "/address/countryCode",
+              schemaPath:
+                "definitions.json#/definitions/address/properties/countryCode/type",
+              keyword: "type",
+              params: { type: "string" },
+              message: "must be string",
+            };
+            if (vErrors === null) {
+              vErrors = [err49];
+            } else {
+              vErrors.push(err49);
+            }
+            errors++;
+          }
+        }
       } else {
-        const err46 = {
+        const err50 = {
           instancePath: instancePath + "/address",
           schemaPath: "definitions.json#/definitions/address/type",
           keyword: "type",
@@ -1326,15 +1398,15 @@ function validate10(
           message: "must be object",
         };
         if (vErrors === null) {
-          vErrors = [err46];
+          vErrors = [err50];
         } else {
-          vErrors.push(err46);
+          vErrors.push(err50);
         }
         errors++;
       }
     }
   } else {
-    const err47 = {
+    const err51 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -1342,9 +1414,9 @@ function validate10(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err47];
+      vErrors = [err51];
     } else {
-      vErrors.push(err47);
+      vErrors.push(err51);
     }
     errors++;
   }
@@ -2345,6 +2417,10 @@ const schema29 = {
     },
     systemId: { $ref: "definitions.json#/definitions/systemId" },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
   },
   additionalProperties: false,
   required: ["id", "type", "driver"],
@@ -3356,8 +3432,76 @@ function validate17(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err38 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err38];
+        } else {
+          vErrors.push(err38);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err39 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err39];
+        } else {
+          vErrors.push(err39);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err40 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err40];
+        } else {
+          vErrors.push(err40);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err41 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err41];
+        } else {
+          vErrors.push(err41);
+        }
+        errors++;
+      }
+    }
   } else {
-    const err38 = {
+    const err42 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -3365,9 +3509,9 @@ function validate17(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err38];
+      vErrors = [err42];
     } else {
-      vErrors.push(err38);
+      vErrors.push(err42);
     }
     errors++;
   }
@@ -3799,6 +3943,10 @@ const schema42 = {
     state: { type: "string", $ref: "#/properties/supportedStates/items" },
     systemId: { $ref: "definitions.json#/definitions/systemId" },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
   },
   required: ["id", "type", "driver", "supportedStates", "state"],
 };
@@ -4528,8 +4676,76 @@ function validate22(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err25 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err25];
+        } else {
+          vErrors.push(err25);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err26 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err26];
+        } else {
+          vErrors.push(err26);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err27 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err27];
+        } else {
+          vErrors.push(err27);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err28 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err28];
+        } else {
+          vErrors.push(err28);
+        }
+        errors++;
+      }
+    }
   } else {
-    const err25 = {
+    const err29 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -4537,9 +4753,9 @@ function validate22(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err25];
+      vErrors = [err29];
     } else {
-      vErrors.push(err25);
+      vErrors.push(err29);
     }
     errors++;
   }
@@ -5227,6 +5443,10 @@ const schema58 = {
     level: { type: ["number", "null"], minimum: 0, maximum: 100 },
     systemId: { $ref: "definitions.json#/definitions/systemId" },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
   },
   required: ["id", "type", "level", "driver"],
 };
@@ -5884,8 +6104,76 @@ function validate27(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err22 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err22];
+        } else {
+          vErrors.push(err22);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err23 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err23];
+        } else {
+          vErrors.push(err23);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err24 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err24];
+        } else {
+          vErrors.push(err24);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err25 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err25];
+        } else {
+          vErrors.push(err25);
+        }
+        errors++;
+      }
+    }
   } else {
-    const err22 = {
+    const err26 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -5893,9 +6181,9 @@ function validate27(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err22];
+      vErrors = [err26];
     } else {
-      vErrors.push(err22);
+      vErrors.push(err26);
     }
     errors++;
   }
@@ -8577,6 +8865,10 @@ const schema86 = {
     systemId: { $ref: "definitions.json#/definitions/systemId" },
     driver: { $ref: "definitions.json#/definitions/driver" },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
   },
   required: ["id", "type", "status", "driver"],
 };
@@ -9167,8 +9459,76 @@ function validate34(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err18 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err18];
+        } else {
+          vErrors.push(err18);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err19 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err19];
+        } else {
+          vErrors.push(err19);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err20 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err20];
+        } else {
+          vErrors.push(err20);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err21 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err21];
+        } else {
+          vErrors.push(err21);
+        }
+        errors++;
+      }
+    }
   } else {
-    const err18 = {
+    const err22 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -9176,9 +9536,9 @@ function validate34(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err18];
+      vErrors = [err22];
     } else {
-      vErrors.push(err18);
+      vErrors.push(err22);
     }
     errors++;
   }
@@ -10092,6 +10452,10 @@ const schema110 = {
     batteryLevel: { $ref: "definitions.json#/definitions/batteryLevel" },
     systemId: { $ref: "definitions.json#/definitions/systemId" },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
   },
   required: ["id", "type", "state", "driver"],
 };
@@ -10905,8 +11269,76 @@ function validate45(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err29 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err29];
+        } else {
+          vErrors.push(err29);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err30 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err30];
+        } else {
+          vErrors.push(err30);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err31 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err31];
+        } else {
+          vErrors.push(err31);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err32 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err32];
+        } else {
+          vErrors.push(err32);
+        }
+        errors++;
+      }
+    }
   } else {
-    const err29 = {
+    const err33 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -10914,9 +11346,9 @@ function validate45(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err29];
+      vErrors = [err33];
     } else {
-      vErrors.push(err29);
+      vErrors.push(err33);
     }
     errors++;
   }
@@ -11763,6 +12195,10 @@ const schema121 = {
     notification: { $ref: "definitions.json#/definitions/notification" },
     systemId: { $ref: "definitions.json#/definitions/systemId" },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
   },
   additionalProperties: false,
 };
@@ -13101,8 +13537,76 @@ function validate49(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err55 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err55];
+        } else {
+          vErrors.push(err55);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err56 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err56];
+        } else {
+          vErrors.push(err56);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err57 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err57];
+        } else {
+          vErrors.push(err57);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err58 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err58];
+        } else {
+          vErrors.push(err58);
+        }
+        errors++;
+      }
+    }
   } else {
-    const err55 = {
+    const err59 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -13110,9 +13614,9 @@ function validate49(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err55];
+      vErrors = [err59];
     } else {
-      vErrors.push(err55);
+      vErrors.push(err59);
     }
     errors++;
   }
@@ -13137,6 +13641,10 @@ const schema132 = {
     },
     notification: { $ref: "definitions.json#/definitions/notification" },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
   },
   additionalProperties: false,
   required: ["id", "type", "driver"],
@@ -13340,17 +13848,7 @@ function validate52(
       errors++;
     }
     for (const key0 in data) {
-      if (
-        !(
-          key0 === "id" ||
-          key0 === "type" ||
-          key0 === "driver" ||
-          key0 === "systemId" ||
-          key0 === "supportedNotifications" ||
-          key0 === "notification" ||
-          key0 === "watts"
-        )
-      ) {
+      if (!func5.call(schema132.properties, key0)) {
         const err3 = {
           instancePath,
           schemaPath: "#/additionalProperties",
@@ -13723,8 +14221,76 @@ function validate52(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err17 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err17];
+        } else {
+          vErrors.push(err17);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err18 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err18];
+        } else {
+          vErrors.push(err18);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err19 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err19];
+        } else {
+          vErrors.push(err19);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err20 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err20];
+        } else {
+          vErrors.push(err20);
+        }
+        errors++;
+      }
+    }
   } else {
-    const err17 = {
+    const err21 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -13732,9 +14298,9 @@ function validate52(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err17];
+      vErrors = [err21];
     } else {
-      vErrors.push(err17);
+      vErrors.push(err21);
     }
     errors++;
   }
@@ -21694,6 +22260,10 @@ const schema172 = {
     state: { type: "string", enum: ["on", "off"] },
     systemId: { $ref: "definitions.json#/definitions/systemId" },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
   },
   required: ["id", "type", "state", "driver"],
 };
@@ -22367,8 +22937,76 @@ function validate68(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err23 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err23];
+        } else {
+          vErrors.push(err23);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err24 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err24];
+        } else {
+          vErrors.push(err24);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err25 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err25];
+        } else {
+          vErrors.push(err25);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err26 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err26];
+        } else {
+          vErrors.push(err26);
+        }
+        errors++;
+      }
+    }
   } else {
-    const err23 = {
+    const err27 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -22376,9 +23014,9 @@ function validate68(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err23];
+      vErrors = [err27];
     } else {
-      vErrors.push(err23);
+      vErrors.push(err27);
     }
     errors++;
   }
@@ -22448,6 +23086,10 @@ const schema181 = {
     batteryLevel: { $ref: "definitions.json#/definitions/batteryLevel" },
     systemId: { $ref: "definitions.json#/definitions/systemId" },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
   },
   $defs: {
     setpoint: {
@@ -24015,8 +24657,76 @@ function validate72(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err55 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err55];
+        } else {
+          vErrors.push(err55);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err56 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err56];
+        } else {
+          vErrors.push(err56);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err57 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err57];
+        } else {
+          vErrors.push(err57);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err58 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err58];
+        } else {
+          vErrors.push(err58);
+        }
+        errors++;
+      }
+    }
   } else {
-    const err55 = {
+    const err59 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -24024,9 +24734,9 @@ function validate72(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err55];
+      vErrors = [err59];
     } else {
-      vErrors.push(err55);
+      vErrors.push(err59);
     }
     errors++;
   }
@@ -24061,6 +24771,10 @@ const schema198 = {
     position: { type: ["number", "null"], minimum: 0, maximum: 100 },
     systemId: { $ref: "definitions.json#/definitions/systemId" },
     watts: { $ref: "definitions.json#/definitions/watts" },
+    icon: { type: "string" },
+    modelNumber: { type: "string" },
+    serialNumber: { type: "string" },
+    firmwareVersion: { type: "string" },
   },
   required: ["id", "type", "position", "driver"],
 };
@@ -24753,8 +25467,76 @@ function validate81(
         errors++;
       }
     }
+    if (data.icon !== undefined) {
+      if (typeof data.icon !== "string") {
+        const err24 = {
+          instancePath: instancePath + "/icon",
+          schemaPath: "#/properties/icon/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err24];
+        } else {
+          vErrors.push(err24);
+        }
+        errors++;
+      }
+    }
+    if (data.modelNumber !== undefined) {
+      if (typeof data.modelNumber !== "string") {
+        const err25 = {
+          instancePath: instancePath + "/modelNumber",
+          schemaPath: "#/properties/modelNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err25];
+        } else {
+          vErrors.push(err25);
+        }
+        errors++;
+      }
+    }
+    if (data.serialNumber !== undefined) {
+      if (typeof data.serialNumber !== "string") {
+        const err26 = {
+          instancePath: instancePath + "/serialNumber",
+          schemaPath: "#/properties/serialNumber/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err26];
+        } else {
+          vErrors.push(err26);
+        }
+        errors++;
+      }
+    }
+    if (data.firmwareVersion !== undefined) {
+      if (typeof data.firmwareVersion !== "string") {
+        const err27 = {
+          instancePath: instancePath + "/firmwareVersion",
+          schemaPath: "#/properties/firmwareVersion/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err27];
+        } else {
+          vErrors.push(err27);
+        }
+        errors++;
+      }
+    }
   } else {
-    const err24 = {
+    const err28 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -24762,9 +25544,9 @@ function validate81(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err24];
+      vErrors = [err28];
     } else {
-      vErrors.push(err24);
+      vErrors.push(err28);
     }
     errors++;
   }

@@ -14,6 +14,10 @@ export class MotionSensor extends Entity {
    * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
    * @property {{name?: string, timestamp?: number, description?: string}} [notification]
    * @property {number} [watts]
+   * @property {string} [icon]
+   * @property {string} [modelNumber]
+   * @property {string} [serialNumber]
+   * @property {string} [firmwareVersion]
    */
 
   /**
@@ -29,6 +33,10 @@ export class MotionSensor extends Entity {
     this.supportedNotifications = data.supportedNotifications;
     this.notification = data.notification;
     this.watts = data.watts;
+    this.icon = data.icon;
+    this.modelNumber = data.modelNumber;
+    this.serialNumber = data.serialNumber;
+    this.firmwareVersion = data.firmwareVersion;
   }
 }
 
@@ -49,6 +57,10 @@ Object.defineProperty(MotionSensor.prototype, "schema", {
       },
       notification: { $ref: "definitions.json#/definitions/notification" },
       watts: { $ref: "definitions.json#/definitions/watts" },
+      icon: { type: "string" },
+      modelNumber: { type: "string" },
+      serialNumber: { type: "string" },
+      firmwareVersion: { type: "string" },
     },
     additionalProperties: false,
     required: ["id", "type", "driver"],

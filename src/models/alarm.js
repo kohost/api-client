@@ -19,6 +19,10 @@ export class Alarm extends Entity {
    * @property {{number?: number, name?: string, secure?: boolean, bypassed?: boolean}[]} zones
    * @property {boolean} [chime] - Reflects whether console chime is enabled
    * @property {number} [watts]
+   * @property {string} [icon]
+   * @property {string} [modelNumber]
+   * @property {string} [serialNumber]
+   * @property {string} [firmwareVersion]
    * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
    */
 
@@ -40,6 +44,10 @@ export class Alarm extends Entity {
     this.zones = data.zones;
     this.chime = data.chime;
     this.watts = data.watts;
+    this.icon = data.icon;
+    this.modelNumber = data.modelNumber;
+    this.serialNumber = data.serialNumber;
+    this.firmwareVersion = data.firmwareVersion;
     this.address = data.address;
   }
 }
@@ -95,6 +103,10 @@ Object.defineProperty(Alarm.prototype, "schema", {
         description: "Reflects whether console chime is enabled",
       },
       watts: { $ref: "definitions.json#/definitions/watts" },
+      icon: { type: "string" },
+      modelNumber: { type: "string" },
+      serialNumber: { type: "string" },
+      firmwareVersion: { type: "string" },
       address: { $ref: "definitions.json#/definitions/address" },
     },
     required: ["id", "type", "areas", "zones", "driver"],

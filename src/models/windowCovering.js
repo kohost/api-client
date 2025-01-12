@@ -18,6 +18,10 @@ export class WindowCovering extends Entity {
    * @property {number} position
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
    * @property {number} [watts]
+   * @property {string} [icon]
+   * @property {string} [modelNumber]
+   * @property {string} [serialNumber]
+   * @property {string} [firmwareVersion]
    */
 
   /**
@@ -37,6 +41,10 @@ export class WindowCovering extends Entity {
     this.position = data.position;
     this.systemId = data.systemId;
     this.watts = data.watts;
+    this.icon = data.icon;
+    this.modelNumber = data.modelNumber;
+    this.serialNumber = data.serialNumber;
+    this.firmwareVersion = data.firmwareVersion;
   }
 }
 
@@ -68,6 +76,10 @@ Object.defineProperty(WindowCovering.prototype, "schema", {
       position: { type: ["number", "null"], minimum: 0, maximum: 100 },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
       watts: { $ref: "definitions.json#/definitions/watts" },
+      icon: { type: "string" },
+      modelNumber: { type: "string" },
+      serialNumber: { type: "string" },
+      firmwareVersion: { type: "string" },
     },
     required: ["id", "type", "position", "driver"],
   },

@@ -33,6 +33,10 @@ export class Thermostat extends Entity {
    * @property {number} [batteryLevel]
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
    * @property {number} [watts]
+   * @property {string} [icon]
+   * @property {string} [modelNumber]
+   * @property {string} [serialNumber]
+   * @property {string} [firmwareVersion]
    */
 
   /**
@@ -64,6 +68,10 @@ export class Thermostat extends Entity {
     this.batteryLevel = data.batteryLevel;
     this.systemId = data.systemId;
     this.watts = data.watts;
+    this.icon = data.icon;
+    this.modelNumber = data.modelNumber;
+    this.serialNumber = data.serialNumber;
+    this.firmwareVersion = data.firmwareVersion;
   }
 }
 
@@ -136,6 +144,10 @@ Object.defineProperty(Thermostat.prototype, "schema", {
       batteryLevel: { $ref: "definitions.json#/definitions/batteryLevel" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
       watts: { $ref: "definitions.json#/definitions/watts" },
+      icon: { type: "string" },
+      modelNumber: { type: "string" },
+      serialNumber: { type: "string" },
+      firmwareVersion: { type: "string" },
     },
     $defs: {
       setpoint: {

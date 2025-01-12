@@ -31,6 +31,10 @@ export class Camera extends Entity {
    * @property {string} [liveStream.previewImage] - Source to preview the camera stream
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
    * @property {number} [watts]
+   * @property {string} [icon]
+   * @property {string} [modelNumber]
+   * @property {string} [serialNumber]
+   * @property {string} [firmwareVersion]
    */
 
   /**
@@ -50,6 +54,10 @@ export class Camera extends Entity {
     this.liveStream = data.liveStream;
     this.systemId = data.systemId;
     this.watts = data.watts;
+    this.icon = data.icon;
+    this.modelNumber = data.modelNumber;
+    this.serialNumber = data.serialNumber;
+    this.firmwareVersion = data.firmwareVersion;
   }
 }
 
@@ -116,6 +124,10 @@ Object.defineProperty(Camera.prototype, "schema", {
       },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
       watts: { $ref: "definitions.json#/definitions/watts" },
+      icon: { type: "string" },
+      modelNumber: { type: "string" },
+      serialNumber: { type: "string" },
+      firmwareVersion: { type: "string" },
     },
     additionalProperties: false,
     required: ["id", "type", "driver"],

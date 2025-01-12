@@ -32,6 +32,10 @@ export class MediaSource extends Entity {
    * @property {{name?: string, timestamp?: number, description?: string}} [notification]
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
    * @property {number} [watts]
+   * @property {string} [icon]
+   * @property {string} [modelNumber]
+   * @property {string} [serialNumber]
+   * @property {string} [firmwareVersion]
    */
 
   /**
@@ -65,6 +69,10 @@ export class MediaSource extends Entity {
     this.notification = data.notification;
     this.systemId = data.systemId;
     this.watts = data.watts;
+    this.icon = data.icon;
+    this.modelNumber = data.modelNumber;
+    this.serialNumber = data.serialNumber;
+    this.firmwareVersion = data.firmwareVersion;
   }
 }
 
@@ -253,6 +261,10 @@ Object.defineProperty(MediaSource.prototype, "schema", {
       notification: { $ref: "definitions.json#/definitions/notification" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
       watts: { $ref: "definitions.json#/definitions/watts" },
+      icon: { type: "string" },
+      modelNumber: { type: "string" },
+      serialNumber: { type: "string" },
+      firmwareVersion: { type: "string" },
     },
     additionalProperties: false,
   },
