@@ -105,6 +105,18 @@ export default {
     watts: {
       $ref: "definitions.json#/definitions/watts",
     },
+    icon: {
+      type: "string",
+    },
+    modelNumber: {
+      type: "string",
+    },
+    serialNumber: {
+      type: "string",
+    },
+    firmwareVersion: {
+      type: "string",
+    },
   },
   $defs: {
     setpoint: {

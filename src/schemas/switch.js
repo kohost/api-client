@@ -40,6 +40,18 @@ export default {
     watts: {
       $ref: "definitions.json#/definitions/watts",
     },
+    icon: {
+      type: "string",
+    },
+    modelNumber: {
+      type: "string",
+    },
+    serialNumber: {
+      type: "string",
+    },
+    firmwareVersion: {
+      type: "string",
+    },
   },
   required: ["id", "type", "state", "driver"],
 };
