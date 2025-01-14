@@ -86,6 +86,7 @@ export default {
       type: "string",
       description: "Driver used to communicate with the object.",
       enum: [
+        "adlink",
         "aws-kinesis",
         "butler",
         "crestron",
