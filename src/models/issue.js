@@ -19,6 +19,7 @@ export class Issue extends Entity {
    * @property {string[]} [autoAssign.tags]
    * @property {string} [systemKey]
    * @property {boolean} [autoCreateTicket] - Default: true
+   * @property {string[]} [excludedResources] - A list of resources that should not trigger notifications of this issue. Default: []
    */
 
   /**
@@ -35,6 +36,7 @@ export class Issue extends Entity {
     this.autoAssign = data.autoAssign;
     this.systemKey = data.systemKey;
     this.autoCreateTicket = data.autoCreateTicket;
+    this.excludedResources = data.excludedResources;
   }
 }
 
@@ -62,6 +64,13 @@ Object.defineProperty(Issue.prototype, "schema", {
       },
       systemKey: { type: "string" },
       autoCreateTicket: { type: "boolean", default: true },
+      excludedResources: {
+        type: "array",
+        description:
+          "A list of resources that should not trigger notifications of this issue",
+        items: { type: "string" },
+        default: [],
+      },
     },
     required: ["id", "type", "name", "department"],
   },

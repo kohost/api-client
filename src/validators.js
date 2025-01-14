@@ -111,6 +111,7 @@ const schema18 = {
   type: "string",
   description: "Driver used to communicate with the object.",
   enum: [
+    "adlink",
     "aws-kinesis",
     "butler",
     "crestron",
@@ -721,6 +722,7 @@ function validate10(
       }
       if (
         !(
+          data8 === "adlink" ||
           data8 === "aws-kinesis" ||
           data8 === "butler" ||
           data8 === "crestron" ||
@@ -2940,6 +2942,7 @@ function validate17(
       }
       if (
         !(
+          data7 === "adlink" ||
           data7 === "aws-kinesis" ||
           data7 === "butler" ||
           data7 === "crestron" ||
@@ -3704,6 +3707,7 @@ function validate20(
       }
       if (
         !(
+          data3 === "adlink" ||
           data3 === "aws-kinesis" ||
           data3 === "butler" ||
           data3 === "crestron" ||
@@ -4439,6 +4443,7 @@ function validate22(
       }
       if (
         !(
+          data6 === "adlink" ||
           data6 === "aws-kinesis" ||
           data6 === "butler" ||
           data6 === "crestron" ||
@@ -4939,6 +4944,7 @@ function validate25(
       }
       if (
         !(
+          data2 === "adlink" ||
           data2 === "aws-kinesis" ||
           data2 === "butler" ||
           data2 === "crestron" ||
@@ -5923,6 +5929,7 @@ function validate27(
       }
       if (
         !(
+          data6 === "adlink" ||
           data6 === "aws-kinesis" ||
           data6 === "butler" ||
           data6 === "crestron" ||
@@ -9362,6 +9369,7 @@ function validate34(
       }
       if (
         !(
+          data7 === "adlink" ||
           data7 === "aws-kinesis" ||
           data7 === "butler" ||
           data7 === "crestron" ||
@@ -10008,6 +10016,13 @@ const schema98 = {
     },
     systemKey: { type: "string" },
     autoCreateTicket: { type: "boolean", default: true },
+    excludedResources: {
+      type: "array",
+      description:
+        "A list of resources that should not trigger notifications of this issue",
+      items: { type: "string" },
+      default: [],
+    },
   },
   required: ["id", "type", "name", "department"],
 };
@@ -10029,6 +10044,9 @@ function validate38(
     }
     if (data.autoCreateTicket === undefined) {
       data.autoCreateTicket = true;
+    }
+    if (data.excludedResources === undefined) {
+      data.excludedResources = [];
     }
     if (data.id === undefined) {
       const err0 = {
@@ -10382,8 +10400,43 @@ function validate38(
       }
       errors++;
     }
+    let data13 = data.excludedResources;
+    if (Array.isArray(data13)) {
+      const len1 = data13.length;
+      for (let i1 = 0; i1 < len1; i1++) {
+        if (typeof data13[i1] !== "string") {
+          const err21 = {
+            instancePath: instancePath + "/excludedResources/" + i1,
+            schemaPath: "#/properties/excludedResources/items/type",
+            keyword: "type",
+            params: { type: "string" },
+            message: "must be string",
+          };
+          if (vErrors === null) {
+            vErrors = [err21];
+          } else {
+            vErrors.push(err21);
+          }
+          errors++;
+        }
+      }
+    } else {
+      const err22 = {
+        instancePath: instancePath + "/excludedResources",
+        schemaPath: "#/properties/excludedResources/type",
+        keyword: "type",
+        params: { type: "array" },
+        message: "must be array",
+      };
+      if (vErrors === null) {
+        vErrors = [err22];
+      } else {
+        vErrors.push(err22);
+      }
+      errors++;
+    }
   } else {
-    const err21 = {
+    const err23 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -10391,9 +10444,9 @@ function validate38(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err21];
+      vErrors = [err23];
     } else {
-      vErrors.push(err21);
+      vErrors.push(err23);
     }
     errors++;
   }
@@ -10953,6 +11006,7 @@ function validate45(
       }
       if (
         !(
+          data7 === "adlink" ||
           data7 === "aws-kinesis" ||
           data7 === "butler" ||
           data7 === "crestron" ||
@@ -12784,6 +12838,7 @@ function validate49(
       }
       if (
         !(
+          data9 === "adlink" ||
           data9 === "aws-kinesis" ||
           data9 === "butler" ||
           data9 === "crestron" ||
@@ -13990,6 +14045,7 @@ function validate52(
       }
       if (
         !(
+          data2 === "adlink" ||
           data2 === "aws-kinesis" ||
           data2 === "butler" ||
           data2 === "crestron" ||
@@ -17680,6 +17736,7 @@ function validate59(
       }
       if (
         !(
+          data3 === "adlink" ||
           data3 === "aws-kinesis" ||
           data3 === "butler" ||
           data3 === "crestron" ||
@@ -21370,6 +21427,7 @@ function validate63(
       }
       if (
         !(
+          data1 === "adlink" ||
           data1 === "aws-kinesis" ||
           data1 === "butler" ||
           data1 === "crestron" ||
@@ -22773,6 +22831,7 @@ function validate68(
       }
       if (
         !(
+          data7 === "adlink" ||
           data7 === "aws-kinesis" ||
           data7 === "butler" ||
           data7 === "crestron" ||
@@ -23792,6 +23851,7 @@ function validate72(
       }
       if (
         !(
+          data3 === "adlink" ||
           data3 === "aws-kinesis" ||
           data3 === "butler" ||
           data3 === "crestron" ||
@@ -25286,6 +25346,7 @@ function validate81(
       }
       if (
         !(
+          data7 === "adlink" ||
           data7 === "aws-kinesis" ||
           data7 === "butler" ||
           data7 === "crestron" ||
@@ -29160,6 +29221,7 @@ function validate102(
       }
       if (
         !(
+          data5 === "adlink" ||
           data5 === "aws-kinesis" ||
           data5 === "butler" ||
           data5 === "crestron" ||
@@ -30165,6 +30227,7 @@ function validate108(
       }
       if (
         !(
+          data2 === "adlink" ||
           data2 === "aws-kinesis" ||
           data2 === "butler" ||
           data2 === "crestron" ||

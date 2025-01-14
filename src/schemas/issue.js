@@ -49,6 +49,15 @@ export default {
       type: "boolean",
       default: true,
     },
+    excludedResources: {
+      type: "array",
+      description:
+        "A list of resources that should not trigger notifications of this issue",
+      items: {
+        type: "string",
+      },
+      default: [],
+    },
   },
   required: ["id", "type", "name", "department"],
 };
