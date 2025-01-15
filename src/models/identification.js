@@ -28,19 +28,21 @@ export class Identification extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.number = data.number;
-    this.maskedNumber = data.maskedNumber;
-    this.encryptedNumber = data.encryptedNumber;
-    this.issued = data.issued;
-    this.expires = data.expires;
-    this.verified = data.verified;
-    this.matched = data.matched;
-    this.firstName = data.firstName;
-    this.lastName = data.lastName;
-    this.issuingCountry = data.issuingCountry;
-    this.systemId = data.systemId;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.number !== undefined) this.number = data.number;
+    if (data.maskedNumber !== undefined) this.maskedNumber = data.maskedNumber;
+    if (data.encryptedNumber !== undefined)
+      this.encryptedNumber = data.encryptedNumber;
+    if (data.issued !== undefined) this.issued = data.issued;
+    if (data.expires !== undefined) this.expires = data.expires;
+    if (data.verified !== undefined) this.verified = data.verified;
+    if (data.matched !== undefined) this.matched = data.matched;
+    if (data.firstName !== undefined) this.firstName = data.firstName;
+    if (data.lastName !== undefined) this.lastName = data.lastName;
+    if (data.issuingCountry !== undefined)
+      this.issuingCountry = data.issuingCountry;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
 

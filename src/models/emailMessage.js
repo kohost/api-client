@@ -29,20 +29,21 @@ export class EmailMessage extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.to = data.to;
-    this.from = data.from;
-    this.subject = data.subject;
-    this.status = data.status;
-    this.statusMessage = data.statusMessage;
-    this.html = data.html;
-    this.text = data.text;
-    this.driver = data.driver;
-    this.appData = data.appData;
-    this.createdAt = data.createdAt;
-    this.updatedAt = data.updatedAt;
-    this.systemId = data.systemId;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.to !== undefined) this.to = data.to;
+    if (data.from !== undefined) this.from = data.from;
+    if (data.subject !== undefined) this.subject = data.subject;
+    if (data.status !== undefined) this.status = data.status;
+    if (data.statusMessage !== undefined)
+      this.statusMessage = data.statusMessage;
+    if (data.html !== undefined) this.html = data.html;
+    if (data.text !== undefined) this.text = data.text;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.appData !== undefined) this.appData = data.appData;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
 

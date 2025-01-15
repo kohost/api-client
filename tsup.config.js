@@ -25,6 +25,7 @@ export default defineConfig([
     globalName: "kohost",
     minify: "terser",
     terserOptions: {
+      mangle: false,
       keep_fnames: true,
       keep_classnames: true,
     },

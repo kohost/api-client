@@ -89,12 +89,6 @@ Promise.all(schemaModules).then(async (modules) => {
       );
     }
   }
-
-  const useCaseIndexCode = generateIndexCode(useCaseIndexExports);
-  const modelIndexCode = generateIndexCode(modelIndexExports);
-
-  fs.writeFileSync("src/useCases/index.js", await formatCode(useCaseIndexCode));
-  fs.writeFileSync("src/models/index.js", await formatCode(modelIndexCode));
 });
 
 function generateModelCode(ajv, schemaModule) {
@@ -130,7 +124,10 @@ function generateModelCode(ajv, schemaModule) {
 	constructor(data) {
 	  super(data);
 	  ${Object.keys(schema.properties)
-      .map((prop) => `this.${prop} = data.${prop};`)
+      .map(
+        (prop) =>
+          `if (data.${prop} !== undefined) this.${prop} = data.${prop};`,
+      )
       .join("\n            ")}
 	}
 	  
@@ -171,6 +168,7 @@ function generateModelCode(ajv, schemaModule) {
   Object.defineProperty(${schemaTitle}.prototype, "validator", {
 	get: function() { return validate; }
   });
+
 `;
 
   return code;
@@ -315,10 +313,4 @@ function generateUseCaseCode(
       }`;
 
   return code;
-}
-
-function generateIndexCode(files) {
-  return `
-	  ${files.map((useCase) => `export * from "./${useCase.charAt(0).toLowerCase() + useCase.slice(1)}";`).join("\n")}
-	`;
 }

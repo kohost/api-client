@@ -35,22 +35,26 @@ export class Space extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.name = data.name;
-    this.type = data.type;
-    this.discriminator = data.discriminator;
-    this.driver = data.driver;
-    this.category = data.category;
-    this.rooms = data.rooms;
-    this.subGroups = data.subGroups;
-    this.occupied = data.occupied;
-    this.inUse = data.inUse;
-    this.eco = data.eco;
-    this.features = data.features;
-    this.maximumOccupancy = data.maximumOccupancy;
-    this.housekeepingStatus = data.housekeepingStatus;
-    this.serviceStatus = data.serviceStatus;
-    this.systemId = data.systemId;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.discriminator !== undefined)
+      this.discriminator = data.discriminator;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.category !== undefined) this.category = data.category;
+    if (data.rooms !== undefined) this.rooms = data.rooms;
+    if (data.subGroups !== undefined) this.subGroups = data.subGroups;
+    if (data.occupied !== undefined) this.occupied = data.occupied;
+    if (data.inUse !== undefined) this.inUse = data.inUse;
+    if (data.eco !== undefined) this.eco = data.eco;
+    if (data.features !== undefined) this.features = data.features;
+    if (data.maximumOccupancy !== undefined)
+      this.maximumOccupancy = data.maximumOccupancy;
+    if (data.housekeepingStatus !== undefined)
+      this.housekeepingStatus = data.housekeepingStatus;
+    if (data.serviceStatus !== undefined)
+      this.serviceStatus = data.serviceStatus;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 
   get floor() {

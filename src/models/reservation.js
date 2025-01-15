@@ -50,35 +50,47 @@ export class Reservation extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.driver = data.driver;
-    this.primaryGuest = data.primaryGuest;
-    this.type = data.type;
-    this.sharedGuests = data.sharedGuests;
-    this.spaceCategory = data.spaceCategory;
-    this.space = data.space;
-    this.previousSpace = data.previousSpace;
-    this.status = data.status;
-    this.mobileCheckInSpaceCategoryChanged =
-      data.mobileCheckInSpaceCategoryChanged;
-    this.mobileCheckInSpaceChanged = data.mobileCheckInSpaceChanged;
-    this.mobileCheckInStatus = data.mobileCheckInStatus;
-    this.mobileCheckInStatusMessage = data.mobileCheckInStatusMessage;
-    this.confirmationNumber = data.confirmationNumber;
-    this.expectedCheckInDateTime = data.expectedCheckInDateTime;
-    this.checkInDateTime = data.checkInDateTime;
-    this.checkOutDateTime = data.checkOutDateTime;
-    this.adultCount = data.adultCount;
-    this.childCount = data.childCount;
-    this.spaceCategoryAvailabilites = data.spaceCategoryAvailabilites;
-    this.revenue = data.revenue;
-    this.rateSuppressed = data.rateSuppressed;
-    this.payment = data.payment;
-    this.company = data.company;
-    this.travelAgent = data.travelAgent;
-    this.systemId = data.systemId;
-    this.metadata = data.metadata;
-    this.updatedAt = data.updatedAt;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.primaryGuest !== undefined) this.primaryGuest = data.primaryGuest;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.sharedGuests !== undefined) this.sharedGuests = data.sharedGuests;
+    if (data.spaceCategory !== undefined)
+      this.spaceCategory = data.spaceCategory;
+    if (data.space !== undefined) this.space = data.space;
+    if (data.previousSpace !== undefined)
+      this.previousSpace = data.previousSpace;
+    if (data.status !== undefined) this.status = data.status;
+    if (data.mobileCheckInSpaceCategoryChanged !== undefined)
+      this.mobileCheckInSpaceCategoryChanged =
+        data.mobileCheckInSpaceCategoryChanged;
+    if (data.mobileCheckInSpaceChanged !== undefined)
+      this.mobileCheckInSpaceChanged = data.mobileCheckInSpaceChanged;
+    if (data.mobileCheckInStatus !== undefined)
+      this.mobileCheckInStatus = data.mobileCheckInStatus;
+    if (data.mobileCheckInStatusMessage !== undefined)
+      this.mobileCheckInStatusMessage = data.mobileCheckInStatusMessage;
+    if (data.confirmationNumber !== undefined)
+      this.confirmationNumber = data.confirmationNumber;
+    if (data.expectedCheckInDateTime !== undefined)
+      this.expectedCheckInDateTime = data.expectedCheckInDateTime;
+    if (data.checkInDateTime !== undefined)
+      this.checkInDateTime = data.checkInDateTime;
+    if (data.checkOutDateTime !== undefined)
+      this.checkOutDateTime = data.checkOutDateTime;
+    if (data.adultCount !== undefined) this.adultCount = data.adultCount;
+    if (data.childCount !== undefined) this.childCount = data.childCount;
+    if (data.spaceCategoryAvailabilites !== undefined)
+      this.spaceCategoryAvailabilites = data.spaceCategoryAvailabilites;
+    if (data.revenue !== undefined) this.revenue = data.revenue;
+    if (data.rateSuppressed !== undefined)
+      this.rateSuppressed = data.rateSuppressed;
+    if (data.payment !== undefined) this.payment = data.payment;
+    if (data.company !== undefined) this.company = data.company;
+    if (data.travelAgent !== undefined) this.travelAgent = data.travelAgent;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
+    if (data.metadata !== undefined) this.metadata = data.metadata;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
   }
 
   checkInTime(tz) {

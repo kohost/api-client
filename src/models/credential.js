@@ -27,18 +27,20 @@ export class Credential extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.driver = data.driver;
-    this.discriminator = data.discriminator;
-    this.credential = data.credential;
-    this.userId = data.userId;
-    this.organizationId = data.organizationId;
-    this.propertyId = data.propertyId;
-    this.deviceId = data.deviceId;
-    this.userAgent = data.userAgent;
-    this.expires = data.expires;
-    this.systemId = data.systemId;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.discriminator !== undefined)
+      this.discriminator = data.discriminator;
+    if (data.credential !== undefined) this.credential = data.credential;
+    if (data.userId !== undefined) this.userId = data.userId;
+    if (data.organizationId !== undefined)
+      this.organizationId = data.organizationId;
+    if (data.propertyId !== undefined) this.propertyId = data.propertyId;
+    if (data.deviceId !== undefined) this.deviceId = data.deviceId;
+    if (data.userAgent !== undefined) this.userAgent = data.userAgent;
+    if (data.expires !== undefined) this.expires = data.expires;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
 

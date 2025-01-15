@@ -44,17 +44,18 @@ export class Organization extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.accountNumber = data.accountNumber;
-    this.name = data.name;
-    this.properties = data.properties;
-    this.hostname = data.hostname;
-    this.appManifest = data.appManifest;
-    this.tickets = data.tickets;
-    this.credentials = data.credentials;
-    this.createdAt = data.createdAt;
-    this.updatedAt = data.updatedAt;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.accountNumber !== undefined)
+      this.accountNumber = data.accountNumber;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.properties !== undefined) this.properties = data.properties;
+    if (data.hostname !== undefined) this.hostname = data.hostname;
+    if (data.appManifest !== undefined) this.appManifest = data.appManifest;
+    if (data.tickets !== undefined) this.tickets = data.tickets;
+    if (data.credentials !== undefined) this.credentials = data.credentials;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
   }
 }
 

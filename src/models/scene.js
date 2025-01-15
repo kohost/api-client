@@ -28,13 +28,13 @@ export class Scene extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.name = data.name;
-    this.description = data.description;
-    this.type = data.type;
-    this.devices = data.devices;
-    this.isDefault = data.isDefault;
-    this.showOnUi = data.showOnUi;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.description !== undefined) this.description = data.description;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.devices !== undefined) this.devices = data.devices;
+    if (data.isDefault !== undefined) this.isDefault = data.isDefault;
+    if (data.showOnUi !== undefined) this.showOnUi = data.showOnUi;
   }
 }
 

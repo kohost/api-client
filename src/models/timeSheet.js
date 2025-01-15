@@ -21,12 +21,12 @@ export class TimeSheet extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.userId = data.userId;
-    this.day = data.day;
-    this.locked = data.locked;
-    this.timeEntries = data.timeEntries;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.userId !== undefined) this.userId = data.userId;
+    if (data.day !== undefined) this.day = data.day;
+    if (data.locked !== undefined) this.locked = data.locked;
+    if (data.timeEntries !== undefined) this.timeEntries = data.timeEntries;
   }
 }
 

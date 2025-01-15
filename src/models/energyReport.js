@@ -24,15 +24,15 @@ export class EnergyReport extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.reportTime = data.reportTime;
-    this.roomId = data.roomId;
-    this.first = data.first;
-    this.last = data.last;
-    this.consumption = data.consumption;
-    this.totals = data.totals;
-    this.costPerKw = data.costPerKw;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.reportTime !== undefined) this.reportTime = data.reportTime;
+    if (data.roomId !== undefined) this.roomId = data.roomId;
+    if (data.first !== undefined) this.first = data.first;
+    if (data.last !== undefined) this.last = data.last;
+    if (data.consumption !== undefined) this.consumption = data.consumption;
+    if (data.totals !== undefined) this.totals = data.totals;
+    if (data.costPerKw !== undefined) this.costPerKw = data.costPerKw;
   }
 }
 

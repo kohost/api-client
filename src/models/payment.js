@@ -23,14 +23,14 @@ export class Payment extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.enabled = data.enabled;
-    this.storageData = data.storageData;
-    this.maskedNumber = data.maskedNumber;
-    this.issued = data.issued;
-    this.expires = data.expires;
-    this.systemId = data.systemId;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.enabled !== undefined) this.enabled = data.enabled;
+    if (data.storageData !== undefined) this.storageData = data.storageData;
+    if (data.maskedNumber !== undefined) this.maskedNumber = data.maskedNumber;
+    if (data.issued !== undefined) this.issued = data.issued;
+    if (data.expires !== undefined) this.expires = data.expires;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
 

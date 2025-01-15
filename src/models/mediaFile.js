@@ -30,21 +30,22 @@ export class MediaFile extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.name = data.name;
-    this.fileHash = data.fileHash;
-    this.category = data.category;
-    this.mimeType = data.mimeType;
-    this.data = data.data;
-    this.url = data.url;
-    this.width = data.width;
-    this.height = data.height;
-    this.size = data.size;
-    this.uploadUrl = data.uploadUrl;
-    this.uploadUrlExpires = data.uploadUrlExpires;
-    this.createdBy = data.createdBy;
-    this.systemId = data.systemId;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.fileHash !== undefined) this.fileHash = data.fileHash;
+    if (data.category !== undefined) this.category = data.category;
+    if (data.mimeType !== undefined) this.mimeType = data.mimeType;
+    if (data.data !== undefined) this.data = data.data;
+    if (data.url !== undefined) this.url = data.url;
+    if (data.width !== undefined) this.width = data.width;
+    if (data.height !== undefined) this.height = data.height;
+    if (data.size !== undefined) this.size = data.size;
+    if (data.uploadUrl !== undefined) this.uploadUrl = data.uploadUrl;
+    if (data.uploadUrlExpires !== undefined)
+      this.uploadUrlExpires = data.uploadUrlExpires;
+    if (data.createdBy !== undefined) this.createdBy = data.createdBy;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 
   createImageVariant(params) {

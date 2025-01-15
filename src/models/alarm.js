@@ -32,23 +32,25 @@ export class Alarm extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.name = data.name;
-    this.offline = data.offline;
-    this.type = data.type;
-    this.systemId = data.systemId;
-    this.supportedNotifications = data.supportedNotifications;
-    this.notification = data.notification;
-    this.driver = data.driver;
-    this.areas = data.areas;
-    this.zones = data.zones;
-    this.chime = data.chime;
-    this.watts = data.watts;
-    this.icon = data.icon;
-    this.modelNumber = data.modelNumber;
-    this.serialNumber = data.serialNumber;
-    this.firmwareVersion = data.firmwareVersion;
-    this.address = data.address;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.offline !== undefined) this.offline = data.offline;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
+    if (data.supportedNotifications !== undefined)
+      this.supportedNotifications = data.supportedNotifications;
+    if (data.notification !== undefined) this.notification = data.notification;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.areas !== undefined) this.areas = data.areas;
+    if (data.zones !== undefined) this.zones = data.zones;
+    if (data.chime !== undefined) this.chime = data.chime;
+    if (data.watts !== undefined) this.watts = data.watts;
+    if (data.icon !== undefined) this.icon = data.icon;
+    if (data.modelNumber !== undefined) this.modelNumber = data.modelNumber;
+    if (data.serialNumber !== undefined) this.serialNumber = data.serialNumber;
+    if (data.firmwareVersion !== undefined)
+      this.firmwareVersion = data.firmwareVersion;
+    if (data.address !== undefined) this.address = data.address;
   }
 }
 

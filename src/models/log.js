@@ -36,15 +36,15 @@ export class Log extends Entity {
    */
   constructor(data) {
     super(data);
-    this.type = data.type;
-    this.timestamp = data.timestamp;
-    this.name = data.name;
-    this.field1 = data.field1;
-    this.field2 = data.field2;
-    this.field3 = data.field3;
-    this.field4 = data.field4;
-    this.field5 = data.field5;
-    this.field6 = data.field6;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.timestamp !== undefined) this.timestamp = data.timestamp;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.field1 !== undefined) this.field1 = data.field1;
+    if (data.field2 !== undefined) this.field2 = data.field2;
+    if (data.field3 !== undefined) this.field3 = data.field3;
+    if (data.field4 !== undefined) this.field4 = data.field4;
+    if (data.field5 !== undefined) this.field5 = data.field5;
+    if (data.field6 !== undefined) this.field6 = data.field6;
   }
 }
 

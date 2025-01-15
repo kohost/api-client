@@ -26,17 +26,17 @@ export class Product extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.name = data.name;
-    this.driver = data.driver;
-    this.description = data.description;
-    this.price = data.price;
-    this.tax = data.tax;
-    this.image = data.image;
-    this.category = data.category;
-    this.imageUrl = data.imageUrl;
-    this.systemId = data.systemId;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.description !== undefined) this.description = data.description;
+    if (data.price !== undefined) this.price = data.price;
+    if (data.tax !== undefined) this.tax = data.tax;
+    if (data.image !== undefined) this.image = data.image;
+    if (data.category !== undefined) this.category = data.category;
+    if (data.imageUrl !== undefined) this.imageUrl = data.imageUrl;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
 

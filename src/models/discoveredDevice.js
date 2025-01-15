@@ -25,16 +25,18 @@ export class DiscoveredDevice extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.name = data.name;
-    this.deviceId = data.deviceId;
-    this.type = data.type;
-    this.discriminator = data.discriminator;
-    this.driver = data.driver;
-    this.deviceData = data.deviceData;
-    this.ignore = data.ignore;
-    this.organizationId = data.organizationId;
-    this.propertyId = data.propertyId;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.deviceId !== undefined) this.deviceId = data.deviceId;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.discriminator !== undefined)
+      this.discriminator = data.discriminator;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.deviceData !== undefined) this.deviceData = data.deviceData;
+    if (data.ignore !== undefined) this.ignore = data.ignore;
+    if (data.organizationId !== undefined)
+      this.organizationId = data.organizationId;
+    if (data.propertyId !== undefined) this.propertyId = data.propertyId;
   }
 }
 

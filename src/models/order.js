@@ -27,18 +27,19 @@ export class Order extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.orderNumber = data.orderNumber;
-    this.status = data.status;
-    this.userId = data.userId;
-    this.reservationId = data.reservationId;
-    this.date = data.date;
-    this.items = data.items;
-    this.taxes = data.taxes;
-    this.fees = data.fees;
-    this.delivery = data.delivery;
-    this.payments = data.payments;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.orderNumber !== undefined) this.orderNumber = data.orderNumber;
+    if (data.status !== undefined) this.status = data.status;
+    if (data.userId !== undefined) this.userId = data.userId;
+    if (data.reservationId !== undefined)
+      this.reservationId = data.reservationId;
+    if (data.date !== undefined) this.date = data.date;
+    if (data.items !== undefined) this.items = data.items;
+    if (data.taxes !== undefined) this.taxes = data.taxes;
+    if (data.fees !== undefined) this.fees = data.fees;
+    if (data.delivery !== undefined) this.delivery = data.delivery;
+    if (data.payments !== undefined) this.payments = data.payments;
   }
 
   getSubTotal() {

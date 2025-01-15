@@ -37,28 +37,29 @@ export class SystemUser extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.driver = data.driver;
-    this.firstName = data.firstName;
-    this.lastName = data.lastName;
-    this.phone = data.phone;
-    this.email = data.email;
-    this.address = data.address;
-    this.photo = data.photo;
-    this.jobTitle = data.jobTitle;
-    this.dob = data.dob;
-    this.gender = data.gender;
-    this.roles = data.roles;
-    this.nationality = data.nationality;
-    this.notes = data.notes;
-    this.files = data.files;
-    this.identifications = data.identifications;
-    this.payments = data.payments;
-    this.revenue = data.revenue;
-    this.createdAt = data.createdAt;
-    this.updatedAt = data.updatedAt;
-    this.systemId = data.systemId;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.firstName !== undefined) this.firstName = data.firstName;
+    if (data.lastName !== undefined) this.lastName = data.lastName;
+    if (data.phone !== undefined) this.phone = data.phone;
+    if (data.email !== undefined) this.email = data.email;
+    if (data.address !== undefined) this.address = data.address;
+    if (data.photo !== undefined) this.photo = data.photo;
+    if (data.jobTitle !== undefined) this.jobTitle = data.jobTitle;
+    if (data.dob !== undefined) this.dob = data.dob;
+    if (data.gender !== undefined) this.gender = data.gender;
+    if (data.roles !== undefined) this.roles = data.roles;
+    if (data.nationality !== undefined) this.nationality = data.nationality;
+    if (data.notes !== undefined) this.notes = data.notes;
+    if (data.files !== undefined) this.files = data.files;
+    if (data.identifications !== undefined)
+      this.identifications = data.identifications;
+    if (data.payments !== undefined) this.payments = data.payments;
+    if (data.revenue !== undefined) this.revenue = data.revenue;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
 

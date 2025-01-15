@@ -28,15 +28,17 @@ export class Issue extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.name = data.name;
-    this.description = data.description;
-    this.department = data.department;
-    this.autoAssign = data.autoAssign;
-    this.systemKey = data.systemKey;
-    this.autoCreateTicket = data.autoCreateTicket;
-    this.excludedResources = data.excludedResources;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.description !== undefined) this.description = data.description;
+    if (data.department !== undefined) this.department = data.department;
+    if (data.autoAssign !== undefined) this.autoAssign = data.autoAssign;
+    if (data.systemKey !== undefined) this.systemKey = data.systemKey;
+    if (data.autoCreateTicket !== undefined)
+      this.autoCreateTicket = data.autoCreateTicket;
+    if (data.excludedResources !== undefined)
+      this.excludedResources = data.excludedResources;
   }
 }
 

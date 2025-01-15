@@ -46,33 +46,36 @@ export class User extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.firstName = data.firstName;
-    this.lastName = data.lastName;
-    this.phone = data.phone;
-    this.phoneVerified = data.phoneVerified;
-    this.email = data.email;
-    this.emailVerified = data.emailVerified;
-    this.address = data.address;
-    this.secretKey = data.secretKey;
-    this.photo = data.photo;
-    this.jobTitle = data.jobTitle;
-    this.dob = data.dob;
-    this.gender = data.gender;
-    this.nationality = data.nationality;
-    this.permissions = data.permissions;
-    this.notes = data.notes;
-    this.files = data.files;
-    this.identifications = data.identifications;
-    this.payments = data.payments;
-    this.location = data.location;
-    this.reservations = data.reservations;
-    this.spaceName = data.spaceName;
-    this.revenue = data.revenue;
-    this.createdAt = data.createdAt;
-    this.updatedAt = data.updatedAt;
-    this.systems = data.systems;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.firstName !== undefined) this.firstName = data.firstName;
+    if (data.lastName !== undefined) this.lastName = data.lastName;
+    if (data.phone !== undefined) this.phone = data.phone;
+    if (data.phoneVerified !== undefined)
+      this.phoneVerified = data.phoneVerified;
+    if (data.email !== undefined) this.email = data.email;
+    if (data.emailVerified !== undefined)
+      this.emailVerified = data.emailVerified;
+    if (data.address !== undefined) this.address = data.address;
+    if (data.secretKey !== undefined) this.secretKey = data.secretKey;
+    if (data.photo !== undefined) this.photo = data.photo;
+    if (data.jobTitle !== undefined) this.jobTitle = data.jobTitle;
+    if (data.dob !== undefined) this.dob = data.dob;
+    if (data.gender !== undefined) this.gender = data.gender;
+    if (data.nationality !== undefined) this.nationality = data.nationality;
+    if (data.permissions !== undefined) this.permissions = data.permissions;
+    if (data.notes !== undefined) this.notes = data.notes;
+    if (data.files !== undefined) this.files = data.files;
+    if (data.identifications !== undefined)
+      this.identifications = data.identifications;
+    if (data.payments !== undefined) this.payments = data.payments;
+    if (data.location !== undefined) this.location = data.location;
+    if (data.reservations !== undefined) this.reservations = data.reservations;
+    if (data.spaceName !== undefined) this.spaceName = data.spaceName;
+    if (data.revenue !== undefined) this.revenue = data.revenue;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.systems !== undefined) this.systems = data.systems;
   }
 
   get fullName() {

@@ -101,24 +101,27 @@ export class Property extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.name = data.name;
-    this.type = data.type;
-    this.discriminator = data.discriminator;
-    this.organization = data.organization;
-    this.departments = data.departments;
-    this.testModeEnabled = data.testModeEnabled;
-    this.testMode = data.testMode;
-    this.timezone = data.timezone;
-    this.smsNumber = data.smsNumber;
-    this.checkInTime = data.checkInTime;
-    this.checkOutTime = data.checkOutTime;
-    this.address = data.address;
-    this.latitude = data.latitude;
-    this.longitude = data.longitude;
-    this.appFeatures = data.appFeatures;
-    this.notifications = data.notifications;
-    this.credentials = data.credentials;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.discriminator !== undefined)
+      this.discriminator = data.discriminator;
+    if (data.organization !== undefined) this.organization = data.organization;
+    if (data.departments !== undefined) this.departments = data.departments;
+    if (data.testModeEnabled !== undefined)
+      this.testModeEnabled = data.testModeEnabled;
+    if (data.testMode !== undefined) this.testMode = data.testMode;
+    if (data.timezone !== undefined) this.timezone = data.timezone;
+    if (data.smsNumber !== undefined) this.smsNumber = data.smsNumber;
+    if (data.checkInTime !== undefined) this.checkInTime = data.checkInTime;
+    if (data.checkOutTime !== undefined) this.checkOutTime = data.checkOutTime;
+    if (data.address !== undefined) this.address = data.address;
+    if (data.latitude !== undefined) this.latitude = data.latitude;
+    if (data.longitude !== undefined) this.longitude = data.longitude;
+    if (data.appFeatures !== undefined) this.appFeatures = data.appFeatures;
+    if (data.notifications !== undefined)
+      this.notifications = data.notifications;
+    if (data.credentials !== undefined) this.credentials = data.credentials;
   }
 }
 

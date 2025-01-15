@@ -44,35 +44,42 @@ export class MediaSource extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.discriminator = data.discriminator;
-    this.playlists = data.playlists;
-    this.remote = data.remote;
-    this.name = data.name;
-    this.driver = data.driver;
-    this.offline = data.offline;
-    this.audio = data.audio;
-    this.video = data.video;
-    this.powerFeedback = data.powerFeedback;
-    this.volumeFeedback = data.volumeFeedback;
-    this.muted = data.muted;
-    this.volume = data.volume;
-    this.brightness = data.brightness;
-    this.contrast = data.contrast;
-    this.power = data.power;
-    this.input = data.input;
-    this.supportedInputs = data.supportedInputs;
-    this.supportedOutputs = data.supportedOutputs;
-    this.command = data.command;
-    this.supportedNotifications = data.supportedNotifications;
-    this.notification = data.notification;
-    this.systemId = data.systemId;
-    this.watts = data.watts;
-    this.icon = data.icon;
-    this.modelNumber = data.modelNumber;
-    this.serialNumber = data.serialNumber;
-    this.firmwareVersion = data.firmwareVersion;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.discriminator !== undefined)
+      this.discriminator = data.discriminator;
+    if (data.playlists !== undefined) this.playlists = data.playlists;
+    if (data.remote !== undefined) this.remote = data.remote;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.offline !== undefined) this.offline = data.offline;
+    if (data.audio !== undefined) this.audio = data.audio;
+    if (data.video !== undefined) this.video = data.video;
+    if (data.powerFeedback !== undefined)
+      this.powerFeedback = data.powerFeedback;
+    if (data.volumeFeedback !== undefined)
+      this.volumeFeedback = data.volumeFeedback;
+    if (data.muted !== undefined) this.muted = data.muted;
+    if (data.volume !== undefined) this.volume = data.volume;
+    if (data.brightness !== undefined) this.brightness = data.brightness;
+    if (data.contrast !== undefined) this.contrast = data.contrast;
+    if (data.power !== undefined) this.power = data.power;
+    if (data.input !== undefined) this.input = data.input;
+    if (data.supportedInputs !== undefined)
+      this.supportedInputs = data.supportedInputs;
+    if (data.supportedOutputs !== undefined)
+      this.supportedOutputs = data.supportedOutputs;
+    if (data.command !== undefined) this.command = data.command;
+    if (data.supportedNotifications !== undefined)
+      this.supportedNotifications = data.supportedNotifications;
+    if (data.notification !== undefined) this.notification = data.notification;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
+    if (data.watts !== undefined) this.watts = data.watts;
+    if (data.icon !== undefined) this.icon = data.icon;
+    if (data.modelNumber !== undefined) this.modelNumber = data.modelNumber;
+    if (data.serialNumber !== undefined) this.serialNumber = data.serialNumber;
+    if (data.firmwareVersion !== undefined)
+      this.firmwareVersion = data.firmwareVersion;
   }
 }
 

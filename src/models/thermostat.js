@@ -45,33 +45,41 @@ export class Thermostat extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.name = data.name;
-    this.type = data.type;
-    this.driver = data.driver;
-    this.offline = data.offline;
-    this.supportedNotifications = data.supportedNotifications;
-    this.notification = data.notification;
-    this.currentTemperature = data.currentTemperature;
-    this.currentHumidity = data.currentHumidity;
-    this.hvacMode = data.hvacMode;
-    this.hvacState = data.hvacState;
-    this.fanMode = data.fanMode;
-    this.fanState = data.fanState;
-    this.temperatureScale = data.temperatureScale;
-    this.humidityScale = data.humidityScale;
-    this.supportedHvacModes = data.supportedHvacModes;
-    this.supportedFanModes = data.supportedFanModes;
-    this.setpoints = data.setpoints;
-    this.minAutoDelta = data.minAutoDelta;
-    this.cycleRate = data.cycleRate;
-    this.batteryLevel = data.batteryLevel;
-    this.systemId = data.systemId;
-    this.watts = data.watts;
-    this.icon = data.icon;
-    this.modelNumber = data.modelNumber;
-    this.serialNumber = data.serialNumber;
-    this.firmwareVersion = data.firmwareVersion;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.offline !== undefined) this.offline = data.offline;
+    if (data.supportedNotifications !== undefined)
+      this.supportedNotifications = data.supportedNotifications;
+    if (data.notification !== undefined) this.notification = data.notification;
+    if (data.currentTemperature !== undefined)
+      this.currentTemperature = data.currentTemperature;
+    if (data.currentHumidity !== undefined)
+      this.currentHumidity = data.currentHumidity;
+    if (data.hvacMode !== undefined) this.hvacMode = data.hvacMode;
+    if (data.hvacState !== undefined) this.hvacState = data.hvacState;
+    if (data.fanMode !== undefined) this.fanMode = data.fanMode;
+    if (data.fanState !== undefined) this.fanState = data.fanState;
+    if (data.temperatureScale !== undefined)
+      this.temperatureScale = data.temperatureScale;
+    if (data.humidityScale !== undefined)
+      this.humidityScale = data.humidityScale;
+    if (data.supportedHvacModes !== undefined)
+      this.supportedHvacModes = data.supportedHvacModes;
+    if (data.supportedFanModes !== undefined)
+      this.supportedFanModes = data.supportedFanModes;
+    if (data.setpoints !== undefined) this.setpoints = data.setpoints;
+    if (data.minAutoDelta !== undefined) this.minAutoDelta = data.minAutoDelta;
+    if (data.cycleRate !== undefined) this.cycleRate = data.cycleRate;
+    if (data.batteryLevel !== undefined) this.batteryLevel = data.batteryLevel;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
+    if (data.watts !== undefined) this.watts = data.watts;
+    if (data.icon !== undefined) this.icon = data.icon;
+    if (data.modelNumber !== undefined) this.modelNumber = data.modelNumber;
+    if (data.serialNumber !== undefined) this.serialNumber = data.serialNumber;
+    if (data.firmwareVersion !== undefined)
+      this.firmwareVersion = data.firmwareVersion;
   }
 }
 

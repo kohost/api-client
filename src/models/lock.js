@@ -32,23 +32,26 @@ export class Lock extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.name = data.name;
-    this.type = data.type;
-    this.offline = data.offline;
-    this.supportedNotifications = data.supportedNotifications;
-    this.notification = data.notification;
-    this.driver = data.driver;
-    this.state = data.state;
-    this.mode = data.mode;
-    this.supportedModes = data.supportedModes;
-    this.batteryLevel = data.batteryLevel;
-    this.systemId = data.systemId;
-    this.watts = data.watts;
-    this.icon = data.icon;
-    this.modelNumber = data.modelNumber;
-    this.serialNumber = data.serialNumber;
-    this.firmwareVersion = data.firmwareVersion;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.offline !== undefined) this.offline = data.offline;
+    if (data.supportedNotifications !== undefined)
+      this.supportedNotifications = data.supportedNotifications;
+    if (data.notification !== undefined) this.notification = data.notification;
+    if (data.driver !== undefined) this.driver = data.driver;
+    if (data.state !== undefined) this.state = data.state;
+    if (data.mode !== undefined) this.mode = data.mode;
+    if (data.supportedModes !== undefined)
+      this.supportedModes = data.supportedModes;
+    if (data.batteryLevel !== undefined) this.batteryLevel = data.batteryLevel;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
+    if (data.watts !== undefined) this.watts = data.watts;
+    if (data.icon !== undefined) this.icon = data.icon;
+    if (data.modelNumber !== undefined) this.modelNumber = data.modelNumber;
+    if (data.serialNumber !== undefined) this.serialNumber = data.serialNumber;
+    if (data.firmwareVersion !== undefined)
+      this.firmwareVersion = data.firmwareVersion;
   }
 }
 

@@ -25,16 +25,16 @@ export class Announcement extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.users = data.users;
-    this.group = data.group;
-    this.body = data.body;
-    this.media = data.media;
-    this.sentBy = data.sentBy;
-    this.tags = data.tags;
-    this.createdAt = data.createdAt;
-    this.updatedAt = data.updatedAt;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.users !== undefined) this.users = data.users;
+    if (data.group !== undefined) this.group = data.group;
+    if (data.body !== undefined) this.body = data.body;
+    if (data.media !== undefined) this.media = data.media;
+    if (data.sentBy !== undefined) this.sentBy = data.sentBy;
+    if (data.tags !== undefined) this.tags = data.tags;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
   }
 }
 

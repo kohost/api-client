@@ -21,12 +21,12 @@ export class ShortLink extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.title = data.title;
-    this.destination = data.destination;
-    this.url = data.url;
-    this.systemId = data.systemId;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.title !== undefined) this.title = data.title;
+    if (data.destination !== undefined) this.destination = data.destination;
+    if (data.url !== undefined) this.url = data.url;
+    if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
 

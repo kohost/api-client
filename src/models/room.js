@@ -32,23 +32,25 @@ export class Room extends Entity {
    */
   constructor(data) {
     super(data);
-    this.id = data.id;
-    this.type = data.type;
-    this.name = data.name;
-    this.floor = data.floor;
-    this.dimmers = data.dimmers;
-    this.switches = data.switches;
-    this.thermostats = data.thermostats;
-    this.locks = data.locks;
-    this.windowCoverings = data.windowCoverings;
-    this.courtesy = data.courtesy;
-    this.cameras = data.cameras;
-    this.mediaSources = data.mediaSources;
-    this.motionSensors = data.motionSensors;
-    this.alarms = data.alarms;
-    this.occupiedAt = data.occupiedAt;
-    this.createdAt = data.createdAt;
-    this.updatedAt = data.updatedAt;
+    if (data.id !== undefined) this.id = data.id;
+    if (data.type !== undefined) this.type = data.type;
+    if (data.name !== undefined) this.name = data.name;
+    if (data.floor !== undefined) this.floor = data.floor;
+    if (data.dimmers !== undefined) this.dimmers = data.dimmers;
+    if (data.switches !== undefined) this.switches = data.switches;
+    if (data.thermostats !== undefined) this.thermostats = data.thermostats;
+    if (data.locks !== undefined) this.locks = data.locks;
+    if (data.windowCoverings !== undefined)
+      this.windowCoverings = data.windowCoverings;
+    if (data.courtesy !== undefined) this.courtesy = data.courtesy;
+    if (data.cameras !== undefined) this.cameras = data.cameras;
+    if (data.mediaSources !== undefined) this.mediaSources = data.mediaSources;
+    if (data.motionSensors !== undefined)
+      this.motionSensors = data.motionSensors;
+    if (data.alarms !== undefined) this.alarms = data.alarms;
+    if (data.occupiedAt !== undefined) this.occupiedAt = data.occupiedAt;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
   }
 
   static getDevicePath(type) {
