@@ -18001,6 +18001,11 @@ const schema160 = {
                 enum: ["climate", "lights", "shades", "tv", "doors"],
               },
             },
+            excludedDeviceIds: {
+              type: "array",
+              items: { type: "string" },
+              default: [],
+            },
             commonAreas: {
               type: "object",
               properties: {
@@ -18989,10 +18994,14 @@ function validate61(
       if (data28.RoomControl !== undefined) {
         let data29 = data28.RoomControl;
         if (data29 && typeof data29 == "object" && !Array.isArray(data29)) {
+          if (data29.excludedDeviceIds === undefined) {
+            data29.excludedDeviceIds = [];
+          }
           for (const key1 in data29) {
             if (
               !(
                 key1 === "disabledSystems" ||
+                key1 === "excludedDeviceIds" ||
                 key1 === "commonAreas" ||
                 key1 === "alarmConfig"
               )
@@ -19088,20 +19097,61 @@ function validate61(
               errors++;
             }
           }
+          let data32 = data29.excludedDeviceIds;
+          if (Array.isArray(data32)) {
+            const len4 = data32.length;
+            for (let i4 = 0; i4 < len4; i4++) {
+              if (typeof data32[i4] !== "string") {
+                const err46 = {
+                  instancePath:
+                    instancePath +
+                    "/appFeatures/RoomControl/excludedDeviceIds/" +
+                    i4,
+                  schemaPath:
+                    "#/properties/appFeatures/properties/RoomControl/properties/excludedDeviceIds/items/type",
+                  keyword: "type",
+                  params: { type: "string" },
+                  message: "must be string",
+                };
+                if (vErrors === null) {
+                  vErrors = [err46];
+                } else {
+                  vErrors.push(err46);
+                }
+                errors++;
+              }
+            }
+          } else {
+            const err47 = {
+              instancePath:
+                instancePath + "/appFeatures/RoomControl/excludedDeviceIds",
+              schemaPath:
+                "#/properties/appFeatures/properties/RoomControl/properties/excludedDeviceIds/type",
+              keyword: "type",
+              params: { type: "array" },
+              message: "must be array",
+            };
+            if (vErrors === null) {
+              vErrors = [err47];
+            } else {
+              vErrors.push(err47);
+            }
+            errors++;
+          }
           if (data29.commonAreas !== undefined) {
-            let data32 = data29.commonAreas;
-            if (data32 && typeof data32 == "object" && !Array.isArray(data32)) {
-              if (data32.spaces !== undefined) {
-                let data33 = data32.spaces;
-                if (Array.isArray(data33)) {
-                  const len4 = data33.length;
-                  for (let i4 = 0; i4 < len4; i4++) {
-                    if (typeof data33[i4] !== "string") {
-                      const err46 = {
+            let data34 = data29.commonAreas;
+            if (data34 && typeof data34 == "object" && !Array.isArray(data34)) {
+              if (data34.spaces !== undefined) {
+                let data35 = data34.spaces;
+                if (Array.isArray(data35)) {
+                  const len5 = data35.length;
+                  for (let i5 = 0; i5 < len5; i5++) {
+                    if (typeof data35[i5] !== "string") {
+                      const err48 = {
                         instancePath:
                           instancePath +
                           "/appFeatures/RoomControl/commonAreas/spaces/" +
-                          i4,
+                          i5,
                         schemaPath:
                           "#/properties/appFeatures/properties/RoomControl/properties/commonAreas/properties/spaces/items/type",
                         keyword: "type",
@@ -19109,15 +19159,15 @@ function validate61(
                         message: "must be string",
                       };
                       if (vErrors === null) {
-                        vErrors = [err46];
+                        vErrors = [err48];
                       } else {
-                        vErrors.push(err46);
+                        vErrors.push(err48);
                       }
                       errors++;
                     }
                   }
                 } else {
-                  const err47 = {
+                  const err49 = {
                     instancePath:
                       instancePath +
                       "/appFeatures/RoomControl/commonAreas/spaces",
@@ -19128,15 +19178,15 @@ function validate61(
                     message: "must be array",
                   };
                   if (vErrors === null) {
-                    vErrors = [err47];
+                    vErrors = [err49];
                   } else {
-                    vErrors.push(err47);
+                    vErrors.push(err49);
                   }
                   errors++;
                 }
               }
             } else {
-              const err48 = {
+              const err50 = {
                 instancePath:
                   instancePath + "/appFeatures/RoomControl/commonAreas",
                 schemaPath:
@@ -19146,34 +19196,34 @@ function validate61(
                 message: "must be object",
               };
               if (vErrors === null) {
-                vErrors = [err48];
+                vErrors = [err50];
               } else {
-                vErrors.push(err48);
+                vErrors.push(err50);
               }
               errors++;
             }
           }
           if (data29.alarmConfig !== undefined) {
-            let data35 = data29.alarmConfig;
-            if (data35 && typeof data35 == "object" && !Array.isArray(data35)) {
-              for (const key2 in data35) {
+            let data37 = data29.alarmConfig;
+            if (data37 && typeof data37 == "object" && !Array.isArray(data37)) {
+              for (const key2 in data37) {
                 if (pattern5.test(key2)) {
-                  let data36 = data35[key2];
+                  let data38 = data37[key2];
                   if (
-                    data36 &&
-                    typeof data36 == "object" &&
-                    !Array.isArray(data36)
+                    data38 &&
+                    typeof data38 == "object" &&
+                    !Array.isArray(data38)
                   ) {
-                    if (data36.zoneLockMap !== undefined) {
-                      let data37 = data36.zoneLockMap;
+                    if (data38.zoneLockMap !== undefined) {
+                      let data39 = data38.zoneLockMap;
                       if (
-                        data37 &&
-                        typeof data37 == "object" &&
-                        !Array.isArray(data37)
+                        data39 &&
+                        typeof data39 == "object" &&
+                        !Array.isArray(data39)
                       ) {
-                        for (const key3 in data37) {
-                          if (typeof data37[key3] !== "string") {
-                            const err49 = {
+                        for (const key3 in data39) {
+                          if (typeof data39[key3] !== "string") {
+                            const err51 = {
                               instancePath:
                                 instancePath +
                                 "/appFeatures/RoomControl/alarmConfig/" +
@@ -19187,15 +19237,15 @@ function validate61(
                               message: "must be string",
                             };
                             if (vErrors === null) {
-                              vErrors = [err49];
+                              vErrors = [err51];
                             } else {
-                              vErrors.push(err49);
+                              vErrors.push(err51);
                             }
                             errors++;
                           }
                         }
                       } else {
-                        const err50 = {
+                        const err52 = {
                           instancePath:
                             instancePath +
                             "/appFeatures/RoomControl/alarmConfig/" +
@@ -19208,15 +19258,15 @@ function validate61(
                           message: "must be object",
                         };
                         if (vErrors === null) {
-                          vErrors = [err50];
+                          vErrors = [err52];
                         } else {
-                          vErrors.push(err50);
+                          vErrors.push(err52);
                         }
                         errors++;
                       }
                     }
                   } else {
-                    const err51 = {
+                    const err53 = {
                       instancePath:
                         instancePath +
                         "/appFeatures/RoomControl/alarmConfig/" +
@@ -19228,16 +19278,16 @@ function validate61(
                       message: "must be object",
                     };
                     if (vErrors === null) {
-                      vErrors = [err51];
+                      vErrors = [err53];
                     } else {
-                      vErrors.push(err51);
+                      vErrors.push(err53);
                     }
                     errors++;
                   }
                 }
               }
             } else {
-              const err52 = {
+              const err54 = {
                 instancePath:
                   instancePath + "/appFeatures/RoomControl/alarmConfig",
                 schemaPath:
@@ -19247,15 +19297,15 @@ function validate61(
                 message: "must be object",
               };
               if (vErrors === null) {
-                vErrors = [err52];
+                vErrors = [err54];
               } else {
-                vErrors.push(err52);
+                vErrors.push(err54);
               }
               errors++;
             }
           }
         } else {
-          const err53 = {
+          const err55 = {
             instancePath: instancePath + "/appFeatures/RoomControl",
             schemaPath: "#/properties/appFeatures/properties/RoomControl/type",
             keyword: "type",
@@ -19263,33 +19313,33 @@ function validate61(
             message: "must be object",
           };
           if (vErrors === null) {
-            vErrors = [err53];
+            vErrors = [err55];
           } else {
-            vErrors.push(err53);
+            vErrors.push(err55);
           }
           errors++;
         }
       }
       if (data28.CheckIn !== undefined) {
-        let data39 = data28.CheckIn;
-        if (data39 && typeof data39 == "object" && !Array.isArray(data39)) {
-          if (data39.earlyCheckIn !== undefined) {
-            let data40 = data39.earlyCheckIn;
-            if (data40 && typeof data40 == "object" && !Array.isArray(data40)) {
-              if (data40.dynamic === undefined) {
-                data40.dynamic = false;
+        let data41 = data28.CheckIn;
+        if (data41 && typeof data41 == "object" && !Array.isArray(data41)) {
+          if (data41.earlyCheckIn !== undefined) {
+            let data42 = data41.earlyCheckIn;
+            if (data42 && typeof data42 == "object" && !Array.isArray(data42)) {
+              if (data42.dynamic === undefined) {
+                data42.dynamic = false;
               }
-              if (data40.minimumPrice === undefined) {
-                data40.minimumPrice = 10;
+              if (data42.minimumPrice === undefined) {
+                data42.minimumPrice = 10;
               }
-              if (data40.maximumPrice === undefined) {
-                data40.maximumPrice = 50;
+              if (data42.maximumPrice === undefined) {
+                data42.maximumPrice = 50;
               }
-              if (data40.priceRatioPerHour === undefined) {
-                data40.priceRatioPerHour = 0.1;
+              if (data42.priceRatioPerHour === undefined) {
+                data42.priceRatioPerHour = 0.1;
               }
-              if (data40.dynamic === undefined) {
-                const err54 = {
+              if (data42.dynamic === undefined) {
+                const err56 = {
                   instancePath:
                     instancePath + "/appFeatures/CheckIn/earlyCheckIn",
                   schemaPath:
@@ -19299,14 +19349,14 @@ function validate61(
                   message: "must have required property '" + "dynamic" + "'",
                 };
                 if (vErrors === null) {
-                  vErrors = [err54];
+                  vErrors = [err56];
                 } else {
-                  vErrors.push(err54);
+                  vErrors.push(err56);
                 }
                 errors++;
               }
-              if (typeof data40.dynamic !== "boolean") {
-                const err55 = {
+              if (typeof data42.dynamic !== "boolean") {
+                const err57 = {
                   instancePath:
                     instancePath + "/appFeatures/CheckIn/earlyCheckIn/dynamic",
                   schemaPath:
@@ -19316,55 +19366,19 @@ function validate61(
                   message: "must be boolean",
                 };
                 if (vErrors === null) {
-                  vErrors = [err55];
-                } else {
-                  vErrors.push(err55);
-                }
-                errors++;
-              }
-              if (!(typeof data40.minimumPrice == "number")) {
-                const err56 = {
-                  instancePath:
-                    instancePath +
-                    "/appFeatures/CheckIn/earlyCheckIn/minimumPrice",
-                  schemaPath:
-                    "#/properties/appFeatures/properties/CheckIn/properties/earlyCheckIn/properties/minimumPrice/type",
-                  keyword: "type",
-                  params: { type: "number" },
-                  message: "must be number",
-                };
-                if (vErrors === null) {
-                  vErrors = [err56];
-                } else {
-                  vErrors.push(err56);
-                }
-                errors++;
-              }
-              if (!(typeof data40.maximumPrice == "number")) {
-                const err57 = {
-                  instancePath:
-                    instancePath +
-                    "/appFeatures/CheckIn/earlyCheckIn/maximumPrice",
-                  schemaPath:
-                    "#/properties/appFeatures/properties/CheckIn/properties/earlyCheckIn/properties/maximumPrice/type",
-                  keyword: "type",
-                  params: { type: "number" },
-                  message: "must be number",
-                };
-                if (vErrors === null) {
                   vErrors = [err57];
                 } else {
                   vErrors.push(err57);
                 }
                 errors++;
               }
-              if (!(typeof data40.priceRatioPerHour == "number")) {
+              if (!(typeof data42.minimumPrice == "number")) {
                 const err58 = {
                   instancePath:
                     instancePath +
-                    "/appFeatures/CheckIn/earlyCheckIn/priceRatioPerHour",
+                    "/appFeatures/CheckIn/earlyCheckIn/minimumPrice",
                   schemaPath:
-                    "#/properties/appFeatures/properties/CheckIn/properties/earlyCheckIn/properties/priceRatioPerHour/type",
+                    "#/properties/appFeatures/properties/CheckIn/properties/earlyCheckIn/properties/minimumPrice/type",
                   keyword: "type",
                   params: { type: "number" },
                   message: "must be number",
@@ -19376,9 +19390,45 @@ function validate61(
                 }
                 errors++;
               }
-              if (data40.minimumTime !== undefined) {
-                if (typeof data40.minimumTime !== "string") {
-                  const err59 = {
+              if (!(typeof data42.maximumPrice == "number")) {
+                const err59 = {
+                  instancePath:
+                    instancePath +
+                    "/appFeatures/CheckIn/earlyCheckIn/maximumPrice",
+                  schemaPath:
+                    "#/properties/appFeatures/properties/CheckIn/properties/earlyCheckIn/properties/maximumPrice/type",
+                  keyword: "type",
+                  params: { type: "number" },
+                  message: "must be number",
+                };
+                if (vErrors === null) {
+                  vErrors = [err59];
+                } else {
+                  vErrors.push(err59);
+                }
+                errors++;
+              }
+              if (!(typeof data42.priceRatioPerHour == "number")) {
+                const err60 = {
+                  instancePath:
+                    instancePath +
+                    "/appFeatures/CheckIn/earlyCheckIn/priceRatioPerHour",
+                  schemaPath:
+                    "#/properties/appFeatures/properties/CheckIn/properties/earlyCheckIn/properties/priceRatioPerHour/type",
+                  keyword: "type",
+                  params: { type: "number" },
+                  message: "must be number",
+                };
+                if (vErrors === null) {
+                  vErrors = [err60];
+                } else {
+                  vErrors.push(err60);
+                }
+                errors++;
+              }
+              if (data42.minimumTime !== undefined) {
+                if (typeof data42.minimumTime !== "string") {
+                  const err61 = {
                     instancePath:
                       instancePath +
                       "/appFeatures/CheckIn/earlyCheckIn/minimumTime",
@@ -19389,15 +19439,15 @@ function validate61(
                     message: "must be string",
                   };
                   if (vErrors === null) {
-                    vErrors = [err59];
+                    vErrors = [err61];
                   } else {
-                    vErrors.push(err59);
+                    vErrors.push(err61);
                   }
                   errors++;
                 }
               }
             } else {
-              const err60 = {
+              const err62 = {
                 instancePath:
                   instancePath + "/appFeatures/CheckIn/earlyCheckIn",
                 schemaPath:
@@ -19407,9 +19457,9 @@ function validate61(
                 message: "must be object",
               };
               if (vErrors === null) {
-                vErrors = [err60];
+                vErrors = [err62];
               } else {
-                vErrors.push(err60);
+                vErrors.push(err62);
               }
               errors++;
             }
@@ -19417,25 +19467,25 @@ function validate61(
         }
       }
       if (data28.CheckOut !== undefined) {
-        let data46 = data28.CheckOut;
-        if (data46 && typeof data46 == "object" && !Array.isArray(data46)) {
-          if (data46.lateCheckOut !== undefined) {
-            let data47 = data46.lateCheckOut;
-            if (data47 && typeof data47 == "object" && !Array.isArray(data47)) {
-              if (data47.dynamic === undefined) {
-                data47.dynamic = false;
+        let data48 = data28.CheckOut;
+        if (data48 && typeof data48 == "object" && !Array.isArray(data48)) {
+          if (data48.lateCheckOut !== undefined) {
+            let data49 = data48.lateCheckOut;
+            if (data49 && typeof data49 == "object" && !Array.isArray(data49)) {
+              if (data49.dynamic === undefined) {
+                data49.dynamic = false;
               }
-              if (data47.minimumPrice === undefined) {
-                data47.minimumPrice = 10;
+              if (data49.minimumPrice === undefined) {
+                data49.minimumPrice = 10;
               }
-              if (data47.maximumPrice === undefined) {
-                data47.maximumPrice = 50;
+              if (data49.maximumPrice === undefined) {
+                data49.maximumPrice = 50;
               }
-              if (data47.priceRatioPerHour === undefined) {
-                data47.priceRatioPerHour = 0.1;
+              if (data49.priceRatioPerHour === undefined) {
+                data49.priceRatioPerHour = 0.1;
               }
-              if (data47.dynamic === undefined) {
-                const err61 = {
+              if (data49.dynamic === undefined) {
+                const err63 = {
                   instancePath:
                     instancePath + "/appFeatures/CheckOut/lateCheckOut",
                   schemaPath:
@@ -19445,14 +19495,14 @@ function validate61(
                   message: "must have required property '" + "dynamic" + "'",
                 };
                 if (vErrors === null) {
-                  vErrors = [err61];
+                  vErrors = [err63];
                 } else {
-                  vErrors.push(err61);
+                  vErrors.push(err63);
                 }
                 errors++;
               }
-              if (typeof data47.dynamic !== "boolean") {
-                const err62 = {
+              if (typeof data49.dynamic !== "boolean") {
+                const err64 = {
                   instancePath:
                     instancePath + "/appFeatures/CheckOut/lateCheckOut/dynamic",
                   schemaPath:
@@ -19462,55 +19512,19 @@ function validate61(
                   message: "must be boolean",
                 };
                 if (vErrors === null) {
-                  vErrors = [err62];
-                } else {
-                  vErrors.push(err62);
-                }
-                errors++;
-              }
-              if (!(typeof data47.minimumPrice == "number")) {
-                const err63 = {
-                  instancePath:
-                    instancePath +
-                    "/appFeatures/CheckOut/lateCheckOut/minimumPrice",
-                  schemaPath:
-                    "#/properties/appFeatures/properties/CheckOut/properties/lateCheckOut/properties/minimumPrice/type",
-                  keyword: "type",
-                  params: { type: "number" },
-                  message: "must be number",
-                };
-                if (vErrors === null) {
-                  vErrors = [err63];
-                } else {
-                  vErrors.push(err63);
-                }
-                errors++;
-              }
-              if (!(typeof data47.maximumPrice == "number")) {
-                const err64 = {
-                  instancePath:
-                    instancePath +
-                    "/appFeatures/CheckOut/lateCheckOut/maximumPrice",
-                  schemaPath:
-                    "#/properties/appFeatures/properties/CheckOut/properties/lateCheckOut/properties/maximumPrice/type",
-                  keyword: "type",
-                  params: { type: "number" },
-                  message: "must be number",
-                };
-                if (vErrors === null) {
                   vErrors = [err64];
                 } else {
                   vErrors.push(err64);
                 }
                 errors++;
               }
-              if (!(typeof data47.priceRatioPerHour == "number")) {
+              if (!(typeof data49.minimumPrice == "number")) {
                 const err65 = {
                   instancePath:
                     instancePath +
-                    "/appFeatures/CheckOut/lateCheckOut/priceRatioPerHour",
+                    "/appFeatures/CheckOut/lateCheckOut/minimumPrice",
                   schemaPath:
-                    "#/properties/appFeatures/properties/CheckOut/properties/lateCheckOut/properties/priceRatioPerHour/type",
+                    "#/properties/appFeatures/properties/CheckOut/properties/lateCheckOut/properties/minimumPrice/type",
                   keyword: "type",
                   params: { type: "number" },
                   message: "must be number",
@@ -19522,8 +19536,44 @@ function validate61(
                 }
                 errors++;
               }
+              if (!(typeof data49.maximumPrice == "number")) {
+                const err66 = {
+                  instancePath:
+                    instancePath +
+                    "/appFeatures/CheckOut/lateCheckOut/maximumPrice",
+                  schemaPath:
+                    "#/properties/appFeatures/properties/CheckOut/properties/lateCheckOut/properties/maximumPrice/type",
+                  keyword: "type",
+                  params: { type: "number" },
+                  message: "must be number",
+                };
+                if (vErrors === null) {
+                  vErrors = [err66];
+                } else {
+                  vErrors.push(err66);
+                }
+                errors++;
+              }
+              if (!(typeof data49.priceRatioPerHour == "number")) {
+                const err67 = {
+                  instancePath:
+                    instancePath +
+                    "/appFeatures/CheckOut/lateCheckOut/priceRatioPerHour",
+                  schemaPath:
+                    "#/properties/appFeatures/properties/CheckOut/properties/lateCheckOut/properties/priceRatioPerHour/type",
+                  keyword: "type",
+                  params: { type: "number" },
+                  message: "must be number",
+                };
+                if (vErrors === null) {
+                  vErrors = [err67];
+                } else {
+                  vErrors.push(err67);
+                }
+                errors++;
+              }
             } else {
-              const err66 = {
+              const err68 = {
                 instancePath:
                   instancePath + "/appFeatures/CheckOut/lateCheckOut",
                 schemaPath:
@@ -19533,9 +19583,9 @@ function validate61(
                 message: "must be object",
               };
               if (vErrors === null) {
-                vErrors = [err66];
+                vErrors = [err68];
               } else {
-                vErrors.push(err66);
+                vErrors.push(err68);
               }
               errors++;
             }
@@ -19543,61 +19593,29 @@ function validate61(
         }
       }
       if (data28.Concierge !== undefined) {
-        let data52 = data28.Concierge;
-        if (data52 && typeof data52 == "object" && !Array.isArray(data52)) {
-          if (data52.timeTracking === undefined) {
-            data52.timeTracking = false;
+        let data54 = data28.Concierge;
+        if (data54 && typeof data54 == "object" && !Array.isArray(data54)) {
+          if (data54.timeTracking === undefined) {
+            data54.timeTracking = false;
           }
-          if (data52.tipping === undefined) {
-            data52.tipping = false;
+          if (data54.tipping === undefined) {
+            data54.tipping = false;
           }
-          if (data52.ratings === undefined) {
-            data52.ratings = true;
+          if (data54.ratings === undefined) {
+            data54.ratings = true;
           }
-          if (data52.newTicketCCs === undefined) {
-            data52.newTicketCCs = [];
+          if (data54.newTicketCCs === undefined) {
+            data54.newTicketCCs = [];
           }
-          if (data52.newMessageChannel === undefined) {
-            data52.newMessageChannel = "sms";
+          if (data54.newMessageChannel === undefined) {
+            data54.newMessageChannel = "sms";
           }
-          if (typeof data52.timeTracking !== "boolean") {
-            const err67 = {
+          if (typeof data54.timeTracking !== "boolean") {
+            const err69 = {
               instancePath:
                 instancePath + "/appFeatures/Concierge/timeTracking",
               schemaPath:
                 "#/properties/appFeatures/properties/Concierge/properties/timeTracking/type",
-              keyword: "type",
-              params: { type: "boolean" },
-              message: "must be boolean",
-            };
-            if (vErrors === null) {
-              vErrors = [err67];
-            } else {
-              vErrors.push(err67);
-            }
-            errors++;
-          }
-          if (typeof data52.tipping !== "boolean") {
-            const err68 = {
-              instancePath: instancePath + "/appFeatures/Concierge/tipping",
-              schemaPath:
-                "#/properties/appFeatures/properties/Concierge/properties/tipping/type",
-              keyword: "type",
-              params: { type: "boolean" },
-              message: "must be boolean",
-            };
-            if (vErrors === null) {
-              vErrors = [err68];
-            } else {
-              vErrors.push(err68);
-            }
-            errors++;
-          }
-          if (typeof data52.ratings !== "boolean") {
-            const err69 = {
-              instancePath: instancePath + "/appFeatures/Concierge/ratings",
-              schemaPath:
-                "#/properties/appFeatures/properties/Concierge/properties/ratings/type",
               keyword: "type",
               params: { type: "boolean" },
               message: "must be boolean",
@@ -19609,14 +19627,46 @@ function validate61(
             }
             errors++;
           }
-          let data56 = data52.newTicketCCs;
-          if (Array.isArray(data56)) {
-            const len5 = data56.length;
-            for (let i5 = 0; i5 < len5; i5++) {
-              if (typeof data56[i5] !== "string") {
-                const err70 = {
+          if (typeof data54.tipping !== "boolean") {
+            const err70 = {
+              instancePath: instancePath + "/appFeatures/Concierge/tipping",
+              schemaPath:
+                "#/properties/appFeatures/properties/Concierge/properties/tipping/type",
+              keyword: "type",
+              params: { type: "boolean" },
+              message: "must be boolean",
+            };
+            if (vErrors === null) {
+              vErrors = [err70];
+            } else {
+              vErrors.push(err70);
+            }
+            errors++;
+          }
+          if (typeof data54.ratings !== "boolean") {
+            const err71 = {
+              instancePath: instancePath + "/appFeatures/Concierge/ratings",
+              schemaPath:
+                "#/properties/appFeatures/properties/Concierge/properties/ratings/type",
+              keyword: "type",
+              params: { type: "boolean" },
+              message: "must be boolean",
+            };
+            if (vErrors === null) {
+              vErrors = [err71];
+            } else {
+              vErrors.push(err71);
+            }
+            errors++;
+          }
+          let data58 = data54.newTicketCCs;
+          if (Array.isArray(data58)) {
+            const len6 = data58.length;
+            for (let i6 = 0; i6 < len6; i6++) {
+              if (typeof data58[i6] !== "string") {
+                const err72 = {
                   instancePath:
-                    instancePath + "/appFeatures/Concierge/newTicketCCs/" + i5,
+                    instancePath + "/appFeatures/Concierge/newTicketCCs/" + i6,
                   schemaPath:
                     "#/properties/appFeatures/properties/Concierge/properties/newTicketCCs/items/type",
                   keyword: "type",
@@ -19624,15 +19674,15 @@ function validate61(
                   message: "must be string",
                 };
                 if (vErrors === null) {
-                  vErrors = [err70];
+                  vErrors = [err72];
                 } else {
-                  vErrors.push(err70);
+                  vErrors.push(err72);
                 }
                 errors++;
               }
             }
           } else {
-            const err71 = {
+            const err73 = {
               instancePath:
                 instancePath + "/appFeatures/Concierge/newTicketCCs",
               schemaPath:
@@ -19642,15 +19692,15 @@ function validate61(
               message: "must be array",
             };
             if (vErrors === null) {
-              vErrors = [err71];
+              vErrors = [err73];
             } else {
-              vErrors.push(err71);
+              vErrors.push(err73);
             }
             errors++;
           }
-          let data58 = data52.newMessageChannel;
-          if (typeof data58 !== "string" && data58 !== null) {
-            const err72 = {
+          let data60 = data54.newMessageChannel;
+          if (typeof data60 !== "string" && data60 !== null) {
+            const err74 = {
               instancePath:
                 instancePath + "/appFeatures/Concierge/newMessageChannel",
               schemaPath:
@@ -19663,14 +19713,14 @@ function validate61(
               message: "must be string,null",
             };
             if (vErrors === null) {
-              vErrors = [err72];
+              vErrors = [err74];
             } else {
-              vErrors.push(err72);
+              vErrors.push(err74);
             }
             errors++;
           }
-          if (!(data58 === "sms" || data58 === "email")) {
-            const err73 = {
+          if (!(data60 === "sms" || data60 === "email")) {
+            const err75 = {
               instancePath:
                 instancePath + "/appFeatures/Concierge/newMessageChannel",
               schemaPath:
@@ -19684,73 +19734,34 @@ function validate61(
               message: "must be equal to one of the allowed values",
             };
             if (vErrors === null) {
-              vErrors = [err73];
+              vErrors = [err75];
             } else {
-              vErrors.push(err73);
+              vErrors.push(err75);
             }
             errors++;
           }
-          if (data52.quickServices !== undefined) {
-            let data59 = data52.quickServices;
-            if (Array.isArray(data59)) {
-              const len6 = data59.length;
-              for (let i6 = 0; i6 < len6; i6++) {
-                let data60 = data59[i6];
+          if (data54.quickServices !== undefined) {
+            let data61 = data54.quickServices;
+            if (Array.isArray(data61)) {
+              const len7 = data61.length;
+              for (let i7 = 0; i7 < len7; i7++) {
+                let data62 = data61[i7];
                 if (
-                  data60 &&
-                  typeof data60 == "object" &&
-                  !Array.isArray(data60)
+                  data62 &&
+                  typeof data62 == "object" &&
+                  !Array.isArray(data62)
                 ) {
-                  if (data60.name === undefined) {
-                    const err74 = {
+                  if (data62.name === undefined) {
+                    const err76 = {
                       instancePath:
                         instancePath +
                         "/appFeatures/Concierge/quickServices/" +
-                        i6,
+                        i7,
                       schemaPath:
                         "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/required",
                       keyword: "required",
                       params: { missingProperty: "name" },
                       message: "must have required property '" + "name" + "'",
-                    };
-                    if (vErrors === null) {
-                      vErrors = [err74];
-                    } else {
-                      vErrors.push(err74);
-                    }
-                    errors++;
-                  }
-                  if (data60.description === undefined) {
-                    const err75 = {
-                      instancePath:
-                        instancePath +
-                        "/appFeatures/Concierge/quickServices/" +
-                        i6,
-                      schemaPath:
-                        "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/required",
-                      keyword: "required",
-                      params: { missingProperty: "description" },
-                      message:
-                        "must have required property '" + "description" + "'",
-                    };
-                    if (vErrors === null) {
-                      vErrors = [err75];
-                    } else {
-                      vErrors.push(err75);
-                    }
-                    errors++;
-                  }
-                  if (data60.image === undefined) {
-                    const err76 = {
-                      instancePath:
-                        instancePath +
-                        "/appFeatures/Concierge/quickServices/" +
-                        i6,
-                      schemaPath:
-                        "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/required",
-                      keyword: "required",
-                      params: { missingProperty: "image" },
-                      message: "must have required property '" + "image" + "'",
                     };
                     if (vErrors === null) {
                       vErrors = [err76];
@@ -19759,60 +19770,55 @@ function validate61(
                     }
                     errors++;
                   }
-                  if (data60.name !== undefined) {
-                    if (typeof data60.name !== "string") {
-                      const err77 = {
-                        instancePath:
-                          instancePath +
-                          "/appFeatures/Concierge/quickServices/" +
-                          i6 +
-                          "/name",
-                        schemaPath:
-                          "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/properties/name/type",
-                        keyword: "type",
-                        params: { type: "string" },
-                        message: "must be string",
-                      };
-                      if (vErrors === null) {
-                        vErrors = [err77];
-                      } else {
-                        vErrors.push(err77);
-                      }
-                      errors++;
+                  if (data62.description === undefined) {
+                    const err77 = {
+                      instancePath:
+                        instancePath +
+                        "/appFeatures/Concierge/quickServices/" +
+                        i7,
+                      schemaPath:
+                        "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/required",
+                      keyword: "required",
+                      params: { missingProperty: "description" },
+                      message:
+                        "must have required property '" + "description" + "'",
+                    };
+                    if (vErrors === null) {
+                      vErrors = [err77];
+                    } else {
+                      vErrors.push(err77);
                     }
+                    errors++;
                   }
-                  if (data60.description !== undefined) {
-                    if (typeof data60.description !== "string") {
-                      const err78 = {
-                        instancePath:
-                          instancePath +
-                          "/appFeatures/Concierge/quickServices/" +
-                          i6 +
-                          "/description",
-                        schemaPath:
-                          "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/properties/description/type",
-                        keyword: "type",
-                        params: { type: "string" },
-                        message: "must be string",
-                      };
-                      if (vErrors === null) {
-                        vErrors = [err78];
-                      } else {
-                        vErrors.push(err78);
-                      }
-                      errors++;
+                  if (data62.image === undefined) {
+                    const err78 = {
+                      instancePath:
+                        instancePath +
+                        "/appFeatures/Concierge/quickServices/" +
+                        i7,
+                      schemaPath:
+                        "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/required",
+                      keyword: "required",
+                      params: { missingProperty: "image" },
+                      message: "must have required property '" + "image" + "'",
+                    };
+                    if (vErrors === null) {
+                      vErrors = [err78];
+                    } else {
+                      vErrors.push(err78);
                     }
+                    errors++;
                   }
-                  if (data60.department !== undefined) {
-                    if (typeof data60.department !== "string") {
+                  if (data62.name !== undefined) {
+                    if (typeof data62.name !== "string") {
                       const err79 = {
                         instancePath:
                           instancePath +
                           "/appFeatures/Concierge/quickServices/" +
-                          i6 +
-                          "/department",
+                          i7 +
+                          "/name",
                         schemaPath:
-                          "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/properties/department/type",
+                          "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/properties/name/type",
                         keyword: "type",
                         params: { type: "string" },
                         message: "must be string",
@@ -19825,15 +19831,59 @@ function validate61(
                       errors++;
                     }
                   }
-                  if (data60.image !== undefined) {
-                    if (
-                      !validate15(data60.image, {
+                  if (data62.description !== undefined) {
+                    if (typeof data62.description !== "string") {
+                      const err80 = {
                         instancePath:
                           instancePath +
                           "/appFeatures/Concierge/quickServices/" +
-                          i6 +
+                          i7 +
+                          "/description",
+                        schemaPath:
+                          "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/properties/description/type",
+                        keyword: "type",
+                        params: { type: "string" },
+                        message: "must be string",
+                      };
+                      if (vErrors === null) {
+                        vErrors = [err80];
+                      } else {
+                        vErrors.push(err80);
+                      }
+                      errors++;
+                    }
+                  }
+                  if (data62.department !== undefined) {
+                    if (typeof data62.department !== "string") {
+                      const err81 = {
+                        instancePath:
+                          instancePath +
+                          "/appFeatures/Concierge/quickServices/" +
+                          i7 +
+                          "/department",
+                        schemaPath:
+                          "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/properties/department/type",
+                        keyword: "type",
+                        params: { type: "string" },
+                        message: "must be string",
+                      };
+                      if (vErrors === null) {
+                        vErrors = [err81];
+                      } else {
+                        vErrors.push(err81);
+                      }
+                      errors++;
+                    }
+                  }
+                  if (data62.image !== undefined) {
+                    if (
+                      !validate15(data62.image, {
+                        instancePath:
+                          instancePath +
+                          "/appFeatures/Concierge/quickServices/" +
+                          i7 +
                           "/image",
-                        parentData: data60,
+                        parentData: data62,
                         parentDataProperty: "image",
                         rootData,
                       })
@@ -19846,57 +19896,16 @@ function validate61(
                     }
                   }
                 } else {
-                  const err80 = {
+                  const err82 = {
                     instancePath:
                       instancePath +
                       "/appFeatures/Concierge/quickServices/" +
-                      i6,
+                      i7,
                     schemaPath:
                       "#/properties/appFeatures/properties/Concierge/properties/quickServices/items/type",
                     keyword: "type",
                     params: { type: "object" },
                     message: "must be object",
-                  };
-                  if (vErrors === null) {
-                    vErrors = [err80];
-                  } else {
-                    vErrors.push(err80);
-                  }
-                  errors++;
-                }
-              }
-            } else {
-              const err81 = {
-                instancePath:
-                  instancePath + "/appFeatures/Concierge/quickServices",
-                schemaPath:
-                  "#/properties/appFeatures/properties/Concierge/properties/quickServices/type",
-                keyword: "type",
-                params: { type: "array" },
-                message: "must be array",
-              };
-              if (vErrors === null) {
-                vErrors = [err81];
-              } else {
-                vErrors.push(err81);
-              }
-              errors++;
-            }
-          }
-          if (data52.issues !== undefined) {
-            let data65 = data52.issues;
-            if (data65 && typeof data65 == "object" && !Array.isArray(data65)) {
-              if (data65.syncWithPropertyId !== undefined) {
-                if (typeof data65.syncWithPropertyId !== "string") {
-                  const err82 = {
-                    instancePath:
-                      instancePath +
-                      "/appFeatures/Concierge/issues/syncWithPropertyId",
-                    schemaPath:
-                      "#/properties/appFeatures/properties/Concierge/properties/issues/properties/syncWithPropertyId/type",
-                    keyword: "type",
-                    params: { type: "string" },
-                    message: "must be string",
                   };
                   if (vErrors === null) {
                     vErrors = [err82];
@@ -19908,12 +19917,13 @@ function validate61(
               }
             } else {
               const err83 = {
-                instancePath: instancePath + "/appFeatures/Concierge/issues",
+                instancePath:
+                  instancePath + "/appFeatures/Concierge/quickServices",
                 schemaPath:
-                  "#/properties/appFeatures/properties/Concierge/properties/issues/type",
+                  "#/properties/appFeatures/properties/Concierge/properties/quickServices/type",
                 keyword: "type",
-                params: { type: "object" },
-                message: "must be object",
+                params: { type: "array" },
+                message: "must be array",
               };
               if (vErrors === null) {
                 vErrors = [err83];
@@ -19923,41 +19933,37 @@ function validate61(
               errors++;
             }
           }
-        } else {
-          const err84 = {
-            instancePath: instancePath + "/appFeatures/Concierge",
-            schemaPath: "#/properties/appFeatures/properties/Concierge/type",
-            keyword: "type",
-            params: { type: "object" },
-            message: "must be object",
-          };
-          if (vErrors === null) {
-            vErrors = [err84];
-          } else {
-            vErrors.push(err84);
-          }
-          errors++;
-        }
-      }
-      if (data28.DigitalKey !== undefined) {
-        let data67 = data28.DigitalKey;
-        if (data67 && typeof data67 == "object" && !Array.isArray(data67)) {
-          if (data67.systemOnline === undefined) {
-            data67.systemOnline = false;
-          }
-          if (data67.systemConfig === undefined) {
-            data67.systemConfig = {};
-          }
-          if (data67.system !== undefined) {
-            let data68 = data67.system;
-            if (typeof data68 !== "string") {
+          if (data54.issues !== undefined) {
+            let data67 = data54.issues;
+            if (data67 && typeof data67 == "object" && !Array.isArray(data67)) {
+              if (data67.syncWithPropertyId !== undefined) {
+                if (typeof data67.syncWithPropertyId !== "string") {
+                  const err84 = {
+                    instancePath:
+                      instancePath +
+                      "/appFeatures/Concierge/issues/syncWithPropertyId",
+                    schemaPath:
+                      "#/properties/appFeatures/properties/Concierge/properties/issues/properties/syncWithPropertyId/type",
+                    keyword: "type",
+                    params: { type: "string" },
+                    message: "must be string",
+                  };
+                  if (vErrors === null) {
+                    vErrors = [err84];
+                  } else {
+                    vErrors.push(err84);
+                  }
+                  errors++;
+                }
+              }
+            } else {
               const err85 = {
-                instancePath: instancePath + "/appFeatures/DigitalKey/system",
+                instancePath: instancePath + "/appFeatures/Concierge/issues",
                 schemaPath:
-                  "#/properties/appFeatures/properties/DigitalKey/properties/system/type",
+                  "#/properties/appFeatures/properties/Concierge/properties/issues/type",
                 keyword: "type",
-                params: { type: "string" },
-                message: "must be string",
+                params: { type: "object" },
+                message: "must be object",
               };
               if (vErrors === null) {
                 vErrors = [err85];
@@ -19966,8 +19972,52 @@ function validate61(
               }
               errors++;
             }
-            if (!(data68 === "salto" || data68 === "dormakaba")) {
-              const err86 = {
+          }
+        } else {
+          const err86 = {
+            instancePath: instancePath + "/appFeatures/Concierge",
+            schemaPath: "#/properties/appFeatures/properties/Concierge/type",
+            keyword: "type",
+            params: { type: "object" },
+            message: "must be object",
+          };
+          if (vErrors === null) {
+            vErrors = [err86];
+          } else {
+            vErrors.push(err86);
+          }
+          errors++;
+        }
+      }
+      if (data28.DigitalKey !== undefined) {
+        let data69 = data28.DigitalKey;
+        if (data69 && typeof data69 == "object" && !Array.isArray(data69)) {
+          if (data69.systemOnline === undefined) {
+            data69.systemOnline = false;
+          }
+          if (data69.systemConfig === undefined) {
+            data69.systemConfig = {};
+          }
+          if (data69.system !== undefined) {
+            let data70 = data69.system;
+            if (typeof data70 !== "string") {
+              const err87 = {
+                instancePath: instancePath + "/appFeatures/DigitalKey/system",
+                schemaPath:
+                  "#/properties/appFeatures/properties/DigitalKey/properties/system/type",
+                keyword: "type",
+                params: { type: "string" },
+                message: "must be string",
+              };
+              if (vErrors === null) {
+                vErrors = [err87];
+              } else {
+                vErrors.push(err87);
+              }
+              errors++;
+            }
+            if (!(data70 === "salto" || data70 === "dormakaba")) {
+              const err88 = {
                 instancePath: instancePath + "/appFeatures/DigitalKey/system",
                 schemaPath:
                   "#/properties/appFeatures/properties/DigitalKey/properties/system/enum",
@@ -19980,15 +20030,15 @@ function validate61(
                 message: "must be equal to one of the allowed values",
               };
               if (vErrors === null) {
-                vErrors = [err86];
+                vErrors = [err88];
               } else {
-                vErrors.push(err86);
+                vErrors.push(err88);
               }
               errors++;
             }
           }
-          if (typeof data67.systemOnline !== "boolean") {
-            const err87 = {
+          if (typeof data69.systemOnline !== "boolean") {
+            const err89 = {
               instancePath:
                 instancePath + "/appFeatures/DigitalKey/systemOnline",
               schemaPath:
@@ -19998,15 +20048,15 @@ function validate61(
               message: "must be boolean",
             };
             if (vErrors === null) {
-              vErrors = [err87];
+              vErrors = [err89];
             } else {
-              vErrors.push(err87);
+              vErrors.push(err89);
             }
             errors++;
           }
-          let data70 = data67.systemConfig;
-          if (data70 && typeof data70 == "object" && !Array.isArray(data70)) {
-            for (const key4 in data70) {
+          let data72 = data69.systemConfig;
+          if (data72 && typeof data72 == "object" && !Array.isArray(data72)) {
+            for (const key4 in data72) {
               if (
                 !(
                   key4 === "legicUrl" ||
@@ -20016,7 +20066,7 @@ function validate61(
                   key4 === "legicTechPassword"
                 )
               ) {
-                const err88 = {
+                const err90 = {
                   instancePath:
                     instancePath + "/appFeatures/DigitalKey/systemConfig",
                   schemaPath:
@@ -20026,18 +20076,18 @@ function validate61(
                   message: "must NOT have additional properties",
                 };
                 if (vErrors === null) {
-                  vErrors = [err88];
+                  vErrors = [err90];
                 } else {
-                  vErrors.push(err88);
+                  vErrors.push(err90);
                 }
                 errors++;
               }
             }
-            if (data70.legicUrl !== undefined) {
-              let data71 = data70.legicUrl;
-              if (typeof data71 === "string") {
-                if (!formats0(data71)) {
-                  const err89 = {
+            if (data72.legicUrl !== undefined) {
+              let data73 = data72.legicUrl;
+              if (typeof data73 === "string") {
+                if (!formats0(data73)) {
+                  const err91 = {
                     instancePath:
                       instancePath +
                       "/appFeatures/DigitalKey/systemConfig/legicUrl",
@@ -20048,14 +20098,14 @@ function validate61(
                     message: 'must match format "' + "uri" + '"',
                   };
                   if (vErrors === null) {
-                    vErrors = [err89];
+                    vErrors = [err91];
                   } else {
-                    vErrors.push(err89);
+                    vErrors.push(err91);
                   }
                   errors++;
                 }
               } else {
-                const err90 = {
+                const err92 = {
                   instancePath:
                     instancePath +
                     "/appFeatures/DigitalKey/systemConfig/legicUrl",
@@ -20066,46 +20116,6 @@ function validate61(
                   message: "must be string",
                 };
                 if (vErrors === null) {
-                  vErrors = [err90];
-                } else {
-                  vErrors.push(err90);
-                }
-                errors++;
-              }
-            }
-            if (data70.legicWalletName !== undefined) {
-              if (typeof data70.legicWalletName !== "string") {
-                const err91 = {
-                  instancePath:
-                    instancePath +
-                    "/appFeatures/DigitalKey/systemConfig/legicWalletName",
-                  schemaPath:
-                    "#/properties/appFeatures/properties/DigitalKey/properties/systemConfig/properties/legicWalletName/type",
-                  keyword: "type",
-                  params: { type: "string" },
-                  message: "must be string",
-                };
-                if (vErrors === null) {
-                  vErrors = [err91];
-                } else {
-                  vErrors.push(err91);
-                }
-                errors++;
-              }
-            }
-            if (data70.legicAppId !== undefined) {
-              if (!(typeof data70.legicAppId == "number")) {
-                const err92 = {
-                  instancePath:
-                    instancePath +
-                    "/appFeatures/DigitalKey/systemConfig/legicAppId",
-                  schemaPath:
-                    "#/properties/appFeatures/properties/DigitalKey/properties/systemConfig/properties/legicAppId/type",
-                  keyword: "type",
-                  params: { type: "number" },
-                  message: "must be number",
-                };
-                if (vErrors === null) {
                   vErrors = [err92];
                 } else {
                   vErrors.push(err92);
@@ -20113,14 +20123,14 @@ function validate61(
                 errors++;
               }
             }
-            if (data70.legicTechUsername !== undefined) {
-              if (typeof data70.legicTechUsername !== "string") {
+            if (data72.legicWalletName !== undefined) {
+              if (typeof data72.legicWalletName !== "string") {
                 const err93 = {
                   instancePath:
                     instancePath +
-                    "/appFeatures/DigitalKey/systemConfig/legicTechUsername",
+                    "/appFeatures/DigitalKey/systemConfig/legicWalletName",
                   schemaPath:
-                    "#/properties/appFeatures/properties/DigitalKey/properties/systemConfig/properties/legicTechUsername/type",
+                    "#/properties/appFeatures/properties/DigitalKey/properties/systemConfig/properties/legicWalletName/type",
                   keyword: "type",
                   params: { type: "string" },
                   message: "must be string",
@@ -20133,9 +20143,49 @@ function validate61(
                 errors++;
               }
             }
-            if (data70.legicTechPassword !== undefined) {
-              if (typeof data70.legicTechPassword !== "string") {
+            if (data72.legicAppId !== undefined) {
+              if (!(typeof data72.legicAppId == "number")) {
                 const err94 = {
+                  instancePath:
+                    instancePath +
+                    "/appFeatures/DigitalKey/systemConfig/legicAppId",
+                  schemaPath:
+                    "#/properties/appFeatures/properties/DigitalKey/properties/systemConfig/properties/legicAppId/type",
+                  keyword: "type",
+                  params: { type: "number" },
+                  message: "must be number",
+                };
+                if (vErrors === null) {
+                  vErrors = [err94];
+                } else {
+                  vErrors.push(err94);
+                }
+                errors++;
+              }
+            }
+            if (data72.legicTechUsername !== undefined) {
+              if (typeof data72.legicTechUsername !== "string") {
+                const err95 = {
+                  instancePath:
+                    instancePath +
+                    "/appFeatures/DigitalKey/systemConfig/legicTechUsername",
+                  schemaPath:
+                    "#/properties/appFeatures/properties/DigitalKey/properties/systemConfig/properties/legicTechUsername/type",
+                  keyword: "type",
+                  params: { type: "string" },
+                  message: "must be string",
+                };
+                if (vErrors === null) {
+                  vErrors = [err95];
+                } else {
+                  vErrors.push(err95);
+                }
+                errors++;
+              }
+            }
+            if (data72.legicTechPassword !== undefined) {
+              if (typeof data72.legicTechPassword !== "string") {
+                const err96 = {
                   instancePath:
                     instancePath +
                     "/appFeatures/DigitalKey/systemConfig/legicTechPassword",
@@ -20146,15 +20196,15 @@ function validate61(
                   message: "must be string",
                 };
                 if (vErrors === null) {
-                  vErrors = [err94];
+                  vErrors = [err96];
                 } else {
-                  vErrors.push(err94);
+                  vErrors.push(err96);
                 }
                 errors++;
               }
             }
           } else {
-            const err95 = {
+            const err97 = {
               instancePath:
                 instancePath + "/appFeatures/DigitalKey/systemConfig",
               schemaPath:
@@ -20164,15 +20214,15 @@ function validate61(
               message: "must be object",
             };
             if (vErrors === null) {
-              vErrors = [err95];
+              vErrors = [err97];
             } else {
-              vErrors.push(err95);
+              vErrors.push(err97);
             }
             errors++;
           }
-          if (data67.enableApp !== undefined) {
-            if (typeof data67.enableApp !== "boolean") {
-              const err96 = {
+          if (data69.enableApp !== undefined) {
+            if (typeof data69.enableApp !== "boolean") {
+              const err98 = {
                 instancePath:
                   instancePath + "/appFeatures/DigitalKey/enableApp",
                 schemaPath:
@@ -20182,21 +20232,21 @@ function validate61(
                 message: "must be boolean",
               };
               if (vErrors === null) {
-                vErrors = [err96];
+                vErrors = [err98];
               } else {
-                vErrors.push(err96);
+                vErrors.push(err98);
               }
               errors++;
             }
           }
-          if (data67.branding !== undefined) {
-            let data77 = data67.branding;
-            if (data77 && typeof data77 == "object" && !Array.isArray(data77)) {
-              if (data77.logo !== undefined) {
-                let data78 = data77.logo;
-                if (typeof data78 === "string") {
-                  if (!formats0(data78)) {
-                    const err97 = {
+          if (data69.branding !== undefined) {
+            let data79 = data69.branding;
+            if (data79 && typeof data79 == "object" && !Array.isArray(data79)) {
+              if (data79.logo !== undefined) {
+                let data80 = data79.logo;
+                if (typeof data80 === "string") {
+                  if (!formats0(data80)) {
+                    const err99 = {
                       instancePath:
                         instancePath + "/appFeatures/DigitalKey/branding/logo",
                       schemaPath:
@@ -20206,14 +20256,14 @@ function validate61(
                       message: 'must match format "' + "uri" + '"',
                     };
                     if (vErrors === null) {
-                      vErrors = [err97];
+                      vErrors = [err99];
                     } else {
-                      vErrors.push(err97);
+                      vErrors.push(err99);
                     }
                     errors++;
                   }
                 } else {
-                  const err98 = {
+                  const err100 = {
                     instancePath:
                       instancePath + "/appFeatures/DigitalKey/branding/logo",
                     schemaPath:
@@ -20223,18 +20273,18 @@ function validate61(
                     message: "must be string",
                   };
                   if (vErrors === null) {
-                    vErrors = [err98];
+                    vErrors = [err100];
                   } else {
-                    vErrors.push(err98);
+                    vErrors.push(err100);
                   }
                   errors++;
                 }
               }
-              if (data77.gradient !== undefined) {
-                let data79 = data77.gradient;
-                if (Array.isArray(data79)) {
-                  if (data79.length > 2) {
-                    const err99 = {
+              if (data79.gradient !== undefined) {
+                let data81 = data79.gradient;
+                if (Array.isArray(data81)) {
+                  if (data81.length > 2) {
+                    const err101 = {
                       instancePath:
                         instancePath +
                         "/appFeatures/DigitalKey/branding/gradient",
@@ -20245,14 +20295,14 @@ function validate61(
                       message: "must NOT have more than 2 items",
                     };
                     if (vErrors === null) {
-                      vErrors = [err99];
+                      vErrors = [err101];
                     } else {
-                      vErrors.push(err99);
+                      vErrors.push(err101);
                     }
                     errors++;
                   }
-                  if (data79.length < 2) {
-                    const err100 = {
+                  if (data81.length < 2) {
+                    const err102 = {
                       instancePath:
                         instancePath +
                         "/appFeatures/DigitalKey/branding/gradient",
@@ -20263,22 +20313,22 @@ function validate61(
                       message: "must NOT have fewer than 2 items",
                     };
                     if (vErrors === null) {
-                      vErrors = [err100];
+                      vErrors = [err102];
                     } else {
-                      vErrors.push(err100);
+                      vErrors.push(err102);
                     }
                     errors++;
                   }
-                  const len7 = data79.length;
-                  for (let i7 = 0; i7 < len7; i7++) {
-                    let data80 = data79[i7];
-                    if (typeof data80 === "string") {
-                      if (!pattern6.test(data80)) {
-                        const err101 = {
+                  const len8 = data81.length;
+                  for (let i8 = 0; i8 < len8; i8++) {
+                    let data82 = data81[i8];
+                    if (typeof data82 === "string") {
+                      if (!pattern6.test(data82)) {
+                        const err103 = {
                           instancePath:
                             instancePath +
                             "/appFeatures/DigitalKey/branding/gradient/" +
-                            i7,
+                            i8,
                           schemaPath:
                             "#/properties/appFeatures/properties/DigitalKey/properties/branding/properties/gradient/items/pattern",
                           keyword: "pattern",
@@ -20289,18 +20339,18 @@ function validate61(
                             '"',
                         };
                         if (vErrors === null) {
-                          vErrors = [err101];
+                          vErrors = [err103];
                         } else {
-                          vErrors.push(err101);
+                          vErrors.push(err103);
                         }
                         errors++;
                       }
                     } else {
-                      const err102 = {
+                      const err104 = {
                         instancePath:
                           instancePath +
                           "/appFeatures/DigitalKey/branding/gradient/" +
-                          i7,
+                          i8,
                         schemaPath:
                           "#/properties/appFeatures/properties/DigitalKey/properties/branding/properties/gradient/items/type",
                         keyword: "type",
@@ -20308,15 +20358,15 @@ function validate61(
                         message: "must be string",
                       };
                       if (vErrors === null) {
-                        vErrors = [err102];
+                        vErrors = [err104];
                       } else {
-                        vErrors.push(err102);
+                        vErrors.push(err104);
                       }
                       errors++;
                     }
                   }
                 } else {
-                  const err103 = {
+                  const err105 = {
                     instancePath:
                       instancePath +
                       "/appFeatures/DigitalKey/branding/gradient",
@@ -20327,18 +20377,18 @@ function validate61(
                     message: "must be array",
                   };
                   if (vErrors === null) {
-                    vErrors = [err103];
+                    vErrors = [err105];
                   } else {
-                    vErrors.push(err103);
+                    vErrors.push(err105);
                   }
                   errors++;
                 }
               }
-              if (data77.highlightedGradient !== undefined) {
-                let data81 = data77.highlightedGradient;
-                if (Array.isArray(data81)) {
-                  if (data81.length > 3) {
-                    const err104 = {
+              if (data79.highlightedGradient !== undefined) {
+                let data83 = data79.highlightedGradient;
+                if (Array.isArray(data83)) {
+                  if (data83.length > 3) {
+                    const err106 = {
                       instancePath:
                         instancePath +
                         "/appFeatures/DigitalKey/branding/highlightedGradient",
@@ -20349,14 +20399,14 @@ function validate61(
                       message: "must NOT have more than 3 items",
                     };
                     if (vErrors === null) {
-                      vErrors = [err104];
+                      vErrors = [err106];
                     } else {
-                      vErrors.push(err104);
+                      vErrors.push(err106);
                     }
                     errors++;
                   }
-                  if (data81.length < 2) {
-                    const err105 = {
+                  if (data83.length < 2) {
+                    const err107 = {
                       instancePath:
                         instancePath +
                         "/appFeatures/DigitalKey/branding/highlightedGradient",
@@ -20367,22 +20417,22 @@ function validate61(
                       message: "must NOT have fewer than 2 items",
                     };
                     if (vErrors === null) {
-                      vErrors = [err105];
+                      vErrors = [err107];
                     } else {
-                      vErrors.push(err105);
+                      vErrors.push(err107);
                     }
                     errors++;
                   }
-                  const len8 = data81.length;
-                  for (let i8 = 0; i8 < len8; i8++) {
-                    let data82 = data81[i8];
-                    if (typeof data82 === "string") {
-                      if (!pattern6.test(data82)) {
-                        const err106 = {
+                  const len9 = data83.length;
+                  for (let i9 = 0; i9 < len9; i9++) {
+                    let data84 = data83[i9];
+                    if (typeof data84 === "string") {
+                      if (!pattern6.test(data84)) {
+                        const err108 = {
                           instancePath:
                             instancePath +
                             "/appFeatures/DigitalKey/branding/highlightedGradient/" +
-                            i8,
+                            i9,
                           schemaPath:
                             "#/properties/appFeatures/properties/DigitalKey/properties/branding/properties/highlightedGradient/items/pattern",
                           keyword: "pattern",
@@ -20393,18 +20443,18 @@ function validate61(
                             '"',
                         };
                         if (vErrors === null) {
-                          vErrors = [err106];
+                          vErrors = [err108];
                         } else {
-                          vErrors.push(err106);
+                          vErrors.push(err108);
                         }
                         errors++;
                       }
                     } else {
-                      const err107 = {
+                      const err109 = {
                         instancePath:
                           instancePath +
                           "/appFeatures/DigitalKey/branding/highlightedGradient/" +
-                          i8,
+                          i9,
                         schemaPath:
                           "#/properties/appFeatures/properties/DigitalKey/properties/branding/properties/highlightedGradient/items/type",
                         keyword: "type",
@@ -20412,15 +20462,15 @@ function validate61(
                         message: "must be string",
                       };
                       if (vErrors === null) {
-                        vErrors = [err107];
+                        vErrors = [err109];
                       } else {
-                        vErrors.push(err107);
+                        vErrors.push(err109);
                       }
                       errors++;
                     }
                   }
                 } else {
-                  const err108 = {
+                  const err110 = {
                     instancePath:
                       instancePath +
                       "/appFeatures/DigitalKey/branding/highlightedGradient",
@@ -20431,58 +20481,21 @@ function validate61(
                     message: "must be array",
                   };
                   if (vErrors === null) {
-                    vErrors = [err108];
+                    vErrors = [err110];
                   } else {
-                    vErrors.push(err108);
+                    vErrors.push(err110);
                   }
                   errors++;
                 }
               }
             } else {
-              const err109 = {
+              const err111 = {
                 instancePath: instancePath + "/appFeatures/DigitalKey/branding",
                 schemaPath:
                   "#/properties/appFeatures/properties/DigitalKey/properties/branding/type",
                 keyword: "type",
                 params: { type: "object" },
                 message: "must be object",
-              };
-              if (vErrors === null) {
-                vErrors = [err109];
-              } else {
-                vErrors.push(err109);
-              }
-              errors++;
-            }
-          }
-        } else {
-          const err110 = {
-            instancePath: instancePath + "/appFeatures/DigitalKey",
-            schemaPath: "#/properties/appFeatures/properties/DigitalKey/type",
-            keyword: "type",
-            params: { type: "object" },
-            message: "must be object",
-          };
-          if (vErrors === null) {
-            vErrors = [err110];
-          } else {
-            vErrors.push(err110);
-          }
-          errors++;
-        }
-      }
-      if (data28.SOS !== undefined) {
-        let data83 = data28.SOS;
-        if (data83 && typeof data83 == "object" && !Array.isArray(data83)) {
-          if (data83.active !== undefined) {
-            if (typeof data83.active !== "boolean") {
-              const err111 = {
-                instancePath: instancePath + "/appFeatures/SOS/active",
-                schemaPath:
-                  "#/properties/appFeatures/properties/SOS/properties/active/type",
-                keyword: "type",
-                params: { type: "boolean" },
-                message: "must be boolean",
               };
               if (vErrors === null) {
                 vErrors = [err111];
@@ -20492,16 +20505,55 @@ function validate61(
               errors++;
             }
           }
-          if (data83.activeEmergencies !== undefined) {
-            let data85 = data83.activeEmergencies;
-            if (Array.isArray(data85)) {
-              const len9 = data85.length;
-              for (let i9 = 0; i9 < len9; i9++) {
-                let data86 = data85[i9];
-                if (typeof data86 !== "string") {
-                  const err112 = {
+        } else {
+          const err112 = {
+            instancePath: instancePath + "/appFeatures/DigitalKey",
+            schemaPath: "#/properties/appFeatures/properties/DigitalKey/type",
+            keyword: "type",
+            params: { type: "object" },
+            message: "must be object",
+          };
+          if (vErrors === null) {
+            vErrors = [err112];
+          } else {
+            vErrors.push(err112);
+          }
+          errors++;
+        }
+      }
+      if (data28.SOS !== undefined) {
+        let data85 = data28.SOS;
+        if (data85 && typeof data85 == "object" && !Array.isArray(data85)) {
+          if (data85.active !== undefined) {
+            if (typeof data85.active !== "boolean") {
+              const err113 = {
+                instancePath: instancePath + "/appFeatures/SOS/active",
+                schemaPath:
+                  "#/properties/appFeatures/properties/SOS/properties/active/type",
+                keyword: "type",
+                params: { type: "boolean" },
+                message: "must be boolean",
+              };
+              if (vErrors === null) {
+                vErrors = [err113];
+              } else {
+                vErrors.push(err113);
+              }
+              errors++;
+            }
+          }
+          if (data85.activeEmergencies !== undefined) {
+            let data87 = data85.activeEmergencies;
+            if (Array.isArray(data87)) {
+              const len10 = data87.length;
+              for (let i10 = 0; i10 < len10; i10++) {
+                let data88 = data87[i10];
+                if (typeof data88 !== "string") {
+                  const err114 = {
                     instancePath:
-                      instancePath + "/appFeatures/SOS/activeEmergencies/" + i9,
+                      instancePath +
+                      "/appFeatures/SOS/activeEmergencies/" +
+                      i10,
                     schemaPath:
                       "#/properties/appFeatures/properties/SOS/properties/activeEmergencies/items/type",
                     keyword: "type",
@@ -20509,25 +20561,27 @@ function validate61(
                     message: "must be string",
                   };
                   if (vErrors === null) {
-                    vErrors = [err112];
+                    vErrors = [err114];
                   } else {
-                    vErrors.push(err112);
+                    vErrors.push(err114);
                   }
                   errors++;
                 }
                 if (
                   !(
-                    data86 === "medical" ||
-                    data86 === "fire" ||
-                    data86 === "suspiciousPerson" ||
-                    data86 === "other" ||
-                    data86 === "conflict" ||
-                    data86 === "shooter"
+                    data88 === "medical" ||
+                    data88 === "fire" ||
+                    data88 === "suspiciousPerson" ||
+                    data88 === "other" ||
+                    data88 === "conflict" ||
+                    data88 === "shooter"
                   )
                 ) {
-                  const err113 = {
+                  const err115 = {
                     instancePath:
-                      instancePath + "/appFeatures/SOS/activeEmergencies/" + i9,
+                      instancePath +
+                      "/appFeatures/SOS/activeEmergencies/" +
+                      i10,
                     schemaPath:
                       "#/properties/appFeatures/properties/SOS/properties/activeEmergencies/items/enum",
                     keyword: "enum",
@@ -20539,15 +20593,15 @@ function validate61(
                     message: "must be equal to one of the allowed values",
                   };
                   if (vErrors === null) {
-                    vErrors = [err113];
+                    vErrors = [err115];
                   } else {
-                    vErrors.push(err113);
+                    vErrors.push(err115);
                   }
                   errors++;
                 }
               }
             } else {
-              const err114 = {
+              const err116 = {
                 instancePath:
                   instancePath + "/appFeatures/SOS/activeEmergencies",
                 schemaPath:
@@ -20557,15 +20611,15 @@ function validate61(
                 message: "must be array",
               };
               if (vErrors === null) {
-                vErrors = [err114];
+                vErrors = [err116];
               } else {
-                vErrors.push(err114);
+                vErrors.push(err116);
               }
               errors++;
             }
           }
         } else {
-          const err115 = {
+          const err117 = {
             instancePath: instancePath + "/appFeatures/SOS",
             schemaPath: "#/properties/appFeatures/properties/SOS/type",
             keyword: "type",
@@ -20573,20 +20627,20 @@ function validate61(
             message: "must be object",
           };
           if (vErrors === null) {
-            vErrors = [err115];
+            vErrors = [err117];
           } else {
-            vErrors.push(err115);
+            vErrors.push(err117);
           }
           errors++;
         }
       }
       if (data28.Dining !== undefined) {
-        let data87 = data28.Dining;
-        if (data87 && typeof data87 == "object" && !Array.isArray(data87)) {
-          if (data87.system !== undefined) {
-            let data88 = data87.system;
-            if (typeof data88 !== "string") {
-              const err116 = {
+        let data89 = data28.Dining;
+        if (data89 && typeof data89 == "object" && !Array.isArray(data89)) {
+          if (data89.system !== undefined) {
+            let data90 = data89.system;
+            if (typeof data90 !== "string") {
+              const err118 = {
                 instancePath: instancePath + "/appFeatures/Dining/system",
                 schemaPath:
                   "#/properties/appFeatures/properties/Dining/properties/system/type",
@@ -20595,14 +20649,14 @@ function validate61(
                 message: "must be string",
               };
               if (vErrors === null) {
-                vErrors = [err116];
+                vErrors = [err118];
               } else {
-                vErrors.push(err116);
+                vErrors.push(err118);
               }
               errors++;
             }
-            if (!(data88 === "gotab")) {
-              const err117 = {
+            if (!(data90 === "gotab")) {
+              const err119 = {
                 instancePath: instancePath + "/appFeatures/Dining/system",
                 schemaPath:
                   "#/properties/appFeatures/properties/Dining/properties/system/enum",
@@ -20615,19 +20669,19 @@ function validate61(
                 message: "must be equal to one of the allowed values",
               };
               if (vErrors === null) {
-                vErrors = [err117];
+                vErrors = [err119];
               } else {
-                vErrors.push(err117);
+                vErrors.push(err119);
               }
               errors++;
             }
           }
-          if (data87.systemConfig !== undefined) {
-            let data89 = data87.systemConfig;
-            if (data89 && typeof data89 == "object" && !Array.isArray(data89)) {
-              for (const key5 in data89) {
+          if (data89.systemConfig !== undefined) {
+            let data91 = data89.systemConfig;
+            if (data91 && typeof data91 == "object" && !Array.isArray(data91)) {
+              for (const key5 in data91) {
                 if (!(key5 === "landingUrl" || key5 === "includeUserDetails")) {
-                  const err118 = {
+                  const err120 = {
                     instancePath:
                       instancePath + "/appFeatures/Dining/systemConfig",
                     schemaPath:
@@ -20637,18 +20691,18 @@ function validate61(
                     message: "must NOT have additional properties",
                   };
                   if (vErrors === null) {
-                    vErrors = [err118];
+                    vErrors = [err120];
                   } else {
-                    vErrors.push(err118);
+                    vErrors.push(err120);
                   }
                   errors++;
                 }
               }
-              if (data89.landingUrl !== undefined) {
-                let data90 = data89.landingUrl;
-                if (typeof data90 === "string") {
-                  if (!formats0(data90)) {
-                    const err119 = {
+              if (data91.landingUrl !== undefined) {
+                let data92 = data91.landingUrl;
+                if (typeof data92 === "string") {
+                  if (!formats0(data92)) {
+                    const err121 = {
                       instancePath:
                         instancePath +
                         "/appFeatures/Dining/systemConfig/landingUrl",
@@ -20659,14 +20713,14 @@ function validate61(
                       message: 'must match format "' + "uri" + '"',
                     };
                     if (vErrors === null) {
-                      vErrors = [err119];
+                      vErrors = [err121];
                     } else {
-                      vErrors.push(err119);
+                      vErrors.push(err121);
                     }
                     errors++;
                   }
                 } else {
-                  const err120 = {
+                  const err122 = {
                     instancePath:
                       instancePath +
                       "/appFeatures/Dining/systemConfig/landingUrl",
@@ -20677,16 +20731,16 @@ function validate61(
                     message: "must be string",
                   };
                   if (vErrors === null) {
-                    vErrors = [err120];
+                    vErrors = [err122];
                   } else {
-                    vErrors.push(err120);
+                    vErrors.push(err122);
                   }
                   errors++;
                 }
               }
-              if (data89.includeUserDetails !== undefined) {
-                if (typeof data89.includeUserDetails !== "boolean") {
-                  const err121 = {
+              if (data91.includeUserDetails !== undefined) {
+                if (typeof data91.includeUserDetails !== "boolean") {
+                  const err123 = {
                     instancePath:
                       instancePath +
                       "/appFeatures/Dining/systemConfig/includeUserDetails",
@@ -20697,15 +20751,15 @@ function validate61(
                     message: "must be boolean",
                   };
                   if (vErrors === null) {
-                    vErrors = [err121];
+                    vErrors = [err123];
                   } else {
-                    vErrors.push(err121);
+                    vErrors.push(err123);
                   }
                   errors++;
                 }
               }
             } else {
-              const err122 = {
+              const err124 = {
                 instancePath: instancePath + "/appFeatures/Dining/systemConfig",
                 schemaPath:
                   "#/properties/appFeatures/properties/Dining/properties/systemConfig/type",
@@ -20714,54 +20768,20 @@ function validate61(
                 message: "must be object",
               };
               if (vErrors === null) {
-                vErrors = [err122];
+                vErrors = [err124];
               } else {
-                vErrors.push(err122);
+                vErrors.push(err124);
               }
               errors++;
             }
           }
         } else {
-          const err123 = {
+          const err125 = {
             instancePath: instancePath + "/appFeatures/Dining",
             schemaPath: "#/properties/appFeatures/properties/Dining/type",
             keyword: "type",
             params: { type: "object" },
             message: "must be object",
-          };
-          if (vErrors === null) {
-            vErrors = [err123];
-          } else {
-            vErrors.push(err123);
-          }
-          errors++;
-        }
-      }
-    } else {
-      const err124 = {
-        instancePath: instancePath + "/appFeatures",
-        schemaPath: "#/properties/appFeatures/type",
-        keyword: "type",
-        params: { type: "object" },
-        message: "must be object",
-      };
-      if (vErrors === null) {
-        vErrors = [err124];
-      } else {
-        vErrors.push(err124);
-      }
-      errors++;
-    }
-    let data92 = data.notifications;
-    if (data92 && typeof data92 == "object" && !Array.isArray(data92)) {
-      for (const key6 in data92) {
-        if (!(key6 === "email" || key6 === "sms" || key6 === "push")) {
-          const err125 = {
-            instancePath: instancePath + "/notifications",
-            schemaPath: "#/properties/notifications/additionalProperties",
-            keyword: "additionalProperties",
-            params: { additionalProperty: key6 },
-            message: "must NOT have additional properties",
           };
           if (vErrors === null) {
             vErrors = [err125];
@@ -20771,12 +20791,46 @@ function validate61(
           errors++;
         }
       }
-      if (data92.email !== undefined) {
-        let data93 = data92.email;
-        if (data93 && typeof data93 == "object" && !Array.isArray(data93)) {
-          for (const key7 in data93) {
+    } else {
+      const err126 = {
+        instancePath: instancePath + "/appFeatures",
+        schemaPath: "#/properties/appFeatures/type",
+        keyword: "type",
+        params: { type: "object" },
+        message: "must be object",
+      };
+      if (vErrors === null) {
+        vErrors = [err126];
+      } else {
+        vErrors.push(err126);
+      }
+      errors++;
+    }
+    let data94 = data.notifications;
+    if (data94 && typeof data94 == "object" && !Array.isArray(data94)) {
+      for (const key6 in data94) {
+        if (!(key6 === "email" || key6 === "sms" || key6 === "push")) {
+          const err127 = {
+            instancePath: instancePath + "/notifications",
+            schemaPath: "#/properties/notifications/additionalProperties",
+            keyword: "additionalProperties",
+            params: { additionalProperty: key6 },
+            message: "must NOT have additional properties",
+          };
+          if (vErrors === null) {
+            vErrors = [err127];
+          } else {
+            vErrors.push(err127);
+          }
+          errors++;
+        }
+      }
+      if (data94.email !== undefined) {
+        let data95 = data94.email;
+        if (data95 && typeof data95 == "object" && !Array.isArray(data95)) {
+          for (const key7 in data95) {
             if (!(key7 === "enabled")) {
-              const err126 = {
+              const err128 = {
                 instancePath: instancePath + "/notifications/email",
                 schemaPath:
                   "#/properties/notifications/properties/email/additionalProperties",
@@ -20785,59 +20839,22 @@ function validate61(
                 message: "must NOT have additional properties",
               };
               if (vErrors === null) {
-                vErrors = [err126];
+                vErrors = [err128];
               } else {
-                vErrors.push(err126);
+                vErrors.push(err128);
               }
               errors++;
             }
           }
-          if (data93.enabled !== undefined) {
-            if (typeof data93.enabled !== "boolean") {
-              const err127 = {
+          if (data95.enabled !== undefined) {
+            if (typeof data95.enabled !== "boolean") {
+              const err129 = {
                 instancePath: instancePath + "/notifications/email/enabled",
                 schemaPath:
                   "#/properties/notifications/properties/email/properties/enabled/type",
                 keyword: "type",
                 params: { type: "boolean" },
                 message: "must be boolean",
-              };
-              if (vErrors === null) {
-                vErrors = [err127];
-              } else {
-                vErrors.push(err127);
-              }
-              errors++;
-            }
-          }
-        } else {
-          const err128 = {
-            instancePath: instancePath + "/notifications/email",
-            schemaPath: "#/properties/notifications/properties/email/type",
-            keyword: "type",
-            params: { type: "object" },
-            message: "must be object",
-          };
-          if (vErrors === null) {
-            vErrors = [err128];
-          } else {
-            vErrors.push(err128);
-          }
-          errors++;
-        }
-      }
-      if (data92.sms !== undefined) {
-        let data95 = data92.sms;
-        if (data95 && typeof data95 == "object" && !Array.isArray(data95)) {
-          for (const key8 in data95) {
-            if (!(key8 === "enabled")) {
-              const err129 = {
-                instancePath: instancePath + "/notifications/sms",
-                schemaPath:
-                  "#/properties/notifications/properties/sms/additionalProperties",
-                keyword: "additionalProperties",
-                params: { additionalProperty: key8 },
-                message: "must NOT have additional properties",
               };
               if (vErrors === null) {
                 vErrors = [err129];
@@ -20847,52 +20864,52 @@ function validate61(
               errors++;
             }
           }
-          if (data95.enabled !== undefined) {
-            if (typeof data95.enabled !== "boolean") {
-              const err130 = {
+        } else {
+          const err130 = {
+            instancePath: instancePath + "/notifications/email",
+            schemaPath: "#/properties/notifications/properties/email/type",
+            keyword: "type",
+            params: { type: "object" },
+            message: "must be object",
+          };
+          if (vErrors === null) {
+            vErrors = [err130];
+          } else {
+            vErrors.push(err130);
+          }
+          errors++;
+        }
+      }
+      if (data94.sms !== undefined) {
+        let data97 = data94.sms;
+        if (data97 && typeof data97 == "object" && !Array.isArray(data97)) {
+          for (const key8 in data97) {
+            if (!(key8 === "enabled")) {
+              const err131 = {
+                instancePath: instancePath + "/notifications/sms",
+                schemaPath:
+                  "#/properties/notifications/properties/sms/additionalProperties",
+                keyword: "additionalProperties",
+                params: { additionalProperty: key8 },
+                message: "must NOT have additional properties",
+              };
+              if (vErrors === null) {
+                vErrors = [err131];
+              } else {
+                vErrors.push(err131);
+              }
+              errors++;
+            }
+          }
+          if (data97.enabled !== undefined) {
+            if (typeof data97.enabled !== "boolean") {
+              const err132 = {
                 instancePath: instancePath + "/notifications/sms/enabled",
                 schemaPath:
                   "#/properties/notifications/properties/sms/properties/enabled/type",
                 keyword: "type",
                 params: { type: "boolean" },
                 message: "must be boolean",
-              };
-              if (vErrors === null) {
-                vErrors = [err130];
-              } else {
-                vErrors.push(err130);
-              }
-              errors++;
-            }
-          }
-        } else {
-          const err131 = {
-            instancePath: instancePath + "/notifications/sms",
-            schemaPath: "#/properties/notifications/properties/sms/type",
-            keyword: "type",
-            params: { type: "object" },
-            message: "must be object",
-          };
-          if (vErrors === null) {
-            vErrors = [err131];
-          } else {
-            vErrors.push(err131);
-          }
-          errors++;
-        }
-      }
-      if (data92.push !== undefined) {
-        let data97 = data92.push;
-        if (data97 && typeof data97 == "object" && !Array.isArray(data97)) {
-          for (const key9 in data97) {
-            if (!(key9 === "enabled")) {
-              const err132 = {
-                instancePath: instancePath + "/notifications/push",
-                schemaPath:
-                  "#/properties/notifications/properties/push/additionalProperties",
-                keyword: "additionalProperties",
-                params: { additionalProperty: key9 },
-                message: "must NOT have additional properties",
               };
               if (vErrors === null) {
                 vErrors = [err132];
@@ -20902,9 +20919,46 @@ function validate61(
               errors++;
             }
           }
-          if (data97.enabled !== undefined) {
-            if (typeof data97.enabled !== "boolean") {
-              const err133 = {
+        } else {
+          const err133 = {
+            instancePath: instancePath + "/notifications/sms",
+            schemaPath: "#/properties/notifications/properties/sms/type",
+            keyword: "type",
+            params: { type: "object" },
+            message: "must be object",
+          };
+          if (vErrors === null) {
+            vErrors = [err133];
+          } else {
+            vErrors.push(err133);
+          }
+          errors++;
+        }
+      }
+      if (data94.push !== undefined) {
+        let data99 = data94.push;
+        if (data99 && typeof data99 == "object" && !Array.isArray(data99)) {
+          for (const key9 in data99) {
+            if (!(key9 === "enabled")) {
+              const err134 = {
+                instancePath: instancePath + "/notifications/push",
+                schemaPath:
+                  "#/properties/notifications/properties/push/additionalProperties",
+                keyword: "additionalProperties",
+                params: { additionalProperty: key9 },
+                message: "must NOT have additional properties",
+              };
+              if (vErrors === null) {
+                vErrors = [err134];
+              } else {
+                vErrors.push(err134);
+              }
+              errors++;
+            }
+          }
+          if (data99.enabled !== undefined) {
+            if (typeof data99.enabled !== "boolean") {
+              const err135 = {
                 instancePath: instancePath + "/notifications/push/enabled",
                 schemaPath:
                   "#/properties/notifications/properties/push/properties/enabled/type",
@@ -20913,15 +20967,15 @@ function validate61(
                 message: "must be boolean",
               };
               if (vErrors === null) {
-                vErrors = [err133];
+                vErrors = [err135];
               } else {
-                vErrors.push(err133);
+                vErrors.push(err135);
               }
               errors++;
             }
           }
         } else {
-          const err134 = {
+          const err136 = {
             instancePath: instancePath + "/notifications/push",
             schemaPath: "#/properties/notifications/properties/push/type",
             keyword: "type",
@@ -20929,15 +20983,15 @@ function validate61(
             message: "must be object",
           };
           if (vErrors === null) {
-            vErrors = [err134];
+            vErrors = [err136];
           } else {
-            vErrors.push(err134);
+            vErrors.push(err136);
           }
           errors++;
         }
       }
     } else {
-      const err135 = {
+      const err137 = {
         instancePath: instancePath + "/notifications",
         schemaPath: "#/properties/notifications/type",
         keyword: "type",
@@ -20945,16 +20999,16 @@ function validate61(
         message: "must be object",
       };
       if (vErrors === null) {
-        vErrors = [err135];
+        vErrors = [err137];
       } else {
-        vErrors.push(err135);
+        vErrors.push(err137);
       }
       errors++;
     }
     if (data.credentials !== undefined) {
-      let data99 = data.credentials;
-      if (!(data99 && typeof data99 == "object" && !Array.isArray(data99))) {
-        const err136 = {
+      let data101 = data.credentials;
+      if (!(data101 && typeof data101 == "object" && !Array.isArray(data101))) {
+        const err138 = {
           instancePath: instancePath + "/credentials",
           schemaPath: "#/properties/credentials/type",
           keyword: "type",
@@ -20962,15 +21016,15 @@ function validate61(
           message: "must be object",
         };
         if (vErrors === null) {
-          vErrors = [err136];
+          vErrors = [err138];
         } else {
-          vErrors.push(err136);
+          vErrors.push(err138);
         }
         errors++;
       }
     }
   } else {
-    const err137 = {
+    const err139 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -20978,9 +21032,9 @@ function validate61(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err137];
+      vErrors = [err139];
     } else {
-      vErrors.push(err137);
+      vErrors.push(err139);
     }
     errors++;
   }

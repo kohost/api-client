@@ -92,6 +92,13 @@ export default {
                 enum: ["climate", "lights", "shades", "tv", "doors"],
               },
             },
+            excludedDeviceIds: {
+              type: "array",
+              items: {
+                type: "string",
+              },
+              default: [],
+            },
             commonAreas: {
               type: "object",
               properties: {
