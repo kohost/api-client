@@ -45,7 +45,7 @@ Promise.all(schemaModules).then(async (modules) => {
       es5: false,
       esm: true,
       lines: true,
-      optimize: true,
+      optimize: 3,
     },
   });
 
@@ -62,9 +62,10 @@ Promise.all(schemaModules).then(async (modules) => {
   }, {});
 
   const validatorCode = standaloneCode(ajv, validateMap);
+
   fs.writeFileSync(
     "src/validators.js",
-    await formatCode(`/* eslint-disable */\n${banner}\n\n${validatorCode}`),
+    await formatCode(`/* eslint-disable */\n${banner}\n\n\n${validatorCode}`),
   );
 
   for (const module of modules) {

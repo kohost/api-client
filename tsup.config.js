@@ -24,6 +24,7 @@ export default defineConfig([
     platform: "neutral",
     globalName: "kohost",
     minify: "terser",
+    esbuildOptions: {},
     terserOptions: {
       mangle: false,
       keep_fnames: true,

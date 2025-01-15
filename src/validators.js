@@ -5393,8 +5393,7 @@ function validate26(
     }
     if (data.devices !== undefined) {
       let data4 = data.devices;
-      if (data4 && typeof data4 == "object" && !Array.isArray(data4)) {
-      } else {
+      if (!(data4 && typeof data4 == "object" && !Array.isArray(data4))) {
         const err9 = {
           instancePath: instancePath + "/devices",
           schemaPath: "#/properties/devices/type",
@@ -16612,8 +16611,7 @@ function validate56(
     }
     if (data.credentials !== undefined) {
       let data31 = data.credentials;
-      if (data31 && typeof data31 == "object" && !Array.isArray(data31)) {
-      } else {
+      if (!(data31 && typeof data31 == "object" && !Array.isArray(data31))) {
         const err39 = {
           instancePath: instancePath + "/credentials",
           schemaPath: "#/properties/credentials/type",
@@ -20955,8 +20953,7 @@ function validate61(
     }
     if (data.credentials !== undefined) {
       let data99 = data.credentials;
-      if (data99 && typeof data99 == "object" && !Array.isArray(data99)) {
-      } else {
+      if (!(data99 && typeof data99 == "object" && !Array.isArray(data99))) {
         const err136 = {
           instancePath: instancePath + "/credentials",
           schemaPath: "#/properties/credentials/type",
