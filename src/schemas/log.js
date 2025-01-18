@@ -13,7 +13,9 @@ export default {
       type: "number",
       minimum: 1655907956593,
     },
-
+    id: {
+      $ref: "definitions.json#/definitions/id",
+    },
     name: {
       type: "string",
       description: "Event name",
