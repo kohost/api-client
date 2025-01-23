@@ -116,6 +116,7 @@ export default {
         "power-shades",
         "rachio",
         "rebrandly",
+        "relay",
         "rtsp",
         "salto",
         "salto-irn",
