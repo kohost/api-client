@@ -129,6 +129,7 @@ export default {
         "twilio",
         "unifi",
         "valcom",
+        "vivotek",
         "vizio",
         "wisenet",
         "cloudflare-images",

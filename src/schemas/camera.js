@@ -89,7 +89,7 @@ export default {
           description: "Source to preview the camera stream",
           examples: [
             "https://example.com/preview.jpg",
-            "data:image/jpegbase64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBYRXhpZgAATU0AKgAAAAgAA1EQAAEAAAABAQAAAFERAAQAAAABAAABAgABAA",
+            "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBYRXhpZgAATU0AKgAAAAgAA1EQAAEAAAABAQAAAFERAAQAAAABAAABAgABAA",
           ],
         },
       },
