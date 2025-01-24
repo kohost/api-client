@@ -175,17 +175,11 @@ export class KohostHTTPClient {
         if (expectedError && newTokensNeeded) {
           while (!this.isAuthTokenRenewalActive) {
             this.isAuthTokenRenewalActive = true;
-            return this.send(
-              new RefreshTokenCommand({
-                data: commandConfig.data,
-                query: commandConfig.params,
-                headers: commandConfig.headers,
-              }),
-            )
+            return this.send(new RefreshTokenCommand({}))
               .then(() => {
                 // retry the original request with the new token
                 this.isAuthTokenRenewalActive = false;
-                return fetch(request.clone());
+                return this.send(command);
               })
               .catch((err) => {
                 this.isAuthTokenRenewalActive = false;

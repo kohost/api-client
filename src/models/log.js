@@ -9,6 +9,7 @@ export class Log extends Entity {
    * @typedef {Object} LogData
    * @property {"log"} [type] - Default: "log"
    * @property {number} [timestamp]
+   * @property {string} [id] - Identifier of the object.
    * @property {string} [name] - Event name
    * @property {{name: string, value: string}} [field1]
    * @property {string} field1.name
@@ -38,6 +39,7 @@ export class Log extends Entity {
     super(data);
     if (data.type !== undefined) this.type = data.type;
     if (data.timestamp !== undefined) this.timestamp = data.timestamp;
+    if (data.id !== undefined) this.id = data.id;
     if (data.name !== undefined) this.name = data.name;
     if (data.field1 !== undefined) this.field1 = data.field1;
     if (data.field2 !== undefined) this.field2 = data.field2;
@@ -57,6 +59,7 @@ Object.defineProperty(Log.prototype, "schema", {
     properties: {
       type: { type: "string", default: "log", enum: ["log"] },
       timestamp: { type: "number", minimum: 1655907956593 },
+      id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string", description: "Event name" },
       field1: {
         type: "object",
