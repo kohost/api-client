@@ -56,7 +56,12 @@ export default {
         },
         driver: {
           type: "string",
-          enum: ["cloudflare-stream", "aws-kinesis", "digital-watchdog"],
+          enum: [
+            "cloudflare-stream",
+            "aws-kinesis",
+            "digital-watchdog",
+            "mediamtx",
+          ],
         },
         allowedOrigins: {
           type: "array",
