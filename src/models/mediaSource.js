@@ -13,7 +13,7 @@ export class MediaSource extends Entity {
    * @property {{id?: string, name?: string}[]} [playlists]
    * @property {("MR22GA"|"XRT260"|"XRT270"|"HOF-16K 1.2"|"219863500"|"SONIFI"|"AKB76039803"|"BN59-01388A")} [remote]
    * @property {string} [name]
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
    * @property {boolean} [offline]
    * @property {boolean} audio
    * @property {boolean} video
@@ -44,17 +44,16 @@ export class MediaSource extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
-    if (data.type !== undefined) this.type = data.type;
-    if (data.discriminator !== undefined)
-      this.discriminator = data.discriminator;
+    this.id = data.id;
+    this.type = data.type;
+    this.discriminator = data.discriminator;
     if (data.playlists !== undefined) this.playlists = data.playlists;
     if (data.remote !== undefined) this.remote = data.remote;
     if (data.name !== undefined) this.name = data.name;
-    if (data.driver !== undefined) this.driver = data.driver;
+    this.driver = data.driver;
     if (data.offline !== undefined) this.offline = data.offline;
-    if (data.audio !== undefined) this.audio = data.audio;
-    if (data.video !== undefined) this.video = data.video;
+    this.audio = data.audio;
+    this.video = data.video;
     if (data.powerFeedback !== undefined)
       this.powerFeedback = data.powerFeedback;
     if (data.volumeFeedback !== undefined)

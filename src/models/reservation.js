@@ -8,7 +8,7 @@ export class Reservation extends Entity {
   /**
  * @typedef {Object} ReservationData 
  * @property {string} [id] - Identifier of the object.
- * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
+ * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
  * @property {string} [primaryGuest]
  * @property {"reservation"} type - Default: "reservation"
  * @property {string[]} [sharedGuests]
@@ -40,7 +40,7 @@ export class Reservation extends Entity {
  * @property {string} [company]
  * @property {string} [travelAgent]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
- * @property {any} [metadata]
+ * @property {{}} [metadata]
  * @property {(string|object)} [updatedAt]
  */
 
@@ -53,14 +53,14 @@ export class Reservation extends Entity {
     if (data.id !== undefined) this.id = data.id;
     if (data.driver !== undefined) this.driver = data.driver;
     if (data.primaryGuest !== undefined) this.primaryGuest = data.primaryGuest;
-    if (data.type !== undefined) this.type = data.type;
+    this.type = data.type;
     if (data.sharedGuests !== undefined) this.sharedGuests = data.sharedGuests;
     if (data.spaceCategory !== undefined)
       this.spaceCategory = data.spaceCategory;
     if (data.space !== undefined) this.space = data.space;
     if (data.previousSpace !== undefined)
       this.previousSpace = data.previousSpace;
-    if (data.status !== undefined) this.status = data.status;
+    this.status = data.status;
     if (data.mobileCheckInSpaceCategoryChanged !== undefined)
       this.mobileCheckInSpaceCategoryChanged =
         data.mobileCheckInSpaceCategoryChanged;
@@ -74,10 +74,8 @@ export class Reservation extends Entity {
       this.confirmationNumber = data.confirmationNumber;
     if (data.expectedCheckInDateTime !== undefined)
       this.expectedCheckInDateTime = data.expectedCheckInDateTime;
-    if (data.checkInDateTime !== undefined)
-      this.checkInDateTime = data.checkInDateTime;
-    if (data.checkOutDateTime !== undefined)
-      this.checkOutDateTime = data.checkOutDateTime;
+    this.checkInDateTime = data.checkInDateTime;
+    this.checkOutDateTime = data.checkOutDateTime;
     if (data.adultCount !== undefined) this.adultCount = data.adultCount;
     if (data.childCount !== undefined) this.childCount = data.childCount;
     if (data.spaceCategoryAvailabilites !== undefined)
@@ -198,7 +196,7 @@ Object.defineProperty(Reservation.prototype, "schema", {
       company: { type: "string" },
       travelAgent: { type: "string" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
-      metadata: { ref: "definitions.json#/definitions/metadata" },
+      metadata: { $ref: "definitions.json#/definitions/metadata" },
       updatedAt: { $ref: "definitions.json#/definitions/updatedAt" },
     },
   },

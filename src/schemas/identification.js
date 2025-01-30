@@ -21,13 +21,13 @@ export default {
       enum: ["driversLicense", "passport", "identityCard", "visa"],
     },
     number: {
-      string: "string",
+      type: "string",
     },
     maskedNumber: {
-      string: "string",
+      type: "string",
     },
     encryptedNumber: {
-      string: "string",
+      type: "string",
     },
     issued: {
       type: ["string", "object"],
@@ -50,7 +50,7 @@ export default {
       type: "string",
     },
     issuingCountry: {
-      string: "string",
+      type: "string",
       minLength: 2,
       maxLength: 2,
     },

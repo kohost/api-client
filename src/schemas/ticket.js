@@ -77,7 +77,9 @@ export default {
         ],
       },
     },
-
+    subject: {
+      type: "string",
+    },
     openedBy: {
       type: "object",
       properties: {

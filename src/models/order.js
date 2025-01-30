@@ -28,9 +28,9 @@ export class Order extends Entity {
   constructor(data) {
     super(data);
     if (data.id !== undefined) this.id = data.id;
-    if (data.type !== undefined) this.type = data.type;
+    this.type = data.type;
     if (data.orderNumber !== undefined) this.orderNumber = data.orderNumber;
-    if (data.status !== undefined) this.status = data.status;
+    this.status = data.status;
     if (data.userId !== undefined) this.userId = data.userId;
     if (data.reservationId !== undefined)
       this.reservationId = data.reservationId;

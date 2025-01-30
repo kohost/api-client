@@ -13,15 +13,15 @@ export class Camera extends Entity {
    * @property {boolean} [offline]
    * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
    * @property {{name?: string, timestamp?: number, description?: string}} [notification]
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
    * @property {{iframe?: string, hls?: string, webRTC?: string, rtsp?: string}} [liveStreams]
    * @property {string} [liveStreams.iframe]
    * @property {string} [liveStreams.hls]
    * @property {string} [liveStreams.webRTC]
    * @property {string} [liveStreams.rtsp]
-   * @property {{id?: string, driver?: ("cloudflare-stream"|"aws-kinesis"|"digital-watchdog"), allowedOrigins?: string[], authRequired?: boolean, iframe?: string, hls?: string, webRTC?: string, rtsp?: string, previewImage?: string}} [liveStream]
+   * @property {{id?: string, driver?: ("cloudflare-stream"|"aws-kinesis"|"digital-watchdog"|"mediamtx"), allowedOrigins?: string[], authRequired?: boolean, iframe?: string, hls?: string, webRTC?: string, rtsp?: string, previewImage?: string}} [liveStream]
    * @property {string} [liveStream.id]
-   * @property {("cloudflare-stream"|"aws-kinesis"|"digital-watchdog")} [liveStream.driver]
+   * @property {("cloudflare-stream"|"aws-kinesis"|"digital-watchdog"|"mediamtx")} [liveStream.driver]
    * @property {string[]} [liveStream.allowedOrigins]
    * @property {boolean} [liveStream.authRequired]
    * @property {string} [liveStream.iframe]
@@ -43,14 +43,14 @@ export class Camera extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
+    this.id = data.id;
     if (data.name !== undefined) this.name = data.name;
-    if (data.type !== undefined) this.type = data.type;
+    this.type = data.type;
     if (data.offline !== undefined) this.offline = data.offline;
     if (data.supportedNotifications !== undefined)
       this.supportedNotifications = data.supportedNotifications;
     if (data.notification !== undefined) this.notification = data.notification;
-    if (data.driver !== undefined) this.driver = data.driver;
+    this.driver = data.driver;
     if (data.liveStreams !== undefined) this.liveStreams = data.liveStreams;
     if (data.liveStream !== undefined) this.liveStream = data.liveStream;
     if (data.systemId !== undefined) this.systemId = data.systemId;
@@ -99,7 +99,12 @@ Object.defineProperty(Camera.prototype, "schema", {
           id: { type: "string" },
           driver: {
             type: "string",
-            enum: ["cloudflare-stream", "aws-kinesis", "digital-watchdog"],
+            enum: [
+              "cloudflare-stream",
+              "aws-kinesis",
+              "digital-watchdog",
+              "mediamtx",
+            ],
           },
           allowedOrigins: { type: "array", items: { type: "string" } },
           authRequired: { type: "boolean" },
@@ -119,7 +124,7 @@ Object.defineProperty(Camera.prototype, "schema", {
             description: "Source to preview the camera stream",
             examples: [
               "https://example.com/preview.jpg",
-              "data:image/jpegbase64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBYRXhpZgAATU0AKgAAAAgAA1EQAAEAAAABAQAAAFERAAQAAAABAAABAgABAA",
+              "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBYRXhpZgAATU0AKgAAAAgAA1EQAAEAAAABAQAAAFERAAQAAAABAAABAgABAA",
             ],
           },
         },

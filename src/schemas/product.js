@@ -20,7 +20,7 @@ export default {
       $ref: "definitions.json#/definitions/driver",
     },
     description: {
-      string: "string",
+      type: "string",
     },
     price: {
       type: "number",
@@ -35,6 +35,7 @@ export default {
       type: "string",
     },
     imageUrl: {
+      type: "string",
       format: "uri",
       pattern: "^https?://",
     },

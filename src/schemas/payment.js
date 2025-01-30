@@ -32,13 +32,13 @@ export default {
       type: ["string", "null"],
     },
     maskedNumber: {
-      string: "string",
+      type: "string",
     },
     issued: {
       type: ["string", "null"],
     },
     expires: {
-      string: "string",
+      type: "string",
     },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",

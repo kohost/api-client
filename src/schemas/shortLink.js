@@ -17,11 +17,11 @@ export default {
       type: "string",
     },
     destination: {
-      string: "string",
+      type: "string",
       format: "uri",
     },
     url: {
-      string: "string",
+      type: "string",
       format: "uri",
     },
     systemId: {

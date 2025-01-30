@@ -24,15 +24,13 @@ export class Policy extends Entity {
   constructor(data) {
     super(data);
     if (data.id !== undefined) this.id = data.id;
-    if (data.type !== undefined) this.type = data.type;
-    if (data.discriminator !== undefined)
-      this.discriminator = data.discriminator;
-    if (data.name !== undefined) this.name = data.name;
+    this.type = data.type;
+    this.discriminator = data.discriminator;
+    this.name = data.name;
     if (data.description !== undefined) this.description = data.description;
-    if (data.organizationId !== undefined)
-      this.organizationId = data.organizationId;
-    if (data.propertyId !== undefined) this.propertyId = data.propertyId;
-    if (data.permissions !== undefined) this.permissions = data.permissions;
+    this.organizationId = data.organizationId;
+    this.propertyId = data.propertyId;
+    this.permissions = data.permissions;
   }
 }
 

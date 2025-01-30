@@ -668,6 +668,15 @@
     }
   ],
   [
+    "ListCameraStreamPreviews",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/cameras/stream-previews"
+      }
+    }
+  ],
+  [
     "DescribeCamera",
     {
       "http": {
@@ -1338,7 +1347,7 @@
     {
       "http": false,
       "automations": {
-        "runsOn": ["DeviceAssociated"]
+        "runsOn": ["DeviceAssociated", "RoomDeviceUpdated"]
       }
     }
   ],
@@ -2157,6 +2166,12 @@
         "method": "PUT",
         "path": "/issues"
       }
+    }
+  ],
+  [
+    "CreateSystemIssues",
+    {
+      "http": false
     }
   ],
   [

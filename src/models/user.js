@@ -25,8 +25,8 @@ export class User extends Entity {
    * @property {{organizationId: string, propertyId: string, role: ("Guest"|"User"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin"), department?: string, policyIds?: string[], policies?: {id?: any, type: "policy", discriminator: "user", name: string, description?: string, organizationId: string, propertyId: string, permissions: {entities: string[], effect: ("Allow"|"Deny")}[]}[]}[]} [permissions] - Default: []
    * @property {string[]} [notes]
    * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}[]} [files]
-   * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: any, maskedNumber?: any, encryptedNumber?: any, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: any, systemId?: any}[]} [identifications]
-   * @property {{id?: any, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: string, maskedNumber: any, issued?: string, expires: any, systemId?: any}[]} [payments]
+   * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, systemId?: any}[]} [identifications]
+   * @property {{id?: any, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: string, maskedNumber: string, issued?: string, expires: string, systemId?: any}[]} [payments]
    * @property {{accuracy: number, latitude: number, longitude: number, timestamp: number}} [location]
    * @property {number} location.accuracy
    * @property {number} location.latitude
@@ -48,8 +48,8 @@ export class User extends Entity {
     super(data);
     if (data.id !== undefined) this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
-    if (data.firstName !== undefined) this.firstName = data.firstName;
-    if (data.lastName !== undefined) this.lastName = data.lastName;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
     if (data.phone !== undefined) this.phone = data.phone;
     if (data.phoneVerified !== undefined)
       this.phoneVerified = data.phoneVerified;

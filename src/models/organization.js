@@ -46,9 +46,8 @@ export class Organization extends Entity {
     super(data);
     if (data.id !== undefined) this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
-    if (data.accountNumber !== undefined)
-      this.accountNumber = data.accountNumber;
-    if (data.name !== undefined) this.name = data.name;
+    this.accountNumber = data.accountNumber;
+    this.name = data.name;
     if (data.properties !== undefined) this.properties = data.properties;
     if (data.hostname !== undefined) this.hostname = data.hostname;
     if (data.appManifest !== undefined) this.appManifest = data.appManifest;

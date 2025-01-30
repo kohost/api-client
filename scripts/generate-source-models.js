@@ -125,10 +125,12 @@ function generateModelCode(ajv, schemaModule) {
 	constructor(data) {
 	  super(data);
 	  ${Object.keys(schema.properties)
-      .map(
-        (prop) =>
-          `if (data.${prop} !== undefined) this.${prop} = data.${prop};`,
-      )
+      .map((prop) => {
+        const isRequired = schema.required?.includes(prop);
+        if (!isRequired)
+          return `if (data.${prop} !== undefined) this.${prop} = data.${prop};`;
+        return `this.${prop} = data.${prop};`;
+      })
       .join("\n            ")}
 	}
 	  

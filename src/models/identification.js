@@ -9,16 +9,16 @@ export class Identification extends Entity {
    * @typedef {Object} IdentificationData
    * @property {string} [id] - Identifier of the object.
    * @property {("driversLicense"|"passport"|"identityCard"|"visa")} type
-   * @property {any} [number]
-   * @property {any} [maskedNumber]
-   * @property {any} [encryptedNumber]
+   * @property {string} [number]
+   * @property {string} [maskedNumber]
+   * @property {string} [encryptedNumber]
    * @property {(string|object)} [issued]
    * @property {(string|object)} [expires]
    * @property {boolean} [verified]
    * @property {boolean} [matched]
    * @property {string} [firstName]
    * @property {string} [lastName]
-   * @property {any} [issuingCountry]
+   * @property {string} [issuingCountry]
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
    */
 
@@ -29,7 +29,7 @@ export class Identification extends Entity {
   constructor(data) {
     super(data);
     if (data.id !== undefined) this.id = data.id;
-    if (data.type !== undefined) this.type = data.type;
+    this.type = data.type;
     if (data.number !== undefined) this.number = data.number;
     if (data.maskedNumber !== undefined) this.maskedNumber = data.maskedNumber;
     if (data.encryptedNumber !== undefined)
@@ -60,16 +60,16 @@ Object.defineProperty(Identification.prototype, "schema", {
         type: "string",
         enum: ["driversLicense", "passport", "identityCard", "visa"],
       },
-      number: { string: "string" },
-      maskedNumber: { string: "string" },
-      encryptedNumber: { string: "string" },
+      number: { type: "string" },
+      maskedNumber: { type: "string" },
+      encryptedNumber: { type: "string" },
       issued: { type: ["string", "object"], format: "date-time" },
       expires: { type: ["string", "object", "null"], format: "date-time" },
       verified: { type: "boolean" },
       matched: { type: "boolean" },
       firstName: { type: "string" },
       lastName: { type: "string" },
-      issuingCountry: { string: "string", minLength: 2, maxLength: 2 },
+      issuingCountry: { type: "string", minLength: 2, maxLength: 2 },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
     },
   },

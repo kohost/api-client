@@ -11,9 +11,9 @@ export class Payment extends Entity {
    * @property {("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay")} type
    * @property {boolean} [enabled] - Default: true
    * @property {string} [storageData]
-   * @property {any} maskedNumber
+   * @property {string} maskedNumber
    * @property {string} [issued]
-   * @property {any} expires
+   * @property {string} expires
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
    */
 
@@ -24,12 +24,12 @@ export class Payment extends Entity {
   constructor(data) {
     super(data);
     if (data.id !== undefined) this.id = data.id;
-    if (data.type !== undefined) this.type = data.type;
+    this.type = data.type;
     if (data.enabled !== undefined) this.enabled = data.enabled;
     if (data.storageData !== undefined) this.storageData = data.storageData;
-    if (data.maskedNumber !== undefined) this.maskedNumber = data.maskedNumber;
+    this.maskedNumber = data.maskedNumber;
     if (data.issued !== undefined) this.issued = data.issued;
-    if (data.expires !== undefined) this.expires = data.expires;
+    this.expires = data.expires;
     if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
@@ -61,9 +61,9 @@ Object.defineProperty(Payment.prototype, "schema", {
       },
       enabled: { type: "boolean", default: true },
       storageData: { type: ["string", "null"] },
-      maskedNumber: { string: "string" },
+      maskedNumber: { type: "string" },
       issued: { type: ["string", "null"] },
-      expires: { string: "string" },
+      expires: { type: "string" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
     },
   },

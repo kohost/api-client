@@ -13,7 +13,7 @@ export class Gateway extends Entity {
    * @property {{name?: string, timestamp?: number, description?: string}} [notification]
    * @property {string} status
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
    * @property {number} [watts]
    * @property {string} [icon]
    * @property {string} [modelNumber]
@@ -27,14 +27,14 @@ export class Gateway extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
-    if (data.type !== undefined) this.type = data.type;
+    this.id = data.id;
+    this.type = data.type;
     if (data.supportedNotifications !== undefined)
       this.supportedNotifications = data.supportedNotifications;
     if (data.notification !== undefined) this.notification = data.notification;
-    if (data.status !== undefined) this.status = data.status;
+    this.status = data.status;
     if (data.systemId !== undefined) this.systemId = data.systemId;
-    if (data.driver !== undefined) this.driver = data.driver;
+    this.driver = data.driver;
     if (data.watts !== undefined) this.watts = data.watts;
     if (data.icon !== undefined) this.icon = data.icon;
     if (data.modelNumber !== undefined) this.modelNumber = data.modelNumber;

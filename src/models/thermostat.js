@@ -10,7 +10,7 @@ export class Thermostat extends Entity {
    * @property {string} id - Identifier of the object.
    * @property {string} [name]
    * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} type - Default: "thermostat"
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
    * @property {boolean} [offline]
    * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
    * @property {{name?: string, timestamp?: number, description?: string}} [notification]
@@ -45,10 +45,10 @@ export class Thermostat extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
+    this.id = data.id;
     if (data.name !== undefined) this.name = data.name;
-    if (data.type !== undefined) this.type = data.type;
-    if (data.driver !== undefined) this.driver = data.driver;
+    this.type = data.type;
+    this.driver = data.driver;
     if (data.offline !== undefined) this.offline = data.offline;
     if (data.supportedNotifications !== undefined)
       this.supportedNotifications = data.supportedNotifications;
@@ -57,19 +57,16 @@ export class Thermostat extends Entity {
       this.currentTemperature = data.currentTemperature;
     if (data.currentHumidity !== undefined)
       this.currentHumidity = data.currentHumidity;
-    if (data.hvacMode !== undefined) this.hvacMode = data.hvacMode;
-    if (data.hvacState !== undefined) this.hvacState = data.hvacState;
-    if (data.fanMode !== undefined) this.fanMode = data.fanMode;
-    if (data.fanState !== undefined) this.fanState = data.fanState;
-    if (data.temperatureScale !== undefined)
-      this.temperatureScale = data.temperatureScale;
+    this.hvacMode = data.hvacMode;
+    this.hvacState = data.hvacState;
+    this.fanMode = data.fanMode;
+    this.fanState = data.fanState;
+    this.temperatureScale = data.temperatureScale;
     if (data.humidityScale !== undefined)
       this.humidityScale = data.humidityScale;
-    if (data.supportedHvacModes !== undefined)
-      this.supportedHvacModes = data.supportedHvacModes;
-    if (data.supportedFanModes !== undefined)
-      this.supportedFanModes = data.supportedFanModes;
-    if (data.setpoints !== undefined) this.setpoints = data.setpoints;
+    this.supportedHvacModes = data.supportedHvacModes;
+    this.supportedFanModes = data.supportedFanModes;
+    this.setpoints = data.setpoints;
     if (data.minAutoDelta !== undefined) this.minAutoDelta = data.minAutoDelta;
     if (data.cycleRate !== undefined) this.cycleRate = data.cycleRate;
     if (data.batteryLevel !== undefined) this.batteryLevel = data.batteryLevel;

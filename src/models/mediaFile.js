@@ -31,7 +31,7 @@ export class MediaFile extends Entity {
   constructor(data) {
     super(data);
     if (data.id !== undefined) this.id = data.id;
-    if (data.type !== undefined) this.type = data.type;
+    this.type = data.type;
     if (data.name !== undefined) this.name = data.name;
     if (data.fileHash !== undefined) this.fileHash = data.fileHash;
     if (data.category !== undefined) this.category = data.category;

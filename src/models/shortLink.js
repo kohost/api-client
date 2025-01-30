@@ -10,8 +10,8 @@ export class ShortLink extends Entity {
    * @property {string} [id] - Identifier of the object.
    * @property {"shortLink"} [type] - Default: "shortLink"
    * @property {string} [title]
-   * @property {any} destination
-   * @property {any} url
+   * @property {string} destination
+   * @property {string} url
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
    */
 
@@ -24,8 +24,8 @@ export class ShortLink extends Entity {
     if (data.id !== undefined) this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
     if (data.title !== undefined) this.title = data.title;
-    if (data.destination !== undefined) this.destination = data.destination;
-    if (data.url !== undefined) this.url = data.url;
+    this.destination = data.destination;
+    this.url = data.url;
     if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
@@ -41,8 +41,8 @@ Object.defineProperty(ShortLink.prototype, "schema", {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", default: "shortLink", enum: ["shortLink"] },
       title: { type: "string" },
-      destination: { string: "string", format: "uri" },
-      url: { string: "string", format: "uri" },
+      destination: { type: "string", format: "uri" },
+      url: { type: "string", format: "uri" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
     },
   },

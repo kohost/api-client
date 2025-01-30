@@ -31,10 +31,10 @@ export class EmailMessage extends Entity {
     super(data);
     if (data.id !== undefined) this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
-    if (data.to !== undefined) this.to = data.to;
-    if (data.from !== undefined) this.from = data.from;
-    if (data.subject !== undefined) this.subject = data.subject;
-    if (data.status !== undefined) this.status = data.status;
+    this.to = data.to;
+    this.from = data.from;
+    this.subject = data.subject;
+    this.status = data.status;
     if (data.statusMessage !== undefined)
       this.statusMessage = data.statusMessage;
     if (data.html !== undefined) this.html = data.html;

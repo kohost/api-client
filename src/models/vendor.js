@@ -26,9 +26,9 @@ export class Vendor extends Entity {
     super(data);
     if (data.id !== undefined) this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
-    if (data.name !== undefined) this.name = data.name;
+    this.name = data.name;
     if (data.phone !== undefined) this.phone = data.phone;
-    if (data.email !== undefined) this.email = data.email;
+    this.email = data.email;
     if (data.address !== undefined) this.address = data.address;
     if (data.photo !== undefined) this.photo = data.photo;
     if (data.createdAt !== undefined) this.createdAt = data.createdAt;

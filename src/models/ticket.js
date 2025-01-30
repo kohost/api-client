@@ -12,6 +12,7 @@ export class Ticket extends Entity {
    * @property {string} [number]
    * @property {string} [issueId]
    * @property {{id?: string, userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp?: (string|object), body?: string, readBy?: string[], media?: any}[]} conversation - Default: []
+   * @property {string} [subject]
    * @property {{userId?: string, systemId?: string}} [openedBy]
    * @property {string} [openedBy.userId]
    * @property {string} [openedBy.systemId]
@@ -55,17 +56,18 @@ export class Ticket extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
+    this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
     if (data.number !== undefined) this.number = data.number;
     if (data.issueId !== undefined) this.issueId = data.issueId;
-    if (data.conversation !== undefined) this.conversation = data.conversation;
+    this.conversation = data.conversation;
+    if (data.subject !== undefined) this.subject = data.subject;
     if (data.openedBy !== undefined) this.openedBy = data.openedBy;
-    if (data.requester !== undefined) this.requester = data.requester;
+    this.requester = data.requester;
     if (data.assignedTo !== undefined) this.assignedTo = data.assignedTo;
-    if (data.status !== undefined) this.status = data.status;
+    this.status = data.status;
     if (data.priority !== undefined) this.priority = data.priority;
-    if (data.tags !== undefined) this.tags = data.tags;
+    this.tags = data.tags;
     if (data.department !== undefined) this.department = data.department;
     if (data.rating !== undefined) this.rating = data.rating;
     if (data.ratingComment !== undefined)
@@ -73,8 +75,8 @@ export class Ticket extends Entity {
     if (data.tipAmount !== undefined) this.tipAmount = data.tipAmount;
     if (data.autoCloseAt !== undefined) this.autoCloseAt = data.autoCloseAt;
     if (data.scheduleDate !== undefined) this.scheduleDate = data.scheduleDate;
-    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
-    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    this.createdAt = data.createdAt;
+    this.updatedAt = data.updatedAt;
     if (data.solvedAt !== undefined) this.solvedAt = data.solvedAt;
     if (data.closedAt !== undefined) this.closedAt = data.closedAt;
   }
@@ -118,6 +120,7 @@ Object.defineProperty(Ticket.prototype, "schema", {
           ],
         },
       },
+      subject: { type: "string" },
       openedBy: {
         type: "object",
         properties: {

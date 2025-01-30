@@ -24,7 +24,7 @@ export default {
       default: "energyReport",
     },
     reportTime: {
-      time: "string",
+      type: "string",
       enum: ["hourly", "daily", "monthly"],
     },
     roomId: {

@@ -22,9 +22,8 @@ export class DeviceRouter extends Entity {
     super(data);
     if (data.id !== undefined) this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
-    if (data.driver !== undefined) this.driver = data.driver;
-    if (data.organizationId !== undefined)
-      this.organizationId = data.organizationId;
+    this.driver = data.driver;
+    this.organizationId = data.organizationId;
     if (data.devices !== undefined) this.devices = data.devices;
   }
 }

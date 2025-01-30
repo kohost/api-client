@@ -140,6 +140,7 @@ export default {
           additionalProperties: false,
         },
         CheckIn: {
+          type: "object",
           properties: {
             payment: {},
             identification: {},
@@ -174,6 +175,7 @@ export default {
           },
         },
         CheckOut: {
+          type: "object",
           properties: {
             lateCheckOut: {
               type: "object",
@@ -347,8 +349,12 @@ export default {
             },
           },
         },
-        Elevator: {},
-        Experiences: {},
+        Elevator: {
+          type: "object",
+        },
+        Experiences: {
+          type: "object",
+        },
         Dining: {
           type: "object",
           properties: {
@@ -371,10 +377,10 @@ export default {
             },
           },
         },
-        Rentals: {},
-        Shop: {},
-        Spa: {},
-        Valet: {},
+        Rentals: { type: "object" },
+        Shop: { type: "object" },
+        Spa: { type: "object" },
+        Valet: { type: "object" },
       },
       additionalProperties: false,
       default: {

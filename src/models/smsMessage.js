@@ -29,10 +29,10 @@ export class SmsMessage extends Entity {
     super(data);
     if (data.id !== undefined) this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
-    if (data.to !== undefined) this.to = data.to;
-    if (data.from !== undefined) this.from = data.from;
+    this.to = data.to;
+    this.from = data.from;
     if (data.media !== undefined) this.media = data.media;
-    if (data.status !== undefined) this.status = data.status;
+    this.status = data.status;
     if (data.body !== undefined) this.body = data.body;
     if (data.driver !== undefined) this.driver = data.driver;
     if (data.appData !== undefined) this.appData = data.appData;

@@ -24,7 +24,7 @@ export class Property extends Entity {
    * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
    * @property {number} [latitude]
    * @property {number} [longitude]
-   * @property {{RoomControl?: {disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object}, CheckIn?: {payment?: any, identification?: any, earlyCheckIn?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number, minimumTime?: string}, roomUpgrades?: any, pet?: any, promos?: any}, CheckOut?: {lateCheckOut?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number}}, Concierge?: {timeTracking?: boolean, tipping?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), quickServices?: {name: string, description: string, department?: string, image: {id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}}[], issues?: {syncWithPropertyId?: string}}, DigitalKey?: {system?: ("salto"|"dormakaba"), systemOnline?: boolean, systemConfig?: {legicUrl?: string, legicWalletName?: string, legicAppId?: number, legicTechUsername?: string, legicTechPassword?: string}, enableApp?: boolean, branding?: {logo?: string, gradient?: string[], highlightedGradient?: string[]}}, SOS?: {active?: boolean, activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]}, Elevator?: any, Experiences?: any, Dining?: {system?: "gotab", systemConfig?: {landingUrl?: string, includeUserDetails?: boolean}}, Rentals?: any, Shop?: any, Spa?: any, Valet?: any}} [appFeatures] - Default: {"RoomControl":{}}
+   * @property {{RoomControl?: {disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object}, CheckIn?: {payment?: any, identification?: any, earlyCheckIn?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number, minimumTime?: string}, roomUpgrades?: any, pet?: any, promos?: any}, CheckOut?: {lateCheckOut?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number}}, Concierge?: {timeTracking?: boolean, tipping?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), quickServices?: {name: string, description: string, department?: string, image: {id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}}[], issues?: {syncWithPropertyId?: string}}, DigitalKey?: {system?: ("salto"|"dormakaba"), systemOnline?: boolean, systemConfig?: {legicUrl?: string, legicWalletName?: string, legicAppId?: number, legicTechUsername?: string, legicTechPassword?: string}, enableApp?: boolean, branding?: {logo?: string, gradient?: string[], highlightedGradient?: string[]}}, SOS?: {active?: boolean, activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]}, Elevator?: object, Experiences?: object, Dining?: {system?: "gotab", systemConfig?: {landingUrl?: string, includeUserDetails?: boolean}}, Rentals?: object, Shop?: object, Spa?: object, Valet?: object}} [appFeatures] - Default: {"RoomControl":{}}
    * @property {{disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object}} [appFeatures.RoomControl]
    * @property {("climate"|"lights"|"shades"|"tv"|"doors")[]} [appFeatures.RoomControl.disabledSystems]
    * @property {string[]} [appFeatures.RoomControl.excludedDeviceIds] - Default: []
@@ -75,17 +75,17 @@ export class Property extends Entity {
    * @property {{active?: boolean, activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]}} [appFeatures.SOS]
    * @property {boolean} [appFeatures.SOS.active]
    * @property {("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]} [appFeatures.SOS.activeEmergencies]
-   * @property {any} [appFeatures.Elevator]
-   * @property {any} [appFeatures.Experiences]
+   * @property {object} [appFeatures.Elevator]
+   * @property {object} [appFeatures.Experiences]
    * @property {{system?: "gotab", systemConfig?: {landingUrl?: string, includeUserDetails?: boolean}}} [appFeatures.Dining]
    * @property {"gotab"} [appFeatures.Dining.system]
    * @property {{landingUrl?: string, includeUserDetails?: boolean}} [appFeatures.Dining.systemConfig]
    * @property {string} [appFeatures.Dining.systemConfig.landingUrl]
    * @property {boolean} [appFeatures.Dining.systemConfig.includeUserDetails]
-   * @property {any} [appFeatures.Rentals]
-   * @property {any} [appFeatures.Shop]
-   * @property {any} [appFeatures.Spa]
-   * @property {any} [appFeatures.Valet]
+   * @property {object} [appFeatures.Rentals]
+   * @property {object} [appFeatures.Shop]
+   * @property {object} [appFeatures.Spa]
+   * @property {object} [appFeatures.Valet]
    * @property {{email?: {enabled?: boolean}, sms?: {enabled?: boolean}, push?: {enabled?: boolean}}} [notifications] - Default: {"email":{"enabled":false},"sms":{"enabled":false},"push":{"enabled":false}}
    * @property {{enabled?: boolean}} [notifications.email]
    * @property {boolean} [notifications.email.enabled]
@@ -102,17 +102,16 @@ export class Property extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
-    if (data.name !== undefined) this.name = data.name;
-    if (data.type !== undefined) this.type = data.type;
-    if (data.discriminator !== undefined)
-      this.discriminator = data.discriminator;
-    if (data.organization !== undefined) this.organization = data.organization;
+    this.id = data.id;
+    this.name = data.name;
+    this.type = data.type;
+    this.discriminator = data.discriminator;
+    this.organization = data.organization;
     if (data.departments !== undefined) this.departments = data.departments;
     if (data.testModeEnabled !== undefined)
       this.testModeEnabled = data.testModeEnabled;
     if (data.testMode !== undefined) this.testMode = data.testMode;
-    if (data.timezone !== undefined) this.timezone = data.timezone;
+    this.timezone = data.timezone;
     if (data.smsNumber !== undefined) this.smsNumber = data.smsNumber;
     if (data.checkInTime !== undefined) this.checkInTime = data.checkInTime;
     if (data.checkOutTime !== undefined) this.checkOutTime = data.checkOutTime;
@@ -239,6 +238,7 @@ Object.defineProperty(Property.prototype, "schema", {
             additionalProperties: false,
           },
           CheckIn: {
+            type: "object",
             properties: {
               payment: {},
               identification: {},
@@ -259,6 +259,7 @@ Object.defineProperty(Property.prototype, "schema", {
             },
           },
           CheckOut: {
+            type: "object",
             properties: {
               lateCheckOut: {
                 type: "object",
@@ -373,8 +374,8 @@ Object.defineProperty(Property.prototype, "schema", {
               },
             },
           },
-          Elevator: {},
-          Experiences: {},
+          Elevator: { type: "object" },
+          Experiences: { type: "object" },
           Dining: {
             type: "object",
             properties: {
@@ -389,10 +390,10 @@ Object.defineProperty(Property.prototype, "schema", {
               },
             },
           },
-          Rentals: {},
-          Shop: {},
-          Spa: {},
-          Valet: {},
+          Rentals: { type: "object" },
+          Shop: { type: "object" },
+          Spa: { type: "object" },
+          Valet: { type: "object" },
         },
         additionalProperties: false,
         default: { RoomControl: {} },

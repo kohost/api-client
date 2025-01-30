@@ -10,13 +10,13 @@ export class Product extends Entity {
    * @property {string} [id] - Identifier of the object.
    * @property {"product"} [type] - Default: "product"
    * @property {string} name
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
-   * @property {any} [description]
+   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+   * @property {string} [description]
    * @property {number} price
    * @property {number} [tax]
    * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [image] - Any media file
    * @property {string} [category]
-   * @property {any} [imageUrl]
+   * @property {string} [imageUrl]
    * @property {string} [systemId] - Identifier of the object, directly related to the system.
    */
 
@@ -28,10 +28,10 @@ export class Product extends Entity {
     super(data);
     if (data.id !== undefined) this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
-    if (data.name !== undefined) this.name = data.name;
-    if (data.driver !== undefined) this.driver = data.driver;
+    this.name = data.name;
+    this.driver = data.driver;
     if (data.description !== undefined) this.description = data.description;
-    if (data.price !== undefined) this.price = data.price;
+    this.price = data.price;
     if (data.tax !== undefined) this.tax = data.tax;
     if (data.image !== undefined) this.image = data.image;
     if (data.category !== undefined) this.category = data.category;
@@ -52,12 +52,12 @@ Object.defineProperty(Product.prototype, "schema", {
       type: { type: "string", default: "product", enum: ["product"] },
       name: { type: "string" },
       driver: { $ref: "definitions.json#/definitions/driver" },
-      description: { string: "string" },
+      description: { type: "string" },
       price: { type: "number" },
       tax: { type: ["number", "null"] },
       image: { $ref: "mediaFile.json" },
       category: { type: "string" },
-      imageUrl: { format: "uri", pattern: "^https?://" },
+      imageUrl: { type: "string", format: "uri", pattern: "^https?://" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
     },
   },
