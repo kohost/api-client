@@ -4,22 +4,27 @@
 import { Entity } from "./entity";
 import { validatePayment as validate } from "../validators";
 
+/**
+ * @typedef {Object} PaymentData
+ * @property {string} [id] - Identifier of the object.
+ * @property {("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay")} type
+ * @property {boolean} [enabled] - Default: true
+ * @property {string} [storageData]
+ * @property {string} maskedNumber
+ * @property {string} [issued]
+ * @property {string} expires
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ */
+
+/**
+ *
+ * @class Payment
+ * @extends {Entity}
+ */
 export class Payment extends Entity {
   /**
-   * @typedef {Object} PaymentData
-   * @property {string} [id] - Identifier of the object.
-   * @property {("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay")} type
-   * @property {boolean} [enabled] - Default: true
-   * @property {string} [storageData]
-   * @property {string} maskedNumber
-   * @property {string} [issued]
-   * @property {string} expires
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   */
-
-  /**
-   * @param {PaymentData} data - The data to initialize the Payment with
    * @constructor
+   * @param {PaymentData} data - The data to initialize the Payment with
    */
   constructor(data) {
     super(data);

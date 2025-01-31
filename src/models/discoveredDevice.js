@@ -4,24 +4,29 @@
 import { Entity } from "./entity";
 import { validateDiscoveredDevice as validate } from "../validators";
 
+/**
+ * @typedef {Object} DiscoveredDeviceData A device that has been discovered by Kohost, but not yet added to the Kohost system.
+ * @property {string} [id] - Identifier of the object.
+ * @property {string} name
+ * @property {string} deviceId
+ * @property {"discoveredDevice"} [type] - Default: "discoveredDevice"
+ * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} [discriminator]
+ * @property {string} [driver]
+ * @property {object} deviceData
+ * @property {boolean} [ignore]
+ * @property {string} [organizationId] - Reference (id) to the organization that owns this device
+ * @property {string} [propertyId] - Reference (id) to the property that this device belongs to
+ */
+
+/**
+ * A device that has been discovered by Kohost, but not yet added to the Kohost system.
+ * @class DiscoveredDevice
+ * @extends {Entity}
+ */
 export class DiscoveredDevice extends Entity {
   /**
-   * @typedef {Object} DiscoveredDeviceData A device that has been discovered by Kohost, but not yet added to the Kohost system.
-   * @property {string} [id] - Identifier of the object.
-   * @property {string} name
-   * @property {string} deviceId
-   * @property {"discoveredDevice"} [type] - Default: "discoveredDevice"
-   * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} [discriminator]
-   * @property {string} [driver]
-   * @property {object} deviceData
-   * @property {boolean} [ignore]
-   * @property {string} [organizationId] - Reference (id) to the organization that owns this device
-   * @property {string} [propertyId] - Reference (id) to the property that this device belongs to
-   */
-
-  /**
-   * @param {DiscoveredDeviceData} data - The data to initialize the DiscoveredDevice with
    * @constructor
+   * @param {DiscoveredDeviceData} data - The data to initialize the DiscoveredDevice with
    */
   constructor(data) {
     super(data);

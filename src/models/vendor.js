@@ -4,23 +4,28 @@
 import { Entity } from "./entity";
 import { validateVendor as validate } from "../validators";
 
+/**
+ * @typedef {Object} VendorData
+ * @property {string} [id] - Identifier of the object.
+ * @property {"vendor"} [type] - Default: "vendor"
+ * @property {string} name
+ * @property {string} [phone]
+ * @property {string} email
+ * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
+ * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [photo] - Any media file
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ */
+
+/**
+ *
+ * @class Vendor
+ * @extends {Entity}
+ */
 export class Vendor extends Entity {
   /**
-   * @typedef {Object} VendorData
-   * @property {string} [id] - Identifier of the object.
-   * @property {"vendor"} [type] - Default: "vendor"
-   * @property {string} name
-   * @property {string} [phone]
-   * @property {string} email
-   * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
-   * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [photo] - Any media file
-   * @property {(string|object)} [createdAt]
-   * @property {(string|object)} [updatedAt]
-   */
-
-  /**
-   * @param {VendorData} data - The data to initialize the Vendor with
    * @constructor
+   * @param {VendorData} data - The data to initialize the Vendor with
    */
   constructor(data) {
     super(data);

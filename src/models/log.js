@@ -4,43 +4,50 @@
 import { Entity } from "./entity";
 import { validateLog as validate } from "../validators";
 
+/**
+ * @typedef {Object} LogData
+ * @property {"log"} type - Default: "log"
+ * @property {number} timestamp
+ * @property {string} id - Identifier of the object.
+ * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+ * @property {string} name - Event name
+ * @property {{name: string, value: string}} [field1]
+ * @property {string} field1.name
+ * @property {string} field1.value
+ * @property {{name: string, value: string}} [field2]
+ * @property {string} field2.name
+ * @property {string} field2.value
+ * @property {{name: string, value: string}} [field3]
+ * @property {string} field3.name
+ * @property {string} field3.value
+ * @property {{name: string, value: string}} [field4]
+ * @property {string} field4.name
+ * @property {string} field4.value
+ * @property {{name: string, value: string}} [field5]
+ * @property {string} field5.name
+ * @property {string} field5.value
+ * @property {{name: string, value: string}} [field6]
+ * @property {string} field6.name
+ * @property {string} field6.value
+ */
+
+/**
+ *
+ * @class Log
+ * @extends {Entity}
+ */
 export class Log extends Entity {
   /**
-   * @typedef {Object} LogData
-   * @property {"log"} [type] - Default: "log"
-   * @property {number} [timestamp]
-   * @property {string} [id] - Identifier of the object.
-   * @property {string} [name] - Event name
-   * @property {{name: string, value: string}} [field1]
-   * @property {string} field1.name
-   * @property {string} field1.value
-   * @property {{name: string, value: string}} [field2]
-   * @property {string} field2.name
-   * @property {string} field2.value
-   * @property {{name: string, value: string}} [field3]
-   * @property {string} field3.name
-   * @property {string} field3.value
-   * @property {{name: string, value: string}} [field4]
-   * @property {string} field4.name
-   * @property {string} field4.value
-   * @property {{name: string, value: string}} [field5]
-   * @property {string} field5.name
-   * @property {string} field5.value
-   * @property {{name: string, value: string}} [field6]
-   * @property {string} field6.name
-   * @property {string} field6.value
-   */
-
-  /**
-   * @param {LogData} data - The data to initialize the Log with
    * @constructor
+   * @param {LogData} data - The data to initialize the Log with
    */
   constructor(data) {
     super(data);
-    if (data.type !== undefined) this.type = data.type;
-    if (data.timestamp !== undefined) this.timestamp = data.timestamp;
-    if (data.id !== undefined) this.id = data.id;
-    if (data.name !== undefined) this.name = data.name;
+    this.type = data.type;
+    this.timestamp = data.timestamp;
+    this.id = data.id;
+    this.driver = data.driver;
+    this.name = data.name;
     if (data.field1 !== undefined) this.field1 = data.field1;
     if (data.field2 !== undefined) this.field2 = data.field2;
     if (data.field3 !== undefined) this.field3 = data.field3;
@@ -56,10 +63,12 @@ Object.defineProperty(Log.prototype, "schema", {
     $id: "log.json",
     title: "Log",
     type: "object",
+    required: ["type", "timestamp", "id", "driver", "name"],
     properties: {
       type: { type: "string", default: "log", enum: ["log"] },
       timestamp: { type: "number", minimum: 1655907956593 },
       id: { $ref: "definitions.json#/definitions/id" },
+      driver: { $ref: "definitions.json#/definitions/driver" },
       name: { type: "string", description: "Event name" },
       field1: {
         type: "object",

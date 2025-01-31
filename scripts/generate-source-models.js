@@ -4,7 +4,7 @@ import addFormats from "ajv-formats";
 import standaloneCode from "ajv/dist/standalone/index.js";
 import fs from "node:fs";
 import * as prettier from "prettier";
-import { generateCommandDataDoc, generateSchemaDoc } from "./jsdoc.js";
+import { generateCommandDataDoc, generateSchemaDoc } from "./utils/jsdoc.js";
 
 async function formatCode(code) {
   return await prettier.format(code, { parser: "babel" });
@@ -65,7 +65,7 @@ Promise.all(schemaModules).then(async (modules) => {
 
   fs.writeFileSync(
     "src/validators.js",
-    await formatCode(`/* eslint-disable */\n${banner}\n\n\n${validatorCode}`),
+    await formatCode(`/* eslint-disable */\n${banner}\n\n\n${validatorCode}`)
   );
 
   for (const module of modules) {
@@ -86,7 +86,7 @@ Promise.all(schemaModules).then(async (modules) => {
       const code = generateUseCaseCode(useCase, data.http, data.description);
       fs.writeFileSync(
         `src/useCases/${useCaseFileName}.js`,
-        await formatCode(code),
+        await formatCode(code)
       );
     }
   }
@@ -112,15 +112,23 @@ function generateModelCode(ajv, schemaModule) {
   ${entityImport}
   ${validatorImport}
 
- 
 
+  ${jsdoc}
+
+
+ 
+  /**
+   * ${schema.description ?? ""}
+   * @class ${schemaTitle}
+   * @extends {Entity}
+   */
   export class ${schemaTitle} extends Entity {
 
-   ${jsdoc}
+
 
   /**
-   * @param {${schemaTitle}Data} data - The data to initialize the ${schemaTitle} with
    * @constructor
+   * @param {${schemaTitle}Data} data - The data to initialize the ${schemaTitle} with
    */
 	constructor(data) {
 	  super(data);
@@ -138,28 +146,28 @@ function generateModelCode(ajv, schemaModule) {
 	${Object.entries(statics)
     .map(
       ([name, func]) =>
-        `static ${name}${func.toString().slice(func.toString().indexOf("("))}`,
+        `static ${name}${func.toString().slice(func.toString().indexOf("("))}`
     )
     .join("\n    ")}
 	  
 	  ${Object.entries(methods)
       .map(
         ([name, func]) =>
-          `${name}${func.toString().slice(func.toString().indexOf("("))}`,
+          `${name}${func.toString().slice(func.toString().indexOf("("))}`
       )
       .join("\n    ")}
 
 	  ${Object.entries(getters)
       .map(
         ([name, func]) =>
-          `get ${name}${func.toString().slice(func.toString().indexOf("("))}`,
+          `get ${name}${func.toString().slice(func.toString().indexOf("("))}`
       )
       .join("\n    ")}
 
 	  ${Object.entries(setters)
       .map(
         ([name, func]) =>
-          `set ${name}${func.toString().slice(func.toString().indexOf("("))}`,
+          `set ${name}${func.toString().slice(func.toString().indexOf("("))}`
       )
       .join("\n    ")}
   }
@@ -186,7 +194,7 @@ function generateModelCode(ajv, schemaModule) {
 function generateUseCaseCode(
   useCase,
   { method, path: endpoint },
-  description = "",
+  description = ""
 ) {
   const pathParams =
     endpoint.match(/:[a-zA-Z0-9]+/g)?.map((param) => param.replace(":", "")) ||

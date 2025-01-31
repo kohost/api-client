@@ -4,22 +4,27 @@
 import { Entity } from "./entity";
 import { validateEnergyReportShard as validate } from "../validators";
 
+/**
+ * @typedef {Object} EnergyReportShardData Shard used for Energy Reports
+ * @property {string} id - Identifier of the object.
+ * @property {"energyReportShard"} type - Default: "energyReportShard"
+ * @property {string} roomId - Identifier of the object.
+ * @property {(string|object)} first
+ * @property {(string|object)} last
+ * @property {{time: (string|object), watts: number, id: string, type: ("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice"), value: number}[]} data
+ * @property {number} ndata - Default: 0
+ * @property {(string|object)} expires
+ */
+
+/**
+ * Shard used for Energy Reports
+ * @class EnergyReportShard
+ * @extends {Entity}
+ */
 export class EnergyReportShard extends Entity {
   /**
-   * @typedef {Object} EnergyReportShardData Shard used for Energy Reports
-   * @property {string} id - Identifier of the object.
-   * @property {"energyReportShard"} type - Default: "energyReportShard"
-   * @property {string} roomId - Identifier of the object.
-   * @property {(string|object)} first
-   * @property {(string|object)} last
-   * @property {{time: (string|object), watts: number, id: string, type: ("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice"), value: number}[]} data
-   * @property {number} ndata - Default: 0
-   * @property {(string|object)} expires
-   */
-
-  /**
-   * @param {EnergyReportShardData} data - The data to initialize the EnergyReportShard with
    * @constructor
+   * @param {EnergyReportShardData} data - The data to initialize the EnergyReportShard with
    */
   constructor(data) {
     super(data);

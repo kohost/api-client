@@ -4,20 +4,25 @@
 import { Entity } from "./entity";
 import { validateTimeSheet as validate } from "../validators";
 
+/**
+ * @typedef {Object} TimeSheetData
+ * @property {string} [id] - Identifier of the object.
+ * @property {"timeSheet"} [type] - Default: "timeSheet"
+ * @property {string} userId - Identifier of the object.
+ * @property {(string|object)} day
+ * @property {boolean} [locked] - If true, the time sheet is locked and cannot be modified. Default: false
+ * @property {{id?: string, discriminator: ("working"|"driving"|"meeting"|"break"), start: (string|object), end?: (string|object), comment?: string, ticketId?: string}[]} [timeEntries] - Default: []
+ */
+
+/**
+ *
+ * @class TimeSheet
+ * @extends {Entity}
+ */
 export class TimeSheet extends Entity {
   /**
-   * @typedef {Object} TimeSheetData
-   * @property {string} [id] - Identifier of the object.
-   * @property {"timeSheet"} [type] - Default: "timeSheet"
-   * @property {string} userId - Identifier of the object.
-   * @property {(string|object)} day
-   * @property {boolean} [locked] - If true, the time sheet is locked and cannot be modified. Default: false
-   * @property {{id?: string, discriminator: ("working"|"driving"|"meeting"|"break"), start: (string|object), end?: (string|object), comment?: string, ticketId?: string}[]} [timeEntries] - Default: []
-   */
-
-  /**
-   * @param {TimeSheetData} data - The data to initialize the TimeSheet with
    * @constructor
+   * @param {TimeSheetData} data - The data to initialize the TimeSheet with
    */
   constructor(data) {
     super(data);

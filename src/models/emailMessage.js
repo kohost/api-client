@@ -4,28 +4,33 @@
 import { Entity } from "./entity";
 import { validateEmailMessage as validate } from "../validators";
 
+/**
+ * @typedef {Object} EmailMessageData
+ * @property {string} [id] - Identifier of the object.
+ * @property {"emailMessage"} [type] - Default: "emailMessage"
+ * @property {string} to
+ * @property {string} from - Must be in the format of 'Sender <email@example.com>
+ * @property {string} subject
+ * @property {("queued"|"sending"|"sent"|"deferred"|"delivered"|"undelivered"|"bounced"|"blocked"|"receiving"|"received"|"opened"|"clicked"|"unsubscribed"|"spamReport")} status
+ * @property {string} [statusMessage]
+ * @property {string} [html]
+ * @property {string} [text]
+ * @property {string} [driver]
+ * @property {object} [appData]
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ */
+
+/**
+ *
+ * @class EmailMessage
+ * @extends {Entity}
+ */
 export class EmailMessage extends Entity {
   /**
-   * @typedef {Object} EmailMessageData
-   * @property {string} [id] - Identifier of the object.
-   * @property {"emailMessage"} [type] - Default: "emailMessage"
-   * @property {string} to
-   * @property {string} from - Must be in the format of 'Sender <email@example.com>
-   * @property {string} subject
-   * @property {("queued"|"sending"|"sent"|"deferred"|"delivered"|"undelivered"|"bounced"|"blocked"|"receiving"|"received"|"opened"|"clicked"|"unsubscribed"|"spamReport")} status
-   * @property {string} [statusMessage]
-   * @property {string} [html]
-   * @property {string} [text]
-   * @property {string} [driver]
-   * @property {object} [appData]
-   * @property {(string|object)} [createdAt]
-   * @property {(string|object)} [updatedAt]
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   */
-
-  /**
-   * @param {EmailMessageData} data - The data to initialize the EmailMessage with
    * @constructor
+   * @param {EmailMessageData} data - The data to initialize the EmailMessage with
    */
   constructor(data) {
     super(data);

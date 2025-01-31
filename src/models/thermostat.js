@@ -4,44 +4,49 @@
 import { Entity } from "./entity";
 import { validateThermostat as validate } from "../validators";
 
+/**
+ * @typedef {Object} ThermostatData Any smart thermostat
+ * @property {string} id - Identifier of the object.
+ * @property {string} [name]
+ * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} type - Default: "thermostat"
+ * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+ * @property {boolean} [offline]
+ * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
+ * @property {{name?: string, timestamp?: number, description?: string}} [notification]
+ * @property {number} [currentTemperature]
+ * @property {number} [currentHumidity]
+ * @property {any} hvacMode
+ * @property {("cooling"|"heating"|"off")} hvacState
+ * @property {any} fanMode
+ * @property {("off"|"low"|"medium"|"high"|"on")} fanState
+ * @property {("celsius"|"fahrenheit")} temperatureScale - Default: "fahrenheit"
+ * @property {("absolute"|"relative")} [humidityScale]
+ * @property {("cool"|"heat"|"auto"|"off")[]} supportedHvacModes
+ * @property {("auto"|"low"|"medium"|"high"|"off"|"on")[]} supportedFanModes
+ * @property {{cool?: any, heat?: any, auto?: any}} setpoints
+ * @property {any} [setpoints.cool]
+ * @property {any} [setpoints.heat]
+ * @property {any} [setpoints.auto]
+ * @property {number} [minAutoDelta] - Default: 3
+ * @property {number} [cycleRate]
+ * @property {number} [batteryLevel]
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ * @property {number} [watts]
+ * @property {string} [icon]
+ * @property {string} [modelNumber]
+ * @property {string} [serialNumber]
+ * @property {string} [firmwareVersion]
+ */
+
+/**
+ * Any smart thermostat
+ * @class Thermostat
+ * @extends {Entity}
+ */
 export class Thermostat extends Entity {
   /**
-   * @typedef {Object} ThermostatData Any smart thermostat
-   * @property {string} id - Identifier of the object.
-   * @property {string} [name]
-   * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} type - Default: "thermostat"
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
-   * @property {boolean} [offline]
-   * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
-   * @property {{name?: string, timestamp?: number, description?: string}} [notification]
-   * @property {number} [currentTemperature]
-   * @property {number} [currentHumidity]
-   * @property {any} hvacMode
-   * @property {("cooling"|"heating"|"off")} hvacState
-   * @property {any} fanMode
-   * @property {("off"|"low"|"medium"|"high"|"on")} fanState
-   * @property {("celsius"|"fahrenheit")} temperatureScale - Default: "fahrenheit"
-   * @property {("absolute"|"relative")} [humidityScale]
-   * @property {("cool"|"heat"|"auto"|"off")[]} supportedHvacModes
-   * @property {("auto"|"low"|"medium"|"high"|"off"|"on")[]} supportedFanModes
-   * @property {{cool?: any, heat?: any, auto?: any}} setpoints
-   * @property {any} [setpoints.cool]
-   * @property {any} [setpoints.heat]
-   * @property {any} [setpoints.auto]
-   * @property {number} [minAutoDelta] - Default: 3
-   * @property {number} [cycleRate]
-   * @property {number} [batteryLevel]
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   * @property {number} [watts]
-   * @property {string} [icon]
-   * @property {string} [modelNumber]
-   * @property {string} [serialNumber]
-   * @property {string} [firmwareVersion]
-   */
-
-  /**
-   * @param {ThermostatData} data - The data to initialize the Thermostat with
    * @constructor
+   * @param {ThermostatData} data - The data to initialize the Thermostat with
    */
   constructor(data) {
     super(data);

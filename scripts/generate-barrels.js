@@ -24,7 +24,7 @@ function findExports(content) {
     /export\s+(?:const|let|var|function|class)\s+([^=\s{]+)/g;
   const namedExports = Array.from(
     content.matchAll(namedExportRegex),
-    (m) => m[1],
+    (m) => m[1]
   );
   const hasDefaultExport = /export\s+default/.test(content);
   return { named: namedExports, hasDefault: hasDefaultExport };
@@ -63,9 +63,7 @@ function generateBarrelFiles(directories) {
       .map((exp) => {
         const lines = [];
         if (exp.namedExports.length > 0) {
-          lines.push(
-            `export { ${exp.namedExports.join(", ")} } from "${exp.path}";`,
-          );
+          lines.push(`export * from "${exp.path}";`);
         }
         if (exp.hasDefaultExport) {
           const name = exp.path.split("/").pop();

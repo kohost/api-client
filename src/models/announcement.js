@@ -4,24 +4,29 @@
 import { Entity } from "./entity";
 import { validateAnnouncement as validate } from "../validators";
 
+/**
+ * @typedef {Object} AnnouncementData Announcement message sent to users
+ * @property {string} [id] - Identifier of the object.
+ * @property {"announcement"} [type] - Default: "announcement"
+ * @property {string[]} [users]
+ * @property {string} [group]
+ * @property {string} [body]
+ * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [media] - Any media file
+ * @property {string} [sentBy]
+ * @property {string[]} [tags]
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ */
+
+/**
+ * Announcement message sent to users
+ * @class Announcement
+ * @extends {Entity}
+ */
 export class Announcement extends Entity {
   /**
-   * @typedef {Object} AnnouncementData Announcement message sent to users
-   * @property {string} [id] - Identifier of the object.
-   * @property {"announcement"} [type] - Default: "announcement"
-   * @property {string[]} [users]
-   * @property {string} [group]
-   * @property {string} [body]
-   * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [media] - Any media file
-   * @property {string} [sentBy]
-   * @property {string[]} [tags]
-   * @property {(string|object)} [createdAt]
-   * @property {(string|object)} [updatedAt]
-   */
-
-  /**
-   * @param {AnnouncementData} data - The data to initialize the Announcement with
    * @constructor
+   * @param {AnnouncementData} data - The data to initialize the Announcement with
    */
   constructor(data) {
     super(data);

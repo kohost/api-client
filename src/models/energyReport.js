@@ -4,23 +4,28 @@
 import { Entity } from "./entity";
 import { validateEnergyReport as validate } from "../validators";
 
+/**
+ * @typedef {Object} EnergyReportData Hourly Report for Energy based on energy report shards
+ * @property {string} id - Identifier of the object.
+ * @property {"energyReport"} type - Default: "energyReport"
+ * @property {("hourly"|"daily"|"monthly")} [reportTime]
+ * @property {string} roomId - Identifier of the object.
+ * @property {(string|object)} first
+ * @property {(string|object)} last
+ * @property {{id: string, type: ("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice"), kwh: number}[]} consumption
+ * @property {{lights: number, climate: number, media: number}[]} totals
+ * @property {number} costPerKw
+ */
+
+/**
+ * Hourly Report for Energy based on energy report shards
+ * @class EnergyReport
+ * @extends {Entity}
+ */
 export class EnergyReport extends Entity {
   /**
-   * @typedef {Object} EnergyReportData Hourly Report for Energy based on energy report shards
-   * @property {string} id - Identifier of the object.
-   * @property {"energyReport"} type - Default: "energyReport"
-   * @property {("hourly"|"daily"|"monthly")} [reportTime]
-   * @property {string} roomId - Identifier of the object.
-   * @property {(string|object)} first
-   * @property {(string|object)} last
-   * @property {{id: string, type: ("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice"), kwh: number}[]} consumption
-   * @property {{lights: number, climate: number, media: number}[]} totals
-   * @property {number} costPerKw
-   */
-
-  /**
-   * @param {EnergyReportData} data - The data to initialize the EnergyReport with
    * @constructor
+   * @param {EnergyReportData} data - The data to initialize the EnergyReport with
    */
   constructor(data) {
     super(data);

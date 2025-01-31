@@ -4,20 +4,25 @@
 import { Entity } from "./entity";
 import { validateShortLink as validate } from "../validators";
 
+/**
+ * @typedef {Object} ShortLinkData
+ * @property {string} [id] - Identifier of the object.
+ * @property {"shortLink"} [type] - Default: "shortLink"
+ * @property {string} [title]
+ * @property {string} destination
+ * @property {string} url
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ */
+
+/**
+ *
+ * @class ShortLink
+ * @extends {Entity}
+ */
 export class ShortLink extends Entity {
   /**
-   * @typedef {Object} ShortLinkData
-   * @property {string} [id] - Identifier of the object.
-   * @property {"shortLink"} [type] - Default: "shortLink"
-   * @property {string} [title]
-   * @property {string} destination
-   * @property {string} url
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   */
-
-  /**
-   * @param {ShortLinkData} data - The data to initialize the ShortLink with
    * @constructor
+   * @param {ShortLinkData} data - The data to initialize the ShortLink with
    */
   constructor(data) {
     super(data);

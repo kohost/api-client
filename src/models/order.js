@@ -4,26 +4,31 @@
 import { Entity } from "./entity";
 import { validateOrder as validate } from "../validators";
 
+/**
+ * @typedef {Object} OrderData A purchase order for products or services.
+ * @property {string} [id] - Identifier of the object.
+ * @property {"order"} type - Default: "order"
+ * @property {string} [orderNumber]
+ * @property {("draft"|"pendingPayment"|"processing"|"outForDelivery"|"completed"|"paymentFailed"|"cancelled"|"refunded")} status
+ * @property {string} [userId] - Identifier of the object.. User id of purchaser
+ * @property {string} [reservationId] - Identifier of the object.. Reservation id if the order is for a reservation
+ * @property {(string|object)} [date]
+ * @property {{additionalProperties?: any, name: string, sku?: string, quantity?: number, price: number, taxClass?: string, deliveryClass?: string, productId?: string}[]} [items] - Default: []
+ * @property {{additionalProperties?: any, name: string, class?: string, rateType?: ("percentage"|"flat"), rate: number, total?: number}[]} [taxes] - Default: []
+ * @property {{additionalProperties?: any, name: string, price: number}[]} [fees] - Default: []
+ * @property {{additionalProperties?: any, name: string, class?: string, rateType?: ("percentage"|"flat"), rate: number, total?: number}[]} [delivery] - Default: []
+ * @property {{method?: ("folio"|"invoice"|"amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), name?: string, date?: (string|object), amount?: number, transactionReference?: string}[]} [payments] - Default: []
+ */
+
+/**
+ * A purchase order for products or services.
+ * @class Order
+ * @extends {Entity}
+ */
 export class Order extends Entity {
   /**
-   * @typedef {Object} OrderData A purchase order for products or services.
-   * @property {string} [id] - Identifier of the object.
-   * @property {"order"} type - Default: "order"
-   * @property {string} [orderNumber]
-   * @property {("draft"|"pendingPayment"|"processing"|"outForDelivery"|"completed"|"paymentFailed"|"cancelled"|"refunded")} status
-   * @property {string} [userId] - Identifier of the object.. User id of purchaser
-   * @property {string} [reservationId] - Identifier of the object.. Reservation id if the order is for a reservation
-   * @property {(string|object)} [date]
-   * @property {{additionalProperties?: any, name: string, sku?: string, quantity?: number, price: number, taxClass?: string, deliveryClass?: string, productId?: string}[]} [items] - Default: []
-   * @property {{additionalProperties?: any, name: string, class?: string, rateType?: ("percentage"|"flat"), rate: number, total?: number}[]} [taxes] - Default: []
-   * @property {{additionalProperties?: any, name: string, price: number}[]} [fees] - Default: []
-   * @property {{additionalProperties?: any, name: string, class?: string, rateType?: ("percentage"|"flat"), rate: number, total?: number}[]} [delivery] - Default: []
-   * @property {{method?: ("folio"|"invoice"|"amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), name?: string, date?: (string|object), amount?: number, transactionReference?: string}[]} [payments] - Default: []
-   */
-
-  /**
-   * @param {OrderData} data - The data to initialize the Order with
    * @constructor
+   * @param {OrderData} data - The data to initialize the Order with
    */
   constructor(data) {
     super(data);

@@ -4,43 +4,48 @@
 import { Entity } from "./entity";
 import { validateMediaSource as validate } from "../validators";
 
+/**
+ * @typedef {Object} MediaSourceData Any media source
+ * @property {string} id - Identifier of the object.
+ * @property {"mediaSource"} type - Default: "mediaSource"
+ * @property {("tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"paSystem"|"uncontrolledDevice")} discriminator
+ * @property {{id?: string, name?: string}[]} [playlists]
+ * @property {("MR22GA"|"XRT260"|"XRT270"|"HOF-16K 1.2"|"219863500"|"SONIFI"|"AKB76039803"|"BN59-01388A")} [remote]
+ * @property {string} [name]
+ * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+ * @property {boolean} [offline]
+ * @property {boolean} audio
+ * @property {boolean} video
+ * @property {boolean} [powerFeedback]
+ * @property {boolean} [volumeFeedback]
+ * @property {boolean} [muted]
+ * @property {number} [volume]
+ * @property {number} [brightness]
+ * @property {number} [contrast]
+ * @property {("on"|"off")} [power]
+ * @property {string} [input]
+ * @property {string[]} [supportedInputs]
+ * @property {string[]} [supportedOutputs]
+ * @property {("mute"|"volumeUp"|"volumeDown"|"brightnessUp"|"brightnessDown"|"channelUp"|"channelDown"|"number0"|"number1"|"number2"|"number3"|"number4"|"number5"|"number6"|"number7"|"number8"|"number9"|"lastChannel"|"display"|"favoriteChannel"|"play"|"playing"|"stop"|"stopped"|"pause"|"paused"|"fastForward"|"fastForwarding"|"rewind"|"rewinding"|"instantReplay"|"record"|"ac3"|"pvrMenu"|"guide"|"menu"|"menuUp"|"menuDown"|"menuLeft"|"menuRight"|"pageUp"|"pageDown"|"select"|"exit"|"input"|"power"|"enterChannel"|"enterVolume"|"enterBrightness"|"enterContrast"|"number10"|"number11"|"number12"|"number13"|"number14"|"number15"|"number16"|"number10Plus"|"number20Plus"|"number100"|"dash"|"threeChan"|"threeD"|"sixChan"|"a"|"add"|"alarm"|"am"|"analog"|"angle"|"antenna"|"antennaEast"|"antennaWest"|"aspect"|"audio1"|"audio2"|"audio3"|"audioDumming"|"audioLevelDown"|"audioLevelUp"|"b"|"back"|"c"|"component1"|"component2"|"component3"|"d"|"home"|"list"|"liveTv"|"discreteInputCable"|"powerOff"|"powerOn"|"setupMenu"|"skipForward"|"skipReverse"|"video1"|"video2"|"video3"|"video4"|"video5"|"details"|"hdmi1"|"hdmi2"|"hdmi3"|"cecDeviceList"|"mtsSap"|"red"|"green"|"yellow"|"blue"|"alert"|"order")} [command]
+ * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
+ * @property {{name?: string, timestamp?: number, description?: string}} [notification]
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ * @property {number} [watts]
+ * @property {string} [icon]
+ * @property {string} [modelNumber]
+ * @property {string} [serialNumber]
+ * @property {string} [firmwareVersion]
+ */
+
+/**
+ * Any media source
+ * @class MediaSource
+ * @extends {Entity}
+ */
 export class MediaSource extends Entity {
   /**
-   * @typedef {Object} MediaSourceData Any media source
-   * @property {string} id - Identifier of the object.
-   * @property {"mediaSource"} type - Default: "mediaSource"
-   * @property {("tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"paSystem"|"uncontrolledDevice")} discriminator
-   * @property {{id?: string, name?: string}[]} [playlists]
-   * @property {("MR22GA"|"XRT260"|"XRT270"|"HOF-16K 1.2"|"219863500"|"SONIFI"|"AKB76039803"|"BN59-01388A")} [remote]
-   * @property {string} [name]
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
-   * @property {boolean} [offline]
-   * @property {boolean} audio
-   * @property {boolean} video
-   * @property {boolean} [powerFeedback]
-   * @property {boolean} [volumeFeedback]
-   * @property {boolean} [muted]
-   * @property {number} [volume]
-   * @property {number} [brightness]
-   * @property {number} [contrast]
-   * @property {("on"|"off")} [power]
-   * @property {string} [input]
-   * @property {string[]} [supportedInputs]
-   * @property {string[]} [supportedOutputs]
-   * @property {("mute"|"volumeUp"|"volumeDown"|"brightnessUp"|"brightnessDown"|"channelUp"|"channelDown"|"number0"|"number1"|"number2"|"number3"|"number4"|"number5"|"number6"|"number7"|"number8"|"number9"|"lastChannel"|"display"|"favoriteChannel"|"play"|"playing"|"stop"|"stopped"|"pause"|"paused"|"fastForward"|"fastForwarding"|"rewind"|"rewinding"|"instantReplay"|"record"|"ac3"|"pvrMenu"|"guide"|"menu"|"menuUp"|"menuDown"|"menuLeft"|"menuRight"|"pageUp"|"pageDown"|"select"|"exit"|"input"|"power"|"enterChannel"|"enterVolume"|"enterBrightness"|"enterContrast"|"number10"|"number11"|"number12"|"number13"|"number14"|"number15"|"number16"|"number10Plus"|"number20Plus"|"number100"|"dash"|"threeChan"|"threeD"|"sixChan"|"a"|"add"|"alarm"|"am"|"analog"|"angle"|"antenna"|"antennaEast"|"antennaWest"|"aspect"|"audio1"|"audio2"|"audio3"|"audioDumming"|"audioLevelDown"|"audioLevelUp"|"b"|"back"|"c"|"component1"|"component2"|"component3"|"d"|"home"|"list"|"liveTv"|"discreteInputCable"|"powerOff"|"powerOn"|"setupMenu"|"skipForward"|"skipReverse"|"video1"|"video2"|"video3"|"video4"|"video5"|"details"|"hdmi1"|"hdmi2"|"hdmi3"|"cecDeviceList"|"mtsSap"|"red"|"green"|"yellow"|"blue"|"alert"|"order")} [command]
-   * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
-   * @property {{name?: string, timestamp?: number, description?: string}} [notification]
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   * @property {number} [watts]
-   * @property {string} [icon]
-   * @property {string} [modelNumber]
-   * @property {string} [serialNumber]
-   * @property {string} [firmwareVersion]
-   */
-
-  /**
-   * @param {MediaSourceData} data - The data to initialize the MediaSource with
    * @constructor
+   * @param {MediaSourceData} data - The data to initialize the MediaSource with
    */
   constructor(data) {
     super(data);

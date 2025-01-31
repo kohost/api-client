@@ -4,26 +4,31 @@
 import { Entity } from "./entity";
 import { validateSmsMessage as validate } from "../validators";
 
+/**
+ * @typedef {Object} SmsMessageData
+ * @property {string} [id] - Identifier of the object.
+ * @property {"smsMessage"} [type] - Default: "smsMessage"
+ * @property {string} to
+ * @property {string} from
+ * @property {string} [media]
+ * @property {("queued"|"accepted"|"sending"|"sent"|"failed"|"delivered"|"undelivered"|"receiving"|"received"|"read")} status
+ * @property {string} [body]
+ * @property {string} [driver]
+ * @property {object} [appData]
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ */
+
+/**
+ *
+ * @class SmsMessage
+ * @extends {Entity}
+ */
 export class SmsMessage extends Entity {
   /**
-   * @typedef {Object} SmsMessageData
-   * @property {string} [id] - Identifier of the object.
-   * @property {"smsMessage"} [type] - Default: "smsMessage"
-   * @property {string} to
-   * @property {string} from
-   * @property {string} [media]
-   * @property {("queued"|"accepted"|"sending"|"sent"|"failed"|"delivered"|"undelivered"|"receiving"|"received"|"read")} status
-   * @property {string} [body]
-   * @property {string} [driver]
-   * @property {object} [appData]
-   * @property {(string|object)} [createdAt]
-   * @property {(string|object)} [updatedAt]
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   */
-
-  /**
-   * @param {SmsMessageData} data - The data to initialize the SmsMessage with
    * @constructor
+   * @param {SmsMessageData} data - The data to initialize the SmsMessage with
    */
   constructor(data) {
     super(data);

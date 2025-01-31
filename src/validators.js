@@ -11519,10 +11519,12 @@ const schema120 = {
   $id: "log.json",
   title: "Log",
   type: "object",
+  required: ["type", "timestamp", "id", "driver", "name"],
   properties: {
     type: { type: "string", default: "log", enum: ["log"] },
     timestamp: { type: "number", minimum: 1655907956593 },
     id: { $ref: "definitions.json#/definitions/id" },
+    driver: { $ref: "definitions.json#/definitions/driver" },
     name: { type: "string", description: "Event name" },
     field1: {
       type: "object",
@@ -11567,14 +11569,13 @@ function validate48(
     if (data.type === undefined) {
       data.type = "log";
     }
-    let data0 = data.type;
-    if (typeof data0 !== "string") {
+    if (data.type === undefined) {
       const err0 = {
-        instancePath: instancePath + "/type",
-        schemaPath: "#/properties/type/type",
-        keyword: "type",
-        params: { type: "string" },
-        message: "must be string",
+        instancePath,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: "type" },
+        message: "must have required property '" + "type" + "'",
       };
       if (vErrors === null) {
         vErrors = [err0];
@@ -11583,13 +11584,13 @@ function validate48(
       }
       errors++;
     }
-    if (!(data0 === "log")) {
+    if (data.timestamp === undefined) {
       const err1 = {
-        instancePath: instancePath + "/type",
-        schemaPath: "#/properties/type/enum",
-        keyword: "enum",
-        params: { allowedValues: schema120.properties.type.enum },
-        message: "must be equal to one of the allowed values",
+        instancePath,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: "timestamp" },
+        message: "must have required property '" + "timestamp" + "'",
       };
       if (vErrors === null) {
         vErrors = [err1];
@@ -11598,11 +11599,87 @@ function validate48(
       }
       errors++;
     }
+    if (data.id === undefined) {
+      const err2 = {
+        instancePath,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: "id" },
+        message: "must have required property '" + "id" + "'",
+      };
+      if (vErrors === null) {
+        vErrors = [err2];
+      } else {
+        vErrors.push(err2);
+      }
+      errors++;
+    }
+    if (data.driver === undefined) {
+      const err3 = {
+        instancePath,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: "driver" },
+        message: "must have required property '" + "driver" + "'",
+      };
+      if (vErrors === null) {
+        vErrors = [err3];
+      } else {
+        vErrors.push(err3);
+      }
+      errors++;
+    }
+    if (data.name === undefined) {
+      const err4 = {
+        instancePath,
+        schemaPath: "#/required",
+        keyword: "required",
+        params: { missingProperty: "name" },
+        message: "must have required property '" + "name" + "'",
+      };
+      if (vErrors === null) {
+        vErrors = [err4];
+      } else {
+        vErrors.push(err4);
+      }
+      errors++;
+    }
+    let data0 = data.type;
+    if (typeof data0 !== "string") {
+      const err5 = {
+        instancePath: instancePath + "/type",
+        schemaPath: "#/properties/type/type",
+        keyword: "type",
+        params: { type: "string" },
+        message: "must be string",
+      };
+      if (vErrors === null) {
+        vErrors = [err5];
+      } else {
+        vErrors.push(err5);
+      }
+      errors++;
+    }
+    if (!(data0 === "log")) {
+      const err6 = {
+        instancePath: instancePath + "/type",
+        schemaPath: "#/properties/type/enum",
+        keyword: "enum",
+        params: { allowedValues: schema120.properties.type.enum },
+        message: "must be equal to one of the allowed values",
+      };
+      if (vErrors === null) {
+        vErrors = [err6];
+      } else {
+        vErrors.push(err6);
+      }
+      errors++;
+    }
     if (data.timestamp !== undefined) {
       let data1 = data.timestamp;
       if (typeof data1 == "number") {
         if (data1 < 1655907956593 || isNaN(data1)) {
-          const err2 = {
+          const err7 = {
             instancePath: instancePath + "/timestamp",
             schemaPath: "#/properties/timestamp/minimum",
             keyword: "minimum",
@@ -11610,14 +11687,14 @@ function validate48(
             message: "must be >= 1655907956593",
           };
           if (vErrors === null) {
-            vErrors = [err2];
+            vErrors = [err7];
           } else {
-            vErrors.push(err2);
+            vErrors.push(err7);
           }
           errors++;
         }
       } else {
-        const err3 = {
+        const err8 = {
           instancePath: instancePath + "/timestamp",
           schemaPath: "#/properties/timestamp/type",
           keyword: "type",
@@ -11625,9 +11702,9 @@ function validate48(
           message: "must be number",
         };
         if (vErrors === null) {
-          vErrors = [err3];
+          vErrors = [err8];
         } else {
-          vErrors.push(err3);
+          vErrors.push(err8);
         }
         errors++;
       }
@@ -11635,7 +11712,7 @@ function validate48(
     if (data.id !== undefined) {
       let data2 = data.id;
       if (typeof data2 !== "string") {
-        const err4 = {
+        const err9 = {
           instancePath: instancePath + "/id",
           schemaPath: "definitions.json#/definitions/id/type",
           keyword: "type",
@@ -11643,26 +11720,26 @@ function validate48(
           message: "must be string",
         };
         if (vErrors === null) {
-          vErrors = [err4];
+          vErrors = [err9];
         } else {
-          vErrors.push(err4);
+          vErrors.push(err9);
         }
         errors++;
       }
       const _errs8 = errors;
       const _errs9 = errors;
       if (!(data2 === "global" || data2 === "system")) {
-        const err5 = {};
+        const err10 = {};
         if (vErrors === null) {
-          vErrors = [err5];
+          vErrors = [err10];
         } else {
-          vErrors.push(err5);
+          vErrors.push(err10);
         }
         errors++;
       }
       var valid2 = _errs9 === errors;
       if (valid2) {
-        const err6 = {
+        const err11 = {
           instancePath: instancePath + "/id",
           schemaPath: "definitions.json#/definitions/id/not",
           keyword: "not",
@@ -11670,9 +11747,9 @@ function validate48(
           message: "must NOT be valid",
         };
         if (vErrors === null) {
-          vErrors = [err6];
+          vErrors = [err11];
         } else {
-          vErrors.push(err6);
+          vErrors.push(err11);
         }
         errors++;
       } else {
@@ -11686,97 +11763,15 @@ function validate48(
         }
       }
     }
-    if (data.name !== undefined) {
-      if (typeof data.name !== "string") {
-        const err7 = {
-          instancePath: instancePath + "/name",
-          schemaPath: "#/properties/name/type",
+    if (data.driver !== undefined) {
+      let data3 = data.driver;
+      if (typeof data3 !== "string") {
+        const err12 = {
+          instancePath: instancePath + "/driver",
+          schemaPath: "definitions.json#/definitions/driver/type",
           keyword: "type",
           params: { type: "string" },
           message: "must be string",
-        };
-        if (vErrors === null) {
-          vErrors = [err7];
-        } else {
-          vErrors.push(err7);
-        }
-        errors++;
-      }
-    }
-    if (data.field1 !== undefined) {
-      let data4 = data.field1;
-      if (data4 && typeof data4 == "object" && !Array.isArray(data4)) {
-        if (data4.name === undefined) {
-          const err8 = {
-            instancePath: instancePath + "/field1",
-            schemaPath: "#/properties/field1/required",
-            keyword: "required",
-            params: { missingProperty: "name" },
-            message: "must have required property '" + "name" + "'",
-          };
-          if (vErrors === null) {
-            vErrors = [err8];
-          } else {
-            vErrors.push(err8);
-          }
-          errors++;
-        }
-        if (data4.value === undefined) {
-          const err9 = {
-            instancePath: instancePath + "/field1",
-            schemaPath: "#/properties/field1/required",
-            keyword: "required",
-            params: { missingProperty: "value" },
-            message: "must have required property '" + "value" + "'",
-          };
-          if (vErrors === null) {
-            vErrors = [err9];
-          } else {
-            vErrors.push(err9);
-          }
-          errors++;
-        }
-        if (data4.name !== undefined) {
-          if (typeof data4.name !== "string") {
-            const err10 = {
-              instancePath: instancePath + "/field1/name",
-              schemaPath: "#/properties/field1/properties/name/type",
-              keyword: "type",
-              params: { type: "string" },
-              message: "must be string",
-            };
-            if (vErrors === null) {
-              vErrors = [err10];
-            } else {
-              vErrors.push(err10);
-            }
-            errors++;
-          }
-        }
-        if (data4.value !== undefined) {
-          if (typeof data4.value !== "string") {
-            const err11 = {
-              instancePath: instancePath + "/field1/value",
-              schemaPath: "#/properties/field1/properties/value/type",
-              keyword: "type",
-              params: { type: "string" },
-              message: "must be string",
-            };
-            if (vErrors === null) {
-              vErrors = [err11];
-            } else {
-              vErrors.push(err11);
-            }
-            errors++;
-          }
-        }
-      } else {
-        const err12 = {
-          instancePath: instancePath + "/field1",
-          schemaPath: "#/properties/field1/type",
-          keyword: "type",
-          params: { type: "object" },
-          message: "must be object",
         };
         if (vErrors === null) {
           vErrors = [err12];
@@ -11785,12 +11780,179 @@ function validate48(
         }
         errors++;
       }
+      if (
+        !(
+          data3 === "adlink" ||
+          data3 === "aws-kinesis" ||
+          data3 === "butler" ||
+          data3 === "crestron" ||
+          data3 === "dell" ||
+          data3 === "dmp" ||
+          data3 === "doorbird" ||
+          data3 === "dormakaba" ||
+          data3 === "dsc" ||
+          data3 === "ecobee" ||
+          data3 === "epson" ||
+          data3 === "geovision-rs" ||
+          data3 === "geovision-as-manager" ||
+          data3 === "honeywell-vista" ||
+          data3 === "igor" ||
+          data3 === "inncom" ||
+          data3 === "isapi" ||
+          data3 === "kohost-k7" ||
+          data3 === "kohost" ||
+          data3 === "lg" ||
+          data3 === "lg-webos" ||
+          data3 === "lapi" ||
+          data3 === "lirc" ||
+          data3 === "mews" ||
+          data3 === "mht" ||
+          data3 === "paxton" ||
+          data3 === "pelican-wireless" ||
+          data3 === "power-shades" ||
+          data3 === "rachio" ||
+          data3 === "rebrandly" ||
+          data3 === "relay" ||
+          data3 === "rtsp" ||
+          data3 === "salto" ||
+          data3 === "salto-irn" ||
+          data3 === "samsung" ||
+          data3 === "se" ||
+          data3 === "sendgrid" ||
+          data3 === "sonifi" ||
+          data3 === "stay-n-touch" ||
+          data3 === "storable" ||
+          data3 === "twilio" ||
+          data3 === "unifi" ||
+          data3 === "valcom" ||
+          data3 === "vivotek" ||
+          data3 === "vizio" ||
+          data3 === "wisenet" ||
+          data3 === "cloudflare-images" ||
+          data3 === "cloudflare-stream" ||
+          data3 === "insperia-privacy"
+        )
+      ) {
+        const err13 = {
+          instancePath: instancePath + "/driver",
+          schemaPath: "definitions.json#/definitions/driver/enum",
+          keyword: "enum",
+          params: { allowedValues: schema18.enum },
+          message: "must be equal to one of the allowed values",
+        };
+        if (vErrors === null) {
+          vErrors = [err13];
+        } else {
+          vErrors.push(err13);
+        }
+        errors++;
+      }
+    }
+    if (data.name !== undefined) {
+      if (typeof data.name !== "string") {
+        const err14 = {
+          instancePath: instancePath + "/name",
+          schemaPath: "#/properties/name/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err14];
+        } else {
+          vErrors.push(err14);
+        }
+        errors++;
+      }
+    }
+    if (data.field1 !== undefined) {
+      let data5 = data.field1;
+      if (data5 && typeof data5 == "object" && !Array.isArray(data5)) {
+        if (data5.name === undefined) {
+          const err15 = {
+            instancePath: instancePath + "/field1",
+            schemaPath: "#/properties/field1/required",
+            keyword: "required",
+            params: { missingProperty: "name" },
+            message: "must have required property '" + "name" + "'",
+          };
+          if (vErrors === null) {
+            vErrors = [err15];
+          } else {
+            vErrors.push(err15);
+          }
+          errors++;
+        }
+        if (data5.value === undefined) {
+          const err16 = {
+            instancePath: instancePath + "/field1",
+            schemaPath: "#/properties/field1/required",
+            keyword: "required",
+            params: { missingProperty: "value" },
+            message: "must have required property '" + "value" + "'",
+          };
+          if (vErrors === null) {
+            vErrors = [err16];
+          } else {
+            vErrors.push(err16);
+          }
+          errors++;
+        }
+        if (data5.name !== undefined) {
+          if (typeof data5.name !== "string") {
+            const err17 = {
+              instancePath: instancePath + "/field1/name",
+              schemaPath: "#/properties/field1/properties/name/type",
+              keyword: "type",
+              params: { type: "string" },
+              message: "must be string",
+            };
+            if (vErrors === null) {
+              vErrors = [err17];
+            } else {
+              vErrors.push(err17);
+            }
+            errors++;
+          }
+        }
+        if (data5.value !== undefined) {
+          if (typeof data5.value !== "string") {
+            const err18 = {
+              instancePath: instancePath + "/field1/value",
+              schemaPath: "#/properties/field1/properties/value/type",
+              keyword: "type",
+              params: { type: "string" },
+              message: "must be string",
+            };
+            if (vErrors === null) {
+              vErrors = [err18];
+            } else {
+              vErrors.push(err18);
+            }
+            errors++;
+          }
+        }
+      } else {
+        const err19 = {
+          instancePath: instancePath + "/field1",
+          schemaPath: "#/properties/field1/type",
+          keyword: "type",
+          params: { type: "object" },
+          message: "must be object",
+        };
+        if (vErrors === null) {
+          vErrors = [err19];
+        } else {
+          vErrors.push(err19);
+        }
+        errors++;
+      }
     }
     if (data.field2 !== undefined) {
-      let data7 = data.field2;
-      if (data7 && typeof data7 == "object" && !Array.isArray(data7)) {
-        if (data7.name === undefined) {
-          const err13 = {
+      let data8 = data.field2;
+      if (data8 && typeof data8 == "object" && !Array.isArray(data8)) {
+        if (data8.name === undefined) {
+          const err20 = {
             instancePath: instancePath + "/field2",
             schemaPath: "#/properties/field2/required",
             keyword: "required",
@@ -11798,14 +11960,14 @@ function validate48(
             message: "must have required property '" + "name" + "'",
           };
           if (vErrors === null) {
-            vErrors = [err13];
+            vErrors = [err20];
           } else {
-            vErrors.push(err13);
+            vErrors.push(err20);
           }
           errors++;
         }
-        if (data7.value === undefined) {
-          const err14 = {
+        if (data8.value === undefined) {
+          const err21 = {
             instancePath: instancePath + "/field2",
             schemaPath: "#/properties/field2/required",
             keyword: "required",
@@ -11813,15 +11975,15 @@ function validate48(
             message: "must have required property '" + "value" + "'",
           };
           if (vErrors === null) {
-            vErrors = [err14];
+            vErrors = [err21];
           } else {
-            vErrors.push(err14);
+            vErrors.push(err21);
           }
           errors++;
         }
-        if (data7.name !== undefined) {
-          if (typeof data7.name !== "string") {
-            const err15 = {
+        if (data8.name !== undefined) {
+          if (typeof data8.name !== "string") {
+            const err22 = {
               instancePath: instancePath + "/field2/name",
               schemaPath: "#/properties/field2/properties/name/type",
               keyword: "type",
@@ -11829,16 +11991,16 @@ function validate48(
               message: "must be string",
             };
             if (vErrors === null) {
-              vErrors = [err15];
+              vErrors = [err22];
             } else {
-              vErrors.push(err15);
+              vErrors.push(err22);
             }
             errors++;
           }
         }
-        if (data7.value !== undefined) {
-          if (typeof data7.value !== "string") {
-            const err16 = {
+        if (data8.value !== undefined) {
+          if (typeof data8.value !== "string") {
+            const err23 = {
               instancePath: instancePath + "/field2/value",
               schemaPath: "#/properties/field2/properties/value/type",
               keyword: "type",
@@ -11846,15 +12008,15 @@ function validate48(
               message: "must be string",
             };
             if (vErrors === null) {
-              vErrors = [err16];
+              vErrors = [err23];
             } else {
-              vErrors.push(err16);
+              vErrors.push(err23);
             }
             errors++;
           }
         }
       } else {
-        const err17 = {
+        const err24 = {
           instancePath: instancePath + "/field2",
           schemaPath: "#/properties/field2/type",
           keyword: "type",
@@ -11862,18 +12024,18 @@ function validate48(
           message: "must be object",
         };
         if (vErrors === null) {
-          vErrors = [err17];
+          vErrors = [err24];
         } else {
-          vErrors.push(err17);
+          vErrors.push(err24);
         }
         errors++;
       }
     }
     if (data.field3 !== undefined) {
-      let data10 = data.field3;
-      if (data10 && typeof data10 == "object" && !Array.isArray(data10)) {
-        if (data10.name === undefined) {
-          const err18 = {
+      let data11 = data.field3;
+      if (data11 && typeof data11 == "object" && !Array.isArray(data11)) {
+        if (data11.name === undefined) {
+          const err25 = {
             instancePath: instancePath + "/field3",
             schemaPath: "#/properties/field3/required",
             keyword: "required",
@@ -11881,14 +12043,14 @@ function validate48(
             message: "must have required property '" + "name" + "'",
           };
           if (vErrors === null) {
-            vErrors = [err18];
+            vErrors = [err25];
           } else {
-            vErrors.push(err18);
+            vErrors.push(err25);
           }
           errors++;
         }
-        if (data10.value === undefined) {
-          const err19 = {
+        if (data11.value === undefined) {
+          const err26 = {
             instancePath: instancePath + "/field3",
             schemaPath: "#/properties/field3/required",
             keyword: "required",
@@ -11896,15 +12058,15 @@ function validate48(
             message: "must have required property '" + "value" + "'",
           };
           if (vErrors === null) {
-            vErrors = [err19];
+            vErrors = [err26];
           } else {
-            vErrors.push(err19);
+            vErrors.push(err26);
           }
           errors++;
         }
-        if (data10.name !== undefined) {
-          if (typeof data10.name !== "string") {
-            const err20 = {
+        if (data11.name !== undefined) {
+          if (typeof data11.name !== "string") {
+            const err27 = {
               instancePath: instancePath + "/field3/name",
               schemaPath: "#/properties/field3/properties/name/type",
               keyword: "type",
@@ -11912,16 +12074,16 @@ function validate48(
               message: "must be string",
             };
             if (vErrors === null) {
-              vErrors = [err20];
+              vErrors = [err27];
             } else {
-              vErrors.push(err20);
+              vErrors.push(err27);
             }
             errors++;
           }
         }
-        if (data10.value !== undefined) {
-          if (typeof data10.value !== "string") {
-            const err21 = {
+        if (data11.value !== undefined) {
+          if (typeof data11.value !== "string") {
+            const err28 = {
               instancePath: instancePath + "/field3/value",
               schemaPath: "#/properties/field3/properties/value/type",
               keyword: "type",
@@ -11929,15 +12091,15 @@ function validate48(
               message: "must be string",
             };
             if (vErrors === null) {
-              vErrors = [err21];
+              vErrors = [err28];
             } else {
-              vErrors.push(err21);
+              vErrors.push(err28);
             }
             errors++;
           }
         }
       } else {
-        const err22 = {
+        const err29 = {
           instancePath: instancePath + "/field3",
           schemaPath: "#/properties/field3/type",
           keyword: "type",
@@ -11945,18 +12107,18 @@ function validate48(
           message: "must be object",
         };
         if (vErrors === null) {
-          vErrors = [err22];
+          vErrors = [err29];
         } else {
-          vErrors.push(err22);
+          vErrors.push(err29);
         }
         errors++;
       }
     }
     if (data.field4 !== undefined) {
-      let data13 = data.field4;
-      if (data13 && typeof data13 == "object" && !Array.isArray(data13)) {
-        if (data13.name === undefined) {
-          const err23 = {
+      let data14 = data.field4;
+      if (data14 && typeof data14 == "object" && !Array.isArray(data14)) {
+        if (data14.name === undefined) {
+          const err30 = {
             instancePath: instancePath + "/field4",
             schemaPath: "#/properties/field4/required",
             keyword: "required",
@@ -11964,14 +12126,14 @@ function validate48(
             message: "must have required property '" + "name" + "'",
           };
           if (vErrors === null) {
-            vErrors = [err23];
+            vErrors = [err30];
           } else {
-            vErrors.push(err23);
+            vErrors.push(err30);
           }
           errors++;
         }
-        if (data13.value === undefined) {
-          const err24 = {
+        if (data14.value === undefined) {
+          const err31 = {
             instancePath: instancePath + "/field4",
             schemaPath: "#/properties/field4/required",
             keyword: "required",
@@ -11979,15 +12141,15 @@ function validate48(
             message: "must have required property '" + "value" + "'",
           };
           if (vErrors === null) {
-            vErrors = [err24];
+            vErrors = [err31];
           } else {
-            vErrors.push(err24);
+            vErrors.push(err31);
           }
           errors++;
         }
-        if (data13.name !== undefined) {
-          if (typeof data13.name !== "string") {
-            const err25 = {
+        if (data14.name !== undefined) {
+          if (typeof data14.name !== "string") {
+            const err32 = {
               instancePath: instancePath + "/field4/name",
               schemaPath: "#/properties/field4/properties/name/type",
               keyword: "type",
@@ -11995,16 +12157,16 @@ function validate48(
               message: "must be string",
             };
             if (vErrors === null) {
-              vErrors = [err25];
+              vErrors = [err32];
             } else {
-              vErrors.push(err25);
+              vErrors.push(err32);
             }
             errors++;
           }
         }
-        if (data13.value !== undefined) {
-          if (typeof data13.value !== "string") {
-            const err26 = {
+        if (data14.value !== undefined) {
+          if (typeof data14.value !== "string") {
+            const err33 = {
               instancePath: instancePath + "/field4/value",
               schemaPath: "#/properties/field4/properties/value/type",
               keyword: "type",
@@ -12012,15 +12174,15 @@ function validate48(
               message: "must be string",
             };
             if (vErrors === null) {
-              vErrors = [err26];
+              vErrors = [err33];
             } else {
-              vErrors.push(err26);
+              vErrors.push(err33);
             }
             errors++;
           }
         }
       } else {
-        const err27 = {
+        const err34 = {
           instancePath: instancePath + "/field4",
           schemaPath: "#/properties/field4/type",
           keyword: "type",
@@ -12028,18 +12190,18 @@ function validate48(
           message: "must be object",
         };
         if (vErrors === null) {
-          vErrors = [err27];
+          vErrors = [err34];
         } else {
-          vErrors.push(err27);
+          vErrors.push(err34);
         }
         errors++;
       }
     }
     if (data.field5 !== undefined) {
-      let data16 = data.field5;
-      if (data16 && typeof data16 == "object" && !Array.isArray(data16)) {
-        if (data16.name === undefined) {
-          const err28 = {
+      let data17 = data.field5;
+      if (data17 && typeof data17 == "object" && !Array.isArray(data17)) {
+        if (data17.name === undefined) {
+          const err35 = {
             instancePath: instancePath + "/field5",
             schemaPath: "#/properties/field5/required",
             keyword: "required",
@@ -12047,14 +12209,14 @@ function validate48(
             message: "must have required property '" + "name" + "'",
           };
           if (vErrors === null) {
-            vErrors = [err28];
+            vErrors = [err35];
           } else {
-            vErrors.push(err28);
+            vErrors.push(err35);
           }
           errors++;
         }
-        if (data16.value === undefined) {
-          const err29 = {
+        if (data17.value === undefined) {
+          const err36 = {
             instancePath: instancePath + "/field5",
             schemaPath: "#/properties/field5/required",
             keyword: "required",
@@ -12062,15 +12224,15 @@ function validate48(
             message: "must have required property '" + "value" + "'",
           };
           if (vErrors === null) {
-            vErrors = [err29];
+            vErrors = [err36];
           } else {
-            vErrors.push(err29);
+            vErrors.push(err36);
           }
           errors++;
         }
-        if (data16.name !== undefined) {
-          if (typeof data16.name !== "string") {
-            const err30 = {
+        if (data17.name !== undefined) {
+          if (typeof data17.name !== "string") {
+            const err37 = {
               instancePath: instancePath + "/field5/name",
               schemaPath: "#/properties/field5/properties/name/type",
               keyword: "type",
@@ -12078,16 +12240,16 @@ function validate48(
               message: "must be string",
             };
             if (vErrors === null) {
-              vErrors = [err30];
+              vErrors = [err37];
             } else {
-              vErrors.push(err30);
+              vErrors.push(err37);
             }
             errors++;
           }
         }
-        if (data16.value !== undefined) {
-          if (typeof data16.value !== "string") {
-            const err31 = {
+        if (data17.value !== undefined) {
+          if (typeof data17.value !== "string") {
+            const err38 = {
               instancePath: instancePath + "/field5/value",
               schemaPath: "#/properties/field5/properties/value/type",
               keyword: "type",
@@ -12095,15 +12257,15 @@ function validate48(
               message: "must be string",
             };
             if (vErrors === null) {
-              vErrors = [err31];
+              vErrors = [err38];
             } else {
-              vErrors.push(err31);
+              vErrors.push(err38);
             }
             errors++;
           }
         }
       } else {
-        const err32 = {
+        const err39 = {
           instancePath: instancePath + "/field5",
           schemaPath: "#/properties/field5/type",
           keyword: "type",
@@ -12111,18 +12273,18 @@ function validate48(
           message: "must be object",
         };
         if (vErrors === null) {
-          vErrors = [err32];
+          vErrors = [err39];
         } else {
-          vErrors.push(err32);
+          vErrors.push(err39);
         }
         errors++;
       }
     }
     if (data.field6 !== undefined) {
-      let data19 = data.field6;
-      if (data19 && typeof data19 == "object" && !Array.isArray(data19)) {
-        if (data19.name === undefined) {
-          const err33 = {
+      let data20 = data.field6;
+      if (data20 && typeof data20 == "object" && !Array.isArray(data20)) {
+        if (data20.name === undefined) {
+          const err40 = {
             instancePath: instancePath + "/field6",
             schemaPath: "#/properties/field6/required",
             keyword: "required",
@@ -12130,14 +12292,14 @@ function validate48(
             message: "must have required property '" + "name" + "'",
           };
           if (vErrors === null) {
-            vErrors = [err33];
+            vErrors = [err40];
           } else {
-            vErrors.push(err33);
+            vErrors.push(err40);
           }
           errors++;
         }
-        if (data19.value === undefined) {
-          const err34 = {
+        if (data20.value === undefined) {
+          const err41 = {
             instancePath: instancePath + "/field6",
             schemaPath: "#/properties/field6/required",
             keyword: "required",
@@ -12145,15 +12307,15 @@ function validate48(
             message: "must have required property '" + "value" + "'",
           };
           if (vErrors === null) {
-            vErrors = [err34];
+            vErrors = [err41];
           } else {
-            vErrors.push(err34);
+            vErrors.push(err41);
           }
           errors++;
         }
-        if (data19.name !== undefined) {
-          if (typeof data19.name !== "string") {
-            const err35 = {
+        if (data20.name !== undefined) {
+          if (typeof data20.name !== "string") {
+            const err42 = {
               instancePath: instancePath + "/field6/name",
               schemaPath: "#/properties/field6/properties/name/type",
               keyword: "type",
@@ -12161,16 +12323,16 @@ function validate48(
               message: "must be string",
             };
             if (vErrors === null) {
-              vErrors = [err35];
+              vErrors = [err42];
             } else {
-              vErrors.push(err35);
+              vErrors.push(err42);
             }
             errors++;
           }
         }
-        if (data19.value !== undefined) {
-          if (typeof data19.value !== "string") {
-            const err36 = {
+        if (data20.value !== undefined) {
+          if (typeof data20.value !== "string") {
+            const err43 = {
               instancePath: instancePath + "/field6/value",
               schemaPath: "#/properties/field6/properties/value/type",
               keyword: "type",
@@ -12178,15 +12340,15 @@ function validate48(
               message: "must be string",
             };
             if (vErrors === null) {
-              vErrors = [err36];
+              vErrors = [err43];
             } else {
-              vErrors.push(err36);
+              vErrors.push(err43);
             }
             errors++;
           }
         }
       } else {
-        const err37 = {
+        const err44 = {
           instancePath: instancePath + "/field6",
           schemaPath: "#/properties/field6/type",
           keyword: "type",
@@ -12194,15 +12356,15 @@ function validate48(
           message: "must be object",
         };
         if (vErrors === null) {
-          vErrors = [err37];
+          vErrors = [err44];
         } else {
-          vErrors.push(err37);
+          vErrors.push(err44);
         }
         errors++;
       }
     }
   } else {
-    const err38 = {
+    const err45 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -12210,9 +12372,9 @@ function validate48(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err38];
+      vErrors = [err45];
     } else {
-      vErrors.push(err38);
+      vErrors.push(err45);
     }
     errors++;
   }
@@ -12223,7 +12385,7 @@ function validate48(
 export const validateMediaFile = validate15;
 
 export const validateMediaSource = validate49;
-const schema122 = {
+const schema123 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "mediaSource.json",
   title: "Media Source",
@@ -12414,7 +12576,7 @@ const schema122 = {
   },
   additionalProperties: false,
 };
-const schema125 = { type: "string" };
+const schema126 = { type: "string" };
 
 function validate50(
   data,
@@ -12662,7 +12824,7 @@ function validate49(
       errors++;
     }
     for (const key0 in data) {
-      if (!func5.call(schema122.properties, key0)) {
+      if (!func5.call(schema123.properties, key0)) {
         const err6 = {
           instancePath,
           schemaPath: "#/additionalProperties",
@@ -12753,7 +12915,7 @@ function validate49(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema122.properties.type.enum },
+        params: { allowedValues: schema123.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -12795,7 +12957,7 @@ function validate49(
           instancePath: instancePath + "/discriminator",
           schemaPath: "#/properties/discriminator/enum",
           keyword: "enum",
-          params: { allowedValues: schema122.properties.discriminator.enum },
+          params: { allowedValues: schema123.properties.discriminator.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -12949,7 +13111,7 @@ function validate49(
           instancePath: instancePath + "/remote",
           schemaPath: "#/properties/remote/enum",
           keyword: "enum",
-          params: { allowedValues: schema122.properties.remote.enum },
+          params: { allowedValues: schema123.properties.remote.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -13333,7 +13495,7 @@ function validate49(
           instancePath: instancePath + "/power",
           schemaPath: "#/properties/power/enum",
           keyword: "enum",
-          params: { allowedValues: schema122.properties.power.enum },
+          params: { allowedValues: schema123.properties.power.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -13442,7 +13604,7 @@ function validate49(
           instancePath: instancePath + "/command",
           schemaPath: "#/properties/command/type",
           keyword: "type",
-          params: { type: schema122.properties.command.type },
+          params: { type: schema123.properties.command.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -13573,7 +13735,7 @@ function validate49(
           instancePath: instancePath + "/command",
           schemaPath: "#/properties/command/enum",
           keyword: "enum",
-          params: { allowedValues: schema122.properties.command.enum },
+          params: { allowedValues: schema123.properties.command.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -13840,7 +14002,7 @@ function validate49(
 }
 
 export const validateMotionSensor = validate52;
-const schema133 = {
+const schema134 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "motionSensor.json",
   title: "Motion Sensor",
@@ -14063,7 +14225,7 @@ function validate52(
       errors++;
     }
     for (const key0 in data) {
-      if (!func5.call(schema133.properties, key0)) {
+      if (!func5.call(schema134.properties, key0)) {
         const err3 = {
           instancePath,
           schemaPath: "#/additionalProperties",
@@ -14527,7 +14689,7 @@ function validate52(
 }
 
 export const validateOrder = validate55;
-const schema142 = {
+const schema143 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "order.json",
   title: "Order",
@@ -14795,7 +14957,7 @@ function validate55(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema142.properties.type.enum },
+        params: { allowedValues: schema143.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -14855,7 +15017,7 @@ function validate55(
           instancePath: instancePath + "/status",
           schemaPath: "#/properties/status/enum",
           keyword: "enum",
-          params: { allowedValues: schema142.properties.status.enum },
+          params: { allowedValues: schema143.properties.status.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -15331,7 +15493,7 @@ function validate55(
               keyword: "enum",
               params: {
                 allowedValues:
-                  schema142.properties.taxes.items.properties.rateType.enum,
+                  schema143.properties.taxes.items.properties.rateType.enum,
               },
               message: "must be equal to one of the allowed values",
             };
@@ -15640,7 +15802,7 @@ function validate55(
               keyword: "enum",
               params: {
                 allowedValues:
-                  schema142.properties.delivery.items.properties.rateType.enum,
+                  schema143.properties.delivery.items.properties.rateType.enum,
               },
               message: "must be equal to one of the allowed values",
             };
@@ -15764,7 +15926,7 @@ function validate55(
                 keyword: "enum",
                 params: {
                   allowedValues:
-                    schema142.properties.payments.items.properties.method.enum,
+                    schema143.properties.payments.items.properties.method.enum,
                 },
                 message: "must be equal to one of the allowed values",
               };
@@ -15919,7 +16081,7 @@ function validate55(
 }
 
 export const validateOrganization = validate56;
-const schema148 = {
+const schema149 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "organization.json",
   title: "Organization",
@@ -16021,7 +16183,7 @@ const schema148 = {
   },
 };
 const schema102 = { type: ["string", "object"], format: "date-time" };
-const schema151 = { type: ["string", "object"], format: "date-time" };
+const schema152 = { type: ["string", "object"], format: "date-time" };
 
 function validate56(
   data,
@@ -16167,7 +16329,7 @@ function validate56(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema148.properties.type.enum },
+        params: { allowedValues: schema149.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -16184,7 +16346,7 @@ function validate56(
           instancePath: instancePath + "/accountNumber",
           schemaPath: "#/properties/accountNumber/type",
           keyword: "type",
-          params: { type: schema148.properties.accountNumber.type },
+          params: { type: schema149.properties.accountNumber.type },
           message: "must be number,null",
         };
         if (vErrors === null) {
@@ -16273,7 +16435,7 @@ function validate56(
           instancePath: instancePath + "/hostname",
           schemaPath: "#/properties/hostname/type",
           keyword: "type",
-          params: { type: schema148.properties.hostname.type },
+          params: { type: schema149.properties.hostname.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -16425,7 +16587,7 @@ function validate56(
           keyword: "enum",
           params: {
             allowedValues:
-              schema148.properties.appManifest.properties.display.enum,
+              schema149.properties.appManifest.properties.display.enum,
           },
           message: "must be equal to one of the allowed values",
         };
@@ -16459,7 +16621,7 @@ function validate56(
           keyword: "enum",
           params: {
             allowedValues:
-              schema148.properties.appManifest.properties.orientation.enum,
+              schema149.properties.appManifest.properties.orientation.enum,
           },
           message: "must be equal to one of the allowed values",
         };
@@ -16744,7 +16906,7 @@ function validate56(
             schemaPath: "#/properties/tickets/properties/nextTicketNumber/type",
             keyword: "type",
             params: {
-              type: schema148.properties.tickets.properties.nextTicketNumber
+              type: schema149.properties.tickets.properties.nextTicketNumber
                 .type,
             },
             message: "must be string,integer",
@@ -16838,7 +17000,7 @@ function validate56(
           instancePath: instancePath + "/updatedAt",
           schemaPath: "definitions.json#/definitions/updatedAt/type",
           keyword: "type",
-          params: { type: schema151.type },
+          params: { type: schema152.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -16886,7 +17048,7 @@ function validate56(
 }
 
 export const validatePayment = validate57;
-const schema152 = {
+const schema153 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "payment.json",
   title: "Payment",
@@ -17064,7 +17226,7 @@ function validate57(
           instancePath: instancePath + "/type",
           schemaPath: "#/properties/type/enum",
           keyword: "enum",
-          params: { allowedValues: schema152.properties.type.enum },
+          params: { allowedValues: schema153.properties.type.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -17097,7 +17259,7 @@ function validate57(
           instancePath: instancePath + "/storageData",
           schemaPath: "#/properties/storageData/type",
           keyword: "type",
-          params: { type: schema152.properties.storageData.type },
+          params: { type: schema153.properties.storageData.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -17132,7 +17294,7 @@ function validate57(
           instancePath: instancePath + "/issued",
           schemaPath: "#/properties/issued/type",
           keyword: "type",
-          params: { type: schema152.properties.issued.type },
+          params: { type: schema153.properties.issued.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -17197,7 +17359,7 @@ function validate57(
 }
 
 export const validatePolicy = validate58;
-const schema155 = {
+const schema156 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "policy.json",
   title: "Policy",
@@ -17413,7 +17575,7 @@ function validate58(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema155.properties.type.enum },
+        params: { allowedValues: schema156.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -17445,7 +17607,7 @@ function validate58(
           instancePath: instancePath + "/discriminator",
           schemaPath: "#/properties/discriminator/enum",
           keyword: "enum",
-          params: { allowedValues: schema155.properties.discriminator.enum },
+          params: { allowedValues: schema156.properties.discriminator.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -17668,7 +17830,7 @@ function validate58(
                   keyword: "enum",
                   params: {
                     allowedValues:
-                      schema155.properties.permissions.items.properties.effect
+                      schema156.properties.permissions.items.properties.effect
                         .enum,
                   },
                   message: "must be equal to one of the allowed values",
@@ -17733,7 +17895,7 @@ function validate58(
 }
 
 export const validateProduct = validate59;
-const schema157 = {
+const schema158 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "product.json",
   title: "Product",
@@ -17885,7 +18047,7 @@ function validate59(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema157.properties.type.enum },
+        params: { allowedValues: schema158.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -18038,7 +18200,7 @@ function validate59(
           instancePath: instancePath + "/tax",
           schemaPath: "#/properties/tax/type",
           keyword: "type",
-          params: { type: schema157.properties.tax.type },
+          params: { type: schema158.properties.tax.type },
           message: "must be number,null",
         };
         if (vErrors === null) {
@@ -18168,7 +18330,7 @@ function validate59(
 }
 
 export const validateProperty = validate61;
-const schema161 = {
+const schema162 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "property.json",
   title: "Property",
@@ -18667,7 +18829,7 @@ function validate61(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema161.properties.type.enum },
+        params: { allowedValues: schema162.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -18706,7 +18868,7 @@ function validate61(
           instancePath: instancePath + "/discriminator",
           schemaPath: "#/properties/discriminator/enum",
           keyword: "enum",
-          params: { allowedValues: schema161.properties.discriminator.enum },
+          params: { allowedValues: schema162.properties.discriminator.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -18724,7 +18886,7 @@ function validate61(
           instancePath: instancePath + "/organization",
           schemaPath: "#/properties/organization/type",
           keyword: "type",
-          params: { type: schema161.properties.organization.type },
+          params: { type: schema162.properties.organization.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -19207,7 +19369,7 @@ function validate61(
     let data28 = data.appFeatures;
     if (data28 && typeof data28 == "object" && !Array.isArray(data28)) {
       for (const key0 in data28) {
-        if (!func5.call(schema161.properties.appFeatures.properties, key0)) {
+        if (!func5.call(schema162.properties.appFeatures.properties, key0)) {
           const err41 = {
             instancePath: instancePath + "/appFeatures",
             schemaPath: "#/properties/appFeatures/additionalProperties",
@@ -19298,7 +19460,7 @@ function validate61(
                     keyword: "enum",
                     params: {
                       allowedValues:
-                        schema161.properties.appFeatures.properties.RoomControl
+                        schema162.properties.appFeatures.properties.RoomControl
                           .properties.disabledSystems.items.enum,
                     },
                     message: "must be equal to one of the allowed values",
@@ -19967,7 +20129,7 @@ function validate61(
                 "#/properties/appFeatures/properties/Concierge/properties/newMessageChannel/type",
               keyword: "type",
               params: {
-                type: schema161.properties.appFeatures.properties.Concierge
+                type: schema162.properties.appFeatures.properties.Concierge
                   .properties.newMessageChannel.type,
               },
               message: "must be string,null",
@@ -19988,7 +20150,7 @@ function validate61(
               keyword: "enum",
               params: {
                 allowedValues:
-                  schema161.properties.appFeatures.properties.Concierge
+                  schema162.properties.appFeatures.properties.Concierge
                     .properties.newMessageChannel.enum,
               },
               message: "must be equal to one of the allowed values",
@@ -20284,7 +20446,7 @@ function validate61(
                 keyword: "enum",
                 params: {
                   allowedValues:
-                    schema161.properties.appFeatures.properties.DigitalKey
+                    schema162.properties.appFeatures.properties.DigitalKey
                       .properties.system.enum,
                 },
                 message: "must be equal to one of the allowed values",
@@ -20847,7 +21009,7 @@ function validate61(
                     keyword: "enum",
                     params: {
                       allowedValues:
-                        schema161.properties.appFeatures.properties.SOS
+                        schema162.properties.appFeatures.properties.SOS
                           .properties.activeEmergencies.items.enum,
                     },
                     message: "must be equal to one of the allowed values",
@@ -20959,7 +21121,7 @@ function validate61(
                 keyword: "enum",
                 params: {
                   allowedValues:
-                    schema161.properties.appFeatures.properties.Dining
+                    schema162.properties.appFeatures.properties.Dining
                       .properties.system.enum,
                 },
                 message: "must be equal to one of the allowed values",
@@ -21411,7 +21573,7 @@ function validate61(
 }
 
 export const validateReservation = validate63;
-const schema164 = {
+const schema165 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "reservation.json",
   title: "Reservation",
@@ -21494,8 +21656,8 @@ const schema164 = {
     updatedAt: { $ref: "definitions.json#/definitions/updatedAt" },
   },
 };
-const schema170 = { type: "object", default: {} };
-const schema167 = {
+const schema171 = { type: "object", default: {} };
+const schema168 = {
   type: "array",
   items: {
     type: "object",
@@ -21649,7 +21811,7 @@ function validate64(
               instancePath: instancePath + "/" + i0 + "/tax",
               schemaPath: "#/items/properties/tax/type",
               keyword: "type",
-              params: { type: schema167.items.properties.tax.type },
+              params: { type: schema168.items.properties.tax.type },
               message: "must be number,null",
             };
             if (vErrors === null) {
@@ -21951,7 +22113,7 @@ function validate63(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema164.properties.type.enum },
+        params: { allowedValues: schema165.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -22022,7 +22184,7 @@ function validate63(
           instancePath: instancePath + "/space",
           schemaPath: "#/properties/space/type",
           keyword: "type",
-          params: { type: schema164.properties.space.type },
+          params: { type: schema165.properties.space.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -22039,7 +22201,7 @@ function validate63(
         instancePath: instancePath + "/previousSpace",
         schemaPath: "#/properties/previousSpace/type",
         keyword: "type",
-        params: { type: schema164.properties.previousSpace.type },
+        params: { type: schema165.properties.previousSpace.type },
         message: "must be string,null",
       };
       if (vErrors === null) {
@@ -22082,7 +22244,7 @@ function validate63(
           instancePath: instancePath + "/status",
           schemaPath: "#/properties/status/enum",
           keyword: "enum",
-          params: { allowedValues: schema164.properties.status.enum },
+          params: { allowedValues: schema165.properties.status.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -22159,7 +22321,7 @@ function validate63(
           schemaPath: "#/properties/mobileCheckInStatus/enum",
           keyword: "enum",
           params: {
-            allowedValues: schema164.properties.mobileCheckInStatus.enum,
+            allowedValues: schema165.properties.mobileCheckInStatus.enum,
           },
           message: "must be equal to one of the allowed values",
         };
@@ -22215,7 +22377,7 @@ function validate63(
           instancePath: instancePath + "/expectedCheckInDateTime",
           schemaPath: "#/properties/expectedCheckInDateTime/type",
           keyword: "type",
-          params: { type: schema164.properties.expectedCheckInDateTime.type },
+          params: { type: schema165.properties.expectedCheckInDateTime.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -22253,7 +22415,7 @@ function validate63(
           instancePath: instancePath + "/checkInDateTime",
           schemaPath: "#/properties/checkInDateTime/type",
           keyword: "type",
-          params: { type: schema164.properties.checkInDateTime.type },
+          params: { type: schema165.properties.checkInDateTime.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -22291,7 +22453,7 @@ function validate63(
           instancePath: instancePath + "/checkOutDateTime",
           schemaPath: "#/properties/checkOutDateTime/type",
           keyword: "type",
-          params: { type: schema164.properties.checkOutDateTime.type },
+          params: { type: schema165.properties.checkOutDateTime.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -22450,7 +22612,7 @@ function validate63(
                   keyword: "enum",
                   params: {
                     allowedValues:
-                      schema164.properties.spaceCategoryAvailabilites.items
+                      schema165.properties.spaceCategoryAvailabilites.items
                         .properties.unit.enum,
                   },
                   message: "must be equal to one of the allowed values",
@@ -22646,7 +22808,7 @@ function validate63(
           instancePath: instancePath + "/updatedAt",
           schemaPath: "definitions.json#/definitions/updatedAt/type",
           keyword: "type",
-          params: { type: schema151.type },
+          params: { type: schema152.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -22694,7 +22856,7 @@ function validate63(
 }
 
 export const validateRoom = validate66;
-const schema172 = {
+const schema173 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "room.json",
   title: "Room",
@@ -22738,7 +22900,7 @@ const schema172 = {
   },
   additionalProperties: false,
 };
-const schema174 = {
+const schema175 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "switch.json",
   title: "Switch",
@@ -23124,7 +23286,7 @@ function validate68(
           instancePath: instancePath + "/discriminator",
           schemaPath: "#/properties/discriminator/enum",
           keyword: "enum",
-          params: { allowedValues: schema174.properties.discriminator.enum },
+          params: { allowedValues: schema175.properties.discriminator.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -23376,7 +23538,7 @@ function validate68(
           instancePath: instancePath + "/state",
           schemaPath: "#/properties/state/enum",
           keyword: "enum",
-          params: { allowedValues: schema174.properties.state.enum },
+          params: { allowedValues: schema175.properties.state.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -23525,7 +23687,7 @@ function validate68(
   return errors === 0;
 }
 
-const schema183 = {
+const schema184 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "thermostat.json",
   title: "Thermostat",
@@ -23619,8 +23781,8 @@ const schema183 = {
     "driver",
   ],
 };
-const schema191 = { enum: ["cool", "heat", "auto", "off"] };
-const schema192 = { enum: ["auto", "low", "medium", "high", "off", "on"] };
+const schema192 = { enum: ["cool", "heat", "auto", "off"] };
+const schema193 = { enum: ["auto", "low", "medium", "high", "off", "on"] };
 
 function validate73(
   data,
@@ -23767,7 +23929,7 @@ function validate73(
   return errors === 0;
 }
 
-const schema193 = {
+const schema194 = {
   type: "object",
   additionalProperties: false,
   properties: {
@@ -23776,8 +23938,8 @@ const schema193 = {
     max: { $ref: "#/$defs/setpointMinMax" },
   },
 };
-const schema194 = { type: "number", minimum: 0, maximum: 99 };
-const schema195 = { type: ["number", "null"], minimum: 0, maximum: 99 };
+const schema195 = { type: "number", minimum: 0, maximum: 99 };
+const schema196 = { type: ["number", "null"], minimum: 0, maximum: 99 };
 
 function validate75(
   data,
@@ -23859,7 +24021,7 @@ function validate75(
           instancePath: instancePath + "/min",
           schemaPath: "#/$defs/setpointMinMax/type",
           keyword: "type",
-          params: { type: schema195.type },
+          params: { type: schema196.type },
           message: "must be number,null",
         };
         if (vErrors === null) {
@@ -23909,7 +24071,7 @@ function validate75(
           instancePath: instancePath + "/max",
           schemaPath: "#/$defs/setpointMinMax/type",
           keyword: "type",
-          params: { type: schema195.type },
+          params: { type: schema196.type },
           message: "must be number,null",
         };
         if (vErrors === null) {
@@ -24573,7 +24735,7 @@ function validate72(
           instancePath: instancePath + "/hvacMode",
           schemaPath: "#/properties/supportedHvacModes/items/enum",
           keyword: "enum",
-          params: { allowedValues: schema191.enum },
+          params: { allowedValues: schema192.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -24591,7 +24753,7 @@ function validate72(
           instancePath: instancePath + "/hvacState",
           schemaPath: "#/properties/hvacState/type",
           keyword: "type",
-          params: { type: schema183.properties.hvacState.type },
+          params: { type: schema184.properties.hvacState.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -24613,7 +24775,7 @@ function validate72(
           instancePath: instancePath + "/hvacState",
           schemaPath: "#/properties/hvacState/enum",
           keyword: "enum",
-          params: { allowedValues: schema183.properties.hvacState.enum },
+          params: { allowedValues: schema184.properties.hvacState.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -24655,7 +24817,7 @@ function validate72(
           instancePath: instancePath + "/fanMode",
           schemaPath: "#/properties/supportedFanModes/items/enum",
           keyword: "enum",
-          params: { allowedValues: schema192.enum },
+          params: { allowedValues: schema193.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -24673,7 +24835,7 @@ function validate72(
           instancePath: instancePath + "/fanState",
           schemaPath: "#/properties/fanState/type",
           keyword: "type",
-          params: { type: schema183.properties.fanState.type },
+          params: { type: schema184.properties.fanState.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -24697,7 +24859,7 @@ function validate72(
           instancePath: instancePath + "/fanState",
           schemaPath: "#/properties/fanState/enum",
           keyword: "enum",
-          params: { allowedValues: schema183.properties.fanState.enum },
+          params: { allowedValues: schema184.properties.fanState.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -24729,7 +24891,7 @@ function validate72(
         instancePath: instancePath + "/temperatureScale",
         schemaPath: "#/properties/temperatureScale/enum",
         keyword: "enum",
-        params: { allowedValues: schema183.properties.temperatureScale.enum },
+        params: { allowedValues: schema184.properties.temperatureScale.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -24746,7 +24908,7 @@ function validate72(
           instancePath: instancePath + "/humidityScale",
           schemaPath: "#/properties/humidityScale/type",
           keyword: "type",
-          params: { type: schema183.properties.humidityScale.type },
+          params: { type: schema184.properties.humidityScale.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -24763,7 +24925,7 @@ function validate72(
           instancePath: instancePath + "/humidityScale",
           schemaPath: "#/properties/humidityScale/enum",
           keyword: "enum",
-          params: { allowedValues: schema183.properties.humidityScale.enum },
+          params: { allowedValues: schema184.properties.humidityScale.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -24809,7 +24971,7 @@ function validate72(
               keyword: "enum",
               params: {
                 allowedValues:
-                  schema183.properties.supportedHvacModes.items.enum,
+                  schema184.properties.supportedHvacModes.items.enum,
               },
               message: "must be equal to one of the allowed values",
             };
@@ -24888,7 +25050,7 @@ function validate72(
               keyword: "enum",
               params: {
                 allowedValues:
-                  schema183.properties.supportedFanModes.items.enum,
+                  schema184.properties.supportedFanModes.items.enum,
               },
               message: "must be equal to one of the allowed values",
             };
@@ -25248,7 +25410,7 @@ function validate72(
   return errors === 0;
 }
 
-const schema200 = {
+const schema201 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "windowCovering.json",
   title: "Window Covering",
@@ -25644,7 +25806,7 @@ function validate81(
         instancePath: instancePath + "/discriminator",
         schemaPath: "#/properties/discriminator/enum",
         keyword: "enum",
-        params: { allowedValues: schema200.properties.discriminator.enum },
+        params: { allowedValues: schema201.properties.discriminator.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -25880,7 +26042,7 @@ function validate81(
           instancePath: instancePath + "/position",
           schemaPath: "#/properties/position/type",
           keyword: "type",
-          params: { type: schema200.properties.position.type },
+          params: { type: schema201.properties.position.type },
           message: "must be number,null",
         };
         if (vErrors === null) {
@@ -26132,7 +26294,7 @@ function validate66(
       errors++;
     }
     for (const key0 in data) {
-      if (!func5.call(schema172.properties, key0)) {
+      if (!func5.call(schema173.properties, key0)) {
         const err2 = {
           instancePath,
           schemaPath: "#/additionalProperties",
@@ -26223,7 +26385,7 @@ function validate66(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema172.properties.type.enum },
+        params: { allowedValues: schema173.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -26693,7 +26855,7 @@ function validate66(
           instancePath: instancePath + "/updatedAt",
           schemaPath: "definitions.json#/definitions/updatedAt/type",
           keyword: "type",
-          params: { type: schema151.type },
+          params: { type: schema152.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -26741,7 +26903,7 @@ function validate66(
 }
 
 export const validateScene = validate90;
-const schema212 = {
+const schema213 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "scene.json",
   title: "Scene",
@@ -26833,14 +26995,14 @@ const schema212 = {
   required: ["id", "name", "type"],
   additionalProperties: false,
 };
-const schema215 = { type: "string", enum: ["on", "off"] };
-const schema217 = { type: ["number", "null"], minimum: 0, maximum: 100 };
-const schema219 = { type: ["number", "null"], minimum: 0, maximum: 100 };
-const schema228 = {
+const schema216 = { type: "string", enum: ["on", "off"] };
+const schema218 = { type: ["number", "null"], minimum: 0, maximum: 100 };
+const schema220 = { type: ["number", "null"], minimum: 0, maximum: 100 };
+const schema229 = {
   type: ["string", "null"],
   enum: ["locked", "unlocked", null],
 };
-const schema229 = {
+const schema230 = {
   type: ["string", "null"],
   enum: [
     "normal",
@@ -26855,7 +27017,7 @@ const schema229 = {
     "emergencyOpen and emergencyClose are deprecated and can be removed once Salto, Paxton and Geovision drivers are updated",
   default: null,
 };
-const schema221 = {
+const schema222 = {
   type: "string",
   $ref: "#/properties/supportedHvacModes/items",
 };
@@ -26888,7 +27050,7 @@ function validate91(
       instancePath,
       schemaPath: "#/properties/supportedHvacModes/items/enum",
       keyword: "enum",
-      params: { allowedValues: schema191.enum },
+      params: { allowedValues: schema192.enum },
       message: "must be equal to one of the allowed values",
     };
     if (vErrors === null) {
@@ -26902,7 +27064,7 @@ function validate91(
   return errors === 0;
 }
 
-const schema223 = {
+const schema224 = {
   type: "object",
   additionalProperties: false,
   properties: {
@@ -27003,7 +27165,7 @@ function validate93(
   return errors === 0;
 }
 
-const schema224 = {
+const schema225 = {
   type: "string",
   $ref: "#/properties/supportedFanModes/items",
 };
@@ -27043,7 +27205,7 @@ function validate98(
       instancePath,
       schemaPath: "#/properties/supportedFanModes/items/enum",
       keyword: "enum",
-      params: { allowedValues: schema192.enum },
+      params: { allowedValues: schema193.enum },
       message: "must be equal to one of the allowed values",
     };
     if (vErrors === null) {
@@ -27254,7 +27416,7 @@ function validate90(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema212.properties.type.enum },
+        params: { allowedValues: schema213.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -27389,7 +27551,7 @@ function validate90(
                         instancePath + "/devices/switches/" + i0 + "/state",
                       schemaPath: "switch.json#/properties/state/enum",
                       keyword: "enum",
-                      params: { allowedValues: schema215.enum },
+                      params: { allowedValues: schema216.enum },
                       message: "must be equal to one of the allowed values",
                     };
                     if (vErrors === null) {
@@ -27503,7 +27665,7 @@ function validate90(
                       instancePath + "/devices/dimmers/" + i1 + "/level",
                     schemaPath: "dimmer.json#/properties/level/type",
                     keyword: "type",
-                    params: { type: schema217.type },
+                    params: { type: schema218.type },
                     message: "must be number,null",
                   };
                   if (vErrors === null) {
@@ -27653,7 +27815,7 @@ function validate90(
                       "/position",
                     schemaPath: "windowCovering.json#/properties/position/type",
                     keyword: "type",
-                    params: { type: schema219.type },
+                    params: { type: schema220.type },
                     message: "must be number,null",
                   };
                   if (vErrors === null) {
@@ -28195,7 +28357,7 @@ function validate90(
                         instancePath + "/devices/locks/" + i6 + "/state",
                       schemaPath: "lock.json#/properties/state/type",
                       keyword: "type",
-                      params: { type: schema228.type },
+                      params: { type: schema229.type },
                       message: "must be string,null",
                     };
                     if (vErrors === null) {
@@ -28217,7 +28379,7 @@ function validate90(
                         instancePath + "/devices/locks/" + i6 + "/state",
                       schemaPath: "lock.json#/properties/state/enum",
                       keyword: "enum",
-                      params: { allowedValues: schema228.enum },
+                      params: { allowedValues: schema229.enum },
                       message: "must be equal to one of the allowed values",
                     };
                     if (vErrors === null) {
@@ -28236,7 +28398,7 @@ function validate90(
                         instancePath + "/devices/locks/" + i6 + "/mode",
                       schemaPath: "lock.json#/properties/mode/type",
                       keyword: "type",
-                      params: { type: schema229.type },
+                      params: { type: schema230.type },
                       message: "must be string,null",
                     };
                     if (vErrors === null) {
@@ -28262,7 +28424,7 @@ function validate90(
                         instancePath + "/devices/locks/" + i6 + "/mode",
                       schemaPath: "lock.json#/properties/mode/enum",
                       keyword: "enum",
-                      params: { allowedValues: schema229.enum },
+                      params: { allowedValues: schema230.enum },
                       message: "must be equal to one of the allowed values",
                     };
                     if (vErrors === null) {
@@ -28372,7 +28534,7 @@ function validate90(
 }
 
 export const validateShortLink = validate100;
-const schema230 = {
+const schema231 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "shortLink.json",
   title: "Short Link",
@@ -28503,7 +28665,7 @@ function validate100(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema230.properties.type.enum },
+        params: { allowedValues: schema231.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -28635,7 +28797,7 @@ function validate100(
 }
 
 export const validateSmsMessage = validate101;
-const schema233 = {
+const schema234 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "smsMessage.json",
   title: "Sms Message",
@@ -28802,7 +28964,7 @@ function validate101(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema233.properties.type.enum },
+        params: { allowedValues: schema234.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -28949,7 +29111,7 @@ function validate101(
           instancePath: instancePath + "/status",
           schemaPath: "#/properties/status/enum",
           keyword: "enum",
-          params: { allowedValues: schema233.properties.status.enum },
+          params: { allowedValues: schema234.properties.status.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -29125,7 +29287,7 @@ function validate101(
 }
 
 export const validateSpace = validate102;
-const schema238 = {
+const schema239 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "space.json",
   title: "Space",
@@ -29619,7 +29781,7 @@ function validate102(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema238.properties.type.enum },
+        params: { allowedValues: schema239.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -29665,7 +29827,7 @@ function validate102(
           instancePath: instancePath + "/discriminator",
           schemaPath: "#/properties/discriminator/enum",
           keyword: "enum",
-          params: { allowedValues: schema238.properties.discriminator.enum },
+          params: { allowedValues: schema239.properties.discriminator.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -29944,7 +30106,7 @@ function validate102(
             schemaPath: "#/properties/eco/properties/activatedAt/type",
             keyword: "type",
             params: {
-              type: schema238.properties.eco.properties.activatedAt.type,
+              type: schema239.properties.eco.properties.activatedAt.type,
             },
             message: "must be string,object",
           };
@@ -29999,7 +30161,7 @@ function validate102(
             schemaPath: "#/properties/eco/properties/previousState/type",
             keyword: "type",
             params: {
-              type: schema238.properties.eco.properties.previousState.type,
+              type: schema239.properties.eco.properties.previousState.type,
             },
             message: "must be object,null",
           };
@@ -30142,7 +30304,7 @@ function validate102(
               schemaPath: "#/properties/features/items/enum",
               keyword: "enum",
               params: {
-                allowedValues: schema238.properties.features.items.enum,
+                allowedValues: schema239.properties.features.items.enum,
               },
               message: "must be equal to one of the allowed values",
             };
@@ -30234,7 +30396,7 @@ function validate102(
           schemaPath: "#/properties/housekeepingStatus/enum",
           keyword: "enum",
           params: {
-            allowedValues: schema238.properties.housekeepingStatus.enum,
+            allowedValues: schema239.properties.housekeepingStatus.enum,
           },
           message: "must be equal to one of the allowed values",
         };
@@ -30274,7 +30436,7 @@ function validate102(
           instancePath: instancePath + "/serviceStatus",
           schemaPath: "#/properties/serviceStatus/enum",
           keyword: "enum",
-          params: { allowedValues: schema238.properties.serviceStatus.enum },
+          params: { allowedValues: schema239.properties.serviceStatus.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -30324,7 +30486,7 @@ function validate102(
 export const validateSwitch = validate68;
 
 export const validateSystemUser = validate108;
-const schema243 = {
+const schema244 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "systemUser.json",
   title: "System User",
@@ -30513,7 +30675,7 @@ function validate112(
               instancePath: instancePath + "/" + i0 + "/tax",
               schemaPath: "#/items/properties/tax/type",
               keyword: "type",
-              params: { type: schema167.items.properties.tax.type },
+              params: { type: schema168.items.properties.tax.type },
               message: "must be number,null",
             };
             if (vErrors === null) {
@@ -30674,7 +30836,7 @@ function validate108(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema243.properties.type.enum },
+        params: { allowedValues: schema244.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -30810,7 +30972,7 @@ function validate108(
           instancePath: instancePath + "/phone",
           schemaPath: "#/properties/phone/type",
           keyword: "type",
-          params: { type: schema243.properties.phone.type },
+          params: { type: schema244.properties.phone.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -30845,7 +31007,7 @@ function validate108(
           instancePath: instancePath + "/email",
           schemaPath: "#/properties/email/type",
           keyword: "type",
-          params: { type: schema243.properties.email.type },
+          params: { type: schema244.properties.email.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -31143,7 +31305,7 @@ function validate108(
           instancePath: instancePath + "/gender",
           schemaPath: "#/properties/gender/enum",
           keyword: "enum",
-          params: { allowedValues: schema243.properties.gender.enum },
+          params: { allowedValues: schema244.properties.gender.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -31189,7 +31351,7 @@ function validate108(
               instancePath: instancePath + "/roles/" + i0,
               schemaPath: "#/properties/roles/items/enum",
               keyword: "enum",
-              params: { allowedValues: schema243.properties.roles.items.enum },
+              params: { allowedValues: schema244.properties.roles.items.enum },
               message: "must be equal to one of the allowed values",
             };
             if (vErrors === null) {
@@ -31474,7 +31636,7 @@ function validate108(
           instancePath: instancePath + "/updatedAt",
           schemaPath: "definitions.json#/definitions/updatedAt/type",
           keyword: "type",
-          params: { type: schema151.type },
+          params: { type: schema152.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -33653,7 +33815,7 @@ function validate39(
 }
 
 export const validateTimeSheet = validate114;
-const schema252 = {
+const schema253 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "timeSheet.json",
   title: "Time Sheet",
@@ -33813,7 +33975,7 @@ function validate114(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema252.properties.type.enum },
+        params: { allowedValues: schema253.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -33887,7 +34049,7 @@ function validate114(
           instancePath: instancePath + "/day",
           schemaPath: "#/properties/day/type",
           keyword: "type",
-          params: { type: schema252.properties.day.type },
+          params: { type: schema253.properties.day.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -34082,7 +34244,7 @@ function validate114(
                 keyword: "enum",
                 params: {
                   allowedValues:
-                    schema252.properties.timeEntries.items.properties
+                    schema253.properties.timeEntries.items.properties
                       .discriminator.enum,
                 },
                 message: "must be equal to one of the allowed values",
@@ -34107,7 +34269,7 @@ function validate114(
                   "#/properties/timeEntries/items/properties/start/type",
                 keyword: "type",
                 params: {
-                  type: schema252.properties.timeEntries.items.properties.start
+                  type: schema253.properties.timeEntries.items.properties.start
                     .type,
                 },
                 message: "must be string,object",
@@ -34150,7 +34312,7 @@ function validate114(
                   "#/properties/timeEntries/items/properties/end/type",
                 keyword: "type",
                 params: {
-                  type: schema252.properties.timeEntries.items.properties.end
+                  type: schema253.properties.timeEntries.items.properties.end
                     .type,
                 },
                 message: "must be string,object",
@@ -34268,7 +34430,7 @@ function validate114(
 }
 
 export const validateUser = validate115;
-const schema256 = {
+const schema257 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "user.json",
   title: "User",
@@ -34517,7 +34679,7 @@ function validate122(
               instancePath: instancePath + "/" + i0 + "/tax",
               schemaPath: "#/items/properties/tax/type",
               keyword: "type",
-              params: { type: schema167.items.properties.tax.type },
+              params: { type: schema168.items.properties.tax.type },
               message: "must be number,null",
             };
             if (vErrors === null) {
@@ -34719,7 +34881,7 @@ function validate115(
           instancePath: instancePath + "/phone",
           schemaPath: "#/properties/phone/type",
           keyword: "type",
-          params: { type: schema256.properties.phone.type },
+          params: { type: schema257.properties.phone.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -34771,7 +34933,7 @@ function validate115(
           instancePath: instancePath + "/email",
           schemaPath: "#/properties/email/type",
           keyword: "type",
-          params: { type: schema256.properties.email.type },
+          params: { type: schema257.properties.email.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -35102,7 +35264,7 @@ function validate115(
           instancePath: instancePath + "/gender",
           schemaPath: "#/properties/gender/enum",
           keyword: "enum",
-          params: { allowedValues: schema256.properties.gender.enum },
+          params: { allowedValues: schema257.properties.gender.enum },
           message: "must be equal to one of the allowed values",
         };
         if (vErrors === null) {
@@ -35313,7 +35475,7 @@ function validate115(
                 keyword: "enum",
                 params: {
                   allowedValues:
-                    schema256.properties.permissions.items.properties.role.enum,
+                    schema257.properties.permissions.items.properties.role.enum,
                 },
                 message: "must be equal to one of the allowed values",
               };
@@ -35694,7 +35856,7 @@ function validate115(
               schemaPath: "#/properties/location/properties/accuracy/type",
               keyword: "type",
               params: {
-                type: schema256.properties.location.properties.accuracy.type,
+                type: schema257.properties.location.properties.accuracy.type,
               },
               message: "must be number,null",
             };
@@ -35714,7 +35876,7 @@ function validate115(
               schemaPath: "#/properties/location/properties/latitude/type",
               keyword: "type",
               params: {
-                type: schema256.properties.location.properties.latitude.type,
+                type: schema257.properties.location.properties.latitude.type,
               },
               message: "must be number,null",
             };
@@ -35734,7 +35896,7 @@ function validate115(
               schemaPath: "#/properties/location/properties/longitude/type",
               keyword: "type",
               params: {
-                type: schema256.properties.location.properties.longitude.type,
+                type: schema257.properties.location.properties.longitude.type,
               },
               message: "must be number,null",
             };
@@ -35754,7 +35916,7 @@ function validate115(
               schemaPath: "#/properties/location/properties/timestamp/type",
               keyword: "type",
               params: {
-                type: schema256.properties.location.properties.timestamp.type,
+                type: schema257.properties.location.properties.timestamp.type,
               },
               message: "must be number,null",
             };
@@ -35899,7 +36061,7 @@ function validate115(
           instancePath: instancePath + "/updatedAt",
           schemaPath: "definitions.json#/definitions/updatedAt/type",
           keyword: "type",
-          params: { type: schema151.type },
+          params: { type: schema152.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -36105,7 +36267,7 @@ function validate115(
 }
 
 export const validateVendor = validate124;
-const schema263 = {
+const schema264 = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "vendor.json",
   title: "Vendor",
@@ -36239,7 +36401,7 @@ function validate124(
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
         keyword: "enum",
-        params: { allowedValues: schema263.properties.type.enum },
+        params: { allowedValues: schema264.properties.type.enum },
         message: "must be equal to one of the allowed values",
       };
       if (vErrors === null) {
@@ -36273,7 +36435,7 @@ function validate124(
           instancePath: instancePath + "/phone",
           schemaPath: "#/properties/phone/type",
           keyword: "type",
-          params: { type: schema263.properties.phone.type },
+          params: { type: schema264.properties.phone.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -36308,7 +36470,7 @@ function validate124(
           instancePath: instancePath + "/email",
           schemaPath: "#/properties/email/type",
           keyword: "type",
-          params: { type: schema263.properties.email.type },
+          params: { type: schema264.properties.email.type },
           message: "must be string,null",
         };
         if (vErrors === null) {
@@ -36597,7 +36759,7 @@ function validate124(
           instancePath: instancePath + "/updatedAt",
           schemaPath: "definitions.json#/definitions/updatedAt/type",
           keyword: "type",
-          params: { type: schema151.type },
+          params: { type: schema152.type },
           message: "must be string,object",
         };
         if (vErrors === null) {

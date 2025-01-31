@@ -4,29 +4,34 @@
 import { Entity } from "./entity";
 import { validateMediaFile as validate } from "../validators";
 
+/**
+ * @typedef {Object} MediaFileData Any media file
+ * @property {string} [id] - Identifier of the object.
+ * @property {"mediaFile"} type - Default: "mediaFile"
+ * @property {string} [name]
+ * @property {string} [fileHash]
+ * @property {string} [category] - This is the category id
+ * @property {("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf")} [mimeType]
+ * @property {string} [data]
+ * @property {string} [url]
+ * @property {number} [width]
+ * @property {number} [height]
+ * @property {number} [size] - Size in bytes
+ * @property {string} [uploadUrl]
+ * @property {(string|object)} [uploadUrlExpires]
+ * @property {string} [createdBy]
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ */
+
+/**
+ * Any media file
+ * @class MediaFile
+ * @extends {Entity}
+ */
 export class MediaFile extends Entity {
   /**
-   * @typedef {Object} MediaFileData Any media file
-   * @property {string} [id] - Identifier of the object.
-   * @property {"mediaFile"} type - Default: "mediaFile"
-   * @property {string} [name]
-   * @property {string} [fileHash]
-   * @property {string} [category] - This is the category id
-   * @property {("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf")} [mimeType]
-   * @property {string} [data]
-   * @property {string} [url]
-   * @property {number} [width]
-   * @property {number} [height]
-   * @property {number} [size] - Size in bytes
-   * @property {string} [uploadUrl]
-   * @property {(string|object)} [uploadUrlExpires]
-   * @property {string} [createdBy]
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   */
-
-  /**
-   * @param {MediaFileData} data - The data to initialize the MediaFile with
    * @constructor
+   * @param {MediaFileData} data - The data to initialize the MediaFile with
    */
   constructor(data) {
     super(data);

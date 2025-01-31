@@ -4,34 +4,39 @@
 import { Entity } from "./entity";
 import { validateSpace as validate } from "../validators";
 
+/**
+ * @typedef {Object} SpaceData
+ * @property {string} [id] - Identifier of the object.
+ * @property {string} [name]
+ * @property {"space"} [type] - Default: "space"
+ * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit")} [discriminator]
+ * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
+ * @property {string} [category] - This is the category id
+ * @property {string[]} [rooms]
+ * @property {string[]} [subGroups]
+ * @property {boolean} [occupied]
+ * @property {boolean} [inUse]
+ * @property {{active?: boolean, activatedAt?: (string|object), allowed?: boolean, previousState?: object}} [eco] - Default: {"active":false,"allowed":false,"previousState":null}
+ * @property {boolean} [eco.active] - Default: false
+ * @property {(string|object)} [eco.activatedAt]
+ * @property {boolean} [eco.allowed] - Default: false
+ * @property {object} [eco.previousState]
+ * @property {"pet"[]} [features]
+ * @property {number} [maximumOccupancy]
+ * @property {("clean"|"dirty"|"inspected"|"pickup")} [housekeepingStatus]
+ * @property {("inService"|"outOfOrder"|"outOfService")} [serviceStatus]
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ */
+
+/**
+ *
+ * @class Space
+ * @extends {Entity}
+ */
 export class Space extends Entity {
   /**
-   * @typedef {Object} SpaceData
-   * @property {string} [id] - Identifier of the object.
-   * @property {string} [name]
-   * @property {"space"} [type] - Default: "space"
-   * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit")} [discriminator]
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
-   * @property {string} [category] - This is the category id
-   * @property {string[]} [rooms]
-   * @property {string[]} [subGroups]
-   * @property {boolean} [occupied]
-   * @property {boolean} [inUse]
-   * @property {{active?: boolean, activatedAt?: (string|object), allowed?: boolean, previousState?: object}} [eco] - Default: {"active":false,"allowed":false,"previousState":null}
-   * @property {boolean} [eco.active] - Default: false
-   * @property {(string|object)} [eco.activatedAt]
-   * @property {boolean} [eco.allowed] - Default: false
-   * @property {object} [eco.previousState]
-   * @property {"pet"[]} [features]
-   * @property {number} [maximumOccupancy]
-   * @property {("clean"|"dirty"|"inspected"|"pickup")} [housekeepingStatus]
-   * @property {("inService"|"outOfOrder"|"outOfService")} [serviceStatus]
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   */
-
-  /**
-   * @param {SpaceData} data - The data to initialize the Space with
    * @constructor
+   * @param {SpaceData} data - The data to initialize the Space with
    */
   constructor(data) {
     super(data);

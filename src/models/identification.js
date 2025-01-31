@@ -4,27 +4,32 @@
 import { Entity } from "./entity";
 import { validateIdentification as validate } from "../validators";
 
+/**
+ * @typedef {Object} IdentificationData
+ * @property {string} [id] - Identifier of the object.
+ * @property {("driversLicense"|"passport"|"identityCard"|"visa")} type
+ * @property {string} [number]
+ * @property {string} [maskedNumber]
+ * @property {string} [encryptedNumber]
+ * @property {(string|object)} [issued]
+ * @property {(string|object)} [expires]
+ * @property {boolean} [verified]
+ * @property {boolean} [matched]
+ * @property {string} [firstName]
+ * @property {string} [lastName]
+ * @property {string} [issuingCountry]
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ */
+
+/**
+ *
+ * @class Identification
+ * @extends {Entity}
+ */
 export class Identification extends Entity {
   /**
-   * @typedef {Object} IdentificationData
-   * @property {string} [id] - Identifier of the object.
-   * @property {("driversLicense"|"passport"|"identityCard"|"visa")} type
-   * @property {string} [number]
-   * @property {string} [maskedNumber]
-   * @property {string} [encryptedNumber]
-   * @property {(string|object)} [issued]
-   * @property {(string|object)} [expires]
-   * @property {boolean} [verified]
-   * @property {boolean} [matched]
-   * @property {string} [firstName]
-   * @property {string} [lastName]
-   * @property {string} [issuingCountry]
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   */
-
-  /**
-   * @param {IdentificationData} data - The data to initialize the Identification with
    * @constructor
+   * @param {IdentificationData} data - The data to initialize the Identification with
    */
   constructor(data) {
     super(data);

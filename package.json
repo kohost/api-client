@@ -9,6 +9,7 @@
     "url": "git+https://github.com/kohost/api-client.git"
   },
   "type": "module",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -18,39 +19,136 @@
       }
     },
     "./models": {
-      "types": "./dist/models.d.ts",
-      "import": "./dist/models.js",
-      "require": "./dist/models.cjs"
+      "require": {
+        "types": "./dist/models/index.d.cts",
+        "node": "./dist/models/index.cjs",
+        "default": "./dist/models/index.cjs"
+      },
+      "import": {
+        "types": "./dist/models/index.d.ts",
+        "default": "./dist/models/index.js"
+      }
+    },
+    "./models/*": {
+      "require": {
+        "types": "./dist/models/*.d.cts",
+        "node": "./dist/models/*.cjs",
+        "default": "./dist/models/*.cjs"
+      },
+      "import": {
+        "types": "./dist/models/*.d.ts",
+        "default": "./dist/models/*.js"
+      }
     },
     "./useCases": {
-      "types": "./dist/useCases.d.ts",
-      "import": "./dist/useCases.js",
-      "require": "./dist/useCases.cjs"
+      "require": {
+        "types": "./dist/useCases/index.d.cts",
+        "node": "./dist/useCases/index.cjs",
+        "default": "./dist/useCases/index.cjs"
+      },
+      "import": {
+        "types": "./dist/useCases/index.d.ts",
+        "default": "./dist/useCases/index.js"
+      }
+    },
+    "./useCases/*": {
+      "require": {
+        "types": "./dist/useCases/*.d.cts",
+        "node": "./dist/useCases/*.cjs",
+        "default": "./dist/useCases/*.cjs"
+      },
+      "import": {
+        "types": "./dist/useCases/*.d.ts",
+        "default": "./dist/useCases/*.js"
+      }
     },
     "./errors": {
-      "types": "./dist/errors.d.ts",
-      "import": "./dist/errors.js",
-      "require": "./dist/errors.cjs"
+      "require": {
+        "types": "./dist/errors/index.d.cts",
+        "node": "./dist/errors/index.cjs",
+        "default": "./dist/errors/index.cjs"
+      },
+      "import": {
+        "types": "./dist/errors/index.d.ts",
+        "default": "./dist/errors/index.js"
+      }
+    },
+    "./errors/*": {
+      "require": {
+        "types": "./dist/errors/*.d.cts",
+        "node": "./dist/errors/*.cjs",
+        "default": "./dist/errors/*.cjs"
+      },
+      "import": {
+        "types": "./dist/errors/*.d.ts",
+        "default": "./dist/errors/*.js"
+      }
     },
     "./commands": {
-      "types": "./dist/commands.d.ts",
-      "import": "./dist/commands.js",
-      "require": "./dist/commands.cjs"
+      "require": {
+        "types": "./dist/commands/index.d.cts",
+        "node": "./dist/commands/index.cjs",
+        "default": "./dist/commands/index.cjs"
+      },
+      "import": {
+        "types": "./dist/commands/index.d.ts",
+        "default": "./dist/commands/index.js"
+      }
+    },
+    "./commands/*": {
+      "require": {
+        "types": "./dist/commands/*.d.cts",
+        "node": "./dist/commands/*.cjs",
+        "default": "./dist/commands/*.cjs"
+      },
+      "import": {
+        "types": "./dist/commands/*.d.ts",
+        "default": "./dist/commands/*.js"
+      }
     },
     "./events": {
-      "types": "./dist/events.d.ts",
-      "import": "./dist/events.js",
-      "require": "./dist/events.cjs"
+      "require": {
+        "types": "./dist/events/index.d.cts",
+        "node": "./dist/events/index.cjs",
+        "default": "./dist/events/index.cjs"
+      },
+      "import": {
+        "types": "./dist/events/index.d.ts",
+        "default": "./dist/events/index.js"
+      }
+    },
+    "./events/*": {
+      "require": {
+        "types": "./dist/events/*.d.cts",
+        "node": "./dist/events/*.cjs",
+        "default": "./dist/events/*.cjs"
+      },
+      "import": {
+        "types": "./dist/events/*.d.ts",
+        "default": "./dist/events/*.js"
+      }
     },
     "./client": {
-      "types": "./dist/client.d.ts",
-      "import": "./dist/client.js",
-      "require": "./dist/client.cjs"
+      "require": {
+        "types": "./dist/httpClient.d.cts",
+        "node": "./dist/httpClient.cjs",
+        "default": "./dist/httpClient.cjs"
+      },
+      "import": {
+        "types": "./dist/httpClient.d.ts",
+        "default": "./dist/httpClient.js"
+      }
     },
     "./socketIoClient": {
-      "types": "./dist/socketIoClient.d.ts",
-      "import": "./dist/socketIoClient.js",
-      "require": "./dist/socketIoClient.cjs"
+      "require": {
+        "types": "./dist/socketIoClient.d.cts",
+        "node": "./dist/socketIoClient.cjs",
+        "default": "./dist/socketIoClient.cjs"
+      },
+      "import": {
+        "types": "./dist/socketIoClient.d.ts",
+        "default": "./dist/socketIoClient.js"
+      }
     }
   },
   "typesVersions": {
@@ -84,6 +182,8 @@
     "@types/debug": "^4.1.12",
     "@types/events": "^3.0.3",
     "@types/node": "^22.10.5",
+    "acorn": "^8.14.0",
+    "acorn-walk": "^8.3.4",
     "ajv": "^8.11.0",
     "ajv-formats": "^3.0.1",
     "eslint": "^9.7.0",

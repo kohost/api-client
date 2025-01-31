@@ -4,36 +4,41 @@
 import { Entity } from "./entity";
 import { validateSystemUser as validate } from "../validators";
 
+/**
+ * @typedef {Object} SystemUserData A system user is a user that originated from an external 3rd party system.
+ * @property {string} [id] - Identifier of the object.
+ * @property {"systemUser"} [type] - Default: "systemUser"
+ * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
+ * @property {string} firstName
+ * @property {string} lastName
+ * @property {string} [phone]
+ * @property {string} [email]
+ * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
+ * @property {string} [photo]
+ * @property {string} [jobTitle]
+ * @property {string} [dob]
+ * @property {("male"|"female")} [gender]
+ * @property {("Guest"|"User"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin")[]} [roles]
+ * @property {string} [nationality]
+ * @property {string[]} [notes]
+ * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}[]} [files]
+ * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, systemId?: any}[]} [identifications]
+ * @property {{id?: any, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: string, maskedNumber: string, issued?: string, expires: string, systemId?: any}[]} [payments]
+ * @property {{id?: string, name?: string, date?: string, price?: number, tax?: number}[]} [revenue]
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ */
+
+/**
+ * A system user is a user that originated from an external 3rd party system.
+ * @class SystemUser
+ * @extends {Entity}
+ */
 export class SystemUser extends Entity {
   /**
-   * @typedef {Object} SystemUserData A system user is a user that originated from an external 3rd party system.
-   * @property {string} [id] - Identifier of the object.
-   * @property {"systemUser"} [type] - Default: "systemUser"
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
-   * @property {string} firstName
-   * @property {string} lastName
-   * @property {string} [phone]
-   * @property {string} [email]
-   * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
-   * @property {string} [photo]
-   * @property {string} [jobTitle]
-   * @property {string} [dob]
-   * @property {("male"|"female")} [gender]
-   * @property {("Guest"|"User"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin")[]} [roles]
-   * @property {string} [nationality]
-   * @property {string[]} [notes]
-   * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}[]} [files]
-   * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, systemId?: any}[]} [identifications]
-   * @property {{id?: any, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: string, maskedNumber: string, issued?: string, expires: string, systemId?: any}[]} [payments]
-   * @property {{id?: string, name?: string, date?: string, price?: number, tax?: number}[]} [revenue]
-   * @property {(string|object)} [createdAt]
-   * @property {(string|object)} [updatedAt]
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   */
-
-  /**
-   * @param {SystemUserData} data - The data to initialize the SystemUser with
    * @constructor
+   * @param {SystemUserData} data - The data to initialize the SystemUser with
    */
   constructor(data) {
     super(data);

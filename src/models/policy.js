@@ -4,22 +4,27 @@
 import { Entity } from "./entity";
 import { validatePolicy as validate } from "../validators";
 
+/**
+ * @typedef {Object} PolicyData A policy is a set of permissions that can be applied to a user to limit their access to resources.
+ * @property {string} [id] - Identifier of the object.
+ * @property {"policy"} type - Default: "policy"
+ * @property {"user"} discriminator
+ * @property {string} name
+ * @property {string} [description]
+ * @property {string} organizationId
+ * @property {string} propertyId
+ * @property {{entities: string[], effect: ("Allow"|"Deny")}[]} permissions
+ */
+
+/**
+ * A policy is a set of permissions that can be applied to a user to limit their access to resources.
+ * @class Policy
+ * @extends {Entity}
+ */
 export class Policy extends Entity {
   /**
-   * @typedef {Object} PolicyData A policy is a set of permissions that can be applied to a user to limit their access to resources.
-   * @property {string} [id] - Identifier of the object.
-   * @property {"policy"} type - Default: "policy"
-   * @property {"user"} discriminator
-   * @property {string} name
-   * @property {string} [description]
-   * @property {string} organizationId
-   * @property {string} propertyId
-   * @property {{entities: string[], effect: ("Allow"|"Deny")}[]} permissions
-   */
-
-  /**
-   * @param {PolicyData} data - The data to initialize the Policy with
    * @constructor
+   * @param {PolicyData} data - The data to initialize the Policy with
    */
   constructor(data) {
     super(data);

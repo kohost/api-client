@@ -4,26 +4,31 @@
 import { Entity } from "./entity";
 import { validateCredential as validate } from "../validators";
 
+/**
+ * @typedef {Object} CredentialData
+ * @property {string} [id] - Identifier of the object.
+ * @property {string} type - Default: "credential"
+ * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
+ * @property {("verificationCode"|"token"|"mobileKey"|"pin"|"publicKey"|"passkeyChallenge")} [discriminator]
+ * @property {string} credential
+ * @property {string} [userId]
+ * @property {string} [organizationId]
+ * @property {string} [propertyId]
+ * @property {string} [deviceId]
+ * @property {string} [userAgent]
+ * @property {(string|object)} expires
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ */
+
+/**
+ *
+ * @class Credential
+ * @extends {Entity}
+ */
 export class Credential extends Entity {
   /**
-   * @typedef {Object} CredentialData
-   * @property {string} [id] - Identifier of the object.
-   * @property {string} type - Default: "credential"
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
-   * @property {("verificationCode"|"token"|"mobileKey"|"pin"|"publicKey"|"passkeyChallenge")} [discriminator]
-   * @property {string} credential
-   * @property {string} [userId]
-   * @property {string} [organizationId]
-   * @property {string} [propertyId]
-   * @property {string} [deviceId]
-   * @property {string} [userAgent]
-   * @property {(string|object)} expires
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   */
-
-  /**
-   * @param {CredentialData} data - The data to initialize the Credential with
    * @constructor
+   * @param {CredentialData} data - The data to initialize the Credential with
    */
   constructor(data) {
     super(data);

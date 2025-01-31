@@ -4,31 +4,36 @@
 import { Entity } from "./entity";
 import { validateAlarm as validate } from "../validators";
 
+/**
+ * @typedef {Object} AlarmData Any smart alarm system
+ * @property {string} id - Identifier of the object.
+ * @property {string} [name] - Name of the alarm
+ * @property {boolean} [offline]
+ * @property {"alarm"} type - Default: "alarm"
+ * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
+ * @property {{name?: string, timestamp?: number, description?: string}} [notification]
+ * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+ * @property {{number?: number, name?: string, securityMode?: ("arming"|"disarming"|"armed"|"disarmed"|"alarm")}[]} areas
+ * @property {{number?: number, name?: string, secure?: boolean, bypassed?: boolean}[]} zones
+ * @property {boolean} [chime] - Reflects whether console chime is enabled
+ * @property {number} [watts]
+ * @property {string} [icon]
+ * @property {string} [modelNumber]
+ * @property {string} [serialNumber]
+ * @property {string} [firmwareVersion]
+ * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
+ */
+
+/**
+ * Any smart alarm system
+ * @class Alarm
+ * @extends {Entity}
+ */
 export class Alarm extends Entity {
   /**
-   * @typedef {Object} AlarmData Any smart alarm system
-   * @property {string} id - Identifier of the object.
-   * @property {string} [name] - Name of the alarm
-   * @property {boolean} [offline]
-   * @property {"alarm"} type - Default: "alarm"
-   * @property {string} [systemId] - Identifier of the object, directly related to the system.
-   * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
-   * @property {{name?: string, timestamp?: number, description?: string}} [notification]
-   * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
-   * @property {{number?: number, name?: string, securityMode?: ("arming"|"disarming"|"armed"|"disarmed"|"alarm")}[]} areas
-   * @property {{number?: number, name?: string, secure?: boolean, bypassed?: boolean}[]} zones
-   * @property {boolean} [chime] - Reflects whether console chime is enabled
-   * @property {number} [watts]
-   * @property {string} [icon]
-   * @property {string} [modelNumber]
-   * @property {string} [serialNumber]
-   * @property {string} [firmwareVersion]
-   * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
-   */
-
-  /**
-   * @param {AlarmData} data - The data to initialize the Alarm with
    * @constructor
+   * @param {AlarmData} data - The data to initialize the Alarm with
    */
   constructor(data) {
     super(data);

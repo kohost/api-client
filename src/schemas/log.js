@@ -3,6 +3,7 @@ export default {
   $id: "log.json",
   title: "Log",
   type: "object",
+  required: ["type", "timestamp", "id", "driver", "name"],
   properties: {
     type: {
       type: "string",
@@ -15,6 +16,9 @@ export default {
     },
     id: {
       $ref: "definitions.json#/definitions/id",
+    },
+    driver: {
+      $ref: "definitions.json#/definitions/driver",
     },
     name: {
       type: "string",

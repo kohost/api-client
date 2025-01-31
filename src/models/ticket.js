@@ -4,55 +4,60 @@
 import { Entity } from "./entity";
 import { validateTicket as validate } from "../validators";
 
+/**
+ * @typedef {Object} TicketData A ticket is a request from a user.
+ * @property {string} id - Identifier of the object.
+ * @property {"ticket"} [type] - Default: "ticket"
+ * @property {string} [number]
+ * @property {string} [issueId]
+ * @property {{id?: string, userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp?: (string|object), body?: string, readBy?: string[], media?: any}[]} conversation - Default: []
+ * @property {string} [subject]
+ * @property {{userId?: string, systemId?: string}} [openedBy]
+ * @property {string} [openedBy.userId]
+ * @property {string} [openedBy.systemId]
+ * @property {{systemId?: string, systemName?: string, systemPhoto?: any, userId?: string, userName?: string, userPhoto?: any, deviceId?: string, roomId?: string, reservationId?: string, spaceId?: string, spaceName?: string}} requester
+ * @property {string} [requester.systemId]
+ * @property {string} [requester.systemName]
+ * @property {any} [requester.systemPhoto]
+ * @property {string} [requester.userId]
+ * @property {string} [requester.userName]
+ * @property {any} [requester.userPhoto]
+ * @property {string} [requester.deviceId]
+ * @property {string} [requester.roomId]
+ * @property {string} [requester.reservationId]
+ * @property {string} [requester.spaceId]
+ * @property {string} [requester.spaceName]
+ * @property {{userId?: string, userName?: string, userPhoto?: any, vendorId?: string, vendorName?: string, vendorPhoto?: any}} [assignedTo]
+ * @property {string} [assignedTo.userId]
+ * @property {string} [assignedTo.userName]
+ * @property {any} [assignedTo.userPhoto]
+ * @property {string} [assignedTo.vendorId]
+ * @property {string} [assignedTo.vendorName]
+ * @property {any} [assignedTo.vendorPhoto]
+ * @property {("open"|"pending"|"solved"|"closed")} status - Default: "open"
+ * @property {("low"|"normal"|"high")} [priority] - Default: "normal"
+ * @property {string[]} tags - Default: []
+ * @property {string} [department]
+ * @property {number} [rating]
+ * @property {string} [ratingComment]
+ * @property {string} [tipAmount]
+ * @property {(string|object)} [autoCloseAt]
+ * @property {(string|object)} [scheduleDate]
+ * @property {(string|object)} createdAt
+ * @property {(string|object)} updatedAt
+ * @property {(string|object)} [solvedAt]
+ * @property {(string|object)} [closedAt]
+ */
+
+/**
+ * A ticket is a request from a user.
+ * @class Ticket
+ * @extends {Entity}
+ */
 export class Ticket extends Entity {
   /**
-   * @typedef {Object} TicketData A ticket is a request from a user.
-   * @property {string} id - Identifier of the object.
-   * @property {"ticket"} [type] - Default: "ticket"
-   * @property {string} [number]
-   * @property {string} [issueId]
-   * @property {{id?: string, userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp?: (string|object), body?: string, readBy?: string[], media?: any}[]} conversation - Default: []
-   * @property {string} [subject]
-   * @property {{userId?: string, systemId?: string}} [openedBy]
-   * @property {string} [openedBy.userId]
-   * @property {string} [openedBy.systemId]
-   * @property {{systemId?: string, systemName?: string, systemPhoto?: any, userId?: string, userName?: string, userPhoto?: any, deviceId?: string, roomId?: string, reservationId?: string, spaceId?: string, spaceName?: string}} requester
-   * @property {string} [requester.systemId]
-   * @property {string} [requester.systemName]
-   * @property {any} [requester.systemPhoto]
-   * @property {string} [requester.userId]
-   * @property {string} [requester.userName]
-   * @property {any} [requester.userPhoto]
-   * @property {string} [requester.deviceId]
-   * @property {string} [requester.roomId]
-   * @property {string} [requester.reservationId]
-   * @property {string} [requester.spaceId]
-   * @property {string} [requester.spaceName]
-   * @property {{userId?: string, userName?: string, userPhoto?: any, vendorId?: string, vendorName?: string, vendorPhoto?: any}} [assignedTo]
-   * @property {string} [assignedTo.userId]
-   * @property {string} [assignedTo.userName]
-   * @property {any} [assignedTo.userPhoto]
-   * @property {string} [assignedTo.vendorId]
-   * @property {string} [assignedTo.vendorName]
-   * @property {any} [assignedTo.vendorPhoto]
-   * @property {("open"|"pending"|"solved"|"closed")} status - Default: "open"
-   * @property {("low"|"normal"|"high")} [priority] - Default: "normal"
-   * @property {string[]} tags - Default: []
-   * @property {string} [department]
-   * @property {number} [rating]
-   * @property {string} [ratingComment]
-   * @property {string} [tipAmount]
-   * @property {(string|object)} [autoCloseAt]
-   * @property {(string|object)} [scheduleDate]
-   * @property {(string|object)} createdAt
-   * @property {(string|object)} updatedAt
-   * @property {(string|object)} [solvedAt]
-   * @property {(string|object)} [closedAt]
-   */
-
-  /**
-   * @param {TicketData} data - The data to initialize the Ticket with
    * @constructor
+   * @param {TicketData} data - The data to initialize the Ticket with
    */
   constructor(data) {
     super(data);

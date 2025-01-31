@@ -4,27 +4,32 @@
 import { Entity } from "./entity";
 import { validateIssue as validate } from "../validators";
 
+/**
+ * @typedef {Object} IssueData An issue associated with ticketing and concierge.
+ * @property {string} id - Identifier of the object.
+ * @property {"issue"} type - Default: "issue"
+ * @property {string} name
+ * @property {string} [description]
+ * @property {string} department
+ * @property {{userId?: string, vendorId?: string, priority?: ("low"|"normal"|"high"), tags?: string[]}} [autoAssign]
+ * @property {string} [autoAssign.userId]
+ * @property {string} [autoAssign.vendorId]
+ * @property {("low"|"normal"|"high")} [autoAssign.priority]
+ * @property {string[]} [autoAssign.tags]
+ * @property {string} [systemKey]
+ * @property {boolean} [autoCreateTicket] - Default: true
+ * @property {string[]} [excludedResources] - A list of resources that should not trigger notifications of this issue. Default: []
+ */
+
+/**
+ * An issue associated with ticketing and concierge.
+ * @class Issue
+ * @extends {Entity}
+ */
 export class Issue extends Entity {
   /**
-   * @typedef {Object} IssueData An issue associated with ticketing and concierge.
-   * @property {string} id - Identifier of the object.
-   * @property {"issue"} type - Default: "issue"
-   * @property {string} name
-   * @property {string} [description]
-   * @property {string} department
-   * @property {{userId?: string, vendorId?: string, priority?: ("low"|"normal"|"high"), tags?: string[]}} [autoAssign]
-   * @property {string} [autoAssign.userId]
-   * @property {string} [autoAssign.vendorId]
-   * @property {("low"|"normal"|"high")} [autoAssign.priority]
-   * @property {string[]} [autoAssign.tags]
-   * @property {string} [systemKey]
-   * @property {boolean} [autoCreateTicket] - Default: true
-   * @property {string[]} [excludedResources] - A list of resources that should not trigger notifications of this issue. Default: []
-   */
-
-  /**
-   * @param {IssueData} data - The data to initialize the Issue with
    * @constructor
+   * @param {IssueData} data - The data to initialize the Issue with
    */
   constructor(data) {
     super(data);

@@ -4,19 +4,24 @@
 import { Entity } from "./entity";
 import { validateDeviceRouter as validate } from "../validators";
 
+/**
+ * @typedef {Object} DeviceRouterData A device router contains instructions on where to route devices based on their organization and driver.
+ * @property {string} [id] - Identifier of the object.
+ * @property {"deviceRouter"} [type] - Default: "deviceRouter"
+ * @property {string} driver
+ * @property {string} organizationId - Reference (id) to the organization that owns this router
+ * @property {object} [devices]
+ */
+
+/**
+ * A device router contains instructions on where to route devices based on their organization and driver.
+ * @class DeviceRouter
+ * @extends {Entity}
+ */
 export class DeviceRouter extends Entity {
   /**
-   * @typedef {Object} DeviceRouterData A device router contains instructions on where to route devices based on their organization and driver.
-   * @property {string} [id] - Identifier of the object.
-   * @property {"deviceRouter"} [type] - Default: "deviceRouter"
-   * @property {string} driver
-   * @property {string} organizationId - Reference (id) to the organization that owns this router
-   * @property {object} [devices]
-   */
-
-  /**
-   * @param {DeviceRouterData} data - The data to initialize the DeviceRouter with
    * @constructor
+   * @param {DeviceRouterData} data - The data to initialize the DeviceRouter with
    */
   constructor(data) {
     super(data);
