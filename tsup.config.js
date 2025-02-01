@@ -45,6 +45,7 @@ export default defineConfig([
   // },
   {
     entry: [
+      "src/index.js",
       "src/models/*",
       "src/useCases/*",
       "src/events/*",

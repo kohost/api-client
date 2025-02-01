@@ -57,7 +57,7 @@ export function extractFunction(sourceCode, exportName) {
 
   if (!targetNode) {
     throw new Error(
-      `Could not find function definition for ${targetFunctionName}`
+      `Could not find function definition for ${targetFunctionName}`,
     );
   }
 
@@ -85,7 +85,7 @@ export function extractFunction(sourceCode, exportName) {
   // Sort the code segments by their position to maintain original order
   const sortedSegments = Array.from(codeSegments.entries())
     .sort(([posA], [posB]) => posA - posB)
-    .map(([_, code]) => code);
+    .map(([, code]) => code);
 
   // Add the export statement at the end
   return (
