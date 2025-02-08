@@ -10,11 +10,13 @@ import { validateTicket as validate } from "../validators";
  * @property {"ticket"} [type] - Default: "ticket"
  * @property {string} [number]
  * @property {string} [issueId]
- * @property {{id?: string, userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp?: (string|object), body?: string, readBy?: string[], media?: any}[]} conversation - Default: []
+ * @property {{id: string, discriminator: ("message"|"opened"|"assigned"|"rated"|"tipped"|"scheduled"|"collaboratorAdded"|"collaboratorRemoved"|"statusChanged"|"priorityChanged"|"scheduleDateChanged"), userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp: (string|object), body: string, parsedBody?: {text?: string, mentions?: {id: string, discriminator: ("user"|"vendor"|"system"), index: number, length: number, originalText: string}[]}, readBy?: string[], media?: any}[]} conversation - Default: []
  * @property {string} [subject]
- * @property {{userId?: string, systemId?: string}} [openedBy]
+ * @property {{userId?: string, userName?: string, systemId?: string, systemName?: string}} [openedBy]
  * @property {string} [openedBy.userId]
+ * @property {string} [openedBy.userName]
  * @property {string} [openedBy.systemId]
+ * @property {string} [openedBy.systemName]
  * @property {{systemId?: string, systemName?: string, systemPhoto?: any, userId?: string, userName?: string, userPhoto?: any, deviceId?: string, roomId?: string, reservationId?: string, spaceId?: string, spaceName?: string}} requester
  * @property {string} [requester.systemId]
  * @property {string} [requester.systemName]
@@ -34,6 +36,9 @@ import { validateTicket as validate } from "../validators";
  * @property {string} [assignedTo.vendorId]
  * @property {string} [assignedTo.vendorName]
  * @property {any} [assignedTo.vendorPhoto]
+ * @property {{userIds?: string[]}} [notify]
+ * @property {string[]} [notify.userIds] - A list of user IDs to notify this ticket is created or updated.. Default: []
+ * @property {{id: string, name: string, discriminator: ("user"|"vendor")}[]} [collaborators] - Default: []
  * @property {("open"|"pending"|"solved"|"closed")} status - Default: "open"
  * @property {("low"|"normal"|"high")} [priority] - Default: "normal"
  * @property {string[]} tags - Default: []
@@ -70,6 +75,9 @@ export class Ticket extends Entity {
     if (data.openedBy !== undefined) this.openedBy = data.openedBy;
     this.requester = data.requester;
     if (data.assignedTo !== undefined) this.assignedTo = data.assignedTo;
+    if (data.notify !== undefined) this.notify = data.notify;
+    if (data.collaborators !== undefined)
+      this.collaborators = data.collaborators;
     this.status = data.status;
     if (data.priority !== undefined) this.priority = data.priority;
     this.tags = data.tags;
@@ -105,8 +113,26 @@ Object.defineProperty(Ticket.prototype, "schema", {
         items: {
           type: "object",
           additionalProperties: false,
+          required: ["id", "discriminator", "timestamp", "body"],
           properties: {
             id: { type: "string" },
+            discriminator: {
+              type: "string",
+              enum: [
+                "message",
+                "opened",
+                "assigned",
+                "rated",
+                "tipped",
+                "scheduled",
+                "collaboratorAdded",
+                "collaboratorRemoved",
+                "statusChanged",
+                "priorityChanged",
+                "scheduleDateChanged",
+              ],
+              default: "message",
+            },
             userId: { type: "string" },
             userName: { type: "string" },
             vendorId: { type: "string" },
@@ -115,14 +141,39 @@ Object.defineProperty(Ticket.prototype, "schema", {
             systemName: { type: "string" },
             timestamp: { $ref: "definitions.json#/definitions/createdAt" },
             body: { type: "string" },
+            parsedBody: {
+              type: "object",
+              properties: {
+                text: { type: "string" },
+                mentions: {
+                  type: "array",
+                  default: [],
+                  items: {
+                    type: "object",
+                    required: [
+                      "discriminator",
+                      "id",
+                      "index",
+                      "length",
+                      "originalText",
+                    ],
+                    properties: {
+                      id: { type: "string" },
+                      discriminator: {
+                        type: "string",
+                        enum: ["user", "vendor", "system"],
+                      },
+                      index: { type: "integer" },
+                      length: { type: "integer" },
+                      originalText: { type: "string" },
+                    },
+                  },
+                },
+              },
+            },
             readBy: { type: "array", default: [], items: { type: "string" } },
             media: { anyOf: [{ $ref: "mediaFile.json" }, { type: "null" }] },
           },
-          anyOf: [
-            { required: ["id", "userId", "timestamp", "body"] },
-            { required: ["id", "systemId", "timestamp", "body"] },
-            { required: ["id", "vendorId", "timestamp", "body"] },
-          ],
         },
       },
       subject: { type: "string" },
@@ -130,7 +181,9 @@ Object.defineProperty(Ticket.prototype, "schema", {
         type: "object",
         properties: {
           userId: { type: "string" },
+          userName: { type: "string" },
           systemId: { type: "string" },
+          systemName: { type: "string" },
         },
       },
       requester: {
@@ -181,6 +234,31 @@ Object.defineProperty(Ticket.prototype, "schema", {
               { type: "null" },
               { type: "string" },
             ],
+          },
+        },
+      },
+      notify: {
+        type: "object",
+        properties: {
+          userIds: {
+            type: "array",
+            description:
+              "A list of user IDs to notify this ticket is created or updated.",
+            items: { type: "string" },
+            default: [],
+          },
+        },
+      },
+      collaborators: {
+        type: "array",
+        default: [],
+        items: {
+          type: "object",
+          required: ["id", "name", "discriminator"],
+          properties: {
+            id: { type: "string" },
+            name: { type: "string" },
+            discriminator: { type: "string", enum: ["user", "vendor"] },
           },
         },
       },

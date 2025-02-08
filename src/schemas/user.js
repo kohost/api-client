@@ -3,7 +3,7 @@ export default {
   $id: "user.json",
   title: "User",
   type: "object",
-  required: ["firstName", "lastName"],
+  required: ["id", "firstName", "lastName"],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

@@ -63,8 +63,12 @@ export default defineConfig([
       options.outbase = "src";
       return options;
     },
-    minify: true,
-
+    minify: "terser",
+    terserOptions: {
+      mangle: false,
+      keep_fnames: true,
+      keep_classnames: true,
+    },
     format: ["cjs", "esm"],
     dts: true,
     bundle: true,

@@ -27,15 +27,31 @@ export default {
       properties: {
         userId: {
           type: "string",
+          description: "The user ID to assign tickets with this issue to.",
         },
         vendorId: {
           type: "string",
+          description: "The vendor ID to assign tickets with this issue to.",
         },
         priority: {
           $ref: "ticket.json#/properties/priority",
+          description: "The priority to assign tickets with this issue to.",
         },
         tags: {
           type: "array",
+          items: {
+            type: "string",
+          },
+        },
+      },
+    },
+    notify: {
+      type: "object",
+      properties: {
+        userIds: {
+          type: "array",
+          description:
+            "A list of user IDs to notify when a ticket with this issue is created.",
           items: {
             type: "string",
           },

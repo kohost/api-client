@@ -12,10 +12,12 @@ import { validateIssue as validate } from "../validators";
  * @property {string} [description]
  * @property {string} department
  * @property {{userId?: string, vendorId?: string, priority?: ("low"|"normal"|"high"), tags?: string[]}} [autoAssign]
- * @property {string} [autoAssign.userId]
- * @property {string} [autoAssign.vendorId]
- * @property {("low"|"normal"|"high")} [autoAssign.priority]
+ * @property {string} [autoAssign.userId] - The user ID to assign tickets with this issue to.
+ * @property {string} [autoAssign.vendorId] - The vendor ID to assign tickets with this issue to.
+ * @property {("low"|"normal"|"high")} [autoAssign.priority] - The priority to assign tickets with this issue to.
  * @property {string[]} [autoAssign.tags]
+ * @property {{userIds?: string[]}} [notify]
+ * @property {string[]} [notify.userIds] - A list of user IDs to notify when a ticket with this issue is created.
  * @property {string} [systemKey]
  * @property {boolean} [autoCreateTicket] - Default: true
  * @property {string[]} [excludedResources] - A list of resources that should not trigger notifications of this issue. Default: []
@@ -39,6 +41,7 @@ export class Issue extends Entity {
     if (data.description !== undefined) this.description = data.description;
     this.department = data.department;
     if (data.autoAssign !== undefined) this.autoAssign = data.autoAssign;
+    if (data.notify !== undefined) this.notify = data.notify;
     if (data.systemKey !== undefined) this.systemKey = data.systemKey;
     if (data.autoCreateTicket !== undefined)
       this.autoCreateTicket = data.autoCreateTicket;
@@ -63,10 +66,30 @@ Object.defineProperty(Issue.prototype, "schema", {
       autoAssign: {
         type: "object",
         properties: {
-          userId: { type: "string" },
-          vendorId: { type: "string" },
-          priority: { $ref: "ticket.json#/properties/priority" },
+          userId: {
+            type: "string",
+            description: "The user ID to assign tickets with this issue to.",
+          },
+          vendorId: {
+            type: "string",
+            description: "The vendor ID to assign tickets with this issue to.",
+          },
+          priority: {
+            $ref: "ticket.json#/properties/priority",
+            description: "The priority to assign tickets with this issue to.",
+          },
           tags: { type: "array", items: { type: "string" } },
+        },
+      },
+      notify: {
+        type: "object",
+        properties: {
+          userIds: {
+            type: "array",
+            description:
+              "A list of user IDs to notify when a ticket with this issue is created.",
+            items: { type: "string" },
+          },
         },
       },
       systemKey: { type: "string" },

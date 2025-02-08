@@ -6,7 +6,7 @@ import { validateUser as validate } from "../validators";
 
 /**
  * @typedef {Object} UserData
- * @property {string} [id] - Identifier of the object.
+ * @property {string} id - Identifier of the object.
  * @property {string} [type] - Default: "user"
  * @property {string} firstName
  * @property {string} lastName
@@ -51,7 +51,7 @@ export class User extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
+    this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
@@ -115,7 +115,7 @@ Object.defineProperty(User.prototype, "schema", {
     $id: "user.json",
     title: "User",
     type: "object",
-    required: ["firstName", "lastName"],
+    required: ["id", "firstName", "lastName"],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", default: "user" },

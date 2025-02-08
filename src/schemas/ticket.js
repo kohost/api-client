@@ -25,9 +25,27 @@ export default {
       items: {
         type: "object",
         additionalProperties: false,
+        required: ["id", "discriminator", "timestamp", "body"],
         properties: {
           id: {
             type: "string",
+          },
+          discriminator: {
+            type: "string",
+            enum: [
+              "message",
+              "opened",
+              "assigned",
+              "rated",
+              "tipped",
+              "scheduled",
+              "collaboratorAdded",
+              "collaboratorRemoved",
+              "statusChanged",
+              "priorityChanged",
+              "scheduleDateChanged",
+            ],
+            default: "message",
           },
           userId: {
             type: "string",
@@ -53,6 +71,47 @@ export default {
           body: {
             type: "string",
           },
+          parsedBody: {
+            type: "object",
+            properties: {
+              text: {
+                type: "string",
+              },
+              mentions: {
+                type: "array",
+                default: [],
+                items: {
+                  type: "object",
+                  required: [
+                    "discriminator",
+                    "id",
+                    "index",
+                    "length",
+                    "originalText",
+                  ],
+                  properties: {
+                    id: {
+                      type: "string",
+                    },
+                    discriminator: {
+                      type: "string",
+                      enum: ["user", "vendor", "system"],
+                    },
+                    index: {
+                      type: "integer",
+                    },
+                    length: {
+                      type: "integer",
+                    },
+                    originalText: {
+                      type: "string",
+                    },
+                  },
+                },
+              },
+            },
+          },
+
           readBy: {
             type: "array",
             default: [],
@@ -64,17 +123,6 @@ export default {
             anyOf: [{ $ref: "mediaFile.json" }, { type: "null" }],
           },
         },
-        anyOf: [
-          {
-            required: ["id", "userId", "timestamp", "body"],
-          },
-          {
-            required: ["id", "systemId", "timestamp", "body"],
-          },
-          {
-            required: ["id", "vendorId", "timestamp", "body"],
-          },
-        ],
       },
     },
     subject: {
@@ -86,7 +134,13 @@ export default {
         userId: {
           type: "string",
         },
+        userName: {
+          type: "string",
+        },
         systemId: {
+          type: "string",
+        },
+        systemName: {
           type: "string",
         },
       },
@@ -165,6 +219,40 @@ export default {
             { type: "null" },
             { type: "string" },
           ],
+        },
+      },
+    },
+    notify: {
+      type: "object",
+      properties: {
+        userIds: {
+          type: "array",
+          description:
+            "A list of user IDs to notify this ticket is created or updated.",
+          items: {
+            type: "string",
+          },
+          default: [],
+        },
+      },
+    },
+    collaborators: {
+      type: "array",
+      default: [],
+      items: {
+        type: "object",
+        required: ["id", "name", "discriminator"],
+        properties: {
+          id: {
+            type: "string",
+          },
+          name: {
+            type: "string",
+          },
+          discriminator: {
+            type: "string",
+            enum: ["user", "vendor"],
+          },
         },
       },
     },
