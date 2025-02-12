@@ -1226,6 +1226,24 @@
     }
   ],
   [
+    "LeaveTicket",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/leave"
+      }
+    }
+  ],
+  [
+    "ListTicketLocations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/locations"
+      }
+    }
+  ],
+  [
     "ListScenes",
     {
       "http": {

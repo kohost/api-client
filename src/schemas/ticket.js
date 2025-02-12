@@ -223,16 +223,22 @@ export default {
       },
     },
     notify: {
-      type: "object",
-      properties: {
-        userIds: {
-          type: "array",
-          description:
-            "A list of user IDs to notify this ticket is created or updated.",
-          items: {
+      type: "array",
+      description:
+        "A list of entities to notify when this ticket is created or resolved.",
+      default: [],
+      items: {
+        type: "object",
+        required: ["id", "discriminator"],
+        properties: {
+          id: {
             type: "string",
+            description: "The ID of the entity to notify.",
           },
-          default: [],
+          discriminator: {
+            type: "string",
+            enum: ["user"],
+          },
         },
       },
     },
@@ -253,6 +259,22 @@ export default {
             type: "string",
             enum: ["user", "vendor"],
           },
+        },
+      },
+    },
+    location: {
+      type: "object",
+      required: ["discriminator", "name"],
+      properties: {
+        id: {
+          type: "string",
+        },
+        discriminator: {
+          type: "string",
+          enum: ["space", "room", "property", "customText"],
+        },
+        name: {
+          type: "string",
         },
       },
     },

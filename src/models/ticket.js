@@ -36,9 +36,12 @@ import { validateTicket as validate } from "../validators";
  * @property {string} [assignedTo.vendorId]
  * @property {string} [assignedTo.vendorName]
  * @property {any} [assignedTo.vendorPhoto]
- * @property {{userIds?: string[]}} [notify]
- * @property {string[]} [notify.userIds] - A list of user IDs to notify this ticket is created or updated.. Default: []
+ * @property {{id: string, discriminator: "user"}[]} [notify] - A list of entities to notify when this ticket is created or resolved.. Default: []
  * @property {{id: string, name: string, discriminator: ("user"|"vendor")}[]} [collaborators] - Default: []
+ * @property {{id?: string, discriminator: ("space"|"room"|"property"|"customText"), name: string}} [location]
+ * @property {string} [location.id]
+ * @property {("space"|"room"|"property"|"customText")} location.discriminator
+ * @property {string} location.name
  * @property {("open"|"pending"|"solved"|"closed")} status - Default: "open"
  * @property {("low"|"normal"|"high")} [priority] - Default: "normal"
  * @property {string[]} tags - Default: []
@@ -78,6 +81,7 @@ export class Ticket extends Entity {
     if (data.notify !== undefined) this.notify = data.notify;
     if (data.collaborators !== undefined)
       this.collaborators = data.collaborators;
+    if (data.location !== undefined) this.location = data.location;
     this.status = data.status;
     if (data.priority !== undefined) this.priority = data.priority;
     this.tags = data.tags;
@@ -238,14 +242,19 @@ Object.defineProperty(Ticket.prototype, "schema", {
         },
       },
       notify: {
-        type: "object",
-        properties: {
-          userIds: {
-            type: "array",
-            description:
-              "A list of user IDs to notify this ticket is created or updated.",
-            items: { type: "string" },
-            default: [],
+        type: "array",
+        description:
+          "A list of entities to notify when this ticket is created or resolved.",
+        default: [],
+        items: {
+          type: "object",
+          required: ["id", "discriminator"],
+          properties: {
+            id: {
+              type: "string",
+              description: "The ID of the entity to notify.",
+            },
+            discriminator: { type: "string", enum: ["user"] },
           },
         },
       },
@@ -260,6 +269,18 @@ Object.defineProperty(Ticket.prototype, "schema", {
             name: { type: "string" },
             discriminator: { type: "string", enum: ["user", "vendor"] },
           },
+        },
+      },
+      location: {
+        type: "object",
+        required: ["discriminator", "name"],
+        properties: {
+          id: { type: "string" },
+          discriminator: {
+            type: "string",
+            enum: ["space", "room", "property", "customText"],
+          },
+          name: { type: "string" },
         },
       },
       status: {

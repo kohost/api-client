@@ -46,14 +46,20 @@ export default {
       },
     },
     notify: {
-      type: "object",
-      properties: {
-        userIds: {
-          type: "array",
-          description:
-            "A list of user IDs to notify when a ticket with this issue is created.",
-          items: {
+      type: "array",
+      description: "A list of entities to notify when this issue is triggered.",
+      default: [],
+      items: {
+        type: "object",
+        required: ["id", "discriminator"],
+        properties: {
+          id: {
             type: "string",
+            description: "The ID of the entity to notify.",
+          },
+          discriminator: {
+            type: "string",
+            enum: ["user"],
           },
         },
       },

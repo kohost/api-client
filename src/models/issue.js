@@ -16,8 +16,7 @@ import { validateIssue as validate } from "../validators";
  * @property {string} [autoAssign.vendorId] - The vendor ID to assign tickets with this issue to.
  * @property {("low"|"normal"|"high")} [autoAssign.priority] - The priority to assign tickets with this issue to.
  * @property {string[]} [autoAssign.tags]
- * @property {{userIds?: string[]}} [notify]
- * @property {string[]} [notify.userIds] - A list of user IDs to notify when a ticket with this issue is created.
+ * @property {{id: string, discriminator: "user"}[]} [notify] - A list of entities to notify when this issue is triggered.. Default: []
  * @property {string} [systemKey]
  * @property {boolean} [autoCreateTicket] - Default: true
  * @property {string[]} [excludedResources] - A list of resources that should not trigger notifications of this issue. Default: []
@@ -82,13 +81,19 @@ Object.defineProperty(Issue.prototype, "schema", {
         },
       },
       notify: {
-        type: "object",
-        properties: {
-          userIds: {
-            type: "array",
-            description:
-              "A list of user IDs to notify when a ticket with this issue is created.",
-            items: { type: "string" },
+        type: "array",
+        description:
+          "A list of entities to notify when this issue is triggered.",
+        default: [],
+        items: {
+          type: "object",
+          required: ["id", "discriminator"],
+          properties: {
+            id: {
+              type: "string",
+              description: "The ID of the entity to notify.",
+            },
+            discriminator: { type: "string", enum: ["user"] },
           },
         },
       },

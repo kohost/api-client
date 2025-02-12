@@ -212,6 +212,10 @@ export default {
               type: "boolean",
               default: false,
             },
+            feedback: {
+              type: "boolean",
+              default: true,
+            },
             ratings: {
               type: "boolean",
               default: true,
