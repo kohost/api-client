@@ -10,7 +10,7 @@ import { validateTicket as validate } from "../validators";
  * @property {"ticket"} [type] - Default: "ticket"
  * @property {string} [number]
  * @property {string} [issueId]
- * @property {{id: string, discriminator: ("message"|"opened"|"assigned"|"rated"|"tipped"|"scheduled"|"collaboratorAdded"|"collaboratorRemoved"|"statusChanged"|"priorityChanged"|"scheduleDateChanged"), userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp: (string|object), body: string, parsedBody?: {text?: string, mentions?: {id: string, discriminator: ("user"|"vendor"|"system"), index: number, length: number, originalText: string}[]}, readBy?: string[], media?: any}[]} conversation - Default: []
+ * @property {{id: string, discriminator: ("message"|"opened"|"assigned"|"rated"|"tipped"|"scheduled"|"collaboratorAdded"|"collaboratorRemoved"|"statusChanged"|"priorityChanged"|"scheduleDateChanged"|"locationChanged"), userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp: (string|object), body: string, parsedBody?: {text?: string, mentions?: {id: string, discriminator: ("user"|"vendor"|"system"), index: number, length: number, originalText: string}[]}, readBy?: string[], media?: any}[]} conversation - Default: []
  * @property {string} [subject]
  * @property {{userId?: string, userName?: string, systemId?: string, systemName?: string}} [openedBy]
  * @property {string} [openedBy.userId]
@@ -134,6 +134,7 @@ Object.defineProperty(Ticket.prototype, "schema", {
                 "statusChanged",
                 "priorityChanged",
                 "scheduleDateChanged",
+                "locationChanged",
               ],
               default: "message",
             },
@@ -147,6 +148,7 @@ Object.defineProperty(Ticket.prototype, "schema", {
             body: { type: "string" },
             parsedBody: {
               type: "object",
+              additionalProperties: false,
               properties: {
                 text: { type: "string" },
                 mentions: {
@@ -154,6 +156,7 @@ Object.defineProperty(Ticket.prototype, "schema", {
                   default: [],
                   items: {
                     type: "object",
+                    additionalProperties: false,
                     required: [
                       "discriminator",
                       "id",
@@ -249,6 +252,7 @@ Object.defineProperty(Ticket.prototype, "schema", {
         items: {
           type: "object",
           required: ["id", "discriminator"],
+          additionalProperties: false,
           properties: {
             id: {
               type: "string",
@@ -264,6 +268,7 @@ Object.defineProperty(Ticket.prototype, "schema", {
         items: {
           type: "object",
           required: ["id", "name", "discriminator"],
+          additionalProperties: false,
           properties: {
             id: { type: "string" },
             name: { type: "string" },
@@ -274,6 +279,7 @@ Object.defineProperty(Ticket.prototype, "schema", {
       location: {
         type: "object",
         required: ["discriminator", "name"],
+        additionalProperties: false,
         properties: {
           id: { type: "string" },
           discriminator: {

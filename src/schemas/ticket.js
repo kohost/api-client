@@ -44,6 +44,7 @@ export default {
               "statusChanged",
               "priorityChanged",
               "scheduleDateChanged",
+              "locationChanged",
             ],
             default: "message",
           },
@@ -73,6 +74,7 @@ export default {
           },
           parsedBody: {
             type: "object",
+            additionalProperties: false,
             properties: {
               text: {
                 type: "string",
@@ -82,6 +84,7 @@ export default {
                 default: [],
                 items: {
                   type: "object",
+                  additionalProperties: false,
                   required: [
                     "discriminator",
                     "id",
@@ -230,6 +233,7 @@ export default {
       items: {
         type: "object",
         required: ["id", "discriminator"],
+        additionalProperties: false,
         properties: {
           id: {
             type: "string",
@@ -248,6 +252,7 @@ export default {
       items: {
         type: "object",
         required: ["id", "name", "discriminator"],
+        additionalProperties: false,
         properties: {
           id: {
             type: "string",
@@ -265,6 +270,7 @@ export default {
     location: {
       type: "object",
       required: ["discriminator", "name"],
+      additionalProperties: false,
       properties: {
         id: {
           type: "string",
