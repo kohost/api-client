@@ -4,6 +4,8 @@ export default {
   title: "Alarm",
   description: "Any smart alarm system",
   type: "object",
+  required: ["id", "type", "areas", "zones", "driver"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -96,5 +98,4 @@ export default {
       $ref: "definitions.json#/definitions/address",
     },
   },
-  required: ["id", "type", "areas", "zones", "driver"],
 };

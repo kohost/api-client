@@ -4,6 +4,8 @@ export default {
   title: "Scene",
   description: "A room represents a physical space of controllable IoT devices",
   type: "object",
+  required: ["id", "name", "type"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -142,6 +144,4 @@ export default {
       default: true,
     },
   },
-  required: ["id", "name", "type"],
-  additionalProperties: false,
 };

@@ -3,6 +3,8 @@ export default {
   $id: "windowCovering.json",
   title: "Window Covering",
   description: "Any smart window covering",
+  required: ["id", "type", "position", "driver"],
+  additionalProperties: false,
   type: "object",
   properties: {
     id: {
@@ -56,5 +58,4 @@ export default {
       type: "string",
     },
   },
-  required: ["id", "type", "position", "driver"],
 };

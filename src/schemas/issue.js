@@ -4,6 +4,8 @@ export default {
   title: "Issue",
   description: "An issue associated with ticketing and concierge.",
   type: "object",
+  required: ["id", "type", "name", "department"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -81,5 +83,4 @@ export default {
       default: [],
     },
   },
-  required: ["id", "type", "name", "department"],
 };

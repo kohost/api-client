@@ -5,7 +5,7 @@ export default {
   description:
     "A system user is a user that originated from an external 3rd party system.",
   type: "object",
-  required: ["firstName", "lastName"],
+  required: ["id", "firstName", "lastName"],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

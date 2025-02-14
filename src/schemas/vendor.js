@@ -3,7 +3,7 @@ export default {
   $id: "vendor.json",
   title: "Vendor",
   type: "object",
-  required: ["name", "email"],
+  required: ["id", "name", "email"],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

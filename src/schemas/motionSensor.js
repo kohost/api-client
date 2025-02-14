@@ -4,6 +4,8 @@ export default {
   title: "Motion Sensor",
   description: "Any smart motion sensor",
   type: "object",
+  required: ["id", "type", "driver"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -39,6 +41,4 @@ export default {
       type: "string",
     },
   },
-  additionalProperties: false,
-  required: ["id", "type", "driver"],
 };

@@ -3,13 +3,14 @@ export default {
   $id: "category.json",
   title: "Category",
   type: "object",
-  required: ["type", "discriminator"],
+  required: ["id", "type", "discriminator"],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
     },
     type: {
       type: "string",
+      enum: ["category"],
       default: "category",
     },
     name: {

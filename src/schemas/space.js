@@ -3,6 +3,8 @@ export default {
   $id: "space.json",
   title: "Space",
   type: "object",
+  required: ["id", "name", "type", "discriminator"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -121,36 +123,6 @@ export default {
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
     },
-  },
-  if: {
-    properties: { type: { const: "hotelRoom" } },
-  },
-  then: {
-    required: [
-      "name",
-      "type",
-      "features",
-      "maximumOccupancy",
-      "housekeepingStatus",
-      "serviceStatus",
-    ],
-    properties: {
-      features: {
-        default: [],
-      },
-      maximumOccupancy: {
-        default: 2,
-      },
-      housekeepingStatus: {
-        default: "dirty",
-      },
-      serviceStatus: {
-        default: "inService",
-      },
-    },
-  },
-  else: {
-    required: ["name", "type"],
   },
 };
 

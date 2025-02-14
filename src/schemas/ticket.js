@@ -4,6 +4,16 @@ export default {
   title: "Ticket",
   description: "A ticket is a request from a user.",
   type: "object",
+  required: [
+    "id",
+    "conversation",
+    "requester",
+    "status",
+    "tags",
+    "createdAt",
+    "updatedAt",
+  ],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -334,14 +344,4 @@ export default {
       $ref: "definitions.json#/definitions/date",
     },
   },
-  required: [
-    "id",
-    "conversation",
-    "requester",
-    "status",
-    "tags",
-    "createdAt",
-    "updatedAt",
-  ],
-  additionalProperties: false,
 };

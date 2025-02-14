@@ -4,6 +4,7 @@ export default {
   title: "Switch",
   description: "Any smart switch",
   type: "object",
+  required: ["id", "type", "state", "driver"],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -53,5 +54,4 @@ export default {
       type: "string",
     },
   },
-  required: ["id", "type", "state", "driver"],
 };

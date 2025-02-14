@@ -4,6 +4,8 @@ export default {
   title: "Camera",
   description: "Any smart camera",
   type: "object",
+  required: ["id", "type", "driver"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -12,7 +14,8 @@ export default {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["camera"],
       default: "camera",
     },
     offline: {
@@ -118,6 +121,4 @@ export default {
       type: "string",
     },
   },
-  additionalProperties: false,
-  required: ["id", "type", "driver"],
 };

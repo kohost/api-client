@@ -4,6 +4,8 @@ export default {
   title: "Courtesy",
   description: "Any smart courtesy system",
   type: "object",
+  required: ["id", "type", "driver", "supportedStates", "state"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -56,5 +58,4 @@ export default {
       type: "string",
     },
   },
-  required: ["id", "type", "driver", "supportedStates", "state"],
 };

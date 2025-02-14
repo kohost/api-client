@@ -6,6 +6,7 @@ export default {
   description:
     "An organization is a group or entity that subscribes to Kohost software.",
   required: ["accountNumber", "name"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

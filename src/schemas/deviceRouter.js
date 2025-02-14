@@ -6,6 +6,7 @@ export default {
     "A device router contains instructions on where to route devices based on their organization and driver.",
   type: "object",
   required: ["driver", "organizationId"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

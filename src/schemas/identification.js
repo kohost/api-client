@@ -4,6 +4,7 @@ export default {
   title: "Identification",
   type: "object",
   required: ["type"],
+  additionalProperties: false,
   oneOf: [
     {
       required: ["number"],

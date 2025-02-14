@@ -4,6 +4,7 @@ export default {
   title: "Payment",
   type: "object",
   required: ["type", "maskedNumber", "expires"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

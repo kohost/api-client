@@ -4,6 +4,20 @@ export default {
   title: "Thermostat",
   description: "Any smart thermostat",
   type: "object",
+  required: [
+    "id",
+    "type",
+    "hvacMode",
+    "fanMode",
+    "hvacState",
+    "fanState",
+    "setpoints",
+    "temperatureScale",
+    "supportedHvacModes",
+    "supportedFanModes",
+    "driver",
+  ],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -145,17 +159,4 @@ export default {
       maximum: 99,
     },
   },
-  required: [
-    "id",
-    "type",
-    "hvacMode",
-    "fanMode",
-    "hvacState",
-    "fanState",
-    "setpoints",
-    "temperatureScale",
-    "supportedHvacModes",
-    "supportedFanModes",
-    "driver",
-  ],
 };
