@@ -1145,6 +1145,24 @@
     }
   ],
   [
+    "ListTicketLocations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/locations"
+      }
+    }
+  ],
+  [
+    "DescribeTicketFilters",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/filters"
+      }
+    }
+  ],
+  [
     "DescribeTicket",
     {
       "http": {
@@ -1231,15 +1249,6 @@
       "http": {
         "method": "POST",
         "path": "/tickets/:id/leave"
-      }
-    }
-  ],
-  [
-    "ListTicketLocations",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/tickets/locations"
       }
     }
   ],

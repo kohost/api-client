@@ -32,6 +32,13 @@ export default {
     emailVerified: {
       type: "boolean",
     },
+    whatsapp: {
+      type: ["string", "null"],
+      pattern: "^\\+[0-9]{1,14}$",
+    },
+    whatsappVerified: {
+      type: "boolean",
+    },
     address: {
       $ref: "definitions.json#/definitions/address",
     },
@@ -77,11 +84,16 @@ export default {
             enum: [
               "Guest",
               "User",
+              "Agent",
               "Manager",
               "Maintenance",
               "Administrator",
               "SuperAdmin",
             ],
+          },
+          timeTrackingEnabled: {
+            type: "boolean",
+            description: "Whether time tracking is enabled for this role.",
           },
           department: {
             type: "string",

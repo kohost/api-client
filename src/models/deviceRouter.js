@@ -42,6 +42,7 @@ Object.defineProperty(DeviceRouter.prototype, "schema", {
       "A device router contains instructions on where to route devices based on their organization and driver.",
     type: "object",
     required: ["driver", "organizationId"],
+    additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", default: "deviceRouter", enum: ["deviceRouter"] },

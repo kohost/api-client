@@ -46,6 +46,7 @@ Object.defineProperty(Payment.prototype, "schema", {
     title: "Payment",
     type: "object",
     required: ["type", "maskedNumber", "expires"],
+    additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: {

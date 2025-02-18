@@ -56,6 +56,8 @@ Object.defineProperty(Issue.prototype, "schema", {
     title: "Issue",
     description: "An issue associated with ticketing and concierge.",
     type: "object",
+    required: ["id", "type", "name", "department"],
+    additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", enum: ["issue"], default: "issue" },
@@ -107,7 +109,6 @@ Object.defineProperty(Issue.prototype, "schema", {
         default: [],
       },
     },
-    required: ["id", "type", "name", "department"],
   },
 });
 

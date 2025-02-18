@@ -62,6 +62,8 @@ Object.defineProperty(Courtesy.prototype, "schema", {
     title: "Courtesy",
     description: "Any smart courtesy system",
     type: "object",
+    required: ["id", "type", "driver", "supportedStates", "state"],
+    additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string" },
@@ -85,7 +87,6 @@ Object.defineProperty(Courtesy.prototype, "schema", {
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },
     },
-    required: ["id", "type", "driver", "supportedStates", "state"],
   },
 });
 

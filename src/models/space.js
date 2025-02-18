@@ -6,10 +6,10 @@ import { validateSpace as validate } from "../validators";
 
 /**
  * @typedef {Object} SpaceData
- * @property {string} [id] - Identifier of the object.
- * @property {string} [name]
- * @property {"space"} [type] - Default: "space"
- * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit")} [discriminator]
+ * @property {string} id - Identifier of the object.
+ * @property {string} name
+ * @property {"space"} type - Default: "space"
+ * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit")} discriminator
  * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
  * @property {string} [category] - This is the category id
  * @property {string[]} [rooms]
@@ -40,11 +40,10 @@ export class Space extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
-    if (data.name !== undefined) this.name = data.name;
-    if (data.type !== undefined) this.type = data.type;
-    if (data.discriminator !== undefined)
-      this.discriminator = data.discriminator;
+    this.id = data.id;
+    this.name = data.name;
+    this.type = data.type;
+    this.discriminator = data.discriminator;
     if (data.driver !== undefined) this.driver = data.driver;
     if (data.category !== undefined) this.category = data.category;
     if (data.rooms !== undefined) this.rooms = data.rooms;
@@ -106,6 +105,8 @@ Object.defineProperty(Space.prototype, "schema", {
     $id: "space.json",
     title: "Space",
     type: "object",
+    required: ["id", "name", "type", "discriminator"],
+    additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string", minLength: 1 },
@@ -173,24 +174,6 @@ Object.defineProperty(Space.prototype, "schema", {
       },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
     },
-    if: { properties: { type: { const: "hotelRoom" } } },
-    then: {
-      required: [
-        "name",
-        "type",
-        "features",
-        "maximumOccupancy",
-        "housekeepingStatus",
-        "serviceStatus",
-      ],
-      properties: {
-        features: { default: [] },
-        maximumOccupancy: { default: 2 },
-        housekeepingStatus: { default: "dirty" },
-        serviceStatus: { default: "inService" },
-      },
-    },
-    else: { required: ["name", "type"] },
   },
 });
 

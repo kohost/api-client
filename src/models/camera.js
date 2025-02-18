@@ -8,7 +8,7 @@ import { validateCamera as validate } from "../validators";
  * @typedef {Object} CameraData Any smart camera
  * @property {string} id - Identifier of the object.
  * @property {string} [name]
- * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} type - Default: "camera"
+ * @property {"camera"} type - Default: "camera"
  * @property {boolean} [offline]
  * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
  * @property {{name?: string, timestamp?: number, description?: string}} [notification]
@@ -75,10 +75,12 @@ Object.defineProperty(Camera.prototype, "schema", {
     title: "Camera",
     description: "Any smart camera",
     type: "object",
+    required: ["id", "type", "driver"],
+    additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string" },
-      type: { $ref: "definitions.json#/definitions/type", default: "camera" },
+      type: { type: "string", enum: ["camera"], default: "camera" },
       offline: { type: "boolean" },
       supportedNotifications: {
         $ref: "definitions.json#/definitions/supportedNotifications",
@@ -141,8 +143,6 @@ Object.defineProperty(Camera.prototype, "schema", {
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },
     },
-    additionalProperties: false,
-    required: ["id", "type", "driver"],
   },
 });
 

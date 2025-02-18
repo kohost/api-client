@@ -66,6 +66,8 @@ Object.defineProperty(Alarm.prototype, "schema", {
     title: "Alarm",
     description: "Any smart alarm system",
     type: "object",
+    required: ["id", "type", "areas", "zones", "driver"],
+    additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string", description: "Name of the alarm" },
@@ -116,7 +118,6 @@ Object.defineProperty(Alarm.prototype, "schema", {
       firmwareVersion: { type: "string" },
       address: { $ref: "definitions.json#/definitions/address" },
     },
-    required: ["id", "type", "areas", "zones", "driver"],
   },
 });
 

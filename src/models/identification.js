@@ -58,6 +58,7 @@ Object.defineProperty(Identification.prototype, "schema", {
     title: "Identification",
     type: "object",
     required: ["type"],
+    additionalProperties: false,
     oneOf: [{ required: ["number"] }, { required: ["encryptedNumber"] }],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },

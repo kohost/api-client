@@ -63,6 +63,7 @@ Object.defineProperty(Switch.prototype, "schema", {
     title: "Switch",
     description: "Any smart switch",
     type: "object",
+    required: ["id", "type", "state", "driver"],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string" },
@@ -82,7 +83,6 @@ Object.defineProperty(Switch.prototype, "schema", {
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },
     },
-    required: ["id", "type", "state", "driver"],
   },
 });
 

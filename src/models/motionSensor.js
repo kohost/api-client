@@ -54,6 +54,8 @@ Object.defineProperty(MotionSensor.prototype, "schema", {
     title: "Motion Sensor",
     description: "Any smart motion sensor",
     type: "object",
+    required: ["id", "type", "driver"],
+    additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { $ref: "definitions.json#/definitions/type" },
@@ -69,8 +71,6 @@ Object.defineProperty(MotionSensor.prototype, "schema", {
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },
     },
-    additionalProperties: false,
-    required: ["id", "type", "driver"],
   },
 });
 

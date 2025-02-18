@@ -14,6 +14,8 @@ import { validateUser as validate } from "../validators";
  * @property {boolean} [phoneVerified]
  * @property {string} [email]
  * @property {boolean} [emailVerified]
+ * @property {string} [whatsapp]
+ * @property {boolean} [whatsappVerified]
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
  * @property {string} [secretKey]
  * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [photo] - Any media file
@@ -21,7 +23,7 @@ import { validateUser as validate } from "../validators";
  * @property {string} [dob]
  * @property {("male"|"female")} [gender]
  * @property {string} [nationality]
- * @property {{organizationId: string, propertyId: string, role: ("Guest"|"User"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin"), department?: string, policyIds?: string[], policies?: {id?: any, type: "policy", discriminator: "user", name: string, description?: string, organizationId: string, propertyId: string, permissions: {entities: string[], effect: ("Allow"|"Deny")}[]}[]}[]} [permissions] - Default: []
+ * @property {{organizationId: string, propertyId: string, role: ("Guest"|"User"|"Agent"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin"), timeTrackingEnabled?: boolean, department?: string, policyIds?: string[], policies?: {id?: any, type: "policy", discriminator: "user", name: string, description?: string, organizationId: string, propertyId: string, permissions: {entities: string[], effect: ("Allow"|"Deny")}[]}[]}[]} [permissions] - Default: []
  * @property {string[]} [notes]
  * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}[]} [files]
  * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, systemId?: any}[]} [identifications]
@@ -61,6 +63,9 @@ export class User extends Entity {
     if (data.email !== undefined) this.email = data.email;
     if (data.emailVerified !== undefined)
       this.emailVerified = data.emailVerified;
+    if (data.whatsapp !== undefined) this.whatsapp = data.whatsapp;
+    if (data.whatsappVerified !== undefined)
+      this.whatsappVerified = data.whatsappVerified;
     if (data.address !== undefined) this.address = data.address;
     if (data.secretKey !== undefined) this.secretKey = data.secretKey;
     if (data.photo !== undefined) this.photo = data.photo;
@@ -125,6 +130,8 @@ Object.defineProperty(User.prototype, "schema", {
       phoneVerified: { type: "boolean" },
       email: { type: ["string", "null"], format: "email" },
       emailVerified: { type: "boolean" },
+      whatsapp: { type: ["string", "null"], pattern: "^\\+[0-9]{1,14}$" },
+      whatsappVerified: { type: "boolean" },
       address: { $ref: "definitions.json#/definitions/address" },
       secretKey: { type: "string" },
       photo: { $ref: "mediaFile.json#" },
@@ -154,11 +161,16 @@ Object.defineProperty(User.prototype, "schema", {
               enum: [
                 "Guest",
                 "User",
+                "Agent",
                 "Manager",
                 "Maintenance",
                 "Administrator",
                 "SuperAdmin",
               ],
+            },
+            timeTrackingEnabled: {
+              type: "boolean",
+              description: "Whether time tracking is enabled for this role.",
             },
             department: {
               type: "string",

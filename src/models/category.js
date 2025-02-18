@@ -6,8 +6,8 @@ import { validateCategory as validate } from "../validators";
 
 /**
  * @typedef {Object} CategoryData
- * @property {string} [id] - Identifier of the object.
- * @property {string} type - Default: "category"
+ * @property {string} id - Identifier of the object.
+ * @property {"category"} type - Default: "category"
  * @property {string} [name]
  * @property {("adlink"|"aws-kinesis"|"butler"|"crestron"|"dell"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
  * @property {string} [description]
@@ -29,7 +29,7 @@ export class Category extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
+    this.id = data.id;
     this.type = data.type;
     if (data.name !== undefined) this.name = data.name;
     if (data.driver !== undefined) this.driver = data.driver;
@@ -47,10 +47,10 @@ Object.defineProperty(Category.prototype, "schema", {
     $id: "category.json",
     title: "Category",
     type: "object",
-    required: ["type", "discriminator"],
+    required: ["id", "type", "discriminator"],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
-      type: { type: "string", default: "category" },
+      type: { type: "string", enum: ["category"], default: "category" },
       name: { type: "string", minLength: 1 },
       driver: { $ref: "definitions.json#/definitions/driver" },
       description: { type: "string" },

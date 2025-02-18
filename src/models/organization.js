@@ -72,6 +72,7 @@ Object.defineProperty(Organization.prototype, "schema", {
     description:
       "An organization is a group or entity that subscribes to Kohost software.",
     required: ["accountNumber", "name"],
+    additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", default: "organization", enum: ["organization"] },

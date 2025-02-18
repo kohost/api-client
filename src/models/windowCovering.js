@@ -62,6 +62,8 @@ Object.defineProperty(WindowCovering.prototype, "schema", {
     $id: "windowCovering.json",
     title: "Window Covering",
     description: "Any smart window covering",
+    required: ["id", "type", "position", "driver"],
+    additionalProperties: false,
     type: "object",
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
@@ -89,7 +91,6 @@ Object.defineProperty(WindowCovering.prototype, "schema", {
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },
     },
-    required: ["id", "type", "position", "driver"],
   },
 });
 

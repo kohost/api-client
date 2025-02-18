@@ -51,6 +51,8 @@ Object.defineProperty(Scene.prototype, "schema", {
     description:
       "A room represents a physical space of controllable IoT devices",
     type: "object",
+    required: ["id", "name", "type"],
+    additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string" },
@@ -134,8 +136,6 @@ Object.defineProperty(Scene.prototype, "schema", {
       isDefault: { type: "boolean", default: false },
       showOnUi: { type: "boolean", default: true },
     },
-    required: ["id", "name", "type"],
-    additionalProperties: false,
   },
 });
 

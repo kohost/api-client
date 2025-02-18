@@ -6,7 +6,7 @@ import { validateVendor as validate } from "../validators";
 
 /**
  * @typedef {Object} VendorData
- * @property {string} [id] - Identifier of the object.
+ * @property {string} id - Identifier of the object.
  * @property {"vendor"} [type] - Default: "vendor"
  * @property {string} name
  * @property {string} [phone]
@@ -29,7 +29,7 @@ export class Vendor extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
+    this.id = data.id;
     if (data.type !== undefined) this.type = data.type;
     this.name = data.name;
     if (data.phone !== undefined) this.phone = data.phone;
@@ -47,7 +47,7 @@ Object.defineProperty(Vendor.prototype, "schema", {
     $id: "vendor.json",
     title: "Vendor",
     type: "object",
-    required: ["name", "email"],
+    required: ["id", "name", "email"],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", default: "vendor", enum: ["vendor"] },
