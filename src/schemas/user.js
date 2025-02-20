@@ -118,6 +118,39 @@ export default {
         additionalProperties: false,
       },
     },
+    preferences: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["organizationId", "propertyId"],
+        properties: {
+          organizationId: {
+            type: "string",
+          },
+          propertyId: {
+            type: "string",
+          },
+          notifications: {
+            type: "array",
+            items: {
+              type: "object",
+              additionalProperties: false,
+              required: ["discriminator", "enabled"],
+              properties: {
+                discriminator: {
+                  type: "string",
+                  enum: ["observerTicketCreated", "observerTicketResolved"],
+                },
+                enabled: {
+                  type: "boolean",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
     notes: {
       type: "array",
       items: {

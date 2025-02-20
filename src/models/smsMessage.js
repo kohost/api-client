@@ -7,7 +7,7 @@ import { validateSmsMessage as validate } from "../validators";
 /**
  * @typedef {Object} SmsMessageData
  * @property {string} [id] - Identifier of the object.
- * @property {"smsMessage"} [type] - Default: "smsMessage"
+ * @property {("smsMessage"|"whatsappMessage")} [type] - Default: "smsMessage"
  * @property {string} to
  * @property {string} from
  * @property {string} [media]
@@ -56,9 +56,13 @@ Object.defineProperty(SmsMessage.prototype, "schema", {
     required: ["to", "from", "status"],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
-      type: { type: "string", default: "smsMessage", enum: ["smsMessage"] },
-      to: { type: "string", pattern: "^\\+[0-9]{1,14}$" },
-      from: { type: "string", pattern: "^\\+[0-9]{1,14}$" },
+      type: {
+        type: "string",
+        default: "smsMessage",
+        enum: ["smsMessage", "whatsappMessage"],
+      },
+      to: { type: "string" },
+      from: { type: "string" },
       media: { type: "string", format: "uri" },
       status: {
         type: "string",

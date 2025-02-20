@@ -29170,9 +29170,13 @@ const schema233 = {
   required: ["to", "from", "status"],
   properties: {
     id: { $ref: "definitions.json#/definitions/id" },
-    type: { type: "string", default: "smsMessage", enum: ["smsMessage"] },
-    to: { type: "string", pattern: "^\\+[0-9]{1,14}$" },
-    from: { type: "string", pattern: "^\\+[0-9]{1,14}$" },
+    type: {
+      type: "string",
+      default: "smsMessage",
+      enum: ["smsMessage", "whatsappMessage"],
+    },
+    to: { type: "string" },
+    from: { type: "string" },
     media: { type: "string", format: "uri" },
     status: {
       type: "string",
@@ -29197,7 +29201,6 @@ const schema233 = {
     systemId: { $ref: "definitions.json#/definitions/systemId" },
   },
 };
-const pattern8 = new RegExp("^\\+[0-9]{1,14}$", "u");
 
 function validate101(
   data,
@@ -29324,7 +29327,7 @@ function validate101(
       }
       errors++;
     }
-    if (!(data1 === "smsMessage")) {
+    if (!(data1 === "smsMessage" || data1 === "whatsappMessage")) {
       const err7 = {
         instancePath: instancePath + "/type",
         schemaPath: "#/properties/type/enum",
@@ -29340,27 +29343,27 @@ function validate101(
       errors++;
     }
     if (data.to !== undefined) {
-      let data2 = data.to;
-      if (typeof data2 === "string") {
-        if (!pattern8.test(data2)) {
-          const err8 = {
-            instancePath: instancePath + "/to",
-            schemaPath: "#/properties/to/pattern",
-            keyword: "pattern",
-            params: { pattern: "^\\+[0-9]{1,14}$" },
-            message: 'must match pattern "' + "^\\+[0-9]{1,14}$" + '"',
-          };
-          if (vErrors === null) {
-            vErrors = [err8];
-          } else {
-            vErrors.push(err8);
-          }
-          errors++;
-        }
-      } else {
-        const err9 = {
+      if (typeof data.to !== "string") {
+        const err8 = {
           instancePath: instancePath + "/to",
           schemaPath: "#/properties/to/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err8];
+        } else {
+          vErrors.push(err8);
+        }
+        errors++;
+      }
+    }
+    if (data.from !== undefined) {
+      if (typeof data.from !== "string") {
+        const err9 = {
+          instancePath: instancePath + "/from",
+          schemaPath: "#/properties/from/type",
           keyword: "type",
           params: { type: "string" },
           message: "must be string",
@@ -29373,16 +29376,16 @@ function validate101(
         errors++;
       }
     }
-    if (data.from !== undefined) {
-      let data3 = data.from;
-      if (typeof data3 === "string") {
-        if (!pattern8.test(data3)) {
+    if (data.media !== undefined) {
+      let data4 = data.media;
+      if (typeof data4 === "string") {
+        if (!formats0(data4)) {
           const err10 = {
-            instancePath: instancePath + "/from",
-            schemaPath: "#/properties/from/pattern",
-            keyword: "pattern",
-            params: { pattern: "^\\+[0-9]{1,14}$" },
-            message: 'must match pattern "' + "^\\+[0-9]{1,14}$" + '"',
+            instancePath: instancePath + "/media",
+            schemaPath: "#/properties/media/format",
+            keyword: "format",
+            params: { format: "uri" },
+            message: 'must match format "' + "uri" + '"',
           };
           if (vErrors === null) {
             vErrors = [err10];
@@ -29393,8 +29396,8 @@ function validate101(
         }
       } else {
         const err11 = {
-          instancePath: instancePath + "/from",
-          schemaPath: "#/properties/from/type",
+          instancePath: instancePath + "/media",
+          schemaPath: "#/properties/media/type",
           keyword: "type",
           params: { type: "string" },
           message: "must be string",
@@ -29407,44 +29410,10 @@ function validate101(
         errors++;
       }
     }
-    if (data.media !== undefined) {
-      let data4 = data.media;
-      if (typeof data4 === "string") {
-        if (!formats0(data4)) {
-          const err12 = {
-            instancePath: instancePath + "/media",
-            schemaPath: "#/properties/media/format",
-            keyword: "format",
-            params: { format: "uri" },
-            message: 'must match format "' + "uri" + '"',
-          };
-          if (vErrors === null) {
-            vErrors = [err12];
-          } else {
-            vErrors.push(err12);
-          }
-          errors++;
-        }
-      } else {
-        const err13 = {
-          instancePath: instancePath + "/media",
-          schemaPath: "#/properties/media/type",
-          keyword: "type",
-          params: { type: "string" },
-          message: "must be string",
-        };
-        if (vErrors === null) {
-          vErrors = [err13];
-        } else {
-          vErrors.push(err13);
-        }
-        errors++;
-      }
-    }
     if (data.status !== undefined) {
       let data5 = data.status;
       if (typeof data5 !== "string") {
-        const err14 = {
+        const err12 = {
           instancePath: instancePath + "/status",
           schemaPath: "#/properties/status/type",
           keyword: "type",
@@ -29452,9 +29421,9 @@ function validate101(
           message: "must be string",
         };
         if (vErrors === null) {
-          vErrors = [err14];
+          vErrors = [err12];
         } else {
-          vErrors.push(err14);
+          vErrors.push(err12);
         }
         errors++;
       }
@@ -29472,12 +29441,46 @@ function validate101(
           data5 === "read"
         )
       ) {
-        const err15 = {
+        const err13 = {
           instancePath: instancePath + "/status",
           schemaPath: "#/properties/status/enum",
           keyword: "enum",
           params: { allowedValues: schema233.properties.status.enum },
           message: "must be equal to one of the allowed values",
+        };
+        if (vErrors === null) {
+          vErrors = [err13];
+        } else {
+          vErrors.push(err13);
+        }
+        errors++;
+      }
+    }
+    if (data.body !== undefined) {
+      if (typeof data.body !== "string") {
+        const err14 = {
+          instancePath: instancePath + "/body",
+          schemaPath: "#/properties/body/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
+        };
+        if (vErrors === null) {
+          vErrors = [err14];
+        } else {
+          vErrors.push(err14);
+        }
+        errors++;
+      }
+    }
+    if (data.driver !== undefined) {
+      if (typeof data.driver !== "string") {
+        const err15 = {
+          instancePath: instancePath + "/driver",
+          schemaPath: "#/properties/driver/type",
+          keyword: "type",
+          params: { type: "string" },
+          message: "must be string",
         };
         if (vErrors === null) {
           vErrors = [err15];
@@ -29487,44 +29490,10 @@ function validate101(
         errors++;
       }
     }
-    if (data.body !== undefined) {
-      if (typeof data.body !== "string") {
-        const err16 = {
-          instancePath: instancePath + "/body",
-          schemaPath: "#/properties/body/type",
-          keyword: "type",
-          params: { type: "string" },
-          message: "must be string",
-        };
-        if (vErrors === null) {
-          vErrors = [err16];
-        } else {
-          vErrors.push(err16);
-        }
-        errors++;
-      }
-    }
-    if (data.driver !== undefined) {
-      if (typeof data.driver !== "string") {
-        const err17 = {
-          instancePath: instancePath + "/driver",
-          schemaPath: "#/properties/driver/type",
-          keyword: "type",
-          params: { type: "string" },
-          message: "must be string",
-        };
-        if (vErrors === null) {
-          vErrors = [err17];
-        } else {
-          vErrors.push(err17);
-        }
-        errors++;
-      }
-    }
     if (data.appData !== undefined) {
       let data8 = data.appData;
       if (!(data8 && typeof data8 == "object" && !Array.isArray(data8))) {
-        const err18 = {
+        const err16 = {
           instancePath: instancePath + "/appData",
           schemaPath: "#/properties/appData/type",
           keyword: "type",
@@ -29532,9 +29501,9 @@ function validate101(
           message: "must be object",
         };
         if (vErrors === null) {
-          vErrors = [err18];
+          vErrors = [err16];
         } else {
-          vErrors.push(err18);
+          vErrors.push(err16);
         }
         errors++;
       }
@@ -29545,8 +29514,46 @@ function validate101(
         typeof data9 !== "string" &&
         !(data9 && typeof data9 == "object" && !Array.isArray(data9))
       ) {
-        const err19 = {
+        const err17 = {
           instancePath: instancePath + "/createdAt",
+          schemaPath: "definitions.json#/definitions/date/type",
+          keyword: "type",
+          params: { type: schema25.type },
+          message: "must be string,object",
+        };
+        if (vErrors === null) {
+          vErrors = [err17];
+        } else {
+          vErrors.push(err17);
+        }
+        errors++;
+      }
+      if (typeof data9 === "string") {
+        if (!formats4.validate(data9)) {
+          const err18 = {
+            instancePath: instancePath + "/createdAt",
+            schemaPath: "definitions.json#/definitions/date/format",
+            keyword: "format",
+            params: { format: "date-time" },
+            message: 'must match format "' + "date-time" + '"',
+          };
+          if (vErrors === null) {
+            vErrors = [err18];
+          } else {
+            vErrors.push(err18);
+          }
+          errors++;
+        }
+      }
+    }
+    if (data.updatedAt !== undefined) {
+      let data10 = data.updatedAt;
+      if (
+        typeof data10 !== "string" &&
+        !(data10 && typeof data10 == "object" && !Array.isArray(data10))
+      ) {
+        const err19 = {
+          instancePath: instancePath + "/updatedAt",
           schemaPath: "definitions.json#/definitions/date/type",
           keyword: "type",
           params: { type: schema25.type },
@@ -29559,10 +29566,10 @@ function validate101(
         }
         errors++;
       }
-      if (typeof data9 === "string") {
-        if (!formats4.validate(data9)) {
+      if (typeof data10 === "string") {
+        if (!formats4.validate(data10)) {
           const err20 = {
-            instancePath: instancePath + "/createdAt",
+            instancePath: instancePath + "/updatedAt",
             schemaPath: "definitions.json#/definitions/date/format",
             keyword: "format",
             params: { format: "date-time" },
@@ -29577,18 +29584,14 @@ function validate101(
         }
       }
     }
-    if (data.updatedAt !== undefined) {
-      let data10 = data.updatedAt;
-      if (
-        typeof data10 !== "string" &&
-        !(data10 && typeof data10 == "object" && !Array.isArray(data10))
-      ) {
+    if (data.systemId !== undefined) {
+      if (typeof data.systemId !== "string") {
         const err21 = {
-          instancePath: instancePath + "/updatedAt",
-          schemaPath: "definitions.json#/definitions/date/type",
+          instancePath: instancePath + "/systemId",
+          schemaPath: "definitions.json#/definitions/systemId/type",
           keyword: "type",
-          params: { type: schema25.type },
-          message: "must be string,object",
+          params: { type: "string" },
+          message: "must be string",
         };
         if (vErrors === null) {
           vErrors = [err21];
@@ -29597,43 +29600,9 @@ function validate101(
         }
         errors++;
       }
-      if (typeof data10 === "string") {
-        if (!formats4.validate(data10)) {
-          const err22 = {
-            instancePath: instancePath + "/updatedAt",
-            schemaPath: "definitions.json#/definitions/date/format",
-            keyword: "format",
-            params: { format: "date-time" },
-            message: 'must match format "' + "date-time" + '"',
-          };
-          if (vErrors === null) {
-            vErrors = [err22];
-          } else {
-            vErrors.push(err22);
-          }
-          errors++;
-        }
-      }
-    }
-    if (data.systemId !== undefined) {
-      if (typeof data.systemId !== "string") {
-        const err23 = {
-          instancePath: instancePath + "/systemId",
-          schemaPath: "definitions.json#/definitions/systemId/type",
-          keyword: "type",
-          params: { type: "string" },
-          message: "must be string",
-        };
-        if (vErrors === null) {
-          vErrors = [err23];
-        } else {
-          vErrors.push(err23);
-        }
-        errors++;
-      }
     }
   } else {
-    const err24 = {
+    const err22 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -29641,9 +29610,9 @@ function validate101(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err24];
+      vErrors = [err22];
     } else {
-      vErrors.push(err24);
+      vErrors.push(err22);
     }
     errors++;
   }
@@ -29727,7 +29696,7 @@ const schema238 = {
     systemId: { $ref: "definitions.json#/definitions/systemId" },
   },
 };
-const pattern10 = new RegExp(".*", "u");
+const pattern8 = new RegExp(".*", "u");
 
 function validate103(
   data,
@@ -30433,7 +30402,7 @@ function validate102(
             let data17 = data16.thermostats;
             if (data17 && typeof data17 == "object" && !Array.isArray(data17)) {
               for (const key3 in data17) {
-                if (pattern10.test(key3)) {
+                if (pattern8.test(key3)) {
                   let data18 = data17[key3];
                   if (
                     data18 &&
@@ -30770,6 +30739,7 @@ const schema243 = {
     systemId: { $ref: "definitions.json#/definitions/systemId" },
   },
 };
+const pattern9 = new RegExp("^\\+[0-9]{1,14}$", "u");
 const formats88 =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
 
@@ -31236,7 +31206,7 @@ function validate108(
         errors++;
       }
       if (typeof data5 === "string") {
-        if (!pattern8.test(data5)) {
+        if (!pattern9.test(data5)) {
           const err13 = {
             instancePath: instancePath + "/phone",
             schemaPath: "#/properties/phone/pattern",
@@ -35674,6 +35644,33 @@ const schema256 = {
         additionalProperties: false,
       },
     },
+    preferences: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["organizationId", "propertyId"],
+        properties: {
+          organizationId: { type: "string" },
+          propertyId: { type: "string" },
+          notifications: {
+            type: "array",
+            items: {
+              type: "object",
+              additionalProperties: false,
+              required: ["discriminator", "enabled"],
+              properties: {
+                discriminator: {
+                  type: "string",
+                  enum: ["observerTicketCreated", "observerTicketResolved"],
+                },
+                enabled: { type: "boolean" },
+              },
+            },
+          },
+        },
+      },
+    },
     notes: { type: "array", items: { type: "string" } },
     files: { type: "array", items: { $ref: "mediaFile.json#" } },
     identifications: { type: "array", items: { $ref: "identification.json#" } },
@@ -36079,7 +36076,7 @@ function validate115(
         errors++;
       }
       if (typeof data4 === "string") {
-        if (!pattern8.test(data4)) {
+        if (!pattern9.test(data4)) {
           const err10 = {
             instancePath: instancePath + "/phone",
             schemaPath: "#/properties/phone/pattern",
@@ -36183,7 +36180,7 @@ function validate115(
         errors++;
       }
       if (typeof data8 === "string") {
-        if (!pattern8.test(data8)) {
+        if (!pattern9.test(data8)) {
           const err16 = {
             instancePath: instancePath + "/whatsapp",
             schemaPath: "#/properties/whatsapp/pattern",
@@ -36876,309 +36873,314 @@ function validate115(
       }
       errors++;
     }
-    if (data.notes !== undefined) {
-      let data36 = data.notes;
+    if (data.preferences !== undefined) {
+      let data36 = data.preferences;
       if (Array.isArray(data36)) {
         const len3 = data36.length;
         for (let i3 = 0; i3 < len3; i3++) {
-          if (typeof data36[i3] !== "string") {
-            const err52 = {
-              instancePath: instancePath + "/notes/" + i3,
-              schemaPath: "#/properties/notes/items/type",
-              keyword: "type",
-              params: { type: "string" },
-              message: "must be string",
-            };
-            if (vErrors === null) {
-              vErrors = [err52];
-            } else {
-              vErrors.push(err52);
+          let data37 = data36[i3];
+          if (data37 && typeof data37 == "object" && !Array.isArray(data37)) {
+            if (data37.organizationId === undefined) {
+              const err52 = {
+                instancePath: instancePath + "/preferences/" + i3,
+                schemaPath: "#/properties/preferences/items/required",
+                keyword: "required",
+                params: { missingProperty: "organizationId" },
+                message:
+                  "must have required property '" + "organizationId" + "'",
+              };
+              if (vErrors === null) {
+                vErrors = [err52];
+              } else {
+                vErrors.push(err52);
+              }
+              errors++;
             }
-            errors++;
-          }
-        }
-      } else {
-        const err53 = {
-          instancePath: instancePath + "/notes",
-          schemaPath: "#/properties/notes/type",
-          keyword: "type",
-          params: { type: "array" },
-          message: "must be array",
-        };
-        if (vErrors === null) {
-          vErrors = [err53];
-        } else {
-          vErrors.push(err53);
-        }
-        errors++;
-      }
-    }
-    if (data.files !== undefined) {
-      let data38 = data.files;
-      if (Array.isArray(data38)) {
-        const len4 = data38.length;
-        for (let i4 = 0; i4 < len4; i4++) {
-          if (
-            !validate15(data38[i4], {
-              instancePath: instancePath + "/files/" + i4,
-              parentData: data38,
-              parentDataProperty: i4,
-              rootData,
-            })
-          ) {
-            vErrors =
-              vErrors === null
-                ? validate15.errors
-                : vErrors.concat(validate15.errors);
-            errors = vErrors.length;
-          }
-        }
-      } else {
-        const err54 = {
-          instancePath: instancePath + "/files",
-          schemaPath: "#/properties/files/type",
-          keyword: "type",
-          params: { type: "array" },
-          message: "must be array",
-        };
-        if (vErrors === null) {
-          vErrors = [err54];
-        } else {
-          vErrors.push(err54);
-        }
-        errors++;
-      }
-    }
-    if (data.identifications !== undefined) {
-      let data40 = data.identifications;
-      if (Array.isArray(data40)) {
-        const len5 = data40.length;
-        for (let i5 = 0; i5 < len5; i5++) {
-          if (
-            !validate37(data40[i5], {
-              instancePath: instancePath + "/identifications/" + i5,
-              parentData: data40,
-              parentDataProperty: i5,
-              rootData,
-            })
-          ) {
-            vErrors =
-              vErrors === null
-                ? validate37.errors
-                : vErrors.concat(validate37.errors);
-            errors = vErrors.length;
-          }
-        }
-      } else {
-        const err55 = {
-          instancePath: instancePath + "/identifications",
-          schemaPath: "#/properties/identifications/type",
-          keyword: "type",
-          params: { type: "array" },
-          message: "must be array",
-        };
-        if (vErrors === null) {
-          vErrors = [err55];
-        } else {
-          vErrors.push(err55);
-        }
-        errors++;
-      }
-    }
-    if (data.payments !== undefined) {
-      let data42 = data.payments;
-      if (Array.isArray(data42)) {
-        const len6 = data42.length;
-        for (let i6 = 0; i6 < len6; i6++) {
-          if (
-            !validate57(data42[i6], {
-              instancePath: instancePath + "/payments/" + i6,
-              parentData: data42,
-              parentDataProperty: i6,
-              rootData,
-            })
-          ) {
-            vErrors =
-              vErrors === null
-                ? validate57.errors
-                : vErrors.concat(validate57.errors);
-            errors = vErrors.length;
-          }
-        }
-      } else {
-        const err56 = {
-          instancePath: instancePath + "/payments",
-          schemaPath: "#/properties/payments/type",
-          keyword: "type",
-          params: { type: "array" },
-          message: "must be array",
-        };
-        if (vErrors === null) {
-          vErrors = [err56];
-        } else {
-          vErrors.push(err56);
-        }
-        errors++;
-      }
-    }
-    if (data.location !== undefined) {
-      let data44 = data.location;
-      if (data44 && typeof data44 == "object" && !Array.isArray(data44)) {
-        if (data44.accuracy === undefined) {
-          const err57 = {
-            instancePath: instancePath + "/location",
-            schemaPath: "#/properties/location/required",
-            keyword: "required",
-            params: { missingProperty: "accuracy" },
-            message: "must have required property '" + "accuracy" + "'",
-          };
-          if (vErrors === null) {
-            vErrors = [err57];
+            if (data37.propertyId === undefined) {
+              const err53 = {
+                instancePath: instancePath + "/preferences/" + i3,
+                schemaPath: "#/properties/preferences/items/required",
+                keyword: "required",
+                params: { missingProperty: "propertyId" },
+                message: "must have required property '" + "propertyId" + "'",
+              };
+              if (vErrors === null) {
+                vErrors = [err53];
+              } else {
+                vErrors.push(err53);
+              }
+              errors++;
+            }
+            for (const key1 in data37) {
+              if (
+                !(
+                  key1 === "organizationId" ||
+                  key1 === "propertyId" ||
+                  key1 === "notifications"
+                )
+              ) {
+                const err54 = {
+                  instancePath: instancePath + "/preferences/" + i3,
+                  schemaPath:
+                    "#/properties/preferences/items/additionalProperties",
+                  keyword: "additionalProperties",
+                  params: { additionalProperty: key1 },
+                  message: "must NOT have additional properties",
+                };
+                if (vErrors === null) {
+                  vErrors = [err54];
+                } else {
+                  vErrors.push(err54);
+                }
+                errors++;
+              }
+            }
+            if (data37.organizationId !== undefined) {
+              if (typeof data37.organizationId !== "string") {
+                const err55 = {
+                  instancePath:
+                    instancePath + "/preferences/" + i3 + "/organizationId",
+                  schemaPath:
+                    "#/properties/preferences/items/properties/organizationId/type",
+                  keyword: "type",
+                  params: { type: "string" },
+                  message: "must be string",
+                };
+                if (vErrors === null) {
+                  vErrors = [err55];
+                } else {
+                  vErrors.push(err55);
+                }
+                errors++;
+              }
+            }
+            if (data37.propertyId !== undefined) {
+              if (typeof data37.propertyId !== "string") {
+                const err56 = {
+                  instancePath:
+                    instancePath + "/preferences/" + i3 + "/propertyId",
+                  schemaPath:
+                    "#/properties/preferences/items/properties/propertyId/type",
+                  keyword: "type",
+                  params: { type: "string" },
+                  message: "must be string",
+                };
+                if (vErrors === null) {
+                  vErrors = [err56];
+                } else {
+                  vErrors.push(err56);
+                }
+                errors++;
+              }
+            }
+            if (data37.notifications !== undefined) {
+              let data40 = data37.notifications;
+              if (Array.isArray(data40)) {
+                const len4 = data40.length;
+                for (let i4 = 0; i4 < len4; i4++) {
+                  let data41 = data40[i4];
+                  if (
+                    data41 &&
+                    typeof data41 == "object" &&
+                    !Array.isArray(data41)
+                  ) {
+                    if (data41.discriminator === undefined) {
+                      const err57 = {
+                        instancePath:
+                          instancePath +
+                          "/preferences/" +
+                          i3 +
+                          "/notifications/" +
+                          i4,
+                        schemaPath:
+                          "#/properties/preferences/items/properties/notifications/items/required",
+                        keyword: "required",
+                        params: { missingProperty: "discriminator" },
+                        message:
+                          "must have required property '" +
+                          "discriminator" +
+                          "'",
+                      };
+                      if (vErrors === null) {
+                        vErrors = [err57];
+                      } else {
+                        vErrors.push(err57);
+                      }
+                      errors++;
+                    }
+                    if (data41.enabled === undefined) {
+                      const err58 = {
+                        instancePath:
+                          instancePath +
+                          "/preferences/" +
+                          i3 +
+                          "/notifications/" +
+                          i4,
+                        schemaPath:
+                          "#/properties/preferences/items/properties/notifications/items/required",
+                        keyword: "required",
+                        params: { missingProperty: "enabled" },
+                        message:
+                          "must have required property '" + "enabled" + "'",
+                      };
+                      if (vErrors === null) {
+                        vErrors = [err58];
+                      } else {
+                        vErrors.push(err58);
+                      }
+                      errors++;
+                    }
+                    for (const key2 in data41) {
+                      if (!(key2 === "discriminator" || key2 === "enabled")) {
+                        const err59 = {
+                          instancePath:
+                            instancePath +
+                            "/preferences/" +
+                            i3 +
+                            "/notifications/" +
+                            i4,
+                          schemaPath:
+                            "#/properties/preferences/items/properties/notifications/items/additionalProperties",
+                          keyword: "additionalProperties",
+                          params: { additionalProperty: key2 },
+                          message: "must NOT have additional properties",
+                        };
+                        if (vErrors === null) {
+                          vErrors = [err59];
+                        } else {
+                          vErrors.push(err59);
+                        }
+                        errors++;
+                      }
+                    }
+                    if (data41.discriminator !== undefined) {
+                      let data42 = data41.discriminator;
+                      if (typeof data42 !== "string") {
+                        const err60 = {
+                          instancePath:
+                            instancePath +
+                            "/preferences/" +
+                            i3 +
+                            "/notifications/" +
+                            i4 +
+                            "/discriminator",
+                          schemaPath:
+                            "#/properties/preferences/items/properties/notifications/items/properties/discriminator/type",
+                          keyword: "type",
+                          params: { type: "string" },
+                          message: "must be string",
+                        };
+                        if (vErrors === null) {
+                          vErrors = [err60];
+                        } else {
+                          vErrors.push(err60);
+                        }
+                        errors++;
+                      }
+                      if (
+                        !(
+                          data42 === "observerTicketCreated" ||
+                          data42 === "observerTicketResolved"
+                        )
+                      ) {
+                        const err61 = {
+                          instancePath:
+                            instancePath +
+                            "/preferences/" +
+                            i3 +
+                            "/notifications/" +
+                            i4 +
+                            "/discriminator",
+                          schemaPath:
+                            "#/properties/preferences/items/properties/notifications/items/properties/discriminator/enum",
+                          keyword: "enum",
+                          params: {
+                            allowedValues:
+                              schema256.properties.preferences.items.properties
+                                .notifications.items.properties.discriminator
+                                .enum,
+                          },
+                          message: "must be equal to one of the allowed values",
+                        };
+                        if (vErrors === null) {
+                          vErrors = [err61];
+                        } else {
+                          vErrors.push(err61);
+                        }
+                        errors++;
+                      }
+                    }
+                    if (data41.enabled !== undefined) {
+                      if (typeof data41.enabled !== "boolean") {
+                        const err62 = {
+                          instancePath:
+                            instancePath +
+                            "/preferences/" +
+                            i3 +
+                            "/notifications/" +
+                            i4 +
+                            "/enabled",
+                          schemaPath:
+                            "#/properties/preferences/items/properties/notifications/items/properties/enabled/type",
+                          keyword: "type",
+                          params: { type: "boolean" },
+                          message: "must be boolean",
+                        };
+                        if (vErrors === null) {
+                          vErrors = [err62];
+                        } else {
+                          vErrors.push(err62);
+                        }
+                        errors++;
+                      }
+                    }
+                  } else {
+                    const err63 = {
+                      instancePath:
+                        instancePath +
+                        "/preferences/" +
+                        i3 +
+                        "/notifications/" +
+                        i4,
+                      schemaPath:
+                        "#/properties/preferences/items/properties/notifications/items/type",
+                      keyword: "type",
+                      params: { type: "object" },
+                      message: "must be object",
+                    };
+                    if (vErrors === null) {
+                      vErrors = [err63];
+                    } else {
+                      vErrors.push(err63);
+                    }
+                    errors++;
+                  }
+                }
+              } else {
+                const err64 = {
+                  instancePath:
+                    instancePath + "/preferences/" + i3 + "/notifications",
+                  schemaPath:
+                    "#/properties/preferences/items/properties/notifications/type",
+                  keyword: "type",
+                  params: { type: "array" },
+                  message: "must be array",
+                };
+                if (vErrors === null) {
+                  vErrors = [err64];
+                } else {
+                  vErrors.push(err64);
+                }
+                errors++;
+              }
+            }
           } else {
-            vErrors.push(err57);
-          }
-          errors++;
-        }
-        if (data44.latitude === undefined) {
-          const err58 = {
-            instancePath: instancePath + "/location",
-            schemaPath: "#/properties/location/required",
-            keyword: "required",
-            params: { missingProperty: "latitude" },
-            message: "must have required property '" + "latitude" + "'",
-          };
-          if (vErrors === null) {
-            vErrors = [err58];
-          } else {
-            vErrors.push(err58);
-          }
-          errors++;
-        }
-        if (data44.longitude === undefined) {
-          const err59 = {
-            instancePath: instancePath + "/location",
-            schemaPath: "#/properties/location/required",
-            keyword: "required",
-            params: { missingProperty: "longitude" },
-            message: "must have required property '" + "longitude" + "'",
-          };
-          if (vErrors === null) {
-            vErrors = [err59];
-          } else {
-            vErrors.push(err59);
-          }
-          errors++;
-        }
-        if (data44.timestamp === undefined) {
-          const err60 = {
-            instancePath: instancePath + "/location",
-            schemaPath: "#/properties/location/required",
-            keyword: "required",
-            params: { missingProperty: "timestamp" },
-            message: "must have required property '" + "timestamp" + "'",
-          };
-          if (vErrors === null) {
-            vErrors = [err60];
-          } else {
-            vErrors.push(err60);
-          }
-          errors++;
-        }
-        for (const key1 in data44) {
-          if (
-            !(
-              key1 === "accuracy" ||
-              key1 === "latitude" ||
-              key1 === "longitude" ||
-              key1 === "timestamp"
-            )
-          ) {
-            const err61 = {
-              instancePath: instancePath + "/location",
-              schemaPath: "#/properties/location/additionalProperties",
-              keyword: "additionalProperties",
-              params: { additionalProperty: key1 },
-              message: "must NOT have additional properties",
-            };
-            if (vErrors === null) {
-              vErrors = [err61];
-            } else {
-              vErrors.push(err61);
-            }
-            errors++;
-          }
-        }
-        if (data44.accuracy !== undefined) {
-          let data45 = data44.accuracy;
-          if (!(typeof data45 == "number") && data45 !== null) {
-            const err62 = {
-              instancePath: instancePath + "/location/accuracy",
-              schemaPath: "#/properties/location/properties/accuracy/type",
-              keyword: "type",
-              params: {
-                type: schema256.properties.location.properties.accuracy.type,
-              },
-              message: "must be number,null",
-            };
-            if (vErrors === null) {
-              vErrors = [err62];
-            } else {
-              vErrors.push(err62);
-            }
-            errors++;
-          }
-        }
-        if (data44.latitude !== undefined) {
-          let data46 = data44.latitude;
-          if (!(typeof data46 == "number") && data46 !== null) {
-            const err63 = {
-              instancePath: instancePath + "/location/latitude",
-              schemaPath: "#/properties/location/properties/latitude/type",
-              keyword: "type",
-              params: {
-                type: schema256.properties.location.properties.latitude.type,
-              },
-              message: "must be number,null",
-            };
-            if (vErrors === null) {
-              vErrors = [err63];
-            } else {
-              vErrors.push(err63);
-            }
-            errors++;
-          }
-        }
-        if (data44.longitude !== undefined) {
-          let data47 = data44.longitude;
-          if (!(typeof data47 == "number") && data47 !== null) {
-            const err64 = {
-              instancePath: instancePath + "/location/longitude",
-              schemaPath: "#/properties/location/properties/longitude/type",
-              keyword: "type",
-              params: {
-                type: schema256.properties.location.properties.longitude.type,
-              },
-              message: "must be number,null",
-            };
-            if (vErrors === null) {
-              vErrors = [err64];
-            } else {
-              vErrors.push(err64);
-            }
-            errors++;
-          }
-        }
-        if (data44.timestamp !== undefined) {
-          let data48 = data44.timestamp;
-          if (!(typeof data48 == "number") && data48 !== null) {
             const err65 = {
-              instancePath: instancePath + "/location/timestamp",
-              schemaPath: "#/properties/location/properties/timestamp/type",
+              instancePath: instancePath + "/preferences/" + i3,
+              schemaPath: "#/properties/preferences/items/type",
               keyword: "type",
-              params: {
-                type: schema256.properties.location.properties.timestamp.type,
-              },
-              message: "must be number,null",
+              params: { type: "object" },
+              message: "must be object",
             };
             if (vErrors === null) {
               vErrors = [err65];
@@ -37190,11 +37192,11 @@ function validate115(
         }
       } else {
         const err66 = {
-          instancePath: instancePath + "/location",
-          schemaPath: "#/properties/location/type",
+          instancePath: instancePath + "/preferences",
+          schemaPath: "#/properties/preferences/type",
           keyword: "type",
-          params: { type: "object" },
-          message: "must be object",
+          params: { type: "array" },
+          message: "must be array",
         };
         if (vErrors === null) {
           vErrors = [err66];
@@ -37204,16 +37206,344 @@ function validate115(
         errors++;
       }
     }
-    if (data.reservations !== undefined) {
-      let data49 = data.reservations;
-      if (Array.isArray(data49)) {
-        const len7 = data49.length;
+    if (data.notes !== undefined) {
+      let data44 = data.notes;
+      if (Array.isArray(data44)) {
+        const len5 = data44.length;
+        for (let i5 = 0; i5 < len5; i5++) {
+          if (typeof data44[i5] !== "string") {
+            const err67 = {
+              instancePath: instancePath + "/notes/" + i5,
+              schemaPath: "#/properties/notes/items/type",
+              keyword: "type",
+              params: { type: "string" },
+              message: "must be string",
+            };
+            if (vErrors === null) {
+              vErrors = [err67];
+            } else {
+              vErrors.push(err67);
+            }
+            errors++;
+          }
+        }
+      } else {
+        const err68 = {
+          instancePath: instancePath + "/notes",
+          schemaPath: "#/properties/notes/type",
+          keyword: "type",
+          params: { type: "array" },
+          message: "must be array",
+        };
+        if (vErrors === null) {
+          vErrors = [err68];
+        } else {
+          vErrors.push(err68);
+        }
+        errors++;
+      }
+    }
+    if (data.files !== undefined) {
+      let data46 = data.files;
+      if (Array.isArray(data46)) {
+        const len6 = data46.length;
+        for (let i6 = 0; i6 < len6; i6++) {
+          if (
+            !validate15(data46[i6], {
+              instancePath: instancePath + "/files/" + i6,
+              parentData: data46,
+              parentDataProperty: i6,
+              rootData,
+            })
+          ) {
+            vErrors =
+              vErrors === null
+                ? validate15.errors
+                : vErrors.concat(validate15.errors);
+            errors = vErrors.length;
+          }
+        }
+      } else {
+        const err69 = {
+          instancePath: instancePath + "/files",
+          schemaPath: "#/properties/files/type",
+          keyword: "type",
+          params: { type: "array" },
+          message: "must be array",
+        };
+        if (vErrors === null) {
+          vErrors = [err69];
+        } else {
+          vErrors.push(err69);
+        }
+        errors++;
+      }
+    }
+    if (data.identifications !== undefined) {
+      let data48 = data.identifications;
+      if (Array.isArray(data48)) {
+        const len7 = data48.length;
         for (let i7 = 0; i7 < len7; i7++) {
           if (
-            !validate63(data49[i7], {
-              instancePath: instancePath + "/reservations/" + i7,
-              parentData: data49,
+            !validate37(data48[i7], {
+              instancePath: instancePath + "/identifications/" + i7,
+              parentData: data48,
               parentDataProperty: i7,
+              rootData,
+            })
+          ) {
+            vErrors =
+              vErrors === null
+                ? validate37.errors
+                : vErrors.concat(validate37.errors);
+            errors = vErrors.length;
+          }
+        }
+      } else {
+        const err70 = {
+          instancePath: instancePath + "/identifications",
+          schemaPath: "#/properties/identifications/type",
+          keyword: "type",
+          params: { type: "array" },
+          message: "must be array",
+        };
+        if (vErrors === null) {
+          vErrors = [err70];
+        } else {
+          vErrors.push(err70);
+        }
+        errors++;
+      }
+    }
+    if (data.payments !== undefined) {
+      let data50 = data.payments;
+      if (Array.isArray(data50)) {
+        const len8 = data50.length;
+        for (let i8 = 0; i8 < len8; i8++) {
+          if (
+            !validate57(data50[i8], {
+              instancePath: instancePath + "/payments/" + i8,
+              parentData: data50,
+              parentDataProperty: i8,
+              rootData,
+            })
+          ) {
+            vErrors =
+              vErrors === null
+                ? validate57.errors
+                : vErrors.concat(validate57.errors);
+            errors = vErrors.length;
+          }
+        }
+      } else {
+        const err71 = {
+          instancePath: instancePath + "/payments",
+          schemaPath: "#/properties/payments/type",
+          keyword: "type",
+          params: { type: "array" },
+          message: "must be array",
+        };
+        if (vErrors === null) {
+          vErrors = [err71];
+        } else {
+          vErrors.push(err71);
+        }
+        errors++;
+      }
+    }
+    if (data.location !== undefined) {
+      let data52 = data.location;
+      if (data52 && typeof data52 == "object" && !Array.isArray(data52)) {
+        if (data52.accuracy === undefined) {
+          const err72 = {
+            instancePath: instancePath + "/location",
+            schemaPath: "#/properties/location/required",
+            keyword: "required",
+            params: { missingProperty: "accuracy" },
+            message: "must have required property '" + "accuracy" + "'",
+          };
+          if (vErrors === null) {
+            vErrors = [err72];
+          } else {
+            vErrors.push(err72);
+          }
+          errors++;
+        }
+        if (data52.latitude === undefined) {
+          const err73 = {
+            instancePath: instancePath + "/location",
+            schemaPath: "#/properties/location/required",
+            keyword: "required",
+            params: { missingProperty: "latitude" },
+            message: "must have required property '" + "latitude" + "'",
+          };
+          if (vErrors === null) {
+            vErrors = [err73];
+          } else {
+            vErrors.push(err73);
+          }
+          errors++;
+        }
+        if (data52.longitude === undefined) {
+          const err74 = {
+            instancePath: instancePath + "/location",
+            schemaPath: "#/properties/location/required",
+            keyword: "required",
+            params: { missingProperty: "longitude" },
+            message: "must have required property '" + "longitude" + "'",
+          };
+          if (vErrors === null) {
+            vErrors = [err74];
+          } else {
+            vErrors.push(err74);
+          }
+          errors++;
+        }
+        if (data52.timestamp === undefined) {
+          const err75 = {
+            instancePath: instancePath + "/location",
+            schemaPath: "#/properties/location/required",
+            keyword: "required",
+            params: { missingProperty: "timestamp" },
+            message: "must have required property '" + "timestamp" + "'",
+          };
+          if (vErrors === null) {
+            vErrors = [err75];
+          } else {
+            vErrors.push(err75);
+          }
+          errors++;
+        }
+        for (const key3 in data52) {
+          if (
+            !(
+              key3 === "accuracy" ||
+              key3 === "latitude" ||
+              key3 === "longitude" ||
+              key3 === "timestamp"
+            )
+          ) {
+            const err76 = {
+              instancePath: instancePath + "/location",
+              schemaPath: "#/properties/location/additionalProperties",
+              keyword: "additionalProperties",
+              params: { additionalProperty: key3 },
+              message: "must NOT have additional properties",
+            };
+            if (vErrors === null) {
+              vErrors = [err76];
+            } else {
+              vErrors.push(err76);
+            }
+            errors++;
+          }
+        }
+        if (data52.accuracy !== undefined) {
+          let data53 = data52.accuracy;
+          if (!(typeof data53 == "number") && data53 !== null) {
+            const err77 = {
+              instancePath: instancePath + "/location/accuracy",
+              schemaPath: "#/properties/location/properties/accuracy/type",
+              keyword: "type",
+              params: {
+                type: schema256.properties.location.properties.accuracy.type,
+              },
+              message: "must be number,null",
+            };
+            if (vErrors === null) {
+              vErrors = [err77];
+            } else {
+              vErrors.push(err77);
+            }
+            errors++;
+          }
+        }
+        if (data52.latitude !== undefined) {
+          let data54 = data52.latitude;
+          if (!(typeof data54 == "number") && data54 !== null) {
+            const err78 = {
+              instancePath: instancePath + "/location/latitude",
+              schemaPath: "#/properties/location/properties/latitude/type",
+              keyword: "type",
+              params: {
+                type: schema256.properties.location.properties.latitude.type,
+              },
+              message: "must be number,null",
+            };
+            if (vErrors === null) {
+              vErrors = [err78];
+            } else {
+              vErrors.push(err78);
+            }
+            errors++;
+          }
+        }
+        if (data52.longitude !== undefined) {
+          let data55 = data52.longitude;
+          if (!(typeof data55 == "number") && data55 !== null) {
+            const err79 = {
+              instancePath: instancePath + "/location/longitude",
+              schemaPath: "#/properties/location/properties/longitude/type",
+              keyword: "type",
+              params: {
+                type: schema256.properties.location.properties.longitude.type,
+              },
+              message: "must be number,null",
+            };
+            if (vErrors === null) {
+              vErrors = [err79];
+            } else {
+              vErrors.push(err79);
+            }
+            errors++;
+          }
+        }
+        if (data52.timestamp !== undefined) {
+          let data56 = data52.timestamp;
+          if (!(typeof data56 == "number") && data56 !== null) {
+            const err80 = {
+              instancePath: instancePath + "/location/timestamp",
+              schemaPath: "#/properties/location/properties/timestamp/type",
+              keyword: "type",
+              params: {
+                type: schema256.properties.location.properties.timestamp.type,
+              },
+              message: "must be number,null",
+            };
+            if (vErrors === null) {
+              vErrors = [err80];
+            } else {
+              vErrors.push(err80);
+            }
+            errors++;
+          }
+        }
+      } else {
+        const err81 = {
+          instancePath: instancePath + "/location",
+          schemaPath: "#/properties/location/type",
+          keyword: "type",
+          params: { type: "object" },
+          message: "must be object",
+        };
+        if (vErrors === null) {
+          vErrors = [err81];
+        } else {
+          vErrors.push(err81);
+        }
+        errors++;
+      }
+    }
+    if (data.reservations !== undefined) {
+      let data57 = data.reservations;
+      if (Array.isArray(data57)) {
+        const len9 = data57.length;
+        for (let i9 = 0; i9 < len9; i9++) {
+          if (
+            !validate63(data57[i9], {
+              instancePath: instancePath + "/reservations/" + i9,
+              parentData: data57,
+              parentDataProperty: i9,
               rootData,
             })
           ) {
@@ -37225,7 +37555,7 @@ function validate115(
           }
         }
       } else {
-        const err67 = {
+        const err82 = {
           instancePath: instancePath + "/reservations",
           schemaPath: "#/properties/reservations/type",
           keyword: "type",
@@ -37233,16 +37563,16 @@ function validate115(
           message: "must be array",
         };
         if (vErrors === null) {
-          vErrors = [err67];
+          vErrors = [err82];
         } else {
-          vErrors.push(err67);
+          vErrors.push(err82);
         }
         errors++;
       }
     }
     if (data.spaceName !== undefined) {
       if (typeof data.spaceName !== "string") {
-        const err68 = {
+        const err83 = {
           instancePath: instancePath + "/spaceName",
           schemaPath: "#/properties/spaceName/type",
           keyword: "type",
@@ -37250,9 +37580,9 @@ function validate115(
           message: "must be string",
         };
         if (vErrors === null) {
-          vErrors = [err68];
+          vErrors = [err83];
         } else {
-          vErrors.push(err68);
+          vErrors.push(err83);
         }
         errors++;
       }
@@ -37274,12 +37604,12 @@ function validate115(
       }
     }
     if (data.createdAt !== undefined) {
-      let data53 = data.createdAt;
+      let data61 = data.createdAt;
       if (
-        typeof data53 !== "string" &&
-        !(data53 && typeof data53 == "object" && !Array.isArray(data53))
+        typeof data61 !== "string" &&
+        !(data61 && typeof data61 == "object" && !Array.isArray(data61))
       ) {
-        const err69 = {
+        const err84 = {
           instancePath: instancePath + "/createdAt",
           schemaPath: "definitions.json#/definitions/createdAt/type",
           keyword: "type",
@@ -37287,15 +37617,15 @@ function validate115(
           message: "must be string,object",
         };
         if (vErrors === null) {
-          vErrors = [err69];
+          vErrors = [err84];
         } else {
-          vErrors.push(err69);
+          vErrors.push(err84);
         }
         errors++;
       }
-      if (typeof data53 === "string") {
-        if (!formats4.validate(data53)) {
-          const err70 = {
+      if (typeof data61 === "string") {
+        if (!formats4.validate(data61)) {
+          const err85 = {
             instancePath: instancePath + "/createdAt",
             schemaPath: "definitions.json#/definitions/createdAt/format",
             keyword: "format",
@@ -37303,21 +37633,21 @@ function validate115(
             message: 'must match format "' + "date-time" + '"',
           };
           if (vErrors === null) {
-            vErrors = [err70];
+            vErrors = [err85];
           } else {
-            vErrors.push(err70);
+            vErrors.push(err85);
           }
           errors++;
         }
       }
     }
     if (data.updatedAt !== undefined) {
-      let data54 = data.updatedAt;
+      let data62 = data.updatedAt;
       if (
-        typeof data54 !== "string" &&
-        !(data54 && typeof data54 == "object" && !Array.isArray(data54))
+        typeof data62 !== "string" &&
+        !(data62 && typeof data62 == "object" && !Array.isArray(data62))
       ) {
-        const err71 = {
+        const err86 = {
           instancePath: instancePath + "/updatedAt",
           schemaPath: "definitions.json#/definitions/updatedAt/type",
           keyword: "type",
@@ -37325,15 +37655,15 @@ function validate115(
           message: "must be string,object",
         };
         if (vErrors === null) {
-          vErrors = [err71];
+          vErrors = [err86];
         } else {
-          vErrors.push(err71);
+          vErrors.push(err86);
         }
         errors++;
       }
-      if (typeof data54 === "string") {
-        if (!formats4.validate(data54)) {
-          const err72 = {
+      if (typeof data62 === "string") {
+        if (!formats4.validate(data62)) {
+          const err87 = {
             instancePath: instancePath + "/updatedAt",
             schemaPath: "definitions.json#/definitions/updatedAt/format",
             keyword: "format",
@@ -37341,92 +37671,92 @@ function validate115(
             message: 'must match format "' + "date-time" + '"',
           };
           if (vErrors === null) {
-            vErrors = [err72];
+            vErrors = [err87];
           } else {
-            vErrors.push(err72);
+            vErrors.push(err87);
           }
           errors++;
         }
       }
     }
-    let data55 = data.systems;
-    if (Array.isArray(data55)) {
-      const len8 = data55.length;
-      for (let i8 = 0; i8 < len8; i8++) {
-        let data56 = data55[i8];
-        if (data56 && typeof data56 == "object" && !Array.isArray(data56)) {
-          if (data56.systemId === undefined) {
-            const err73 = {
-              instancePath: instancePath + "/systems/" + i8,
+    let data63 = data.systems;
+    if (Array.isArray(data63)) {
+      const len10 = data63.length;
+      for (let i10 = 0; i10 < len10; i10++) {
+        let data64 = data63[i10];
+        if (data64 && typeof data64 == "object" && !Array.isArray(data64)) {
+          if (data64.systemId === undefined) {
+            const err88 = {
+              instancePath: instancePath + "/systems/" + i10,
               schemaPath: "#/properties/systems/items/required",
               keyword: "required",
               params: { missingProperty: "systemId" },
               message: "must have required property '" + "systemId" + "'",
             };
             if (vErrors === null) {
-              vErrors = [err73];
+              vErrors = [err88];
             } else {
-              vErrors.push(err73);
+              vErrors.push(err88);
             }
             errors++;
           }
-          if (data56.propertyId === undefined) {
-            const err74 = {
-              instancePath: instancePath + "/systems/" + i8,
+          if (data64.propertyId === undefined) {
+            const err89 = {
+              instancePath: instancePath + "/systems/" + i10,
               schemaPath: "#/properties/systems/items/required",
               keyword: "required",
               params: { missingProperty: "propertyId" },
               message: "must have required property '" + "propertyId" + "'",
             };
             if (vErrors === null) {
-              vErrors = [err74];
+              vErrors = [err89];
             } else {
-              vErrors.push(err74);
+              vErrors.push(err89);
             }
             errors++;
           }
-          if (data56.driver === undefined) {
-            const err75 = {
-              instancePath: instancePath + "/systems/" + i8,
+          if (data64.driver === undefined) {
+            const err90 = {
+              instancePath: instancePath + "/systems/" + i10,
               schemaPath: "#/properties/systems/items/required",
               keyword: "required",
               params: { missingProperty: "driver" },
               message: "must have required property '" + "driver" + "'",
             };
             if (vErrors === null) {
-              vErrors = [err75];
+              vErrors = [err90];
             } else {
-              vErrors.push(err75);
+              vErrors.push(err90);
             }
             errors++;
           }
-          for (const key2 in data56) {
+          for (const key4 in data64) {
             if (
               !(
-                key2 === "systemId" ||
-                key2 === "propertyId" ||
-                key2 === "driver"
+                key4 === "systemId" ||
+                key4 === "propertyId" ||
+                key4 === "driver"
               )
             ) {
-              const err76 = {
-                instancePath: instancePath + "/systems/" + i8,
+              const err91 = {
+                instancePath: instancePath + "/systems/" + i10,
                 schemaPath: "#/properties/systems/items/additionalProperties",
                 keyword: "additionalProperties",
-                params: { additionalProperty: key2 },
+                params: { additionalProperty: key4 },
                 message: "must NOT have additional properties",
               };
               if (vErrors === null) {
-                vErrors = [err76];
+                vErrors = [err91];
               } else {
-                vErrors.push(err76);
+                vErrors.push(err91);
               }
               errors++;
             }
           }
-          if (data56.systemId !== undefined) {
-            if (typeof data56.systemId !== "string") {
-              const err77 = {
-                instancePath: instancePath + "/systems/" + i8 + "/systemId",
+          if (data64.systemId !== undefined) {
+            if (typeof data64.systemId !== "string") {
+              const err92 = {
+                instancePath: instancePath + "/systems/" + i10 + "/systemId",
                 schemaPath:
                   "#/properties/systems/items/properties/systemId/type",
                 keyword: "type",
@@ -37434,17 +37764,17 @@ function validate115(
                 message: "must be string",
               };
               if (vErrors === null) {
-                vErrors = [err77];
+                vErrors = [err92];
               } else {
-                vErrors.push(err77);
+                vErrors.push(err92);
               }
               errors++;
             }
           }
-          if (data56.propertyId !== undefined) {
-            if (typeof data56.propertyId !== "string") {
-              const err78 = {
-                instancePath: instancePath + "/systems/" + i8 + "/propertyId",
+          if (data64.propertyId !== undefined) {
+            if (typeof data64.propertyId !== "string") {
+              const err93 = {
+                instancePath: instancePath + "/systems/" + i10 + "/propertyId",
                 schemaPath:
                   "#/properties/systems/items/properties/propertyId/type",
                 keyword: "type",
@@ -37452,48 +37782,48 @@ function validate115(
                 message: "must be string",
               };
               if (vErrors === null) {
-                vErrors = [err78];
+                vErrors = [err93];
               } else {
-                vErrors.push(err78);
+                vErrors.push(err93);
               }
               errors++;
             }
           }
-          if (data56.driver !== undefined) {
-            if (typeof data56.driver !== "string") {
-              const err79 = {
-                instancePath: instancePath + "/systems/" + i8 + "/driver",
+          if (data64.driver !== undefined) {
+            if (typeof data64.driver !== "string") {
+              const err94 = {
+                instancePath: instancePath + "/systems/" + i10 + "/driver",
                 schemaPath: "#/properties/systems/items/properties/driver/type",
                 keyword: "type",
                 params: { type: "string" },
                 message: "must be string",
               };
               if (vErrors === null) {
-                vErrors = [err79];
+                vErrors = [err94];
               } else {
-                vErrors.push(err79);
+                vErrors.push(err94);
               }
               errors++;
             }
           }
         } else {
-          const err80 = {
-            instancePath: instancePath + "/systems/" + i8,
+          const err95 = {
+            instancePath: instancePath + "/systems/" + i10,
             schemaPath: "#/properties/systems/items/type",
             keyword: "type",
             params: { type: "object" },
             message: "must be object",
           };
           if (vErrors === null) {
-            vErrors = [err80];
+            vErrors = [err95];
           } else {
-            vErrors.push(err80);
+            vErrors.push(err95);
           }
           errors++;
         }
       }
     } else {
-      const err81 = {
+      const err96 = {
         instancePath: instancePath + "/systems",
         schemaPath: "#/properties/systems/type",
         keyword: "type",
@@ -37501,14 +37831,14 @@ function validate115(
         message: "must be array",
       };
       if (vErrors === null) {
-        vErrors = [err81];
+        vErrors = [err96];
       } else {
-        vErrors.push(err81);
+        vErrors.push(err96);
       }
       errors++;
     }
   } else {
-    const err82 = {
+    const err97 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -37516,9 +37846,9 @@ function validate115(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err82];
+      vErrors = [err97];
     } else {
-      vErrors.push(err82);
+      vErrors.push(err97);
     }
     errors++;
   }
@@ -37721,7 +38051,7 @@ function validate124(
         errors++;
       }
       if (typeof data3 === "string") {
-        if (!pattern8.test(data3)) {
+        if (!pattern9.test(data3)) {
           const err10 = {
             instancePath: instancePath + "/phone",
             schemaPath: "#/properties/phone/pattern",

@@ -11,15 +11,13 @@ export default {
     type: {
       type: "string",
       default: "smsMessage",
-      enum: ["smsMessage"],
+      enum: ["smsMessage", "whatsappMessage"],
     },
     to: {
       type: "string",
-      pattern: "^\\+[0-9]{1,14}$",
     },
     from: {
       type: "string",
-      pattern: "^\\+[0-9]{1,14}$",
     },
     media: {
       type: "string",
