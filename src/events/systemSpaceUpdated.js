@@ -1,6 +1,6 @@
 import { Event } from "./event";
 
-export class SystemSpaceUpdate extends Event {
+export class SystemSpaceUpdated extends Event {
   constructor(space, context) {
     super(space, context);
   }
