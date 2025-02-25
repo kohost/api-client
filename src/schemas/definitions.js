@@ -88,6 +88,7 @@ export default {
       enum: [
         "adlink",
         "aws-kinesis",
+        "bacnet",
         "butler",
         "crestron",
         "dell",
