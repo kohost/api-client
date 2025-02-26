@@ -7,24 +7,16 @@ import { validateAutomation as validate } from "../validators";
 /**
  * @typedef {Object} AutomationData An automation is a collection of triggers and actions
  * @property {string} id - Identifier of the object.
- * @property {string} name - Name of the automation
  * @property {"automation"} type - Default: "automation"
- * @property {boolean} isEnabled - Whether the automation is currently enabled. Default: true
- * @property {string} [description] - Optional description of what the automation does
- * @property {{type: ("time"|"device"|"motion"|"temperature"|"occupancy"|"lock"|"alarm"), schedule?: {days?: number[], time: string, repeat?: boolean, timezone?: string}, deviceId?: string, roomId?: string, condition?: {property: string, operator: ("equals"|"notEquals"|"greaterThan"|"lessThan"|"greaterThanOrEqual"|"lessThanOrEqual"|"changes"), value?: (string|number|boolean)}}} [trigger] - The trigger that initiates the automation
- * @property {("time"|"device"|"motion"|"temperature"|"occupancy"|"lock"|"alarm")} trigger.type - Type of trigger
+ * @property {boolean} [isEnabled] - Whether the automation is currently enabled. Default: true
+ * @property {{type: "time", schedule?: {days?: number[], time: string, repeat?: boolean, timezone?: string}}} trigger - The trigger that initiates the automation
+ * @property {"time"} trigger.type - Type of trigger
  * @property {{days?: number[], time: string, repeat?: boolean, timezone?: string}} [trigger.schedule] - Schedule for time-based triggers
  * @property {number[]} [trigger.schedule.days] - Days of the week (0 = Sunday, 6 = Saturday)
- * @property {string} trigger.schedule.time - Time in 24-hour format (HH:MM)
+ * @property {string} trigger.schedule.time - Time of day to trigger the automation
  * @property {boolean} [trigger.schedule.repeat] - Whether the schedule repeats. Default: true
  * @property {string} [trigger.schedule.timezone] - Timezone for the schedule (IANA timezone format)
- * @property {string} [trigger.deviceId] - ID of the device that triggers the automation
- * @property {string} [trigger.roomId] - ID of the room containing the triggering device
- * @property {{property: string, operator: ("equals"|"notEquals"|"greaterThan"|"lessThan"|"greaterThanOrEqual"|"lessThanOrEqual"|"changes"), value?: (string|number|boolean)}} [trigger.condition] - Condition that must be met to trigger the automation
- * @property {string} trigger.condition.property - Property to check (e.g., 'state', 'level', 'temperature')
- * @property {("equals"|"notEquals"|"greaterThan"|"lessThan"|"greaterThanOrEqual"|"lessThanOrEqual"|"changes")} trigger.condition.operator - Comparison operator
- * @property {(string|number|boolean)} [trigger.condition.value] - Value to compare against
- * @property {{deviceId: string, roomId: string, discriminator?: string, action: {property: string, value: (string|number|boolean), delay?: number}}[]} [actions] - Actions to perform when the trigger conditions are met
+ * @property {{deviceId: string, roomId: string, discriminator: string, duration?: number, state: {property?: string, value?: (string|number|boolean)}[]}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  * @property {(string|object)} [lastTriggeredAt] - When the automation was last triggered
@@ -43,12 +35,10 @@ export class Automation extends Entity {
   constructor(data) {
     super(data);
     this.id = data.id;
-    this.name = data.name;
     this.type = data.type;
-    this.isEnabled = data.isEnabled;
-    if (data.description !== undefined) this.description = data.description;
-    if (data.trigger !== undefined) this.trigger = data.trigger;
-    if (data.actions !== undefined) this.actions = data.actions;
+    if (data.isEnabled !== undefined) this.isEnabled = data.isEnabled;
+    this.trigger = data.trigger;
+    this.actions = data.actions;
     if (data.createdAt !== undefined) this.createdAt = data.createdAt;
     if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
     if (data.lastTriggeredAt !== undefined)
@@ -79,19 +69,14 @@ Object.defineProperty(Automation.prototype, "schema", {
     title: "Automation",
     description: "An automation is a collection of triggers and actions",
     type: "object",
-    required: ["id", "name", "type", "discriminator", "isEnabled"],
+    required: ["id", "type", "trigger", "actions"],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
-      name: { type: "string", description: "Name of the automation" },
       type: { type: "string", enum: ["automation"], default: "automation" },
       isEnabled: {
         type: "boolean",
         description: "Whether the automation is currently enabled",
         default: true,
-      },
-      description: {
-        type: "string",
-        description: "Optional description of what the automation does",
       },
       trigger: {
         type: "object",
@@ -100,15 +85,7 @@ Object.defineProperty(Automation.prototype, "schema", {
         properties: {
           type: {
             type: "string",
-            enum: [
-              "time",
-              "device",
-              "motion",
-              "temperature",
-              "occupancy",
-              "lock",
-              "alarm",
-            ],
+            enum: ["time"],
             description: "Type of trigger",
           },
           schedule: {
@@ -122,8 +99,7 @@ Object.defineProperty(Automation.prototype, "schema", {
               },
               time: {
                 type: "string",
-                description: "Time in 24-hour format (HH:MM)",
-                pattern: "^([01]\\d|2[0-3]):([0-5]\\d)$",
+                description: "Time of day to trigger the automation",
               },
               repeat: {
                 type: "boolean",
@@ -137,74 +113,14 @@ Object.defineProperty(Automation.prototype, "schema", {
             },
             required: ["time"],
           },
-          deviceId: {
-            type: "string",
-            description: "ID of the device that triggers the automation",
-          },
-          roomId: {
-            type: "string",
-            description: "ID of the room containing the triggering device",
-          },
-          condition: {
-            type: "object",
-            description: "Condition that must be met to trigger the automation",
-            properties: {
-              property: {
-                type: "string",
-                description:
-                  "Property to check (e.g., 'state', 'level', 'temperature')",
-              },
-              operator: {
-                type: "string",
-                enum: [
-                  "equals",
-                  "notEquals",
-                  "greaterThan",
-                  "lessThan",
-                  "greaterThanOrEqual",
-                  "lessThanOrEqual",
-                  "changes",
-                ],
-                description: "Comparison operator",
-              },
-              value: {
-                type: ["string", "number", "boolean"],
-                description: "Value to compare against",
-              },
-            },
-            required: ["property", "operator"],
-          },
         },
-        allOf: [
-          {
-            if: { properties: { type: { enum: ["time"] } } },
-            then: { required: ["schedule"] },
-          },
-          {
-            if: {
-              properties: {
-                type: {
-                  enum: [
-                    "device",
-                    "motion",
-                    "temperature",
-                    "occupancy",
-                    "lock",
-                    "alarm",
-                  ],
-                },
-              },
-            },
-            then: { required: ["deviceId", "condition"] },
-          },
-        ],
       },
       actions: {
         type: "array",
         description: "Actions to perform when the trigger conditions are met",
         items: {
           type: "object",
-          required: ["deviceId", "roomId", "action"],
+          required: ["deviceId", "roomId", "discriminator", "state"],
           properties: {
             deviceId: {
               type: "string",
@@ -219,23 +135,26 @@ Object.defineProperty(Automation.prototype, "schema", {
               description:
                 "Type discriminator for the device (e.g., 'windowCovering', 'switch')",
             },
-            action: {
-              type: "object",
-              required: ["property", "value"],
-              properties: {
-                property: {
-                  type: "string",
-                  description:
-                    "Property to set (e.g., 'state', 'level', 'setpoint')",
-                },
-                value: {
-                  type: ["string", "number", "boolean"],
-                  description: "Value to set the property to",
-                },
-                delay: {
-                  type: "integer",
-                  description: "Delay in seconds before executing this action",
-                  minimum: 0,
+            duration: {
+              type: "integer",
+              description:
+                "Duration in seconds to keep the device in the configured state",
+              minimum: 0,
+            },
+            state: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  property: {
+                    type: "string",
+                    description:
+                      "Property to set (e.g., 'state', 'level', 'setpoint')",
+                  },
+                  value: {
+                    type: ["string", "number", "boolean"],
+                    description: "Value to set the property to",
+                  },
                 },
               },
             },

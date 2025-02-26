@@ -4,30 +4,23 @@ export default {
   title: "Automation",
   description: "An automation is a collection of triggers and actions",
   type: "object",
-  required: ["id", "name", "type", "discriminator", "isEnabled"],
+  required: ["id", "type", "trigger", "actions"],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
     },
-    name: {
-      type: "string",
-      description: "Name of the automation",
-    },
+
     type: {
       type: "string",
       enum: ["automation"],
       default: "automation",
     },
-
     isEnabled: {
       type: "boolean",
       description: "Whether the automation is currently enabled",
       default: true,
     },
-    description: {
-      type: "string",
-      description: "Optional description of what the automation does",
-    },
+
     trigger: {
       type: "object",
       description: "The trigger that initiates the automation",
@@ -35,15 +28,7 @@ export default {
       properties: {
         type: {
           type: "string",
-          enum: [
-            "time",
-            "device",
-            "motion",
-            "temperature",
-            "occupancy",
-            "lock",
-            "alarm",
-          ],
+          enum: ["time"],
           description: "Type of trigger",
         },
         // Time-based trigger properties
@@ -62,8 +47,7 @@ export default {
             },
             time: {
               type: "string",
-              description: "Time in 24-hour format (HH:MM)",
-              pattern: "^([01]\\d|2[0-3]):([0-5]\\d)$",
+              description: "Time of day to trigger the automation",
             },
             repeat: {
               type: "boolean",
@@ -77,81 +61,14 @@ export default {
           },
           required: ["time"],
         },
-        // Device-based trigger properties
-        deviceId: {
-          type: "string",
-          description: "ID of the device that triggers the automation",
-        },
-        roomId: {
-          type: "string",
-          description: "ID of the room containing the triggering device",
-        },
-        condition: {
-          type: "object",
-          description: "Condition that must be met to trigger the automation",
-          properties: {
-            property: {
-              type: "string",
-              description:
-                "Property to check (e.g., 'state', 'level', 'temperature')",
-            },
-            operator: {
-              type: "string",
-              enum: [
-                "equals",
-                "notEquals",
-                "greaterThan",
-                "lessThan",
-                "greaterThanOrEqual",
-                "lessThanOrEqual",
-                "changes",
-              ],
-              description: "Comparison operator",
-            },
-            value: {
-              type: ["string", "number", "boolean"],
-              description: "Value to compare against",
-            },
-          },
-          required: ["property", "operator"],
-        },
       },
-      allOf: [
-        {
-          if: {
-            properties: { type: { enum: ["time"] } },
-          },
-          then: {
-            required: ["schedule"],
-          },
-        },
-        {
-          if: {
-            properties: {
-              type: {
-                enum: [
-                  "device",
-                  "motion",
-                  "temperature",
-                  "occupancy",
-                  "lock",
-                  "alarm",
-                ],
-              },
-            },
-          },
-          then: {
-            required: ["deviceId", "condition"],
-          },
-        },
-      ],
     },
     actions: {
       type: "array",
       description: "Actions to perform when the trigger conditions are met",
       items: {
         type: "object",
-        required: ["deviceId", "roomId", "action"],
+        required: ["deviceId", "roomId", "discriminator", "state"],
         properties: {
           deviceId: {
             type: "string",
@@ -166,23 +83,26 @@ export default {
             description:
               "Type discriminator for the device (e.g., 'windowCovering', 'switch')",
           },
-          action: {
-            type: "object",
-            required: ["property", "value"],
-            properties: {
-              property: {
-                type: "string",
-                description:
-                  "Property to set (e.g., 'state', 'level', 'setpoint')",
-              },
-              value: {
-                type: ["string", "number", "boolean"],
-                description: "Value to set the property to",
-              },
-              delay: {
-                type: "integer",
-                description: "Delay in seconds before executing this action",
-                minimum: 0,
+          duration: {
+            type: "integer",
+            description:
+              "Duration in seconds to keep the device in the configured state",
+            minimum: 0,
+          },
+          state: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                property: {
+                  type: "string",
+                  description:
+                    "Property to set (e.g., 'state', 'level', 'setpoint')",
+                },
+                value: {
+                  type: ["string", "number", "boolean"],
+                  description: "Value to set the property to",
+                },
               },
             },
           },
