@@ -92,6 +92,7 @@ export default {
         "butler",
         "crestron",
         "dell",
+        "distech",
         "dmp",
         "doorbird",
         "dormakaba",
