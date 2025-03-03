@@ -24,9 +24,9 @@ export default {
     trigger: {
       type: "object",
       description: "The trigger that initiates the automation",
-      required: ["type"],
+      required: ["discriminator", "schedule"],
       properties: {
-        type: {
+        discriminator: {
           type: "string",
           enum: ["time"],
           description: "Type of trigger",
@@ -35,6 +35,7 @@ export default {
         schedule: {
           type: "object",
           description: "Schedule for time-based triggers",
+          required: ["days", "time", "timezone"],
           properties: {
             days: {
               type: "array",
@@ -49,6 +50,11 @@ export default {
               type: "string",
               description: "Time of day to trigger the automation",
             },
+            timeOffsetSeconds: {
+              type: "integer",
+              description: "Offset in seconds from the scheduled time",
+              default: 0,
+            },
             repeat: {
               type: "boolean",
               description: "Whether the schedule repeats",
@@ -59,7 +65,6 @@ export default {
               description: "Timezone for the schedule (IANA timezone format)",
             },
           },
-          required: ["time"],
         },
       },
     },

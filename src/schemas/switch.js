@@ -53,5 +53,9 @@ export default {
     firmwareVersion: {
       type: "string",
     },
+    restoresAt: {
+      type: "string",
+      format: "date-time",
+    },
   },
 };

@@ -9,13 +9,13 @@ import { validateAutomation as validate } from "../validators";
  * @property {string} id - Identifier of the object.
  * @property {"automation"} type - Default: "automation"
  * @property {boolean} [isEnabled] - Whether the automation is currently enabled. Default: true
- * @property {{type: "time", schedule?: {days?: number[], time: string, repeat?: boolean, timezone?: string}}} trigger - The trigger that initiates the automation
- * @property {"time"} trigger.type - Type of trigger
- * @property {{days?: number[], time: string, repeat?: boolean, timezone?: string}} [trigger.schedule] - Schedule for time-based triggers
- * @property {number[]} [trigger.schedule.days] - Days of the week (0 = Sunday, 6 = Saturday)
+ * @property {{discriminator: "time", schedule: {days: number[], time: string, repeat?: boolean, timezone: string}}} trigger - The trigger that initiates the automation
+ * @property {"time"} trigger.discriminator - Type of trigger
+ * @property {{days: number[], time: string, repeat?: boolean, timezone: string}} trigger.schedule - Schedule for time-based triggers
+ * @property {number[]} trigger.schedule.days - Days of the week (0 = Sunday, 6 = Saturday)
  * @property {string} trigger.schedule.time - Time of day to trigger the automation
  * @property {boolean} [trigger.schedule.repeat] - Whether the schedule repeats. Default: true
- * @property {string} [trigger.schedule.timezone] - Timezone for the schedule (IANA timezone format)
+ * @property {string} trigger.schedule.timezone - Timezone for the schedule (IANA timezone format)
  * @property {{deviceId: string, roomId: string, discriminator: string, duration?: number, state: {property?: string, value?: (string|number|boolean)}[]}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
@@ -81,9 +81,9 @@ Object.defineProperty(Automation.prototype, "schema", {
       trigger: {
         type: "object",
         description: "The trigger that initiates the automation",
-        required: ["type"],
+        required: ["discriminator", "schedule"],
         properties: {
-          type: {
+          discriminator: {
             type: "string",
             enum: ["time"],
             description: "Type of trigger",
@@ -91,6 +91,7 @@ Object.defineProperty(Automation.prototype, "schema", {
           schedule: {
             type: "object",
             description: "Schedule for time-based triggers",
+            required: ["days", "time", "timezone"],
             properties: {
               days: {
                 type: "array",
@@ -111,7 +112,6 @@ Object.defineProperty(Automation.prototype, "schema", {
                 description: "Timezone for the schedule (IANA timezone format)",
               },
             },
-            required: ["time"],
           },
         },
       },
