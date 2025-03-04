@@ -9,6 +9,12 @@ export default {
     id: {
       $ref: "definitions.json#/definitions/id",
     },
+    name: {
+      type: "string",
+    },
+    offline: {
+      type: "boolean",
+    },
     type: {
       $ref: "definitions.json#/definitions/type",
     },

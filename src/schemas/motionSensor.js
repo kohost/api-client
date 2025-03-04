@@ -10,8 +10,14 @@ export default {
     id: {
       $ref: "definitions.json#/definitions/id",
     },
+    name: {
+      type: "string",
+    },
     type: {
       $ref: "definitions.json#/definitions/type",
+    },
+    offline: {
+      type: "boolean",
     },
     driver: {
       $ref: "definitions.json#/definitions/driver",
