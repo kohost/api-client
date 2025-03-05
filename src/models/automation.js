@@ -7,13 +7,15 @@ import { validateAutomation as validate } from "../validators";
 /**
  * @typedef {Object} AutomationData An automation is a collection of triggers and actions
  * @property {string} id - Identifier of the object.
+ * @property {string} [name] - The friendly name of the automation
  * @property {"automation"} type - Default: "automation"
  * @property {boolean} [isEnabled] - Whether the automation is currently enabled. Default: true
- * @property {{discriminator: "time", schedule: {days: number[], time: string, repeat?: boolean, timezone: string}}} trigger - The trigger that initiates the automation
+ * @property {{discriminator: "time", schedule: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}}} trigger - The trigger that initiates the automation
  * @property {"time"} trigger.discriminator - Type of trigger
- * @property {{days: number[], time: string, repeat?: boolean, timezone: string}} trigger.schedule - Schedule for time-based triggers
+ * @property {{days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}} trigger.schedule - Schedule for time-based triggers
  * @property {number[]} trigger.schedule.days - Days of the week (0 = Sunday, 6 = Saturday)
  * @property {string} trigger.schedule.time - Time of day to trigger the automation
+ * @property {number} [trigger.schedule.timeOffsetSeconds] - Offset in seconds from the scheduled time. Default: 0
  * @property {boolean} [trigger.schedule.repeat] - Whether the schedule repeats. Default: true
  * @property {string} trigger.schedule.timezone - Timezone for the schedule (IANA timezone format)
  * @property {{deviceId: string, roomId: string, discriminator: string, duration?: number, state: {property?: string, value?: (string|number|boolean)}[]}[]} actions - Actions to perform when the trigger conditions are met
@@ -35,6 +37,7 @@ export class Automation extends Entity {
   constructor(data) {
     super(data);
     this.id = data.id;
+    if (data.name !== undefined) this.name = data.name;
     this.type = data.type;
     if (data.isEnabled !== undefined) this.isEnabled = data.isEnabled;
     this.trigger = data.trigger;
@@ -72,6 +75,10 @@ Object.defineProperty(Automation.prototype, "schema", {
     required: ["id", "type", "trigger", "actions"],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
+      name: {
+        type: "string",
+        description: "The friendly name of the automation",
+      },
       type: { type: "string", enum: ["automation"], default: "automation" },
       isEnabled: {
         type: "boolean",
@@ -101,6 +108,11 @@ Object.defineProperty(Automation.prototype, "schema", {
               time: {
                 type: "string",
                 description: "Time of day to trigger the automation",
+              },
+              timeOffsetSeconds: {
+                type: "integer",
+                description: "Offset in seconds from the scheduled time",
+                default: 0,
               },
               repeat: {
                 type: "boolean",

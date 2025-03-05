@@ -9,7 +9,10 @@ export default {
     id: {
       $ref: "definitions.json#/definitions/id",
     },
-
+    name: {
+      type: "string",
+      description: "The friendly name of the automation",
+    },
     type: {
       type: "string",
       enum: ["automation"],
