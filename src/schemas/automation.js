@@ -101,6 +101,7 @@ export default {
             type: "array",
             items: {
               type: "object",
+              required: ["property", "value"],
               properties: {
                 property: {
                   type: "string",

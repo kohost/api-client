@@ -18,7 +18,7 @@ import { validateAutomation as validate } from "../validators";
  * @property {number} [trigger.schedule.timeOffsetSeconds] - Offset in seconds from the scheduled time. Default: 0
  * @property {boolean} [trigger.schedule.repeat] - Whether the schedule repeats. Default: true
  * @property {string} trigger.schedule.timezone - Timezone for the schedule (IANA timezone format)
- * @property {{deviceId: string, roomId: string, discriminator: string, duration?: number, state: {property?: string, value?: (string|number|boolean)}[]}[]} actions - Actions to perform when the trigger conditions are met
+ * @property {{deviceId: string, roomId: string, discriminator: string, duration?: number, state: {property: string, value: (string|number|boolean)}[]}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  * @property {(string|object)} [lastTriggeredAt] - When the automation was last triggered
@@ -157,6 +157,7 @@ Object.defineProperty(Automation.prototype, "schema", {
               type: "array",
               items: {
                 type: "object",
+                required: ["property", "value"],
                 properties: {
                   property: {
                     type: "string",

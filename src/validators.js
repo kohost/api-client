@@ -2474,6 +2474,7 @@ const schema29 = {
             type: "array",
             items: {
               type: "object",
+              required: ["property", "value"],
               properties: {
                 property: {
                   type: "string",
@@ -3204,9 +3205,45 @@ function validate17(
                     typeof data20 == "object" &&
                     !Array.isArray(data20)
                   ) {
+                    if (data20.property === undefined) {
+                      const err39 = {
+                        instancePath:
+                          instancePath + "/actions/" + i1 + "/state/" + i2,
+                        schemaPath:
+                          "#/properties/actions/items/properties/state/items/required",
+                        keyword: "required",
+                        params: { missingProperty: "property" },
+                        message:
+                          "must have required property '" + "property" + "'",
+                      };
+                      if (vErrors === null) {
+                        vErrors = [err39];
+                      } else {
+                        vErrors.push(err39);
+                      }
+                      errors++;
+                    }
+                    if (data20.value === undefined) {
+                      const err40 = {
+                        instancePath:
+                          instancePath + "/actions/" + i1 + "/state/" + i2,
+                        schemaPath:
+                          "#/properties/actions/items/properties/state/items/required",
+                        keyword: "required",
+                        params: { missingProperty: "value" },
+                        message:
+                          "must have required property '" + "value" + "'",
+                      };
+                      if (vErrors === null) {
+                        vErrors = [err40];
+                      } else {
+                        vErrors.push(err40);
+                      }
+                      errors++;
+                    }
                     if (data20.property !== undefined) {
                       if (typeof data20.property !== "string") {
-                        const err39 = {
+                        const err41 = {
                           instancePath:
                             instancePath +
                             "/actions/" +
@@ -3221,9 +3258,9 @@ function validate17(
                           message: "must be string",
                         };
                         if (vErrors === null) {
-                          vErrors = [err39];
+                          vErrors = [err41];
                         } else {
-                          vErrors.push(err39);
+                          vErrors.push(err41);
                         }
                         errors++;
                       }
@@ -3235,7 +3272,7 @@ function validate17(
                         !(typeof data22 == "number") &&
                         typeof data22 !== "boolean"
                       ) {
-                        const err40 = {
+                        const err42 = {
                           instancePath:
                             instancePath +
                             "/actions/" +
@@ -3253,15 +3290,15 @@ function validate17(
                           message: "must be string,number,boolean",
                         };
                         if (vErrors === null) {
-                          vErrors = [err40];
+                          vErrors = [err42];
                         } else {
-                          vErrors.push(err40);
+                          vErrors.push(err42);
                         }
                         errors++;
                       }
                     }
                   } else {
-                    const err41 = {
+                    const err43 = {
                       instancePath:
                         instancePath + "/actions/" + i1 + "/state/" + i2,
                       schemaPath:
@@ -3271,15 +3308,15 @@ function validate17(
                       message: "must be object",
                     };
                     if (vErrors === null) {
-                      vErrors = [err41];
+                      vErrors = [err43];
                     } else {
-                      vErrors.push(err41);
+                      vErrors.push(err43);
                     }
                     errors++;
                   }
                 }
               } else {
-                const err42 = {
+                const err44 = {
                   instancePath: instancePath + "/actions/" + i1 + "/state",
                   schemaPath:
                     "#/properties/actions/items/properties/state/type",
@@ -3288,15 +3325,15 @@ function validate17(
                   message: "must be array",
                 };
                 if (vErrors === null) {
-                  vErrors = [err42];
+                  vErrors = [err44];
                 } else {
-                  vErrors.push(err42);
+                  vErrors.push(err44);
                 }
                 errors++;
               }
             }
           } else {
-            const err43 = {
+            const err45 = {
               instancePath: instancePath + "/actions/" + i1,
               schemaPath: "#/properties/actions/items/type",
               keyword: "type",
@@ -3304,15 +3341,15 @@ function validate17(
               message: "must be object",
             };
             if (vErrors === null) {
-              vErrors = [err43];
+              vErrors = [err45];
             } else {
-              vErrors.push(err43);
+              vErrors.push(err45);
             }
             errors++;
           }
         }
       } else {
-        const err44 = {
+        const err46 = {
           instancePath: instancePath + "/actions",
           schemaPath: "#/properties/actions/type",
           keyword: "type",
@@ -3320,9 +3357,9 @@ function validate17(
           message: "must be array",
         };
         if (vErrors === null) {
-          vErrors = [err44];
+          vErrors = [err46];
         } else {
-          vErrors.push(err44);
+          vErrors.push(err46);
         }
         errors++;
       }
@@ -3333,49 +3370,11 @@ function validate17(
         typeof data23 !== "string" &&
         !(data23 && typeof data23 == "object" && !Array.isArray(data23))
       ) {
-        const err45 = {
+        const err47 = {
           instancePath: instancePath + "/createdAt",
           schemaPath: "definitions.json#/definitions/createdAt/type",
           keyword: "type",
           params: { type: schema31.type },
-          message: "must be string,object",
-        };
-        if (vErrors === null) {
-          vErrors = [err45];
-        } else {
-          vErrors.push(err45);
-        }
-        errors++;
-      }
-      if (typeof data23 === "string") {
-        if (!formats4.validate(data23)) {
-          const err46 = {
-            instancePath: instancePath + "/createdAt",
-            schemaPath: "definitions.json#/definitions/createdAt/format",
-            keyword: "format",
-            params: { format: "date-time" },
-            message: 'must match format "' + "date-time" + '"',
-          };
-          if (vErrors === null) {
-            vErrors = [err46];
-          } else {
-            vErrors.push(err46);
-          }
-          errors++;
-        }
-      }
-    }
-    if (data.updatedAt !== undefined) {
-      let data24 = data.updatedAt;
-      if (
-        typeof data24 !== "string" &&
-        !(data24 && typeof data24 == "object" && !Array.isArray(data24))
-      ) {
-        const err47 = {
-          instancePath: instancePath + "/updatedAt",
-          schemaPath: "definitions.json#/definitions/updatedAt/type",
-          keyword: "type",
-          params: { type: schema32.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -3385,11 +3384,11 @@ function validate17(
         }
         errors++;
       }
-      if (typeof data24 === "string") {
-        if (!formats4.validate(data24)) {
+      if (typeof data23 === "string") {
+        if (!formats4.validate(data23)) {
           const err48 = {
-            instancePath: instancePath + "/updatedAt",
-            schemaPath: "definitions.json#/definitions/updatedAt/format",
+            instancePath: instancePath + "/createdAt",
+            schemaPath: "definitions.json#/definitions/createdAt/format",
             keyword: "format",
             params: { format: "date-time" },
             message: 'must match format "' + "date-time" + '"',
@@ -3403,17 +3402,17 @@ function validate17(
         }
       }
     }
-    if (data.lastTriggeredAt !== undefined) {
-      let data25 = data.lastTriggeredAt;
+    if (data.updatedAt !== undefined) {
+      let data24 = data.updatedAt;
       if (
-        typeof data25 !== "string" &&
-        !(data25 && typeof data25 == "object" && !Array.isArray(data25))
+        typeof data24 !== "string" &&
+        !(data24 && typeof data24 == "object" && !Array.isArray(data24))
       ) {
         const err49 = {
-          instancePath: instancePath + "/lastTriggeredAt",
-          schemaPath: "definitions.json#/definitions/date/type",
+          instancePath: instancePath + "/updatedAt",
+          schemaPath: "definitions.json#/definitions/updatedAt/type",
           keyword: "type",
-          params: { type: schema25.type },
+          params: { type: schema32.type },
           message: "must be string,object",
         };
         if (vErrors === null) {
@@ -3423,11 +3422,11 @@ function validate17(
         }
         errors++;
       }
-      if (typeof data25 === "string") {
-        if (!formats4.validate(data25)) {
+      if (typeof data24 === "string") {
+        if (!formats4.validate(data24)) {
           const err50 = {
-            instancePath: instancePath + "/lastTriggeredAt",
-            schemaPath: "definitions.json#/definitions/date/format",
+            instancePath: instancePath + "/updatedAt",
+            schemaPath: "definitions.json#/definitions/updatedAt/format",
             keyword: "format",
             params: { format: "date-time" },
             message: 'must match format "' + "date-time" + '"',
@@ -3441,8 +3440,46 @@ function validate17(
         }
       }
     }
+    if (data.lastTriggeredAt !== undefined) {
+      let data25 = data.lastTriggeredAt;
+      if (
+        typeof data25 !== "string" &&
+        !(data25 && typeof data25 == "object" && !Array.isArray(data25))
+      ) {
+        const err51 = {
+          instancePath: instancePath + "/lastTriggeredAt",
+          schemaPath: "definitions.json#/definitions/date/type",
+          keyword: "type",
+          params: { type: schema25.type },
+          message: "must be string,object",
+        };
+        if (vErrors === null) {
+          vErrors = [err51];
+        } else {
+          vErrors.push(err51);
+        }
+        errors++;
+      }
+      if (typeof data25 === "string") {
+        if (!formats4.validate(data25)) {
+          const err52 = {
+            instancePath: instancePath + "/lastTriggeredAt",
+            schemaPath: "definitions.json#/definitions/date/format",
+            keyword: "format",
+            params: { format: "date-time" },
+            message: 'must match format "' + "date-time" + '"',
+          };
+          if (vErrors === null) {
+            vErrors = [err52];
+          } else {
+            vErrors.push(err52);
+          }
+          errors++;
+        }
+      }
+    }
   } else {
-    const err51 = {
+    const err53 = {
       instancePath,
       schemaPath: "#/type",
       keyword: "type",
@@ -3450,9 +3487,9 @@ function validate17(
       message: "must be object",
     };
     if (vErrors === null) {
-      vErrors = [err51];
+      vErrors = [err53];
     } else {
-      vErrors.push(err51);
+      vErrors.push(err53);
     }
     errors++;
   }

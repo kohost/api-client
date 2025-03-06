@@ -23,7 +23,7 @@ export class KohostHTTPClient {
       headers: new Headers({}),
       onSuccess: (response) => response,
       onError: (error) => error,
-    },
+    }
   ) {
     if (!options.url) throw new Error("options.url is required");
     this.options = options;
