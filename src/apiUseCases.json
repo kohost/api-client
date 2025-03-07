@@ -452,7 +452,7 @@
     }
   ],
   [
-    "CreateCateory",
+    "CreateCategory",
     {
       "http": {
         "method": "POST",
@@ -2243,6 +2243,51 @@
       "http": {
         "method": "PUT",
         "path": "/vendors/:id"
+      }
+    }
+  ],
+  [
+    "CreateAutomation",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/automations"
+      }
+    }
+  ],
+  [
+    "ListAutomations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/automations"
+      }
+    }
+  ],
+  [
+    "DescribeAutomation",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/automations/:id"
+      }
+    }
+  ],
+  [
+    "UpdateAutomation",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/automations/:id"
+      }
+    }
+  ],
+  [
+    "DeleteAutomation",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/automations/:id"
       }
     }
   ]
