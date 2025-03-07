@@ -90,6 +90,7 @@ export default {
         "aws-kinesis",
         "bacnet",
         "butler",
+        "comelit",
         "crestron",
         "dell",
         "distech",
