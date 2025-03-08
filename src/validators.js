@@ -116,6 +116,7 @@ const schema18 = {
     "aws-kinesis",
     "bacnet",
     "butler",
+    "comelit",
     "crestron",
     "dell",
     "distech",
@@ -749,6 +750,7 @@ function validate10(
           data8 === "aws-kinesis" ||
           data8 === "bacnet" ||
           data8 === "butler" ||
+          data8 === "comelit" ||
           data8 === "crestron" ||
           data8 === "dell" ||
           data8 === "distech" ||
@@ -4050,6 +4052,7 @@ function validate18(
           data7 === "aws-kinesis" ||
           data7 === "bacnet" ||
           data7 === "butler" ||
+          data7 === "comelit" ||
           data7 === "crestron" ||
           data7 === "dell" ||
           data7 === "distech" ||
@@ -4851,6 +4854,7 @@ function validate21(
           data3 === "aws-kinesis" ||
           data3 === "bacnet" ||
           data3 === "butler" ||
+          data3 === "comelit" ||
           data3 === "crestron" ||
           data3 === "dell" ||
           data3 === "distech" ||
@@ -5631,6 +5635,7 @@ function validate23(
           data6 === "aws-kinesis" ||
           data6 === "bacnet" ||
           data6 === "butler" ||
+          data6 === "comelit" ||
           data6 === "crestron" ||
           data6 === "dell" ||
           data6 === "distech" ||
@@ -6136,6 +6141,7 @@ function validate26(
           data2 === "aws-kinesis" ||
           data2 === "bacnet" ||
           data2 === "butler" ||
+          data2 === "comelit" ||
           data2 === "crestron" ||
           data2 === "dell" ||
           data2 === "distech" ||
@@ -7150,6 +7156,7 @@ function validate28(
           data6 === "aws-kinesis" ||
           data6 === "bacnet" ||
           data6 === "butler" ||
+          data6 === "comelit" ||
           data6 === "crestron" ||
           data6 === "dell" ||
           data6 === "distech" ||
@@ -10645,6 +10652,7 @@ function validate35(
           data9 === "aws-kinesis" ||
           data9 === "bacnet" ||
           data9 === "butler" ||
+          data9 === "comelit" ||
           data9 === "crestron" ||
           data9 === "dell" ||
           data9 === "distech" ||
@@ -12538,6 +12546,7 @@ function validate46(
           data7 === "aws-kinesis" ||
           data7 === "bacnet" ||
           data7 === "butler" ||
+          data7 === "comelit" ||
           data7 === "crestron" ||
           data7 === "dell" ||
           data7 === "distech" ||
@@ -13215,6 +13224,7 @@ function validate49(
           data3 === "aws-kinesis" ||
           data3 === "bacnet" ||
           data3 === "butler" ||
+          data3 === "comelit" ||
           data3 === "crestron" ||
           data3 === "dell" ||
           data3 === "distech" ||
@@ -14593,6 +14603,7 @@ function validate50(
           data9 === "aws-kinesis" ||
           data9 === "bacnet" ||
           data9 === "butler" ||
+          data9 === "comelit" ||
           data9 === "crestron" ||
           data9 === "dell" ||
           data9 === "distech" ||
@@ -15840,6 +15851,7 @@ function validate53(
           data4 === "aws-kinesis" ||
           data4 === "bacnet" ||
           data4 === "butler" ||
+          data4 === "comelit" ||
           data4 === "crestron" ||
           data4 === "dell" ||
           data4 === "distech" ||
@@ -19613,6 +19625,7 @@ function validate60(
           data3 === "aws-kinesis" ||
           data3 === "bacnet" ||
           data3 === "butler" ||
+          data3 === "comelit" ||
           data3 === "crestron" ||
           data3 === "dell" ||
           data3 === "distech" ||
@@ -23553,6 +23566,7 @@ function validate64(
           data1 === "aws-kinesis" ||
           data1 === "bacnet" ||
           data1 === "butler" ||
+          data1 === "comelit" ||
           data1 === "crestron" ||
           data1 === "dell" ||
           data1 === "distech" ||
@@ -24980,6 +24994,7 @@ function validate69(
           data7 === "aws-kinesis" ||
           data7 === "bacnet" ||
           data7 === "butler" ||
+          data7 === "comelit" ||
           data7 === "crestron" ||
           data7 === "dell" ||
           data7 === "distech" ||
@@ -26056,6 +26071,7 @@ function validate73(
           data3 === "aws-kinesis" ||
           data3 === "bacnet" ||
           data3 === "butler" ||
+          data3 === "comelit" ||
           data3 === "crestron" ||
           data3 === "dell" ||
           data3 === "distech" ||
@@ -27573,6 +27589,7 @@ function validate82(
           data7 === "aws-kinesis" ||
           data7 === "bacnet" ||
           data7 === "butler" ||
+          data7 === "comelit" ||
           data7 === "crestron" ||
           data7 === "dell" ||
           data7 === "distech" ||
@@ -31322,6 +31339,7 @@ function validate103(
           data4 === "aws-kinesis" ||
           data4 === "bacnet" ||
           data4 === "butler" ||
+          data4 === "comelit" ||
           data4 === "crestron" ||
           data4 === "dell" ||
           data4 === "distech" ||
@@ -32348,6 +32366,7 @@ function validate109(
           data2 === "aws-kinesis" ||
           data2 === "bacnet" ||
           data2 === "butler" ||
+          data2 === "comelit" ||
           data2 === "crestron" ||
           data2 === "dell" ||
           data2 === "distech" ||

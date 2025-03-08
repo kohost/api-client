@@ -3,6 +3,8 @@ import { RefreshTokenCommand } from "./useCases/refreshToken";
 export class KohostHTTPClient {
   #onSuccess;
   #onError;
+  /** @type {Promise<void> | null} */
+  #tokenRenewalRequest = null;
 
   /** 
   @param {Object} options - The options to create the client
@@ -131,6 +133,11 @@ export class KohostHTTPClient {
   async send(command) {
     const commandConfig = command.config;
     const request = this.createRequest(commandConfig);
+
+    if (this.#tokenRenewalRequest) {
+      await this.#tokenRenewalRequest;
+    }
+
     const response = await fetch(request);
 
     const isJsonResponse =
@@ -173,18 +180,26 @@ export class KohostHTTPClient {
         }
 
         if (expectedError && newTokensNeeded) {
-          while (!this.isAuthTokenRenewalActive) {
-            this.isAuthTokenRenewalActive = true;
-            return this.send(new RefreshTokenCommand({}))
-              .then(() => {
-                // retry the original request with the new token
-                this.isAuthTokenRenewalActive = false;
-                return this.send(command);
-              })
-              .catch((err) => {
-                this.isAuthTokenRenewalActive = false;
-                return Promise.reject(err);
-              });
+          if (this.#tokenRenewalRequest) {
+            try {
+              await this.#tokenRenewalRequest;
+              return this.send(command);
+            } catch (error) {
+              return Promise.reject(error);
+            }
+          }
+
+          this.#tokenRenewalRequest = this.send(
+            new RefreshTokenCommand({}),
+          ).finally(() => {
+            this.#tokenRenewalRequest = null;
+          });
+
+          try {
+            await this.#tokenRenewalRequest;
+            return this.send(command);
+          } catch (error) {
+            return Promise.reject(error);
           }
         }
       } catch (error) {
