@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { Ajv } from "ajv";
 import addFormats from "ajv-formats";
-import standaloneCode from "ajv/dist/standalone/index.js";
 import fs from "node:fs";
 import * as prettier from "prettier";
 import { generateCommandDataDoc, generateSchemaDoc } from "./utils/jsdoc.js";
@@ -22,15 +21,27 @@ const useCaseJson = fs.readFileSync("src/apiUseCases.json", {
  */
 const useCases = new Map(JSON.parse(useCaseJson));
 
-// load all files in the src/schemas directory
-const schemaFiles = fs.readdirSync("src/schemas");
-// import all files in the src/schemas directory
-const schemaModules = schemaFiles
-  .filter((filename) => filename.endsWith("js"))
-  .map((file) => import(`../src/schemas/${file}`));
+async function loadSchemas() {
+  const schemaFiles = fs
+    .readdirSync("src/schemas")
+    .filter((file) => file.endsWith(".js"));
 
-Promise.all(schemaModules).then(async (modules) => {
-  const schemas = modules.map((module) => module.default);
+  const modules = await Promise.all(
+    schemaFiles.map(async (file) => {
+      const module = await import(`../src/schemas/${file}`);
+
+      return [file, module];
+    }),
+  );
+
+  const map = new Map(modules);
+
+  return map;
+}
+
+loadSchemas().then(async (schemas) => {
+  const code = await generateValidatorCode(schemas);
+  fs.writeFileSync("src/validate.js", await formatCode(code));
 
   const ajv = new Ajv({
     allErrors: true,
@@ -39,41 +50,18 @@ Promise.all(schemaModules).then(async (modules) => {
     allowMatchingProperties: true,
     allowUnionTypes: true,
     strictRequired: false,
-    schemas: schemas,
-    code: {
-      source: true,
-      es5: false,
-      esm: true,
-      lines: true,
-      optimize: 3,
-    },
+    schemas: Array.from(schemas.entries()).map(([fileName, module]) => {
+      return module.default;
+    }),
   });
 
   addFormats(ajv);
 
-  const modelIndexExports = ["entity"];
-  const useCaseIndexExports = [];
-
-  const validateMap = schemas.reduce((acc, schema) => {
-    if (schema.$id === "definitions.json") return acc;
-    const schemaTitle = schema.title.replace(/\s+/g, "");
-    acc[`validate${schemaTitle}`] = schema.$id;
-    return acc;
-  }, {});
-
-  const validatorCode = standaloneCode(ajv, validateMap);
-
-  fs.writeFileSync(
-    "src/validators.js",
-    await formatCode(`/* eslint-disable */\n${banner}\n\n\n${validatorCode}`)
-  );
-
-  for (const module of modules) {
+  for (const [, module] of schemas) {
     const schema = module.default;
     if (schema.$id === "definitions.json") continue;
     const schemaTitle = schema.title.replace(/\s+/g, "");
     const fileName = schemaTitle.charAt(0).toLowerCase() + schemaTitle.slice(1);
-    modelIndexExports.push(fileName);
     const modelCode = generateModelCode(ajv, module);
     fs.writeFileSync(`src/models/${fileName}.js`, await formatCode(modelCode));
   }
@@ -82,15 +70,114 @@ Promise.all(schemaModules).then(async (modules) => {
     if (data.http) {
       const useCaseFileName =
         useCase.charAt(0).toLowerCase() + useCase.slice(1);
-      useCaseIndexExports.push(useCaseFileName);
       const code = generateUseCaseCode(useCase, data.http, data.description);
       fs.writeFileSync(
         `src/useCases/${useCaseFileName}.js`,
-        await formatCode(code)
+        await formatCode(code),
       );
     }
   }
 });
+
+/**
+ *
+ * @param {Map<string, object>} schemas
+ * @returns
+ */
+async function generateValidatorCode(schemas) {
+  const code = `
+${banner}
+import { Ajv } from "ajv";
+import addFormats from "ajv-formats";
+
+
+
+${Array.from(schemas.entries())
+  .map(
+    ([fileName]) =>
+      `import ${fileName.replace(".js", "")}schema from "./schemas/${fileName}";`,
+  )
+  .join("\n")}
+
+const schemas = [
+  ${Array.from(schemas.entries())
+    .map(([fileName]) => `${fileName.replace(".js", "")}schema`)
+    .join(",\n")}
+];
+
+const ajv = new Ajv({
+  allErrors: true,
+  useDefaults: true,
+  strict: false,
+  allowMatchingProperties: true,
+  allowUnionTypes: true,
+  strictRequired: false,
+  schemas: schemas,
+});
+
+addFormats(ajv);
+
+${Array.from(schemas.entries())
+  .map(([fileName, module]) => {
+    if (fileName === "definitions.js") return "";
+    return `export const validate${module.default.title.replace(/\s+/g, "")} = ajv.compile(${fileName.replace(".js", "")}schema);`;
+  })
+  .filter((line) => line !== "")
+  .join("\n")}
+  `;
+  console.log(code);
+  return code;
+}
+
+// Promise.all(schemaModules).then(async (modules) => {
+//   const schemas = modules.map((module) => module.default);
+
+//   const ajv = new Ajv({
+//     allErrors: true,
+//     useDefaults: true,
+//     strict: false,
+//     allowMatchingProperties: true,
+//     allowUnionTypes: true,
+//     strictRequired: false,
+//     schemas: schemas,
+//     code: {
+//       source: true,
+//       es5: false,
+//       esm: true,
+//       lines: true,
+//       optimize: 3,
+//     },
+//   });
+
+//   addFormats(ajv);
+
+//   const modelIndexExports = ["entity"];
+//   const useCaseIndexExports = [];
+
+//   const validateMap = schemas.reduce((acc, schema) => {
+//     if (schema.$id === "definitions.json") return acc;
+//     const schemaTitle = schema.title.replace(/\s+/g, "");
+//     acc[`validate${schemaTitle}`] = schema.$id;
+//     return acc;
+//   }, {});
+
+//   const validatorCode = standaloneCode(ajv, validateMap);
+
+//   fs.writeFileSync(
+//     "src/validators.js",
+//     await formatCode(`/* eslint-disable */\n${banner}\n\n\n${validatorCode}`)
+//   );
+
+//   for (const module of modules) {
+//     const schema = module.default;
+//     if (schema.$id === "definitions.json") continue;
+//     const schemaTitle = schema.title.replace(/\s+/g, "");
+//     const fileName = schemaTitle.charAt(0).toLowerCase() + schemaTitle.slice(1);
+//     modelIndexExports.push(fileName);
+//     //const modelCode = generateModelCode(ajv, module);
+//     //fs.writeFileSync(`src/models/${fileName}.js`, await formatCode(modelCode));
+//   }
+// });
 
 function generateModelCode(ajv, schemaModule) {
   const {
@@ -106,7 +193,7 @@ function generateModelCode(ajv, schemaModule) {
 
   const entityImport = "import { Entity } from './entity';";
 
-  const validatorImport = `import { validate${schemaTitle} as validate } from '../validators';`;
+  const validatorImport = `import { validate${schemaTitle} as validate } from '../validate';`;
 
   const code = `${banner}\n
   ${entityImport}
@@ -146,28 +233,28 @@ function generateModelCode(ajv, schemaModule) {
 	${Object.entries(statics)
     .map(
       ([name, func]) =>
-        `static ${name}${func.toString().slice(func.toString().indexOf("("))}`
+        `static ${name}${func.toString().slice(func.toString().indexOf("("))}`,
     )
     .join("\n    ")}
 	  
 	  ${Object.entries(methods)
       .map(
         ([name, func]) =>
-          `${name}${func.toString().slice(func.toString().indexOf("("))}`
+          `${name}${func.toString().slice(func.toString().indexOf("("))}`,
       )
       .join("\n    ")}
 
 	  ${Object.entries(getters)
       .map(
         ([name, func]) =>
-          `get ${name}${func.toString().slice(func.toString().indexOf("("))}`
+          `get ${name}${func.toString().slice(func.toString().indexOf("("))}`,
       )
       .join("\n    ")}
 
 	  ${Object.entries(setters)
       .map(
         ([name, func]) =>
-          `set ${name}${func.toString().slice(func.toString().indexOf("("))}`
+          `set ${name}${func.toString().slice(func.toString().indexOf("("))}`,
       )
       .join("\n    ")}
   }
@@ -194,7 +281,7 @@ function generateModelCode(ajv, schemaModule) {
 function generateUseCaseCode(
   useCase,
   { method, path: endpoint },
-  description = ""
+  description = "",
 ) {
   const pathParams =
     endpoint.match(/:[a-zA-Z0-9]+/g)?.map((param) => param.replace(":", "")) ||

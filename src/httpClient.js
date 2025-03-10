@@ -237,7 +237,7 @@ export class KohostHTTPClient {
       apiPath = `.${apiPath}`;
     }
     const url = new URL(apiPath, this.baseUrl);
-    const method = config.method.toUpperCase() || "GET";
+    const method = config.method?.toUpperCase() || "GET";
 
     // Add parameters to URL if they exist
     if (config.params && typeof config.params === "object") {
