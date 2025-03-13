@@ -3,7 +3,7 @@ export default {
   $id: "space.json",
   title: "Space",
   type: "object",
-  required: ["id", "name", "type", "discriminator"],
+  required: ["id", "name", "type"],
   additionalProperties: false,
   properties: {
     id: {
@@ -34,6 +34,9 @@ export default {
         "unit",
       ],
     },
+    floor: {
+      type: "string",
+    },
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
@@ -42,12 +45,6 @@ export default {
       description: "This is the category id",
     },
     rooms: {
-      type: "array",
-      items: {
-        type: "string",
-      },
-    },
-    subGroups: {
       type: "array",
       items: {
         type: "string",
@@ -127,15 +124,6 @@ export default {
 };
 
 export const getters = {
-  floor() {
-    const floors = new Set();
-
-    this.rooms.forEach((room) => {
-      if (room.floor) floors.add(room.floor);
-    });
-
-    return floors.size == 1 ? [...floors][0] : undefined;
-  },
   hasDimmer() {
     return this.rooms.some((room) => room.hasDimmer);
   },
