@@ -93,6 +93,7 @@ export default {
         "comelit",
         "crestron",
         "dell",
+        "digital-watchdog",
         "distech",
         "dmp",
         "doorbird",
