@@ -19,7 +19,6 @@ export default {
         "doorStation"
       ]
     },
-
     type: {
       type: "string",
       enum: ["camera"],
@@ -67,8 +66,9 @@ export default {
         driver: {
           type: "string",
           enum: [
-            "cloudflare-stream",
             "aws-kinesis",
+            "cloudflare-stream",
+            "doorbird",
             "digital-watchdog",
             "mediamtx",
           ],
