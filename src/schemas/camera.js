@@ -13,6 +13,13 @@ export default {
     name: {
       type: "string",
     },
+    discriminator: {
+      type: "string",
+      enum: [
+        "doorStation"
+      ]
+    },
+
     type: {
       type: "string",
       enum: ["camera"],
