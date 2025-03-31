@@ -5,7 +5,7 @@ export default {
   type: "object",
   description:
     "An organization is a group or entity that subscribes to Kohost software.",
-  required: ["accountNumber", "name", "smsNumber"],
+  required: ["accountNumber", "name"],
   additionalProperties: false,
   properties: {
     id: {
