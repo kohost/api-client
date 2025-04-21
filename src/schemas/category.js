@@ -34,7 +34,7 @@ export default {
     },
     discriminator: {
       type: "string",
-      enum: ["space", "product", "mediaFile"],
+      enum: ["space", "product", "mediaFile", "property", "user"],
     },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",

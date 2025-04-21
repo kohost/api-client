@@ -10,6 +10,7 @@ import { validateOrganization as validate } from "../validate";
  * @property {"organization"} [type] - Default: "organization"
  * @property {number} accountNumber
  * @property {string} name
+ * @property {string} [smsNumber]
  * @property {string[]} [properties]
  * @property {string} [hostname]
  * @property {{name?: string, short_name?: string, scope?: string, start_url?: string, themeColor?: string, backgroundColor?: string, display?: ("fullscreen"|"standalone"|"minimal-ui"|"browser"), orientation?: ("portrait"|"landscape"), splash?: {src?: string, type?: string, sizes?: string}, icons?: {src?: string, sizes?: string, type?: string}[], logo?: {src?: string, type?: string, sizes?: string}}} [appManifest] - Default: {"name":"Kohost","short_name":"Kohost","start_url":"/","scope":"/","display":"fullscreen","orientation":"portrait","theme_color":"#1d1f22","background_color":"#1d1f22","icons":[{"src":"https://images.kohost.io/cdn-cgi/imagedelivery/vcVX2aBwdFSYr66spcFKaA/9c85047f-ccba-4b1c-3070-5463fbe93b00/w=512","sizes":"512x512","type":"image/png"}],"splash":{"src":"https://images.kohost.io/cdn-cgi/imagedelivery/vcVX2aBwdFSYr66spcFKaA/034fb112-5326-4d37-373e-d1cc2a4d0400/w=1500","sizes":"1500x800","type":"image/jpg"},"logo":{"src":"https://images.kohost.io/cdn-cgi/imagedelivery/vcVX2aBwdFSYr66spcFKaA/1e54c54d-3bac-4745-f46f-c2f98036af00/h=75","sizes":"300x75","type":"image/png"}}
@@ -53,6 +54,7 @@ export class Organization extends Entity {
     if (data.type !== undefined) this.type = data.type;
     this.accountNumber = data.accountNumber;
     this.name = data.name;
+    if (data.smsNumber !== undefined) this.smsNumber = data.smsNumber;
     if (data.properties !== undefined) this.properties = data.properties;
     if (data.hostname !== undefined) this.hostname = data.hostname;
     if (data.appManifest !== undefined) this.appManifest = data.appManifest;
@@ -78,6 +80,7 @@ Object.defineProperty(Organization.prototype, "schema", {
       type: { type: "string", default: "organization", enum: ["organization"] },
       accountNumber: { type: ["number", "null"], minimum: 10000 },
       name: { type: "string" },
+      smsNumber: { type: "string" },
       properties: { type: "array", items: { type: "string" } },
       hostname: { type: ["string", "null"] },
       appManifest: {

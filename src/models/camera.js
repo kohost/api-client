@@ -8,19 +8,20 @@ import { validateCamera as validate } from "../validate";
  * @typedef {Object} CameraData Any smart camera
  * @property {string} id - Identifier of the object.
  * @property {string} [name]
+ * @property {"doorStation"} [discriminator]
  * @property {"camera"} type - Default: "camera"
  * @property {boolean} [offline]
  * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
  * @property {{name?: string, timestamp?: number, description?: string}} [notification]
- * @property {("adlink"|"aws-kinesis"|"bacnet"|"butler"|"comelit"|"crestron"|"dell"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+ * @property {("adlink"|"aws-kinesis"|"bacnet"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
  * @property {{iframe?: string, hls?: string, webRTC?: string, rtsp?: string}} [liveStreams]
  * @property {string} [liveStreams.iframe]
  * @property {string} [liveStreams.hls]
  * @property {string} [liveStreams.webRTC]
  * @property {string} [liveStreams.rtsp]
- * @property {{id?: string, driver?: ("cloudflare-stream"|"aws-kinesis"|"digital-watchdog"|"mediamtx"), allowedOrigins?: string[], authRequired?: boolean, iframe?: string, hls?: string, webRTC?: string, rtsp?: string, previewImage?: string}} [liveStream]
+ * @property {{id?: string, driver?: ("aws-kinesis"|"cloudflare-stream"|"doorbird"|"digital-watchdog"|"mediamtx"), allowedOrigins?: string[], authRequired?: boolean, iframe?: string, hls?: string, webRTC?: string, rtsp?: string, previewImage?: string}} [liveStream]
  * @property {string} [liveStream.id]
- * @property {("cloudflare-stream"|"aws-kinesis"|"digital-watchdog"|"mediamtx")} [liveStream.driver]
+ * @property {("aws-kinesis"|"cloudflare-stream"|"doorbird"|"digital-watchdog"|"mediamtx")} [liveStream.driver]
  * @property {string[]} [liveStream.allowedOrigins]
  * @property {boolean} [liveStream.authRequired]
  * @property {string} [liveStream.iframe]
@@ -50,6 +51,8 @@ export class Camera extends Entity {
     super(data);
     this.id = data.id;
     if (data.name !== undefined) this.name = data.name;
+    if (data.discriminator !== undefined)
+      this.discriminator = data.discriminator;
     this.type = data.type;
     if (data.offline !== undefined) this.offline = data.offline;
     if (data.supportedNotifications !== undefined)
@@ -80,6 +83,7 @@ Object.defineProperty(Camera.prototype, "schema", {
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string" },
+      discriminator: { type: "string", enum: ["doorStation"] },
       type: { type: "string", enum: ["camera"], default: "camera" },
       offline: { type: "boolean" },
       supportedNotifications: {
@@ -107,8 +111,9 @@ Object.defineProperty(Camera.prototype, "schema", {
           driver: {
             type: "string",
             enum: [
-              "cloudflare-stream",
               "aws-kinesis",
+              "cloudflare-stream",
+              "doorbird",
               "digital-watchdog",
               "mediamtx",
             ],
