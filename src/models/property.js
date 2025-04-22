@@ -18,6 +18,8 @@ import { validateProperty as validate } from "../validate";
  * @property {string[]} [testMode.notificationEmailDomains] - Only users with email addreses ending in these domains will receive notifications in test mode, including sms, email, or push.
  * @property {string} timezone - IANA timezone string
  * @property {string} [smsNumber]
+ * @property {string} [voiceNumber]
+ * @property {string[]} [tags]
  * @property {string} [checkInTime]
  * @property {string} [checkOutTime]
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
@@ -119,6 +121,8 @@ export class Property extends Entity {
     if (data.testMode !== undefined) this.testMode = data.testMode;
     this.timezone = data.timezone;
     if (data.smsNumber !== undefined) this.smsNumber = data.smsNumber;
+    if (data.voiceNumber !== undefined) this.voiceNumber = data.voiceNumber;
+    if (data.tags !== undefined) this.tags = data.tags;
     if (data.checkInTime !== undefined) this.checkInTime = data.checkInTime;
     if (data.checkOutTime !== undefined) this.checkOutTime = data.checkOutTime;
     if (data.address !== undefined) this.address = data.address;
@@ -185,6 +189,8 @@ Object.defineProperty(Property.prototype, "schema", {
         examples: ["America/New_York", "America/Los_Angeles"],
       },
       smsNumber: { type: "string" },
+      voiceNumber: { type: "string" },
+      tags: { type: "array", items: { type: "string" } },
       checkInTime: { type: "string" },
       checkOutTime: { type: "string" },
       address: { $ref: "definitions.json#/definitions/address" },

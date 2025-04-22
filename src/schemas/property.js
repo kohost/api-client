@@ -64,6 +64,15 @@ export default {
     smsNumber: {
       type: "string",
     },
+    voiceNumber: {
+      type: "string",
+    },
+    tags: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+    },
     checkInTime: {
       type: "string",
     },

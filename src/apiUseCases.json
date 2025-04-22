@@ -290,6 +290,15 @@
     }
   ],
   [
+    "UpsertSystemCredentials",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["SystemCredentialUpdated"]
+      }
+    }
+  ],
+  [
     "CreatePolicy",
     {
       "http": {
@@ -632,6 +641,15 @@
     }
   ],
   [
+    "MoveAlarm",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/alarms/:id/move"
+      }
+    }
+  ],
+  [
     "CreateCamera",
     {
       "http": {
@@ -695,6 +713,15 @@
     }
   ],
   [
+    "MoveCamera",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/cameras/:id/move"
+      }
+    }
+  ],
+  [
     "CreateCourtesy",
     {
       "http": {
@@ -745,6 +772,15 @@
       "http": {
         "method": "POST",
         "path": "/rooms/:roomId/courtesy/:id"
+      }
+    }
+  ],
+  [
+    "MoveCourtesy",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/courtesy/:id/move"
       }
     }
   ],
@@ -803,6 +839,15 @@
     }
   ],
   [
+    "MoveDimmer",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/dimmers/:id/move"
+      }
+    }
+  ],
+  [
     "CreateLock",
     {
       "http": {
@@ -853,6 +898,15 @@
       "http": {
         "method": "POST",
         "path": "/rooms/:roomId/locks/:id"
+      }
+    }
+  ],
+  [
+    "MoveLock",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/locks/:id/move"
       }
     }
   ],
@@ -920,6 +974,15 @@
     }
   ],
   [
+    "MoveSwitch",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/switches/:id/move"
+      }
+    }
+  ],
+  [
     "CreateMediaSource",
     {
       "http": {
@@ -970,6 +1033,15 @@
       "http": {
         "method": "POST",
         "path": "/rooms/:roomId/mediaSources/:id"
+      }
+    }
+  ],
+  [
+    "MoveMediaSource",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/mediaSources/:id/move"
       }
     }
   ],
@@ -1028,6 +1100,15 @@
     }
   ],
   [
+    "MoveThermostat",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/thermostats/:id/move"
+      }
+    }
+  ],
+  [
     "CreateWindowCovering",
     {
       "http": {
@@ -1078,6 +1159,15 @@
       "http": {
         "method": "POST",
         "path": "/rooms/:roomId/windowCoverings/:id"
+      }
+    }
+  ],
+  [
+    "MoveWindowCovering",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/windowCoverings/:id/move"
       }
     }
   ],
@@ -2289,6 +2379,12 @@
         "method": "DELETE",
         "path": "/automations/:id"
       }
+    }
+  ],
+  [
+    "UpdateAutomationJobStartDate",
+    {
+      "http": false
     }
   ]
 ]
