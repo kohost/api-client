@@ -8,7 +8,7 @@ import { validateSystemUser as validate } from "../validate";
  * @typedef {Object} SystemUserData A system user is a user that originated from an external 3rd party system.
  * @property {string} id - Identifier of the object.
  * @property {"systemUser"} [type] - Default: "systemUser"
- * @property {("adlink"|"aws-kinesis"|"bacnet"|"butler"|"comelit"|"crestron"|"dell"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
+ * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
  * @property {string} firstName
  * @property {string} lastName
  * @property {string} [phone]
@@ -22,7 +22,7 @@ import { validateSystemUser as validate } from "../validate";
  * @property {string} [nationality]
  * @property {string[]} [notes]
  * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}[]} [files]
- * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, systemId?: any}[]} [identifications]
+ * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, issuingState?: string, systemId?: any}[]} [identifications]
  * @property {{id?: any, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: string, maskedNumber: string, issued?: string, expires: string, systemId?: any}[]} [payments]
  * @property {{id?: string, name?: string, date?: string, price?: number, tax?: number}[]} [revenue]
  * @property {(string|object)} [createdAt]

@@ -27,7 +27,7 @@ import { validateUser as validate } from "../validate";
  * @property {{organizationId: string, propertyId: string, notifications?: {discriminator: ("observerTicketCreated"|"observerTicketResolved"), enabled: boolean}[]}[]} [preferences]
  * @property {string[]} [notes]
  * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}[]} [files]
- * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, systemId?: any}[]} [identifications]
+ * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, issuingState?: string, systemId?: any}[]} [identifications]
  * @property {{id?: any, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: string, maskedNumber: string, issued?: string, expires: string, systemId?: any}[]} [payments]
  * @property {{accuracy: number, latitude: number, longitude: number, timestamp: number}} [location]
  * @property {number} location.accuracy

@@ -18,6 +18,7 @@ import { validateIdentification as validate } from "../validate";
  * @property {string} [firstName]
  * @property {string} [lastName]
  * @property {string} [issuingCountry]
+ * @property {string} [issuingState]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  */
 
@@ -47,6 +48,7 @@ export class Identification extends Entity {
     if (data.lastName !== undefined) this.lastName = data.lastName;
     if (data.issuingCountry !== undefined)
       this.issuingCountry = data.issuingCountry;
+    if (data.issuingState !== undefined) this.issuingState = data.issuingState;
     if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
@@ -76,6 +78,7 @@ Object.defineProperty(Identification.prototype, "schema", {
       firstName: { type: "string" },
       lastName: { type: "string" },
       issuingCountry: { type: "string", minLength: 2, maxLength: 2 },
+      issuingState: { type: "string", minLength: 2, maxLength: 2 },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
     },
   },

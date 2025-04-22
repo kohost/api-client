@@ -9,11 +9,11 @@ import { validateSpace as validate } from "../validate";
  * @property {string} id - Identifier of the object.
  * @property {string} name
  * @property {"space"} type - Default: "space"
- * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit")} discriminator
- * @property {("adlink"|"aws-kinesis"|"bacnet"|"butler"|"comelit"|"crestron"|"dell"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
+ * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit")} [discriminator]
+ * @property {string} [floor]
+ * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
  * @property {string} [category] - This is the category id
  * @property {string[]} [rooms]
- * @property {string[]} [subGroups]
  * @property {boolean} [occupied]
  * @property {boolean} [inUse]
  * @property {{active?: boolean, activatedAt?: (string|object), allowed?: boolean, previousState?: object}} [eco] - Default: {"active":false,"allowed":false,"previousState":null}
@@ -43,11 +43,12 @@ export class Space extends Entity {
     this.id = data.id;
     this.name = data.name;
     this.type = data.type;
-    this.discriminator = data.discriminator;
+    if (data.discriminator !== undefined)
+      this.discriminator = data.discriminator;
+    if (data.floor !== undefined) this.floor = data.floor;
     if (data.driver !== undefined) this.driver = data.driver;
     if (data.category !== undefined) this.category = data.category;
     if (data.rooms !== undefined) this.rooms = data.rooms;
-    if (data.subGroups !== undefined) this.subGroups = data.subGroups;
     if (data.occupied !== undefined) this.occupied = data.occupied;
     if (data.inUse !== undefined) this.inUse = data.inUse;
     if (data.eco !== undefined) this.eco = data.eco;
@@ -61,15 +62,6 @@ export class Space extends Entity {
     if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 
-  get floor() {
-    const floors = new Set();
-
-    this.rooms.forEach((room) => {
-      if (room.floor) floors.add(room.floor);
-    });
-
-    return floors.size == 1 ? [...floors][0] : undefined;
-  }
   get hasDimmer() {
     return this.rooms.some((room) => room.hasDimmer);
   }
@@ -105,7 +97,7 @@ Object.defineProperty(Space.prototype, "schema", {
     $id: "space.json",
     title: "Space",
     type: "object",
-    required: ["id", "name", "type", "discriminator"],
+    required: ["id", "name", "type"],
     additionalProperties: false,
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
@@ -127,10 +119,10 @@ Object.defineProperty(Space.prototype, "schema", {
           "unit",
         ],
       },
+      floor: { type: "string" },
       driver: { $ref: "definitions.json#/definitions/driver" },
       category: { type: "string", description: "This is the category id" },
       rooms: { type: "array", items: { type: "string" } },
-      subGroups: { type: "array", items: { type: "string" } },
       occupied: { type: "boolean" },
       inUse: { type: "boolean" },
       eco: {

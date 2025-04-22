@@ -55,6 +55,11 @@ export default {
       minLength: 2,
       maxLength: 2,
     },
+    issuingState: {
+      type: "string",
+      minLength: 2,
+      maxLength: 2,
+    },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
     },
