@@ -10,15 +10,15 @@ import { validateAutomation as validate } from "../validate";
  * @property {string} [name] - The friendly name of the automation
  * @property {"automation"} type - Default: "automation"
  * @property {boolean} [isEnabled] - Whether the automation is currently enabled. Default: true
- * @property {{discriminator: "time", schedule: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}}} trigger - The trigger that initiates the automation
- * @property {"time"} trigger.discriminator - Type of trigger
+ * @property {{discriminator: ("time"|"event"), schedule: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}}} trigger - The trigger that initiates the automation
+ * @property {("time"|"event")} trigger.discriminator - Type of trigger
  * @property {{days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}} trigger.schedule - Schedule for time-based triggers
  * @property {number[]} trigger.schedule.days - Days of the week (0 = Sunday, 6 = Saturday)
  * @property {string} trigger.schedule.time - Time of day to trigger the automation
  * @property {number} [trigger.schedule.timeOffsetSeconds] - Offset in seconds from the scheduled time. Default: 0
  * @property {boolean} [trigger.schedule.repeat] - Whether the schedule repeats. Default: true
  * @property {string} trigger.schedule.timezone - Timezone for the schedule (IANA timezone format)
- * @property {{deviceId: string, roomId: string, discriminator: string, duration?: number, state: {property: string, value: (string|number|boolean)}[]}[]} actions - Actions to perform when the trigger conditions are met
+ * @property {{entityId?: string, entityType?: "switch", deviceId: string, roomId: string, discriminator: string, duration?: number, state: {property: string, value: (string|number|boolean)}[]}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  * @property {(string|object)} [lastTriggeredAt] - When the automation was last triggered
@@ -46,22 +46,6 @@ export class Automation extends Entity {
     if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
     if (data.lastTriggeredAt !== undefined)
       this.lastTriggeredAt = data.lastTriggeredAt;
-  }
-
-  get isTimeBased() {
-    return (
-      this.discriminator === "time" ||
-      (this.trigger && this.trigger.type === "time")
-    );
-  }
-  get isDeviceBased() {
-    return (
-      this.discriminator === "device" ||
-      (this.trigger && this.trigger.type !== "time")
-    );
-  }
-  get isRepeating() {
-    return this.isTimeBased() && this.trigger?.schedule?.repeat !== false;
   }
 }
 
@@ -92,7 +76,7 @@ Object.defineProperty(Automation.prototype, "schema", {
         properties: {
           discriminator: {
             type: "string",
-            enum: ["time"],
+            enum: ["time", "event"],
             description: "Type of trigger",
           },
           schedule: {
@@ -134,6 +118,15 @@ Object.defineProperty(Automation.prototype, "schema", {
           type: "object",
           required: ["deviceId", "roomId", "discriminator", "state"],
           properties: {
+            entityId: {
+              type: "string",
+              description: "ID of the entity to control",
+            },
+            entityType: {
+              type: "string",
+              description: "Type of entity to control",
+              enum: ["switch"],
+            },
             deviceId: {
               type: "string",
               description: "ID of the device to control",

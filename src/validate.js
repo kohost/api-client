@@ -25,6 +25,7 @@ import logschema from "./schemas/log.js";
 import mediaFileschema from "./schemas/mediaFile.js";
 import mediaSourceschema from "./schemas/mediaSource.js";
 import motionSensorschema from "./schemas/motionSensor.js";
+import notificationschema from "./schemas/notification.js";
 import orderschema from "./schemas/order.js";
 import organizationschema from "./schemas/organization.js";
 import paymentschema from "./schemas/payment.js";
@@ -69,6 +70,7 @@ const schemas = [
   mediaFileschema,
   mediaSourceschema,
   motionSensorschema,
+  notificationschema,
   orderschema,
   organizationschema,
   paymentschema,
@@ -124,6 +126,7 @@ export const validateLog = ajv.compile(logschema);
 export const validateMediaFile = ajv.compile(mediaFileschema);
 export const validateMediaSource = ajv.compile(mediaSourceschema);
 export const validateMotionSensor = ajv.compile(motionSensorschema);
+export const validateNotification = ajv.compile(notificationschema);
 export const validateOrder = ajv.compile(orderschema);
 export const validateOrganization = ajv.compile(organizationschema);
 export const validatePayment = ajv.compile(paymentschema);

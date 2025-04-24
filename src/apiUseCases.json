@@ -2386,5 +2386,50 @@
     {
       "http": false
     }
+  ],
+  [
+    "CreateNotification",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/notifications"
+      }
+    }
+  ],
+  [
+    "DeleteNotification",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/notifications/:id"
+      }
+    }
+  ],
+  [
+    "DescribeNotification",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/notifications/:id"
+      }
+    }
+  ],
+  [
+    "ListNotifications",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/notifications"
+      }
+    }
+  ],
+  [
+    "UpdateNotification",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/notifications/:id"
+      }
+    }
   ]
 ]

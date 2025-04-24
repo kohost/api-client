@@ -125,59 +125,8 @@ ${Array.from(schemas.entries())
   .filter((line) => line !== "")
   .join("\n")}
   `;
-  console.log(code);
   return code;
 }
-
-// Promise.all(schemaModules).then(async (modules) => {
-//   const schemas = modules.map((module) => module.default);
-
-//   const ajv = new Ajv({
-//     allErrors: true,
-//     useDefaults: true,
-//     strict: false,
-//     allowMatchingProperties: true,
-//     allowUnionTypes: true,
-//     strictRequired: false,
-//     schemas: schemas,
-//     code: {
-//       source: true,
-//       es5: false,
-//       esm: true,
-//       lines: true,
-//       optimize: 3,
-//     },
-//   });
-
-//   addFormats(ajv);
-
-//   const modelIndexExports = ["entity"];
-//   const useCaseIndexExports = [];
-
-//   const validateMap = schemas.reduce((acc, schema) => {
-//     if (schema.$id === "definitions.json") return acc;
-//     const schemaTitle = schema.title.replace(/\s+/g, "");
-//     acc[`validate${schemaTitle}`] = schema.$id;
-//     return acc;
-//   }, {});
-
-//   const validatorCode = standaloneCode(ajv, validateMap);
-
-//   fs.writeFileSync(
-//     "src/validators.js",
-//     await formatCode(`/* eslint-disable */\n${banner}\n\n\n${validatorCode}`)
-//   );
-
-//   for (const module of modules) {
-//     const schema = module.default;
-//     if (schema.$id === "definitions.json") continue;
-//     const schemaTitle = schema.title.replace(/\s+/g, "");
-//     const fileName = schemaTitle.charAt(0).toLowerCase() + schemaTitle.slice(1);
-//     modelIndexExports.push(fileName);
-//     //const modelCode = generateModelCode(ajv, module);
-//     //fs.writeFileSync(`src/models/${fileName}.js`, await formatCode(modelCode));
-//   }
-// });
 
 function generateModelCode(ajv, schemaModule) {
   const {

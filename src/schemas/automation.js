@@ -23,7 +23,6 @@ export default {
       description: "Whether the automation is currently enabled",
       default: true,
     },
-
     trigger: {
       type: "object",
       description: "The trigger that initiates the automation",
@@ -31,7 +30,7 @@ export default {
       properties: {
         discriminator: {
           type: "string",
-          enum: ["time"],
+          enum: ["time", "event"],
           description: "Type of trigger",
         },
         // Time-based trigger properties
@@ -78,6 +77,15 @@ export default {
         type: "object",
         required: ["deviceId", "roomId", "discriminator", "state"],
         properties: {
+          entityId: {
+            type: "string",
+            description: "ID of the entity to control",
+          },
+          entityType: {
+            type: "string",
+            description: "Type of entity to control",
+            enum: ["switch"],
+          },
           deviceId: {
             type: "string",
             description: "ID of the device to control",
@@ -131,36 +139,4 @@ export default {
     },
   },
   additionalProperties: false,
-};
-
-export const getters = {
-  /**
-   * Check if the automation is time-based
-   * @returns {boolean} True if the automation is time-based
-   */
-  isTimeBased() {
-    return (
-      this.discriminator === "time" ||
-      (this.trigger && this.trigger.type === "time")
-    );
-  },
-
-  /**
-   * Check if the automation is device-based
-   * @returns {boolean} True if the automation is device-based
-   */
-  isDeviceBased() {
-    return (
-      this.discriminator === "device" ||
-      (this.trigger && this.trigger.type !== "time")
-    );
-  },
-
-  /**
-   * Check if the automation is repeating (only applicable for time-based automations)
-   * @returns {boolean} True if the automation repeats
-   */
-  isRepeating() {
-    return this.isTimeBased() && this.trigger?.schedule?.repeat !== false;
-  },
 };
