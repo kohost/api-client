@@ -27,5 +27,8 @@ export default {
     content: {
       type: "string",
     },
+    subject: {
+      type: "string",
+    },
   },
 };

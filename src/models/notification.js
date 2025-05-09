@@ -12,6 +12,7 @@ import { validateNotification as validate } from "../validate";
  * @property {string} [name]
  * @property {("sms"|"email"|"push")} discriminator
  * @property {string} content
+ * @property {string} [subject]
  */
 
 /**
@@ -32,6 +33,7 @@ export class Notification extends Entity {
     if (data.name !== undefined) this.name = data.name;
     this.discriminator = data.discriminator;
     this.content = data.content;
+    if (data.subject !== undefined) this.subject = data.subject;
   }
 }
 
@@ -49,6 +51,7 @@ Object.defineProperty(Notification.prototype, "schema", {
       name: { type: "string" },
       discriminator: { type: "string", enum: ["sms", "email", "push"] },
       content: { type: "string" },
+      subject: { type: "string" },
     },
   },
 });
