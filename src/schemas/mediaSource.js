@@ -52,6 +52,7 @@ export default {
         "AKB76039803",
         "BN59-01388A",
         "TRY01",
+        "1035792",
       ],
     },
     name: {
