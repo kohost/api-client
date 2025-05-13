@@ -26,11 +26,11 @@ export default {
     trigger: {
       type: "object",
       description: "The trigger that initiates the automation",
-      required: ["discriminator", "schedule"],
+      required: ["discriminator"],
       properties: {
         discriminator: {
           type: "string",
-          enum: ["time", "event"],
+          enum: ["schedule", "event"],
           description: "Type of trigger",
         },
         // Time-based trigger properties
@@ -68,6 +68,47 @@ export default {
             },
           },
         },
+        event: {
+          type: "object",
+          required: ["eventName", "eventProperties", "match"],
+          properties: {
+            eventName: {
+              type: "string",
+              description:
+                "Name of the event that triggers the automation actions",
+            },
+            eventProperties: {
+              type: "array",
+              description:
+                "Properties of the event that triggers the automation actions",
+              items: {
+                type: "object",
+                required: ["property", "value", "operator"],
+                properties: {
+                  property: {
+                    type: "string",
+                    description: "Property of the event",
+                  },
+                  value: {
+                    type: "string",
+                    description: "Value of the property",
+                  },
+                  operator: {
+                    type: "string",
+                    description: "Operator of the property",
+                    enum: ["==", "!=", ">", ">=", "<", "<="],
+                  },
+                },
+              },
+            },
+            match: {
+              type: "string",
+              description:
+                "Match criteria for the event to trigger the automation actions",
+              enum: ["any", "all"],
+            },
+          },
+        },
       },
     },
     actions: {
@@ -75,7 +116,7 @@ export default {
       description: "Actions to perform when the trigger conditions are met",
       items: {
         type: "object",
-        required: ["deviceId", "roomId", "discriminator", "state"],
+        required: ["useCase", "useCaseParams"],
         properties: {
           entityId: {
             type: "string",
@@ -85,6 +126,20 @@ export default {
             type: "string",
             description: "Type of entity to control",
             enum: ["switch"],
+          },
+          useCase: {
+            type: "string",
+            description: "Name of the use case to call",
+          },
+          useCaseParams: {
+            type: "object",
+            description: "Parameters to pass to the use case",
+            properties: {
+              data: {
+                type: "object",
+                description: "Data to pass to the use case",
+              },
+            },
           },
           deviceId: {
             type: "string",

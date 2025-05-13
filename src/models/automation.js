@@ -10,15 +10,19 @@ import { validateAutomation as validate } from "../validate";
  * @property {string} [name] - The friendly name of the automation
  * @property {"automation"} type - Default: "automation"
  * @property {boolean} [isEnabled] - Whether the automation is currently enabled. Default: true
- * @property {{discriminator: ("time"|"event"), schedule: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}}} trigger - The trigger that initiates the automation
- * @property {("time"|"event")} trigger.discriminator - Type of trigger
- * @property {{days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}} trigger.schedule - Schedule for time-based triggers
+ * @property {{discriminator: ("schedule"|"event"), schedule?: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}, event?: {eventName: string, eventProperties: {property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<=")}[], match: ("any"|"all")}}} trigger - The trigger that initiates the automation
+ * @property {("schedule"|"event")} trigger.discriminator - Type of trigger
+ * @property {{days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}} [trigger.schedule] - Schedule for time-based triggers
  * @property {number[]} trigger.schedule.days - Days of the week (0 = Sunday, 6 = Saturday)
  * @property {string} trigger.schedule.time - Time of day to trigger the automation
  * @property {number} [trigger.schedule.timeOffsetSeconds] - Offset in seconds from the scheduled time. Default: 0
  * @property {boolean} [trigger.schedule.repeat] - Whether the schedule repeats. Default: true
  * @property {string} trigger.schedule.timezone - Timezone for the schedule (IANA timezone format)
- * @property {{entityId?: string, entityType?: "switch", deviceId: string, roomId: string, discriminator: string, duration?: number, state: {property: string, value: (string|number|boolean)}[]}[]} actions - Actions to perform when the trigger conditions are met
+ * @property {{eventName: string, eventProperties: {property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<=")}[], match: ("any"|"all")}} [trigger.event]
+ * @property {string} trigger.event.eventName - Name of the event that triggers the automation actions
+ * @property {{property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<=")}[]} trigger.event.eventProperties - Properties of the event that triggers the automation actions
+ * @property {("any"|"all")} trigger.event.match - Match criteria for the event to trigger the automation actions
+ * @property {{entityId?: string, entityType?: "switch", useCase: string, useCaseParams: {data?: object}, deviceId?: string, roomId?: string, discriminator?: string, duration?: number, state?: {property: string, value: (string|number|boolean)}[]}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  * @property {(string|object)} [lastTriggeredAt] - When the automation was last triggered
@@ -72,11 +76,11 @@ Object.defineProperty(Automation.prototype, "schema", {
       trigger: {
         type: "object",
         description: "The trigger that initiates the automation",
-        required: ["discriminator", "schedule"],
+        required: ["discriminator"],
         properties: {
           discriminator: {
             type: "string",
-            enum: ["time", "event"],
+            enum: ["schedule", "event"],
             description: "Type of trigger",
           },
           schedule: {
@@ -109,6 +113,47 @@ Object.defineProperty(Automation.prototype, "schema", {
               },
             },
           },
+          event: {
+            type: "object",
+            required: ["eventName", "eventProperties", "match"],
+            properties: {
+              eventName: {
+                type: "string",
+                description:
+                  "Name of the event that triggers the automation actions",
+              },
+              eventProperties: {
+                type: "array",
+                description:
+                  "Properties of the event that triggers the automation actions",
+                items: {
+                  type: "object",
+                  required: ["property", "value", "operator"],
+                  properties: {
+                    property: {
+                      type: "string",
+                      description: "Property of the event",
+                    },
+                    value: {
+                      type: "string",
+                      description: "Value of the property",
+                    },
+                    operator: {
+                      type: "string",
+                      description: "Operator of the property",
+                      enum: ["==", "!=", ">", ">=", "<", "<="],
+                    },
+                  },
+                },
+              },
+              match: {
+                type: "string",
+                description:
+                  "Match criteria for the event to trigger the automation actions",
+                enum: ["any", "all"],
+              },
+            },
+          },
         },
       },
       actions: {
@@ -116,7 +161,7 @@ Object.defineProperty(Automation.prototype, "schema", {
         description: "Actions to perform when the trigger conditions are met",
         items: {
           type: "object",
-          required: ["deviceId", "roomId", "discriminator", "state"],
+          required: ["useCase", "useCaseParams"],
           properties: {
             entityId: {
               type: "string",
@@ -126,6 +171,20 @@ Object.defineProperty(Automation.prototype, "schema", {
               type: "string",
               description: "Type of entity to control",
               enum: ["switch"],
+            },
+            useCase: {
+              type: "string",
+              description: "Name of the use case to call",
+            },
+            useCaseParams: {
+              type: "object",
+              description: "Parameters to pass to the use case",
+              properties: {
+                data: {
+                  type: "object",
+                  description: "Data to pass to the use case",
+                },
+              },
             },
             deviceId: {
               type: "string",
