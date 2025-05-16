@@ -118,15 +118,6 @@ export default {
         type: "object",
         required: ["useCase", "useCaseParams"],
         properties: {
-          entityId: {
-            type: "string",
-            description: "ID of the entity to control",
-          },
-          entityType: {
-            type: "string",
-            description: "Type of entity to control",
-            enum: ["switch"],
-          },
           useCase: {
             type: "string",
             description: "Name of the use case to call",
@@ -136,51 +127,14 @@ export default {
             description: "Parameters to pass to the use case",
             properties: {
               data: {
-                type: "object",
+                type: ["object", "array"],
                 description: "Data to pass to the use case",
               },
             },
           },
-          deviceId: {
-            type: "string",
-            description: "ID of the device to control",
-          },
-          roomId: {
-            type: "string",
-            description: "ID of the room containing the device",
-          },
-          discriminator: {
-            type: "string",
-            description:
-              "Type discriminator for the device (e.g., 'windowCovering', 'switch')",
-          },
-          duration: {
-            type: "integer",
-            description:
-              "Duration in seconds to keep the device in the configured state",
-            minimum: 0,
-          },
-          state: {
-            type: "array",
-            items: {
-              type: "object",
-              required: ["property", "value"],
-              properties: {
-                property: {
-                  type: "string",
-                  description:
-                    "Property to set (e.g., 'state', 'level', 'setpoint')",
-                },
-                value: {
-                  type: ["string", "number", "boolean"],
-                  description: "Value to set the property to",
-                },
-              },
-            },
-          },
         },
+        minItems: 1,
       },
-      minItems: 1,
     },
     createdAt: {
       $ref: "definitions.json#/definitions/createdAt",

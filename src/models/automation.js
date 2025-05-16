@@ -22,7 +22,7 @@ import { validateAutomation as validate } from "../validate";
  * @property {string} trigger.event.eventName - Name of the event that triggers the automation actions
  * @property {{property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<=")}[]} trigger.event.eventProperties - Properties of the event that triggers the automation actions
  * @property {("any"|"all")} trigger.event.match - Match criteria for the event to trigger the automation actions
- * @property {{entityId?: string, entityType?: "switch", useCase: string, useCaseParams: {data?: object}, deviceId?: string, roomId?: string, discriminator?: string, duration?: number, state?: {property: string, value: (string|number|boolean)}[]}[]} actions - Actions to perform when the trigger conditions are met
+ * @property {{useCase: string, useCaseParams: {data?: (object|array)}}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  * @property {(string|object)} [lastTriggeredAt] - When the automation was last triggered
@@ -163,15 +163,6 @@ Object.defineProperty(Automation.prototype, "schema", {
           type: "object",
           required: ["useCase", "useCaseParams"],
           properties: {
-            entityId: {
-              type: "string",
-              description: "ID of the entity to control",
-            },
-            entityType: {
-              type: "string",
-              description: "Type of entity to control",
-              enum: ["switch"],
-            },
             useCase: {
               type: "string",
               description: "Name of the use case to call",
@@ -181,51 +172,14 @@ Object.defineProperty(Automation.prototype, "schema", {
               description: "Parameters to pass to the use case",
               properties: {
                 data: {
-                  type: "object",
+                  type: ["object", "array"],
                   description: "Data to pass to the use case",
                 },
               },
             },
-            deviceId: {
-              type: "string",
-              description: "ID of the device to control",
-            },
-            roomId: {
-              type: "string",
-              description: "ID of the room containing the device",
-            },
-            discriminator: {
-              type: "string",
-              description:
-                "Type discriminator for the device (e.g., 'windowCovering', 'switch')",
-            },
-            duration: {
-              type: "integer",
-              description:
-                "Duration in seconds to keep the device in the configured state",
-              minimum: 0,
-            },
-            state: {
-              type: "array",
-              items: {
-                type: "object",
-                required: ["property", "value"],
-                properties: {
-                  property: {
-                    type: "string",
-                    description:
-                      "Property to set (e.g., 'state', 'level', 'setpoint')",
-                  },
-                  value: {
-                    type: ["string", "number", "boolean"],
-                    description: "Value to set the property to",
-                  },
-                },
-              },
-            },
           },
+          minItems: 1,
         },
-        minItems: 1,
       },
       createdAt: { $ref: "definitions.json#/definitions/createdAt" },
       updatedAt: { $ref: "definitions.json#/definitions/updatedAt" },
