@@ -722,6 +722,15 @@
     }
   ],
   [
+    "DescribeCameraConfig",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/rooms/:roomId/cameras/:id/config"
+      }
+    }
+  ],
+  [
     "CreateCourtesy",
     {
       "http": {
@@ -2388,6 +2397,15 @@
     }
   ],
   [
+    "RunEventAutomations",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["RoomDeviceUpdated", "SOSActive", "SOSInactive"]
+      }
+    }
+  ],
+  [
     "CreateNotification",
     {
       "http": {
@@ -2430,6 +2448,18 @@
         "method": "PUT",
         "path": "/notifications/:id"
       }
+    }
+  ],
+  [
+    "CreateDefaultNotifications",
+    {
+      "http": false
+    }
+  ],
+  [
+    "SendSMS",
+    {
+      "http": false
     }
   ]
 ]

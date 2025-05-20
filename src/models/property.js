@@ -25,13 +25,14 @@ import { validateProperty as validate } from "../validate";
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
  * @property {number} [latitude]
  * @property {number} [longitude]
- * @property {{RoomControl?: {disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object}, CheckIn?: {payment?: any, identification?: any, earlyCheckIn?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number, minimumTime?: string}, roomUpgrades?: any, pet?: any, promos?: any}, CheckOut?: {lateCheckOut?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number}}, Concierge?: {timeTracking?: boolean, tipping?: boolean, feedback?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), quickServices?: {name: string, description: string, department?: string, image: {id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}}[], issues?: {syncWithPropertyId?: string}}, DigitalKey?: {system?: ("salto"|"dormakaba"), systemOnline?: boolean, systemConfig?: {legicUrl?: string, legicWalletName?: string, legicAppId?: number, legicTechUsername?: string, legicTechPassword?: string}, enableApp?: boolean, branding?: {logo?: string, gradient?: string[], highlightedGradient?: string[]}}, SOS?: {active?: boolean, activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]}, Elevator?: object, Experiences?: object, Dining?: {system?: "gotab", systemConfig?: {landingUrl?: string, includeUserDetails?: boolean}}, Rentals?: object, Shop?: object, Spa?: object, Valet?: object}} [appFeatures] - Default: {"RoomControl":{}}
- * @property {{disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object}} [appFeatures.RoomControl]
+ * @property {{RoomControl?: {disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object, cameraConfig?: object}, CheckIn?: {payment?: any, identification?: any, earlyCheckIn?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number, minimumTime?: string}, roomUpgrades?: any, pet?: any, promos?: any}, CheckOut?: {lateCheckOut?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number}}, Concierge?: {timeTracking?: boolean, tipping?: boolean, feedback?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), quickServices?: {name: string, description: string, department?: string, image: {id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}}[], issues?: {syncWithPropertyId?: string}}, DigitalKey?: {system?: ("salto"|"dormakaba"), systemOnline?: boolean, systemConfig?: {legicUrl?: string, legicWalletName?: string, legicAppId?: number, legicTechUsername?: string, legicTechPassword?: string}, enableApp?: boolean, branding?: {logo?: string, gradient?: string[], highlightedGradient?: string[]}}, SOS?: {active?: boolean, activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]}, Elevator?: object, Experiences?: object, Dining?: {system?: "gotab", systemConfig?: {landingUrl?: string, includeUserDetails?: boolean}}, Rentals?: object, Shop?: object, Spa?: object, Valet?: object}} [appFeatures] - Default: {"RoomControl":{}}
+ * @property {{disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object, cameraConfig?: object}} [appFeatures.RoomControl]
  * @property {("climate"|"lights"|"shades"|"tv"|"doors")[]} [appFeatures.RoomControl.disabledSystems]
  * @property {string[]} [appFeatures.RoomControl.excludedDeviceIds] - Default: []
  * @property {{spaces?: string[]}} [appFeatures.RoomControl.commonAreas]
  * @property {string[]} [appFeatures.RoomControl.commonAreas.spaces]
  * @property {object} [appFeatures.RoomControl.alarmConfig]
+ * @property {object} [appFeatures.RoomControl.cameraConfig]
  * @property {{payment?: any, identification?: any, earlyCheckIn?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number, minimumTime?: string}, roomUpgrades?: any, pet?: any, promos?: any}} [appFeatures.CheckIn]
  * @property {any} [appFeatures.CheckIn.payment]
  * @property {any} [appFeatures.CheckIn.identification]
@@ -245,6 +246,27 @@ Object.defineProperty(Property.prototype, "schema", {
                     },
                   },
                 ],
+              },
+              cameraConfig: {
+                type: "object",
+                doorStationConfig: {
+                  type: "object",
+                  patternProperties: {
+                    "^[a-zA-Z0-9]+$": {
+                      type: "object",
+                      properties: {
+                        lockIds: {
+                          type: "array",
+                          items: { type: "string" },
+                          default: [],
+                          description:
+                            "List of lock ids that will be available for control from this door station",
+                        },
+                      },
+                    },
+                  },
+                },
+                examples: [{ wZz7hucY: { lockIds: ["wc87hucb", "wc87hucd"] } }],
               },
             },
             additionalProperties: false,
