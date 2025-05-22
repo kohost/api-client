@@ -32,6 +32,11 @@ export default {
         "pool",
         "restaurant",
         "unit",
+        "cafeteria",
+        "multiPurposeRoom",
+        "library",
+        "idf",
+        "restroom",
       ],
     },
     floor: {
@@ -49,6 +54,14 @@ export default {
       items: {
         type: "string",
       },
+      description: "IDs of rooms in the space",
+    },
+    spaces: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+      description: "IDs of sub-spaces in the space",
     },
     occupied: {
       type: "boolean",
