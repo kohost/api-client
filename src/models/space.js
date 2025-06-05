@@ -9,11 +9,12 @@ import { validateSpace as validate } from "../validate";
  * @property {string} id - Identifier of the object.
  * @property {string} name
  * @property {"space"} type - Default: "space"
- * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit")} [discriminator]
+ * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit"|"cafeteria"|"multiPurposeRoom"|"library"|"idf"|"restroom")} [discriminator]
  * @property {string} [floor]
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
  * @property {string} [category] - This is the category id
- * @property {string[]} [rooms]
+ * @property {string[]} [rooms] - IDs of rooms in the space
+ * @property {string[]} [spaces] - IDs of sub-spaces in the space
  * @property {boolean} [occupied]
  * @property {boolean} [inUse]
  * @property {{active?: boolean, activatedAt?: (string|object), allowed?: boolean, previousState?: object}} [eco] - Default: {"active":false,"allowed":false,"previousState":null}
@@ -49,6 +50,7 @@ export class Space extends Entity {
     if (data.driver !== undefined) this.driver = data.driver;
     if (data.category !== undefined) this.category = data.category;
     if (data.rooms !== undefined) this.rooms = data.rooms;
+    if (data.spaces !== undefined) this.spaces = data.spaces;
     if (data.occupied !== undefined) this.occupied = data.occupied;
     if (data.inUse !== undefined) this.inUse = data.inUse;
     if (data.eco !== undefined) this.eco = data.eco;
@@ -117,12 +119,26 @@ Object.defineProperty(Space.prototype, "schema", {
           "pool",
           "restaurant",
           "unit",
+          "cafeteria",
+          "multiPurposeRoom",
+          "library",
+          "idf",
+          "restroom",
         ],
       },
       floor: { type: "string" },
       driver: { $ref: "definitions.json#/definitions/driver" },
       category: { type: "string", description: "This is the category id" },
-      rooms: { type: "array", items: { type: "string" } },
+      rooms: {
+        type: "array",
+        items: { type: "string" },
+        description: "IDs of rooms in the space",
+      },
+      spaces: {
+        type: "array",
+        items: { type: "string" },
+        description: "IDs of sub-spaces in the space",
+      },
       occupied: { type: "boolean" },
       inUse: { type: "boolean" },
       eco: {

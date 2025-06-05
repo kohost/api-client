@@ -4,6 +4,7 @@ export default {
   title: "Announcement",
   description: "Announcement message sent to users",
   type: "object",
+  required: ["id", "type", "body"],
   properties: {
     id: { $ref: "definitions.json#/definitions/id" },
     type: {

@@ -6,11 +6,11 @@ import { validateAnnouncement as validate } from "../validate";
 
 /**
  * @typedef {Object} AnnouncementData Announcement message sent to users
- * @property {string} [id] - Identifier of the object.
- * @property {"announcement"} [type] - Default: "announcement"
+ * @property {string} id - Identifier of the object.
+ * @property {"announcement"} type - Default: "announcement"
  * @property {string[]} [users]
  * @property {string} [group]
- * @property {string} [body]
+ * @property {string} body
  * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [media] - Any media file
  * @property {string} [sentBy]
  * @property {string[]} [tags]
@@ -30,11 +30,11 @@ export class Announcement extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
-    if (data.type !== undefined) this.type = data.type;
+    this.id = data.id;
+    this.type = data.type;
     if (data.users !== undefined) this.users = data.users;
     if (data.group !== undefined) this.group = data.group;
-    if (data.body !== undefined) this.body = data.body;
+    this.body = data.body;
     if (data.media !== undefined) this.media = data.media;
     if (data.sentBy !== undefined) this.sentBy = data.sentBy;
     if (data.tags !== undefined) this.tags = data.tags;
@@ -50,6 +50,7 @@ Object.defineProperty(Announcement.prototype, "schema", {
     title: "Announcement",
     description: "Announcement message sent to users",
     type: "object",
+    required: ["id", "type", "body"],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", enum: ["announcement"], default: "announcement" },
