@@ -231,6 +231,12 @@ export default {
         "order",
       ],
     },
+    supportedCommands: {
+      type: "array",
+      items: {
+        $ref: "#/properties/command",
+      },
+    },
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",
     },
