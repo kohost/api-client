@@ -35,6 +35,7 @@ import propertyschema from "./schemas/property.js";
 import reservationschema from "./schemas/reservation.js";
 import roomschema from "./schemas/room.js";
 import sceneschema from "./schemas/scene.js";
+import sessionschema from "./schemas/session.js";
 import shortLinkschema from "./schemas/shortLink.js";
 import smsMessageschema from "./schemas/smsMessage.js";
 import spaceschema from "./schemas/space.js";
@@ -80,6 +81,7 @@ const schemas = [
   reservationschema,
   roomschema,
   sceneschema,
+  sessionschema,
   shortLinkschema,
   smsMessageschema,
   spaceschema,
@@ -136,6 +138,7 @@ export const validateProperty = ajv.compile(propertyschema);
 export const validateReservation = ajv.compile(reservationschema);
 export const validateRoom = ajv.compile(roomschema);
 export const validateScene = ajv.compile(sceneschema);
+export const validateSession = ajv.compile(sessionschema);
 export const validateShortLink = ajv.compile(shortLinkschema);
 export const validateSmsMessage = ajv.compile(smsMessageschema);
 export const validateSpace = ajv.compile(spaceschema);
