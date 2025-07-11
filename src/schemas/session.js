@@ -3,7 +3,15 @@ export default {
   $id: "session.json",
   title: "Session",
   type: "object",
-  required: ["id", "type", "title", "destination", "url", "systemId"],
+  required: [
+    "id",
+    "type",
+    "userId",
+    "organizationId",
+    "userAgent",
+    "expires",
+    "data",
+  ],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
