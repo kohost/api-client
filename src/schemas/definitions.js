@@ -116,6 +116,7 @@ export default {
         "lirc",
         "mews",
         "mht",
+        "newline",
         "paxton",
         "pelican-wireless",
         "power-shades",
