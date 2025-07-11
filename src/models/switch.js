@@ -8,7 +8,7 @@ import { validateSwitch as validate } from "../validate";
  * @typedef {Object} SwitchData Any smart switch
  * @property {string} id - Identifier of the object.
  * @property {string} [name]
- * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} type
+ * @property {"switch"} type - Default: "switch"
  * @property {("light"|"fan"|"irrigation")} [discriminator]
  * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
  * @property {{name?: string, timestamp?: number, description?: string}} [notification]
@@ -69,7 +69,7 @@ Object.defineProperty(Switch.prototype, "schema", {
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string" },
-      type: { $ref: "definitions.json#/definitions/type" },
+      type: { type: "string", enum: ["switch"], default: "switch" },
       discriminator: { type: "string", enum: ["light", "fan", "irrigation"] },
       supportedNotifications: {
         $ref: "definitions.json#/definitions/supportedNotifications",

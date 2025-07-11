@@ -14,7 +14,8 @@ export default {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["windowCovering"],
       default: "windowCovering",
     },
     discriminator: {

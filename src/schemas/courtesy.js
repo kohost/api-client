@@ -14,7 +14,9 @@ export default {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["courtesy"],
+      default: "courtesy",
     },
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",

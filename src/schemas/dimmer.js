@@ -12,7 +12,9 @@ export default {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["dimmer"],
+      default: "dimmer",
     },
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",

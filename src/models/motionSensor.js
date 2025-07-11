@@ -8,7 +8,7 @@ import { validateMotionSensor as validate } from "../validate";
  * @typedef {Object} MotionSensorData Any smart motion sensor
  * @property {string} id - Identifier of the object.
  * @property {string} [name]
- * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} type
+ * @property {"motionSensor"} type - Default: "motionSensor"
  * @property {boolean} [offline]
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
@@ -63,7 +63,7 @@ Object.defineProperty(MotionSensor.prototype, "schema", {
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string" },
-      type: { $ref: "definitions.json#/definitions/type" },
+      type: { type: "string", default: "motionSensor", enum: ["motionSensor"] },
       offline: { type: "boolean" },
       driver: { $ref: "definitions.json#/definitions/driver" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },

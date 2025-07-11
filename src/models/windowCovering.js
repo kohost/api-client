@@ -8,7 +8,7 @@ import { validateWindowCovering as validate } from "../validate";
  * @typedef {Object} WindowCoveringData Any smart window covering
  * @property {string} id - Identifier of the object.
  * @property {string} [name]
- * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} type - Default: "windowCovering"
+ * @property {"windowCovering"} type - Default: "windowCovering"
  * @property {("basic"|"variable")} [discriminator] - Default: "variable"
  * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
  * @property {{name?: string, timestamp?: number, description?: string}} [notification]
@@ -69,7 +69,8 @@ Object.defineProperty(WindowCovering.prototype, "schema", {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string" },
       type: {
-        $ref: "definitions.json#/definitions/type",
+        type: "string",
+        enum: ["windowCovering"],
         default: "windowCovering",
       },
       discriminator: {

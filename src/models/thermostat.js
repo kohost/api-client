@@ -8,7 +8,7 @@ import { validateThermostat as validate } from "../validate";
  * @typedef {Object} ThermostatData Any smart thermostat
  * @property {string} id - Identifier of the object.
  * @property {string} [name]
- * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} type - Default: "thermostat"
+ * @property {"thermostat"} type - Default: "thermostat"
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
  * @property {boolean} [offline]
  * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
@@ -109,10 +109,7 @@ Object.defineProperty(Thermostat.prototype, "schema", {
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { $ref: "definitions.json#/definitions/name" },
-      type: {
-        $ref: "definitions.json#/definitions/type",
-        default: "thermostat",
-      },
+      type: { type: "string", enum: ["thermostat"], default: "thermostat" },
       driver: { $ref: "definitions.json#/definitions/driver" },
       offline: { type: "boolean" },
       supportedNotifications: {

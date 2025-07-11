@@ -26,7 +26,8 @@ export default {
       $ref: "definitions.json#/definitions/name",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["thermostat"],
       default: "thermostat",
     },
     driver: {

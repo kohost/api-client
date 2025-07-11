@@ -8,7 +8,7 @@ import { validateLock as validate } from "../validate";
  * @typedef {Object} LockData Any smart lock
  * @property {string} id - Identifier of the object.
  * @property {string} [name]
- * @property {("alarm"|"dimmer"|"switch"|"motionSensor"|"windowCovering"|"camera"|"mediaSource"|"thermostat"|"lock"|"courtesy"|"gateway"|"tv"|"dvr"|"appleTv"|"discPlayer"|"mediaPlayer"|"uncontrolledDevice")} type
+ * @property {"lock"} type - Default: "lock"
  * @property {boolean} [offline]
  * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
  * @property {{name?: string, timestamp?: number, description?: string}} [notification]
@@ -70,7 +70,7 @@ Object.defineProperty(Lock.prototype, "schema", {
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string" },
-      type: { $ref: "definitions.json#/definitions/type" },
+      type: { type: "string", enum: ["lock"], default: "lock" },
       offline: { type: "boolean" },
       supportedNotifications: {
         $ref: "definitions.json#/definitions/supportedNotifications",

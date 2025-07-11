@@ -13,7 +13,9 @@ export default {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      enum: ["switch"],
+      default: "switch",
     },
     discriminator: {
       type: "string",

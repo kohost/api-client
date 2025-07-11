@@ -14,7 +14,9 @@ export default {
       type: "string",
     },
     type: {
-      $ref: "definitions.json#/definitions/type",
+      type: "string",
+      default: "motionSensor",
+      enum: ["motionSensor"],
     },
     offline: {
       type: "boolean",
