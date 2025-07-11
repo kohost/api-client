@@ -8,11 +8,11 @@ import { validateSession as validate } from "../validate";
  * @typedef {Object} SessionData
  * @property {string} id - Identifier of the object.
  * @property {"session"} type - Default: "session"
- * @property {string} [userId]
- * @property {string} [organizationId]
- * @property {string} [userAgent]
- * @property {(string|object)} [expires]
- * @property {object} [data]
+ * @property {string} userId
+ * @property {string} organizationId
+ * @property {string} userAgent
+ * @property {(string|object)} expires
+ * @property {object} data
  */
 
 /**
@@ -29,12 +29,11 @@ export class Session extends Entity {
     super(data);
     this.id = data.id;
     this.type = data.type;
-    if (data.userId !== undefined) this.userId = data.userId;
-    if (data.organizationId !== undefined)
-      this.organizationId = data.organizationId;
-    if (data.userAgent !== undefined) this.userAgent = data.userAgent;
-    if (data.expires !== undefined) this.expires = data.expires;
-    if (data.data !== undefined) this.data = data.data;
+    this.userId = data.userId;
+    this.organizationId = data.organizationId;
+    this.userAgent = data.userAgent;
+    this.expires = data.expires;
+    this.data = data.data;
   }
 }
 
@@ -44,7 +43,15 @@ Object.defineProperty(Session.prototype, "schema", {
     $id: "session.json",
     title: "Session",
     type: "object",
-    required: ["id", "type", "title", "destination", "url", "systemId"],
+    required: [
+      "id",
+      "type",
+      "userId",
+      "organizationId",
+      "userAgent",
+      "expires",
+      "data",
+    ],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", default: "session", enum: ["session"] },
