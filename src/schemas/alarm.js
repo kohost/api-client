@@ -82,17 +82,19 @@ export default {
         properties: {
           type: {
             type: "string",
-            enum: ["master", "user"],
+            enum: ["master", "user", "installer"],
           },
           number: {
-            type: "number",
-            minimum: 2,
+            type: ["number", "null"],
           },
           firstName: {
-            type: "string",
+            type: ["string", "null"],
           },
           lastName: {
-            type: "string",
+            type: ["string", "null"],
+          },
+          code: {
+            type: "number",
           },
         },
       },
