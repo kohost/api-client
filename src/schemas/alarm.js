@@ -75,30 +75,6 @@ export default {
         additionalProperties: false,
       },
     },
-    codes: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          type: {
-            type: "string",
-            enum: ["master", "user", "installer"],
-          },
-          number: {
-            type: ["number", "null"],
-          },
-          firstName: {
-            type: ["string", "null"],
-          },
-          lastName: {
-            type: ["string", "null"],
-          },
-          code: {
-            type: "number",
-          },
-        },
-      },
-    },
     chime: {
       type: "boolean",
       description: "Reflects whether console chime is enabled",
