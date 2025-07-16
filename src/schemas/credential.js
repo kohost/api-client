@@ -24,6 +24,7 @@ export default {
         "pin",
         "publicKey",
         "passkeyChallenge",
+        "alarmCode",
       ],
     },
     credential: {
