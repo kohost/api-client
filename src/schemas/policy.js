@@ -6,6 +6,7 @@ export default {
     "A policy is a set of permissions that can be applied to a user to limit their access to resources.",
   type: "object",
   required: [
+    "id",
     "name",
     "type",
     "organizationId",
