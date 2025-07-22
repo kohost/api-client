@@ -5,7 +5,7 @@ export default {
   description:
     "A device that has been discovered by Kohost, but not yet added to the Kohost system.",
   type: "object",
-  required: ["name", "deviceId", "deviceData"],
+  required: ["id", "name", "deviceId", "deviceData"],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
