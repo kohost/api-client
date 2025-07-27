@@ -12,10 +12,6 @@ import { validateIssue as validate } from "../validate";
  * @property {string} [description]
  * @property {string} department
  * @property {{userId?: string, vendorId?: string, priority?: ("low"|"normal"|"high"), tags?: string[]}} [autoAssign]
- * @property {string} [autoAssign.userId] - The user ID to assign tickets with this issue to.
- * @property {string} [autoAssign.vendorId] - The vendor ID to assign tickets with this issue to.
- * @property {("low"|"normal"|"high")} [autoAssign.priority] - The priority to assign tickets with this issue to.
- * @property {string[]} [autoAssign.tags]
  * @property {{id: string, discriminator: "user"}[]} [notify] - A list of entities to notify when this issue is triggered.. Default: []
  * @property {string} [systemKey]
  * @property {boolean} [autoCreateTicket] - Default: true

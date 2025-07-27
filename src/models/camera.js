@@ -15,20 +15,7 @@ import { validateCamera as validate } from "../validate";
  * @property {{name?: string, timestamp?: number, description?: string}} [notification]
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
  * @property {{iframe?: string, hls?: string, webRTC?: string, rtsp?: string}} [liveStreams]
- * @property {string} [liveStreams.iframe]
- * @property {string} [liveStreams.hls]
- * @property {string} [liveStreams.webRTC]
- * @property {string} [liveStreams.rtsp]
  * @property {{id?: string, driver?: ("aws-kinesis"|"cloudflare-stream"|"doorbird"|"digital-watchdog"|"mediamtx"), allowedOrigins?: string[], authRequired?: boolean, iframe?: string, hls?: string, webRTC?: string, rtsp?: string, previewImage?: string}} [liveStream]
- * @property {string} [liveStream.id]
- * @property {("aws-kinesis"|"cloudflare-stream"|"doorbird"|"digital-watchdog"|"mediamtx")} [liveStream.driver]
- * @property {string[]} [liveStream.allowedOrigins]
- * @property {boolean} [liveStream.authRequired]
- * @property {string} [liveStream.iframe]
- * @property {string} [liveStream.hls]
- * @property {string} [liveStream.webRTC]
- * @property {string} [liveStream.rtsp] - Local RTSP stream URL
- * @property {string} [liveStream.previewImage] - Source to preview the camera stream
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  * @property {number} [watts]
  * @property {string} [icon]

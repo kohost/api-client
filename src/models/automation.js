@@ -11,17 +11,6 @@ import { validateAutomation as validate } from "../validate";
  * @property {"automation"} type - Default: "automation"
  * @property {boolean} [isEnabled] - Whether the automation is currently enabled. Default: true
  * @property {{discriminator: ("schedule"|"event"), schedule?: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}, event?: {eventName: string, eventProperties: {property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<=")}[], match: ("any"|"all")}}} trigger - The trigger that initiates the automation
- * @property {("schedule"|"event")} trigger.discriminator - Type of trigger
- * @property {{days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}} [trigger.schedule] - Schedule for time-based triggers
- * @property {number[]} trigger.schedule.days - Days of the week (0 = Sunday, 6 = Saturday)
- * @property {string} trigger.schedule.time - Time of day to trigger the automation
- * @property {number} [trigger.schedule.timeOffsetSeconds] - Offset in seconds from the scheduled time. Default: 0
- * @property {boolean} [trigger.schedule.repeat] - Whether the schedule repeats. Default: true
- * @property {string} trigger.schedule.timezone - Timezone for the schedule (IANA timezone format)
- * @property {{eventName: string, eventProperties: {property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<=")}[], match: ("any"|"all")}} [trigger.event]
- * @property {string} trigger.event.eventName - Name of the event that triggers the automation actions
- * @property {{property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<=")}[]} trigger.event.eventProperties - Properties of the event that triggers the automation actions
- * @property {("any"|"all")} trigger.event.match - Match criteria for the event to trigger the automation actions
  * @property {{useCase: string, useCaseParams: {data?: (object|array)}}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]

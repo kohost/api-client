@@ -25,15 +25,15 @@ function processProperties(properties, lines, required, ajv, prefix = "") {
       ` * @property {${type}} ${!isRequired ? "[" + fullPropName + "]" : fullPropName}${descriptions ? ` - ${descriptions}` : ""}`,
     );
 
-    if (hasNestedProperties(prop)) {
-      processProperties(
-        prop.properties,
-        lines,
-        prop.required || [],
-        ajv,
-        fullPropName,
-      );
-    }
+    // if (hasNestedProperties(prop)) {
+    //   processProperties(
+    //     prop.properties,
+    //     lines,
+    //     prop.required || [],
+    //     ajv,
+    //     fullPropName,
+    //   );
+    // }
   }
 }
 

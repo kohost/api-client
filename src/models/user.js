@@ -23,17 +23,13 @@ import { validateUser as validate } from "../validate";
  * @property {string} [dob]
  * @property {("male"|"female")} [gender]
  * @property {string} [nationality]
- * @property {{organizationId: string, propertyId: string, role: ("Guest"|"User"|"Agent"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin"), timeTrackingEnabled?: boolean, department?: string, policyIds?: string[], policies?: {id?: any, type: "policy", discriminator: "user", name: string, description?: string, organizationId: string, propertyId: string, permissions: {entities: string[], effect: ("Allow"|"Deny")}[]}[]}[]} [permissions] - Default: []
+ * @property {{organizationId: string, propertyId: string, role: ("Guest"|"User"|"Agent"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin"), timeTrackingEnabled?: boolean, department?: string, policyIds?: string[], policies?: {id: any, type: "policy", discriminator: "user", name: string, description?: string, organizationId: string, propertyId: string, permissions: {entities: string[], effect: ("Allow"|"Deny")}[]}[]}[]} [permissions] - Default: []
  * @property {{organizationId: string, propertyId: string, notifications?: {discriminator: ("observerTicketCreated"|"observerTicketResolved"), enabled: boolean}[]}[]} [preferences]
  * @property {string[]} [notes]
  * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}[]} [files]
  * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, issuingState?: string, systemId?: any}[]} [identifications]
  * @property {{id?: any, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: string, maskedNumber: string, issued?: string, expires: string, systemId?: any}[]} [payments]
  * @property {{accuracy: number, latitude: number, longitude: number, timestamp: number}} [location]
- * @property {number} location.accuracy
- * @property {number} location.latitude
- * @property {number} location.longitude
- * @property {number} location.timestamp
  * @property {{id?: any, driver?: any, primaryGuest?: string, type: "reservation", sharedGuests?: string[], spaceCategory?: string, space?: string, previousSpace?: string, status: ("reserved"|"checkedIn"|"checkedOut"|"cancelled"|"noShow"|"enquired"|"requested"|"optional"), mobileCheckInSpaceCategoryChanged?: boolean, mobileCheckInSpaceChanged?: boolean, mobileCheckInStatus?: ("ready"|"blocked"|"preArrivalStepsRequired"|"spaceNotAssigned"|"spaceNotReady"|"checkInTimeNotStarted"), mobileCheckInStatusMessage?: string, confirmationNumber?: string, expectedCheckInDateTime?: (string|object), checkInDateTime: (string|object), checkOutDateTime: (string|object), adultCount?: number, childCount?: number, spaceCategoryAvailabilites?: {id?: string, price?: number, unit?: ("night"|"stay"|"hour"), isUpgrade?: boolean}[], revenue?: any, rateSuppressed?: boolean, payment?: string, company?: string, travelAgent?: string, systemId?: any, metadata?: any, updatedAt?: any}[]} [reservations]
  * @property {string} [spaceName]
  * @property {{id?: string, name?: string, date?: string, price?: number, tax?: number}[]} [revenue]

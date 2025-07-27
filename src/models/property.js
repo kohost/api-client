@@ -14,8 +14,6 @@ import { validateProperty as validate } from "../validate";
  * @property {string[]} [departments]
  * @property {boolean} [testModeEnabled]
  * @property {{notificationEmails?: string[], notificationEmailDomains?: string[]}} [testMode]
- * @property {string[]} [testMode.notificationEmails] - Only users with these email addresses will receive notifications in test mode, including sms, email, or push.
- * @property {string[]} [testMode.notificationEmailDomains] - Only users with email addreses ending in these domains will receive notifications in test mode, including sms, email, or push.
  * @property {string} timezone - IANA timezone string
  * @property {string} [smsNumber]
  * @property {string} [voiceNumber]
@@ -26,76 +24,7 @@ import { validateProperty as validate } from "../validate";
  * @property {number} [latitude]
  * @property {number} [longitude]
  * @property {{RoomControl?: {disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object, cameraConfig?: object}, CheckIn?: {payment?: any, identification?: any, earlyCheckIn?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number, minimumTime?: string}, roomUpgrades?: any, pet?: any, promos?: any}, CheckOut?: {lateCheckOut?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number}}, Concierge?: {timeTracking?: boolean, tipping?: boolean, feedback?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), quickServices?: {name: string, description: string, department?: string, image: {id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}}[], issues?: {syncWithPropertyId?: string}}, DigitalKey?: {system?: ("salto"|"dormakaba"), systemOnline?: boolean, systemConfig?: {legicUrl?: string, legicWalletName?: string, legicAppId?: number, legicTechUsername?: string, legicTechPassword?: string}, enableApp?: boolean, branding?: {logo?: string, gradient?: string[], highlightedGradient?: string[]}}, SOS?: {active?: boolean, activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]}, Elevator?: object, Experiences?: object, Dining?: {system?: "gotab", systemConfig?: {landingUrl?: string, includeUserDetails?: boolean}}, Rentals?: object, Shop?: object, Spa?: object, Valet?: object}} [appFeatures] - Default: {"RoomControl":{}}
- * @property {{disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object, cameraConfig?: object}} [appFeatures.RoomControl]
- * @property {("climate"|"lights"|"shades"|"tv"|"doors")[]} [appFeatures.RoomControl.disabledSystems]
- * @property {string[]} [appFeatures.RoomControl.excludedDeviceIds] - Default: []
- * @property {{spaces?: string[]}} [appFeatures.RoomControl.commonAreas]
- * @property {string[]} [appFeatures.RoomControl.commonAreas.spaces]
- * @property {object} [appFeatures.RoomControl.alarmConfig]
- * @property {object} [appFeatures.RoomControl.cameraConfig]
- * @property {{payment?: any, identification?: any, earlyCheckIn?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number, minimumTime?: string}, roomUpgrades?: any, pet?: any, promos?: any}} [appFeatures.CheckIn]
- * @property {any} [appFeatures.CheckIn.payment]
- * @property {any} [appFeatures.CheckIn.identification]
- * @property {{dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number, minimumTime?: string}} [appFeatures.CheckIn.earlyCheckIn]
- * @property {boolean} appFeatures.CheckIn.earlyCheckIn.dynamic - Default: false
- * @property {number} [appFeatures.CheckIn.earlyCheckIn.minimumPrice] - Default: 10
- * @property {number} [appFeatures.CheckIn.earlyCheckIn.maximumPrice] - Default: 50
- * @property {number} [appFeatures.CheckIn.earlyCheckIn.priceRatioPerHour] - Default: 0.1
- * @property {string} [appFeatures.CheckIn.earlyCheckIn.minimumTime]
- * @property {any} [appFeatures.CheckIn.roomUpgrades]
- * @property {any} [appFeatures.CheckIn.pet]
- * @property {any} [appFeatures.CheckIn.promos]
- * @property {{lateCheckOut?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number}}} [appFeatures.CheckOut]
- * @property {{dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number}} [appFeatures.CheckOut.lateCheckOut]
- * @property {boolean} appFeatures.CheckOut.lateCheckOut.dynamic - Default: false
- * @property {number} [appFeatures.CheckOut.lateCheckOut.minimumPrice] - Default: 10
- * @property {number} [appFeatures.CheckOut.lateCheckOut.maximumPrice] - Default: 50
- * @property {number} [appFeatures.CheckOut.lateCheckOut.priceRatioPerHour] - Default: 0.1
- * @property {{timeTracking?: boolean, tipping?: boolean, feedback?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), quickServices?: {name: string, description: string, department?: string, image: {id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}}[], issues?: {syncWithPropertyId?: string}}} [appFeatures.Concierge]
- * @property {boolean} [appFeatures.Concierge.timeTracking] - Default: false
- * @property {boolean} [appFeatures.Concierge.tipping] - Default: false
- * @property {boolean} [appFeatures.Concierge.feedback] - Default: true
- * @property {boolean} [appFeatures.Concierge.ratings] - Default: true
- * @property {string[]} [appFeatures.Concierge.newTicketCCs] - Default: []
- * @property {("sms"|"email")} [appFeatures.Concierge.newMessageChannel] - Determines how users should be notified of new messages in the concierge system. Default: "sms"
- * @property {{name: string, description: string, department?: string, image: {id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}}[]} [appFeatures.Concierge.quickServices]
- * @property {{syncWithPropertyId?: string}} [appFeatures.Concierge.issues]
- * @property {string} [appFeatures.Concierge.issues.syncWithPropertyId]
- * @property {{system?: ("salto"|"dormakaba"), systemOnline?: boolean, systemConfig?: {legicUrl?: string, legicWalletName?: string, legicAppId?: number, legicTechUsername?: string, legicTechPassword?: string}, enableApp?: boolean, branding?: {logo?: string, gradient?: string[], highlightedGradient?: string[]}}} [appFeatures.DigitalKey]
- * @property {("salto"|"dormakaba")} [appFeatures.DigitalKey.system]
- * @property {boolean} [appFeatures.DigitalKey.systemOnline] - Default: false
- * @property {{legicUrl?: string, legicWalletName?: string, legicAppId?: number, legicTechUsername?: string, legicTechPassword?: string}} [appFeatures.DigitalKey.systemConfig] - Default: {}
- * @property {string} [appFeatures.DigitalKey.systemConfig.legicUrl]
- * @property {string} [appFeatures.DigitalKey.systemConfig.legicWalletName]
- * @property {number} [appFeatures.DigitalKey.systemConfig.legicAppId]
- * @property {string} [appFeatures.DigitalKey.systemConfig.legicTechUsername]
- * @property {string} [appFeatures.DigitalKey.systemConfig.legicTechPassword]
- * @property {boolean} [appFeatures.DigitalKey.enableApp]
- * @property {{logo?: string, gradient?: string[], highlightedGradient?: string[]}} [appFeatures.DigitalKey.branding]
- * @property {string} [appFeatures.DigitalKey.branding.logo]
- * @property {string[]} [appFeatures.DigitalKey.branding.gradient]
- * @property {string[]} [appFeatures.DigitalKey.branding.highlightedGradient]
- * @property {{active?: boolean, activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]}} [appFeatures.SOS]
- * @property {boolean} [appFeatures.SOS.active]
- * @property {("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]} [appFeatures.SOS.activeEmergencies]
- * @property {object} [appFeatures.Elevator]
- * @property {object} [appFeatures.Experiences]
- * @property {{system?: "gotab", systemConfig?: {landingUrl?: string, includeUserDetails?: boolean}}} [appFeatures.Dining]
- * @property {"gotab"} [appFeatures.Dining.system]
- * @property {{landingUrl?: string, includeUserDetails?: boolean}} [appFeatures.Dining.systemConfig]
- * @property {string} [appFeatures.Dining.systemConfig.landingUrl]
- * @property {boolean} [appFeatures.Dining.systemConfig.includeUserDetails]
- * @property {object} [appFeatures.Rentals]
- * @property {object} [appFeatures.Shop]
- * @property {object} [appFeatures.Spa]
- * @property {object} [appFeatures.Valet]
  * @property {{email?: {enabled?: boolean}, sms?: {enabled?: boolean}, push?: {enabled?: boolean}}} [notifications] - Default: {"email":{"enabled":false},"sms":{"enabled":false},"push":{"enabled":false}}
- * @property {{enabled?: boolean}} [notifications.email]
- * @property {boolean} [notifications.email.enabled]
- * @property {{enabled?: boolean}} [notifications.sms]
- * @property {boolean} [notifications.sms.enabled]
- * @property {{enabled?: boolean}} [notifications.push]
- * @property {boolean} [notifications.push.enabled]
  * @property {object} [credentials]
  */
 

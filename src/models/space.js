@@ -18,10 +18,6 @@ import { validateSpace as validate } from "../validate";
  * @property {boolean} [occupied]
  * @property {boolean} [inUse]
  * @property {{active?: boolean, activatedAt?: (string|object), allowed?: boolean, previousState?: object}} [eco] - Default: {"active":false,"allowed":false,"previousState":null}
- * @property {boolean} [eco.active] - Default: false
- * @property {(string|object)} [eco.activatedAt]
- * @property {boolean} [eco.allowed] - Default: false
- * @property {object} [eco.previousState]
  * @property {"pet"[]} [features]
  * @property {number} [maximumOccupancy]
  * @property {("clean"|"dirty"|"inspected"|"pickup")} [housekeepingStatus]

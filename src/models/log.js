@@ -12,23 +12,11 @@ import { validateLog as validate } from "../validate";
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
  * @property {string} name - Event name
  * @property {{name: string, value: string}} [field1]
- * @property {string} field1.name
- * @property {string} field1.value
  * @property {{name: string, value: string}} [field2]
- * @property {string} field2.name
- * @property {string} field2.value
  * @property {{name: string, value: string}} [field3]
- * @property {string} field3.name
- * @property {string} field3.value
  * @property {{name: string, value: string}} [field4]
- * @property {string} field4.name
- * @property {string} field4.value
  * @property {{name: string, value: string}} [field5]
- * @property {string} field5.name
- * @property {string} field5.value
  * @property {{name: string, value: string}} [field6]
- * @property {string} field6.name
- * @property {string} field6.value
  */
 
 /**

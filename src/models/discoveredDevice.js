@@ -6,7 +6,7 @@ import { validateDiscoveredDevice as validate } from "../validate";
 
 /**
  * @typedef {Object} DiscoveredDeviceData A device that has been discovered by Kohost, but not yet added to the Kohost system.
- * @property {string} [id] - Identifier of the object.
+ * @property {string} id - Identifier of the object.
  * @property {string} name
  * @property {string} deviceId
  * @property {"discoveredDevice"} [type] - Default: "discoveredDevice"
@@ -30,7 +30,7 @@ export class DiscoveredDevice extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
+    this.id = data.id;
     this.name = data.name;
     this.deviceId = data.deviceId;
     if (data.type !== undefined) this.type = data.type;
@@ -53,7 +53,7 @@ Object.defineProperty(DiscoveredDevice.prototype, "schema", {
     description:
       "A device that has been discovered by Kohost, but not yet added to the Kohost system.",
     type: "object",
-    required: ["name", "deviceId", "deviceData"],
+    required: ["id", "name", "deviceId", "deviceData"],
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       name: { type: "string" },

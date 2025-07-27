@@ -6,7 +6,7 @@ import { validatePolicy as validate } from "../validate";
 
 /**
  * @typedef {Object} PolicyData A policy is a set of permissions that can be applied to a user to limit their access to resources.
- * @property {string} [id] - Identifier of the object.
+ * @property {string} id - Identifier of the object.
  * @property {"policy"} type - Default: "policy"
  * @property {"user"} discriminator
  * @property {string} name
@@ -28,7 +28,7 @@ export class Policy extends Entity {
    */
   constructor(data) {
     super(data);
-    if (data.id !== undefined) this.id = data.id;
+    this.id = data.id;
     this.type = data.type;
     this.discriminator = data.discriminator;
     this.name = data.name;
@@ -48,6 +48,7 @@ Object.defineProperty(Policy.prototype, "schema", {
       "A policy is a set of permissions that can be applied to a user to limit their access to resources.",
     type: "object",
     required: [
+      "id",
       "name",
       "type",
       "organizationId",

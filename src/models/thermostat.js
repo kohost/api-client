@@ -24,9 +24,6 @@ import { validateThermostat as validate } from "../validate";
  * @property {("cool"|"heat"|"auto"|"off")[]} supportedHvacModes
  * @property {("auto"|"low"|"medium"|"high"|"off"|"on")[]} supportedFanModes
  * @property {{cool?: any, heat?: any, auto?: any}} setpoints
- * @property {any} [setpoints.cool]
- * @property {any} [setpoints.heat]
- * @property {any} [setpoints.auto]
  * @property {number} [minAutoDelta] - Default: 3
  * @property {number} [cycleRate]
  * @property {number} [batteryLevel]
