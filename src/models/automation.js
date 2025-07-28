@@ -11,7 +11,7 @@ import { validateAutomation as validate } from "../validate";
  * @property {"automation"} type - Default: "automation"
  * @property {boolean} [isEnabled] - Whether the automation is currently enabled. Default: true
  * @property {{discriminator: ("schedule"|"event"), schedule?: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}, event?: {eventName: string, eventProperties: {property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<=")}[], match: ("any"|"all")}}} trigger - The trigger that initiates the automation
- * @property {{useCase: string, useCaseParams: {data?: (object|array)}}[]} actions - Actions to perform when the trigger conditions are met
+ * @property {{useCase: string, useCaseParams: {data: (object|array)}}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  * @property {(string|object)} [lastTriggeredAt] - When the automation was last triggered
@@ -159,6 +159,7 @@ Object.defineProperty(Automation.prototype, "schema", {
             useCaseParams: {
               type: "object",
               description: "Parameters to pass to the use case",
+              required: ["data"],
               properties: {
                 data: {
                   type: ["object", "array"],

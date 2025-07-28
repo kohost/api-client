@@ -125,6 +125,7 @@ export default {
           useCaseParams: {
             type: "object",
             description: "Parameters to pass to the use case",
+            required: ["data"],
             properties: {
               data: {
                 type: ["object", "array"],
