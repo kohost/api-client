@@ -91,6 +91,7 @@ export default {
         "bacnet",
         "benq",
         "butler",
+        "centegix",
         "comelit",
         "crestron",
         "dell",
