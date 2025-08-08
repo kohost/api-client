@@ -10,6 +10,7 @@ import { validateAutomation as validate } from "../validate";
  * @property {string} [name] - The friendly name of the automation
  * @property {"automation"} type - Default: "automation"
  * @property {boolean} [isEnabled] - Whether the automation is currently enabled. Default: true
+ * @property {string} [description] - The text description of the automation
  * @property {{discriminator: ("schedule"|"event"), schedule?: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}, event?: {eventName: string, eventProperties: {property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<=")}[], match: ("any"|"all")}}} trigger - The trigger that initiates the automation
  * @property {{useCase: string, useCaseParams: {data: (object|array)}}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
@@ -33,6 +34,7 @@ export class Automation extends Entity {
     if (data.name !== undefined) this.name = data.name;
     this.type = data.type;
     if (data.isEnabled !== undefined) this.isEnabled = data.isEnabled;
+    if (data.description !== undefined) this.description = data.description;
     this.trigger = data.trigger;
     this.actions = data.actions;
     if (data.createdAt !== undefined) this.createdAt = data.createdAt;
@@ -61,6 +63,10 @@ Object.defineProperty(Automation.prototype, "schema", {
         type: "boolean",
         description: "Whether the automation is currently enabled",
         default: true,
+      },
+      description: {
+        type: "string",
+        description: "The text description of the automation",
       },
       trigger: {
         type: "object",

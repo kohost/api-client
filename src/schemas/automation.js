@@ -23,6 +23,10 @@ export default {
       description: "Whether the automation is currently enabled",
       default: true,
     },
+    description: {
+      type: "string",
+      description: "The text description of the automation",
+    },
     trigger: {
       type: "object",
       description: "The trigger that initiates the automation",

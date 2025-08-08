@@ -15,11 +15,9 @@ export default {
     },
     to: {
       type: "string",
-      pattern: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
     },
     from: {
       type: "string",
-      pattern: ".*<[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+>.*",
       description: "Must be in the format of 'Sender <email@example.com>",
     },
     subject: {
