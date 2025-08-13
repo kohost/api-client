@@ -100,7 +100,16 @@ export default {
                   operator: {
                     type: "string",
                     description: "Operator of the property",
-                    enum: ["==", "!=", ">", ">=", "<", "<="],
+                    enum: [
+                      "==",
+                      "!=",
+                      ">",
+                      ">=",
+                      "<",
+                      "<=",
+                      "contains",
+                      "notContains",
+                    ],
                   },
                 },
               },
@@ -150,6 +159,11 @@ export default {
     lastTriggeredAt: {
       $ref: "definitions.json#/definitions/date",
       description: "When the automation was last triggered",
+    },
+    webhookUrl: {
+      type: "string",
+      description: "The URL of the webhook that triggers the automation",
+      format: "uri",
     },
   },
   additionalProperties: false,

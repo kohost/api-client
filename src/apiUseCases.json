@@ -299,6 +299,15 @@
     }
   ],
   [
+    "UserUpdatedEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["UserUpdated"]
+      }
+    }
+  ],
+  [
     "CreatePolicy",
     {
       "http": {
@@ -340,6 +349,15 @@
       "http": {
         "method": "GET",
         "path": "/policies/:id"
+      }
+    }
+  ],
+  [
+    "PoliciesEffects",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["PolicyCreated", "PolicyUpdated", "PolicyDeleted"]
       }
     }
   ],
@@ -1235,15 +1253,6 @@
     }
   ],
   [
-    "ListMyTickets",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/tickets/mine"
-      }
-    }
-  ],
-  [
     "ListTicketLocations",
     {
       "http": {
@@ -1992,6 +2001,18 @@
     }
   ],
   [
+    "ApplicationInUseEvent",
+    {
+      "http": false
+    }
+  ],
+  [
+    "ApplicationOutOfUseEvent",
+    {
+      "http": false
+    }
+  ],
+  [
     "CreateImageUploadEndpoint",
     {
       "http": {
@@ -2459,7 +2480,64 @@
   [
     "SendSMS",
     {
-      "http": false
+      "http": {
+        "method": "POST",
+        "path": "/sms"
+      }
+    }
+  ],
+  [
+    "CreateSession",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/sessions"
+      }
+    }
+  ],
+  [
+    "ListSessions",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sessions"
+      }
+    }
+  ],
+  [
+    "DescribeSession",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sessions/:id"
+      }
+    }
+  ],
+  [
+    "UpdateSession",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/sessions/:id"
+      }
+    }
+  ],
+  [
+    "DeleteSession",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/sessions/:id"
+      }
+    }
+  ],
+  [
+    "SetDevices",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/devices"
+      }
     }
   ]
 ]

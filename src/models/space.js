@@ -11,7 +11,7 @@ import { validateSpace as validate } from "../validate";
  * @property {"space"} type - Default: "space"
  * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit"|"cafeteria"|"multiPurposeRoom"|"library"|"idf"|"restroom")} [discriminator]
  * @property {string} [floor]
- * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"centegix"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
+ * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
  * @property {string} [category] - This is the category id
  * @property {string[]} [rooms] - IDs of rooms in the space
  * @property {string[]} [spaces] - IDs of sub-spaces in the space
@@ -22,6 +22,7 @@ import { validateSpace as validate } from "../validate";
  * @property {number} [maximumOccupancy]
  * @property {("clean"|"dirty"|"inspected"|"pickup")} [housekeepingStatus]
  * @property {("inService"|"outOfOrder"|"outOfService")} [serviceStatus]
+ * @property {object[]} [devices] - Default: []
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  */
 
@@ -57,6 +58,7 @@ export class Space extends Entity {
       this.housekeepingStatus = data.housekeepingStatus;
     if (data.serviceStatus !== undefined)
       this.serviceStatus = data.serviceStatus;
+    if (data.devices !== undefined) this.devices = data.devices;
     if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 
@@ -175,6 +177,11 @@ Object.defineProperty(Space.prototype, "schema", {
       serviceStatus: {
         type: "string",
         enum: ["inService", "outOfOrder", "outOfService"],
+      },
+      devices: {
+        type: "array",
+        items: { type: "object", additionalProperties: true },
+        default: [],
       },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
     },

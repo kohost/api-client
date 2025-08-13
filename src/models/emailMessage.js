@@ -62,13 +62,9 @@ Object.defineProperty(EmailMessage.prototype, "schema", {
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", default: "emailMessage", enum: ["emailMessage"] },
-      to: {
-        type: "string",
-        pattern: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
-      },
+      to: { type: "string" },
       from: {
         type: "string",
-        pattern: ".*<[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+>.*",
         description: "Must be in the format of 'Sender <email@example.com>",
       },
       subject: { type: "string" },

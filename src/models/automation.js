@@ -11,11 +11,12 @@ import { validateAutomation as validate } from "../validate";
  * @property {"automation"} type - Default: "automation"
  * @property {boolean} [isEnabled] - Whether the automation is currently enabled. Default: true
  * @property {string} [description] - The text description of the automation
- * @property {{discriminator: ("schedule"|"event"), schedule?: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}, event?: {eventName: string, eventProperties: {property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<=")}[], match: ("any"|"all")}}} trigger - The trigger that initiates the automation
+ * @property {{discriminator: ("schedule"|"event"), schedule?: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}, event?: {eventName: string, eventProperties: {property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<="|"contains"|"notContains")}[], match: ("any"|"all")}}} trigger - The trigger that initiates the automation
  * @property {{useCase: string, useCaseParams: {data: (object|array)}}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  * @property {(string|object)} [lastTriggeredAt] - When the automation was last triggered
+ * @property {string} [webhookUrl] - The URL of the webhook that triggers the automation
  */
 
 /**
@@ -41,6 +42,7 @@ export class Automation extends Entity {
     if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
     if (data.lastTriggeredAt !== undefined)
       this.lastTriggeredAt = data.lastTriggeredAt;
+    if (data.webhookUrl !== undefined) this.webhookUrl = data.webhookUrl;
   }
 }
 
@@ -136,7 +138,16 @@ Object.defineProperty(Automation.prototype, "schema", {
                     operator: {
                       type: "string",
                       description: "Operator of the property",
-                      enum: ["==", "!=", ">", ">=", "<", "<="],
+                      enum: [
+                        "==",
+                        "!=",
+                        ">",
+                        ">=",
+                        "<",
+                        "<=",
+                        "contains",
+                        "notContains",
+                      ],
                     },
                   },
                 },
@@ -182,6 +193,11 @@ Object.defineProperty(Automation.prototype, "schema", {
       lastTriggeredAt: {
         $ref: "definitions.json#/definitions/date",
         description: "When the automation was last triggered",
+      },
+      webhookUrl: {
+        type: "string",
+        description: "The URL of the webhook that triggers the automation",
+        format: "uri",
       },
     },
     additionalProperties: false,

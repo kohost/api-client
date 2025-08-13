@@ -130,6 +130,14 @@ export default {
       type: "string",
       enum: ["inService", "outOfOrder", "outOfService"],
     },
+    devices: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: true,
+      },
+      default: [],
+    },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
     },
