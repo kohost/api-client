@@ -113,6 +113,21 @@ export default {
         type: "string",
       },
     },
+    content: {
+      type: ["object", "null"],
+      additionalProperties: false,
+      properties: {
+        title: {
+          type: "string",
+        },
+        message: {
+          type: "string",
+        },
+        url: {
+          type: "string",
+        },
+      },
+    },
     command: {
       type: ["string", "null"],
       enum: [
