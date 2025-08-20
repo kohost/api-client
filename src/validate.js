@@ -40,6 +40,7 @@ import shortLinkschema from "./schemas/shortLink.js";
 import smsMessageschema from "./schemas/smsMessage.js";
 import spaceschema from "./schemas/space.js";
 import switchschema from "./schemas/switch.js";
+import systemschema from "./schemas/system.js";
 import systemUserschema from "./schemas/systemUser.js";
 import thermostatschema from "./schemas/thermostat.js";
 import ticketschema from "./schemas/ticket.js";
@@ -86,6 +87,7 @@ const schemas = [
   smsMessageschema,
   spaceschema,
   switchschema,
+  systemschema,
   systemUserschema,
   thermostatschema,
   ticketschema,
@@ -143,6 +145,7 @@ export const validateShortLink = ajv.compile(shortLinkschema);
 export const validateSmsMessage = ajv.compile(smsMessageschema);
 export const validateSpace = ajv.compile(spaceschema);
 export const validateSwitch = ajv.compile(switchschema);
+export const validateSystem = ajv.compile(systemschema);
 export const validateSystemUser = ajv.compile(systemUserschema);
 export const validateThermostat = ajv.compile(thermostatschema);
 export const validateTicket = ajv.compile(ticketschema);
