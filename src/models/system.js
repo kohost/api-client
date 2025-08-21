@@ -11,11 +11,13 @@ import { validateSystem as validate } from "../validate";
  * @property {string} [name]
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} systemId - Driver used to communicate with the object.. The driver key that implements the system
  * @property {string} [organizationId] - The id of the organization that uses the system
+ * @property {string} [propertyId] - The id of the property that uses the system
  * @property {{id?: string, systemId: string, type?: string, discriminator?: string, propertyIds?: string[]}[]} entities - The entities produced by the system. Default: []
  * @property {string} [driverApiVersion] - The version of the driver API used by the system
  * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [logo] - Any media file
  * @property {object} [config] - The runtime configuration of the system
  * @property {{websiteUrl?: string, email?: string, phone?: string, itunesAppId?: string, googleAppId?: string}} [contactInfo]
+ * @property {{lastCommunicationAt?: string}} [health]
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  */
@@ -38,12 +40,14 @@ export class System extends Entity {
     this.systemId = data.systemId;
     if (data.organizationId !== undefined)
       this.organizationId = data.organizationId;
+    if (data.propertyId !== undefined) this.propertyId = data.propertyId;
     this.entities = data.entities;
     if (data.driverApiVersion !== undefined)
       this.driverApiVersion = data.driverApiVersion;
     if (data.logo !== undefined) this.logo = data.logo;
     if (data.config !== undefined) this.config = data.config;
     if (data.contactInfo !== undefined) this.contactInfo = data.contactInfo;
+    if (data.health !== undefined) this.health = data.health;
     if (data.createdAt !== undefined) this.createdAt = data.createdAt;
     if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
   }
@@ -68,6 +72,10 @@ Object.defineProperty(System.prototype, "schema", {
       organizationId: {
         type: "string",
         description: "The id of the organization that uses the system",
+      },
+      propertyId: {
+        type: "string",
+        description: "The id of the property that uses the system",
       },
       entities: {
         type: "array",
@@ -126,6 +134,17 @@ Object.defineProperty(System.prototype, "schema", {
           googleAppId: {
             type: "string",
             example: "tw.com.geovision.gvaccesscontrol",
+          },
+        },
+      },
+      health: {
+        type: "object",
+        properties: {
+          lastCommunicationAt: {
+            type: "string",
+            description:
+              "The date and time of the last communication with the system",
+            format: "date-time",
           },
         },
       },

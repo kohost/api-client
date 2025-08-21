@@ -25,7 +25,10 @@ export default {
       type: "string",
       description: "The id of the organization that uses the system",
     },
-
+    propertyId: {
+      type: "string",
+      description: "The id of the property that uses the system",
+    },
     entities: {
       type: "array",
       description: "The entities produced by the system",
@@ -97,6 +100,17 @@ export default {
         googleAppId: {
           type: "string",
           example: "tw.com.geovision.gvaccesscontrol",
+        },
+      },
+    },
+    health: {
+      type: "object",
+      properties: {
+        lastCommunicationAt: {
+          type: "string",
+          description:
+            "The date and time of the last communication with the system",
+          format: "date-time",
         },
       },
     },
