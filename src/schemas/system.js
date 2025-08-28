@@ -3,7 +3,7 @@ export default {
   $id: "system.json",
   title: "System",
   type: "object",
-  required: ["id", "type", "systemId", "entities"],
+  required: ["id", "type", "driver", "entities"],
   properties: {
     id: {
       type: "string",
@@ -16,10 +16,10 @@ export default {
     name: {
       type: "string",
     },
-    systemId: {
+    driver: {
       $ref: "definitions.json#/definitions/driver",
       example: "salto",
-      description: "The driver key that implements the system",
+      description: "The driver value that implements the system",
     },
     organizationId: {
       type: "string",
@@ -68,7 +68,6 @@ export default {
       type: "string",
       description: "The version of the driver API used by the system",
     },
-
     logo: {
       $ref: "mediaFile.json#",
     },
