@@ -111,6 +111,14 @@ export default {
     cycleRate: {
       type: "number",
     },
+    co2: {
+      type: "number",
+      description: "Parts per million (ppm)",
+    },
+    voc: {
+      type: "number",
+      description: "Parts per billion (ppb)",
+    },
     batteryLevel: {
       $ref: "definitions.json#/definitions/batteryLevel",
     },

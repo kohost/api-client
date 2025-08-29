@@ -33,6 +33,9 @@ export default {
     notification: {
       $ref: "definitions.json#/definitions/notification",
     },
+    occupied: {
+      type: "boolean",
+    },
     watts: {
       $ref: "definitions.json#/definitions/watts",
     },
