@@ -105,7 +105,7 @@ export default {
     health: {
       type: "object",
       properties: {
-        lastCommunicationAt: {
+        lastHeartbeatAt: {
           type: "string",
           description:
             "The date and time of the last communication with the system",
