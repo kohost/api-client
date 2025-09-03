@@ -131,8 +131,11 @@ export default {
     command: {
       type: ["string", "null"],
       enum: [
+        "content",
         "mute",
+        "muted",
         "volumeUp",
+        "volume",
         "volumeDown",
         "brightnessUp",
         "brightnessDown",
