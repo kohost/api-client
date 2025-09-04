@@ -137,6 +137,7 @@ export default {
         "volumeUp",
         "volume",
         "volumeDown",
+        "brightness",
         "brightnessUp",
         "brightnessDown",
         "channelUp",
