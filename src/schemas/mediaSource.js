@@ -108,7 +108,10 @@ export default {
       },
     },
     output: {
-      type: "string",
+      type: "array",
+      items: {
+        type: "string",
+      },
     },
     supportedOutputs: {
       type: "array",
@@ -120,6 +123,9 @@ export default {
       type: ["object", "null"],
       additionalProperties: false,
       properties: {
+        playlistId: {
+          type: "string",
+        },
         title: {
           type: "string",
         },
