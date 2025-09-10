@@ -135,6 +135,7 @@ export default {
       type: ["string", "null"],
       enum: [
         "content",
+        "output",
         "mute",
         "muted",
         "volumeUp",
