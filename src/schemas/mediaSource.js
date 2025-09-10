@@ -107,6 +107,9 @@ export default {
         type: "string",
       },
     },
+    output: {
+      type: "string",
+    },
     supportedOutputs: {
       type: "array",
       items: {
