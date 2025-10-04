@@ -140,8 +140,14 @@ export default {
     metadata: {
       $ref: "definitions.json#/definitions/metadata",
     },
+    createdAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
     updatedAt: {
       $ref: "definitions.json#/definitions/updatedAt",
+    },
+    deletedAt: {
+      $ref: "definitions.json#/definitions/date",
     },
   },
 };

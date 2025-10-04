@@ -37,6 +37,7 @@ export default {
         "library",
         "idf",
         "restroom",
+        "exterior",
       ],
     },
     floor: {
@@ -140,6 +141,15 @@ export default {
     },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
+    },
+    createdAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
+    updatedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
+    deletedAt: {
+      $ref: "definitions.json#/definitions/date",
     },
   },
 };

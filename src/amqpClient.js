@@ -1,5 +1,4 @@
 import { connect } from "amqplib";
-import { isFatalError } from "amqplib/lib/connection";
 import dbg from "debug";
 import { Buffer } from "node:buffer";
 import * as crypto from "node:crypto";
@@ -238,5 +237,15 @@ class Message {
       options: this.options,
       routingKey: this.routingKey,
     };
+  }
+}
+
+function isFatalError(err) {
+  switch (err && err.code) {
+    case 320:
+    case 200:
+      return false;
+    default:
+      return true;
   }
 }

@@ -37,5 +37,11 @@ export default {
       type: "object",
       additionalProperties: true,
     },
+    createdAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
+    updatedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
   },
 };

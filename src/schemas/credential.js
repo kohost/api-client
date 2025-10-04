@@ -48,6 +48,12 @@ export default {
     expires: {
       type: ["string", "object", "null"],
     },
+    createdAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
+    updatedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
     },

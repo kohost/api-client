@@ -156,9 +156,12 @@ export default {
     updatedAt: {
       $ref: "definitions.json#/definitions/updatedAt",
     },
-    lastTriggeredAt: {
+    lastRunAt: {
       $ref: "definitions.json#/definitions/date",
       description: "When the automation was last triggered",
+    },
+    deletedAt: {
+      $ref: "definitions.json#/definitions/date",
     },
     webhookUrl: {
       type: "string",

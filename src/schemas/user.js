@@ -206,12 +206,6 @@ export default {
     revenue: {
       $ref: "definitions.json#/definitions/revenue",
     },
-    createdAt: {
-      $ref: "definitions.json#/definitions/createdAt",
-    },
-    updatedAt: {
-      $ref: "definitions.json#/definitions/updatedAt",
-    },
     systems: {
       type: "array",
       default: [],
@@ -231,6 +225,15 @@ export default {
         required: ["systemId", "propertyId", "driver"],
         additionalProperties: false,
       },
+    },
+    createdAt: {
+      $ref: "definitions.json#/definitions/createdAt",
+    },
+    updatedAt: {
+      $ref: "definitions.json#/definitions/updatedAt",
+    },
+    deletedAt: {
+      $ref: "definitions.json#/definitions/date",
     },
   },
 };

@@ -30,5 +30,14 @@ export default {
     subject: {
       type: "string",
     },
+    createdAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
+    updatedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
+    deletedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
   },
 };

@@ -99,6 +99,9 @@ export default {
     updatedAt: {
       $ref: "definitions.json#/definitions/updatedAt",
     },
+    deletedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
   },
   additionalProperties: false,
 };

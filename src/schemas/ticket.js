@@ -343,5 +343,8 @@ export default {
     closedAt: {
       $ref: "definitions.json#/definitions/date",
     },
+    deletedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
   },
 };

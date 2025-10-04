@@ -41,5 +41,11 @@ export default {
       type: ["string", "null"],
       description: "Reference (id) to the property that this device belongs to",
     },
+    createdAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
+    updatedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
   },
 };

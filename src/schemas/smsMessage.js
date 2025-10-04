@@ -53,6 +53,9 @@ export default {
     updatedAt: {
       $ref: "definitions.json#/definitions/date",
     },
+    deletedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
     },
