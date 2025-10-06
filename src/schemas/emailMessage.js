@@ -54,6 +54,12 @@ export default {
     driver: {
       type: "string",
     },
+    headers: {
+      type: "object",
+    },
+    replyTo: {
+      type: ["string", "array"],
+    },
     appData: {
       type: "object",
     },
