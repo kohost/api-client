@@ -12,9 +12,10 @@ import { validateVendor as validate } from "../validate";
  * @property {string} [phone]
  * @property {string} email
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
- * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [photo] - Any media file
+ * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any, createdAt?: any, updatedAt?: any, deletedAt?: any}} [photo] - Any media file
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -38,6 +39,7 @@ export class Vendor extends Entity {
     if (data.photo !== undefined) this.photo = data.photo;
     if (data.createdAt !== undefined) this.createdAt = data.createdAt;
     if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 }
 
@@ -58,6 +60,7 @@ Object.defineProperty(Vendor.prototype, "schema", {
       photo: { $ref: "mediaFile.json#" },
       createdAt: { $ref: "definitions.json#/definitions/createdAt" },
       updatedAt: { $ref: "definitions.json#/definitions/updatedAt" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

@@ -13,6 +13,8 @@ import { validateSession as validate } from "../validate";
  * @property {string} userAgent
  * @property {(string|object)} expires
  * @property {object} data
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
  */
 
 /**
@@ -34,6 +36,8 @@ export class Session extends Entity {
     this.userAgent = data.userAgent;
     this.expires = data.expires;
     this.data = data.data;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
   }
 }
 
@@ -60,6 +64,8 @@ Object.defineProperty(Session.prototype, "schema", {
       userAgent: { type: "string" },
       expires: { type: ["string", "object", "null"] },
       data: { type: "object", additionalProperties: true },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

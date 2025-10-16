@@ -12,6 +12,9 @@ import { validateShortLink as validate } from "../validate";
  * @property {string} destination
  * @property {string} url
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -32,6 +35,9 @@ export class ShortLink extends Entity {
     this.destination = data.destination;
     this.url = data.url;
     if (data.systemId !== undefined) this.systemId = data.systemId;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 }
 
@@ -49,6 +55,9 @@ Object.defineProperty(ShortLink.prototype, "schema", {
       destination: { type: "string", format: "uri" },
       url: { type: "string", format: "uri" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

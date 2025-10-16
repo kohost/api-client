@@ -14,6 +14,7 @@ import { validateMotionSensor as validate } from "../validate";
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
  * @property {{name?: string, timestamp?: number, description?: string}} [notification]
+ * @property {boolean} [occupied]
  * @property {number} [watts]
  * @property {string} [icon]
  * @property {string} [modelNumber]
@@ -42,6 +43,7 @@ export class MotionSensor extends Entity {
     if (data.supportedNotifications !== undefined)
       this.supportedNotifications = data.supportedNotifications;
     if (data.notification !== undefined) this.notification = data.notification;
+    if (data.occupied !== undefined) this.occupied = data.occupied;
     if (data.watts !== undefined) this.watts = data.watts;
     if (data.icon !== undefined) this.icon = data.icon;
     if (data.modelNumber !== undefined) this.modelNumber = data.modelNumber;
@@ -71,6 +73,7 @@ Object.defineProperty(MotionSensor.prototype, "schema", {
         $ref: "definitions.json#/definitions/supportedNotifications",
       },
       notification: { $ref: "definitions.json#/definitions/notification" },
+      occupied: { type: "boolean" },
       watts: { $ref: "definitions.json#/definitions/watts" },
       icon: { type: "string" },
       modelNumber: { type: "string" },

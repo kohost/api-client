@@ -40,7 +40,9 @@ import { validateReservation as validate } from "../validate";
  * @property {string} [travelAgent]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  * @property {{}} [metadata]
+ * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -93,7 +95,9 @@ export class Reservation extends Entity {
     if (data.travelAgent !== undefined) this.travelAgent = data.travelAgent;
     if (data.systemId !== undefined) this.systemId = data.systemId;
     if (data.metadata !== undefined) this.metadata = data.metadata;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
     if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 
   checkInTime(tz) {
@@ -202,7 +206,9 @@ Object.defineProperty(Reservation.prototype, "schema", {
       travelAgent: { type: "string" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
       metadata: { $ref: "definitions.json#/definitions/metadata" },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
       updatedAt: { $ref: "definitions.json#/definitions/updatedAt" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

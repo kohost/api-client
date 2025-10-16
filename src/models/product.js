@@ -13,10 +13,13 @@ import { validateProduct as validate } from "../validate";
  * @property {string} [description]
  * @property {number} price
  * @property {number} [tax]
- * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [image] - Any media file
+ * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any, createdAt?: any, updatedAt?: any, deletedAt?: any}} [image] - Any media file
  * @property {string} [category]
  * @property {string} [imageUrl]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -42,6 +45,9 @@ export class Product extends Entity {
     if (data.category !== undefined) this.category = data.category;
     if (data.imageUrl !== undefined) this.imageUrl = data.imageUrl;
     if (data.systemId !== undefined) this.systemId = data.systemId;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 }
 
@@ -64,6 +70,9 @@ Object.defineProperty(Product.prototype, "schema", {
       category: { type: "string" },
       imageUrl: { type: "string", format: "uri", pattern: "^https?://" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

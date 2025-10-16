@@ -14,6 +14,9 @@ import { validatePolicy as validate } from "../validate";
  * @property {string} organizationId
  * @property {string} propertyId
  * @property {{entities: string[], effect: ("Allow"|"Deny")}[]} permissions
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -36,6 +39,9 @@ export class Policy extends Entity {
     this.organizationId = data.organizationId;
     this.propertyId = data.propertyId;
     this.permissions = data.permissions;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 }
 
@@ -78,6 +84,9 @@ Object.defineProperty(Policy.prototype, "schema", {
           },
         },
       },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

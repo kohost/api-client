@@ -18,6 +18,9 @@ import { validateOrder as validate } from "../validate";
  * @property {{additionalProperties?: any, name: string, price: number}[]} [fees] - Default: []
  * @property {{additionalProperties?: any, name: string, class?: string, rateType?: ("percentage"|"flat"), rate: number, total?: number}[]} [delivery] - Default: []
  * @property {{method?: ("folio"|"invoice"|"amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), name?: string, date?: (string|object), amount?: number, transactionReference?: string}[]} [payments] - Default: []
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -45,6 +48,9 @@ export class Order extends Entity {
     if (data.fees !== undefined) this.fees = data.fees;
     if (data.delivery !== undefined) this.delivery = data.delivery;
     if (data.payments !== undefined) this.payments = data.payments;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 
   getSubTotal() {
@@ -244,6 +250,9 @@ Object.defineProperty(Order.prototype, "schema", {
           },
         },
       },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

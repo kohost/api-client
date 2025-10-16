@@ -21,6 +21,9 @@ import { validateMediaFile as validate } from "../validate";
  * @property {(string|object)} [uploadUrlExpires]
  * @property {string} [createdBy]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -51,6 +54,9 @@ export class MediaFile extends Entity {
       this.uploadUrlExpires = data.uploadUrlExpires;
     if (data.createdBy !== undefined) this.createdBy = data.createdBy;
     if (data.systemId !== undefined) this.systemId = data.systemId;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 
   createImageVariant(params) {
@@ -102,6 +108,9 @@ Object.defineProperty(MediaFile.prototype, "schema", {
       uploadUrlExpires: { $ref: "definitions.json#/definitions/date" },
       createdBy: { type: "string" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
     additionalProperties: false,
     required: ["type"],

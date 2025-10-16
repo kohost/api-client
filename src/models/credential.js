@@ -17,6 +17,8 @@ import { validateCredential as validate } from "../validate";
  * @property {string} [deviceId]
  * @property {string} [userAgent]
  * @property {(string|object)} expires
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  */
 
@@ -45,6 +47,8 @@ export class Credential extends Entity {
     if (data.deviceId !== undefined) this.deviceId = data.deviceId;
     if (data.userAgent !== undefined) this.userAgent = data.userAgent;
     this.expires = data.expires;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
     if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
@@ -79,6 +83,8 @@ Object.defineProperty(Credential.prototype, "schema", {
       deviceId: { type: "string" },
       userAgent: { type: "string" },
       expires: { type: ["string", "object", "null"] },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
     },
   },

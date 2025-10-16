@@ -31,6 +31,7 @@ import { validateTicket as validate } from "../validate";
  * @property {(string|object)} updatedAt
  * @property {(string|object)} [solvedAt]
  * @property {(string|object)} [closedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -72,6 +73,7 @@ export class Ticket extends Entity {
     this.updatedAt = data.updatedAt;
     if (data.solvedAt !== undefined) this.solvedAt = data.solvedAt;
     if (data.closedAt !== undefined) this.closedAt = data.closedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 }
 
@@ -296,6 +298,7 @@ Object.defineProperty(Ticket.prototype, "schema", {
       updatedAt: { $ref: "definitions.json#/definitions/date" },
       solvedAt: { $ref: "definitions.json#/definitions/date" },
       closedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

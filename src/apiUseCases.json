@@ -85,6 +85,16 @@
     }
   ],
   [
+    "ValidateAuth",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/auth/validate",
+        "disableAuth": true
+      }
+    }
+  ],
+  [
     "DescribeSelf",
     {
       "http": {
@@ -118,8 +128,7 @@
       "http": {
         "method": "GET",
         "path": "/users"
-      },
-      "entity": "user"
+      }
     }
   ],
   [
@@ -127,8 +136,7 @@
     {
       "http": {
         "method": "PUT",
-        "path": "/users/me",
-        "maxSize": "2mb"
+        "path": "/users/me"
       }
     }
   ],
@@ -147,8 +155,7 @@
       "http": {
         "method": "DELETE",
         "path": "/users/:id"
-      },
-      "entity": "user"
+      }
     }
   ],
   [
@@ -170,27 +177,6 @@
     }
   ],
   [
-    "MatchUserIdentification",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/users/:id/identifications/match",
-        "maxSize": "2mb"
-      },
-      "entity": "user"
-    }
-  ],
-  [
-    "ListUserReservations",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/users/:id/reservations"
-      },
-      "entity": "reservation"
-    }
-  ],
-  [
     "ListUserSpaces",
     {
       "http": {
@@ -200,56 +186,11 @@
     }
   ],
   [
-    "ListUserOrders",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/users/:id/orders"
-      },
-      "entity": "order"
-    }
-  ],
-  [
-    "UpsertSystemUsers",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["SystemUserUpdated"]
-      }
-    }
-  ],
-  [
-    "SeedSuperAdminUsers",
-    {
-      "http": false,
-      "entity": "user"
-    }
-  ],
-  [
-    "ListTeam",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/team"
-      }
-    }
-  ],
-  [
     "DescribeMyPasskeyRegistrations",
     {
       "http": {
         "method": "GET",
         "path": "/users/me/passkeyRegistrations"
-      },
-      "entity": "credential"
-    }
-  ],
-  [
-    "TipUser",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/users/:id/tip"
       }
     }
   ],
@@ -259,33 +200,6 @@
       "http": {
         "method": "DELETE",
         "path": "/users/me/accessCredentials/:id"
-      }
-    }
-  ],
-  [
-    "CreateUserMobileKey",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/users/:id/mobileKeys"
-      }
-    }
-  ],
-  [
-    "DescribeMyMobileKeyApp",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/users/me/accessCredentials"
-      }
-    }
-  ],
-  [
-    "ListUserMobileKeys",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/users/:id/mobileKeys"
       }
     }
   ],
@@ -371,15 +285,6 @@
     }
   ],
   [
-    "ListMySpaces",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/spaces/mine"
-      }
-    }
-  ],
-  [
     "ListRoomsInSpace",
     {
       "http": {
@@ -434,47 +339,11 @@
     }
   ],
   [
-    "UpsertSystemSpaces",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["SystemSpaceUpdated"]
-      }
-    }
-  ],
-  [
-    "SetSpaceScene",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/spaces/:spaceId/scenes/:id"
-      }
-    }
-  ],
-  [
     "SpaceUnoccupiedEffects",
     {
       "http": false,
       "automations": {
         "runsOn": ["SpaceUnoccupied"]
-      }
-    }
-  ],
-  [
-    "SpaceInspectedEffects",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["SpaceInspected"]
-      }
-    }
-  ],
-  [
-    "UpsertSystemCategories",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["SystemCategoryUpdated"]
       }
     }
   ],
@@ -583,15 +452,6 @@
       "http": false,
       "automations": {
         "runsOn": ["RoomOccupied"]
-      }
-    }
-  ],
-  [
-    "CourtesyServiceRequestedEffects",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["CourtesyServiceRequested"]
       }
     }
   ],
@@ -938,15 +798,6 @@
     }
   ],
   [
-    "DescribeLockCredential",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/locks/:id/credential"
-      }
-    }
-  ],
-  [
     "CreateSwitch",
     {
       "http": {
@@ -1199,15 +1050,6 @@
     }
   ],
   [
-    "SetRoomScene",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/scenes/:id"
-      }
-    }
-  ],
-  [
     "AutoCloseTickets",
     {
       "http": {
@@ -1370,20 +1212,11 @@
     }
   ],
   [
-    "CreateScene",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/scenes"
-      }
-    }
-  ],
-  [
     "CreateDefaultScenes",
     {
-      "http": {
-        "method": "POST",
-        "path": "/scenes/default"
+      "http": false,
+      "automations": {
+        "runsOn": ["PropertyCreated"]
       }
     }
   ],
@@ -1393,6 +1226,15 @@
       "http": {
         "method": "POST",
         "path": "/scenes/:id"
+      }
+    }
+  ],
+  [
+    "SetRoomScene",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/rooms/:roomId/scenes/:id"
       }
     }
   ],
@@ -1482,27 +1324,7 @@
     {
       "http": false,
       "automations": {
-        "runsOn": ["DeviceAssociated", "RoomDeviceUpdated"]
-      }
-    }
-  ],
-  [
-    "UpsertSystemDevices",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": [
-          "SystemAlarmUpdated",
-          "SystemThermostatUpdated",
-          "SystemDimmerUpdated",
-          "SystemSwitchUpdated",
-          "SystemCourtesyUpdated",
-          "SystemLockUpdated",
-          "SystemCameraUpdated",
-          "SystemWindowCoveringUpdated",
-          "SystemMediaSourceUpdated",
-          "SystemMotionSensorUpdated"
-        ]
+        "runsOn": ["DeviceAssociated"]
       }
     }
   ],
@@ -1512,343 +1334,6 @@
       "http": false,
       "automations": {
         "runsOn": ["SystemEntityDeleted"]
-      }
-    }
-  ],
-  [
-    "DiscoverReservations",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/reservations/discover"
-      }
-    }
-  ],
-  [
-    "CreateReservation",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations"
-      }
-    }
-  ],
-  [
-    "DeleteReservation",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/reservations/:id"
-      }
-    }
-  ],
-  [
-    "ListReservations",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/reservations"
-      }
-    }
-  ],
-  [
-    "ListMyReservations",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/reservations/mine"
-      }
-    }
-  ],
-  [
-    "UpdateReservation",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/reservations/:id"
-      }
-    }
-  ],
-  [
-    "DescribeReservation",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/reservations/:id"
-      }
-    }
-  ],
-  [
-    "CheckInReservation",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/checkin"
-      }
-    }
-  ],
-  [
-    "CheckOutReservation",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/checkout"
-      }
-    }
-  ],
-  [
-    "SendCheckInSMS",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/sendCheckInSMS"
-      },
-      "automations": {
-        "runsOn": ["ReservationCreated", "ReservationUpdated"]
-      }
-    }
-  ],
-  [
-    "SendPreArrivalSMS",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/sendPreArrivalSMS"
-      },
-      "automations": {
-        "runsOn": ["ReservationCreated", "ReservationUpdated"]
-      }
-    }
-  ],
-  [
-    "SendPreArrivalEmail",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/sendPreArrivalEmail"
-      },
-      "automations": {
-        "runsOn": ["ReservationCreated", "ReservationUpdated"]
-      }
-    }
-  ],
-  [
-    "SendRoomControlSMS",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/sendRoomControlSMS"
-      },
-      "automations": {
-        "runsOn": [
-          "ReservationCreated",
-          "ReservationUpdated",
-          "ReservationStatusCheckedIn"
-        ]
-      }
-    }
-  ],
-  [
-    "SendCheckOutSMS",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/sendCheckOutSMS"
-      }
-    }
-  ],
-  [
-    "BatchNotifyPreArrival",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/batchNotifyPreArrival"
-      }
-    }
-  ],
-  [
-    "UpsertSystemReservations",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["SystemReservationUpdated"]
-      }
-    }
-  ],
-  [
-    "BatchNotifyCheckIn",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/batchNotifyCheckIn"
-      }
-    }
-  ],
-  [
-    "BatchNotifyCheckOut",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/batchNotifyCheckIn"
-      }
-    }
-  ],
-  [
-    "BatchNotifyMissedCheckOut",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/batchNotifyMissedCheckOut"
-      }
-    }
-  ],
-  [
-    "AssignSpaceToReservation",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/space"
-      }
-    }
-  ],
-  [
-    "DescribeReservationEarlyCheckInProducts",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/reservations/:id/products/earlyCheckIn"
-      }
-    }
-  ],
-  [
-    "PurchaseReservationEarlyCheckInProducts",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/products/earlyCheckIn"
-      }
-    }
-  ],
-  [
-    "DescribeReservationRoomUpgrades",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/reservations/:id/products/roomUpgrades"
-      }
-    }
-  ],
-  [
-    "PurchaseReservationRoomUpgrades",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/products/roomUpgrades"
-      }
-    }
-  ],
-  [
-    "DescribeReservationLateCheckOutProducts",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/reservations/:id/products/lateCheckOut"
-      }
-    }
-  ],
-  [
-    "PurchaseReservationLateCheckOutProducts",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/products/lateCheckOut"
-      }
-    }
-  ],
-  [
-    "UpdateReservationExpectedArrivalTime",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/reservations/:id/expectedArrivalTime"
-      }
-    }
-  ],
-  [
-    "DescribeReservationPetProducts",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/reservations/:id/products/pet"
-      }
-    }
-  ],
-  [
-    "PurchaseReservationPetProducts",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/products/pet"
-      }
-    }
-  ],
-  [
-    "DescribeReservationPromos",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/reservations/:id/products/promo"
-      }
-    }
-  ],
-  [
-    "PurchaseReservationPromos",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/reservations/:id/products/promo"
-      }
-    }
-  ],
-  [
-    "CheckInReservationEffects",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["ReservationStatusCheckedIn"]
-      }
-    }
-  ],
-  [
-    "CheckOutReservationEffects",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["ReservationStatusCheckedOut", "ReservationStatusCancelled"]
-      }
-    }
-  ],
-  [
-    "ReservationMobileKeyEffects",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": [
-          "ReservationSpaceChanged",
-          "ReservationCheckoutDateTimeChanged",
-          "ReservationStatusCheckedOut",
-          "ReservationStatusCancelled"
-        ]
-      }
-    }
-  ],
-  [
-    "OCRDocument",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/documents/ocr",
-        "maxSize": "2mb"
       }
     }
   ],
@@ -1956,15 +1441,6 @@
     }
   ],
   [
-    "UpsertSystemProperty",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["SystemPropertyUpdated"]
-      }
-    }
-  ],
-  [
     "UpdatePropertySettings",
     {
       "http": {
@@ -2013,6 +1489,15 @@
     }
   ],
   [
+    "SystemEventRouter",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["SYSTEM_DEVICE_UPDATE", "SYSTEM_STARTUP", "SYSTEM_HEARTBEAT"]
+      }
+    }
+  ],
+  [
     "CreateImageUploadEndpoint",
     {
       "http": {
@@ -2040,54 +1525,9 @@
     }
   ],
   [
-    "DescribeProduct",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/products/:id"
-      }
-    }
-  ],
-  [
-    "UpsertSystemProducts",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["SystemProductUpdated"]
-      }
-    }
-  ],
-  [
-    "ListProducts",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/products"
-      }
-    }
-  ],
-  [
     "CreateLoginLink",
     {
       "http": false
-    }
-  ],
-  [
-    "ListOrders",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/orders"
-      }
-    }
-  ],
-  [
-    "ListMyOrders",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/orders/mine"
-      }
     }
   ],
   [
@@ -2322,6 +1762,15 @@
     }
   ],
   [
+    "CreateDefaultIssues",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": ["PropertyCreated"]
+      }
+    }
+  ],
+  [
     "DescribeVendor",
     {
       "http": {
@@ -2427,6 +1876,18 @@
     }
   ],
   [
+    "CreateDefaultAutomations",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/automations/default"
+      },
+      "automations": {
+        "runsOn": ["PropertyCreated"]
+      }
+    }
+  ],
+  [
     "CreateNotification",
     {
       "http": {
@@ -2474,7 +1935,19 @@
   [
     "CreateDefaultNotifications",
     {
-      "http": false
+      "http": false,
+      "automations": {
+        "runsOn": ["PropertyCreated"]
+      }
+    }
+  ],
+  [
+    "SendNotification",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/notifications/send"
+      }
     }
   ],
   [
@@ -2537,6 +2010,71 @@
       "http": {
         "method": "POST",
         "path": "/devices"
+      }
+    }
+  ],
+  [
+    "UpsertSystemDevices",
+    {
+      "http": false,
+      "automations": {
+        "runsOn": [
+          "SystemAlarmUpdated",
+          "SystemThermostatUpdated",
+          "SystemDimmerUpdated",
+          "SystemSwitchUpdated",
+          "SystemCourtesyUpdated",
+          "SystemLockUpdated",
+          "SystemCameraUpdated",
+          "SystemWindowCoveringUpdated",
+          "SystemMediaSourceUpdated",
+          "SystemMotionSensorUpdated"
+        ]
+      }
+    }
+  ],
+  [
+    "CreateSystem",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/systems"
+      }
+    }
+  ],
+  [
+    "DeleteSystem",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/systems/:id"
+      }
+    }
+  ],
+  [
+    "DescribeSystem",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/systems/:id"
+      }
+    }
+  ],
+  [
+    "ListSystems",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/systems"
+      }
+    }
+  ],
+  [
+    "UpdateSystem",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/systems/:id"
       }
     }
   ]

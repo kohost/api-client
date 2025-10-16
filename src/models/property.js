@@ -23,7 +23,7 @@ import { validateProperty as validate } from "../validate";
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
  * @property {number} [latitude]
  * @property {number} [longitude]
- * @property {{RoomControl?: {disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object, cameraConfig?: object}, CheckIn?: {payment?: any, identification?: any, earlyCheckIn?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number, minimumTime?: string}, roomUpgrades?: any, pet?: any, promos?: any}, CheckOut?: {lateCheckOut?: {dynamic: boolean, minimumPrice?: number, maximumPrice?: number, priceRatioPerHour?: number}}, Concierge?: {timeTracking?: boolean, tipping?: boolean, feedback?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), quickServices?: {name: string, description: string, department?: string, image: {id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}}[], issues?: {syncWithPropertyId?: string}}, DigitalKey?: {system?: ("salto"|"dormakaba"), systemOnline?: boolean, systemConfig?: {legicUrl?: string, legicWalletName?: string, legicAppId?: number, legicTechUsername?: string, legicTechPassword?: string}, enableApp?: boolean, branding?: {logo?: string, gradient?: string[], highlightedGradient?: string[]}}, SOS?: {active?: boolean, activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]}, Elevator?: object, Experiences?: object, Dining?: {system?: "gotab", systemConfig?: {landingUrl?: string, includeUserDetails?: boolean}}, Rentals?: object, Shop?: object, Spa?: object, Valet?: object}} [appFeatures] - Default: {"RoomControl":{}}
+ * @property {{RoomControl?: {disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object, cameraConfig?: object}, Concierge?: {timeTracking?: boolean, feedback?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), issues?: {syncWithPropertyId?: string}}, SOS?: {active?: boolean, activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]}}} [appFeatures] - Default: {"RoomControl":{}}
  * @property {{email?: {enabled?: boolean}, sms?: {enabled?: boolean}, push?: {enabled?: boolean}}} [notifications] - Default: {"email":{"enabled":false},"sms":{"enabled":false},"push":{"enabled":false}}
  * @property {object} [credentials]
  */
@@ -200,47 +200,10 @@ Object.defineProperty(Property.prototype, "schema", {
             },
             additionalProperties: false,
           },
-          CheckIn: {
-            type: "object",
-            properties: {
-              payment: {},
-              identification: {},
-              earlyCheckIn: {
-                type: "object",
-                required: ["dynamic"],
-                properties: {
-                  dynamic: { type: "boolean", default: false },
-                  minimumPrice: { type: "number", default: 10 },
-                  maximumPrice: { type: "number", default: 50 },
-                  priceRatioPerHour: { type: "number", default: 0.1 },
-                  minimumTime: { type: "string" },
-                },
-              },
-              roomUpgrades: {},
-              pet: {},
-              promos: {},
-            },
-          },
-          CheckOut: {
-            type: "object",
-            properties: {
-              lateCheckOut: {
-                type: "object",
-                required: ["dynamic"],
-                properties: {
-                  dynamic: { type: "boolean", default: false },
-                  minimumPrice: { type: "number", default: 10 },
-                  maximumPrice: { type: "number", default: 50 },
-                  priceRatioPerHour: { type: "number", default: 0.1 },
-                },
-              },
-            },
-          },
           Concierge: {
             type: "object",
             properties: {
               timeTracking: { type: "boolean", default: false },
-              tipping: { type: "boolean", default: false },
               feedback: { type: "boolean", default: true },
               ratings: { type: "boolean", default: true },
               newTicketCCs: {
@@ -255,66 +218,9 @@ Object.defineProperty(Property.prototype, "schema", {
                 description:
                   "Determines how users should be notified of new messages in the concierge system",
               },
-              quickServices: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    name: { type: "string" },
-                    description: { type: "string" },
-                    department: { type: "string" },
-                    image: { $ref: "mediaFile.json" },
-                  },
-                  required: ["name", "description", "image"],
-                },
-              },
               issues: {
                 type: "object",
                 properties: { syncWithPropertyId: { type: "string" } },
-              },
-            },
-          },
-          DigitalKey: {
-            type: "object",
-            properties: {
-              system: { type: "string", enum: ["salto", "dormakaba"] },
-              systemOnline: { type: "boolean", default: false },
-              systemConfig: {
-                type: "object",
-                properties: {
-                  legicUrl: { type: "string", format: "uri" },
-                  legicWalletName: { type: "string" },
-                  legicAppId: { type: "number" },
-                  legicTechUsername: { type: "string" },
-                  legicTechPassword: { type: "string" },
-                },
-                additionalProperties: false,
-                default: {},
-              },
-              enableApp: { type: "boolean" },
-              branding: {
-                type: "object",
-                properties: {
-                  logo: { type: "string", format: "uri" },
-                  gradient: {
-                    type: "array",
-                    items: {
-                      type: "string",
-                      pattern: "^(?!#ffffff)(#[0-9a-fA-F]{6})$",
-                    },
-                    minItems: 2,
-                    maxItems: 2,
-                  },
-                  highlightedGradient: {
-                    type: "array",
-                    items: {
-                      type: "string",
-                      pattern: "^(?!#ffffff)(#[0-9a-fA-F]{6})$",
-                    },
-                    minItems: 2,
-                    maxItems: 3,
-                  },
-                },
               },
             },
           },
@@ -338,26 +244,6 @@ Object.defineProperty(Property.prototype, "schema", {
               },
             },
           },
-          Elevator: { type: "object" },
-          Experiences: { type: "object" },
-          Dining: {
-            type: "object",
-            properties: {
-              system: { type: "string", enum: ["gotab"] },
-              systemConfig: {
-                type: "object",
-                properties: {
-                  landingUrl: { type: "string", format: "uri" },
-                  includeUserDetails: { type: "boolean" },
-                },
-                additionalProperties: false,
-              },
-            },
-          },
-          Rentals: { type: "object" },
-          Shop: { type: "object" },
-          Spa: { type: "object" },
-          Valet: { type: "object" },
         },
         additionalProperties: false,
         default: { RoomControl: {} },

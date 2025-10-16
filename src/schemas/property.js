@@ -177,76 +177,10 @@ export default {
           },
           additionalProperties: false,
         },
-        CheckIn: {
-          type: "object",
-          properties: {
-            payment: {},
-            identification: {},
-            earlyCheckIn: {
-              type: "object",
-              required: ["dynamic"],
-              properties: {
-                dynamic: {
-                  type: "boolean",
-                  default: false,
-                },
-                minimumPrice: {
-                  type: "number",
-                  default: 10,
-                },
-                maximumPrice: {
-                  type: "number",
-                  default: 50,
-                },
-                priceRatioPerHour: {
-                  type: "number",
-                  default: 0.1,
-                },
-                minimumTime: {
-                  type: "string",
-                },
-              },
-            },
-            roomUpgrades: {},
-            pet: {},
-            promos: {},
-          },
-        },
-        CheckOut: {
-          type: "object",
-          properties: {
-            lateCheckOut: {
-              type: "object",
-              required: ["dynamic"],
-              properties: {
-                dynamic: {
-                  type: "boolean",
-                  default: false,
-                },
-                minimumPrice: {
-                  type: "number",
-                  default: 10,
-                },
-                maximumPrice: {
-                  type: "number",
-                  default: 50,
-                },
-                priceRatioPerHour: {
-                  type: "number",
-                  default: 0.1,
-                },
-              },
-            },
-          },
-        },
         Concierge: {
           type: "object",
           properties: {
             timeTracking: {
-              type: "boolean",
-              default: false,
-            },
-            tipping: {
               type: "boolean",
               default: false,
             },
@@ -272,98 +206,11 @@ export default {
               description:
                 "Determines how users should be notified of new messages in the concierge system",
             },
-            quickServices: {
-              type: "array",
-              items: {
-                type: "object",
-                properties: {
-                  name: {
-                    type: "string",
-                  },
-                  description: {
-                    type: "string",
-                  },
-                  department: {
-                    type: "string",
-                  },
-                  image: {
-                    $ref: "mediaFile.json",
-                  },
-                },
-                required: ["name", "description", "image"],
-              },
-            },
             issues: {
               type: "object",
               properties: {
                 syncWithPropertyId: {
                   type: "string",
-                },
-              },
-            },
-          },
-        },
-        DigitalKey: {
-          type: "object",
-          properties: {
-            system: {
-              type: "string",
-              enum: ["salto", "dormakaba"],
-            },
-            systemOnline: {
-              type: "boolean",
-              default: false,
-            },
-            systemConfig: {
-              type: "object",
-              properties: {
-                legicUrl: {
-                  type: "string",
-                  format: "uri",
-                },
-                legicWalletName: {
-                  type: "string",
-                },
-                legicAppId: {
-                  type: "number",
-                },
-                legicTechUsername: {
-                  type: "string",
-                },
-                legicTechPassword: {
-                  type: "string",
-                },
-              },
-              additionalProperties: false,
-              default: {},
-            },
-            enableApp: {
-              type: "boolean",
-            },
-            branding: {
-              type: "object",
-              properties: {
-                logo: {
-                  type: "string",
-                  format: "uri",
-                },
-                gradient: {
-                  type: "array",
-                  items: {
-                    type: "string",
-                    pattern: "^(?!#ffffff)(#[0-9a-fA-F]{6})$",
-                  },
-                  minItems: 2,
-                  maxItems: 2,
-                },
-                highlightedGradient: {
-                  type: "array",
-                  items: {
-                    type: "string",
-                    pattern: "^(?!#ffffff)(#[0-9a-fA-F]{6})$",
-                  },
-                  minItems: 2,
-                  maxItems: 3,
                 },
               },
             },
@@ -391,38 +238,6 @@ export default {
             },
           },
         },
-        Elevator: {
-          type: "object",
-        },
-        Experiences: {
-          type: "object",
-        },
-        Dining: {
-          type: "object",
-          properties: {
-            system: {
-              type: "string",
-              enum: ["gotab"],
-            },
-            systemConfig: {
-              type: "object",
-              properties: {
-                landingUrl: {
-                  type: "string",
-                  format: "uri",
-                },
-                includeUserDetails: {
-                  type: "boolean",
-                },
-              },
-              additionalProperties: false,
-            },
-          },
-        },
-        Rentals: { type: "object" },
-        Shop: { type: "object" },
-        Spa: { type: "object" },
-        Valet: { type: "object" },
       },
       additionalProperties: false,
       default: {

@@ -26,6 +26,8 @@ import { validateThermostat as validate } from "../validate";
  * @property {{cool?: any, heat?: any, auto?: any}} setpoints
  * @property {number} [minAutoDelta] - Default: 3
  * @property {number} [cycleRate]
+ * @property {number} [co2] - Parts per million (ppm)
+ * @property {number} [voc] - Parts per billion (ppb)
  * @property {number} [batteryLevel]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  * @property {number} [watts]
@@ -71,6 +73,8 @@ export class Thermostat extends Entity {
     this.setpoints = data.setpoints;
     if (data.minAutoDelta !== undefined) this.minAutoDelta = data.minAutoDelta;
     if (data.cycleRate !== undefined) this.cycleRate = data.cycleRate;
+    if (data.co2 !== undefined) this.co2 = data.co2;
+    if (data.voc !== undefined) this.voc = data.voc;
     if (data.batteryLevel !== undefined) this.batteryLevel = data.batteryLevel;
     if (data.systemId !== undefined) this.systemId = data.systemId;
     if (data.watts !== undefined) this.watts = data.watts;
@@ -159,6 +163,8 @@ Object.defineProperty(Thermostat.prototype, "schema", {
       },
       minAutoDelta: { type: "number", default: 3 },
       cycleRate: { type: "number" },
+      co2: { type: "number", description: "Parts per million (ppm)" },
+      voc: { type: "number", description: "Parts per billion (ppb)" },
       batteryLevel: { $ref: "definitions.json#/definitions/batteryLevel" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
       watts: { $ref: "definitions.json#/definitions/watts" },

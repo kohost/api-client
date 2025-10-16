@@ -16,6 +16,9 @@ import { validateIssue as validate } from "../validate";
  * @property {string} [systemKey]
  * @property {boolean} [autoCreateTicket] - Default: true
  * @property {string[]} [excludedResources] - A list of resources that should not trigger notifications of this issue. Default: []
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -42,6 +45,9 @@ export class Issue extends Entity {
       this.autoCreateTicket = data.autoCreateTicket;
     if (data.excludedResources !== undefined)
       this.excludedResources = data.excludedResources;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 }
 
@@ -104,6 +110,9 @@ Object.defineProperty(Issue.prototype, "schema", {
         items: { type: "string" },
         default: [],
       },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

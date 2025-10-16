@@ -16,6 +16,8 @@ import { validateDiscoveredDevice as validate } from "../validate";
  * @property {boolean} [ignore]
  * @property {string} [organizationId] - Reference (id) to the organization that owns this device
  * @property {string} [propertyId] - Reference (id) to the property that this device belongs to
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
  */
 
 /**
@@ -42,6 +44,8 @@ export class DiscoveredDevice extends Entity {
     if (data.organizationId !== undefined)
       this.organizationId = data.organizationId;
     if (data.propertyId !== undefined) this.propertyId = data.propertyId;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
   }
 }
 
@@ -76,6 +80,8 @@ Object.defineProperty(DiscoveredDevice.prototype, "schema", {
         description:
           "Reference (id) to the property that this device belongs to",
       },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

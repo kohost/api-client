@@ -17,6 +17,7 @@ import { validateSmsMessage as validate } from "../validate";
  * @property {object} [appData]
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  */
 
@@ -43,6 +44,7 @@ export class SmsMessage extends Entity {
     if (data.appData !== undefined) this.appData = data.appData;
     if (data.createdAt !== undefined) this.createdAt = data.createdAt;
     if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
     if (data.systemId !== undefined) this.systemId = data.systemId;
   }
 }
@@ -84,6 +86,7 @@ Object.defineProperty(SmsMessage.prototype, "schema", {
       appData: { type: "object" },
       createdAt: { $ref: "definitions.json#/definitions/date" },
       updatedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
     },
   },

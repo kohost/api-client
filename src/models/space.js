@@ -9,7 +9,7 @@ import { validateSpace as validate } from "../validate";
  * @property {string} id - Identifier of the object.
  * @property {string} name
  * @property {"space"} type - Default: "space"
- * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit"|"cafeteria"|"multiPurposeRoom"|"library"|"idf"|"restroom")} [discriminator]
+ * @property {("classRoom"|"hotelRoom"|"office"|"building"|"commonArea"|"conferenceRoom"|"lobby"|"gym"|"pool"|"restaurant"|"unit"|"cafeteria"|"multiPurposeRoom"|"library"|"idf"|"restroom"|"exterior")} [discriminator]
  * @property {string} [floor]
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
  * @property {string} [category] - This is the category id
@@ -24,6 +24,9 @@ import { validateSpace as validate } from "../validate";
  * @property {("inService"|"outOfOrder"|"outOfService")} [serviceStatus]
  * @property {object[]} [devices] - Default: []
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -60,6 +63,9 @@ export class Space extends Entity {
       this.serviceStatus = data.serviceStatus;
     if (data.devices !== undefined) this.devices = data.devices;
     if (data.systemId !== undefined) this.systemId = data.systemId;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 
   get hasDimmer() {
@@ -122,6 +128,7 @@ Object.defineProperty(Space.prototype, "schema", {
           "library",
           "idf",
           "restroom",
+          "exterior",
         ],
       },
       floor: { type: "string" },
@@ -184,6 +191,9 @@ Object.defineProperty(Space.prototype, "schema", {
         default: [],
       },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

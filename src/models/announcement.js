@@ -11,11 +11,12 @@ import { validateAnnouncement as validate } from "../validate";
  * @property {string[]} [users]
  * @property {string} [group]
  * @property {string} body
- * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [media] - Any media file
+ * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any, createdAt?: any, updatedAt?: any, deletedAt?: any}} [media] - Any media file
  * @property {string} [sentBy]
  * @property {string[]} [tags]
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -40,6 +41,7 @@ export class Announcement extends Entity {
     if (data.tags !== undefined) this.tags = data.tags;
     if (data.createdAt !== undefined) this.createdAt = data.createdAt;
     if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 }
 
@@ -62,6 +64,7 @@ Object.defineProperty(Announcement.prototype, "schema", {
       tags: { type: "array", items: { type: "string" } },
       createdAt: { $ref: "definitions.json#/definitions/date" },
       updatedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
     additionalProperties: false,
   },

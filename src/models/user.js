@@ -18,24 +18,25 @@ import { validateUser as validate } from "../validate";
  * @property {boolean} [whatsappVerified]
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
  * @property {string} [secretKey]
- * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}} [photo] - Any media file
+ * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any, createdAt?: any, updatedAt?: any, deletedAt?: any}} [photo] - Any media file
  * @property {string} [jobTitle]
  * @property {string} [dob]
  * @property {("male"|"female")} [gender]
  * @property {string} [nationality]
- * @property {{organizationId: string, propertyId: string, role: ("Guest"|"User"|"Agent"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin"), timeTrackingEnabled?: boolean, department?: string, policyIds?: string[], policies?: {id: any, type: "policy", discriminator: "user", name: string, description?: string, organizationId: string, propertyId: string, permissions: {entities: string[], effect: ("Allow"|"Deny")}[]}[]}[]} [permissions] - Default: []
+ * @property {{organizationId: string, propertyId: string, role: ("Guest"|"User"|"Agent"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin"), timeTrackingEnabled?: boolean, department?: string, policyIds?: string[], policies?: {id: any, type: "policy", discriminator: "user", name: string, description?: string, organizationId: string, propertyId: string, permissions: {entities: string[], effect: ("Allow"|"Deny")}[], createdAt?: any, updatedAt?: any, deletedAt?: any}[]}[]} [permissions] - Default: []
  * @property {{organizationId: string, propertyId: string, notifications?: {discriminator: ("observerTicketCreated"|"observerTicketResolved"), enabled: boolean}[]}[]} [preferences]
  * @property {string[]} [notes]
- * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any}[]} [files]
+ * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any, createdAt?: any, updatedAt?: any, deletedAt?: any}[]} [files]
  * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, issuingState?: string, systemId?: any}[]} [identifications]
  * @property {{id?: any, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: string, maskedNumber: string, issued?: string, expires: string, systemId?: any}[]} [payments]
  * @property {{accuracy: number, latitude: number, longitude: number, timestamp: number}} [location]
- * @property {{id?: any, driver?: any, primaryGuest?: string, type: "reservation", sharedGuests?: string[], spaceCategory?: string, space?: string, previousSpace?: string, status: ("reserved"|"checkedIn"|"checkedOut"|"cancelled"|"noShow"|"enquired"|"requested"|"optional"), mobileCheckInSpaceCategoryChanged?: boolean, mobileCheckInSpaceChanged?: boolean, mobileCheckInStatus?: ("ready"|"blocked"|"preArrivalStepsRequired"|"spaceNotAssigned"|"spaceNotReady"|"checkInTimeNotStarted"), mobileCheckInStatusMessage?: string, confirmationNumber?: string, expectedCheckInDateTime?: (string|object), checkInDateTime: (string|object), checkOutDateTime: (string|object), adultCount?: number, childCount?: number, spaceCategoryAvailabilites?: {id?: string, price?: number, unit?: ("night"|"stay"|"hour"), isUpgrade?: boolean}[], revenue?: any, rateSuppressed?: boolean, payment?: string, company?: string, travelAgent?: string, systemId?: any, metadata?: any, updatedAt?: any}[]} [reservations]
+ * @property {{id?: any, driver?: any, primaryGuest?: string, type: "reservation", sharedGuests?: string[], spaceCategory?: string, space?: string, previousSpace?: string, status: ("reserved"|"checkedIn"|"checkedOut"|"cancelled"|"noShow"|"enquired"|"requested"|"optional"), mobileCheckInSpaceCategoryChanged?: boolean, mobileCheckInSpaceChanged?: boolean, mobileCheckInStatus?: ("ready"|"blocked"|"preArrivalStepsRequired"|"spaceNotAssigned"|"spaceNotReady"|"checkInTimeNotStarted"), mobileCheckInStatusMessage?: string, confirmationNumber?: string, expectedCheckInDateTime?: (string|object), checkInDateTime: (string|object), checkOutDateTime: (string|object), adultCount?: number, childCount?: number, spaceCategoryAvailabilites?: {id?: string, price?: number, unit?: ("night"|"stay"|"hour"), isUpgrade?: boolean}[], revenue?: any, rateSuppressed?: boolean, payment?: string, company?: string, travelAgent?: string, systemId?: any, metadata?: any, createdAt?: any, updatedAt?: any, deletedAt?: any}[]} [reservations]
  * @property {string} [spaceName]
  * @property {{id?: string, name?: string, date?: string, price?: number, tax?: number}[]} [revenue]
+ * @property {{systemId: string, propertyId: string, driver: string}[]} [systems] - Default: []
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
- * @property {{systemId: string, propertyId: string, driver: string}[]} [systems] - Default: []
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -81,9 +82,10 @@ export class User extends Entity {
     if (data.reservations !== undefined) this.reservations = data.reservations;
     if (data.spaceName !== undefined) this.spaceName = data.spaceName;
     if (data.revenue !== undefined) this.revenue = data.revenue;
+    if (data.systems !== undefined) this.systems = data.systems;
     if (data.createdAt !== undefined) this.createdAt = data.createdAt;
     if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
-    if (data.systems !== undefined) this.systems = data.systems;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 
   get fullName() {
@@ -241,8 +243,6 @@ Object.defineProperty(User.prototype, "schema", {
       reservations: { type: "array", items: { $ref: "reservation.json" } },
       spaceName: { type: "string" },
       revenue: { $ref: "definitions.json#/definitions/revenue" },
-      createdAt: { $ref: "definitions.json#/definitions/createdAt" },
-      updatedAt: { $ref: "definitions.json#/definitions/updatedAt" },
       systems: {
         type: "array",
         default: [],
@@ -257,6 +257,9 @@ Object.defineProperty(User.prototype, "schema", {
           additionalProperties: false,
         },
       },
+      createdAt: { $ref: "definitions.json#/definitions/createdAt" },
+      updatedAt: { $ref: "definitions.json#/definitions/updatedAt" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });

@@ -13,6 +13,9 @@ import { validateNotification as validate } from "../validate";
  * @property {("sms"|"email"|"push")} discriminator
  * @property {string} content
  * @property {string} [subject]
+ * @property {(string|object)} [createdAt]
+ * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [deletedAt]
  */
 
 /**
@@ -34,6 +37,9 @@ export class Notification extends Entity {
     this.discriminator = data.discriminator;
     this.content = data.content;
     if (data.subject !== undefined) this.subject = data.subject;
+    if (data.createdAt !== undefined) this.createdAt = data.createdAt;
+    if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
   }
 }
 
@@ -52,6 +58,9 @@ Object.defineProperty(Notification.prototype, "schema", {
       discriminator: { type: "string", enum: ["sms", "email", "push"] },
       content: { type: "string" },
       subject: { type: "string" },
+      createdAt: { $ref: "definitions.json#/definitions/date" },
+      updatedAt: { $ref: "definitions.json#/definitions/date" },
+      deletedAt: { $ref: "definitions.json#/definitions/date" },
     },
   },
 });
