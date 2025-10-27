@@ -15,9 +15,7 @@ export default {
     },
     discriminator: {
       type: "string",
-      enum: [
-        "doorStation"
-      ]
+      enum: ["doorStation"],
     },
     type: {
       type: "string",
@@ -116,6 +114,9 @@ export default {
       $ref: "definitions.json#/definitions/watts",
     },
     icon: {
+      type: "string",
+    },
+    manufacturer: {
       type: "string",
     },
     modelNumber: {

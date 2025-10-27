@@ -46,6 +46,9 @@ export default {
     icon: {
       type: "string",
     },
+    manufacturer: {
+      type: "string",
+    },
     modelNumber: {
       type: "string",
     },
