@@ -74,9 +74,9 @@ export default {
         },
         event: {
           type: "object",
-          required: ["eventName", "eventProperties", "match"],
+          required: ["eventType", "eventProperties", "match"],
           properties: {
-            eventName: {
+            eventType: {
               type: "string",
               description:
                 "Name of the event that triggers the automation actions",
