@@ -19,6 +19,7 @@ import { validateAlarm as validate } from "../validate";
  * @property {boolean} [chime] - Reflects whether console chime is enabled
  * @property {number} [watts]
  * @property {string} [icon]
+ * @property {string} [manufacturer]
  * @property {string} [modelNumber]
  * @property {string} [serialNumber]
  * @property {string} [firmwareVersion]
@@ -51,6 +52,7 @@ export class Alarm extends Entity {
     if (data.chime !== undefined) this.chime = data.chime;
     if (data.watts !== undefined) this.watts = data.watts;
     if (data.icon !== undefined) this.icon = data.icon;
+    if (data.manufacturer !== undefined) this.manufacturer = data.manufacturer;
     if (data.modelNumber !== undefined) this.modelNumber = data.modelNumber;
     if (data.serialNumber !== undefined) this.serialNumber = data.serialNumber;
     if (data.firmwareVersion !== undefined)
@@ -113,6 +115,7 @@ Object.defineProperty(Alarm.prototype, "schema", {
       },
       watts: { $ref: "definitions.json#/definitions/watts" },
       icon: { type: "string" },
+      manufacturer: { type: "string" },
       modelNumber: { type: "string" },
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },

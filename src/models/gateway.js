@@ -17,6 +17,7 @@ import { validateGateway as validate } from "../validate";
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
  * @property {number} [watts]
  * @property {string} [icon]
+ * @property {string} [manufacturer]
  * @property {string} [modelNumber]
  * @property {string} [serialNumber]
  * @property {string} [firmwareVersion]
@@ -46,6 +47,7 @@ export class Gateway extends Entity {
     this.driver = data.driver;
     if (data.watts !== undefined) this.watts = data.watts;
     if (data.icon !== undefined) this.icon = data.icon;
+    if (data.manufacturer !== undefined) this.manufacturer = data.manufacturer;
     if (data.modelNumber !== undefined) this.modelNumber = data.modelNumber;
     if (data.serialNumber !== undefined) this.serialNumber = data.serialNumber;
     if (data.firmwareVersion !== undefined)
@@ -75,6 +77,7 @@ Object.defineProperty(Gateway.prototype, "schema", {
       driver: { $ref: "definitions.json#/definitions/driver" },
       watts: { $ref: "definitions.json#/definitions/watts" },
       icon: { type: "string" },
+      manufacturer: { type: "string" },
       modelNumber: { type: "string" },
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },

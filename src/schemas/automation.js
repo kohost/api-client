@@ -94,7 +94,7 @@ export default {
                     description: "Property of the event",
                   },
                   value: {
-                    type: "string",
+                    type: ["string", "number", "boolean"],
                     description: "Value of the property",
                   },
                   operator: {

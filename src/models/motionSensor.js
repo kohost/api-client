@@ -17,6 +17,7 @@ import { validateMotionSensor as validate } from "../validate";
  * @property {boolean} [occupied]
  * @property {number} [watts]
  * @property {string} [icon]
+ * @property {string} [manufacturer]
  * @property {string} [modelNumber]
  * @property {string} [serialNumber]
  * @property {string} [firmwareVersion]
@@ -46,6 +47,7 @@ export class MotionSensor extends Entity {
     if (data.occupied !== undefined) this.occupied = data.occupied;
     if (data.watts !== undefined) this.watts = data.watts;
     if (data.icon !== undefined) this.icon = data.icon;
+    if (data.manufacturer !== undefined) this.manufacturer = data.manufacturer;
     if (data.modelNumber !== undefined) this.modelNumber = data.modelNumber;
     if (data.serialNumber !== undefined) this.serialNumber = data.serialNumber;
     if (data.firmwareVersion !== undefined)
@@ -76,6 +78,7 @@ Object.defineProperty(MotionSensor.prototype, "schema", {
       occupied: { type: "boolean" },
       watts: { $ref: "definitions.json#/definitions/watts" },
       icon: { type: "string" },
+      manufacturer: { type: "string" },
       modelNumber: { type: "string" },
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },

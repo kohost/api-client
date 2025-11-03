@@ -11,7 +11,7 @@ import { validateAutomation as validate } from "../validate";
  * @property {"automation"} type - Default: "automation"
  * @property {boolean} [isEnabled] - Whether the automation is currently enabled. Default: true
  * @property {string} [description] - The text description of the automation
- * @property {{discriminator: ("schedule"|"event"), schedule?: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}, event?: {eventName: string, eventProperties: {property: string, value: string, operator: ("=="|"!="|">"|">="|"<"|"<="|"contains"|"notContains")}[], match: ("any"|"all")}}} trigger - The trigger that initiates the automation
+ * @property {{discriminator: ("schedule"|"event"), schedule?: {days: number[], time: string, timeOffsetSeconds?: number, repeat?: boolean, timezone: string}, event?: {eventType: string, eventProperties: {property: string, value: (string|number|boolean), operator: ("=="|"!="|">"|">="|"<"|"<="|"contains"|"notContains")}[], match: ("any"|"all")}}} trigger - The trigger that initiates the automation
  * @property {{useCase: string, useCaseParams: {data: (object|array)}}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
@@ -113,9 +113,9 @@ Object.defineProperty(Automation.prototype, "schema", {
           },
           event: {
             type: "object",
-            required: ["eventName", "eventProperties", "match"],
+            required: ["eventType", "eventProperties", "match"],
             properties: {
-              eventName: {
+              eventType: {
                 type: "string",
                 description:
                   "Name of the event that triggers the automation actions",
@@ -133,7 +133,7 @@ Object.defineProperty(Automation.prototype, "schema", {
                       description: "Property of the event",
                     },
                     value: {
-                      type: "string",
+                      type: ["string", "number", "boolean"],
                       description: "Value of the property",
                     },
                     operator: {

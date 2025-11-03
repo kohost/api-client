@@ -35,6 +35,7 @@ import { validateMediaSource as validate } from "../validate";
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  * @property {number} [watts]
  * @property {string} [icon]
+ * @property {string} [manufacturer]
  * @property {string} [modelNumber]
  * @property {string} [serialNumber]
  * @property {string} [firmwareVersion]
@@ -87,6 +88,7 @@ export class MediaSource extends Entity {
     if (data.systemId !== undefined) this.systemId = data.systemId;
     if (data.watts !== undefined) this.watts = data.watts;
     if (data.icon !== undefined) this.icon = data.icon;
+    if (data.manufacturer !== undefined) this.manufacturer = data.manufacturer;
     if (data.modelNumber !== undefined) this.modelNumber = data.modelNumber;
     if (data.serialNumber !== undefined) this.serialNumber = data.serialNumber;
     if (data.firmwareVersion !== undefined)
@@ -302,6 +304,7 @@ Object.defineProperty(MediaSource.prototype, "schema", {
       systemId: { $ref: "definitions.json#/definitions/systemId" },
       watts: { $ref: "definitions.json#/definitions/watts" },
       icon: { type: "string" },
+      manufacturer: { type: "string" },
       modelNumber: { type: "string" },
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },
