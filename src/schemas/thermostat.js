@@ -143,6 +143,11 @@ export default {
     firmwareVersion: {
       type: "string",
     },
+    uiEnabled: {
+      type: "boolean",
+      description: "Local thermostat controls active or not",
+      default: true,
+    },
   },
   $defs: {
     setpoint: {
