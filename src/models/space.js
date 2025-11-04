@@ -17,7 +17,7 @@ import { validateSpace as validate } from "../validate";
  * @property {string[]} [spaces] - IDs of sub-spaces in the space
  * @property {boolean} [occupied]
  * @property {boolean} [inUse]
- * @property {{active?: boolean, activatedAt?: (string|object), allowed?: boolean, previousState?: object}} [eco] - Default: {"active":false,"allowed":false,"previousState":null}
+ * @property {{active?: boolean, activatedAt?: (string|object), allowed?: boolean, previousState?: (object|null)}} [eco] - Default: {"active":false,"allowed":false,"previousState":null}
  * @property {"pet"[]} [features]
  * @property {number} [maximumOccupancy]
  * @property {("clean"|"dirty"|"inspected"|"pickup")} [housekeepingStatus]

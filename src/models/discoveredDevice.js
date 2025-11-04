@@ -14,8 +14,8 @@ import { validateDiscoveredDevice as validate } from "../validate";
  * @property {string} [driver]
  * @property {object} deviceData
  * @property {boolean} [ignore]
- * @property {string} [organizationId] - Reference (id) to the organization that owns this device
- * @property {string} [propertyId] - Reference (id) to the property that this device belongs to
+ * @property {(string|null)} [organizationId] - Reference (id) to the organization that owns this device
+ * @property {(string|null)} [propertyId] - Reference (id) to the property that this device belongs to
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  */

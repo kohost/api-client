@@ -11,7 +11,7 @@ import { validateAnnouncement as validate } from "../validate";
  * @property {string[]} [users]
  * @property {string} [group]
  * @property {string} body
- * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any, createdAt?: any, updatedAt?: any, deletedAt?: any}} [media] - Any media file
+ * @property {{id?: string, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: (string|object), createdBy?: string, systemId?: string, createdAt?: (string|object), updatedAt?: (string|object), deletedAt?: (string|object)}} [media] - Any media file
  * @property {string} [sentBy]
  * @property {string[]} [tags]
  * @property {(string|object)} [createdAt]

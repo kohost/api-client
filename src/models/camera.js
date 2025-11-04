@@ -12,10 +12,10 @@ import { validateCamera as validate } from "../validate";
  * @property {"camera"} type - Default: "camera"
  * @property {boolean} [offline]
  * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
- * @property {{name?: string, timestamp?: number, description?: string}} [notification]
+ * @property {{name?: any, timestamp?: number, description?: string}} [notification]
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
- * @property {{iframe?: string, hls?: string, webRTC?: string, rtsp?: string}} [liveStreams]
- * @property {{id?: string, driver?: ("aws-kinesis"|"cloudflare-stream"|"doorbird"|"digital-watchdog"|"mediamtx"), allowedOrigins?: string[], authRequired?: boolean, iframe?: string, hls?: string, webRTC?: string, rtsp?: string, previewImage?: string}} [liveStream]
+ * @property {{iframe?: (string|null), hls?: (string|null), webRTC?: (string|null), rtsp?: (string|null)}} [liveStreams]
+ * @property {{id?: string, driver?: ("aws-kinesis"|"cloudflare-stream"|"doorbird"|"digital-watchdog"|"mediamtx"), allowedOrigins?: string[], authRequired?: boolean, iframe?: (string|null), hls?: (string|null), webRTC?: (string|null), rtsp?: (string|null), previewImage?: (string|null)}} [liveStream]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  * @property {number} [watts]
  * @property {string} [icon]

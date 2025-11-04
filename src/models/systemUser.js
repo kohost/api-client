@@ -11,8 +11,8 @@ import { validateSystemUser as validate } from "../validate";
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
  * @property {string} firstName
  * @property {string} lastName
- * @property {string} [phone]
- * @property {string} [email]
+ * @property {(string|null)} [phone]
+ * @property {(string|null)} [email]
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
  * @property {string} [photo]
  * @property {string} [jobTitle]
@@ -21,10 +21,10 @@ import { validateSystemUser as validate } from "../validate";
  * @property {("Guest"|"User"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin")[]} [roles]
  * @property {string} [nationality]
  * @property {string[]} [notes]
- * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any, createdAt?: any, updatedAt?: any, deletedAt?: any}[]} [files]
- * @property {{id?: any, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, issuingState?: string, systemId?: any}[]} [identifications]
- * @property {{id?: any, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: string, maskedNumber: string, issued?: string, expires: string, systemId?: any}[]} [payments]
- * @property {{id?: string, name?: string, date?: string, price?: number, tax?: number}[]} [revenue]
+ * @property {{id?: string, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: (string|object), createdBy?: string, systemId?: string, createdAt?: (string|object), updatedAt?: (string|object), deletedAt?: (string|object)}[]} [files]
+ * @property {{id?: string, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object|null), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, issuingState?: string, systemId?: string}[]} [identifications]
+ * @property {{id?: string, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: (string|null), maskedNumber: string, issued?: (string|null), expires: string, systemId?: string}[]} [payments]
+ * @property {{id?: string, name?: string, date?: string, price?: number, tax?: (number|null)}[]} [revenue]
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.

@@ -9,7 +9,7 @@ import { validateDeviceRouter as validate } from "../validate";
  * @property {string} [id] - Identifier of the object.
  * @property {"deviceRouter"} [type] - Default: "deviceRouter"
  * @property {string} driver
- * @property {string} organizationId - Reference (id) to the organization that owns this router
+ * @property {(string|null)} organizationId - Reference (id) to the organization that owns this router
  * @property {object} [devices]
  */
 

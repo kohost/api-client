@@ -10,7 +10,7 @@ import { validateProperty as validate } from "../validate";
  * @property {string} name
  * @property {"property"} type - Default: "property"
  * @property {("hospitality"|"education"|"commercial"|"storage")} discriminator
- * @property {string} organization - Reference (id) to the organization that owns this property
+ * @property {(string|null)} organization - Reference (id) to the organization that owns this property
  * @property {string[]} [departments]
  * @property {boolean} [testModeEnabled]
  * @property {{notificationEmails?: string[], notificationEmailDomains?: string[]}} [testMode]

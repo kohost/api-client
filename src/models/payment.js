@@ -9,9 +9,9 @@ import { validatePayment as validate } from "../validate";
  * @property {string} [id] - Identifier of the object.
  * @property {("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay")} type
  * @property {boolean} [enabled] - Default: true
- * @property {string} [storageData]
+ * @property {(string|null)} [storageData]
  * @property {string} maskedNumber
- * @property {string} [issued]
+ * @property {(string|null)} [issued]
  * @property {string} expires
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
  */

@@ -12,18 +12,18 @@ import { validateThermostat as validate } from "../validate";
  * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
  * @property {boolean} [offline]
  * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
- * @property {{name?: string, timestamp?: number, description?: string}} [notification]
+ * @property {{name?: any, timestamp?: number, description?: string}} [notification]
  * @property {number} [currentTemperature]
  * @property {number} [currentHumidity]
- * @property {any} hvacMode
+ * @property {("cool"|"heat"|"auto"|"off")} hvacMode
  * @property {("cooling"|"heating"|"off")} hvacState
- * @property {any} fanMode
+ * @property {("auto"|"low"|"medium"|"high"|"off"|"on")} fanMode
  * @property {("off"|"low"|"medium"|"high"|"on")} fanState
  * @property {("celsius"|"fahrenheit")} temperatureScale - Default: "fahrenheit"
  * @property {("absolute"|"relative")} [humidityScale]
  * @property {("cool"|"heat"|"auto"|"off")[]} supportedHvacModes
  * @property {("auto"|"low"|"medium"|"high"|"off"|"on")[]} supportedFanModes
- * @property {{cool?: any, heat?: any, auto?: any}} setpoints
+ * @property {{cool?: {value?: number, min?: (number|null), max?: (number|null)}, heat?: {value?: number, min?: (number|null), max?: (number|null)}, auto?: {value?: number, min?: (number|null), max?: (number|null)}}} setpoints
  * @property {number} [minAutoDelta] - Default: 3
  * @property {number} [cycleRate]
  * @property {number} [co2] - Parts per million (ppm)
@@ -36,6 +36,7 @@ import { validateThermostat as validate } from "../validate";
  * @property {string} [modelNumber]
  * @property {string} [serialNumber]
  * @property {string} [firmwareVersion]
+ * @property {boolean} [uiEnabled] - Local thermostat controls active or not. Default: true
  */
 
 /**
@@ -85,6 +86,7 @@ export class Thermostat extends Entity {
     if (data.serialNumber !== undefined) this.serialNumber = data.serialNumber;
     if (data.firmwareVersion !== undefined)
       this.firmwareVersion = data.firmwareVersion;
+    if (data.uiEnabled !== undefined) this.uiEnabled = data.uiEnabled;
   }
 }
 
@@ -175,6 +177,11 @@ Object.defineProperty(Thermostat.prototype, "schema", {
       modelNumber: { type: "string" },
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },
+      uiEnabled: {
+        type: "boolean",
+        description: "Local thermostat controls active or not",
+        default: true,
+      },
     },
     $defs: {
       setpoint: {

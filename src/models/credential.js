@@ -16,7 +16,7 @@ import { validateCredential as validate } from "../validate";
  * @property {string} [propertyId]
  * @property {string} [deviceId]
  * @property {string} [userAgent]
- * @property {(string|object)} expires
+ * @property {(string|object|null)} expires
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  * @property {string} [systemId] - Identifier of the object, directly related to the system.

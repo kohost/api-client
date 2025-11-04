@@ -12,8 +12,8 @@ import { validateReservation as validate } from "../validate";
  * @property {"reservation"} type - Default: "reservation"
  * @property {string[]} [sharedGuests]
  * @property {string} [spaceCategory]
- * @property {string} [space]
- * @property {string} [previousSpace] - Used when there was a space assigned and it changes. Default: null
+ * @property {(string|null)} [space]
+ * @property {(string|null)} [previousSpace] - Used when there was a space assigned and it changes. Default: null
  * @property {("reserved"|"checkedIn"|"checkedOut"|"cancelled"|"noShow"|"enquired"|"requested"|"optional")} status -  reserved - confirmed by both parties, before check-in
  checkedIn - checked in
  checkedOut - checked out
@@ -33,7 +33,7 @@ import { validateReservation as validate } from "../validate";
  * @property {number} [adultCount] - Default: 1
  * @property {number} [childCount] - Default: 0
  * @property {{id?: string, price?: number, unit?: ("night"|"stay"|"hour"), isUpgrade?: boolean}[]} [spaceCategoryAvailabilites]
- * @property {{id?: string, name?: string, date?: string, price?: number, tax?: number}[]} [revenue]
+ * @property {{id?: string, name?: string, date?: string, price?: number, tax?: (number|null)}[]} [revenue]
  * @property {boolean} [rateSuppressed]
  * @property {string} [payment]
  * @property {string} [company]

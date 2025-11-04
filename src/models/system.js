@@ -14,7 +14,7 @@ import { validateSystem as validate } from "../validate";
  * @property {string} [propertyId] - The id of the property that uses the system
  * @property {{id?: string, systemId: string, type?: string, discriminator?: string, propertyIds?: string[]}[]} entities - The entities produced by the system. Default: []
  * @property {string} [driverApiVersion] - The version of the driver API used by the system
- * @property {{id?: any, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: any, createdBy?: string, systemId?: any, createdAt?: any, updatedAt?: any, deletedAt?: any}} [logo] - Any media file
+ * @property {{id?: string, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: (string|object), createdBy?: string, systemId?: string, createdAt?: (string|object), updatedAt?: (string|object), deletedAt?: (string|object)}} [logo] - Any media file
  * @property {object} [config] - The runtime configuration of the system
  * @property {{websiteUrl?: string, email?: string, phone?: string, itunesAppId?: string, googleAppId?: string}} [contactInfo]
  * @property {{lastHeartbeatAt?: string}} [health]

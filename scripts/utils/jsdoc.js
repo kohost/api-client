@@ -9,16 +9,30 @@ export function generateSchemaDoc(schemaPath, ajv) {
   lines.push(
     ` * @typedef {Object} ${typeName}Data ${schema.description ?? ""}`,
   );
-  processProperties(schema.properties || {}, lines, schema.required || [], ajv);
+  processProperties(
+    schema.properties || {},
+    lines,
+    schema.required || [],
+    ajv,
+    "",
+    schema,
+  );
   lines.push(" */");
   return lines.join("\n");
 }
 
-function processProperties(properties, lines, required, ajv, prefix = "") {
+function processProperties(
+  properties,
+  lines,
+  required,
+  ajv,
+  prefix = "",
+  rootSchema,
+) {
   for (const [propName, prop] of Object.entries(properties)) {
     const fullPropName = prefix ? `${prefix}.${propName}` : propName;
     const isRequired = required.includes(propName);
-    const type = getPropertyType(prop, ajv);
+    const type = getPropertyType(prop, ajv, rootSchema);
     const descriptions = getDescriptions(prop, ajv);
 
     lines.push(
@@ -32,21 +46,38 @@ function processProperties(properties, lines, required, ajv, prefix = "") {
     //     prop.required || [],
     //     ajv,
     //     fullPropName,
+    //     rootSchema
     //   );
     // }
   }
 }
 
-function getPropertyType(prop, ajv) {
+function getPropertyType(prop, ajv, rootSchema) {
   if (prop.$ref) {
-    const refSchema = ajv.getSchema(prop.$ref)?.schema;
+    // Try to resolve the reference
+    let refSchema;
+
+    // Handle local references (e.g., #/$defs/setpoint or #/properties/supportedHvacModes/items)
+    if (prop.$ref.startsWith("#")) {
+      refSchema = resolveLocalRef(prop.$ref, rootSchema);
+    } else {
+      // Handle external references (e.g., definitions.json#/definitions/id)
+      refSchema = ajv.getSchema(prop.$ref)?.schema;
+    }
+
     if (!refSchema) return "any";
+
+    // Recursively process the resolved schema to handle nested $refs
+    if (refSchema.$ref) {
+      return getPropertyType(refSchema, ajv, rootSchema);
+    }
 
     // For top-level type references, preserve the object structure
     if (refSchema.type === "object" || refSchema.properties) {
       const props = Object.entries(refSchema.properties || {})
         .map(([key, value]) => {
-          const type = getTypeFromSchema(value, ajv);
+          // Recursively resolve nested references
+          const type = getPropertyType(value, ajv, rootSchema);
           const required = refSchema.required?.includes(key);
           return `${key}${required ? "" : "?"}: ${type}`;
         })
@@ -54,14 +85,38 @@ function getPropertyType(prop, ajv) {
       return `{${props}}`;
     }
 
-    return getTypeFromSchema(refSchema, ajv);
+    return getTypeFromSchema(refSchema, ajv, rootSchema);
   }
-  return getTypeFromSchema(prop, ajv);
+  return getTypeFromSchema(prop, ajv, rootSchema);
 }
 
-function getTypeFromSchema(schema, ajv) {
+/**
+ * Resolves a JSON pointer reference within a schema
+ * @param {string} ref - The reference string (e.g., "#/$defs/setpoint" or "#/properties/supportedHvacModes/items")
+ * @param {Object} rootSchema - The root schema to resolve against
+ * @returns {Object|null} The resolved schema or null
+ */
+function resolveLocalRef(ref, rootSchema) {
+  if (!ref || !ref.startsWith("#")) return null;
+
+  // Remove the leading # and split by /
+  const path = ref
+    .substring(1)
+    .split("/")
+    .filter((p) => p);
+
+  let current = rootSchema;
+  for (const segment of path) {
+    if (!current || typeof current !== "object") return null;
+    current = current[segment];
+  }
+
+  return current;
+}
+
+function getTypeFromSchema(schema, ajv, rootSchema) {
   if (schema.type === "array") {
-    return `${getPropertyType(schema.items, ajv)}[]`;
+    return `${getPropertyType(schema.items, ajv, rootSchema)}[]`;
   }
 
   if (schema.enum) {
@@ -75,7 +130,7 @@ function getTypeFromSchema(schema, ajv) {
   }
 
   if (hasNestedProperties(schema)) {
-    return formatObjectType(schema, ajv);
+    return formatObjectType(schema, ajv, rootSchema);
   }
 
   return schema.type === "integer" ? "number" : schema.type || "any";
@@ -93,18 +148,30 @@ function formatEnumType(enumValues) {
 }
 
 function formatMultipleTypes(types) {
+  const hasNull = types.includes("null");
   const formattedTypes = types
     .filter((t) => t !== "null")
     .map((t) => (t === "integer" ? "number" : t));
-  return formattedTypes.length === 1
-    ? formattedTypes[0]
-    : `(${formattedTypes.join("|")})`;
+
+  // If there's only one non-null type and it has null, return "type | null"
+  if (formattedTypes.length === 1 && hasNull) {
+    return `(${formattedTypes[0]}|null)`;
+  }
+
+  // If there are multiple non-null types
+  if (formattedTypes.length > 1) {
+    return hasNull
+      ? `(${formattedTypes.join("|")}|null)`
+      : `(${formattedTypes.join("|")})`;
+  }
+
+  return formattedTypes[0];
 }
 
-function formatObjectType(schema, ajv) {
+function formatObjectType(schema, ajv, rootSchema) {
   const props = Object.entries(schema.properties || {})
     .map(([key, value]) => {
-      const type = getPropertyType(value, ajv);
+      const type = getPropertyType(value, ajv, rootSchema);
       const required = schema.required?.includes(key);
       return `${key}${required ? "" : "?"}: ${type}`;
     })

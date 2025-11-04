@@ -11,7 +11,7 @@ import { validateSession as validate } from "../validate";
  * @property {string} userId
  * @property {string} organizationId
  * @property {string} userAgent
- * @property {(string|object)} expires
+ * @property {(string|object|null)} expires
  * @property {object} data
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]

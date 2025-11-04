@@ -12,7 +12,7 @@ import { validateIdentification as validate } from "../validate";
  * @property {string} [maskedNumber]
  * @property {string} [encryptedNumber]
  * @property {(string|object)} [issued]
- * @property {(string|object)} [expires]
+ * @property {(string|object|null)} [expires]
  * @property {boolean} [verified]
  * @property {boolean} [matched]
  * @property {string} [firstName]

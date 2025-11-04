@@ -10,7 +10,7 @@ import { validateScene as validate } from "../validate";
  * @property {string} name
  * @property {string} [description]
  * @property {"scene"} type - Default: "scene"
- * @property {{switches?: {id?: string, state?: ("on"|"off")}[], dimmers?: {id?: string, level?: number}[], windowCoverings?: {id?: string, position?: number}[], thermostats?: {id?: string, hvacMode?: string, setpoints?: {cool?: any, heat?: any, auto?: any}, fanMode?: string, setpointDelta?: number}[], mediaSources?: {id?: string, volume?: number, commands?: string[]}[], locks?: {id?: string, state?: ("locked"|"unlocked"), mode?: ("normal"|"autoLock"|"emergencyOpen"|"emergencyClose"|"holdOpen"|"lockdown")}[]}} [devices]
+ * @property {{switches?: {id?: string, state?: ("on"|"off")}[], dimmers?: {id?: string, level?: (number|null)}[], windowCoverings?: {id?: string, position?: (number|null)}[], thermostats?: {id?: string, hvacMode?: any, setpoints?: {cool?: any, heat?: any, auto?: any}, fanMode?: any, setpointDelta?: number}[], mediaSources?: {id?: string, volume?: number, commands?: string[]}[], locks?: {id?: string, state?: ("locked"|"unlocked"), mode?: ("normal"|"autoLock"|"emergencyOpen"|"emergencyClose"|"holdOpen"|"lockdown")}[]}} [devices]
  * @property {boolean} [isDefault] - Default: false
  * @property {boolean} [showOnUi] - Default: true
  */
