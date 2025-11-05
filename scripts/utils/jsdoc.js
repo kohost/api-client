@@ -56,28 +56,40 @@ function getPropertyType(prop, ajv, rootSchema) {
   if (prop.$ref) {
     // Try to resolve the reference
     let refSchema;
+    let resolvedRootSchema = rootSchema;
 
     // Handle local references (e.g., #/$defs/setpoint or #/properties/supportedHvacModes/items)
     if (prop.$ref.startsWith("#")) {
       refSchema = resolveLocalRef(prop.$ref, rootSchema);
     } else {
-      // Handle external references (e.g., definitions.json#/definitions/id)
-      refSchema = ajv.getSchema(prop.$ref)?.schema;
+      // Handle external references (e.g., definitions.json#/definitions/id or definitions.json#/definitions/supportedNotifications/items)
+      const [schemaFile, jsonPointer] = prop.$ref.split("#");
+
+      // Get the base schema
+      const baseSchema = ajv.getSchema(schemaFile)?.schema;
+      resolvedRootSchema = baseSchema; // Update root schema context for nested references
+
+      // If there's a JSON pointer after the #, resolve it within the external schema
+      if (baseSchema && jsonPointer) {
+        refSchema = resolveLocalRef("#" + jsonPointer, baseSchema);
+      } else {
+        refSchema = baseSchema;
+      }
     }
 
     if (!refSchema) return "any";
 
     // Recursively process the resolved schema to handle nested $refs
     if (refSchema.$ref) {
-      return getPropertyType(refSchema, ajv, rootSchema);
+      return getPropertyType(refSchema, ajv, resolvedRootSchema);
     }
 
     // For top-level type references, preserve the object structure
     if (refSchema.type === "object" || refSchema.properties) {
       const props = Object.entries(refSchema.properties || {})
         .map(([key, value]) => {
-          // Recursively resolve nested references
-          const type = getPropertyType(value, ajv, rootSchema);
+          // Recursively resolve nested references using the correct root schema context
+          const type = getPropertyType(value, ajv, resolvedRootSchema);
           const required = refSchema.required?.includes(key);
           return `${key}${required ? "" : "?"}: ${type}`;
         })
@@ -85,7 +97,7 @@ function getPropertyType(prop, ajv, rootSchema) {
       return `{${props}}`;
     }
 
-    return getTypeFromSchema(refSchema, ajv, rootSchema);
+    return getTypeFromSchema(refSchema, ajv, resolvedRootSchema);
   }
   return getTypeFromSchema(prop, ajv, rootSchema);
 }
