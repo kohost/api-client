@@ -22,7 +22,7 @@ export default {
       enum: ["hospitality", "education", "commercial", "storage"],
     },
     organization: {
-      type: ["string", "null"],
+      type: "string",
       description: "Reference (id) to the organization that owns this property",
     },
     departments: {

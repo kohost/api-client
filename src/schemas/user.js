@@ -19,21 +19,21 @@ export default {
       type: "string",
     },
     phone: {
-      type: ["string", "null"],
+      type: "string",
       pattern: "^\\+[0-9]{1,14}$",
     },
     phoneVerified: {
       type: "boolean",
     },
     email: {
-      type: ["string", "null"],
+      type: "string",
       format: "email",
     },
     emailVerified: {
       type: "boolean",
     },
     whatsapp: {
-      type: ["string", "null"],
+      type: "string",
       pattern: "^\\+[0-9]{1,14}$",
     },
     whatsappVerified: {
