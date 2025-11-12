@@ -222,6 +222,24 @@ export default {
             active: {
               type: "boolean",
             },
+            activatedAt: {
+              type: ["string", "null"],
+              format: "date-time",
+            },
+            activatedBy: {
+              type: ["object", "null"],
+              properties: {
+                id: {
+                  type: "string",
+                },
+                discriminator: {
+                  enum: ["user", "device", "automation"],
+                },
+              },
+            },
+            activatedMessage: {
+              type: ["string", "null"],
+            },
             activeEmergencies: {
               type: "array",
               items: {
@@ -234,6 +252,21 @@ export default {
                   "conflict",
                   "shooter",
                 ],
+              },
+            },
+            deactivatedAt: {
+              type: ["string", "null"],
+              format: "date-time",
+            },
+            deactivatedBy: {
+              type: ["object", "null"],
+              properties: {
+                id: {
+                  type: "string",
+                },
+                discriminator: {
+                  enum: ["user", "device", "automation"],
+                },
               },
             },
           },

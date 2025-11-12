@@ -58,21 +58,37 @@ export default {
             ],
             default: "message",
           },
+          authorId: {
+            type: "string",
+          },
+          authorName: {
+            type: "string",
+          },
+          authorDiscriminator: {
+            type: "string",
+            enum: ["user", "vendor", "system"],
+          },
+          // deprecated - use authorId instead
           userId: {
             type: "string",
           },
+          // deprecated - use authorName instead
           userName: {
             type: "string",
           },
+          // deprecated - use authorId instead
           vendorId: {
             type: "string",
           },
+          // deprecated - use authorName instead
           vendorName: {
             type: "string",
           },
+          // deprecated - use authorId instead
           systemId: {
             type: "string",
           },
+          // deprecated - use authorName instead
           systemName: {
             type: "string",
           },
@@ -144,6 +160,16 @@ export default {
     openedBy: {
       type: "object",
       properties: {
+        id: {
+          type: "string",
+        },
+        discriminator: {
+          type: "string",
+          enum: ["user", "system"],
+        },
+        name: {
+          type: "string",
+        },
         userId: {
           type: "string",
         },
@@ -161,6 +187,16 @@ export default {
     requester: {
       type: "object",
       properties: {
+        id: {
+          type: "string",
+        },
+        discriminator: {
+          type: "string",
+          enum: ["user", "vendor", "system"],
+        },
+        name: {
+          type: "string",
+        },
         systemId: {
           type: "string",
         },
@@ -207,6 +243,23 @@ export default {
     assignedTo: {
       type: "object",
       properties: {
+        id: {
+          type: "string",
+        },
+        discriminator: {
+          type: "string",
+          enum: ["user", "vendor"],
+        },
+        name: {
+          type: "string",
+        },
+        photo: {
+          anyOf: [
+            { $ref: "mediaFile.json" },
+            { type: "null" },
+            { type: "string" },
+          ],
+        },
         userId: {
           type: "string",
         },

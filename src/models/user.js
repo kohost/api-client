@@ -10,11 +10,11 @@ import { validateUser as validate } from "../validate";
  * @property {string} [type] - Default: "user"
  * @property {string} firstName
  * @property {string} lastName
- * @property {(string|null)} [phone]
+ * @property {string} [phone]
  * @property {boolean} [phoneVerified]
- * @property {(string|null)} [email]
+ * @property {string} [email]
  * @property {boolean} [emailVerified]
- * @property {(string|null)} [whatsapp]
+ * @property {string} [whatsapp]
  * @property {boolean} [whatsappVerified]
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
  * @property {string} [secretKey]
@@ -30,7 +30,7 @@ import { validateUser as validate } from "../validate";
  * @property {{id?: string, type: ("driversLicense"|"passport"|"identityCard"|"visa"), number?: string, maskedNumber?: string, encryptedNumber?: string, issued?: (string|object), expires?: (string|object|null), verified?: boolean, matched?: boolean, firstName?: string, lastName?: string, issuingCountry?: string, issuingState?: string, systemId?: string}[]} [identifications]
  * @property {{id?: string, type: ("amex"|"visa"|"masterCard"|"maestro"|"discover"|"diners"|"jcb"|"applePay"|"alipay"|"chinaUnionPay"|"vpay"), enabled?: boolean, storageData?: (string|null), maskedNumber: string, issued?: (string|null), expires: string, systemId?: string}[]} [payments]
  * @property {{accuracy: (number|null), latitude: (number|null), longitude: (number|null), timestamp: (number|null)}} [location]
- * @property {{id?: string, driver?: ("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy"), primaryGuest?: string, type: "reservation", sharedGuests?: string[], spaceCategory?: string, space?: (string|null), previousSpace?: (string|null), status: ("reserved"|"checkedIn"|"checkedOut"|"cancelled"|"noShow"|"enquired"|"requested"|"optional"), mobileCheckInSpaceCategoryChanged?: boolean, mobileCheckInSpaceChanged?: boolean, mobileCheckInStatus?: ("ready"|"blocked"|"preArrivalStepsRequired"|"spaceNotAssigned"|"spaceNotReady"|"checkInTimeNotStarted"), mobileCheckInStatusMessage?: string, confirmationNumber?: string, expectedCheckInDateTime?: (string|object), checkInDateTime: (string|object), checkOutDateTime: (string|object), adultCount?: number, childCount?: number, spaceCategoryAvailabilites?: {id?: string, price?: number, unit?: ("night"|"stay"|"hour"), isUpgrade?: boolean}[], revenue?: {id?: string, name?: string, date?: string, price?: number, tax?: (number|null)}[], rateSuppressed?: boolean, payment?: string, company?: string, travelAgent?: string, systemId?: string, metadata?: {}, createdAt?: (string|object), updatedAt?: (string|object), deletedAt?: (string|object)}[]} [reservations]
+ * @property {{id?: string, driver?: ("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"dsc_itv2"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy"), primaryGuest?: string, type: "reservation", sharedGuests?: string[], spaceCategory?: string, space?: (string|null), previousSpace?: (string|null), status: ("reserved"|"checkedIn"|"checkedOut"|"cancelled"|"noShow"|"enquired"|"requested"|"optional"), mobileCheckInSpaceCategoryChanged?: boolean, mobileCheckInSpaceChanged?: boolean, mobileCheckInStatus?: ("ready"|"blocked"|"preArrivalStepsRequired"|"spaceNotAssigned"|"spaceNotReady"|"checkInTimeNotStarted"), mobileCheckInStatusMessage?: string, confirmationNumber?: string, expectedCheckInDateTime?: (string|object), checkInDateTime: (string|object), checkOutDateTime: (string|object), adultCount?: number, childCount?: number, spaceCategoryAvailabilites?: {id?: string, price?: number, unit?: ("night"|"stay"|"hour"), isUpgrade?: boolean}[], revenue?: {id?: string, name?: string, date?: string, price?: number, tax?: (number|null)}[], rateSuppressed?: boolean, payment?: string, company?: string, travelAgent?: string, systemId?: string, metadata?: {}, createdAt?: (string|object), updatedAt?: (string|object), deletedAt?: (string|object)}[]} [reservations]
  * @property {string} [spaceName]
  * @property {{id?: string, name?: string, date?: string, price?: number, tax?: (number|null)}[]} [revenue]
  * @property {{systemId: string, propertyId: string, driver: string}[]} [systems] - Default: []
@@ -126,11 +126,11 @@ Object.defineProperty(User.prototype, "schema", {
       type: { type: "string", default: "user" },
       firstName: { type: "string" },
       lastName: { type: "string" },
-      phone: { type: ["string", "null"], pattern: "^\\+[0-9]{1,14}$" },
+      phone: { type: "string", pattern: "^\\+[0-9]{1,14}$" },
       phoneVerified: { type: "boolean" },
-      email: { type: ["string", "null"], format: "email" },
+      email: { type: "string", format: "email" },
       emailVerified: { type: "boolean" },
-      whatsapp: { type: ["string", "null"], pattern: "^\\+[0-9]{1,14}$" },
+      whatsapp: { type: "string", pattern: "^\\+[0-9]{1,14}$" },
       whatsappVerified: { type: "boolean" },
       address: { $ref: "definitions.json#/definitions/address" },
       secretKey: { type: "string" },

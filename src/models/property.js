@@ -10,7 +10,7 @@ import { validateProperty as validate } from "../validate";
  * @property {string} name
  * @property {"property"} type - Default: "property"
  * @property {("hospitality"|"education"|"commercial"|"storage")} discriminator
- * @property {(string|null)} organization - Reference (id) to the organization that owns this property
+ * @property {string} organization - Reference (id) to the organization that owns this property
  * @property {string[]} [departments]
  * @property {boolean} [testModeEnabled]
  * @property {{notificationEmails?: string[], notificationEmailDomains?: string[]}} [testMode]
@@ -23,7 +23,7 @@ import { validateProperty as validate } from "../validate";
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
  * @property {number} [latitude]
  * @property {number} [longitude]
- * @property {{RoomControl?: {disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object, cameraConfig?: object}, Concierge?: {timeTracking?: boolean, feedback?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), issues?: {syncWithPropertyId?: string}}, SOS?: {active?: boolean, activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[]}}} [appFeatures] - Default: {"RoomControl":{}}
+ * @property {{RoomControl?: {disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object, cameraConfig?: object}, Concierge?: {timeTracking?: boolean, feedback?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), issues?: {syncWithPropertyId?: string}}, SOS?: {active?: boolean, activatedAt?: (string|null), activatedBy?: (object|null), activatedMessage?: (string|null), activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[], deactivatedAt?: (string|null), deactivatedBy?: (object|null)}}} [appFeatures] - Default: {"RoomControl":{}}
  * @property {{email?: {enabled?: boolean}, sms?: {enabled?: boolean}, push?: {enabled?: boolean}}} [notifications] - Default: {"email":{"enabled":false},"sms":{"enabled":false},"push":{"enabled":false}}
  * @property {object} [credentials]
  */
@@ -89,7 +89,7 @@ Object.defineProperty(Property.prototype, "schema", {
         enum: ["hospitality", "education", "commercial", "storage"],
       },
       organization: {
-        type: ["string", "null"],
+        type: "string",
         description:
           "Reference (id) to the organization that owns this property",
       },
@@ -228,6 +228,15 @@ Object.defineProperty(Property.prototype, "schema", {
             type: "object",
             properties: {
               active: { type: "boolean" },
+              activatedAt: { type: ["string", "null"], format: "date-time" },
+              activatedBy: {
+                type: ["object", "null"],
+                properties: {
+                  id: { type: "string" },
+                  discriminator: { enum: ["user", "device", "automation"] },
+                },
+              },
+              activatedMessage: { type: ["string", "null"] },
               activeEmergencies: {
                 type: "array",
                 items: {
@@ -240,6 +249,14 @@ Object.defineProperty(Property.prototype, "schema", {
                     "conflict",
                     "shooter",
                   ],
+                },
+              },
+              deactivatedAt: { type: ["string", "null"], format: "date-time" },
+              deactivatedBy: {
+                type: ["object", "null"],
+                properties: {
+                  id: { type: "string" },
+                  discriminator: { enum: ["user", "device", "automation"] },
                 },
               },
             },

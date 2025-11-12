@@ -10,11 +10,11 @@ import { validateTicket as validate } from "../validate";
  * @property {"ticket"} [type] - Default: "ticket"
  * @property {string} [number]
  * @property {string} [issueId]
- * @property {{id: string, discriminator: ("message"|"opened"|"assigned"|"rated"|"tipped"|"scheduled"|"collaboratorAdded"|"collaboratorRemoved"|"statusChanged"|"priorityChanged"|"scheduleDateChanged"|"locationChanged"), userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp: (string|object), body: string, parsedBody?: {text?: string, mentions?: {id: string, discriminator: ("user"|"vendor"|"system"), index: number, length: number, originalText: string}[]}, readBy?: string[], media?: any}[]} conversation - Default: []
+ * @property {{id: string, discriminator: ("message"|"opened"|"assigned"|"rated"|"tipped"|"scheduled"|"collaboratorAdded"|"collaboratorRemoved"|"statusChanged"|"priorityChanged"|"scheduleDateChanged"|"locationChanged"), authorId?: string, authorName?: string, authorDiscriminator?: ("user"|"vendor"|"system"), userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp: (string|object), body: string, parsedBody?: {text?: string, mentions?: {id: string, discriminator: ("user"|"vendor"|"system"), index: number, length: number, originalText: string}[]}, readBy?: string[], media?: any}[]} conversation - Default: []
  * @property {string} [subject]
- * @property {{userId?: string, userName?: string, systemId?: string, systemName?: string}} [openedBy]
- * @property {{systemId?: string, systemName?: string, systemPhoto?: any, userId?: string, userName?: string, userPhoto?: any, deviceId?: string, roomId?: string, reservationId?: string, spaceId?: string, spaceName?: string}} requester
- * @property {{userId?: string, userName?: string, userPhoto?: any, vendorId?: string, vendorName?: string, vendorPhoto?: any}} [assignedTo]
+ * @property {{id?: string, discriminator?: ("user"|"system"), name?: string, userId?: string, userName?: string, systemId?: string, systemName?: string}} [openedBy]
+ * @property {{id?: string, discriminator?: ("user"|"vendor"|"system"), name?: string, systemId?: string, systemName?: string, systemPhoto?: any, userId?: string, userName?: string, userPhoto?: any, deviceId?: string, roomId?: string, reservationId?: string, spaceId?: string, spaceName?: string}} requester
+ * @property {{id?: string, discriminator?: ("user"|"vendor"), name?: string, photo?: any, userId?: string, userName?: string, userPhoto?: any, vendorId?: string, vendorName?: string, vendorPhoto?: any}} [assignedTo]
  * @property {{id: string, discriminator: "user"}[]} [notify] - A list of entities to notify when this ticket is created or resolved.. Default: []
  * @property {{id: string, name: string, discriminator: ("user"|"vendor")}[]} [collaborators] - Default: []
  * @property {{id?: string, discriminator: ("space"|"room"|"property"|"customText"), name: string}} [location]
@@ -126,6 +126,12 @@ Object.defineProperty(Ticket.prototype, "schema", {
               ],
               default: "message",
             },
+            authorId: { type: "string" },
+            authorName: { type: "string" },
+            authorDiscriminator: {
+              type: "string",
+              enum: ["user", "vendor", "system"],
+            },
             userId: { type: "string" },
             userName: { type: "string" },
             vendorId: { type: "string" },
@@ -175,6 +181,9 @@ Object.defineProperty(Ticket.prototype, "schema", {
       openedBy: {
         type: "object",
         properties: {
+          id: { type: "string" },
+          discriminator: { type: "string", enum: ["user", "system"] },
+          name: { type: "string" },
           userId: { type: "string" },
           userName: { type: "string" },
           systemId: { type: "string" },
@@ -184,6 +193,9 @@ Object.defineProperty(Ticket.prototype, "schema", {
       requester: {
         type: "object",
         properties: {
+          id: { type: "string" },
+          discriminator: { type: "string", enum: ["user", "vendor", "system"] },
+          name: { type: "string" },
           systemId: { type: "string" },
           systemName: { type: "string" },
           systemPhoto: {
@@ -212,6 +224,16 @@ Object.defineProperty(Ticket.prototype, "schema", {
       assignedTo: {
         type: "object",
         properties: {
+          id: { type: "string" },
+          discriminator: { type: "string", enum: ["user", "vendor"] },
+          name: { type: "string" },
+          photo: {
+            anyOf: [
+              { $ref: "mediaFile.json" },
+              { type: "null" },
+              { type: "string" },
+            ],
+          },
           userId: { type: "string" },
           userName: { type: "string" },
           userPhoto: {
