@@ -1888,6 +1888,15 @@
     }
   ],
   [
+    "RunAutomation",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/automations/:id"
+      }
+    }
+  ],
+  [
     "CreateNotification",
     {
       "http": {
