@@ -35,20 +35,19 @@ function processProperties(
     const type = getPropertyType(prop, ajv, rootSchema);
     const descriptions = getDescriptions(prop, ajv);
 
+    // Check if the property is deprecated (only for top-level properties)
+    const isDeprecated =
+      !prefix && prop.description && prop.description.includes("@deprecated");
+
+    if (isDeprecated) {
+      lines.push(" * @deprecated");
+    }
+
     lines.push(
       ` * @property {${type}} ${!isRequired ? "[" + fullPropName + "]" : fullPropName}${descriptions ? ` - ${descriptions}` : ""}`,
     );
 
-    // if (hasNestedProperties(prop)) {
-    //   processProperties(
-    //     prop.properties,
-    //     lines,
-    //     prop.required || [],
-    //     ajv,
-    //     fullPropName,
-    //     rootSchema
-    //   );
-    // }
+    // Don't recurse - nested properties are already in the inline type
   }
 }
 

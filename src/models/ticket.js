@@ -8,15 +8,15 @@ import { validateTicket as validate } from "../validate";
  * @typedef {Object} TicketData A ticket is a request from a user.
  * @property {string} id - Identifier of the object.
  * @property {"ticket"} [type] - Default: "ticket"
- * @property {string} [number]
- * @property {string} [issueId]
- * @property {{id: string, discriminator: ("message"|"opened"|"assigned"|"rated"|"tipped"|"scheduled"|"collaboratorAdded"|"collaboratorRemoved"|"statusChanged"|"priorityChanged"|"scheduleDateChanged"|"locationChanged"), authorId?: string, authorName?: string, authorDiscriminator?: ("user"|"vendor"|"system"), userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp: (string|object), body: string, parsedBody?: {text?: string, mentions?: {id: string, discriminator: ("user"|"vendor"|"system"), index: number, length: number, originalText: string}[]}, readBy?: string[], media?: any}[]} conversation - Default: []
- * @property {string} [subject]
+ * @property {string} [number] - The number of the ticket.
+ * @property {string} [issueId] - The ID of the issue that this ticket is associated with.
+ * @property {{id: string, discriminator: ("message"|"opened"|"assigned"|"rated"|"tipped"|"scheduled"|"collaboratorAdded"|"collaboratorRemoved"|"statusChanged"|"priorityChanged"|"scheduleDateChanged"|"locationChanged"), authorId?: string, authorName?: string, authorDiscriminator?: ("user"|"vendor"|"system"), userId?: string, userName?: string, vendorId?: string, vendorName?: string, systemId?: string, systemName?: string, timestamp: (string|object), body: string, parsedBody?: {text?: string, mentions?: {id: string, discriminator: ("user"|"vendor"|"system"), index: number, length: number, originalText: string}[]}, readBy?: string[], media?: any}[]} conversation - The conversation history of the ticket.. Default: []
+ * @property {string} [subject] - The subject of the ticket.
  * @property {{id?: string, discriminator?: ("user"|"system"), name?: string, userId?: string, userName?: string, systemId?: string, systemName?: string}} [openedBy]
- * @property {{id?: string, discriminator?: ("user"|"vendor"|"system"), name?: string, systemId?: string, systemName?: string, systemPhoto?: any, userId?: string, userName?: string, userPhoto?: any, deviceId?: string, roomId?: string, reservationId?: string, spaceId?: string, spaceName?: string}} requester
+ * @property {{id?: string, discriminator?: ("user"|"vendor"|"system"|"device"), name?: string, photo?: any, systemId?: string, systemName?: string, systemPhoto?: any, userId?: string, userName?: string, userPhoto?: any, deviceId?: string, roomId?: string, reservationId?: string, spaceId?: string, spaceName?: string}} requester
  * @property {{id?: string, discriminator?: ("user"|"vendor"), name?: string, photo?: any, userId?: string, userName?: string, userPhoto?: any, vendorId?: string, vendorName?: string, vendorPhoto?: any}} [assignedTo]
  * @property {{id: string, discriminator: "user"}[]} [notify] - A list of entities to notify when this ticket is created or resolved.. Default: []
- * @property {{id: string, name: string, discriminator: ("user"|"vendor")}[]} [collaborators] - Default: []
+ * @property {{id: string, name: string, discriminator: ("user"|"vendor")}[]} [collaborators] - A list of entities who will collaborate on this ticket.. Default: []
  * @property {{id?: string, discriminator: ("space"|"room"|"property"|"customText"), name: string}} [location]
  * @property {("open"|"pending"|"solved"|"closed")} status - Default: "open"
  * @property {("low"|"normal"|"high")} [priority] - Default: "normal"
@@ -24,7 +24,8 @@ import { validateTicket as validate } from "../validate";
  * @property {string} [department]
  * @property {number} [rating]
  * @property {string} [ratingComment]
- * @property {string} [tipAmount]
+ * @deprecated
+ * @property {string} [tipAmount] - @deprecated - This will be removed in a future version. The amount of the tip.
  * @property {(string|object)} [autoCloseAt]
  * @property {(string|object)} [scheduleDate]
  * @property {(string|object)} createdAt
@@ -97,17 +98,21 @@ Object.defineProperty(Ticket.prototype, "schema", {
     properties: {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", enum: ["ticket"], default: "ticket" },
-      number: { type: "string" },
-      issueId: { type: "string" },
+      number: { type: "string", description: "The number of the ticket." },
+      issueId: {
+        type: "string",
+        description: "The ID of the issue that this ticket is associated with.",
+      },
       conversation: {
         type: "array",
         default: [],
+        description: "The conversation history of the ticket.",
         items: {
           type: "object",
           additionalProperties: false,
           required: ["id", "discriminator", "timestamp", "body"],
           properties: {
-            id: { type: "string" },
+            id: { type: "string", description: "The ID of the message." },
             discriminator: {
               type: "string",
               enum: [
@@ -125,26 +130,63 @@ Object.defineProperty(Ticket.prototype, "schema", {
                 "locationChanged",
               ],
               default: "message",
+              description: "The discriminator of the message.",
             },
-            authorId: { type: "string" },
-            authorName: { type: "string" },
+            authorId: {
+              type: "string",
+              description: "The ID of the author of the message.",
+            },
+            authorName: {
+              type: "string",
+              description: "The name of the author of the message.",
+            },
             authorDiscriminator: {
               type: "string",
               enum: ["user", "vendor", "system"],
+              description: "The discriminator of the author of the message.",
             },
-            userId: { type: "string" },
-            userName: { type: "string" },
-            vendorId: { type: "string" },
-            vendorName: { type: "string" },
-            systemId: { type: "string" },
-            systemName: { type: "string" },
-            timestamp: { $ref: "definitions.json#/definitions/createdAt" },
-            body: { type: "string" },
+            userId: {
+              type: "string",
+              description:
+                "@deprecated - use authorId instead. The ID of the user who sent the message.",
+            },
+            userName: {
+              type: "string",
+              description:
+                "@deprecated - use authorName instead. The name of the user who sent the message.",
+            },
+            vendorId: {
+              type: "string",
+              description:
+                "@deprecated - use authorId instead. The ID of the vendor who sent the message.",
+            },
+            vendorName: {
+              type: "string",
+              description:
+                "@deprecated - use authorName instead. The name of the vendor who sent the message.",
+            },
+            systemId: {
+              type: "string",
+              description:
+                "@deprecated - use authorId instead. The ID of the system who sent the message.",
+            },
+            systemName: {
+              type: "string",
+              description:
+                "@deprecated - use authorName instead. The name of the system who sent the message.",
+            },
+            timestamp: {
+              $ref: "definitions.json#/definitions/createdAt",
+              description: "The ISO 8601 timestamp of the message.",
+            },
+            body: { type: "string", description: "The body of the message." },
             parsedBody: {
               type: "object",
               additionalProperties: false,
+              description:
+                "An object containing the parsed body of the message for mentions.",
               properties: {
-                text: { type: "string" },
+                text: { type: "string", description: "The mention text." },
                 mentions: {
                   type: "array",
                   default: [],
@@ -159,83 +201,183 @@ Object.defineProperty(Ticket.prototype, "schema", {
                       "originalText",
                     ],
                     properties: {
-                      id: { type: "string" },
+                      id: {
+                        type: "string",
+                        description: "The ID of the mention.",
+                      },
                       discriminator: {
                         type: "string",
                         enum: ["user", "vendor", "system"],
+                        description:
+                          "The discriminator of entity that was mentioned.",
                       },
-                      index: { type: "integer" },
-                      length: { type: "integer" },
-                      originalText: { type: "string" },
+                      index: {
+                        type: "integer",
+                        description: "The index of the mention in the message.",
+                      },
+                      length: {
+                        type: "integer",
+                        description:
+                          "The length of the mention in the message.",
+                      },
+                      originalText: {
+                        type: "string",
+                        description: "The original text of the mention.",
+                      },
                     },
                   },
                 },
               },
             },
-            readBy: { type: "array", default: [], items: { type: "string" } },
-            media: { anyOf: [{ $ref: "mediaFile.json" }, { type: "null" }] },
+            readBy: {
+              type: "array",
+              default: [],
+              items: { type: "string" },
+              description: "The IDs of the users who have read the message.",
+            },
+            media: {
+              anyOf: [{ $ref: "mediaFile.json" }, { type: "null" }],
+              description: "The media file associated with the message.",
+            },
           },
         },
       },
-      subject: { type: "string" },
+      subject: { type: "string", description: "The subject of the ticket." },
       openedBy: {
         type: "object",
         properties: {
           id: { type: "string" },
           discriminator: { type: "string", enum: ["user", "system"] },
           name: { type: "string" },
-          userId: { type: "string" },
-          userName: { type: "string" },
-          systemId: { type: "string" },
-          systemName: { type: "string" },
+          userId: {
+            type: "string",
+            description:
+              "@deprecated - use id instead. The ID of the user who opened the ticket.",
+          },
+          userName: {
+            type: "string",
+            description:
+              "@deprecated - use name instead. The name of the user who opened the ticket.",
+          },
+          systemId: {
+            type: "string",
+            description:
+              "@deprecated - use id instead. The ID of the system who opened the ticket.",
+          },
+          systemName: {
+            type: "string",
+            description:
+              "@deprecated - use name instead. The name of the system who opened the ticket.",
+          },
         },
       },
       requester: {
         type: "object",
         properties: {
-          id: { type: "string" },
-          discriminator: { type: "string", enum: ["user", "vendor", "system"] },
-          name: { type: "string" },
-          systemId: { type: "string" },
-          systemName: { type: "string" },
-          systemPhoto: {
-            anyOf: [
-              { $ref: "mediaFile.json" },
-              { type: "null" },
-              { type: "string" },
-            ],
+          id: { type: "string", description: "The ID of the requester." },
+          discriminator: {
+            type: "string",
+            enum: ["user", "vendor", "system", "device"],
+            description: "The discriminator of the requester.",
           },
-          userId: { type: "string" },
-          userName: { type: "string" },
-          userPhoto: {
-            anyOf: [
-              { $ref: "mediaFile.json" },
-              { type: "null" },
-              { type: "string" },
-            ],
-          },
-          deviceId: { type: "string" },
-          roomId: { type: "string" },
-          reservationId: { type: "string" },
-          spaceId: { type: "string" },
-          spaceName: { type: "string" },
-        },
-      },
-      assignedTo: {
-        type: "object",
-        properties: {
-          id: { type: "string" },
-          discriminator: { type: "string", enum: ["user", "vendor"] },
-          name: { type: "string" },
+          name: { type: "string", description: "The name of the requester." },
           photo: {
             anyOf: [
               { $ref: "mediaFile.json" },
               { type: "null" },
               { type: "string" },
             ],
+            description: "The photo of the requester.",
           },
-          userId: { type: "string" },
-          userName: { type: "string" },
+          systemId: {
+            type: "string",
+            description:
+              "@deprecated - use id instead. The ID of the system who requested the ticket.",
+          },
+          systemName: {
+            type: "string",
+            description:
+              "@deprecated - use name instead. The name of the system who requested the ticket.",
+          },
+          systemPhoto: {
+            anyOf: [
+              { $ref: "mediaFile.json" },
+              { type: "null" },
+              { type: "string" },
+            ],
+            description:
+              "@deprecated - use photo instead. The photo of the system who requested the ticket.",
+          },
+          userId: {
+            type: "string",
+            description:
+              "@deprecated - use id instead. The ID of the user who requested the ticket.",
+          },
+          userName: {
+            type: "string",
+            description:
+              "@deprecated - use name instead. The name of the user who requested the ticket.",
+          },
+          userPhoto: {
+            anyOf: [
+              { $ref: "mediaFile.json" },
+              { type: "null" },
+              { type: "string" },
+            ],
+            description:
+              "@deprecated - use photo instead. The photo of the user who requested the ticket.",
+          },
+          deviceId: { type: "string" },
+          roomId: {
+            type: "string",
+            description:
+              "@deprecated - This will be removed in a future version. The ID of the room who requested the ticket.",
+          },
+          reservationId: {
+            type: "string",
+            description:
+              "@deprecated - This will be removed in a future version. The ID of the reservation who requested the ticket.",
+          },
+          spaceId: {
+            type: "string",
+            description:
+              "@deprecated - This will be removed in a future version. The ID of the space who requested the ticket.",
+          },
+          spaceName: {
+            type: "string",
+            description:
+              "@deprecated - This will be removed in a future version. The name of the space who requested the ticket.",
+          },
+        },
+      },
+      assignedTo: {
+        type: "object",
+        properties: {
+          id: { type: "string", description: "The ID of the assigned to." },
+          discriminator: {
+            type: "string",
+            enum: ["user", "vendor"],
+            description: "The discriminator of the assigned to.",
+          },
+          name: { type: "string", description: "The name of the assigned to." },
+          photo: {
+            anyOf: [
+              { $ref: "mediaFile.json" },
+              { type: "null" },
+              { type: "string" },
+            ],
+            description: "The photo of the assigned to.",
+          },
+          userId: {
+            type: "string",
+            description:
+              "@deprecated - use id instead. The ID of the user who assigned the ticket.",
+          },
+          userName: {
+            type: "string",
+            description:
+              "@deprecated - use name instead. The name of the user who assigned the ticket.",
+          },
           userPhoto: {
             anyOf: [
               { $ref: "mediaFile.json" },
@@ -243,14 +385,24 @@ Object.defineProperty(Ticket.prototype, "schema", {
               { type: "string" },
             ],
           },
-          vendorId: { type: "string" },
-          vendorName: { type: "string" },
+          vendorId: {
+            type: "string",
+            description:
+              "@deprecated - use id instead. The ID of the vendor who assigned the ticket.",
+          },
+          vendorName: {
+            type: "string",
+            description:
+              "@deprecated - use name instead. The name of the vendor who assigned the ticket.",
+          },
           vendorPhoto: {
             anyOf: [
               { $ref: "mediaFile.json" },
               { type: "null" },
               { type: "string" },
             ],
+            description:
+              "@deprecated - use photo instead. The photo of the vendor who assigned the ticket.",
           },
         },
       },
@@ -275,6 +427,7 @@ Object.defineProperty(Ticket.prototype, "schema", {
       collaborators: {
         type: "array",
         default: [],
+        description: "A list of entities who will collaborate on this ticket.",
         items: {
           type: "object",
           required: ["id", "name", "discriminator"],
@@ -313,7 +466,11 @@ Object.defineProperty(Ticket.prototype, "schema", {
       department: { type: "string" },
       rating: { type: "number", minimum: 0, maximum: 5 },
       ratingComment: { type: "string" },
-      tipAmount: { type: "string" },
+      tipAmount: {
+        type: "string",
+        description:
+          "@deprecated - This will be removed in a future version. The amount of the tip.",
+      },
       autoCloseAt: { $ref: "definitions.json#/definitions/date" },
       scheduleDate: { $ref: "definitions.json#/definitions/date" },
       createdAt: { $ref: "definitions.json#/definitions/date" },
