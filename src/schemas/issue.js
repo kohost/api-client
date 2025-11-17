@@ -24,6 +24,11 @@ export default {
     department: {
       type: "string",
     },
+    departmentId: {
+      type: "string",
+      description:
+        "The ID of the department that this issue is associated with.",
+    },
     autoAssign: {
       type: "object",
       properties: {

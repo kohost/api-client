@@ -11,6 +11,7 @@ import categoryschema from "./schemas/category.js";
 import courtesyschema from "./schemas/courtesy.js";
 import credentialschema from "./schemas/credential.js";
 import definitionsschema from "./schemas/definitions.js";
+import departmentschema from "./schemas/department.js";
 import deviceRouterschema from "./schemas/deviceRouter.js";
 import dimmerschema from "./schemas/dimmer.js";
 import discoveredDeviceschema from "./schemas/discoveredDevice.js";
@@ -58,6 +59,7 @@ const schemas = [
   courtesyschema,
   credentialschema,
   definitionsschema,
+  departmentschema,
   deviceRouterschema,
   dimmerschema,
   discoveredDeviceschema,
@@ -116,6 +118,7 @@ export const validateCamera = ajv.compile(cameraschema);
 export const validateCategory = ajv.compile(categoryschema);
 export const validateCourtesy = ajv.compile(courtesyschema);
 export const validateCredential = ajv.compile(credentialschema);
+export const validateDepartment = ajv.compile(departmentschema);
 export const validateDeviceRouter = ajv.compile(deviceRouterschema);
 export const validateDimmer = ajv.compile(dimmerschema);
 export const validateDiscoveredDevice = ajv.compile(discoveredDeviceschema);

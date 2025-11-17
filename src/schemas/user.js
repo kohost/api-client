@@ -99,6 +99,10 @@ export default {
             type: "string",
             description: "The department the user belongs to.",
           },
+          departmentId: {
+            type: "string",
+            description: "The ID of the department the user belongs to.",
+          },
           policyIds: {
             type: "array",
             items: {

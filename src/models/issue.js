@@ -11,6 +11,7 @@ import { validateIssue as validate } from "../validate";
  * @property {string} name
  * @property {string} [description]
  * @property {string} department
+ * @property {string} [departmentId] - The ID of the department that this issue is associated with.
  * @property {{userId?: string, vendorId?: string, priority?: ("low"|"normal"|"high"), tags?: string[]}} [autoAssign]
  * @property {{id: string, discriminator: "user"}[]} [notify] - A list of entities to notify when this issue is triggered.. Default: []
  * @property {string} [systemKey]
@@ -38,6 +39,7 @@ export class Issue extends Entity {
     this.name = data.name;
     if (data.description !== undefined) this.description = data.description;
     this.department = data.department;
+    if (data.departmentId !== undefined) this.departmentId = data.departmentId;
     if (data.autoAssign !== undefined) this.autoAssign = data.autoAssign;
     if (data.notify !== undefined) this.notify = data.notify;
     if (data.systemKey !== undefined) this.systemKey = data.systemKey;
@@ -66,6 +68,11 @@ Object.defineProperty(Issue.prototype, "schema", {
       name: { type: "string" },
       description: { type: "string" },
       department: { type: "string" },
+      departmentId: {
+        type: "string",
+        description:
+          "The ID of the department that this issue is associated with.",
+      },
       autoAssign: {
         type: "object",
         properties: {

@@ -23,7 +23,7 @@ import { validateUser as validate } from "../validate";
  * @property {string} [dob]
  * @property {("male"|"female")} [gender]
  * @property {string} [nationality]
- * @property {{organizationId: string, propertyId: string, role: ("Guest"|"User"|"Agent"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin"), timeTrackingEnabled?: boolean, department?: string, policyIds?: string[], policies?: {id: string, type: "policy", discriminator: "user", name: string, description?: string, organizationId: string, propertyId: string, permissions: {entities: string[], effect: ("Allow"|"Deny")}[], createdAt?: (string|object), updatedAt?: (string|object), deletedAt?: (string|object)}[]}[]} [permissions] - Default: []
+ * @property {{organizationId: string, propertyId: string, role: ("Guest"|"User"|"Agent"|"Manager"|"Maintenance"|"Administrator"|"SuperAdmin"), timeTrackingEnabled?: boolean, department?: string, departmentId?: string, policyIds?: string[], policies?: {id: string, type: "policy", discriminator: "user", name: string, description?: string, organizationId: string, propertyId: string, permissions: {entities: string[], effect: ("Allow"|"Deny")}[], createdAt?: (string|object), updatedAt?: (string|object), deletedAt?: (string|object)}[]}[]} [permissions] - Default: []
  * @property {{organizationId: string, propertyId: string, notifications?: {discriminator: ("observerTicketCreated"|"observerTicketResolved"), enabled: boolean}[]}[]} [preferences]
  * @property {string[]} [notes]
  * @property {{id?: string, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: (string|object), createdBy?: string, systemId?: string, createdAt?: (string|object), updatedAt?: (string|object), deletedAt?: (string|object)}[]} [files]
@@ -175,6 +175,10 @@ Object.defineProperty(User.prototype, "schema", {
             department: {
               type: "string",
               description: "The department the user belongs to.",
+            },
+            departmentId: {
+              type: "string",
+              description: "The ID of the department the user belongs to.",
             },
             policyIds: {
               type: "array",
