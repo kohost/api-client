@@ -156,6 +156,10 @@ export default {
     updatedAt: {
       $ref: "definitions.json#/definitions/updatedAt",
     },
+    nextRunAt: {
+      $ref: "definitions.json#/definitions/date",
+      description: "When the automation is scheduled to run next",
+    },
     lastRunAt: {
       $ref: "definitions.json#/definitions/date",
       description: "When the automation was last triggered",

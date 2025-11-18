@@ -271,6 +271,10 @@ export default {
             },
           },
         },
+        Automations: {
+          type: "object",
+          default: {},
+        },
       },
       additionalProperties: false,
       default: {
