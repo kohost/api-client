@@ -94,6 +94,10 @@ export default {
         RoomControl: {
           type: "object",
           properties: {
+            enabled: {
+              type: "boolean",
+              default: true,
+            },
             disabledSystems: {
               type: "array",
               items: {
@@ -180,6 +184,10 @@ export default {
         Concierge: {
           type: "object",
           properties: {
+            enabled: {
+              type: "boolean",
+              default: true,
+            },
             timeTracking: {
               type: "boolean",
               default: false,
@@ -219,6 +227,10 @@ export default {
         SOS: {
           type: "object",
           properties: {
+            enabled: {
+              type: "boolean",
+              default: true,
+            },
             active: {
               type: "boolean",
             },
@@ -273,7 +285,12 @@ export default {
         },
         Automations: {
           type: "object",
-          default: {},
+          properties: {
+            enabled: {
+              type: "boolean",
+            },
+          },
+          additionalProperties: false,
         },
       },
       additionalProperties: false,
