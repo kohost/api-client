@@ -15,6 +15,9 @@ export default {
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
+    name: {
+      $ref: "definitions.json#/definitions/name",
+    },
     discriminator: {
       type: "string",
       enum: [
