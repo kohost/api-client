@@ -4,6 +4,21 @@ export default {
   title: "Alarm",
   description: "Any smart alarm system",
   type: "object",
+  $defs: {
+    securityMode: {
+      type: ["string", "null"],
+      enum: [
+        "arming",
+        "disarming",
+        "armed",
+        "disarmed",
+        "intrusion",
+        "fire",
+        "medical",
+        null,
+      ],
+    },
+  },
   required: ["id", "type", "areas", "zones", "driver"],
   additionalProperties: false,
   properties: {
@@ -25,12 +40,6 @@ export default {
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
     },
-    supportedNotifications: {
-      $ref: "definitions.json#/definitions/supportedNotifications",
-    },
-    notification: {
-      $ref: "definitions.json#/definitions/notification",
-    },
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
@@ -45,18 +54,12 @@ export default {
           name: {
             type: "string",
           },
+          supportedSecurityModes: {
+            type: "array",
+            items: { $ref: "#/$defs/securityMode" },
+          },
           securityMode: {
-            type: ["string", "null"],
-            enum: [
-              "arming",
-              "disarming",
-              "armed",
-              "disarmed",
-              "intrusion",
-              "fire",
-              "medical",
-              null,
-            ],
+            $ref: "#/$defs/securityMode",
           },
         },
         additionalProperties: false,
@@ -84,9 +87,12 @@ export default {
         additionalProperties: false,
       },
     },
+    code: {
+      type: "string",
+    },
     chime: {
       type: "boolean",
-      description: "Reflects whether console chime is enabled",
+      description: "Chime enabled",
     },
     watts: {
       $ref: "definitions.json#/definitions/watts",
@@ -108,6 +114,18 @@ export default {
     },
     address: {
       $ref: "definitions.json#/definitions/address",
+    },
+    batteryLevel: {
+      $ref: "definitions.json#/definitions/batteryLevel",
+    },
+    powerLevel: {
+      $ref: "definitions.json#/definitions/batteryLevel",
+    },
+    monitoringTrouble: {
+      type: "boolean",
+    },
+    bellTrouble: {
+      type: "boolean",
     },
   },
 };
