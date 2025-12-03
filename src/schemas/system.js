@@ -105,6 +105,10 @@ export default {
     health: {
       type: "object",
       properties: {
+        offline: {
+          type: "boolean",
+          description: "Whether the system is offline",
+        },
         lastHeartbeatAt: {
           type: "string",
           description:
