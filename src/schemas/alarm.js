@@ -47,7 +47,16 @@ export default {
           },
           securityMode: {
             type: ["string", "null"],
-            enum: ["arming", "disarming", "armed", "disarmed", "alarm", null],
+            enum: [
+              "arming",
+              "disarming",
+              "armed",
+              "disarmed",
+              "intrusion",
+              "fire",
+              "medical",
+              null,
+            ],
           },
         },
         additionalProperties: false,
