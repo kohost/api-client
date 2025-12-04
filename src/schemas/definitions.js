@@ -100,7 +100,7 @@ export default {
         "doorbird",
         "dormakaba",
         "dsc",
-        "dsc_itv2",
+        "dsc-itv2",
         "ecobee",
         "epson",
         "geovision-rs",
