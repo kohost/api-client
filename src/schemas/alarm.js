@@ -86,6 +86,9 @@ export default {
           offline: {
             type: "boolean",
           },
+          batteryLevel: {
+            $ref: "definitions.json#/definitions/batteryLevel",
+          },
         },
         additionalProperties: false,
       },
