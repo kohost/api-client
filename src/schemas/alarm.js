@@ -83,6 +83,9 @@ export default {
           bypassed: {
             type: ["boolean", "null"],
           },
+          offline: {
+            type: "boolean",
+          },
         },
         additionalProperties: false,
       },
