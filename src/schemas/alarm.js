@@ -48,8 +48,8 @@ export default {
       items: {
         type: "object",
         properties: {
-          number: {
-            type: "number",
+          id: {
+            $ref: "definitions.json#/definitions/id",
           },
           name: {
             type: "string",
@@ -70,9 +70,8 @@ export default {
       items: {
         type: "object",
         properties: {
-          number: {
-            type: "number",
-            minimum: 0,
+          id: {
+            $ref: "definitions.json#/definitions/id",
           },
           name: {
             type: "string",
