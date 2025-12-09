@@ -20,7 +20,7 @@
     },
     "./schemas/*": {
       "import": {
-        "default": "./dist/schemas/*.js"
+        "default": "./dist/schemas/*.ts"
       }
     },
     "./models": {
@@ -170,7 +170,8 @@
     "lint:fix": "eslint --fix ./",
     "prepare": "husky",
     "prebuild": "npm run generate-models && npm run generate-barrels",
-    "build": "tsup",
+    "build": "tsup && npm run resolve-schemas",
+    "resolve-schemas": "node scripts/resolve-schema-refs.js",
     "generate-models": "node scripts/generate-source-models",
     "generate-barrels": "node scripts/generate-barrels",
     "start": "node scripts/build.js --watch",
@@ -190,6 +191,7 @@
     "eslint": "^9.7.0",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^9.0.11",
+    "json-schema-to-ts": "^3.1.1",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
     "terser": "^5.37.0",
@@ -200,8 +202,7 @@
     "ajv": "^8.11.0",
     "ajv-formats": "^3.0.1",
     "amqplib": "^0.10.3",
-    "debug": "^4.3.4",
-    "socket.io-client": "^4.6.1"
+    "debug": "^4.3.4"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.9.5"
