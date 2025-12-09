@@ -18,6 +18,11 @@
         "require": "./dist/index.cjs"
       }
     },
+    "./schemas/*": {
+      "import": {
+        "default": "./dist/schemas/*.js"
+      }
+    },
     "./models": {
       "require": {
         "types": "./dist/models/index.d.cts",

@@ -15,6 +15,7 @@ import { validateAutomation as validate } from "../validate";
  * @property {{useCase: string, useCaseParams: {data: (object|array)}}[]} actions - Actions to perform when the trigger conditions are met
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
+ * @property {(string|object)} [nextRunAt] - When the automation is scheduled to run next
  * @property {(string|object)} [lastRunAt] - When the automation was last triggered
  * @property {(string|object)} [deletedAt]
  * @property {string} [webhookUrl] - The URL of the webhook that triggers the automation
@@ -41,6 +42,7 @@ export class Automation extends Entity {
     this.actions = data.actions;
     if (data.createdAt !== undefined) this.createdAt = data.createdAt;
     if (data.updatedAt !== undefined) this.updatedAt = data.updatedAt;
+    if (data.nextRunAt !== undefined) this.nextRunAt = data.nextRunAt;
     if (data.lastRunAt !== undefined) this.lastRunAt = data.lastRunAt;
     if (data.deletedAt !== undefined) this.deletedAt = data.deletedAt;
     if (data.webhookUrl !== undefined) this.webhookUrl = data.webhookUrl;
@@ -191,6 +193,10 @@ Object.defineProperty(Automation.prototype, "schema", {
       },
       createdAt: { $ref: "definitions.json#/definitions/createdAt" },
       updatedAt: { $ref: "definitions.json#/definitions/updatedAt" },
+      nextRunAt: {
+        $ref: "definitions.json#/definitions/date",
+        description: "When the automation is scheduled to run next",
+      },
       lastRunAt: {
         $ref: "definitions.json#/definitions/date",
         description: "When the automation was last triggered",

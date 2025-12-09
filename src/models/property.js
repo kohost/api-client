@@ -23,7 +23,7 @@ import { validateProperty as validate } from "../validate";
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
  * @property {number} [latitude]
  * @property {number} [longitude]
- * @property {{RoomControl?: {disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object, cameraConfig?: object}, Concierge?: {timeTracking?: boolean, feedback?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), issues?: {syncWithPropertyId?: string}}, SOS?: {active?: boolean, activatedAt?: (string|null), activatedBy?: (object|null), activatedMessage?: (string|null), activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[], deactivatedAt?: (string|null), deactivatedBy?: (object|null)}}} [appFeatures] - Default: {"RoomControl":{}}
+ * @property {{RoomControl?: {enabled?: boolean, disabledSystems?: ("climate"|"lights"|"shades"|"tv"|"doors")[], excludedDeviceIds?: string[], commonAreas?: {spaces?: string[]}, alarmConfig?: object, cameraConfig?: object}, Concierge?: {enabled?: boolean, timeTracking?: boolean, feedback?: boolean, ratings?: boolean, newTicketCCs?: string[], newMessageChannel?: ("sms"|"email"), issues?: {syncWithPropertyId?: string}}, SOS?: {enabled?: boolean, active?: boolean, activatedAt?: (string|null), activatedBy?: (object|null), activatedMessage?: (string|null), activeEmergencies?: ("medical"|"fire"|"suspiciousPerson"|"other"|"conflict"|"shooter")[], deactivatedAt?: (string|null), deactivatedBy?: (object|null)}, Automations?: {enabled?: boolean}}} [appFeatures] - Default: {"RoomControl":{}}
  * @property {{email?: {enabled?: boolean}, sms?: {enabled?: boolean}, push?: {enabled?: boolean}}} [notifications] - Default: {"email":{"enabled":false},"sms":{"enabled":false},"push":{"enabled":false}}
  * @property {object} [credentials]
  */
@@ -132,6 +132,7 @@ Object.defineProperty(Property.prototype, "schema", {
           RoomControl: {
             type: "object",
             properties: {
+              enabled: { type: "boolean", default: true },
               disabledSystems: {
                 type: "array",
                 items: {
@@ -203,6 +204,7 @@ Object.defineProperty(Property.prototype, "schema", {
           Concierge: {
             type: "object",
             properties: {
+              enabled: { type: "boolean", default: true },
               timeTracking: { type: "boolean", default: false },
               feedback: { type: "boolean", default: true },
               ratings: { type: "boolean", default: true },
@@ -227,6 +229,7 @@ Object.defineProperty(Property.prototype, "schema", {
           SOS: {
             type: "object",
             properties: {
+              enabled: { type: "boolean", default: true },
               active: { type: "boolean" },
               activatedAt: { type: ["string", "null"], format: "date-time" },
               activatedBy: {
@@ -260,6 +263,11 @@ Object.defineProperty(Property.prototype, "schema", {
                 },
               },
             },
+          },
+          Automations: {
+            type: "object",
+            properties: { enabled: { type: "boolean" } },
+            additionalProperties: false,
           },
         },
         additionalProperties: false,

@@ -8,7 +8,8 @@ import { validateCredential as validate } from "../validate";
  * @typedef {Object} CredentialData
  * @property {string} [id] - Identifier of the object.
  * @property {string} type - Default: "credential"
- * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"dsc_itv2"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
+ * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"dsc-itv2"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} [driver] - Driver used to communicate with the object.
+ * @property {string} [name]
  * @property {("verificationCode"|"token"|"mobileKey"|"pin"|"publicKey"|"passkeyChallenge"|"alarmCode")} [discriminator]
  * @property {string} credential
  * @property {string} [userId]
@@ -37,6 +38,7 @@ export class Credential extends Entity {
     if (data.id !== undefined) this.id = data.id;
     this.type = data.type;
     if (data.driver !== undefined) this.driver = data.driver;
+    if (data.name !== undefined) this.name = data.name;
     if (data.discriminator !== undefined)
       this.discriminator = data.discriminator;
     this.credential = data.credential;
@@ -64,6 +66,7 @@ Object.defineProperty(Credential.prototype, "schema", {
       id: { $ref: "definitions.json#/definitions/id" },
       type: { type: "string", default: "credential" },
       driver: { $ref: "definitions.json#/definitions/driver" },
+      name: { $ref: "definitions.json#/definitions/name" },
       discriminator: {
         type: "string",
         enum: [

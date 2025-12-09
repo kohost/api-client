@@ -11,12 +11,11 @@ import { validateAlarm as validate } from "../validate";
  * @property {boolean} [offline]
  * @property {"alarm"} type - Default: "alarm"
  * @property {string} [systemId] - Identifier of the object, directly related to the system.
- * @property {("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm")[]} [supportedNotifications]
- * @property {{name?: ("button 1"|"button 2"|"button 3"|"button 4"|"button 5"|"idle"|"powerHasBeedApplied"|"acMainsDisconnected"|"acMainsReconnected"|"replaceBatterySoon"|"replaceBatteryNow"|"batteryOk"|"hardwareFailure"|"softwareFailure"|"hardwareFailureWithCode"|"softwareFailureWithCode"|"motionDetection"|"airFilterNeedsCleaned"|"airFilterNeedsReplaced"|"smokeDetected"|"outsideSafeTemperatureRange"|"outsideSafeHumidityRange"|"scheduleMaintenance"|"doorAjar"|"communicationFailure"|"communicationOk"|"burglarAlarm"|"fireAlarm"), timestamp?: number, description?: string}} [notification]
- * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"dsc_itv2"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
- * @property {{number?: number, name?: string, securityMode?: ("arming"|"disarming"|"armed"|"disarmed"|"alarm")}[]} areas
- * @property {{number?: number, name?: string, secure?: (boolean|null), bypassed?: (boolean|null)}[]} zones
- * @property {boolean} [chime] - Reflects whether console chime is enabled
+ * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"dsc-itv2"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.
+ * @property {{id?: string, name?: string, supportedSecurityModes?: ("arming"|"disarming"|"armed"|"disarmed"|"intrusion"|"fire"|"medical")[], securityMode?: ("arming"|"disarming"|"armed"|"disarmed"|"intrusion"|"fire"|"medical")}[]} areas
+ * @property {{id?: string, name?: string, secure?: (boolean|null), bypassed?: (boolean|null), offline?: boolean, batteryLevel?: number}[]} zones
+ * @property {string} [code]
+ * @property {boolean} [chime] - Chime enabled
  * @property {number} [watts]
  * @property {string} [icon]
  * @property {string} [manufacturer]
@@ -24,6 +23,10 @@ import { validateAlarm as validate } from "../validate";
  * @property {string} [serialNumber]
  * @property {string} [firmwareVersion]
  * @property {{id?: string, line1?: string, line2?: string, line3?: string, city?: string, state?: string, postalCode?: string, countryCode?: string}} [address]
+ * @property {number} [batteryLevel]
+ * @property {number} [powerLevel]
+ * @property {boolean} [monitoringTrouble]
+ * @property {boolean} [bellTrouble]
  */
 
 /**
@@ -43,12 +46,10 @@ export class Alarm extends Entity {
     if (data.offline !== undefined) this.offline = data.offline;
     this.type = data.type;
     if (data.systemId !== undefined) this.systemId = data.systemId;
-    if (data.supportedNotifications !== undefined)
-      this.supportedNotifications = data.supportedNotifications;
-    if (data.notification !== undefined) this.notification = data.notification;
     this.driver = data.driver;
     this.areas = data.areas;
     this.zones = data.zones;
+    if (data.code !== undefined) this.code = data.code;
     if (data.chime !== undefined) this.chime = data.chime;
     if (data.watts !== undefined) this.watts = data.watts;
     if (data.icon !== undefined) this.icon = data.icon;
@@ -58,6 +59,11 @@ export class Alarm extends Entity {
     if (data.firmwareVersion !== undefined)
       this.firmwareVersion = data.firmwareVersion;
     if (data.address !== undefined) this.address = data.address;
+    if (data.batteryLevel !== undefined) this.batteryLevel = data.batteryLevel;
+    if (data.powerLevel !== undefined) this.powerLevel = data.powerLevel;
+    if (data.monitoringTrouble !== undefined)
+      this.monitoringTrouble = data.monitoringTrouble;
+    if (data.bellTrouble !== undefined) this.bellTrouble = data.bellTrouble;
   }
 }
 
@@ -68,6 +74,21 @@ Object.defineProperty(Alarm.prototype, "schema", {
     title: "Alarm",
     description: "Any smart alarm system",
     type: "object",
+    $defs: {
+      securityMode: {
+        type: ["string", "null"],
+        enum: [
+          "arming",
+          "disarming",
+          "armed",
+          "disarmed",
+          "intrusion",
+          "fire",
+          "medical",
+          null,
+        ],
+      },
+    },
     required: ["id", "type", "areas", "zones", "driver"],
     additionalProperties: false,
     properties: {
@@ -76,22 +97,19 @@ Object.defineProperty(Alarm.prototype, "schema", {
       offline: { type: "boolean" },
       type: { type: "string", enum: ["alarm"], default: "alarm" },
       systemId: { $ref: "definitions.json#/definitions/systemId" },
-      supportedNotifications: {
-        $ref: "definitions.json#/definitions/supportedNotifications",
-      },
-      notification: { $ref: "definitions.json#/definitions/notification" },
       driver: { $ref: "definitions.json#/definitions/driver" },
       areas: {
         type: "array",
         items: {
           type: "object",
           properties: {
-            number: { type: "number" },
+            id: { $ref: "definitions.json#/definitions/id" },
             name: { type: "string" },
-            securityMode: {
-              type: ["string", "null"],
-              enum: ["arming", "disarming", "armed", "disarmed", "alarm", null],
+            supportedSecurityModes: {
+              type: "array",
+              items: { $ref: "#/$defs/securityMode" },
             },
+            securityMode: { $ref: "#/$defs/securityMode" },
           },
           additionalProperties: false,
         },
@@ -101,18 +119,20 @@ Object.defineProperty(Alarm.prototype, "schema", {
         items: {
           type: "object",
           properties: {
-            number: { type: "number", minimum: 0 },
+            id: { $ref: "definitions.json#/definitions/id" },
             name: { type: "string" },
             secure: { type: ["boolean", "null"] },
             bypassed: { type: ["boolean", "null"] },
+            offline: { type: "boolean" },
+            batteryLevel: {
+              $ref: "definitions.json#/definitions/batteryLevel",
+            },
           },
           additionalProperties: false,
         },
       },
-      chime: {
-        type: "boolean",
-        description: "Reflects whether console chime is enabled",
-      },
+      code: { type: "string" },
+      chime: { type: "boolean", description: "Chime enabled" },
       watts: { $ref: "definitions.json#/definitions/watts" },
       icon: { type: "string" },
       manufacturer: { type: "string" },
@@ -120,6 +140,10 @@ Object.defineProperty(Alarm.prototype, "schema", {
       serialNumber: { type: "string" },
       firmwareVersion: { type: "string" },
       address: { $ref: "definitions.json#/definitions/address" },
+      batteryLevel: { $ref: "definitions.json#/definitions/batteryLevel" },
+      powerLevel: { $ref: "definitions.json#/definitions/batteryLevel" },
+      monitoringTrouble: { type: "boolean" },
+      bellTrouble: { type: "boolean" },
     },
   },
 });

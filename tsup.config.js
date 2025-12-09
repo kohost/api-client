@@ -79,4 +79,15 @@ export default defineConfig([
     globalName: "kohost",
     keepNames: true,
   },
+  {
+    entry: ["src/schemas/*"],
+    outDir: "dist/schemas",
+    format: ["esm"],
+    dts: false,
+    bundle: false,
+    clean: false,
+    sourcemap: true,
+    target: ["es2022"],
+    platform: "node",
+  },
 ]);

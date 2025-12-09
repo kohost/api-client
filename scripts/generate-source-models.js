@@ -24,7 +24,7 @@ const useCases = new Map(JSON.parse(useCaseJson));
 async function loadSchemas() {
   const schemaFiles = fs
     .readdirSync("src/schemas")
-    .filter((file) => file.endsWith(".js"));
+    .filter((fileName) => fileName.endsWith(".js") && fileName !== "index.js");
 
   const modules = await Promise.all(
     schemaFiles.map(async (file) => {

@@ -9,7 +9,7 @@ import { validateSystem as validate } from "../validate";
  * @property {string} id
  * @property {"system"} type - Default: "system"
  * @property {string} [name]
- * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"dsc_itv2"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.. The driver value that implements the system
+ * @property {("adlink"|"aws-kinesis"|"bacnet"|"benq"|"butler"|"comelit"|"crestron"|"dell"|"digital-watchdog"|"distech"|"dmp"|"doorbird"|"dormakaba"|"dsc"|"dsc-itv2"|"ecobee"|"epson"|"geovision-rs"|"geovision-as-manager"|"honeywell-vista"|"igor"|"inncom"|"isapi"|"kohost-k7"|"kohost"|"lg"|"lg-webos"|"lapi"|"lirc"|"mews"|"mht"|"newline"|"paxton"|"pelican-wireless"|"power-shades"|"rachio"|"rebrandly"|"relay"|"rtsp"|"salto"|"salto-irn"|"samsung"|"se"|"sendgrid"|"smartboard"|"sonifi"|"stay-n-touch"|"storable"|"twilio"|"unifi"|"valcom"|"veracross"|"vivotek"|"vizio"|"wisenet"|"cloudflare-images"|"cloudflare-stream"|"insperia-privacy")} driver - Driver used to communicate with the object.. The driver value that implements the system
  * @property {string} [organizationId] - The id of the organization that uses the system
  * @property {string} [propertyId] - The id of the property that uses the system
  * @property {{id?: string, systemId: string, type?: string, discriminator?: string, propertyIds?: string[]}[]} entities - The entities produced by the system. Default: []
@@ -17,7 +17,7 @@ import { validateSystem as validate } from "../validate";
  * @property {{id?: string, type: "mediaFile", name?: string, fileHash?: string, category?: string, mimeType?: ("image/*"|"image/jpeg"|"image/png"|"image/gif"|"image/webp"|"image/avif"|"image/svg+xml"|"application/pdf"), data?: string, url?: string, width?: number, height?: number, size?: number, uploadUrl?: string, uploadUrlExpires?: (string|object), createdBy?: string, systemId?: string, createdAt?: (string|object), updatedAt?: (string|object), deletedAt?: (string|object)}} [logo] - Any media file
  * @property {object} [config] - The runtime configuration of the system
  * @property {{websiteUrl?: string, email?: string, phone?: string, itunesAppId?: string, googleAppId?: string}} [contactInfo]
- * @property {{lastHeartbeatAt?: string}} [health]
+ * @property {{offline?: boolean, lastHeartbeatAt?: string}} [health]
  * @property {(string|object)} [createdAt]
  * @property {(string|object)} [updatedAt]
  * @property {(string|object)} [deletedAt]
@@ -142,6 +142,10 @@ Object.defineProperty(System.prototype, "schema", {
       health: {
         type: "object",
         properties: {
+          offline: {
+            type: "boolean",
+            description: "Whether the system is offline",
+          },
           lastHeartbeatAt: {
             type: "string",
             description:
