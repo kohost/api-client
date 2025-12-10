@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const DIST_SCHEMAS_DIR = "dist/schemas";
+const DIST_SCHEMAS_DIR = "dist/esm/schemas";
 
 /**
  * Deep clone an object

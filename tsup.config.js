@@ -1,8 +1,43 @@
 import { defineConfig } from "tsup";
 
+// Shared config for ESM builds
+const esmConfig = {
+  format: ["esm"],
+  dts: true,
+  bundle: true,
+  sourcemap: true,
+  target: ["es2022"],
+  platform: "node",
+  keepNames: true,
+  minify: "terser",
+  terserOptions: {
+    mangle: false,
+    keep_fnames: true,
+    keep_classnames: true,
+  },
+};
+
+// Shared config for CJS builds
+const cjsConfig = {
+  format: ["cjs"],
+  dts: true,
+  bundle: true,
+  sourcemap: true,
+  target: ["es2022"],
+  platform: "node",
+  keepNames: true,
+  minify: "terser",
+  terserOptions: {
+    mangle: false,
+    keep_fnames: true,
+    keep_classnames: true,
+  },
+};
+
 export default defineConfig([
-  // Main build - source files
+  // ESM build - source files
   {
+    ...esmConfig,
     entry: [
       "src/index.js",
       "src/events/*",
@@ -11,62 +46,69 @@ export default defineConfig([
       "src/defs.js",
       "src/utils.js",
       "src/httpClient.js",
-      "src/socketIoClient.js",
       "src/amqpClient.js",
     ],
-    outDir: "dist",
+    outDir: "dist/esm",
     esbuildOptions(options) {
       options.outbase = "src";
       return options;
     },
-    minify: "terser",
-    terserOptions: {
-      mangle: false,
-      keep_fnames: true,
-      keep_classnames: true,
-    },
-    format: ["cjs", "esm"],
-    dts: true,
-    bundle: true,
     clean: true,
-    sourcemap: true,
-    target: ["es2022"],
-    platform: "node",
-    globalName: "kohost",
-    keepNames: true,
   },
-  // Generated models and useCases from .generated/
+  // CJS build - source files
   {
+    ...cjsConfig,
+    entry: [
+      "src/index.js",
+      "src/events/*",
+      "src/errors/*",
+      "src/commands/*",
+      "src/defs.js",
+      "src/utils.js",
+      "src/httpClient.js",
+      "src/amqpClient.js",
+    ],
+    outDir: "dist/cjs",
+    esbuildOptions(options) {
+      options.outbase = "src";
+      return options;
+    },
+    clean: true,
+  },
+  // ESM build - generated models and useCases
+  {
+    ...esmConfig,
     entry: [
       ".generated/models/*",
       ".generated/useCases/*",
       ".generated/validate.ts",
     ],
-    outDir: "dist",
+    outDir: "dist/esm",
     esbuildOptions(options) {
       options.outbase = ".generated";
       return options;
     },
-    minify: "terser",
-    terserOptions: {
-      mangle: false,
-      keep_fnames: true,
-      keep_classnames: true,
-    },
-    format: ["cjs", "esm"],
-    dts: true,
-    bundle: true,
     clean: false,
-    sourcemap: true,
-    target: ["es2022"],
-    platform: "node",
-    globalName: "kohost",
-    keepNames: true,
   },
-  // Schemas - copy as-is for direct imports
+  // CJS build - generated models and useCases
+  {
+    ...cjsConfig,
+    entry: [
+      ".generated/models/*",
+      ".generated/useCases/*",
+      ".generated/validate.ts",
+    ],
+    outDir: "dist/cjs",
+    esbuildOptions(options) {
+      options.outbase = ".generated";
+      return options;
+    },
+    clean: false,
+  },
+  // Schemas - ESM only (for direct imports)
   {
     entry: ["src/schemas/*"],
-    outDir: "dist/schemas",
+    outDir: "dist/esm/schemas",
     format: ["esm"],
     dts: false,
     bundle: false,
