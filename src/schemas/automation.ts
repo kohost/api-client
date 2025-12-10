@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const automationSchema = {
@@ -154,10 +154,12 @@ export const automationSchema = {
       },
     },
     createdAt: {
-      $ref: "definitions.json#/definitions/createdAt",
+      $ref: "definitions.json#/definitions/date",
+      description: "When the automation was created",
     },
     updatedAt: {
-      $ref: "definitions.json#/definitions/updatedAt",
+      $ref: "definitions.json#/definitions/date",
+      description: "When the automation was updated",
     },
     nextRunAt: {
       $ref: "definitions.json#/definitions/date",
@@ -181,5 +183,15 @@ export const automationSchema = {
 
 export type AutomationSchema = FromSchema<
   typeof automationSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

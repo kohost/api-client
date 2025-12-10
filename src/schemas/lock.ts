@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const lockSchema = {
@@ -7,6 +7,7 @@ export const lockSchema = {
   title: "Lock",
   description: "Any smart lock",
   type: "object",
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -95,5 +96,15 @@ export const lockSchema = {
 
 export type LockSchema = FromSchema<
   typeof lockSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

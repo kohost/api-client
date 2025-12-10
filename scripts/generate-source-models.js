@@ -415,11 +415,19 @@ export class ${className} extends Entity {
   declare schema: typeof ${schemaVar};
   declare validator: typeof validate;`;
 
+  // Generate the data type alias for backwards compatibility
+  const dataTypeAlias = `${className}Data`;
+
   return `${banner}
 
 import { Entity } from "../../src/models/entity.js";
 import { validate${className} as validate } from "../validate.js";
 import { ${schemaVar}, type ${typeName} } from "../../src/schemas/${fileName}.js";
+
+/**
+ * Data type for ${className} constructor - exported for backwards compatibility
+ */
+export type ${dataTypeAlias} = ${typeName};
 
 /**
  * ${schema.description || className}
@@ -454,7 +462,7 @@ function generateModelsIndex(modelNames) {
   const exports = modelNames
     .map(
       ({ className, fileName }) =>
-        `export { ${className} } from "./${fileName}.js";`,
+        `export { ${className}, type ${className}Data } from "./${fileName}.js";`,
     )
     .join("\n");
 

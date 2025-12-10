@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const categorySchema = {
@@ -52,9 +52,20 @@ export const categorySchema = {
       $ref: "definitions.json#/definitions/date",
     },
   },
+  additionalProperties: false,
 } as const;
 
 export type CategorySchema = FromSchema<
   typeof categorySchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

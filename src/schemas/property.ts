@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const propertySchema = {
@@ -354,5 +354,15 @@ export const propertySchema = {
 
 export type PropertySchema = FromSchema<
   typeof propertySchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

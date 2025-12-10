@@ -1,4 +1,4 @@
-export default {
+const defs = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "definitions.json",
   title: "Definitions",
@@ -19,14 +19,6 @@ export default {
       default: {},
     },
     date: {
-      type: ["string", "object"],
-      format: "date-time",
-    },
-    createdAt: {
-      type: ["string", "object"],
-      format: "date-time",
-    },
-    updatedAt: {
       type: ["string", "object"],
       format: "date-time",
     },
@@ -256,3 +248,8 @@ export default {
     },
   },
 } as const;
+
+export type ISODateString =
+  `${number}-${number}-${number}T${number}:${number}:${number}.${number}Z`;
+
+export default defs;

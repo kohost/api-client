@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const credentialSchema = {
@@ -7,6 +7,7 @@ export const credentialSchema = {
   title: "Credential",
   type: "object",
   required: ["type", "credential", "expires"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -68,5 +69,15 @@ export const credentialSchema = {
 
 export type CredentialSchema = FromSchema<
   typeof credentialSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

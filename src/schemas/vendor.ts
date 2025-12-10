@@ -1,5 +1,6 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import { mediaFileSchema } from "./mediaFile";
 
 export const vendorSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -7,6 +8,7 @@ export const vendorSchema = {
   title: "Vendor",
   type: "object",
   required: ["id", "name", "email"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -34,10 +36,10 @@ export const vendorSchema = {
       $ref: "mediaFile.json#",
     },
     createdAt: {
-      $ref: "definitions.json#/definitions/createdAt",
+      $ref: "definitions.json#/definitions/date",
     },
     updatedAt: {
-      $ref: "definitions.json#/definitions/updatedAt",
+      $ref: "definitions.json#/definitions/date",
     },
     deletedAt: {
       $ref: "definitions.json#/definitions/date",
@@ -47,5 +49,15 @@ export const vendorSchema = {
 
 export type VendorSchema = FromSchema<
   typeof vendorSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs, typeof mediaFileSchema];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

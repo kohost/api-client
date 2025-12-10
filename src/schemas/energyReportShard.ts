@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const energyReportShardSchema = {
@@ -79,5 +79,15 @@ export const energyReportShardSchema = {
 
 export type EnergyReportShardSchema = FromSchema<
   typeof energyReportShardSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

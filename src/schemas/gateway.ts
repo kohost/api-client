@@ -8,6 +8,7 @@ export const gatewaySchema = {
   description:
     "Any smart gateway that is an entrypoint for controlling devices",
   type: "object",
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

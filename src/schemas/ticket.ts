@@ -1,5 +1,6 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import type { mediaFileSchema } from "./mediaFile";
 
 export const ticketSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -128,7 +129,7 @@ export const ticketSchema = {
               "@deprecated - use authorName instead. The name of the system who sent the message.",
           },
           timestamp: {
-            $ref: "definitions.json#/definitions/createdAt",
+            $ref: "definitions.json#/definitions/date",
             description: "The ISO 8601 timestamp of the message.",
           },
           body: {
@@ -576,5 +577,15 @@ export const ticketSchema = {
 
 export type TicketSchema = FromSchema<
   typeof ticketSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs, typeof mediaFileSchema];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

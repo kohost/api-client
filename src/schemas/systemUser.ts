@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const systemUserSchema = {
@@ -98,10 +98,10 @@ export const systemUserSchema = {
       $ref: "definitions.json#/definitions/revenue",
     },
     createdAt: {
-      $ref: "definitions.json#/definitions/createdAt",
+      $ref: "definitions.json#/definitions/date",
     },
     updatedAt: {
-      $ref: "definitions.json#/definitions/updatedAt",
+      $ref: "definitions.json#/definitions/date",
     },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
@@ -111,5 +111,15 @@ export const systemUserSchema = {
 
 export type SystemUserSchema = FromSchema<
   typeof systemUserSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

@@ -1,5 +1,15 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import type { dimmerSchema } from "./dimmer";
+import type { switchSchema } from "./switch";
+import type { thermostatSchema } from "./thermostat";
+import type { lockSchema } from "./lock";
+import type { windowCoveringSchema } from "./windowCovering";
+import type { courtesySchema } from "./courtesy";
+import type { cameraSchema } from "./camera";
+import type { mediaSourceSchema } from "./mediaSource";
+import type { motionSensorSchema } from "./motionSensor";
+import type { alarmSchema } from "./alarm";
 
 export const roomSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -7,7 +17,19 @@ export const roomSchema = {
   title: "Room",
   description: "A room represents a physical space of controllable IoT devices",
   type: "object",
-  required: ["id", "name"],
+  required: [
+    "id",
+    "name",
+    "dimmers",
+    "thermostats",
+    "switches",
+    "windowCoverings",
+    "courtesy",
+    "cameras",
+    "mediaSources",
+    "motionSensors",
+    "alarms",
+  ],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -94,13 +116,13 @@ export const roomSchema = {
       },
     },
     occupiedAt: {
-      $ref: "definitions.json#/definitions/createdAt",
+      $ref: "definitions.json#/definitions/date",
     },
     createdAt: {
-      $ref: "definitions.json#/definitions/createdAt",
+      $ref: "definitions.json#/definitions/date",
     },
     updatedAt: {
-      $ref: "definitions.json#/definitions/updatedAt",
+      $ref: "definitions.json#/definitions/date",
     },
     deletedAt: {
       $ref: "definitions.json#/definitions/date",
@@ -111,8 +133,32 @@ export const roomSchema = {
 
 export type RoomSchema = FromSchema<
   typeof roomSchema,
-  { references: [typeof defs] }
+  {
+    references: [
+      typeof defs,
+      typeof dimmerSchema,
+      typeof switchSchema,
+      typeof thermostatSchema,
+      typeof lockSchema,
+      typeof windowCoveringSchema,
+      typeof courtesySchema,
+      typeof cameraSchema,
+      typeof mediaSourceSchema,
+      typeof motionSensorSchema,
+      typeof alarmSchema,
+    ];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;
+
+type RoomThermostat = RoomSchema["thermostats"];
 
 export const getters = {
   /**
@@ -203,7 +249,7 @@ export const getters = {
     const hasDiscriminatorLight = this.switches?.some(
       (sw: { discriminator?: string }) => {
         return sw.discriminator === "light" || sw.discriminator === "fan";
-      },
+      }
     );
     return this.hasDimmer || hasDiscriminatorLight;
   },

@@ -1,5 +1,6 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import { mediaFileSchema } from "./mediaFile";
 
 export const userSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -7,6 +8,7 @@ export const userSchema = {
   title: "User",
   type: "object",
   required: ["id", "firstName", "lastName"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -170,18 +172,6 @@ export const userSchema = {
         $ref: "mediaFile.json#",
       },
     },
-    identifications: {
-      type: "array",
-      items: {
-        $ref: "identification.json#",
-      },
-    },
-    payments: {
-      type: "array",
-      items: {
-        $ref: "payment.json#",
-      },
-    },
     location: {
       type: "object",
       required: ["accuracy", "latitude", "longitude", "timestamp"],
@@ -201,18 +191,11 @@ export const userSchema = {
         },
       },
     },
-    reservations: {
-      type: "array",
-      items: {
-        $ref: "reservation.json",
-      },
-    },
+
     spaceName: {
       type: "string",
     },
-    revenue: {
-      $ref: "definitions.json#/definitions/revenue",
-    },
+
     systems: {
       type: "array",
       default: [],
@@ -234,10 +217,10 @@ export const userSchema = {
       },
     },
     createdAt: {
-      $ref: "definitions.json#/definitions/createdAt",
+      $ref: "definitions.json#/definitions/date",
     },
     updatedAt: {
-      $ref: "definitions.json#/definitions/updatedAt",
+      $ref: "definitions.json#/definitions/date",
     },
     deletedAt: {
       $ref: "definitions.json#/definitions/date",
@@ -247,7 +230,17 @@ export const userSchema = {
 
 export type UserSchema = FromSchema<
   typeof userSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs, typeof mediaFileSchema];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;
 
 export const getters = {

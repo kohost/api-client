@@ -1,5 +1,6 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import { ticketSchema } from "./ticket";
 
 export const issueSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -34,6 +35,7 @@ export const issueSchema = {
     },
     autoAssign: {
       type: "object",
+      additionalProperties: false,
       properties: {
         userId: {
           type: "string",
@@ -62,6 +64,7 @@ export const issueSchema = {
       items: {
         type: "object",
         required: ["id", "discriminator"],
+        additionalProperties: false,
         properties: {
           id: {
             type: "string",
@@ -104,5 +107,15 @@ export const issueSchema = {
 
 export type IssueSchema = FromSchema<
   typeof issueSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs, typeof ticketSchema];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

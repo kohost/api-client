@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const serverSchema = {
@@ -8,6 +8,7 @@ export const serverSchema = {
   description:
     "A server is a physical or virtual machine that runs the Kohost software",
   type: "object",
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -140,5 +141,15 @@ export const serverSchema = {
 
 export type ServerSchema = FromSchema<
   typeof serverSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

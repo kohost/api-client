@@ -1,7 +1,11 @@
+import type { AnySchema, ValidateFunction } from "ajv";
 import { ValidationError } from "../errors/validationError";
 
 export class Entity {
-  constructor(data) {
+  declare schema: AnySchema;
+  declare validator: ValidateFunction;
+
+  constructor(data: unknown) {
     if (!this.schema) {
       throw new Error("Schema is not defined");
     }
@@ -13,11 +17,15 @@ export class Entity {
     this.#validate(data);
   }
 
-  get schemaProperties() {
-    return Object.keys(this.validator.schema.properties);
+  get schemaProperties(): string[] {
+    const schema = this.validator.schema;
+    if (typeof schema === "object" && schema !== null && "properties" in schema) {
+      return Object.keys(schema.properties as Record<string, unknown>);
+    }
+    return [];
   }
 
-  #validate(data) {
+  #validate(data: unknown) {
     const valid = this.validator(data);
     if (!valid) {
       throw new ValidationError(`Invalid ${this.constructor.name}`, {

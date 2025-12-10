@@ -7,6 +7,7 @@ export const notificationSchema = {
   title: "Notification",
   type: "object",
   required: ["id", "type", "discriminator", "content"],
+  additionalProperties: false,
   properties: {
     id: {
       type: "string",

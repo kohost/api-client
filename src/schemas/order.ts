@@ -8,6 +8,7 @@ export const orderSchema = {
   description: "A purchase order for products or services.",
   type: "object",
   required: ["type", "status"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

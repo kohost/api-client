@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const thermostatSchema = {
@@ -54,7 +54,7 @@ export const thermostatSchema = {
     },
     hvacMode: {
       type: "string",
-      $ref: "#/properties/supportedHvacModes/items",
+      enum: ["cool", "heat", "auto", "off"],
     },
     hvacState: {
       type: ["string", "null"],
@@ -62,7 +62,7 @@ export const thermostatSchema = {
     },
     fanMode: {
       type: "string",
-      $ref: "#/properties/supportedFanModes/items",
+      enum: ["auto", "low", "medium", "high", "off", "on"],
     },
     fanState: {
       type: ["string", "null"],
@@ -82,6 +82,7 @@ export const thermostatSchema = {
       uniqueItems: true,
       minItems: 2,
       items: {
+        type: "string",
         enum: ["cool", "heat", "auto", "off"],
       },
     },
@@ -89,6 +90,7 @@ export const thermostatSchema = {
       type: "array",
       uniqueItems: true,
       items: {
+        type: "string",
         enum: ["auto", "low", "medium", "high", "off", "on"],
       },
     },
@@ -158,30 +160,36 @@ export const thermostatSchema = {
       additionalProperties: false,
       properties: {
         value: {
-          $ref: "#/definitions/setpointValue",
+          type: "number",
+          minimum: 0,
+          maximum: 99,
         },
         min: {
-          $ref: "#/definitions/setpointMinMax",
+          type: ["number", "null"],
+          minimum: 0,
+          maximum: 99,
         },
         max: {
-          $ref: "#/definitions/setpointMinMax",
+          type: ["number", "null"],
+          minimum: 0,
+          maximum: 99,
         },
       },
-    },
-    setpointValue: {
-      type: "number",
-      minimum: 0,
-      maximum: 99,
-    },
-    setpointMinMax: {
-      type: ["number", "null"],
-      minimum: 0,
-      maximum: 99,
     },
   },
 } as const;
 
 export type ThermostatSchema = FromSchema<
   typeof thermostatSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

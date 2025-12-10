@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const sessionSchema = {
@@ -15,6 +15,7 @@ export const sessionSchema = {
     "expires",
     "data",
   ],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -51,5 +52,15 @@ export const sessionSchema = {
 
 export type SessionSchema = FromSchema<
   typeof sessionSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

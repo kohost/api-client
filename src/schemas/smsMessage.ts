@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const smsMessageSchema = {
@@ -7,6 +7,7 @@ export const smsMessageSchema = {
   title: "Sms Message",
   type: "object",
   required: ["to", "from", "status"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -67,5 +68,15 @@ export const smsMessageSchema = {
 
 export type SmsMessageSchema = FromSchema<
   typeof smsMessageSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;

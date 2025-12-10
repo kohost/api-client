@@ -1,4 +1,4 @@
-import defs from "./definitions";
+import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 
 export const shortLinkSchema = {
@@ -7,6 +7,7 @@ export const shortLinkSchema = {
   title: "Short Link",
   type: "object",
   required: ["destination", "url"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
@@ -44,5 +45,15 @@ export const shortLinkSchema = {
 
 export type ShortLinkSchema = FromSchema<
   typeof shortLinkSchema,
-  { references: [typeof defs] }
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
 >;
