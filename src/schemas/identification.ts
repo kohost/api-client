@@ -78,7 +78,7 @@ export type IdentificationSchema = FromSchema<
         pattern: {
           format: "date-time";
         };
-        output: Date | ISODateString;
+        output: Date | ISODateString | null;
       },
     ];
   }

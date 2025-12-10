@@ -1,6 +1,7 @@
 import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 import { mediaFileSchema } from "./mediaFile";
+import { policySchema } from "./policy";
 
 export const userSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -231,7 +232,7 @@ export const userSchema = {
 export type UserSchema = FromSchema<
   typeof userSchema,
   {
-    references: [typeof defs, typeof mediaFileSchema];
+    references: [typeof defs, typeof mediaFileSchema, typeof policySchema];
     deserialize: [
       {
         pattern: {

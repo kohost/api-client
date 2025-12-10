@@ -156,6 +156,11 @@ export const organizationSchema = {
     credentials: {
       type: "object",
       additionalProperties: true,
+      properties: {
+        apiKey: { type: "string" },
+        webhookToken: { type: "string" },
+        jwtSecret: { type: "string" },
+      },
     },
     createdAt: {
       $ref: "definitions.json#/definitions/date",

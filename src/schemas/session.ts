@@ -1,5 +1,6 @@
 import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import type { policySchema } from "./policy";
 
 export const sessionSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -35,11 +36,56 @@ export const sessionSchema = {
       type: "string",
     },
     expires: {
-      type: ["string", "object", "null"],
+      $ref: "definitions.json#/definitions/date",
     },
     data: {
       type: "object",
       additionalProperties: true,
+      required: ["phoneVerified", "properties", "organizationId"],
+      properties: {
+        phoneVerified: {
+          type: "boolean",
+        },
+        properties: {
+          type: "array",
+          items: {
+            type: "object",
+            additionalProperties: false,
+            properties: {
+              id: {
+                type: "string",
+              },
+              roles: {
+                type: "array",
+                items: {
+                  type: "string",
+                },
+              },
+              spaces: {
+                type: "array",
+                items: {
+                  type: "string",
+                },
+              },
+              rooms: {
+                type: "array",
+                items: {
+                  type: "string",
+                },
+              },
+              policies: {
+                type: "array",
+                items: {
+                  $ref: "policy.json#",
+                },
+              },
+            },
+          },
+        },
+        organizationId: {
+          type: "string",
+        },
+      },
     },
     createdAt: {
       $ref: "definitions.json#/definitions/date",
@@ -53,7 +99,7 @@ export const sessionSchema = {
 export type SessionSchema = FromSchema<
   typeof sessionSchema,
   {
-    references: [typeof defs];
+    references: [typeof defs, typeof policySchema];
     deserialize: [
       {
         pattern: {

@@ -37,26 +37,6 @@ export const cameraSchema = {
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
-    liveStreams: {
-      type: "object",
-      additionalProperties: false,
-      $comment:
-        "This is now deprecated. Use liveStream instead. This will remain here for backwards compatibility.",
-      properties: {
-        iframe: {
-          type: ["string", "null"],
-        },
-        hls: {
-          type: ["string", "null"],
-        },
-        webRTC: {
-          type: ["string", "null"],
-        },
-        rtsp: {
-          type: ["string", "null"],
-        },
-      },
-    },
     liveStream: {
       type: "object",
       additionalProperties: false,

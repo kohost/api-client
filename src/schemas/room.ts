@@ -158,8 +158,6 @@ export type RoomSchema = FromSchema<
   }
 >;
 
-type RoomThermostat = RoomSchema["thermostats"];
-
 export const getters = {
   /**
    * Check if the room has any dimmers
@@ -278,7 +276,7 @@ export const statics = {
    * @returns {"mediaSources" | "courtesy" | "dimmers" | "thermostats" | "locks" | "windowCoverings" | "switches" | "cameras" | "motionSensors" | "alarms"} The device path
    * @throws {Error} If the device type is invalid
    */
-  getDevicePath(type) {
+  getDevicePath(type: string) {
     switch (type) {
       case "tv":
       case "dvr":
@@ -316,7 +314,7 @@ export const statics = {
    * @param {string} path
    * @returns
    */
-  getDeviceTypeFromPath(path) {
+  getDeviceTypeFromPath(path: string) {
     const validPaths = [
       "dimmers",
       "switches",

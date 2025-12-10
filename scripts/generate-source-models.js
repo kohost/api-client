@@ -466,7 +466,10 @@ function generateModelsIndex(modelNames) {
     )
     .join("\n");
 
-  return `${banner}\n\n${exports}\n`;
+  // Also export Entity from the source models folder
+  const entityExport = `export { Entity } from "../../src/models/entity.js";`;
+
+  return `${banner}\n\n${entityExport}\n\n${exports}\n`;
 }
 
 function generateUseCasesIndex(useCaseNames) {

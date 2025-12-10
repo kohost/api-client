@@ -158,6 +158,7 @@ export const thermostatSchema = {
     setpoint: {
       type: "object",
       additionalProperties: false,
+      required: ["value", "min", "max"],
       properties: {
         value: {
           type: "number",

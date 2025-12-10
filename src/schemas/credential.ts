@@ -54,6 +54,7 @@ export const credentialSchema = {
     },
     expires: {
       type: ["string", "object", "null"],
+      format: "date-time",
     },
     createdAt: {
       $ref: "definitions.json#/definitions/date",
@@ -67,17 +68,20 @@ export const credentialSchema = {
   },
 } as const;
 
-export type CredentialSchema = FromSchema<
-  typeof credentialSchema,
-  {
-    references: [typeof defs];
-    deserialize: [
-      {
-        pattern: {
-          format: "date-time";
-        };
-        output: Date | ISODateString;
-      },
-    ];
-  }
->;
+export type CredentialSchema = Omit<
+  FromSchema<
+    typeof credentialSchema,
+    {
+      references: [typeof defs];
+      deserialize: [
+        {
+          pattern: {
+            format: "date-time";
+          };
+          output: Date | ISODateString;
+        },
+      ];
+    }
+  >,
+  "expires"
+> & { expires: Date | ISODateString | null };

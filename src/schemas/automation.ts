@@ -43,6 +43,7 @@ export const automationSchema = {
         // Time-based trigger properties
         schedule: {
           type: "object",
+          additionalProperties: false,
           description: "Schedule for time-based triggers",
           required: ["days", "time", "timezone"],
           properties: {
@@ -78,6 +79,7 @@ export const automationSchema = {
         event: {
           type: "object",
           required: ["eventType", "eventProperties", "match"],
+          additionalProperties: false,
           properties: {
             eventType: {
               type: "string",
@@ -91,6 +93,7 @@ export const automationSchema = {
               items: {
                 type: "object",
                 required: ["property", "value", "operator"],
+                additionalProperties: false,
                 properties: {
                   property: {
                     type: "string",
@@ -133,6 +136,7 @@ export const automationSchema = {
       items: {
         type: "object",
         required: ["useCase", "useCaseParams"],
+        additionalProperties: false,
         properties: {
           useCase: {
             type: "string",

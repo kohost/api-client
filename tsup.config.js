@@ -9,12 +9,12 @@ const esmConfig = {
   target: ["es2022"],
   platform: "node",
   keepNames: true,
-  minify: "terser",
-  terserOptions: {
-    mangle: false,
-    keep_fnames: true,
-    keep_classnames: true,
-  },
+  // minify: "terser",
+  // terserOptions: {
+  //   mangle: false,
+  //   keep_fnames: true,
+  //   keep_classnames: true,
+  // },
 };
 
 // Shared config for CJS builds
@@ -26,12 +26,12 @@ const cjsConfig = {
   target: ["es2022"],
   platform: "node",
   keepNames: true,
-  minify: "terser",
-  terserOptions: {
-    mangle: false,
-    keep_fnames: true,
-    keep_classnames: true,
-  },
+  // minify: "terser",
+  // terserOptions: {
+  //   mangle: false,
+  //   keep_fnames: true,
+  //   keep_classnames: true,
+  // },
 };
 
 export default defineConfig([

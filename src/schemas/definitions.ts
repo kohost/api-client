@@ -149,13 +149,6 @@ const defs = {
         "thermostat",
         "lock",
         "courtesy",
-        "gateway",
-        "tv",
-        "dvr",
-        "appleTv",
-        "discPlayer",
-        "mediaPlayer",
-        "uncontrolledDevice",
       ],
     },
     name: {
@@ -249,7 +242,6 @@ const defs = {
   },
 } as const;
 
-export type ISODateString =
-  `${number}-${number}-${number}T${number}:${number}:${number}.${number}Z`;
+export type ISODateString = ReturnType<Date["toISOString"]>;
 
 export default defs;

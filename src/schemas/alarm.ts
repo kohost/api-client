@@ -95,6 +95,12 @@ export const alarmSchema = {
         additionalProperties: false,
       },
     },
+    supportedNotifications: {
+      $ref: "definitions.json#/definitions/supportedNotifications",
+    },
+    notification: {
+      $ref: "definitions.json#/definitions/notification",
+    },
     code: {
       type: "string",
     },
