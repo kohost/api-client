@@ -159,35 +159,3 @@ export type ReservationSchema = FromSchema<
   typeof reservationSchema,
   { references: [typeof defs] }
 >;
-
-function checkInTime(tz) {
-  return new Date(this.checkInDateTime).toLocaleString("default", {
-    hour: "numeric",
-    minute: "numeric",
-    timeZone: tz,
-  });
-}
-
-function checkOutTime(tz) {
-  return new Date(this.checkOutDateTime).toLocaleString("default", {
-    hour: "numeric",
-    minute: "numeric",
-    timeZone: tz,
-  });
-}
-
-function getNights() {
-  const start = new Date(this.checkInDateTime);
-  const end = new Date(this.checkOutDateTime);
-  let nights = Math.round((end - start) / (1000 * 60 * 60 * 24));
-  if (nights <= 0) {
-    nights = 1;
-  }
-  return nights;
-}
-
-export const methods = {
-  checkInTime,
-  checkOutTime,
-  getNights,
-};

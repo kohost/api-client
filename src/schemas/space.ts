@@ -161,33 +161,3 @@ export type SpaceSchema = FromSchema<
   typeof spaceSchema,
   { references: [typeof defs] }
 >;
-
-export const getters = {
-  hasDimmer() {
-    return this.rooms.some((room) => room.hasDimmer);
-  },
-  hasSwitch() {
-    return this.rooms.some((room) => room.hasSwitch);
-  },
-  hasWindowCovering() {
-    return this.rooms.some((room) => room.hasWindowCovering);
-  },
-  hasThermostat() {
-    return this.rooms.some((room) => room.hasThermostat);
-  },
-  hasLock() {
-    return this.rooms.some((room) => room.hasLock);
-  },
-  hasCourtesy() {
-    return this.rooms.some((room) => room.hasCourtesy);
-  },
-  hasCamera() {
-    return this.rooms.some((room) => room.hasCamera);
-  },
-  hasAlarm() {
-    return this.rooms.some((room) => room.hasAlarm);
-  },
-  hasMedia() {
-    return this.rooms.some((room) => room.hasMedia);
-  },
-};

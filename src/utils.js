@@ -1,6 +1,6 @@
 import * as Errors from "./errors";
 import * as Events from "./events";
-import * as Models from "./models";
+import * as Models from "../.generated/models";
 
 export function entityFactory(type) {
   switch (type) {

@@ -200,9 +200,11 @@ export const getters = {
    * @returns {boolean} True if the room has lighting devices, false otherwise
    */
   hasLight() {
-    const hasDiscriminatorLight = this.switches?.some((sw) => {
-      return sw.discriminator === "light" || sw.discriminator === "fan";
-    });
+    const hasDiscriminatorLight = this.switches?.some(
+      (sw: { discriminator?: string }) => {
+        return sw.discriminator === "light" || sw.discriminator === "fan";
+      },
+    );
     return this.hasDimmer || hasDiscriminatorLight;
   },
 
@@ -215,8 +217,9 @@ export const getters = {
    * @returns {boolean} True if the room was occupied within the last hour, false otherwise
    */
   occupied() {
+    if (!this.occupiedAt) return false;
     const now = new Date();
-    const lastOccupied = new Date(this.occupiedAt);
+    const lastOccupied = new Date(this.occupiedAt as string | Date);
     const diff = now.getTime() - lastOccupied.getTime();
     return diff < 60 * 60 * 1000;
   },

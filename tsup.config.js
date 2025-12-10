@@ -1,53 +1,10 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig([
-  // browser build
-  // {
-  //   entry: {
-  //     client: "src/httpClient.js",
-  //     socketIoClient: "src/socketIoClient.js",
-  //     utils: "src/utils.js",
-  //     defs: "src/defs.js",
-  //     models: "src/models/index.js",
-  //     events: "src/events/index.js",
-  //     errors: "src/errors/index.js",
-  //     commands: "src/commands/index.js",
-  //     useCases: "src/useCases/index.js",
-  //   },
-  //   outDir: "dist",
-  //   format: ["esm", "cjs"],
-  //   dts: true,
-  //   clean: false,
-  //   sourcemap: true,
-  //   bundle: true,
-  //   target: "es2022",
-  //   platform: "neutral",
-  //   globalName: "kohost",
-  //   minify: "terser",
-  //   terserOptions: {
-  //     mangle: false,
-  //     keep_fnames: true,
-  //     keep_classnames: true,
-  //   },
-  // },
-  // //node build
-  // {
-  //   entry: ["src/index.js"],
-  //   outDir: "dist",
-  //   format: ["cjs", "esm"],
-  //   dts: true,
-  //   clean: false,
-  //   sourcemap: true,
-  //   target: "node20",
-  //   platform: "node",
-  //   globalName: "kohost",
-  //   keepNames: true,
-  // },
+  // Main build - source files
   {
     entry: [
       "src/index.js",
-      "src/models/*",
-      "src/useCases/*",
       "src/events/*",
       "src/errors/*",
       "src/commands/*",
@@ -56,7 +13,6 @@ export default defineConfig([
       "src/httpClient.js",
       "src/socketIoClient.js",
       "src/amqpClient.js",
-      "src/validators.js",
     ],
     outDir: "dist",
     esbuildOptions(options) {
@@ -79,6 +35,35 @@ export default defineConfig([
     globalName: "kohost",
     keepNames: true,
   },
+  // Generated models and useCases from .generated/
+  {
+    entry: [
+      ".generated/models/*",
+      ".generated/useCases/*",
+      ".generated/validate.ts",
+    ],
+    outDir: "dist",
+    esbuildOptions(options) {
+      options.outbase = ".generated";
+      return options;
+    },
+    minify: "terser",
+    terserOptions: {
+      mangle: false,
+      keep_fnames: true,
+      keep_classnames: true,
+    },
+    format: ["cjs", "esm"],
+    dts: true,
+    bundle: true,
+    clean: false,
+    sourcemap: true,
+    target: ["es2022"],
+    platform: "node",
+    globalName: "kohost",
+    keepNames: true,
+  },
+  // Schemas - copy as-is for direct imports
   {
     entry: ["src/schemas/*"],
     outDir: "dist/schemas",

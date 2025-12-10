@@ -169,11 +169,11 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix ./",
     "prepare": "husky",
-    "prebuild": "npm run generate-models && npm run generate-barrels",
+    "prebuild": "npm run generate-models",
     "build": "tsup && npm run resolve-schemas",
     "resolve-schemas": "node scripts/resolve-schema-refs.js",
-    "generate-models": "node scripts/generate-source-models",
-    "generate-barrels": "node scripts/generate-barrels",
+    "generate-models": "tsx scripts/generate-source-models.js",
+    "clean:generated": "rm -rf .generated",
     "start": "node scripts/build.js --watch",
     "clean": "rm -rf ./dist",
     "tsc": "tsc",
@@ -196,6 +196,7 @@
     "prettier": "^3.0.3",
     "terser": "^5.37.0",
     "tsup": "^8.3.5",
+    "tsx": "^4.21.0",
     "typescript": "^5.1.6"
   },
   "dependencies": {

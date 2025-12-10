@@ -202,7 +202,11 @@ function toJsObjectString(value, indent = 0) {
  */
 async function processSchemaFile(filePath, definitions) {
   const module = await import(path.resolve(filePath));
-  const schema = deepClone(module.default);
+  // Find the schema export - it's a named export now (e.g., alarmSchema)
+  const schemaKey = Object.keys(module).find(
+    (k) => k.endsWith("Schema") && typeof module[k] === "object",
+  );
+  const schema = deepClone(module.default || module[schemaKey]);
 
   // First resolve external refs (definitions.json)
   let resolved = resolveExternalRefs(schema, definitions);
@@ -330,7 +334,9 @@ async function main() {
   // Load definitions
   const definitionsPath = path.join(DIST_SCHEMAS_DIR, "definitions.js");
   const definitionsModule = await import(path.resolve(definitionsPath));
-  let definitions = definitionsModule.default;
+  // Schema exports are now named exports (e.g., definitionsSchema) instead of default
+  let definitions =
+    definitionsModule.default || definitionsModule.definitionsSchema;
 
   // First, resolve any internal refs within definitions itself
   definitions = resolveDefinitionsInternalRefs(definitions);
