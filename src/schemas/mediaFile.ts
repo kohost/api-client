@@ -9,7 +9,8 @@ export const mediaFileSchema = {
   type: "object",
   properties: {
     id: {
-      $ref: "definitions.json#/definitions/id",
+      type: "string",
+      default: "",
     },
     type: {
       type: "string",
