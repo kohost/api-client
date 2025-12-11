@@ -35,52 +35,19 @@ const cjsConfig = {
 };
 
 export default defineConfig([
-  // ESM build - source files
+  // ESM build - all source files from .generated
   {
     ...esmConfig,
     entry: [
-      "src/index.js",
-      "src/events/*",
-      "src/errors/*",
-      "src/commands/*",
-      "src/defs.js",
-      "src/utils.js",
-      "src/httpClient.js",
-      "src/amqpClient.js",
-    ],
-    outDir: "dist/esm",
-    esbuildOptions(options) {
-      options.outbase = "src";
-      return options;
-    },
-    clean: true,
-  },
-  // CJS build - source files
-  {
-    ...cjsConfig,
-    entry: [
-      "src/index.js",
-      "src/events/*",
-      "src/errors/*",
-      "src/commands/*",
-      "src/defs.js",
-      "src/utils.js",
-      "src/httpClient.js",
-      "src/amqpClient.js",
-    ],
-    outDir: "dist/cjs",
-    esbuildOptions(options) {
-      options.outbase = "src";
-      return options;
-    },
-    clean: true,
-  },
-  // ESM build - generated models and useCases
-  {
-    ...esmConfig,
-    entry: [
+      ".generated/index.ts",
+      ".generated/events/*",
+      ".generated/errors/*",
+      ".generated/commands/*",
       ".generated/models/*",
       ".generated/useCases/*",
+      ".generated/schemas/*",
+      ".generated/httpClient.js",
+      ".generated/amqpClient.js",
       ".generated/validate.ts",
     ],
     outDir: "dist/esm",
@@ -88,14 +55,21 @@ export default defineConfig([
       options.outbase = ".generated";
       return options;
     },
-    clean: false,
+    clean: true,
   },
-  // CJS build - generated models and useCases
+  // CJS build - all source files from .generated
   {
     ...cjsConfig,
     entry: [
+      ".generated/index.ts",
+      ".generated/events/*",
+      ".generated/errors/*",
+      ".generated/commands/*",
       ".generated/models/*",
       ".generated/useCases/*",
+      ".generated/schemas/*",
+      ".generated/httpClient.js",
+      ".generated/amqpClient.js",
       ".generated/validate.ts",
     ],
     outDir: "dist/cjs",
@@ -103,18 +77,6 @@ export default defineConfig([
       options.outbase = ".generated";
       return options;
     },
-    clean: false,
-  },
-  // Schemas - ESM only (for direct imports)
-  {
-    entry: ["src/schemas/*"],
-    outDir: "dist/esm/schemas",
-    format: ["esm"],
-    dts: false,
-    bundle: false,
-    clean: false,
-    sourcemap: true,
-    target: ["es2022"],
-    platform: "node",
+    clean: true,
   },
 ]);

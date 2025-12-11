@@ -1,4 +1,3 @@
-import { amqpExchanges } from "../defs";
 import { Event } from "./event";
 
 export class ApplicationOutOfUse extends Event {
@@ -15,6 +14,6 @@ export class ApplicationOutOfUse extends Event {
   }
 
   static get exchange() {
-    return amqpExchanges.AppEvents.name;
+    return "kohost.events.app";
   }
 }

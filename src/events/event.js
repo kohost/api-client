@@ -1,5 +1,3 @@
-import { amqpExchanges } from "../defs";
-
 export class Event {
   constructor(data, context = {}) {
     this.data = [];
@@ -25,7 +23,7 @@ export class Event {
   }
 
   static get exchange() {
-    return amqpExchanges.DriverEvents.name;
+    return "kohost.events.drivers";
   }
 
   static get entity() {

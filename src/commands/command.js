@@ -1,7 +1,3 @@
-import { amqpExchanges } from "../defs";
-
-const Commands = amqpExchanges.Commands;
-
 export class Command {
   constructor(data) {
     this.data = {};
@@ -23,7 +19,7 @@ export class Command {
   }
 
   static get exchange() {
-    return Commands.name;
+    return "kohost.commands";
   }
 
   build() {

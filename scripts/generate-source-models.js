@@ -173,11 +173,36 @@ async function loadSchemas() {
   return map;
 }
 
-// Ensure directories exist
-function ensureDirectories() {
-  if (!fs.existsSync(GENERATED_DIR)) {
-    fs.mkdirSync(GENERATED_DIR, { recursive: true });
+/**
+ * Recursively copy a directory
+ */
+function copyDir(src, dest) {
+  fs.mkdirSync(dest, { recursive: true });
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+
+    if (entry.isDirectory()) {
+      copyDir(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
   }
+}
+
+// Ensure directories exist and copy src to .generated
+function setupGeneratedDir() {
+  // Remove existing .generated directory
+  if (fs.existsSync(GENERATED_DIR)) {
+    fs.rmSync(GENERATED_DIR, { recursive: true });
+  }
+
+  // Copy entire src directory to .generated
+  copyDir("src", GENERATED_DIR);
+
+  // Create models and useCases directories (they may not exist in src)
   if (!fs.existsSync(MODELS_DIR)) {
     fs.mkdirSync(MODELS_DIR, { recursive: true });
   }
@@ -187,7 +212,7 @@ function ensureDirectories() {
 }
 
 loadSchemas().then(async (schemas) => {
-  ensureDirectories();
+  setupGeneratedDir();
 
   // Generate validate.ts
   const validateCode = await generateValidatorCode(schemas);
@@ -255,9 +280,18 @@ loadSchemas().then(async (schemas) => {
     await formatCode(useCasesIndexCode),
   );
 
+  // Generate main index.ts
+  const mainIndexCode = generateMainIndex();
+  fs.writeFileSync(
+    path.join(GENERATED_DIR, "index.ts"),
+    await formatCode(mainIndexCode),
+  );
+
   console.log(`Generated files in ${GENERATED_DIR}/`);
+  console.log(`  - Copied src/ to ${GENERATED_DIR}/`);
+  console.log(`  - index.ts (main entry point)`);
   console.log(`  - validate.ts`);
-  console.log(`  - models/ (${modelNames.length} files)`);
+  console.log(`  - models/ (${modelNames.length} model files + entity.ts)`);
   console.log(`  - useCases/ (${useCaseNames.length} files)`);
 });
 
@@ -269,14 +303,16 @@ async function generateValidatorCode(schemas) {
   const schemaList = [];
   const exports = [];
 
+  // Always include definitions schema first (it's referenced by other schemas)
+  imports.push(`import defs from "./schemas/definitions.js";`);
+  schemaList.push("defs");
+
   for (const [fileName, module] of schemas.entries()) {
     const schema = module.default;
     const baseName = fileName.replace(".ts", "");
     const schemaKey = module.schemaKey;
 
-    imports.push(
-      `import { ${schemaKey} } from "../src/schemas/${baseName}.js";`,
-    );
+    imports.push(`import { ${schemaKey} } from "./schemas/${baseName}.js";`);
     schemaList.push(schemaKey);
 
     if (schema.$id !== "definitions.json") {
@@ -420,9 +456,9 @@ export class ${className} extends Entity {
 
   return `${banner}
 
-import { Entity } from "../../src/models/entity.js";
+import { Entity } from "./entity.js";
 import { validate${className} as validate } from "../validate.js";
-import { ${schemaVar}, type ${typeName} } from "../../src/schemas/${fileName}.js";
+import { ${schemaVar}, type ${typeName} } from "../schemas/${fileName}.js";
 
 /**
  * Data type for ${className} constructor - exported for backwards compatibility
@@ -466,8 +502,8 @@ function generateModelsIndex(modelNames) {
     )
     .join("\n");
 
-  // Also export Entity from the source models folder
-  const entityExport = `export { Entity } from "../../src/models/entity.js";`;
+  // Also export Entity (it's copied from src/models/)
+  const entityExport = `export { Entity } from "./entity.js";`;
 
   return `${banner}\n\n${entityExport}\n\n${exports}\n`;
 }
@@ -482,6 +518,20 @@ function generateUseCasesIndex(useCaseNames) {
     .join("\n");
 
   return `${banner}\n\n${exports}\n`;
+}
+
+function generateMainIndex() {
+  return `${banner}
+
+export { KohostAMQPClient as AMQPClient } from "./amqpClient.js";
+export { KohostHTTPClient as Client } from "./httpClient.js";
+
+export * as Commands from "./commands/index.js";
+export * as Errors from "./errors/index.js";
+export * as Events from "./events/index.js";
+export * as Models from "./models/index.js";
+export * as UseCases from "./useCases/index.js";
+`;
 }
 
 /**
