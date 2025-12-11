@@ -2,7 +2,7 @@ import { connect } from "amqplib";
 import dbg from "debug";
 import { Buffer } from "node:buffer";
 import * as crypto from "node:crypto";
-import * as Errors from "./errors";
+import * as Errors from "./errors/index.js";
 
 const exchanges = {
   // routes commands based on `command-name` header and in many cases `property-id` header
