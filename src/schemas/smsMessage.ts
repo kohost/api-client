@@ -6,7 +6,7 @@ export const smsMessageSchema = {
   $id: "smsMessage.json",
   title: "Sms Message",
   type: "object",
-  required: ["to", "from", "status"],
+  required: ["id", "type", "to", "from", "status"],
   additionalProperties: false,
   properties: {
     id: {

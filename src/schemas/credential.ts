@@ -6,7 +6,7 @@ export const credentialSchema = {
   $id: "credential.json",
   title: "Credential",
   type: "object",
-  required: ["type", "credential", "expires"],
+  required: ["id", "type", "credential", "expires"],
   additionalProperties: false,
   properties: {
     id: {
@@ -15,6 +15,7 @@ export const credentialSchema = {
     type: {
       type: "string",
       default: "credential",
+      enum: ["credential"],
     },
     driver: {
       $ref: "definitions.json#/definitions/driver",

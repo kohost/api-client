@@ -6,7 +6,7 @@ export const emailMessageSchema = {
   $id: "emailMessage.json",
   title: "Email Message",
   type: "object",
-  required: ["to", "from", "status", "subject"],
+  required: ["id", "type", "to", "from", "status", "subject"],
   additionalProperties: false,
   properties: {
     id: {

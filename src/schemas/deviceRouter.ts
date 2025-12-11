@@ -8,7 +8,7 @@ export const deviceRouterSchema = {
   description:
     "A device router contains instructions on where to route devices based on their organization and driver.",
   type: "object",
-  required: ["driver", "organizationId"],
+  required: ["id", "type", "driver", "organizationId"],
   additionalProperties: false,
   properties: {
     id: {

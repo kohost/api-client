@@ -6,7 +6,7 @@ export const timeSheetSchema = {
   $id: "timeSheet.json",
   title: "Time Sheet",
   type: "object",
-  required: ["userId", "day"],
+  required: ["id", "type", "userId", "day"],
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

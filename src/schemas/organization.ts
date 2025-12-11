@@ -8,7 +8,7 @@ export const organizationSchema = {
   type: "object",
   description:
     "An organization is a group or entity that subscribes to Kohost software.",
-  required: ["accountNumber", "name"],
+  required: ["id", "type", "accountNumber", "name"],
   additionalProperties: false,
   properties: {
     id: {

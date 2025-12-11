@@ -83,7 +83,7 @@ export const mediaFileSchema = {
     },
   },
   additionalProperties: false,
-  required: ["type"],
+  required: ["id", "type"],
 } as const;
 
 export type MediaFileSchema = FromSchema<
