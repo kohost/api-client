@@ -104,7 +104,43 @@ export const spaceSchema = {
                   type: "object",
                   properties: {
                     setpoints: {
-                      $ref: "thermostat.json#/properties/setpoints",
+                      type: "object",
+                      additionalProperties: false,
+                      properties: {
+                        cool: {
+                          type: "object",
+                          additionalProperties: false,
+                          properties: {
+                            value: {
+                              type: "number",
+                              minimum: 0,
+                              maximum: 99,
+                            },
+                          },
+                        },
+                        heat: {
+                          type: "object",
+                          additionalProperties: false,
+                          properties: {
+                            value: {
+                              type: "number",
+                              minimum: 0,
+                              maximum: 99,
+                            },
+                          },
+                        },
+                        auto: {
+                          type: "object",
+                          additionalProperties: false,
+                          properties: {
+                            value: {
+                              type: "number",
+                              minimum: 0,
+                              maximum: 99,
+                            },
+                          },
+                        },
+                      },
                     },
                   },
                 },
