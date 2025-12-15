@@ -9,7 +9,8 @@ import { join } from "path";
 
 /**
  * @typedef {Object} ExportInfo
- * @property {string} path - Relative path to the file
+ * @property {string} path - Relative path to the file (with extension)
+ * @property {string} name - File name without extension
  * @property {string[]} namedExports - Array of named export identifiers
  * @property {boolean} hasDefaultExport - Whether file has a default export
  */
@@ -24,7 +25,7 @@ function findExports(content) {
     /export\s+(?:const|let|var|function|class)\s+([^=\s{]+)/g;
   const namedExports = Array.from(
     content.matchAll(namedExportRegex),
-    (m) => m[1]
+    (m) => m[1],
   );
   const hasDefaultExport = /export\s+default/.test(content);
   return { named: namedExports, hasDefault: hasDefaultExport };
@@ -42,16 +43,21 @@ function generateBarrelFiles(directories) {
       return;
     }
 
+    const isSchemaDir = dir.endsWith("/schemas") || dir === "./src/schemas";
+
     /** @type {ExportInfo[]} */
     const exports = readdirSync(dir, { withFileTypes: true })
       .filter((dirent) => dirent.isFile() && /\.m?js$/.test(dirent.name))
       .filter((dirent) => !dirent.name.startsWith("index."))
+      // Exclude definitions.js from schemas barrel (it gets inlined during build)
+      .filter((dirent) => !(isSchemaDir && dirent.name === "definitions.js"))
       .map((file) => {
         const filePath = join(dir, file.name);
         const content = readFileSync(filePath, "utf-8");
         const { named, hasDefault } = findExports(content);
         return {
-          path: "./" + file.name.replace(/\.m?js$/, ""),
+          path: "./" + file.name,
+          name: file.name.replace(/\.m?js$/, ""),
           namedExports: named,
           hasDefaultExport: hasDefault,
         };
@@ -62,12 +68,12 @@ function generateBarrelFiles(directories) {
     const barrelContent = exports
       .map((exp) => {
         const lines = [];
-        if (exp.namedExports.length > 0) {
+        if (exp.namedExports.length > 0 && !isSchemaDir) {
           lines.push(`export * from "${exp.path}";`);
         }
         if (exp.hasDefaultExport) {
-          const name = exp.path.split("/").pop();
-          lines.push(`export { default as ${name} } from "${exp.path}";`);
+          const exportName = isSchemaDir ? `${exp.name}Schema` : exp.name;
+          lines.push(`export { default as ${exportName} } from "${exp.path}";`);
         }
         return lines.join("\n");
       })
@@ -79,6 +85,7 @@ function generateBarrelFiles(directories) {
 }
 
 generateBarrelFiles([
+  "./src/schemas",
   "./src/models",
   "./src/events",
   "./src/errors",

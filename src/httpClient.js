@@ -1,4 +1,4 @@
-import { RefreshTokenCommand } from "./useCases/refreshToken";
+import { RefreshTokenCommand } from "./useCases/refreshToken.js";
 
 export class KohostHTTPClient {
   #onSuccess;

@@ -1,0 +1,201 @@
+import defs, { ISODateString } from "./definitions";
+import type { FromSchema } from "json-schema-to-ts";
+
+export const automationSchema = {
+  $schema: "http://json-schema.org/draft-07/schema",
+  $id: "automation.json",
+  title: "Automation",
+  description: "An automation is a collection of triggers and actions",
+  type: "object",
+  required: ["id", "type", "trigger", "actions"],
+  properties: {
+    id: {
+      $ref: "definitions.json#/definitions/id",
+    },
+    name: {
+      type: "string",
+      description: "The friendly name of the automation",
+    },
+    type: {
+      type: "string",
+      enum: ["automation"],
+      default: "automation",
+    },
+    isEnabled: {
+      type: "boolean",
+      description: "Whether the automation is currently enabled",
+      default: true,
+    },
+    description: {
+      type: "string",
+      description: "The text description of the automation",
+    },
+    trigger: {
+      type: "object",
+      description: "The trigger that initiates the automation",
+      required: ["discriminator"],
+      properties: {
+        discriminator: {
+          type: "string",
+          enum: ["schedule", "event"],
+          description: "Type of trigger",
+        },
+        // Time-based trigger properties
+        schedule: {
+          type: "object",
+          additionalProperties: false,
+          description: "Schedule for time-based triggers",
+          required: ["days", "time", "timezone"],
+          properties: {
+            days: {
+              type: "array",
+              description: "Days of the week (0 = Sunday, 6 = Saturday)",
+              items: {
+                type: "integer",
+                minimum: 0,
+                maximum: 6,
+              },
+            },
+            time: {
+              type: "string",
+              description: "Time of day to trigger the automation",
+            },
+            timeOffsetSeconds: {
+              type: "integer",
+              description: "Offset in seconds from the scheduled time",
+              default: 0,
+            },
+            repeat: {
+              type: "boolean",
+              description: "Whether the schedule repeats",
+              default: true,
+            },
+            timezone: {
+              type: "string",
+              description: "Timezone for the schedule (IANA timezone format)",
+            },
+          },
+        },
+        event: {
+          type: "object",
+          required: ["eventType", "eventProperties", "match"],
+          additionalProperties: false,
+          properties: {
+            eventType: {
+              type: "string",
+              description:
+                "Name of the event that triggers the automation actions",
+            },
+            eventProperties: {
+              type: "array",
+              description:
+                "Properties of the event that triggers the automation actions",
+              items: {
+                type: "object",
+                required: ["property", "value", "operator"],
+                additionalProperties: false,
+                properties: {
+                  property: {
+                    type: "string",
+                    description: "Property of the event",
+                  },
+                  value: {
+                    type: ["string", "number", "boolean"],
+                    description: "Value of the property",
+                  },
+                  operator: {
+                    type: "string",
+                    description: "Operator of the property",
+                    enum: [
+                      "==",
+                      "!=",
+                      ">",
+                      ">=",
+                      "<",
+                      "<=",
+                      "contains",
+                      "notContains",
+                    ],
+                  },
+                },
+              },
+            },
+            match: {
+              type: "string",
+              description:
+                "Match criteria for the event to trigger the automation actions",
+              enum: ["any", "all"],
+            },
+          },
+        },
+      },
+    },
+    actions: {
+      type: "array",
+      description: "Actions to perform when the trigger conditions are met",
+      items: {
+        type: "object",
+        required: ["useCase", "useCaseParams"],
+        additionalProperties: false,
+        properties: {
+          useCase: {
+            type: "string",
+            description: "Name of the use case to call",
+          },
+          useCaseParams: {
+            type: "object",
+            description: "Parameters to pass to the use case",
+            required: ["data"],
+            properties: {
+              data: {
+                type: ["object", "array"],
+                description: "Data to pass to the use case",
+              },
+            },
+          },
+        },
+        minItems: 1,
+      },
+    },
+    createdAt: {
+      $ref: "definitions.json#/definitions/date",
+      description: "When the automation was created",
+    },
+    updatedAt: {
+      $ref: "definitions.json#/definitions/date",
+      description: "When the automation was updated",
+    },
+    nextRunAt: {
+      $ref: "definitions.json#/definitions/date",
+      description: "When the automation is scheduled to run next",
+    },
+    lastRunAt: {
+      $ref: "definitions.json#/definitions/date",
+      description: "When the automation was last triggered",
+    },
+    deletedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
+    webhookUrl: {
+      type: "string",
+      description: "The URL of the webhook that triggers the automation",
+      format: "uri",
+    },
+  },
+  additionalProperties: false,
+} as const;
+
+export type AutomationSchema = FromSchema<
+  typeof automationSchema,
+  {
+    references: [typeof defs];
+    deserialize: [
+      {
+        pattern: {
+          format: "date-time";
+        };
+        output: Date | ISODateString;
+      },
+    ];
+  }
+>;
