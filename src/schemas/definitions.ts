@@ -244,4 +244,5 @@ const defs = {
 
 export type ISODateString = ReturnType<Date["toISOString"]>;
 
+export { defs as definitionsSchema };
 export default defs;

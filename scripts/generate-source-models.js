@@ -304,7 +304,9 @@ async function generateValidatorCode(schemas) {
   const exports = [];
 
   // Always include definitions schema first (it's referenced by other schemas)
-  imports.push(`import defs from "./schemas/definitions.js";`);
+  imports.push(
+    `import { definitionsSchema as defs } from "./schemas/definitions.js";`,
+  );
   schemaList.push("defs");
 
   for (const [fileName, module] of schemas.entries()) {
