@@ -21,7 +21,6 @@ export const organizationSchema = {
     },
     accountNumber: {
       type: ["number", "null"],
-      minimum: 10000,
     },
     name: {
       type: "string",
