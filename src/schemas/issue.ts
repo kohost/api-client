@@ -8,7 +8,7 @@ export const issueSchema = {
   title: "Issue",
   description: "An issue associated with ticketing and concierge.",
   type: "object",
-  required: ["id", "type", "name", "department"],
+  required: ["id", "type", "name"],
   additionalProperties: false,
   properties: {
     id: {

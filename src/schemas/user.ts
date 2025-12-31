@@ -105,8 +105,11 @@ export const userSchema = {
             type: "string",
             description: "The department the user belongs to.",
           },
-          departmentId: {
-            type: "string",
+          departmentIds: {
+            type: "array",
+            items: {
+              type: "string",
+            },
             description: "The ID of the department the user belongs to.",
           },
           policyIds: {

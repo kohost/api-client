@@ -393,6 +393,51 @@
     }
   ],
   [
+    "DescribeDepartment",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/departments/:id"
+      }
+    }
+  ],
+  [
+    "ListDepartments",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/departments"
+      }
+    }
+  ],
+  [
+    "DeleteDepartment",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/departments/:id"
+      }
+    }
+  ],
+  [
+    "CreateDepartment",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/departments"
+      }
+    }
+  ],
+  [
+    "UpdateDepartment",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/departments/:id"
+      }
+    }
+  ],
+  [
     "ListRooms",
     {
       "http": {
@@ -2084,6 +2129,51 @@
       "http": {
         "method": "PUT",
         "path": "/systems/:id"
+      }
+    }
+  ],
+  [
+    "CreateServer",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/servers"
+      }
+    }
+  ],
+  [
+    "DeleteServer",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/servers/:id"
+      }
+    }
+  ],
+  [
+    "DescribeServer",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/servers/:id"
+      }
+    }
+  ],
+  [
+    "ListServers",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/servers"
+      }
+    }
+  ],
+  [
+    "UpdateServer",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/servers/:id"
       }
     }
   ]
