@@ -25,9 +25,6 @@ export const issueSchema = {
     description: {
       type: "string",
     },
-    department: {
-      type: "string",
-    },
     departmentId: {
       type: "string",
       description:

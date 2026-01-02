@@ -28,12 +28,6 @@ export const propertySchema = {
       type: "string",
       description: "Reference (id) to the organization that owns this property",
     },
-    departments: {
-      type: "array",
-      items: {
-        type: "string",
-      },
-    },
     testModeEnabled: {
       type: "boolean",
     },

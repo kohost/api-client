@@ -532,9 +532,6 @@ export const ticketSchema = {
         type: "string",
       },
     },
-    department: {
-      type: "string",
-    },
     rating: {
       type: "number",
       minimum: 0,

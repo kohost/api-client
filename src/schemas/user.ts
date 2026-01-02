@@ -101,10 +101,6 @@ export const userSchema = {
             type: "boolean",
             description: "Whether time tracking is enabled for this role.",
           },
-          department: {
-            type: "string",
-            description: "The department the user belongs to.",
-          },
           departmentIds: {
             type: "array",
             items: {
