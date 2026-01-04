@@ -12,7 +12,10 @@ export const ticketSchema = {
     "id",
     "conversation",
     "requester",
+    "openedBy",
+    "assignedTo",
     "status",
+    "priority",
     "tags",
     "createdAt",
     "updatedAt",
@@ -79,54 +82,6 @@ export const ticketSchema = {
             type: "string",
             enum: ["user", "vendor", "system"],
             description: "The discriminator of the author of the message.",
-          },
-          /**
-           * @deprecated - use authorId instead.
-           */
-          userId: {
-            type: "string",
-            description:
-              "@deprecated - use authorId instead. The ID of the user who sent the message.",
-          },
-          /**
-           * @deprecated - use authorName instead.
-           */
-          userName: {
-            type: "string",
-            description:
-              "@deprecated - use authorName instead. The name of the user who sent the message.",
-          },
-          /**
-           * @deprecated - use authorId instead.
-           */
-          vendorId: {
-            type: "string",
-            description:
-              "@deprecated - use authorId instead. The ID of the vendor who sent the message.",
-          },
-          /**
-           * @deprecated - use authorName instead.
-           */
-          vendorName: {
-            type: "string",
-            description:
-              "@deprecated - use authorName instead. The name of the vendor who sent the message.",
-          },
-          /**
-           * @deprecated - use authorId instead.
-           */
-          systemId: {
-            type: "string",
-            description:
-              "@deprecated - use authorId instead. The ID of the system who sent the message.",
-          },
-          /**
-           * @deprecated - use authorName instead.
-           */
-          systemName: {
-            type: "string",
-            description:
-              "@deprecated - use authorName instead. The name of the system who sent the message.",
           },
           timestamp: {
             $ref: "definitions.json#/definitions/date",
@@ -209,6 +164,8 @@ export const ticketSchema = {
     },
     openedBy: {
       type: "object",
+      additionalProperties: false,
+      required: ["id", "discriminator", "name"],
       properties: {
         id: {
           type: "string",
@@ -220,43 +177,12 @@ export const ticketSchema = {
         name: {
           type: "string",
         },
-        /**
-         * @deprecated - use id instead.
-         */
-        userId: {
-          type: "string",
-          description:
-            "@deprecated - use id instead. The ID of the user who opened the ticket.",
-        },
-        /**
-         * @deprecated - use name instead.
-         */
-        userName: {
-          type: "string",
-          description:
-            "@deprecated - use name instead. The name of the user who opened the ticket.",
-        },
-
-        /**
-         * @deprecated - use id instead.
-         */
-        systemId: {
-          type: "string",
-          description:
-            "@deprecated - use id instead. The ID of the system who opened the ticket.",
-        },
-        /**
-         * @deprecated - use name instead.
-         */
-        systemName: {
-          type: "string",
-          description:
-            "@deprecated - use name instead. The name of the system who opened the ticket.",
-        },
       },
     },
     requester: {
       type: "object",
+      additionalProperties: false,
+      required: ["id", "discriminator", "name"],
       properties: {
         id: {
           type: "string",
@@ -279,104 +205,13 @@ export const ticketSchema = {
           ],
           description: "The photo of the requester.",
         },
-        /**
-         * @deprecated - use id instead.
-         */
-        systemId: {
-          type: "string",
-          description:
-            "@deprecated - use id instead. The ID of the system who requested the ticket.",
-        },
-        /**
-         * @deprecated - use name instead.
-         */
-        systemName: {
-          type: "string",
-          description:
-            "@deprecated - use name instead. The name of the system who requested the ticket.",
-        },
-        /**
-         * @deprecated - use photo instead.
-         */
-        systemPhoto: {
-          anyOf: [
-            { $ref: "mediaFile.json" },
-            { type: "null" },
-            { type: "string" },
-          ],
-          description:
-            "@deprecated - use photo instead. The photo of the system who requested the ticket.",
-        },
-        /**
-         * @deprecated - use id instead.
-         */
-        userId: {
-          type: "string",
-          description:
-            "@deprecated - use id instead. The ID of the user who requested the ticket.",
-        },
-        /**
-         * @deprecated - use name instead.
-         */
-        userName: {
-          type: "string",
-          description:
-            "@deprecated - use name instead. The name of the user who requested the ticket.",
-        },
-        /**
-         * @deprecated - use photo instead.
-         */
-        userPhoto: {
-          anyOf: [
-            { $ref: "mediaFile.json" },
-            { type: "null" },
-            { type: "string" },
-          ],
-          description:
-            "@deprecated - use photo instead. The photo of the user who requested the ticket.",
-        },
-        /**
-         * @deprecated - use id instead.
-         */
-        deviceId: {
-          type: "string",
-        },
-        /**
-         * @deprecated - This will be removed in a future version.
-         */
-        roomId: {
-          type: "string",
-          description:
-            "@deprecated - This will be removed in a future version. The ID of the room who requested the ticket.",
-        },
-        /**
-         * @deprecated - This will be removed in a future version.
-         */
-        reservationId: {
-          type: "string",
-          description:
-            "@deprecated - This will be removed in a future version. The ID of the reservation who requested the ticket.",
-        },
-        /**
-         * @deprecated - This will be removed in a future version.
-         */
-        spaceId: {
-          type: "string",
-          description:
-            "@deprecated - This will be removed in a future version. The ID of the space who requested the ticket.",
-        },
-        /**
-         * @deprecated - This will be removed in a future version.
-         */
-        spaceName: {
-          type: "string",
-          description:
-            "@deprecated - This will be removed in a future version. The name of the space who requested the ticket.",
-        },
       },
     },
     assignedTo: {
-      type: "object",
+      type: ["object", "null"],
+      default: null,
+      additionalProperties: false,
+      required: ["id", "discriminator", "name"],
       properties: {
         id: {
           type: "string",
@@ -398,60 +233,6 @@ export const ticketSchema = {
             { type: "string" },
           ],
           description: "The photo of the assigned to.",
-        },
-        /**
-         * @deprecated - use id instead.
-         */
-        userId: {
-          type: "string",
-          description:
-            "@deprecated - use id instead. The ID of the user who assigned the ticket.",
-        },
-        /**
-         * @deprecated - use name instead.
-         */
-        userName: {
-          type: "string",
-          description:
-            "@deprecated - use name instead. The name of the user who assigned the ticket.",
-        },
-        /**
-         * @deprecated - use photo instead.
-         */
-        userPhoto: {
-          anyOf: [
-            { $ref: "mediaFile.json" },
-            { type: "null" },
-            { type: "string" },
-          ],
-        },
-        /**
-         * @deprecated - use id instead.
-         */
-        vendorId: {
-          type: "string",
-          description:
-            "@deprecated - use id instead. The ID of the vendor who assigned the ticket.",
-        },
-        /**
-         * @deprecated - use name instead.
-         */
-        vendorName: {
-          type: "string",
-          description:
-            "@deprecated - use name instead. The name of the vendor who assigned the ticket.",
-        },
-        /**
-         * @deprecated - use photo instead.
-         */
-        vendorPhoto: {
-          anyOf: [
-            { $ref: "mediaFile.json" },
-            { type: "null" },
-            { type: "string" },
-          ],
-          description:
-            "@deprecated - use photo instead. The photo of the vendor who assigned the ticket.",
         },
       },
     },
@@ -508,7 +289,7 @@ export const ticketSchema = {
         },
         discriminator: {
           type: "string",
-          enum: ["space", "room", "property", "customText"],
+          enum: ["space", "property", "customText"],
         },
         name: {
           type: "string",
@@ -522,7 +303,7 @@ export const ticketSchema = {
     },
     priority: {
       type: "string",
-      enum: ["low", "normal", "high"],
+      enum: ["low", "normal", "high", "critical"],
       default: "normal",
     },
     tags: {
@@ -539,14 +320,6 @@ export const ticketSchema = {
     },
     ratingComment: {
       type: "string",
-    },
-    /**
-     * @deprecated - This will be removed in a future version.
-     */
-    tipAmount: {
-      type: "string",
-      description:
-        "@deprecated - This will be removed in a future version. The amount of the tip.",
     },
     autoCloseAt: {
       $ref: "definitions.json#/definitions/date",
