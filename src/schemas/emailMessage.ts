@@ -60,12 +60,17 @@ export const emailMessageSchema = {
     },
     headers: {
       type: "object",
+      additionalProperties: { type: "string" },
+      description: "Additional headers for the email message, key/value pairs",
     },
     replyTo: {
       type: ["string", "array"],
     },
     appData: {
       type: "object",
+      additionalProperties: true,
+      description:
+        "Additional data for the email message, used for custom data",
     },
     createdAt: {
       $ref: "definitions.json#/definitions/date",
