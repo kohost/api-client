@@ -45,7 +45,7 @@ export const ticketSchema = {
       items: {
         type: "object",
         additionalProperties: false,
-        required: ["id", "discriminator", "timestamp", "body"],
+        required: ["id", "discriminator", "timestamp", "body", "author"],
         properties: {
           id: {
             type: "string",
@@ -70,18 +70,25 @@ export const ticketSchema = {
             default: "message",
             description: "The discriminator of the message.",
           },
-          authorId: {
-            type: "string",
-            description: "The ID of the author of the message.",
-          },
-          authorName: {
-            type: "string",
-            description: "The name of the author of the message.",
-          },
-          authorDiscriminator: {
-            type: "string",
-            enum: ["user", "vendor", "system"],
-            description: "The discriminator of the author of the message.",
+          author: {
+            type: "object",
+            additionalProperties: false,
+            required: ["id", "discriminator", "name"],
+            properties: {
+              id: {
+                type: "string",
+                description: "The ID of the author of the message.",
+              },
+              discriminator: {
+                type: "string",
+                enum: ["user", "vendor", "system"],
+                description: "The discriminator of the author of the message.",
+              },
+              name: {
+                type: "string",
+                description: "The name of the author of the message.",
+              },
+            },
           },
           timestamp: {
             $ref: "definitions.json#/definitions/date",
