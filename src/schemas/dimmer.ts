@@ -1,5 +1,5 @@
-import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import defs, { ISODateString } from "./definitions";
 
 export const dimmerSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -7,6 +7,7 @@ export const dimmerSchema = {
   title: "Dimmer",
   description: "Any smart dimmer",
   type: "object",
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

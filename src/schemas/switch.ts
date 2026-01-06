@@ -1,5 +1,5 @@
-import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import defs, { ISODateString } from "./definitions";
 
 export const switchSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -8,6 +8,7 @@ export const switchSchema = {
   description: "Any smart switch",
   type: "object",
   required: ["id", "type", "state", "driver"],
+  additionalProperties: false,
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",

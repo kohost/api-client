@@ -1,5 +1,5 @@
-import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import defs, { ISODateString } from "./definitions";
 
 export const mediaSourceSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
