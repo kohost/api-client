@@ -48,9 +48,25 @@ export const thermostatSchema = {
     currentTemperature: {
       type: "number",
     },
+    maxSafeCurrentTemp: {
+      type: ["number", null],
+      description: "Maximum safe temperature"
+    },
+    minSafeCurrentTemp: {
+      type: ["number", null],
+      description: "Minimum safe temperature"
+    },
     currentHumidity: {
       type: "number",
       minimum: 0,
+    },
+    maxSafeCurrentHumidity: {
+      type: ["number", null],
+      description: "Maximum safe humidity"
+    },
+    minSafeCurrentHumidity: {
+      type: ["number", null],
+      description: "Minimum safe humidity"
     },
     hvacMode: {
       type: "string",
