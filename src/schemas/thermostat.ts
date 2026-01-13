@@ -76,117 +76,116 @@ export const thermostatSchema = {
       properties: {
         status: {
           type: "string",
-          enum: ["Ok", "Trouble"]
+          enum: ["Ok", "Trouble"],
         },
         message: {
-          type: "string"
-        }
+          type: "string",
+        },
       },
-      required: ["status"]
-    }
-  },
-  hvacMode: {
-    type: "string",
-    enum: ["cool", "heat", "auto", "off"],
-  },
-  hvacState: {
-    type: ["string", "null"],
-    enum: ["cooling", "heating", "off", null],
-  },
-  fanMode: {
-    type: "string",
-    enum: ["auto", "low", "medium", "high", "off", "on"],
-  },
-  fanState: {
-    type: ["string", "null"],
-    enum: ["off", "low", "medium", "high", "on", null],
-  },
-  temperatureScale: {
-    type: "string",
-    enum: ["celsius", "fahrenheit"],
-    default: "fahrenheit",
-  },
-  humidityScale: {
-    type: ["string", "null"],
-    enum: ["absolute", "relative", null],
-  },
-  supportedHvacModes: {
-    type: "array",
-    uniqueItems: true,
-    minItems: 2,
-    items: {
+      required: ["status"],
+    },
+    hvacMode: {
       type: "string",
       enum: ["cool", "heat", "auto", "off"],
     },
-  },
-  supportedFanModes: {
-    type: "array",
-    uniqueItems: true,
-    items: {
+    hvacState: {
+      type: ["string", "null"],
+      enum: ["cooling", "heating", "off", null],
+    },
+    fanMode: {
       type: "string",
       enum: ["auto", "low", "medium", "high", "off", "on"],
     },
-  },
-  setpoints: {
-    type: "object",
-    additionalProperties: false,
-    properties: {
-      cool: {
-        $ref: "#/definitions/setpoint",
-      },
-      heat: {
-        $ref: "#/definitions/setpoint",
-      },
-      auto: {
-        $ref: "#/definitions/setpoint",
+    fanState: {
+      type: ["string", "null"],
+      enum: ["off", "low", "medium", "high", "on", null],
+    },
+    temperatureScale: {
+      type: "string",
+      enum: ["celsius", "fahrenheit"],
+      default: "fahrenheit",
+    },
+    humidityScale: {
+      type: ["string", "null"],
+      enum: ["absolute", "relative", null],
+    },
+    supportedHvacModes: {
+      type: "array",
+      uniqueItems: true,
+      minItems: 2,
+      items: {
+        type: "string",
+        enum: ["cool", "heat", "auto", "off"],
       },
     },
+    supportedFanModes: {
+      type: "array",
+      uniqueItems: true,
+      items: {
+        type: "string",
+        enum: ["auto", "low", "medium", "high", "off", "on"],
+      },
+    },
+    setpoints: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        cool: {
+          $ref: "#/definitions/setpoint",
+        },
+        heat: {
+          $ref: "#/definitions/setpoint",
+        },
+        auto: {
+          $ref: "#/definitions/setpoint",
+        },
+      },
+    },
+    minAutoDelta: {
+      type: "number",
+      default: 3,
+    },
+    cycleRate: {
+      type: "number",
+    },
+    co2: {
+      type: "number",
+      description: "Parts per million (ppm)",
+    },
+    voc: {
+      type: "number",
+      description: "Parts per billion (ppb)",
+    },
+    batteryLevel: {
+      $ref: "definitions.json#/definitions/batteryLevel",
+    },
+    systemId: {
+      $ref: "definitions.json#/definitions/systemId",
+    },
+    watts: {
+      $ref: "definitions.json#/definitions/watts",
+    },
+    icon: {
+      type: "string",
+    },
+    manufacturer: {
+      type: "string",
+    },
+    modelNumber: {
+      type: "string",
+    },
+    serialNumber: {
+      type: "string",
+    },
+    firmwareVersion: {
+      type: "string",
+    },
+    uiEnabled: {
+      type: "boolean",
+      description: "Local thermostat controls active or not",
+      default: true,
+    },
   },
-  minAutoDelta: {
-    type: "number",
-    default: 3,
-  },
-  cycleRate: {
-    type: "number",
-  },
-  co2: {
-    type: "number",
-    description: "Parts per million (ppm)",
-  },
-  voc: {
-    type: "number",
-    description: "Parts per billion (ppb)",
-  },
-  batteryLevel: {
-    $ref: "definitions.json#/definitions/batteryLevel",
-  },
-  systemId: {
-    $ref: "definitions.json#/definitions/systemId",
-  },
-  watts: {
-    $ref: "definitions.json#/definitions/watts",
-  },
-  icon: {
-    type: "string",
-  },
-  manufacturer: {
-    type: "string",
-  },
-  modelNumber: {
-    type: "string",
-  },
-  serialNumber: {
-    type: "string",
-  },
-  firmwareVersion: {
-    type: "string",
-  },
-  uiEnabled: {
-    type: "boolean",
-    description: "Local thermostat controls active or not",
-    default: true,
-  },
-},
   definitions: {
     setpoint: {
       type: "object",
@@ -211,7 +210,7 @@ export const thermostatSchema = {
       },
     },
   },
-} as const ;
+} as const;
 
 export type ThermostatSchema = FromSchema<
   typeof thermostatSchema,
