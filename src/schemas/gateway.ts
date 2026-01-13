@@ -22,6 +22,9 @@ export const gatewaySchema = {
     type: {
       $ref: "definitions.json#/definitions/type",
     },
+    alerts: {
+      $ref: "definitions.json#/definitions/alerts"
+    },
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",
     },

@@ -46,6 +46,9 @@ export const alarmSchema = {
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
+    alerts: {
+      $ref: "definitions.json#/definitions/alerts"
+    },
     areas: {
       type: "array",
       items: {
@@ -134,12 +137,6 @@ export const alarmSchema = {
     },
     powerLevel: {
       $ref: "definitions.json#/definitions/batteryLevel",
-    },
-    monitoringTrouble: {
-      type: "boolean",
-    },
-    bellTrouble: {
-      type: "boolean",
     },
   },
 } as const;

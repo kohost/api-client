@@ -29,6 +29,9 @@ export const mediaSourceSchema = {
         "uncontrolledDevice",
       ],
     },
+    alerts: {
+      $ref: "definitions.json#/definitions/alerts"
+    },
     playlists: {
       type: "array",
       items: {

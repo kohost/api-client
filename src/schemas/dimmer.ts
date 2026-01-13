@@ -31,6 +31,9 @@ export const dimmerSchema = {
     offline: {
       type: "boolean",
     },
+    alerts: {
+      $ref: "definitions.json#/definitions/alerts"
+    },
     level: {
       type: ["number", "null"],
       minimum: 0,

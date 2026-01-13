@@ -154,6 +154,26 @@ const defs = {
     name: {
       type: "string",
     },
+    alerts: {
+      type: "array",
+      uniqueItems: true,
+      items: {
+        type: "object",
+        properties: {
+          type: {
+            type: "string",
+            enum: [
+              "doorAjar",
+              "bellTrouble",
+              "monitoringTrouble"
+            ]
+          },
+          message: {
+            type: "string"
+          }
+        }
+      }
+    },
     supportedNotifications: {
       type: "array",
       uniqueItems: true,

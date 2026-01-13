@@ -32,6 +32,9 @@ export const lockSchema = {
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
+    alerts: {
+      $ref: "definitions.json#/definitions/alerts"
+    },
     state: {
       type: ["string", "null"],
       enum: ["locked", "unlocked", null],

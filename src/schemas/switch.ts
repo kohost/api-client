@@ -24,6 +24,9 @@ export const switchSchema = {
       type: "string",
       enum: ["light", "fan", "irrigation"],
     },
+    alerts: {
+      $ref: "definitions.json#/definitions/alerts"
+    },
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",
     },

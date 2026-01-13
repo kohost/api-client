@@ -29,6 +29,9 @@ export const windowCoveringSchema = {
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",
     },
+    alerts: {
+      $ref: "definitions.json#/definitions/alerts"
+    },
     notification: {
       $ref: "definitions.json#/definitions/notification",
     },

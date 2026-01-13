@@ -36,6 +36,9 @@ export const thermostatSchema = {
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
+    alerts: {
+      $ref: "definitions.json#/definitions/alerts"
+    },
     offline: {
       type: "boolean",
     },

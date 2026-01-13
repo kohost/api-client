@@ -27,6 +27,9 @@ export const motionSensorSchema = {
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
+    alerts: {
+      $ref: "definitions.json#/definitions/alerts"
+    },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
     },
