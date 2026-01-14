@@ -163,9 +163,20 @@ const defs = {
           type: {
             type: "string",
             enum: [
-              "doorAjar",
-              "bellTrouble",
-              "monitoringTrouble"
+              "Battery",
+              "Communication",
+              "Config",
+              "Door Ajar",
+              "Equipment",
+              "Power",
+              "Temperature",
+            ]
+          },
+          status: {
+            type: "string",
+            enum: [
+              "Active",
+              "Resolved",
             ]
           },
           message: {

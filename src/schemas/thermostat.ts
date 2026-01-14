@@ -71,19 +71,6 @@ export const thermostatSchema = {
       type: ["number", "null"],
       description: "Minimum safe humidity",
     },
-    equipment: {
-      type: "object",
-      properties: {
-        status: {
-          type: "string",
-          enum: ["Ok", "Trouble"],
-        },
-        message: {
-          type: "string",
-        },
-      },
-      required: ["status"],
-    },
     hvacMode: {
       type: "string",
       enum: ["cool", "heat", "auto", "off"],
