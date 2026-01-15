@@ -159,6 +159,8 @@ const defs = {
       uniqueItems: true,
       items: {
         type: "object",
+        additionalProperties: false,
+        required: ["type", "status", "message"],
         properties: {
           type: {
             type: "string",
@@ -168,20 +170,17 @@ const defs = {
               "Door Ajar",
               "Equipment",
               "Temperature",
-            ]
+            ],
           },
           status: {
             type: "string",
-            enum: [
-              "Active",
-              "Resolved",
-            ]
+            enum: ["Active", "Resolved"],
           },
           message: {
-            type: "string"
-          }
-        }
-      }
+            type: "string",
+          },
+        },
+      },
     },
     supportedNotifications: {
       type: "array",
