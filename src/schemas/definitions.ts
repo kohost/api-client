@@ -165,6 +165,7 @@ const defs = {
           type: {
             type: "string",
             enum: [
+              "Battery",
               "Communication",
               "Config",
               "Door Ajar",
