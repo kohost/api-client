@@ -171,6 +171,9 @@ const defs = {
               "Door Ajar",
               "Equipment",
               "Temperature",
+              "Maintenance",
+              "Cost",
+              "Registration",
             ],
           },
           status: {

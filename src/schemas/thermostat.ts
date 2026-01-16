@@ -136,11 +136,11 @@ export const thermostatSchema = {
       type: "number",
     },
     co2: {
-      type: "number",
+      type: ["number", "null"],
       description: "Parts per million (ppm)",
     },
     voc: {
-      type: "number",
+      type: ["number", "null"],
       description: "Parts per billion (ppb)",
     },
     batteryLevel: {
