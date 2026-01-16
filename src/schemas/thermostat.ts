@@ -37,7 +37,7 @@ export const thermostatSchema = {
       $ref: "definitions.json#/definitions/driver",
     },
     alerts: {
-      $ref: "definitions.json#/definitions/alerts"
+      $ref: "definitions.json#/definitions/alerts",
     },
     offline: {
       type: "boolean",
@@ -171,6 +171,20 @@ export const thermostatSchema = {
       type: "boolean",
       description: "Local thermostat controls active or not",
       default: true,
+    },
+    // deprecated, use alerts instead
+    equipment: {
+      type: "object",
+      properties: {
+        status: {
+          type: "string",
+          enum: ["Ok", "Trouble"],
+        },
+        message: {
+          type: "string",
+        },
+      },
+      required: ["status"],
     },
   },
   definitions: {
