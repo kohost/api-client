@@ -77,6 +77,7 @@ const defs = {
       description: "Driver used to communicate with the object.",
       enum: [
         "adlink",
+        "avigilon-alta",
         "aws-kinesis",
         "bacnet",
         "benq",
