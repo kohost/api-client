@@ -70,6 +70,11 @@ export const ticketSchema = {
             default: "message",
             description: "The discriminator of the message.",
           },
+          isInternal: {
+            type: "boolean",
+            description: "Whether the message is internal to the assignedTo and collaborators. Internal messages are not visible to the requester.",
+            default: false,
+          },
           author: {
             type: "object",
             additionalProperties: false,
