@@ -51,6 +51,7 @@ export const cameraSchema = {
             "cloudflare-stream",
             "doorbird",
             "digital-watchdog",
+            "verkada",
             "mediamtx",
           ],
         },
