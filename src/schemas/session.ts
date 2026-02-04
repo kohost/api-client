@@ -11,10 +11,8 @@ export const sessionSchema = {
     "id",
     "type",
     "userId",
-    "organizationId",
     "userAgent",
     "expires",
-    "data",
   ],
   additionalProperties: false,
   properties: {
