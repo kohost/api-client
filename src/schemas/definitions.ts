@@ -110,6 +110,7 @@ const defs = {
         "mht",
         "newline",
         "paxton",
+        "pdk",
         "pelican-wireless",
         "power-shades",
         "rachio",
