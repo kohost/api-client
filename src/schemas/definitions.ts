@@ -130,6 +130,7 @@ const defs = {
         "unifi",
         "valcom",
         "veracross",
+        "verkada",
         "vivotek",
         "vizio",
         "wisenet",

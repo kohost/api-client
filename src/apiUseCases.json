@@ -1383,6 +1383,15 @@
     }
   ],
   [
+    "ListIntegrations",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/integrations"
+      }
+    }
+  ],
+  [
     "DescribeMyOrganization",
     {
       "http": {
@@ -1738,15 +1747,6 @@
     }
   ],
   [
-    "SOSActiveEffects",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["SOSActive", "SOSInactive"]
-      }
-    }
-  ],
-  [
     "DescribeIssue",
     {
       "http": {
@@ -1938,60 +1938,6 @@
       "http": {
         "method": "POST",
         "path": "/automations/:id"
-      }
-    }
-  ],
-  [
-    "CreateNotification",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/notifications"
-      }
-    }
-  ],
-  [
-    "DeleteNotification",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/notifications/:id"
-      }
-    }
-  ],
-  [
-    "DescribeNotification",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/notifications/:id"
-      }
-    }
-  ],
-  [
-    "ListNotifications",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/notifications"
-      }
-    }
-  ],
-  [
-    "UpdateNotification",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/notifications/:id"
-      }
-    }
-  ],
-  [
-    "CreateDefaultNotifications",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["PropertyCreated"]
       }
     }
   ],
