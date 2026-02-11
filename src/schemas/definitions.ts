@@ -109,6 +109,7 @@ const defs = {
         "mews",
         "mht",
         "newline",
+        "obix",
         "paxton",
         "pdk",
         "pelican-wireless",
