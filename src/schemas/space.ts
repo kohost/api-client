@@ -1,5 +1,15 @@
 import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import type { switchSchema } from "./switch";
+import type { dimmerSchema } from "./dimmer";
+import type { thermostatSchema } from "./thermostat";
+import type { lockSchema } from "./lock";
+import type { windowCoveringSchema } from "./windowCovering";
+import type { courtesySchema } from "./courtesy";
+import type { cameraSchema } from "./camera";
+import type { mediaSourceSchema } from "./mediaSource";
+import type { motionSensorSchema } from "./motionSensor";
+import type { alarmSchema } from "./alarm";
 
 export const spaceSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -29,6 +39,7 @@ export const spaceSchema = {
         "office",
         "building",
         "commonArea",
+        "hallway",
         "conferenceRoom",
         "lobby",
         "gym",
@@ -173,8 +184,18 @@ export const spaceSchema = {
     devices: {
       type: "array",
       items: {
-        type: "object",
-        additionalProperties: true,
+        anyOf: [
+          { $ref: "switch.json" },
+          { $ref: "dimmer.json" },
+          { $ref: "thermostat.json" },
+          { $ref: "lock.json" },
+          { $ref: "windowCovering.json" },
+          { $ref: "courtesy.json" },
+          { $ref: "camera.json" },
+          { $ref: "mediaSource.json" },
+          { $ref: "motionSensor.json" },
+          { $ref: "alarm.json" },
+        ],
       },
       default: [],
     },
@@ -196,7 +217,7 @@ export const spaceSchema = {
 export type SpaceSchema = FromSchema<
   typeof spaceSchema,
   {
-    references: [typeof defs];
+    references: [typeof defs, typeof switchSchema, typeof dimmerSchema, typeof thermostatSchema, typeof lockSchema, typeof windowCoveringSchema, typeof courtesySchema, typeof cameraSchema, typeof mediaSourceSchema, typeof motionSensorSchema, typeof alarmSchema];
     deserialize: [
       {
         pattern: {
