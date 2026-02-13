@@ -342,6 +342,7 @@ const ajv = new Ajv({
   allowMatchingProperties: true,
   allowUnionTypes: true,
   strictRequired: false,
+  discriminator: true,
   schemas: schemas,
 });
 

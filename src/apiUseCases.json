@@ -384,6 +384,15 @@
     }
   ],
   [
+    "MoveDevice",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/spaces/:spaceId/devices/:id/move"
+      }
+    }
+  ],
+  [
     "DescribeDeviceConfig",
     {
       "http": {
