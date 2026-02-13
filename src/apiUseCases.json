@@ -285,15 +285,6 @@
     }
   ],
   [
-    "ListRoomsInSpace",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/spaces/:id/rooms"
-      }
-    }
-  ],
-  [
     "UpdateSpace",
     {
       "http": {
@@ -330,20 +321,83 @@
     }
   ],
   [
-    "CreateRoomInSpace",
+    "DeviceUpdatedEffects",
     {
-      "http": {
-        "method": "POST",
-        "path": "/spaces/:id/rooms"
+      "http": false,
+      "automations": {
+        "runsOn": ["SpaceDeviceUpdated"]
       }
     }
   ],
   [
-    "SpaceUnoccupiedEffects",
+    "CreateDevice",
     {
-      "http": false,
-      "automations": {
-        "runsOn": ["SpaceUnoccupied"]
+      "http": {
+        "method": "POST",
+        "path": "/spaces/:spaceId/devices"
+      }
+    }
+  ],
+  [
+    "ListDevices",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/spaces/:spaceId/devices"
+      }
+    }
+  ],
+  [
+    "DescribeDevice",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/spaces/:spaceId/devices/:id"
+      }
+    }
+  ],
+  [
+    "UpdateDevice",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/spaces/:spaceId/devices/:id"
+      }
+    }
+  ],
+  [
+    "SetDevice",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/spaces/:spaceId/devices/:id"
+      }
+    }
+  ],
+  [
+    "DeleteDevice",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/spaces/:spaceId/devices/:id"
+      }
+    }
+  ],
+  [
+    "DescribeDeviceConfig",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/spaces/:spaceId/devices/:id/config"
+      }
+    }
+  ],
+  [
+    "ListCameraStreamPreviews",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/spaces/:spaceId/devices/camera-previews"
       }
     }
   ],
@@ -434,663 +488,6 @@
       "http": {
         "method": "PUT",
         "path": "/departments/:id"
-      }
-    }
-  ],
-  [
-    "ListRooms",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms"
-      }
-    }
-  ],
-  [
-    "DescribeRoom",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:id"
-      }
-    }
-  ],
-  [
-    "CreateRoom",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms"
-      }
-    }
-  ],
-  [
-    "UpdateRoom",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:id"
-      }
-    }
-  ],
-  [
-    "DeleteRoom",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:id"
-      }
-    }
-  ],
-  [
-    "DeviceUpdatedEffects",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["RoomDeviceUpdated"]
-      }
-    }
-  ],
-  [
-    "RoomOccupiedEffects",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["RoomOccupied"]
-      }
-    }
-  ],
-  [
-    "CreateAlarm",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/alarms"
-      }
-    }
-  ],
-  [
-    "ListAlarms",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/alarms"
-      }
-    }
-  ],
-  [
-    "UpdateAlarm",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:roomId/alarms/:id"
-      }
-    }
-  ],
-  [
-    "DeleteAlarm",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:roomId/alarms/:id"
-      }
-    }
-  ],
-  [
-    "DescribeAlarm",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/alarms/:id"
-      }
-    }
-  ],
-  [
-    "DescribeAlarmConfig",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/alarms/:id/config"
-      }
-    }
-  ],
-  [
-    "SetAlarm",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/alarms/:id"
-      }
-    }
-  ],
-  [
-    "MoveAlarm",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/alarms/:id/move"
-      }
-    }
-  ],
-  [
-    "CreateCamera",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/cameras"
-      }
-    }
-  ],
-  [
-    "ListCameras",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/cameras"
-      }
-    }
-  ],
-  [
-    "UpdateCamera",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:roomId/cameras/:id"
-      }
-    }
-  ],
-  [
-    "DeleteCamera",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:roomId/cameras/:id"
-      }
-    }
-  ],
-  [
-    "ListCameraStreamPreviews",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/cameras/stream-previews"
-      }
-    }
-  ],
-  [
-    "DescribeCamera",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/cameras/:id"
-      }
-    }
-  ],
-  [
-    "SetCamera",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/cameras/:id"
-      }
-    }
-  ],
-  [
-    "MoveCamera",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/cameras/:id/move"
-      }
-    }
-  ],
-  [
-    "DescribeCameraConfig",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/cameras/:id/config"
-      }
-    }
-  ],
-  [
-    "CreateCourtesy",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/courtesy"
-      }
-    }
-  ],
-  [
-    "ListCourtesy",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/courtesy"
-      }
-    }
-  ],
-  [
-    "UpdateCourtesy",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:roomId/courtesy/:id"
-      }
-    }
-  ],
-  [
-    "DeleteCourtesy",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:roomId/courtesy/:id"
-      }
-    }
-  ],
-  [
-    "DescribeCourtesy",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/courtesy/:id"
-      }
-    }
-  ],
-  [
-    "SetCourtesy",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/courtesy/:id"
-      }
-    }
-  ],
-  [
-    "MoveCourtesy",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/courtesy/:id/move"
-      }
-    }
-  ],
-  [
-    "CreateDimmer",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/dimmers"
-      }
-    }
-  ],
-  [
-    "ListDimmers",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/dimmers"
-      }
-    }
-  ],
-  [
-    "UpdateDimmer",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:roomId/dimmers/:id"
-      }
-    }
-  ],
-  [
-    "DeleteDimmer",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:roomId/dimmers/:id"
-      }
-    }
-  ],
-  [
-    "DescribeDimmer",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/dimmers/:id"
-      }
-    }
-  ],
-  [
-    "SetDimmer",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/dimmers/:id"
-      }
-    }
-  ],
-  [
-    "MoveDimmer",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/dimmers/:id/move"
-      }
-    }
-  ],
-  [
-    "CreateLock",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/locks"
-      }
-    }
-  ],
-  [
-    "ListLocks",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/locks"
-      }
-    }
-  ],
-  [
-    "UpdateLock",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:roomId/locks/:id"
-      }
-    }
-  ],
-  [
-    "DeleteLock",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:roomId/locks/:id"
-      }
-    }
-  ],
-  [
-    "DescribeLock",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/locks/:id"
-      }
-    }
-  ],
-  [
-    "SetLock",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/locks/:id"
-      }
-    }
-  ],
-  [
-    "MoveLock",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/locks/:id/move"
-      }
-    }
-  ],
-  [
-    "CreateSwitch",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/switches"
-      }
-    }
-  ],
-  [
-    "ListSwitches",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/switches"
-      }
-    }
-  ],
-  [
-    "UpdateSwitch",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:roomId/switches/:id"
-      }
-    }
-  ],
-  [
-    "DeleteSwitch",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:roomId/switches/:id"
-      }
-    }
-  ],
-  [
-    "DescribeSwitch",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/switches/:id"
-      }
-    }
-  ],
-  [
-    "SetSwitch",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/switches/:id"
-      }
-    }
-  ],
-  [
-    "MoveSwitch",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/switches/:id/move"
-      }
-    }
-  ],
-  [
-    "CreateMediaSource",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/mediaSources"
-      }
-    }
-  ],
-  [
-    "ListMediaSources",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/mediaSources"
-      }
-    }
-  ],
-  [
-    "UpdateMediaSource",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:roomId/mediaSources/:id"
-      }
-    }
-  ],
-  [
-    "DeleteMediaSource",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:roomId/mediaSources/:id"
-      }
-    }
-  ],
-  [
-    "DescribeMediaSource",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/mediaSources/:id"
-      }
-    }
-  ],
-  [
-    "SetMediaSource",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/mediaSources/:id"
-      }
-    }
-  ],
-  [
-    "MoveMediaSource",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/mediaSources/:id/move"
-      }
-    }
-  ],
-  [
-    "CreateThermostat",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/thermostats"
-      }
-    }
-  ],
-  [
-    "ListThermostats",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/thermostats"
-      }
-    }
-  ],
-  [
-    "UpdateThermostat",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:roomId/thermostats/:id"
-      }
-    }
-  ],
-  [
-    "DeleteThermostat",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:roomId/thermostats/:id"
-      }
-    }
-  ],
-  [
-    "DescribeThermostat",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/thermostats/:id"
-      }
-    }
-  ],
-  [
-    "SetThermostat",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/thermostats/:id"
-      }
-    }
-  ],
-  [
-    "MoveThermostat",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/thermostats/:id/move"
-      }
-    }
-  ],
-  [
-    "CreateWindowCovering",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/windowCoverings"
-      }
-    }
-  ],
-  [
-    "ListWindowCoverings",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/windowCoverings"
-      }
-    }
-  ],
-  [
-    "UpdateWindowCovering",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/rooms/:roomId/windowCoverings/:id"
-      }
-    }
-  ],
-  [
-    "DeleteWindowCovering",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/rooms/:roomId/windowCoverings/:id"
-      }
-    }
-  ],
-  [
-    "DescribeWindowCovering",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/rooms/:roomId/windowCoverings/:id"
-      }
-    }
-  ],
-  [
-    "SetWindowCovering",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/windowCoverings/:id"
-      }
-    }
-  ],
-  [
-    "MoveWindowCovering",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/windowCoverings/:id/move"
       }
     }
   ],
@@ -1248,42 +645,6 @@
     }
   ],
   [
-    "ListScenes",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/scenes"
-      }
-    }
-  ],
-  [
-    "CreateDefaultScenes",
-    {
-      "http": false,
-      "automations": {
-        "runsOn": ["PropertyCreated"]
-      }
-    }
-  ],
-  [
-    "SetScene",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/scenes/:id"
-      }
-    }
-  ],
-  [
-    "SetRoomScene",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/rooms/:roomId/scenes/:id"
-      }
-    }
-  ],
-  [
     "CreateDiscoveredDeviceAssociationMap",
     {
       "http": {
@@ -1415,6 +776,15 @@
     {
       "http": {
         "method": "PUT",
+        "path": "/organizations/:id"
+      }
+    }
+  ],
+  [
+    "DeleteOrganization",
+    {
+      "http": {
+        "method": "DELETE",
         "path": "/organizations/:id"
       }
     }
@@ -1916,7 +1286,7 @@
     {
       "http": false,
       "automations": {
-        "runsOn": ["RoomDeviceUpdated", "SOSActive", "SOSInactive"]
+        "runsOn": ["SpaceDeviceUpdated", "SOSActive", "SOSInactive"]
       }
     }
   ],
