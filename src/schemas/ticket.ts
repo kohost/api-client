@@ -66,6 +66,7 @@ export const ticketSchema = {
               "priorityChanged",
               "scheduleDateChanged",
               "locationChanged",
+              "nudged",
             ],
             default: "message",
             description: "The discriminator of the message.",
