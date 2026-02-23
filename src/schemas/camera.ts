@@ -53,6 +53,7 @@ export const cameraSchema = {
             "digital-watchdog",
             "verkada",
             "mediamtx",
+            "mobile-mule",
           ],
         },
         allowedOrigins: {
