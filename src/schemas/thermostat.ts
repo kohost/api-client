@@ -99,7 +99,6 @@ export const thermostatSchema = {
     supportedHvacModes: {
       type: "array",
       uniqueItems: true,
-      minItems: 2,
       items: {
         type: "string",
         enum: ["cool", "heat", "auto", "off"],
