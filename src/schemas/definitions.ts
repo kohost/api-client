@@ -108,6 +108,7 @@ const defs = {
         "lirc",
         "mews",
         "mht",
+        "mobile-mule",
         "newline",
         "obix",
         "paxton",
