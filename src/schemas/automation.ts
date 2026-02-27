@@ -1,5 +1,5 @@
-import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import defs, { ISODateString } from "./definitions";
 
 export const automationSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -37,8 +37,66 @@ export const automationSchema = {
       properties: {
         discriminator: {
           type: "string",
-          enum: ["schedule", "event"],
+          enum: ["schedule", "event", "rrule"],
           description: "Type of trigger",
+        },
+        rrule: {
+          type: "object",
+          additionalProperties: false,
+          description: "RFC 5545 recurrence rule with solar time support",
+          required: ["expression", "timezone", "timeMode"],
+          properties: {
+            expression: {
+              type: "string",
+              description:
+                "RFC 5545 RRULE string (omit BYHOUR/BYMINUTE when using solar timeMode)",
+            },
+            timezone: {
+              type: "string",
+              description: "IANA timezone for rule evaluation",
+            },
+            timeMode: {
+              type: "object",
+              additionalProperties: false,
+              required: ["type"],
+              properties: {
+                type: {
+                  type: "string",
+                  enum: ["fixed", "sunrise", "sunset"],
+                  description:
+                    "How to determine execution time on matching days",
+                },
+                time: {
+                  type: "string",
+                  description: "HH:mm time for fixed mode",
+                },
+                offsetSeconds: {
+                  type: "integer",
+                  description:
+                    "Offset in seconds from time or solar event (negative = before)",
+                  default: 0,
+                },
+              },
+            },
+            location: {
+              type: "object",
+              additionalProperties: false,
+              description: "Required when timeMode is sunrise or sunset",
+              required: ["lat", "lng"],
+              properties: {
+                lat: {
+                  type: "number",
+                  minimum: -90,
+                  maximum: 90,
+                },
+                lng: {
+                  type: "number",
+                  minimum: -180,
+                  maximum: 180,
+                },
+              },
+            },
+          },
         },
         // Time-based trigger properties
         schedule: {
