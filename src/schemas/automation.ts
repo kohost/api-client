@@ -44,12 +44,12 @@ export const automationSchema = {
           type: "object",
           additionalProperties: false,
           description: "RFC 5545 recurrence rule with solar time support",
-          required: ["expression", "timezone", "timeMode"],
+          required: ["expression", "timezone"],
           properties: {
             expression: {
               type: "string",
               description:
-                "RFC 5545 RRULE string (omit BYHOUR/BYMINUTE when using solar timeMode)",
+                "RFC 5545 RRULE string. Use BYHOUR/BYMINUTE for time when timeMode is omitted. Must not contain BYHOUR/BYMINUTE when timeMode is provided.",
             },
             timezone: {
               type: "string",
