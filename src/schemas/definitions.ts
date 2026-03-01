@@ -167,6 +167,9 @@ const defs = {
         additionalProperties: false,
         required: ["type", "status", "message"],
         properties: {
+          id: {
+            type: "string"
+          },
           type: {
             type: "string",
             enum: [
