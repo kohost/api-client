@@ -114,7 +114,7 @@ export const mediaSourceSchema = {
       },
     },
     output: {
-      type: "string",
+      type: ["string", "null"],
     },
     supportedOutputs: {
       type: "array",
