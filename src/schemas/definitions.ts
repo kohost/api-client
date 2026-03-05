@@ -92,6 +92,7 @@ const defs = {
         "dormakaba",
         "dsc",
         "dsc-itv2",
+        "earbridge",
         "ecobee",
         "epson",
         "geovision-rs",
