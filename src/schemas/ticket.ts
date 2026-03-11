@@ -38,6 +38,10 @@ export const ticketSchema = {
       type: "string",
       description: "The ID of the issue that this ticket is associated with.",
     },
+    parentAutomationId: {
+      type: "string",
+      description: "The ID of the automation that created this ticket.",
+    },
     conversation: {
       type: "array",
       default: [],
