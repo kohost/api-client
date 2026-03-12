@@ -14,6 +14,9 @@ export const groupSchema = {
     id: {
       $ref: "definitions.json#/definitions/id",
     },
+    systemId: {
+      $ref: "definitions.json#/definitions/systemId",
+    },
     type: {
       type: "string",
       enum: ["group"],
