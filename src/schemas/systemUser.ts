@@ -48,8 +48,8 @@ export const systemUserSchema = {
       type: "string",
     },
     gender: {
-      type: "string",
-      enum: ["male", "female"],
+      type: ["string", "null"],
+      enum: ["male", "female", null],
     },
     roles: {
       type: "array",
