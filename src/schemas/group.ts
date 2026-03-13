@@ -17,6 +17,9 @@ export const groupSchema = {
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
     },
+    driver: {
+      $ref: "definitions.json#/definitions/driver",
+    },
     type: {
       type: "string",
       enum: ["group"],
