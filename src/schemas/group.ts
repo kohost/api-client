@@ -27,7 +27,7 @@ export const groupSchema = {
     },
     kind: {
       type: "string",
-      enum: ["Household", "Department"],
+      enum: ["Social", "Department"],
     },
     name: {
       type: "string",
