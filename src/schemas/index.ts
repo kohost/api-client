@@ -13,6 +13,7 @@ export { emailMessageSchema, type EmailMessageSchema } from "./emailMessage.js";
 export { energyReportSchema, type EnergyReportSchema } from "./energyReport.js";
 export { energyReportShardSchema, type EnergyReportShardSchema } from "./energyReportShard.js";
 export { gatewaySchema, type GatewaySchema } from "./gateway.js";
+export { groupSchema, type GroupSchema } from "./group.js";
 export { identificationSchema, type IdentificationSchema } from "./identification.js";
 export { issueSchema, type IssueSchema } from "./issue.js";
 export { lockSchema, type LockSchema } from "./lock.js";
