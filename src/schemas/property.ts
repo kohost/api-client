@@ -340,8 +340,7 @@ export const propertySchema = {
       },
     },
     deletedAt: {
-      type: ["string", "null"],
-      format: "date-time",
+      $ref: "definitions.json#/definitions/date",
     },
     credentials: {
       type: "object",
