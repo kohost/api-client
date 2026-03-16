@@ -339,6 +339,10 @@ export const propertySchema = {
         },
       },
     },
+    deletedAt: {
+      type: ["string", "null"],
+      format: "date-time",
+    },
     credentials: {
       type: "object",
       additionalProperties: true,
