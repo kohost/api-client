@@ -65,6 +65,11 @@ export const cameraSchema = {
         authRequired: {
           type: "boolean",
         },
+        authHeaders: {
+          type: ["object", "null"],
+          additionalProperties: true,
+          default: null,
+        },
         iframe: {
           type: ["string", "null"],
         },
