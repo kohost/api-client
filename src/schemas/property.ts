@@ -339,6 +339,9 @@ export const propertySchema = {
         },
       },
     },
+    deletedAt: {
+      $ref: "definitions.json#/definitions/date",
+    },
     credentials: {
       type: "object",
       additionalProperties: true,

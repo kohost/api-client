@@ -92,6 +92,7 @@ const defs = {
         "dormakaba",
         "dsc",
         "dsc-itv2",
+        "earbridge",
         "ecobee",
         "epson",
         "geovision-rs",
@@ -108,8 +109,11 @@ const defs = {
         "lirc",
         "mews",
         "mht",
+        "mobile-mule",
         "newline",
+        "obix",
         "paxton",
+        "pdk",
         "pelican-wireless",
         "power-shades",
         "rachio",
@@ -142,15 +146,16 @@ const defs = {
       type: "string",
       enum: [
         "alarm",
-        "dimmer",
-        "switch",
-        "motionSensor",
-        "windowCovering",
         "camera",
-        "mediaSource",
-        "thermostat",
-        "lock",
         "courtesy",
+        "dimmer",
+        "gateway",
+        "lock",
+        "mediaSource",
+        "motionSensor",
+        "switch",
+        "thermostat",
+        "windowCovering",
       ],
     },
     name: {
@@ -164,6 +169,9 @@ const defs = {
         additionalProperties: false,
         required: ["type", "status", "message"],
         properties: {
+          id: {
+            type: "string"
+          },
           type: {
             type: "string",
             enum: [

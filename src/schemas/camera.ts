@@ -53,6 +53,7 @@ export const cameraSchema = {
             "digital-watchdog",
             "verkada",
             "mediamtx",
+            "mobile-mule",
           ],
         },
         allowedOrigins: {
@@ -63,6 +64,11 @@ export const cameraSchema = {
         },
         authRequired: {
           type: "boolean",
+        },
+        authHeaders: {
+          type: ["object", "null"],
+          additionalProperties: true,
+          default: null,
         },
         iframe: {
           type: ["string", "null"],
