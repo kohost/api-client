@@ -33,6 +33,9 @@ export const sessionSchema = {
     userAgent: {
       type: "string",
     },
+    ipAddress: {
+      type: "string",
+    },
     expires: {
       $ref: "definitions.json#/definitions/date",
     },
