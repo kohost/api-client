@@ -1,10 +1,6 @@
-import { RefreshTokenCommand } from "./useCases/refreshToken.js";
-
 export class KohostHTTPClient {
   #onSuccess;
   #onError;
-  /** @type {Promise<void> | null} */
-  #tokenRenewalRequest = null;
 
   /** 
   @param {Object} options - The options to create the client
@@ -29,8 +25,6 @@ export class KohostHTTPClient {
   ) {
     if (!options.url) throw new Error("options.url is required");
     this.options = options;
-
-    this.isAuthTokenRenewalActive = false;
 
     this.baseUrl = new URL(options.url);
     this.headers = new Headers({
@@ -134,10 +128,6 @@ export class KohostHTTPClient {
     const commandConfig = command.config;
     const request = this.createRequest(commandConfig);
 
-    if (this.#tokenRenewalRequest) {
-      await this.#tokenRenewalRequest;
-    }
-
     const response = await fetch(request);
 
     const isJsonResponse =
@@ -150,60 +140,26 @@ export class KohostHTTPClient {
       let error = responseData?.error || new Error(response.statusText);
 
       const status = response.status;
-      const errorType = responseData.error?.type;
       const errorMessage = responseData?.error?.message;
 
-      try {
-        const expectedError = status >= 400 && status < 500;
-        const newTokensNeeded =
-          expectedError && errorType === "TokenExpiredError";
+      const expectedError = status >= 400 && status < 500;
 
-        if (
-          expectedError &&
-          errorMessage === "Phone Verification is required"
-        ) {
-          this.#onPhoneVerificationRequired();
-          return Promise.reject(error);
-        }
+      if (expectedError && errorMessage === "Phone Verification is required") {
+        this.#onPhoneVerificationRequired();
+        return Promise.reject(error);
+      }
 
-        if (expectedError && errorMessage === "Login Required") {
-          this.#onLoginRequired();
-          return Promise.reject(error);
-        }
+      if (expectedError && errorMessage === "Login Required") {
+        this.#onLoginRequired();
+        return Promise.reject(error);
+      }
 
-        if (
-          expectedError &&
-          errorMessage === "No auth header or cookie provided"
-        ) {
-          this.#onLoginRequired();
-          return Promise.reject(error);
-        }
-
-        if (expectedError && newTokensNeeded) {
-          if (this.#tokenRenewalRequest) {
-            try {
-              await this.#tokenRenewalRequest;
-              return this.send(command);
-            } catch (error) {
-              return Promise.reject(error);
-            }
-          }
-
-          this.#tokenRenewalRequest = this.send(
-            new RefreshTokenCommand({}),
-          ).finally(() => {
-            this.#tokenRenewalRequest = null;
-          });
-
-          try {
-            await this.#tokenRenewalRequest;
-            return this.send(command);
-          } catch (error) {
-            return Promise.reject(error);
-          }
-        }
-      } catch (error) {
-        console.error(error);
+      if (
+        expectedError &&
+        errorMessage === "No auth header or cookie provided"
+      ) {
+        this.#onLoginRequired();
+        return Promise.reject(error);
       }
 
       error = this.#onError(error);
