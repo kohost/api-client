@@ -184,7 +184,8 @@ export const spaceSchema = {
     devices: {
       type: "array",
       items: {
-        anyOf: [
+        discriminator: { propertyName: "type" },
+        oneOf: [
           { $ref: "switch.json" },
           { $ref: "dimmer.json" },
           { $ref: "thermostat.json" },
