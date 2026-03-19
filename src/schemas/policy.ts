@@ -28,7 +28,7 @@ export const policySchema = {
     },
     discriminator: {
       type: "string",
-      enum: ["user"],
+      enum: ["user", "space"],
     },
     name: {
       type: "string",
