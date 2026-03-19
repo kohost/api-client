@@ -98,6 +98,22 @@ export const alarmSchema = {
         additionalProperties: false,
       },
     },
+    credentials: {
+      type: "array",
+      readOnly: true,
+      items: {
+        type: "object",
+        properties: {
+          id: {
+            $ref: "definitions.json#/definitions/id",
+          },
+          name: {
+            type: "string",
+            description: "Name of the credential",
+          },
+        }
+      }
+    },
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",
     },
