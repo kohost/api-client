@@ -120,9 +120,6 @@ export const alarmSchema = {
     notification: {
       $ref: "definitions.json#/definitions/notification",
     },
-    code: {
-      type: "string",
-    },
     chime: {
       type: "boolean",
       description: "Chime enabled",
