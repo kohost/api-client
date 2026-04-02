@@ -228,6 +228,7 @@ loadSchemas().then(async (schemas) => {
     allowMatchingProperties: true,
     allowUnionTypes: true,
     strictRequired: false,
+    discriminator: true,
     schemas: Array.from(schemas.entries()).map(([fileName, module]) => {
       return module.default;
     }),
@@ -342,6 +343,7 @@ const ajv = new Ajv({
   allowMatchingProperties: true,
   allowUnionTypes: true,
   strictRequired: false,
+  discriminator: true,
   schemas: schemas,
 });
 

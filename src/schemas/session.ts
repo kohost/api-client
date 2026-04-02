@@ -11,10 +11,8 @@ export const sessionSchema = {
     "id",
     "type",
     "userId",
-    "organizationId",
     "userAgent",
     "expires",
-    "data",
   ],
   additionalProperties: false,
   properties: {
@@ -33,6 +31,9 @@ export const sessionSchema = {
       type: "string",
     },
     userAgent: {
+      type: "string",
+    },
+    ipAddress: {
       type: "string",
     },
     expires: {
