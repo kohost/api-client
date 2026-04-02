@@ -110,6 +110,7 @@ const defs = {
         "mews",
         "mht",
         "mobile-mule",
+        "modbus",
         "newline",
         "obix",
         "paxton",
