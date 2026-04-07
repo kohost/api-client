@@ -113,6 +113,7 @@ const defs = {
         "modbus",
         "newline",
         "obix",
+        "one-roster",
         "paxton",
         "pdk",
         "pelican-wireless",
