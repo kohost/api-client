@@ -111,6 +111,7 @@ const defs = {
         "mht",
         "mobile-mule",
         "modbus",
+        "napco",
         "newline",
         "obix",
         "one-roster",
