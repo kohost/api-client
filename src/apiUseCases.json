@@ -1,5 +1,14 @@
 [
   [
+    "CreatePwaHandoffToken",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/auth/pwa-handoff"
+      }
+    }
+  ],
+  [
     "LogoutUser",
     {
       "http": {
@@ -291,11 +300,38 @@
     }
   ],
   [
+    "CreateDeviceCredential",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/spaces/:spaceId/devices/:deviceId/credentials"
+      }
+    }
+  ],
+  [
     "ListDevices",
     {
       "http": {
         "method": "GET",
         "path": "/spaces/:spaceId/devices"
+      }
+    }
+  ],
+  [
+    "ListDeviceCredentials",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/spaces/:spaceId/devices/:deviceId/credentials"
+      }
+    }
+  ],
+  [
+    "ListCameraStreamPreviews",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/spaces/:spaceId/devices/camera-previews"
       }
     }
   ],
@@ -318,6 +354,15 @@
     }
   ],
   [
+    "UpdateDeviceCredential",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/spaces/:spaceId/devices/:deviceId/credentials/:credentialId"
+      }
+    }
+  ],
+  [
     "SetDevice",
     {
       "http": {
@@ -336,6 +381,15 @@
     }
   ],
   [
+    "DeleteDeviceCredential",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/spaces/:spaceId/devices/:deviceId/credentials/:credentialId"
+      }
+    }
+  ],
+  [
     "MoveDevice",
     {
       "http": {
@@ -350,15 +404,6 @@
       "http": {
         "method": "GET",
         "path": "/spaces/:spaceId/devices/:id/config"
-      }
-    }
-  ],
-  [
-    "ListCameraStreamPreviews",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/spaces/:spaceId/devices/camera-previews"
       }
     }
   ],
@@ -780,6 +825,15 @@
       "http": {
         "method": "GET",
         "path": "/properties"
+      }
+    }
+  ],
+  [
+    "ListPropertyCredentials",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/properties/:id/credentials"
       }
     }
   ],
