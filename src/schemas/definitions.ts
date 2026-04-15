@@ -128,6 +128,7 @@ const defs = {
         "samsung",
         "se",
         "sendgrid",
+        "singlewire",
         "smartboard",
         "sonifi",
         "stay-n-touch",
