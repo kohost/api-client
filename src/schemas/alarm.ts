@@ -82,6 +82,12 @@ export const alarmSchema = {
           name: {
             type: "string",
           },
+          areas: {
+            type: "array",
+            items: {
+              type: "string",
+            }
+          },
           secure: {
             type: ["boolean", "null"],
           },
