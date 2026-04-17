@@ -759,6 +759,33 @@
     }
   ],
   [
+    "DescribeIntegration",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/integrations/:id"
+      }
+    }
+  ],
+  [
+    "CreateIntegration",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/integrations"
+      }
+    }
+  ],
+  [
+    "UpdateIntegration",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/integrations/:id"
+      }
+    }
+  ],
+  [
     "DescribeMyOrganization",
     {
       "http": {
