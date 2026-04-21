@@ -24,10 +24,22 @@ export { motionSensorSchema, type MotionSensorSchema } from "./motionSensor.js";
 export { notificationSchema, type NotificationSchema } from "./notification.js";
 export { orderSchema, type OrderSchema } from "./order.js";
 export { organizationSchema, type OrganizationSchema } from "./organization.js";
+export {
+  orgNotificationDefaultsSchema,
+  type OrgNotificationDefaultsSchema,
+  notificationEventDiscriminators,
+  notificationChannels,
+  indexes as orgNotificationDefaultsIndexes,
+} from "./orgNotificationDefaults.js";
 export { paymentSchema, type PaymentSchema } from "./payment.js";
 export { policySchema, type PolicySchema } from "./policy.js";
 export { productSchema, type ProductSchema } from "./product.js";
 export { propertySchema, type PropertySchema } from "./property.js";
+export {
+  pushSubscriptionSchema,
+  type PushSubscriptionSchema,
+  indexes as pushSubscriptionIndexes,
+} from "./pushSubscription.js";
 export { reservationSchema, type ReservationSchema } from "./reservation.js";
 export { roomSchema, type RoomSchema, getters as roomGetters, statics as roomStatics } from "./room.js";
 export { sceneSchema, type SceneSchema } from "./scene.js";

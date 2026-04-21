@@ -132,12 +132,9 @@ export const userSchema = {
       items: {
         type: "object",
         additionalProperties: false,
-        required: ["organizationId", "propertyId"],
+        required: ["organizationId"],
         properties: {
           organizationId: {
-            type: "string",
-          },
-          propertyId: {
             type: "string",
           },
           notifications: {
@@ -145,14 +142,25 @@ export const userSchema = {
             items: {
               type: "object",
               additionalProperties: false,
-              required: ["discriminator", "enabled"],
+              required: ["discriminator", "channels"],
               properties: {
                 discriminator: {
                   type: "string",
-                  enum: ["observerTicketCreated", "observerTicketResolved"],
+                  enum: [
+                    "ticketAssignedToMe",
+                    "mentionedInTicket",
+                    "messageOnMyTicket",
+                    "ticketCreatedAsObserver",
+                    "ticketResolvedAsObserver",
+                    "ticketResolvedAsAssignee",
+                  ],
                 },
-                enabled: {
-                  type: "boolean",
+                channels: {
+                  type: "array",
+                  items: {
+                    type: "string",
+                    enum: ["email", "sms", "push", "whatsapp"],
+                  },
                 },
               },
             },
