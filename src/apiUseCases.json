@@ -1510,5 +1510,23 @@
         "path": "/servers/:id"
       }
     }
+  ],
+  [
+    "DescribeMyOrgNotificationDefaults",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/organizations/mine/notificationDefaults"
+      }
+    }
+  ],
+  [
+    "UpdateMyOrgNotificationDefaults",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/organizations/mine/notificationDefaults"
+      }
+    }
   ]
 ]
