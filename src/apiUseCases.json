@@ -1528,5 +1528,41 @@
         "path": "/organizations/mine/notificationDefaults"
       }
     }
+  ],
+  [
+    "DescribeWebPushPublicKey",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/pushSubscriptions/publicKey"
+      }
+    }
+  ],
+  [
+    "ListMyPushSubscriptions",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/pushSubscriptions"
+      }
+    }
+  ],
+  [
+    "CreateMyPushSubscription",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/pushSubscriptions"
+      }
+    }
+  ],
+  [
+    "DeleteMyPushSubscription",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/pushSubscriptions/:id"
+      }
+    }
   ]
 ]
