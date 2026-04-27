@@ -122,6 +122,7 @@ const defs = {
         "rachio",
         "rebrandly",
         "relay",
+        "reolink",
         "rtsp",
         "salto",
         "salto-irn",
