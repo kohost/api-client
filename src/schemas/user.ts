@@ -92,7 +92,6 @@ export const userSchema = {
               "User",
               "Agent",
               "Manager",
-              "Maintenance",
               "Administrator",
               "SuperAdmin",
             ],
