@@ -15,6 +15,7 @@ export { energyReportShardSchema, type EnergyReportShardSchema } from "./energyR
 export { gatewaySchema, type GatewaySchema } from "./gateway.js";
 export { groupSchema, type GroupSchema } from "./group.js";
 export { identificationSchema, type IdentificationSchema } from "./identification.js";
+export { integrationSchema, type IntegrationSchema } from "./integration.js";
 export { issueSchema, type IssueSchema } from "./issue.js";
 export { lockSchema, type LockSchema } from "./lock.js";
 export { logSchema, type LogSchema } from "./log.js";
