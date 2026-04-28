@@ -142,6 +142,7 @@ const defs = {
         "vivotek",
         "vizio",
         "wisenet",
+        "zkteco",
         "cloudflare-images",
         "cloudflare-stream",
         "insperia-privacy",
