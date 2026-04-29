@@ -191,10 +191,6 @@ export const userSchema = {
       },
     },
 
-    spaceName: {
-      type: "string",
-    },
-
     systems: {
       type: "array",
       default: [],
