@@ -527,7 +527,6 @@ function generateUseCasesIndex(useCaseNames) {
 function generateMainIndex() {
   return `${banner}
 
-export { KohostAMQPClient as AMQPClient } from "./amqpClient.js";
 export { KohostHTTPClient as Client } from "./httpClient.js";
 
 export * as Commands from "./commands/index.js";

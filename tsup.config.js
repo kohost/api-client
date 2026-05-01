@@ -27,36 +27,7 @@ function addJsExtensions(dir) {
   }
 }
 
-// Post-process CJS files to add .cjs extensions to relative requires
-function addCjsExtensions(dir) {
-  const files = readdirSync(dir);
-  for (const file of files) {
-    const filePath = join(dir, file);
-    const stat = statSync(filePath);
-    if (stat.isDirectory()) {
-      addCjsExtensions(filePath);
-    } else if (file.endsWith(".cjs")) {
-      let content = readFileSync(filePath, "utf8");
-      // Match relative requires and replace .js with .cjs or add .cjs if no extension
-      content = content.replace(
-        /(require\s*\(\s*["'])(\.\.?\/[^"']+)(["']\s*\))/g,
-        (match, prefix, path, suffix) => {
-          if (path.endsWith(".cjs")) {
-            return match;
-          }
-          if (path.endsWith(".js")) {
-            return `${prefix}${path.slice(0, -3)}.cjs${suffix}`;
-          }
-          return `${prefix}${path}.cjs${suffix}`;
-        },
-      );
-      writeFileSync(filePath, content);
-    }
-  }
-}
-
-// Shared config for ESM builds
-const esmConfig = {
+export default defineConfig({
   format: ["esm"],
   dts: true,
   bundle: false,
@@ -65,69 +36,24 @@ const esmConfig = {
   target: ["es2022"],
   platform: "node",
   keepNames: true,
-};
-
-// Shared config for CJS builds
-const cjsConfig = {
-  format: ["cjs"],
-  dts: true,
-  bundle: false,
-  splitting: false,
-  sourcemap: true,
-  target: ["es2022"],
-  platform: "node",
-  keepNames: true,
-};
-
-export default defineConfig([
-  // ESM build - all source files from .generated
-  {
-    ...esmConfig,
-    entry: [
-      ".generated/index.ts",
-      ".generated/events/*",
-      ".generated/errors/*",
-      ".generated/commands/*",
-      ".generated/models/*",
-      ".generated/useCases/*",
-      ".generated/schemas/*",
-      ".generated/httpClient.js",
-      ".generated/amqpClient.js",
-      ".generated/validate.ts",
-    ],
-    outDir: "dist/esm",
-    esbuildOptions(options) {
-      options.outbase = ".generated";
-      return options;
-    },
-    onSuccess: async () => {
-      addJsExtensions("dist/esm");
-    },
-    clean: true,
+  entry: [
+    ".generated/index.ts",
+    ".generated/events/*",
+    ".generated/errors/*",
+    ".generated/commands/*",
+    ".generated/models/*",
+    ".generated/useCases/*",
+    ".generated/schemas/*",
+    ".generated/httpClient.js",
+    ".generated/validate.ts",
+  ],
+  outDir: "dist",
+  esbuildOptions(options) {
+    options.outbase = ".generated";
+    return options;
   },
-  // CJS build - all source files from .generated
-  {
-    ...cjsConfig,
-    entry: [
-      ".generated/index.ts",
-      ".generated/events/*",
-      ".generated/errors/*",
-      ".generated/commands/*",
-      ".generated/models/*",
-      ".generated/useCases/*",
-      ".generated/schemas/*",
-      ".generated/httpClient.js",
-      ".generated/amqpClient.js",
-      ".generated/validate.ts",
-    ],
-    outDir: "dist/cjs",
-    esbuildOptions(options) {
-      options.outbase = ".generated";
-      return options;
-    },
-    onSuccess: async () => {
-      addCjsExtensions("dist/cjs");
-    },
-    clean: true,
+  onSuccess: async () => {
+    addJsExtensions("dist");
   },
-]);
+  clean: true,
+});
