@@ -22,7 +22,7 @@ export const propertySchema = {
     },
     discriminator: {
       type: "string",
-      enum: ["hospitality", "education", "commercial", "storage"],
+      enum: ["education", "commercial"],
     },
     organization: {
       type: "string",
@@ -70,12 +70,6 @@ export const propertySchema = {
         type: "string",
       },
     },
-    checkInTime: {
-      type: "string",
-    },
-    checkOutTime: {
-      type: "string",
-    },
     address: {
       $ref: "definitions.json#/definitions/address",
     },
@@ -94,31 +88,6 @@ export const propertySchema = {
             enabled: {
               type: "boolean",
               default: true,
-            },
-            disabledSystems: {
-              type: "array",
-              items: {
-                type: "string",
-                enum: ["climate", "lights", "shades", "tv", "doors"],
-              },
-            },
-            excludedDeviceIds: {
-              type: "array",
-              items: {
-                type: "string",
-              },
-              default: [],
-            },
-            commonAreas: {
-              type: "object",
-              properties: {
-                spaces: {
-                  type: "array",
-                  items: {
-                    type: "string",
-                  },
-                },
-              },
             },
             alarmConfig: {
               type: "object",
@@ -196,13 +165,6 @@ export const propertySchema = {
             ratings: {
               type: "boolean",
               default: true,
-            },
-            newTicketCCs: {
-              type: "array",
-              items: {
-                type: "string",
-              },
-              default: [],
             },
             newMessageChannel: {
               type: ["string", "null"],

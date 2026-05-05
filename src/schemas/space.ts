@@ -60,17 +60,6 @@ export const spaceSchema = {
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
-    category: {
-      type: "string",
-      description: "This is the category id",
-    },
-    rooms: {
-      type: "array",
-      items: {
-        type: "string",
-      },
-      description: "IDs of rooms in the space",
-    },
     spaces: {
       type: "array",
       items: {
@@ -162,24 +151,9 @@ export const spaceSchema = {
         },
       },
     },
-    features: {
-      type: "array",
-      items: {
-        type: "string",
-        enum: ["pet"],
-      },
-    },
     maximumOccupancy: {
       type: "number",
       minimum: 1,
-    },
-    housekeepingStatus: {
-      type: "string",
-      enum: ["clean", "dirty", "inspected", "pickup"],
-    },
-    serviceStatus: {
-      type: "string",
-      enum: ["inService", "outOfOrder", "outOfService"],
     },
     devices: {
       type: "array",

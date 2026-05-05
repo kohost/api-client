@@ -62,7 +62,6 @@ export const ticketSchema = {
               "opened",
               "assigned",
               "rated",
-              "tipped",
               "scheduled",
               "collaboratorAdded",
               "collaboratorRemoved",
