@@ -83,6 +83,7 @@ const defs = {
         "benq",
         "butler",
         "comelit",
+        "cool-automation",
         "crestron",
         "dell",
         "digital-watchdog",
