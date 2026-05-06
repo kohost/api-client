@@ -116,6 +116,7 @@ const defs = {
         "newline",
         "obix",
         "one-roster",
+        "orchid-fusion",
         "paxton",
         "pdk",
         "pelican-wireless",
