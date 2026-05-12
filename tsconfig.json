@@ -1,6 +1,9 @@
 {
   "include": ["src/**/*"],
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
+    "noImplicitAny": false,
+    "noImplicitThis": false,
     "allowJs": true,
     "checkJs": true,
     "declaration": true,
