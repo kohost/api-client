@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [".generated/**/*"],
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "checkJs": false,
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "rootDir": ".generated",
+    "incremental": true,
+    "tsBuildInfoFile": ".generated/.tsbuildinfo"
+  }
+}
