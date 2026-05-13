@@ -10,7 +10,7 @@ export function getExternalRefs(targetSchema, allSchemas) {
 
   // Create a map of filename to schema for easier lookup
   const schemaMap = new Map(
-    allSchemas.map((schema) => [schema.$id || "", schema])
+    allSchemas.map((schema) => [schema.$id || "", schema]),
   );
 
   /**
