@@ -55,5 +55,5 @@ export default defineConfig({
   onSuccess: async () => {
     addJsExtensions("dist");
   },
-  clean: true,
+  clean: process.env.TSUP_CLEAN !== "false",
 });

@@ -5,10 +5,7 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "checkJs": false,
-    "noEmit": false,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "dist",
+    "noEmit": true,
     "rootDir": ".generated",
     "incremental": true,
     "tsBuildInfoFile": ".generated/.tsbuildinfo"
