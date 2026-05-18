@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 6.2.0
+
+### Minor Changes
+
+- [`2dd8ae1`](https://github.com/kohost/kohost/commit/2dd8ae1074af1c9c579039436a61cc49299fdd3a) Thanks [@itrogers](https://github.com/itrogers)! - Add `mock` to the driver enum and register the Kohost Mock system.
+
 ## 6.1.0
 
 ### Minor Changes
