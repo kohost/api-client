@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 6.2.1
+
+### Patch Changes
+
+- [`19b66de`](https://github.com/kohost/kohost/commit/19b66dee3779dec255f4b1c557020e389e63a5f1) Thanks [@itrogers](https://github.com/itrogers)! - Add `honeywell-resideo` to the driver definitions schema.
+
 ## 6.2.0
 
 ### Minor Changes
