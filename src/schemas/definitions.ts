@@ -99,6 +99,7 @@ const defs = {
         "geovision-rs",
         "geovision-as-manager",
         "honeywell-vista",
+        "honeywell-resideo",
         "igor",
         "inncom",
         "isapi",
