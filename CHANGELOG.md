@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 6.3.0
+
+### Minor Changes
+
+- [`8d44fbf`](https://github.com/kohost/kohost/commit/8d44fbf7babbe314cecc76d4ab2cc24b9dc0707e) Thanks [@itrogers](https://github.com/itrogers)! - Add `Button` and `Motion` alert types (and `Cost`) to the alert definitions enum, and reference `alerts` from the camera schema.
+
 ## 6.2.1
 
 ### Patch Changes
