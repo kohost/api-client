@@ -186,14 +186,16 @@ const defs = {
             type: "string",
             enum: [
               "Battery",
+              "Button",
               "Communication",
               "Config",
+              "Cost",
               "Door Ajar",
               "Equipment",
-              "Temperature",
               "Maintenance",
-              "Cost",
+              "Motion",
               "Registration",
+              "Temperature",
             ],
           },
           status: {

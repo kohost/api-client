@@ -118,6 +118,9 @@ export const cameraSchema = {
     firmwareVersion: {
       type: "string",
     },
+    alerts: {
+      $ref: "definitions.json#/definitions/alerts"
+    },
   },
 } as const;
 
