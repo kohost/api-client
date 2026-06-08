@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 6.3.1
+
+### Patch Changes
+
+- [`cfde09b`](https://github.com/kohost/kohost/commit/cfde09b9d18939c702c1ca43985fea9f7c7d755a) Thanks [@itrogers](https://github.com/itrogers)! - Mark server-reported thermostat schema fields (`id`, `type`, `driver`, `offline`, `currentTemperature`, `currentHumidity`, `hvacState`) as `readOnly`.
+
 ## 6.3.0
 
 ### Minor Changes
