@@ -24,6 +24,7 @@ export const thermostatSchema = {
   properties: {
     id: {
       $ref: "definitions.json#/definitions/id",
+      readOnly: true,
     },
     name: {
       $ref: "definitions.json#/definitions/name",
@@ -32,15 +33,18 @@ export const thermostatSchema = {
       type: "string",
       enum: ["thermostat"],
       default: "thermostat",
+      readOnly: true,
     },
     driver: {
       $ref: "definitions.json#/definitions/driver",
+      readOnly: true,
     },
     alerts: {
       $ref: "definitions.json#/definitions/alerts",
     },
     offline: {
       type: "boolean",
+      readOnly: true,
     },
     supportedNotifications: {
       $ref: "definitions.json#/definitions/supportedNotifications",
@@ -50,6 +54,7 @@ export const thermostatSchema = {
     },
     currentTemperature: {
       type: "number",
+      readOnly: true,
     },
     maxSafeCurrentTemp: {
       type: ["number", "null"],
@@ -62,6 +67,7 @@ export const thermostatSchema = {
     currentHumidity: {
       type: "number",
       minimum: 0,
+      readOnly: true,
     },
     maxSafeCurrentHumidity: {
       type: ["number", "null"],
@@ -78,6 +84,7 @@ export const thermostatSchema = {
     hvacState: {
       type: ["string", "null"],
       enum: ["cooling", "heating", "off", null],
+      readOnly: true,
     },
     fanMode: {
       type: "string",
@@ -86,6 +93,7 @@ export const thermostatSchema = {
     fanState: {
       type: ["string", "null"],
       enum: ["off", "low", "medium", "high", "on", null],
+      readOnly: true,
     },
     temperatureScale: {
       type: "string",
@@ -103,6 +111,7 @@ export const thermostatSchema = {
         type: "string",
         enum: ["cool", "heat", "auto", "off"],
       },
+      readOnly: true,
     },
     supportedFanModes: {
       type: "array",
@@ -111,6 +120,7 @@ export const thermostatSchema = {
         type: "string",
         enum: ["auto", "low", "medium", "high", "off", "on"],
       },
+      readOnly: true,
     },
     setpoints: {
       type: "object",
@@ -133,38 +143,47 @@ export const thermostatSchema = {
     },
     cycleRate: {
       type: "number",
+      readOnly: true,
     },
     co2: {
       type: ["number", "null"],
       description: "Parts per million (ppm)",
+      readOnly: true,
     },
     voc: {
       type: ["number", "null"],
       description: "Parts per billion (ppb)",
+      readOnly: true,
     },
     batteryLevel: {
       $ref: "definitions.json#/definitions/batteryLevel",
+      readOnly: true,
     },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
     },
     watts: {
       $ref: "definitions.json#/definitions/watts",
+      readOnly: true,
     },
     icon: {
       type: "string",
     },
     manufacturer: {
       type: "string",
+      readOnly: true,
     },
     modelNumber: {
       type: "string",
+      readOnly: true,
     },
     serialNumber: {
       type: "string",
+      readOnly: true,
     },
     firmwareVersion: {
       type: "string",
+      readOnly: true,
     },
     uiEnabled: {
       type: "boolean",
