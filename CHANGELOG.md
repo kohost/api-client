@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 6.3.2
+
+### Patch Changes
+
+- [`6e1b069`](https://github.com/kohost/kohost/commit/6e1b069156970089fd7a96e8eec66bf6374d0032) Thanks [@itrogers](https://github.com/itrogers)! - Move json-schema-to-ts to a production dependency so the published package's type imports resolve for consumers.
+
 ## 6.3.1
 
 ### Patch Changes
