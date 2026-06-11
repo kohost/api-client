@@ -118,6 +118,7 @@ const defs = {
         "newline",
         "obix",
         "one-roster",
+        "onvif",
         "orchid-fusion",
         "paxton",
         "pdk",
