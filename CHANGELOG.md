@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 6.4.0
+
+### Minor Changes
+
+- [`0c9627c`](https://github.com/kohost/kohost/commit/0c9627c552e1176cffff9b9a5772eff7af187f5a) Thanks [@itrogers](https://github.com/itrogers)! - Add ONVIF driver and integration
+
 ## 6.3.2
 
 ### Patch Changes
