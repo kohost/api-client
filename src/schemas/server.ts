@@ -45,7 +45,7 @@ export const serverSchema = {
           status: { type: "string" }, // running, exited, restarting
           state: { type: "string" }, // healthy, unhealthy, none
           restartCount: { type: "integer" },
-          startedAt: { type: "string", format: "date-time" },
+          startedAt: { $ref: "definitions.json#/definitions/date" },
         },
       },
     },
@@ -94,8 +94,7 @@ export const serverSchema = {
           type: "number",
         },
         lastHeartbeatAt: {
-          type: "string",
-          format: "date-time",
+          $ref: "definitions.json#/definitions/date",
         },
       },
     },
@@ -106,20 +105,16 @@ export const serverSchema = {
       type: "string",
     },
     bootedAt: {
-      type: "string",
-      format: "date-time",
+      $ref: "definitions.json#/definitions/date",
     },
     createdAt: {
-      type: "string",
-      format: "date-time",
+      $ref: "definitions.json#/definitions/date",
     },
     updatedAt: {
-      type: "string",
-      format: "date-time",
+      $ref: "definitions.json#/definitions/date",
     },
     deletedAt: {
-      type: "string",
-      format: "date-time",
+      $ref: "definitions.json#/definitions/date",
     },
     architecture: {
       type: "string",
