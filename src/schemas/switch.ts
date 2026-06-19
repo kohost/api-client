@@ -19,10 +19,12 @@ export const switchSchema = {
       type: "string",
       enum: ["switch"],
       default: "switch",
+      readOnly: true,
     },
     discriminator: {
       type: "string",
       enum: ["light", "fan", "irrigation"],
+      readOnly: true,
     },
     alerts: {
       $ref: "definitions.json#/definitions/alerts"
@@ -35,9 +37,11 @@ export const switchSchema = {
     },
     driver: {
       $ref: "definitions.json#/definitions/driver",
+      readOnly: true,
     },
     offline: {
       type: "boolean",
+      readOnly: true,
     },
     state: {
       type: "string",
@@ -45,24 +49,30 @@ export const switchSchema = {
     },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
+      readOnly: true,
     },
     watts: {
       $ref: "definitions.json#/definitions/watts",
+      readOnly: true,
     },
     icon: {
       type: "string",
     },
     manufacturer: {
       type: "string",
+      readOnly: true,
     },
     modelNumber: {
       type: "string",
+      readOnly: true,
     },
     serialNumber: {
       type: "string",
+      readOnly: true,
     },
     firmwareVersion: {
       type: "string",
+      readOnly: true,
     },
     restoresAt: {
       type: "string",
