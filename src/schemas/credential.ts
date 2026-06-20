@@ -33,9 +33,13 @@ export const credentialSchema = {
         "publicKey",
         "passkeyChallenge",
         "alarmCode",
+        "apiKey",
       ],
     },
     credential: {
+      type: "string",
+    },
+    keyHash: {
       type: "string",
     },
     userId: {

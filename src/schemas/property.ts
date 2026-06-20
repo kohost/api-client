@@ -79,10 +79,10 @@ export const propertySchema = {
     longitude: {
       type: "number",
     },
-    appFeatures: {
+    features: {
       type: "object",
       properties: {
-        RoomControl: {
+        SmartBuilding: {
           type: "object",
           properties: {
             enabled: {
@@ -173,14 +173,6 @@ export const propertySchema = {
               description:
                 "Determines how users should be notified of new messages in the concierge system",
             },
-            issues: {
-              type: "object",
-              properties: {
-                syncWithPropertyId: {
-                  type: "string",
-                },
-              },
-            },
           },
         },
         SOS: {
@@ -251,10 +243,20 @@ export const propertySchema = {
           },
           additionalProperties: false,
         },
+        Resources: {
+          type: "object",
+          properties: {
+            enabled: {
+              type: "boolean",
+              default: true,
+            },
+          },
+          additionalProperties: false,
+        },
       },
       additionalProperties: false,
       default: {
-        RoomControl: {},
+        SmartBuilding: {},
       },
     },
     notifications: {

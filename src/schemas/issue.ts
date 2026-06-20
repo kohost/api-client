@@ -1,6 +1,69 @@
-import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import defs, { ISODateString } from "./definitions";
 import { ticketSchema } from "./ticket";
+
+const SYSTEM_CATEGORIES = [
+  "hvac",
+  "access-control",
+  "lighting",
+  "shades",
+  "irrigation",
+  "cameras",
+  "alarms",
+  "pa",
+  "media",
+] as const;
+
+const routingOverrideSchema = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    assignedTo: {
+      type: ["object", "null"],
+      additionalProperties: false,
+      required: ["id", "discriminator"],
+      properties: {
+        id: {
+          type: "string",
+        },
+        discriminator: {
+          type: "string",
+          enum: ["user", "vendor"],
+        },
+      },
+    },
+    priority: {
+      $ref: "ticket.json#/properties/priority",
+    },
+    tags: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+    },
+    notify: {
+      type: "array",
+      items: {
+        type: "object",
+        required: ["id", "discriminator"],
+        additionalProperties: false,
+        properties: {
+          id: {
+            type: "string",
+          },
+          discriminator: {
+            type: "string",
+            enum: ["user"],
+          },
+        },
+      },
+    },
+  },
+} as const;
+
+const nullableRoutingOverrideSchema = {
+  oneOf: [routingOverrideSchema, { type: "null" }],
+} as const;
 
 export const issueSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
@@ -28,67 +91,57 @@ export const issueSchema = {
     departmentId: {
       type: "string",
       description:
-        "The ID of the department that this issue is associated with.",
+        "The ID of the department that this issue is associated with. Departments are org-level entities, so this is one value per issue (no per-property override).",
     },
-    autoAssign: {
+    system: {
       type: "object",
+      description:
+        "Present if this is a System Issue (driven by a device notification). Absence means User Issue.",
       additionalProperties: false,
+      required: ["category", "notification"],
       properties: {
-        userId: {
+        category: {
           type: "string",
-          description: "The user ID to assign tickets with this issue to.",
+          enum: SYSTEM_CATEGORIES,
+          description:
+            "Canonical System Category slug. Derived from (device.type, device.discriminator) at notification time.",
         },
-        vendorId: {
-          type: "string",
-          description: "The vendor ID to assign tickets with this issue to.",
+        notification: {
+          $ref: "definitions.json#/definitions/supportedNotifications/items",
+          description:
+            "The device notification name this issue corresponds to.",
         },
-        priority: {
-          $ref: "ticket.json#/properties/priority",
-          description: "The priority to assign tickets with this issue to.",
-        },
-        tags: {
+        excludedEntities: {
           type: "array",
+          description:
+            "Device IDs muted for this issue. Devices in this list never trigger ticket creation.",
           items: {
             type: "string",
           },
+          default: [],
         },
       },
     },
-    notify: {
-      type: "array",
-      description: "A list of entities to notify when this issue is triggered.",
-      default: [],
-      items: {
-        type: "object",
-        required: ["id", "discriminator"],
-        additionalProperties: false,
-        properties: {
-          id: {
-            type: "string",
-            description: "The ID of the entity to notify.",
-          },
-          discriminator: {
-            type: "string",
-            enum: ["user"],
-          },
-        },
-      },
-    },
-    systemKey: {
-      type: "string",
-    },
-    autoCreateTicket: {
-      type: "boolean",
-      default: true,
-    },
-    excludedResources: {
-      type: "array",
+    routing: {
+      type: "object",
+      additionalProperties: false,
       description:
-        "A list of resources that should not trigger notifications of this issue",
-      items: {
-        type: "string",
+        "Per-property routing overrides on top of a single org-level default. null at any level means suppressed.",
+      default: { default: {}, properties: {} },
+      properties: {
+        default: {
+          ...nullableRoutingOverrideSchema,
+          description:
+            "Org-level default routing applied to every property unless overridden. null means suppressed org-wide.",
+        },
+        properties: {
+          type: "object",
+          description:
+            "Sparse per-property overrides keyed by propertyId. Fields omitted from an entry fall back to the org-level default. null entry means suppressed at that property.",
+          additionalProperties: nullableRoutingOverrideSchema,
+          default: {},
+        },
       },
-      default: [],
     },
     createdAt: {
       $ref: "definitions.json#/definitions/date",

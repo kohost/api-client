@@ -34,9 +34,6 @@ export const organizationSchema = {
         type: "string",
       },
     },
-    hostname: {
-      type: ["string", "null"],
-    },
     appManifest: {
       type: "object",
 
@@ -143,12 +140,55 @@ export const organizationSchema = {
         },
       },
     },
-    tickets: {
+    features: {
       type: "object",
+      additionalProperties: false,
       properties: {
-        nextTicketNumber: {
-          type: ["string", "integer"],
-          default: 1,
+        Concierge: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            tickets: {
+              type: "object",
+              properties: {
+                nextTicketNumber: {
+                  type: ["string", "integer"],
+                  default: 1,
+                },
+              },
+            },
+            departments: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                order: {
+                  type: "array",
+                  description:
+                    "Org-wide curated Department ID order for the Concierge settings UI. The `Unassigned` and `System` pseudo-groups are pinned at the bottom by the UI and have no entries here.",
+                  items: {
+                    type: "string",
+                  },
+                },
+              },
+            },
+            issues: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                order: {
+                  type: "object",
+                  description:
+                    "Org-wide curated Issue ordering for the Concierge settings UI, mapping each Department ID to its ordered Issue IDs.",
+                  additionalProperties: {
+                    type: "array",
+                    items: {
+                      type: "string",
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       },
     },
@@ -156,9 +196,7 @@ export const organizationSchema = {
       type: "object",
       additionalProperties: true,
       properties: {
-        apiKey: { type: "string" },
         webhookToken: { type: "string" },
-        jwtSecret: { type: "string" },
       },
     },
     createdAt: {

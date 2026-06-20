@@ -532,6 +532,7 @@ export { KohostHTTPClient as Client } from "./httpClient.js";
 export * as Commands from "./commands/index.js";
 export * as Errors from "./errors/index.js";
 export * as Events from "./events/index.js";
+export * as Lib from "./lib/index.js";
 export * as Models from "./models/index.js";
 export * as UseCases from "./useCases/index.js";
 `;

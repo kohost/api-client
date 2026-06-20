@@ -29,11 +29,24 @@ export const vendorSchema = {
       type: ["string", "null"],
       format: "email",
     },
+    notes: {
+      type: ["string", "null"],
+      maxLength: 1000,
+    },
     address: {
       $ref: "definitions.json#/definitions/address",
     },
     photo: {
       $ref: "mediaFile.json#",
+    },
+    properties: {
+      type: "array",
+      description:
+        "List of propertyIds where this vendor is enabled. Vendors are org-scoped; this controls per-property availability for assignment/listing.",
+      default: [],
+      items: {
+        type: "string",
+      },
     },
     createdAt: {
       $ref: "definitions.json#/definitions/date",

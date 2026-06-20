@@ -28,6 +28,10 @@ export const alarmSchema = {
     id: {
       $ref: "definitions.json#/definitions/id",
     },
+    propertyId: {
+      type: "string",
+      description: "ID of the property this entity belongs to. Optional — used as a per-document filter inside the org-scoped database.",
+    },
     name: {
       type: "string",
       description: "Name of the alarm",

@@ -26,6 +26,10 @@ export const thermostatSchema = {
       $ref: "definitions.json#/definitions/id",
       readOnly: true,
     },
+    propertyId: {
+      type: "string",
+      description: "ID of the property this entity belongs to. Optional — used as a per-document filter inside the org-scoped database.",
+    },
     name: {
       $ref: "definitions.json#/definitions/name",
     },

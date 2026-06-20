@@ -20,20 +20,20 @@
   [
     "DescribeMyAuth",
     {
+      "authCallback": null,
       "http": {
         "method": "GET",
-        "path": "/auth/me",
-        "disableAuth": true
+        "path": "/auth/me"
       }
     }
   ],
   [
     "ValidateAuth",
     {
+      "authCallback": null,
       "http": {
         "method": "GET",
-        "path": "/auth/validate",
-        "disableAuth": true
+        "path": "/auth/validate"
       }
     }
   ],
@@ -53,6 +53,27 @@
         "method": "GET",
         "path": "/auth/orgs"
       }
+    }
+  ],
+  [
+    "LoadPermissions",
+    {
+      "http": false,
+      "authCallback": null
+    }
+  ],
+  [
+    "InvalidatePermissionsCache",
+    {
+      "http": false,
+      "authCallback": null
+    }
+  ],
+  [
+    "InvalidateAllPermissionsCacheForOrg",
+    {
+      "http": false,
+      "authCallback": null
     }
   ],
   [
@@ -120,6 +141,56 @@
     }
   ],
   [
+    "CleanupUserReferences",
+    {
+      "http": false,
+      "authCallback": null
+    }
+  ],
+  [
+    "CreateApiKey",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/users/:userId/apiKey"
+      }
+    }
+  ],
+  [
+    "GetApiKey",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/:userId/apiKey"
+      }
+    }
+  ],
+  [
+    "RotateApiKey",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/users/:userId/apiKey"
+      }
+    }
+  ],
+  [
+    "RevokeApiKey",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/users/:userId/apiKey"
+      }
+    }
+  ],
+  [
+    "RevokeUserAlarmCredentials",
+    {
+      "http": false,
+      "authCallback": null
+    }
+  ],
+  [
     "SendVerificationCode",
     {
       "http": {
@@ -168,8 +239,9 @@
     "UpsertSystemCredentials",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["SystemCredentialUpdated"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["SystemCredentialUpdated"]
       }
     }
   ],
@@ -177,8 +249,9 @@
     "UserUpdatedEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["UserUpdated"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["UserUpdated"]
       }
     }
   ],
@@ -231,8 +304,9 @@
     "PoliciesEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["PolicyCreated", "PolicyUpdated", "PolicyDeleted"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["PolicyCreated", "PolicyUpdated", "PolicyDeleted"]
       }
     }
   ],
@@ -285,9 +359,24 @@
     "DeviceUpdatedEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["SpaceDeviceUpdated"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["SpaceDeviceUpdated"]
       }
+    }
+  ],
+  [
+    "AssertDeviceNotAnAutomationTrigger",
+    {
+      "http": false,
+      "authCallback": null
+    }
+  ],
+  [
+    "CleanupDeviceAutomationActions",
+    {
+      "http": false,
+      "authCallback": null
     }
   ],
   [
@@ -609,8 +698,9 @@
     "TicketUpdatedEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["TicketUpdated", "TicketMessageCreated"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["TicketUpdated", "TicketMessageCreated"]
       }
     }
   ],
@@ -618,8 +708,9 @@
     "TicketCreatedEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["TicketCreated"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["TicketCreated"]
       }
     }
   ],
@@ -627,8 +718,9 @@
     "TicketResolvedEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["TicketResolved"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["TicketResolved"]
       }
     }
   ],
@@ -636,8 +728,9 @@
     "TicketAssignedEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["TicketAssigned"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["TicketAssigned"]
       }
     }
   ],
@@ -735,8 +828,9 @@
     "DeviceAssociatedEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["DeviceAssociated"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["DeviceAssociated"]
       }
     }
   ],
@@ -744,8 +838,9 @@
     "DeleteEntity",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["SystemEntityDeleted"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["SystemEntityDeleted"]
       }
     }
   ],
@@ -759,39 +854,12 @@
     }
   ],
   [
-    "DescribeIntegration",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/integrations/:id"
-      }
-    }
-  ],
-  [
-    "CreateIntegration",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/integrations"
-      }
-    }
-  ],
-  [
-    "UpdateIntegration",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/integrations/:id"
-      }
-    }
-  ],
-  [
     "DescribeMyOrganization",
     {
+      "authCallback": null,
       "http": {
         "method": "GET",
-        "path": "/organizations/mine",
-        "disableAuth": true
+        "path": "/organizations/mine"
       }
     }
   ],
@@ -810,6 +878,15 @@
       "http": {
         "method": "PUT",
         "path": "/organizations/:id"
+      }
+    }
+  ],
+  [
+    "UpdateOrganizationFeatures",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/organizations/:id/features"
       }
     }
   ],
@@ -843,7 +920,58 @@
   [
     "SeedOrganizations",
     {
-      "http": false
+      "http": false,
+      "authCallback": null
+    }
+  ],
+  [
+    "DepartmentCreatedOrderEffects",
+    {
+      "http": false,
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["DepartmentCreated"]
+      }
+    }
+  ],
+  [
+    "DepartmentDeletedOrderEffects",
+    {
+      "http": false,
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["DepartmentDeleted"]
+      }
+    }
+  ],
+  [
+    "IssueCreatedOrderEffects",
+    {
+      "http": false,
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["IssueCreated"]
+      }
+    }
+  ],
+  [
+    "IssueDeletedOrderEffects",
+    {
+      "http": false,
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["IssueDeleted"]
+      }
+    }
+  ],
+  [
+    "IssueUpdatedOrderEffects",
+    {
+      "http": false,
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["IssueUpdated"]
+      }
     }
   ],
   [
@@ -912,15 +1040,16 @@
   [
     "SeedProperties",
     {
-      "http": false
+      "http": false,
+      "authCallback": null
     }
   ],
   [
-    "UpdatePropertySettings",
+    "UpdatePropertyFeatures",
     {
       "http": {
         "method": "PUT",
-        "path": "/properties/:id/settings"
+        "path": "/properties/:id/features"
       }
     }
   ],
@@ -928,8 +1057,9 @@
     "PropertyCreatedEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["PropertyCreated"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["PropertyCreated"]
       }
     }
   ],
@@ -937,8 +1067,9 @@
     "PropertyDeletedEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["PropertyDeleted"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["PropertyDeleted"]
       }
     }
   ],
@@ -949,44 +1080,53 @@
         "method": "POST",
         "path": "/users/:id/email/setup"
       },
-      "automations": {
-        "runsOn": ["UserCreated"]
+      "events": {
+        "subscribesTo": ["UserCreated"]
       }
     }
   ],
   [
-    "BroadcastAMQPEvent",
+    "SendEmail",
     {
-      "http": false
+      "http": false,
+      "authCallback": null
     }
   ],
   [
     "MessageEventEffects",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["EmailEvent", "SMSEvent"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["EmailEvent", "SMSEvent"]
       }
     }
   ],
   [
-    "ApplicationInUseEvent",
+    "SignalApplicationInUse",
     {
-      "http": false
+      "http": false,
+      "authCallback": null
     }
   ],
   [
-    "ApplicationOutOfUseEvent",
+    "SignalApplicationOutOfUse",
     {
-      "http": false
+      "http": false,
+      "authCallback": null
     }
   ],
   [
     "SystemEventRouter",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["SYSTEM_DEVICE_UPDATE", "SYSTEM_STARTUP", "SYSTEM_HEARTBEAT"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": [
+          "SYSTEM_DEVICE_UPDATE",
+          "SYSTEM_STARTUP",
+          "SYSTEM_HEARTBEAT"
+        ]
       }
     }
   ],
@@ -1018,48 +1158,10 @@
     }
   ],
   [
-    "CreateAnnouncement",
+    "CreateShortLink",
     {
-      "http": {
-        "method": "POST",
-        "path": "/announcements"
-      }
-    }
-  ],
-  [
-    "UpdateAnnouncement",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/announcements/:id"
-      }
-    }
-  ],
-  [
-    "DescribeAnnouncement",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/announcements/:id"
-      }
-    }
-  ],
-  [
-    "DeleteAnnouncement",
-    {
-      "http": {
-        "method": "DELETE",
-        "path": "/announcements/:id"
-      }
-    }
-  ],
-  [
-    "ListAnnouncements",
-    {
-      "http": {
-        "method": "GET",
-        "path": "/announcements"
-      }
+      "http": false,
+      "authCallback": null
     }
   ],
   [
@@ -1236,15 +1338,17 @@
   [
     "CreateSystemIssues",
     {
-      "http": false
+      "http": false,
+      "authCallback": null
     }
   ],
   [
     "CreateDefaultIssues",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["PropertyCreated"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["PropertyCreated"]
       }
     }
   ],
@@ -1341,15 +1445,17 @@
   [
     "UpdateAutomationJobStartDate",
     {
-      "http": false
+      "http": false,
+      "authCallback": null
     }
   ],
   [
     "RunEventAutomations",
     {
       "http": false,
-      "automations": {
-        "runsOn": ["SpaceDeviceUpdated", "SOSActive", "SOSInactive"]
+      "authCallback": null,
+      "events": {
+        "subscribesTo": ["SpaceDeviceUpdated", "SOSActive", "SOSInactive"]
       }
     }
   ],
@@ -1360,8 +1466,8 @@
         "method": "POST",
         "path": "/automations/default"
       },
-      "automations": {
-        "runsOn": ["PropertyCreated"]
+      "events": {
+        "subscribesTo": ["PropertyCreated"]
       }
     }
   ],
@@ -1386,10 +1492,8 @@
   [
     "SendSMS",
     {
-      "http": {
-        "method": "POST",
-        "path": "/sms"
-      }
+      "http": false,
+      "authCallback": null
     }
   ],
   [
@@ -1432,8 +1536,9 @@
     "UpsertSystemDevices",
     {
       "http": false,
-      "automations": {
-        "runsOn": [
+      "authCallback": null,
+      "events": {
+        "subscribesTo": [
           "SystemAlarmUpdated",
           "SystemThermostatUpdated",
           "SystemDimmerUpdated",

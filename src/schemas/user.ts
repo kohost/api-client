@@ -48,9 +48,6 @@ export const userSchema = {
     address: {
       $ref: "definitions.json#/definitions/address",
     },
-    secretKey: {
-      type: "string",
-    },
     photo: {
       $ref: "mediaFile.json#",
     },

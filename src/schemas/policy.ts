@@ -37,6 +37,11 @@ export const policySchema = {
     description: {
       type: "string",
     },
+    isDefault: {
+      type: "boolean",
+      description:
+        "Default policies appear pre-checked when granting a new user access.",
+    },
     organizationId: {
       type: "string",
     },

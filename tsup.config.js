@@ -41,6 +41,7 @@ export default defineConfig({
     ".generated/events/*",
     ".generated/errors/*",
     ".generated/commands/*",
+    ".generated/lib/*",
     ".generated/models/*",
     ".generated/useCases/*",
     ".generated/schemas/*",

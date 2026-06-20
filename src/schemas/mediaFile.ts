@@ -12,6 +12,10 @@ export const mediaFileSchema = {
       type: "string",
       default: "",
     },
+    propertyId: {
+      type: "string",
+      description: "ID of the property this entity belongs to. Optional — used as a per-document filter inside the org-scoped database.",
+    },
     type: {
       type: "string",
       default: "mediaFile",
