@@ -1,5 +1,31 @@
 # @kohost/api-client
 
+## 7.0.0
+
+### Major Changes
+
+- [#67](https://github.com/kohost/kohost/pull/67) [`8af8d3b`](https://github.com/kohost/kohost/commit/8af8d3b94be7ece0dfb56737da00005fc8d21aad) Thanks [@kohost-bot](https://github.com/apps/kohost-bot)! - Restructure `Issue` and `Vendor` for the org-DBs cutover; add optional `propertyId` to every Tier A entity schema.
+
+  - `Issue`: `departmentId` stays flat at the top level (org-level, one value per issue). System-Issue fields are grouped under a new `system` block (`category`, `notification`, and `excludedEntities` — the device IDs muted for this issue, replacing the old flat `excludedResources`). All ticket-routing moves under a new `routing: { default, properties: { [propertyId]: {...} } }` block: `routing.default` is the org-level default and `routing.properties` holds sparse per-property overrides that fall back to it. A `null` at `routing.default` or at a per-property entry means routing is **suppressed** (replacing the old boolean `autoCreateTicket`). Each routing override carries `assignedTo` (a discriminated `{ id, discriminator: "user" | "vendor" }` matching the shape `ticket.assignedTo` already uses, replacing the legacy `autoAssign.{ userId, vendorId }` pair), `priority`, `tags`, and `notify`.
+  - `Vendor`: new `properties: string[]` field — list of `propertyId`s where the vendor is enabled. Contact fields (name, phone, email, address, photo) stay flat at the top level; no per-property contact overrides.
+  - Tier A entities (`Space`, every device discriminator — `alarm`, `camera`, `dimmer`, `lock`, `motionSensor`, `switch`, `thermostat`, `windowCovering`, `mediaSource` — plus `Automation`, `Ticket`, `Reservation`, `MediaFile`, `EnergyReport`, `Announcement`, `Log`, `Notification`, `EmailMessage`, `SmsMessage`, `ShortLink`, `Order`, `Payment`, `Product`, `TimeSheet`, `Category`, `Gateway`, `Courtesy`) accept optional `propertyId` for org-DB residency.
+
+  Breaking — consumers of `Issue`/`Vendor` must update their payload shapes; consumers of any Tier A entity must accept the new optional `propertyId` field on read.
+
+- [#67](https://github.com/kohost/kohost/pull/67) [`8af8d3b`](https://github.com/kohost/kohost/commit/8af8d3b94be7ece0dfb56737da00005fc8d21aad) Thanks [@kohost-bot](https://github.com/apps/kohost-bot)! - Rename the property `appFeatures` field to `features` and the `RoomControl` app-feature to `SmartBuilding` on the `Property` schema. The `@kohost/types` `SOS` type follows the rename (`PropertyData["features"]`).
+
+  Breaking — consumers reading `property.appFeatures` or the `RoomControl` feature key must switch to `property.features` / `SmartBuilding`.
+
+### Minor Changes
+
+- [#67](https://github.com/kohost/kohost/pull/67) [`8af8d3b`](https://github.com/kohost/kohost/commit/8af8d3b94be7ece0dfb56737da00005fc8d21aad) Thanks [@kohost-bot](https://github.com/apps/kohost-bot)! - Add user-tied API keys: replace the per-Property shared secret with an `apiKey` Credential scoped to a `(User, Organization)` pair. Adds `CreateApiKey`, `RotateApiKey`, and `RevokeApiKey` use cases gated to SuperAdmin. Rotation is a hard cutover — minting a new secret invalidates the old one immediately; revocation deletes the Credential.
+
+  `@kohost/api-client` gains the `GetApiKey`, `CreateApiKey`, `RotateApiKey`, and `RevokeApiKey` use cases. `@kohost/app` adds an API Keys card to the user-detail view (profile and edit-User), shown to SuperAdmins, with a one-time secret reveal modal on create and rotate.
+
+- [#67](https://github.com/kohost/kohost/pull/67) [`8af8d3b`](https://github.com/kohost/kohost/commit/8af8d3b94be7ece0dfb56737da00005fc8d21aad) Thanks [@kohost-bot](https://github.com/apps/kohost-bot)! - Add `apiKey` Credential discriminator and `keyHash` field for user-tied API keys.
+
+- [#67](https://github.com/kohost/kohost/pull/67) [`8af8d3b`](https://github.com/kohost/kohost/commit/8af8d3b94be7ece0dfb56737da00005fc8d21aad) Thanks [@kohost-bot](https://github.com/apps/kohost-bot)! - Add an optional `notes` field to Vendors (free text, max 1000 chars). Editable via a textarea on the vendor form and shown in the users/vendors detail panel.
+
 ## 6.5.0
 
 ### Minor Changes
