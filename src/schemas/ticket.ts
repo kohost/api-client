@@ -326,6 +326,13 @@ export const ticketSchema = {
       enum: ["low", "normal", "high", "critical"],
       default: "normal",
     },
+    priorityRank: {
+      type: "integer",
+      minimum: 1,
+      maximum: 4,
+      description:
+        "Server-derived numeric rank of priority (low=1, normal=2, high=3, critical=4). Denormalized to support priority sorting; never set by clients.",
+    },
     tags: {
       type: "array",
       default: [],
@@ -355,6 +362,11 @@ export const ticketSchema = {
     },
     solvedAt: {
       $ref: "definitions.json#/definitions/date",
+    },
+    lastMessageAt: {
+      $ref: "definitions.json#/definitions/date",
+      description:
+        "Server-derived timestamp of the latest conversation message; initialized to createdAt when no message exists. Denormalized to support recency sorting; never set by clients.",
     },
     closedAt: {
       $ref: "definitions.json#/definitions/date",
