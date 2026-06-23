@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.1.0
+
+### Minor Changes
+
+- [#213](https://github.com/kohost/kohost/pull/213) [`c9158f1`](https://github.com/kohost/kohost/commit/c9158f1841d487132a4a940b50bc55d829e399e8) Thanks [@itrogers](https://github.com/itrogers)! - Add denormalized `priorityRank` and `lastMessageAt` fields to the ticket schema (additive, optional, never set by clients). These are not yet read or written by the API or app — shipping the schema ahead of the Concierge sort-presets feature lets existing tickets be safely backfilled while the current code tolerates the new fields.
+
 ## 7.0.0
 
 ### Major Changes
