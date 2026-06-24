@@ -8,6 +8,6 @@
     "noEmit": true,
     "rootDir": ".generated",
     "incremental": true,
-    "tsBuildInfoFile": ".generated/.tsbuildinfo"
+    "tsBuildInfoFile": "node_modules/.cache/typescript/api-client-check.tsbuildinfo"
   }
 }

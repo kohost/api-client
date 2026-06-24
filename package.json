@@ -86,7 +86,9 @@
     "lint:fix": "eslint --fix --cache --cache-location node_modules/.cache/eslint/ ./",
     "prepare": "husky || true",
     "prebuild": "npm run generate-models",
-    "build": "tsup",
+    "build": "npm run build:js -- --silent && npm run build:types",
+    "build:js": "tsdown",
+    "build:types": "tsc -b tsconfig.build.json --force && node scripts/add-js-extensions.js dist",
     "check-types": "npm run generate-models && tsc -p tsconfig.check.json",
     "prepublishOnly": "npm run build",
     "generate-models": "tsx scripts/generate-source-models.js",
@@ -95,7 +97,7 @@
     "start": "node scripts/dev-watcher.mjs",
     "clean": "rm -rf ./dist ./.generated",
     "tsc": "tsc",
-    "tsup": "tsup"
+    "tsdown": "tsdown"
   },
   "files": [
     "dist",
@@ -115,7 +117,7 @@
     "husky": "9.1.7",
     "lint-staged": "17.0.7",
     "prettier": "3.8.4",
-    "tsup": "8.5.1",
+    "tsdown": "0.22.3",
     "tsx": "4.22.4",
     "typescript": "6.0.3"
   },

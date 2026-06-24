@@ -3,7 +3,7 @@
  * Dev watcher for @kohost/api-client.
  *
  * - Watches `src/` recursively; debounced re-runs of generate-models on change
- * - Runs `tsup --watch` in parallel, which observes `.generated/` and rebuilds `dist/`
+ * - Runs `tsdown --watch` in parallel, which observes `.generated/` and rebuilds `dist/`
  *
  * Wired into the root `npm run dev` via `turbo run dev` — turbo's `^build`
  * dependency ensures the first full build is already in cache before this
@@ -31,18 +31,23 @@ function runOnce(cmd, args) {
 
 // `^build` (via turbo's @kohost/api-client#dev → @kohost/api-client#build dep)
 // has already run generate-models and populated dist/. Skip the redundant
-// initial generation, and tell tsup not to wipe dist on startup so downstream
+// initial generation, and tell tsdown not to wipe dist on startup so downstream
 // dev tasks (e.g. vite) never see an empty dist directory.
-const tsup = spawn("tsup", ["--watch"], {
+//
+// tsdown --watch refreshes dist/*.js only; declarations are emitted by tsc in
+// `build:types`, not here, so dist/*.d.ts go stale during dev. That's fine:
+// consumers get fresh types at build time via Turbo's ^build, and dev runtime
+// resolves the live .js. Don't add a tsc --watch here just to chase it.
+const tsdown = spawn("tsdown", ["--watch"], {
   cwd: PKG_ROOT,
   stdio: "inherit",
   shell: process.platform === "win32",
-  env: { ...process.env, TSUP_CLEAN: "false" },
+  env: { ...process.env, BUILD_CLEAN: "false" },
 });
 
 function shutdown() {
-  tsup.once("exit", () => process.exit(0));
-  tsup.kill("SIGTERM");
+  tsdown.once("exit", () => process.exit(0));
+  tsdown.kill("SIGTERM");
 }
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
