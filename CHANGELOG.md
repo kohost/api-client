@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.1.1
+
+### Patch Changes
+
+- [#222](https://github.com/kohost/kohost/pull/222) [`a9970fb`](https://github.com/kohost/kohost/commit/a9970fb67f4fa84e3c8eeed14e58e124280b47eb) Thanks [@itrogers](https://github.com/itrogers)! - Speed up API client builds by emitting declarations with TypeScript, and migrate JavaScript emit from the deprecated tsup to its successor tsdown.
+
 ## 7.1.0
 
 ### Minor Changes
