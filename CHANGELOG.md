@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.2.0
+
+### Minor Changes
+
+- [#180](https://github.com/kohost/kohost/pull/180) [`13d897b`](https://github.com/kohost/kohost/commit/13d897ba750099f39d8707a58ca23817eed5bc7a) Thanks [@itrogers](https://github.com/itrogers)! - Add server-side sort presets to the Concierge ticket list. Staff can order tickets by Priority (high to low, the default, or low to high), Created (newest/oldest), or Reply (newest/oldest) from a sort dropdown; the choice lives in the URL (shareable, survives refresh) and drives MongoDB ordering across the whole organization rather than the legacy client-side sort over a capped fetch. Two denormalized, indexed keys — `priorityRank` and `lastMessageAt` (last human reply, excluding bookkeeping events) — are maintained by `TicketRepository` and backfilled across all organization databases. The client sends a closed-set preset key that the server validates and maps to a sort spec; an invalid or absent value falls back to the Priority high to low composite default.
+
 ## 7.1.1
 
 ### Patch Changes
