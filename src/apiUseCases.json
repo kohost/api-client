@@ -686,15 +686,6 @@
     }
   ],
   [
-    "UpdateTicketStatus",
-    {
-      "http": {
-        "method": "PUT",
-        "path": "/tickets/:id/status"
-      }
-    }
-  ],
-  [
     "TicketUpdatedEffects",
     {
       "http": false,
@@ -1323,6 +1314,24 @@
       "http": {
         "method": "PUT",
         "path": "/issues/:id"
+      }
+    }
+  ],
+  [
+    "MergeIssue",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/issues/merge"
+      }
+    }
+  ],
+  [
+    "CopyIssueRouting",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/issues/copy-routing"
       }
     }
   ],

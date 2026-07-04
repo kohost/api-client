@@ -162,7 +162,25 @@ export const ticketSchema = {
               },
             },
           },
-
+          statusChanged: {
+            type: "object",
+            additionalProperties: false,
+            required: ["from", "to"],
+            description:
+              "Structured status transition for `statusChanged` entries. Lets consumers detect reopens (from solved/closed to open) without parsing the body text.",
+            properties: {
+              from: {
+                type: "string",
+                enum: ["open", "pending", "solved", "closed"],
+                description: "The status the ticket transitioned from.",
+              },
+              to: {
+                type: "string",
+                enum: ["open", "pending", "solved", "closed"],
+                description: "The status the ticket transitioned to.",
+              },
+            },
+          },
           readBy: {
             type: "array",
             default: [],
@@ -332,6 +350,13 @@ export const ticketSchema = {
       maximum: 4,
       description:
         "Server-derived numeric rank of priority (low=1, normal=2, high=3, critical=4). Denormalized to support priority sorting; never set by clients.",
+    },
+    reopenCount: {
+      type: "integer",
+      minimum: 0,
+      default: 0,
+      description:
+        "Server-derived count of transitions back to \"open\" that followed a solve/close. reopenCount > 0 answers \"was this ticket ever reopened?\" in O(1); maintained at the repository layer across every status-write path. Never set by clients.",
     },
     tags: {
       type: "array",
