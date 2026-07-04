@@ -190,6 +190,27 @@ export const organizationSchema = {
             },
           },
         },
+        SOS: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            types: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                order: {
+                  type: "array",
+                  description:
+                    "Org-wide curated SOS Type ID order. Each Property renders its subset of " +
+                    "SOS Types in this order; org-wide and per-property-selected types share one " +
+                    "order. IDs for deleted SOS Types are ignored on read; SOS Types not yet listed " +
+                    "sort to the end alphabetically.",
+                  items: { type: "string" },
+                },
+              },
+            },
+          },
+        },
       },
     },
     credentials: {

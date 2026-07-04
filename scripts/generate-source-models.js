@@ -24,10 +24,24 @@ const useCaseJson = fs.readFileSync("src/apiUseCases.json", {
  */
 const useCases = new Map(JSON.parse(useCaseJson));
 
+// Lower-case the leading run of capitals so acronym titles ("SOS Type")
+// camel-case correctly ("sosType") instead of naively ("sOSType"). When the
+// run is followed by a lowercase letter, its final capital starts the next
+// word and stays upper ("IPAddress" -> "ipAddress").
+function toCamelCase(name) {
+  const run = name.match(/^[A-Z]+/)?.[0];
+  if (!run || run.length === 1) {
+    return name.charAt(0).toLowerCase() + name.slice(1);
+  }
+  const followedByLower = /[a-z]/.test(name.charAt(run.length));
+  const lowerCount = followedByLower ? run.length - 1 : run.length;
+  return run.slice(0, lowerCount).toLowerCase() + name.slice(lowerCount);
+}
+
 // Map of schema titles to their schema variable names and type names
 function getSchemaNames(schemaTitle) {
   const baseName = schemaTitle.replace(/\s+/g, "");
-  const varName = baseName.charAt(0).toLowerCase() + baseName.slice(1);
+  const varName = toCamelCase(baseName);
   return {
     schemaVar: `${varName}Schema`,
     typeName: `${baseName}Schema`,

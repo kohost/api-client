@@ -203,18 +203,10 @@ export const propertySchema = {
             activatedMessage: {
               type: ["string", "null"],
             },
-            activeEmergencies: {
+            activeSOSTypeIds: {
               type: "array",
               items: {
                 type: "string",
-                enum: [
-                  "medical",
-                  "fire",
-                  "suspiciousPerson",
-                  "other",
-                  "conflict",
-                  "shooter",
-                ],
               },
             },
             deactivatedAt: {
