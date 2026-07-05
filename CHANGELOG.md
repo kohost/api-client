@@ -1,5 +1,21 @@
 # @kohost/api-client
 
+## 7.4.0
+
+### Minor Changes
+
+- [#294](https://github.com/kohost/kohost/pull/294) [`f3c11d1`](https://github.com/kohost/kohost/commit/f3c11d1ff9393872722dd6cd2c353ead269a076a) Thanks [@itrogers](https://github.com/itrogers)! - Add CopyIssueRouting use case (POST /v3/issues/copy-routing) that mirrors an Issue's department and default routing onto many distinct Issues (all Issue types, source survives), with a CopyIssueRoutingCommand in @kohost/api-client and a "Copy routing to..." action in the Concierge issue editor and settings list.
+
+- [#294](https://github.com/kohost/kohost/pull/294) [`f3c11d1`](https://github.com/kohost/kohost/commit/f3c11d1ff9393872722dd6cd2c353ead269a076a) Thanks [@itrogers](https://github.com/itrogers)! - Add MergeIssue use case (POST /v3/issues/merge) that repoints every Ticket from source Issues onto a target across all properties, then hard-deletes the sources, with a MergeIssueCommand in @kohost/api-client.
+
+- [#294](https://github.com/kohost/kohost/pull/294) [`f3c11d1`](https://github.com/kohost/kohost/commit/f3c11d1ff9393872722dd6cd2c353ead269a076a) Thanks [@itrogers](https://github.com/itrogers)! - Track ticket reopens as first-class data instead of parsing audit text ([#282](https://github.com/kohost/kohost/issues/282), [#281](https://github.com/kohost/kohost/issues/281)).
+
+  `TicketRepository.update` is now the single choke point for status transitions: every status-write path (`UpdateTicket` and the `CreateTicketMessage` auto-reopen) maintains a denormalized `reopenCount` and emits the `statusChanged` conversation entry, so no use case can forget. Reopens via posting a message — previously invisible in `conversation[]` — are now recorded.
+
+  - Adds `reopenCount` to the ticket: incremented on each transition back to `open` from `solved`/`closed`. `reopenCount > 0` answers "was this ticket reopened?" in O(1); missing on legacy tickets reads as `0`.
+  - Adds structured `{ from, to }` fields to `statusChanged` conversation entries so consumers detect reopens without regex-matching the body string.
+  - Removes the unused `UpdateTicketStatus` use case and `PUT /tickets/:id/status` route (status is written through `UpdateTicket`), plus the `TicketRepository.updateStatus` wrapper.
+
 ## 7.3.0
 
 ### Minor Changes
