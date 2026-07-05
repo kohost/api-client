@@ -587,15 +587,6 @@
     }
   ],
   [
-    "AutoCloseTickets",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/tickets/autoClose"
-      }
-    }
-  ],
-  [
     "DescribeTicketStats",
     {
       "http": {

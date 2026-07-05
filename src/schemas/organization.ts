@@ -155,6 +155,13 @@ export const organizationSchema = {
                   type: ["string", "integer"],
                   default: 1,
                 },
+                autoCloseAfterDays: {
+                  type: "integer",
+                  description:
+                    "Days a solved Ticket waits before it is automatically closed. Always on; read when the close job is scheduled.",
+                  default: 7,
+                  minimum: 1,
+                },
               },
             },
             departments: {

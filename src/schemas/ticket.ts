@@ -373,9 +373,6 @@ export const ticketSchema = {
     ratingComment: {
       type: "string",
     },
-    autoCloseAt: {
-      $ref: "definitions.json#/definitions/date",
-    },
     scheduleDate: {
       $ref: "definitions.json#/definitions/date",
     },
