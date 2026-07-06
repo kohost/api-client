@@ -1,5 +1,13 @@
 # @kohost/api-client
 
+## 7.5.0
+
+### Minor Changes
+
+- [#313](https://github.com/kohost/kohost/pull/313) [`46ee45e`](https://github.com/kohost/kohost/commit/46ee45eaf5bad2573fccadbba780ac7426f2def1) Thanks [@itrogers](https://github.com/itrogers)! - Auto-close solved tickets after a per-organization grace period and make `closed` a terminal, locked status ([#192](https://github.com/kohost/kohost/issues/192), [#193](https://github.com/kohost/kohost/issues/193), [#194](https://github.com/kohost/kohost/issues/194), [#195](https://github.com/kohost/kohost/issues/195), [#196](https://github.com/kohost/kohost/issues/196), [#197](https://github.com/kohost/kohost/issues/197)).
+
+  `solved` is now provisional and `closed` terminal (ADR 0022): `closed → open/pending` is rejected, a message on a closed ticket is rejected with `TICKET_CLOSED` (the app disables replying and offers "Start a new request"), and reopen-on-message stays for solved/pending tickets. Solving a ticket schedules a unique-per-ticket close job at `solvedAt + Organization.features.Concierge.tickets.autoCloseAfterMinutes` (new schema field, stored in minutes, default 10080 = 7 days, min 5 minutes; the Concierge settings UI edits it with a minutes/hours/days unit selector and shows the saved value in its largest evenly-dividing unit); the job closes still-solved tickets through `UpdateTicket` with a system "Ticket automatically closed" event, emitting `TICKET_UPDATED` but not `TICKET_RESOLVED`. A migration backfills the existing solved backlog (aged tickets close in bulk, within-grace tickets get scheduled jobs, `updatedAt` fallback when `solvedAt` is absent) and stamps the default grace onto every tickets-enabled organization that lacks it, so the effective policy is readable from the org document rather than implied by the code default. The dead `autoCloseAt` field, `AutoCloseTickets` use case, and `POST /tickets/autoClose` route are removed.
+
 ## 7.4.0
 
 ### Minor Changes
