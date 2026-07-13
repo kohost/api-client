@@ -128,7 +128,7 @@ export const userSchema = {
       items: {
         type: "object",
         additionalProperties: false,
-        required: ["organizationId", "propertyId"],
+        required: ["organizationId"],
         properties: {
           organizationId: {
             type: "string",
@@ -141,14 +141,16 @@ export const userSchema = {
             items: {
               type: "object",
               additionalProperties: false,
-              required: ["discriminator", "enabled"],
+              required: ["discriminator"],
               properties: {
                 discriminator: {
-                  type: "string",
-                  enum: ["observerTicketCreated", "observerTicketResolved"],
+                  $ref: "definitions.json#/definitions/ticketNotificationEvent",
                 },
-                enabled: {
-                  type: "boolean",
+                channels: {
+                  type: "array",
+                  items: {
+                    $ref: "definitions.json#/definitions/notificationChannel",
+                  },
                 },
               },
             },

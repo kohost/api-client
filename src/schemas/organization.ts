@@ -162,6 +162,30 @@ export const organizationSchema = {
                   default: 10080,
                   minimum: 5,
                 },
+                notifications: {
+                  type: "array",
+                  description:
+                    "Org-wide ticket notification defaults: the starting channel set per event, and whether members may turn an event off. Read when resolving a member's effective channels.",
+                  items: {
+                    type: "object",
+                    additionalProperties: false,
+                    required: ["discriminator", "channels", "locked"],
+                    properties: {
+                      discriminator: {
+                        $ref: "definitions.json#/definitions/ticketNotificationEvent",
+                      },
+                      channels: {
+                        type: "array",
+                        items: {
+                          $ref: "definitions.json#/definitions/notificationChannel",
+                        },
+                      },
+                      locked: {
+                        type: "boolean",
+                      },
+                    },
+                  },
+                },
               },
             },
             departments: {
@@ -253,3 +277,18 @@ export type OrganizationSchema = FromSchema<
     ];
   }
 >;
+
+type ConciergeTickets = NonNullable<
+  NonNullable<NonNullable<OrganizationSchema["features"]>["Concierge"]>["tickets"]
+>;
+
+/** One org-wide ticket notification default: channels + lock for a single event. */
+export type OrgNotificationDefaultEntry = NonNullable<
+  ConciergeTickets["notifications"]
+>[number];
+
+/** Response envelope for the org notification defaults endpoints. */
+export interface OrgNotificationDefaults {
+  organizationId: string;
+  notifications: OrgNotificationDefaultEntry[];
+}

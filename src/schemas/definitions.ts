@@ -1,3 +1,22 @@
+export const TICKET_NOTIFICATION_EVENTS = [
+  "ticketCreated",
+  "ticketAssignedToMe",
+  "addedAsCollaborator",
+  "mentionedInTicket",
+  "messageOnMyTicket",
+  "ticketResolved",
+  "ticketCreatedAsObserver",
+  "messageAsObserver",
+  "ticketResolvedAsObserver",
+] as const;
+
+export type TicketNotificationEvent =
+  (typeof TICKET_NOTIFICATION_EVENTS)[number];
+
+export const NOTIFICATION_CHANNELS = ["email", "sms", "push"] as const;
+
+export type NotificationChannel = (typeof NOTIFICATION_CHANNELS)[number];
+
 const defs = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "definitions.json",
@@ -299,6 +318,14 @@ const defs = {
           },
         },
       },
+    },
+    ticketNotificationEvent: {
+      type: "string",
+      enum: TICKET_NOTIFICATION_EVENTS,
+    },
+    notificationChannel: {
+      type: "string",
+      enum: NOTIFICATION_CHANNELS,
     },
   },
 } as const;

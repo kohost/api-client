@@ -166,13 +166,6 @@ export const propertySchema = {
               type: "boolean",
               default: true,
             },
-            newMessageChannel: {
-              type: ["string", "null"],
-              enum: ["sms", "email"],
-              default: "sms",
-              description:
-                "Determines how users should be notified of new messages in the concierge system",
-            },
           },
         },
         SOS: {

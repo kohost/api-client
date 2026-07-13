@@ -1490,6 +1490,60 @@
     }
   ],
   [
+    "DescribeOrgNotificationDefaults",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/notifications/defaults"
+      }
+    }
+  ],
+  [
+    "UpdateOrgNotificationDefaults",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/notifications/defaults"
+      }
+    }
+  ],
+  [
+    "ListMyPushSubscriptions",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/notifications/push-subscriptions"
+      }
+    }
+  ],
+  [
+    "DescribePushVapidPublicKey",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/notifications/push-subscriptions/vapid-public-key"
+      }
+    }
+  ],
+  [
+    "SubscribePushDevice",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/notifications/push-subscriptions"
+      }
+    }
+  ],
+  [
+    "UnsubscribePushDevice",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/notifications/push-subscriptions/:id"
+      }
+    }
+  ],
+  [
     "SendSMS",
     {
       "http": false,
