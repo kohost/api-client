@@ -12,6 +12,7 @@ const SYSTEM_CATEGORIES = [
   "alarms",
   "pa",
   "media",
+  "other",
 ] as const;
 
 const routingOverrideSchema = {

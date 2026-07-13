@@ -8,6 +8,7 @@ export const SYSTEM_CATEGORIES = [
   "alarms",
   "pa",
   "media",
+  "other",
 ] as const;
 
 export type SystemCategory = (typeof SYSTEM_CATEGORIES)[number];
@@ -22,6 +23,7 @@ export const SYSTEM_CATEGORY_LABELS: Record<SystemCategory, string> = {
   alarms: "Alarms",
   pa: "PA",
   media: "Media",
+  other: "System",
 };
 
 export interface CategoryForDeviceInput {
