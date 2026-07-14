@@ -1,5 +1,27 @@
 # @kohost/api-client
 
+## 7.6.0
+
+### Minor Changes
+
+- [#38](https://github.com/kohost/kohost/pull/38) [`34ab9d2`](https://github.com/kohost/kohost/commit/34ab9d28d869c1b52a0ec4a42c3a91fe4704ea31) Thanks [@kohost-bot](https://github.com/apps/kohost-bot)! - Customizable ticket notification preferences.
+
+  - Admins get a new settings page at `/organizations/:slug/settings/notifications` to set org-wide channel defaults (email, SMS, push) for each ticket event and to lock events. Locked events still let users pick channels but require at least one.
+  - Users get a matching matrix on their profile that inherits from org defaults, with column select-all and clear locked/blocked states. Overrides are deduped on save so later admin default changes flow through.
+  - On the API, every ticket notification now flows through a single preference-aware dispatcher: effective channels are the user's preference for the event, falling back to the org default. Org defaults are stored on the Organization document at `features.Concierge.tickets.notifications` and served via `GET`/`PUT /v3/notifications/defaults` (writes gated to Administrator and above), with a seeded starter set when unset.
+  - Event and channel enums are single-sourced in `@kohost/api-client` and re-exported through `@kohost/types`. The app reaches the new endpoints through shared api-client use cases instead of hand-rolled fetches, inheriting auth, org/property headers, and envelope handling.
+  - Removes the legacy `Property.features.Concierge.newMessageChannel` field (migration `24_NOTIFICATION_PREFERENCES` unsets it), the requester ticket-confirmation SMS it gated, and the alarm-tag SMS escalation, which is now owned by Automations.
+
+- [#318](https://github.com/kohost/kohost/pull/318) [`32fe1e6`](https://github.com/kohost/kohost/commit/32fe1e67376bb0a029815eaca8a014f158a086e4) Thanks [@itrogers](https://github.com/itrogers)! - Fix system-offline tickets being silently skipped when system entities lack a device type ([#317](https://github.com/kohost/kohost/issues/317)). `createSystemOfflineTicket` now derives the SystemCategory from the resolved space devices when `system.entities` can't produce one, and falls back to a generic `"other"` category (issue name "System: Communication Failure") instead of skipping ticket creation when neither entities nor devices resolve a category — a confirmed outage always opens a ticket. `UpsertSystemDevices` persists `type`/`discriminator` on new system entities and backfills them on existing type-less entities at driver startup. Adds `"other"` to the api-client system category enum.
+
+- [#38](https://github.com/kohost/kohost/pull/38) [`34ab9d2`](https://github.com/kohost/kohost/commit/34ab9d28d869c1b52a0ec4a42c3a91fe4704ea31) Thanks [@kohost-bot](https://github.com/apps/kohost-bot)! - Rework ticket notification events around involvement. Preference matrices (org defaults and per-user) group events into **Directly involved** (requester, assignee, collaborator) and **Observing** (on the notify list), with plain-language labels spelling out when each fires.
+
+  - New `ticketCreated`: at creation, collaborators and the requester (when the ticket is opened on their behalf) are notified. Copy never names you to yourself: recipients read "A new ticket was created by {requester}" while the requester reads "You created a new ticket", identical across email, SMS, and push.
+  - New `addedAsCollaborator`: fires when a user is explicitly added as a collaborator on a ticket (email + push by default).
+  - New `messageAsObserver`: observers get their own toggle for replies on tickets they watch, separate from the direct new-reply event.
+  - `ticketResolvedAsAssignee` becomes `ticketResolved`: resolution now notifies everyone directly involved, mirroring creation.
+  - Nobody is notified about their own action.
+
 ## 7.5.0
 
 ### Minor Changes
