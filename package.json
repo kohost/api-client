@@ -88,14 +88,14 @@
     "prebuild": "npm run generate-models",
     "build": "npm run build:js -- --silent && npm run build:types",
     "build:js": "tsdown",
-    "build:types": "tsc -b tsconfig.build.json --force && node scripts/add-js-extensions.js dist",
+    "build:types": "tsc -b tsconfig.build.json && node scripts/add-js-extensions.js dist",
     "check-types": "npm run generate-models && tsc -p tsconfig.check.json",
     "prepublishOnly": "npm run build",
     "generate-models": "tsx scripts/generate-source-models.js",
     "clean:generated": "rm -rf .generated",
     "dev": "node scripts/dev-watcher.mjs",
     "start": "node scripts/dev-watcher.mjs",
-    "clean": "rm -rf ./dist ./.generated",
+    "clean": "rm -rf ./dist ./.generated ./node_modules/.cache/typescript",
     "tsc": "tsc",
     "tsdown": "tsdown"
   },
@@ -119,7 +119,7 @@
     "prettier": "^3.9.4",
     "tsdown": "^0.22.3",
     "tsx": "^4.23.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.9"
   },
   "dependencies": {

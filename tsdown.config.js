@@ -21,5 +21,10 @@ export default defineConfig({
     ".generated/validate.ts",
   ],
   outDir: "dist",
-  clean: process.env.BUILD_CLEAN !== "false",
+  // Scoped to tsdown's own outputs: tsc -b emits .d.ts into dist incrementally,
+  // and wiping them would force a full re-typecheck on every build.
+  clean:
+    process.env.BUILD_CLEAN === "false"
+      ? false
+      : ["dist/**/*.js", "dist/**/*.js.map"],
 });
