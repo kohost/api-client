@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.6.1
+
+### Patch Changes
+
+- [#437](https://github.com/kohost/kohost/pull/437) [`8ee2d2b`](https://github.com/kohost/kohost/commit/8ee2d2baa6120d6bc639c4c51caeeea203f21246) Thanks [@itrogers](https://github.com/itrogers)! - Speed up builds: incremental declaration emit (drop `tsc -b --force`, scope tsdown's clean away from `.d.ts` outputs), skip prettier in the model generator by default (`GENERATE_PRETTY=1` re-enables), and compile declarations with TypeScript 7. Emitted `.d.ts` now use TS7's output shape (`export declare class`, preserved `Command`/`CommandName` aliases in `./client`, and static getters on event classes that TS6 omitted).
+
 ## 7.6.0
 
 ### Minor Changes
