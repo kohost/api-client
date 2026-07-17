@@ -17,3 +17,4 @@ export {
   type PolicyLike,
   type PolicyPermissionLike,
 } from "./policy-resolvers.js";
+export { MAX_MESSAGE_ATTACHMENTS } from "./messageAttachments.js";

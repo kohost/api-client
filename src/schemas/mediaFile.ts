@@ -41,7 +41,16 @@ export const mediaFileSchema = {
         "image/webp",
         "image/avif",
         "image/svg+xml",
+        "image/heic",
         "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "text/plain",
+        "text/csv",
       ],
     },
     data: {
@@ -56,6 +65,18 @@ export const mediaFileSchema = {
       minimum: 0,
     },
     height: {
+      type: "integer",
+      minimum: 0,
+    },
+    previewUrl: {
+      type: "string",
+      format: "uri",
+    },
+    previewWidth: {
+      type: "integer",
+      minimum: 0,
+    },
+    previewHeight: {
       type: "integer",
       minimum: 0,
     },
@@ -107,18 +128,35 @@ export type MediaFileSchema = FromSchema<
 >;
 
 function createImageVariant(params) {
-  if (this.mimeType != "image/*")
-    throw new Error("Only dynamic images can have variants");
   if (!this.url) throw new Error("MediaFile has no url");
-  // convert params to "key=value" pairs
-  const query = Object.keys(params)
-    .map((key) => `${key}=${params[key]}`)
-    .join(",");
 
-  // replace the final /public with the query above
-  return this.url.replace(/\/public$/, `/${query}`);
+  const { pathname } = new URL(this.url, "http://localhost");
+  if (pathname.includes("/files/")) {
+    return this.url + "?" + new URLSearchParams(params);
+  }
+
+  if (this.mimeType === "image/*") {
+    const query = Object.keys(params)
+      .map((key) => `${key}=${params[key]}`)
+      .join(",");
+    return this.url.replace(/\/public$/, `/${query}`);
+  }
+
+  throw new Error("Only dynamic images can have variants");
+}
+
+function supportsImageVariants(): boolean {
+  if (this.mimeType === "image/*") return true;
+  if (!this.url || !this.url.includes("/files/")) return false;
+  return (
+    typeof this.mimeType === "string" &&
+    this.mimeType.startsWith("image/") &&
+    this.mimeType !== "image/svg+xml" &&
+    this.mimeType !== "image/avif"
+  );
 }
 
 export const methods = {
   createImageVariant: createImageVariant,
+  supportsImageVariants: supportsImageVariants,
 };

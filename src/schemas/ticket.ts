@@ -2,6 +2,98 @@ import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 import type { mediaFileSchema } from "./mediaFile";
 
+// Rich-text node vocabulary for parsedBody.content (ADR 0012). Deliberately
+// fixed-depth rather than recursive: json-schema-to-ts cannot derive types
+// from self-referencing schemas, so nested lists are excluded. These consts
+// must not be exported — the model generator treats the first export ending
+// in "Schema" as the entity schema.
+const richTextTextNode = {
+  type: "object",
+  additionalProperties: false,
+  required: ["type", "text"],
+  properties: {
+    type: { type: "string", enum: ["text"] },
+    text: { type: "string" },
+    marks: {
+      type: "array",
+      uniqueItems: true,
+      items: { type: "string", enum: ["bold", "italic", "underline"] },
+    },
+  },
+} as const;
+
+const richTextMentionNode = {
+  type: "object",
+  additionalProperties: false,
+  required: ["type", "id", "discriminator", "label"],
+  properties: {
+    type: { type: "string", enum: ["mention"] },
+    id: { type: "string" },
+    discriminator: { type: "string", enum: ["user", "vendor", "system"] },
+    label: {
+      type: "string",
+      description: "Display name of the mentioned entity, without the leading @.",
+    },
+  },
+} as const;
+
+const richTextHardBreakNode = {
+  type: "object",
+  additionalProperties: false,
+  required: ["type"],
+  properties: {
+    type: { type: "string", enum: ["hardBreak"] },
+  },
+} as const;
+
+const richTextInlineNodes = {
+  type: "array",
+  minItems: 1,
+  items: {
+    anyOf: [richTextTextNode, richTextMentionNode, richTextHardBreakNode],
+  },
+} as const;
+
+const richTextParagraphNode = {
+  type: "object",
+  additionalProperties: false,
+  required: ["type", "content"],
+  properties: {
+    type: { type: "string", enum: ["paragraph"] },
+    content: richTextInlineNodes,
+  },
+} as const;
+
+const richTextListItemNode = {
+  type: "object",
+  additionalProperties: false,
+  required: ["type", "content"],
+  properties: {
+    type: { type: "string", enum: ["listItem"] },
+    content: richTextInlineNodes,
+  },
+} as const;
+
+const richTextBulletListNode = {
+  type: "object",
+  additionalProperties: false,
+  required: ["type", "content"],
+  properties: {
+    type: { type: "string", enum: ["bulletList"] },
+    content: { type: "array", minItems: 1, items: richTextListItemNode },
+  },
+} as const;
+
+const richTextOrderedListNode = {
+  type: "object",
+  additionalProperties: false,
+  required: ["type", "content"],
+  properties: {
+    type: { type: "string", enum: ["orderedList"] },
+    content: { type: "array", minItems: 1, items: richTextListItemNode },
+  },
+} as const;
+
 export const ticketSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "ticket.json",
@@ -117,9 +209,22 @@ export const ticketSchema = {
             description:
               "An object containing the parsed body of the message for mentions.",
             properties: {
+              content: {
+                type: "array",
+                minItems: 1,
+                description:
+                  "Rich-text block nodes (ADR 0012). Present = rich message: `body` is the server-derived plain-text projection of this tree, and the legacy text/mentions fields are not written.",
+                items: {
+                  anyOf: [
+                    richTextParagraphNode,
+                    richTextBulletListNode,
+                    richTextOrderedListNode,
+                  ],
+                },
+              },
               text: {
                 type: "string",
-                description: "The mention text.",
+                description: "The mention text (legacy tokenized format).",
               },
               mentions: {
                 type: "array",
@@ -192,6 +297,12 @@ export const ticketSchema = {
           media: {
             anyOf: [{ $ref: "mediaFile.json" }, { type: "null" }],
             description: "The media file associated with the message.",
+          },
+          attachments: {
+            type: "array",
+            items: { $ref: "mediaFile.json" },
+            description:
+              "Files attached to the message. Supersedes the singular media.",
           },
         },
       },

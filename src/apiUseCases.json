@@ -1113,29 +1113,11 @@
     }
   ],
   [
-    "CreateImageUploadEndpoint",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/mediaFiles/imageUploadEndpoint"
-      }
-    }
-  ],
-  [
     "DeleteMediaFile",
     {
       "http": {
         "method": "DELETE",
         "path": "/mediaFiles/:id"
-      }
-    }
-  ],
-  [
-    "UploadImage",
-    {
-      "http": {
-        "method": "POST",
-        "path": "/mediaFiles/uploadImage"
       }
     }
   ],
