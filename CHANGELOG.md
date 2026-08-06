@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.7.1
+
+### Patch Changes
+
+- Add apex-american-audio driver to the driver enum
+
 ## 7.7.0
 
 ### Minor Changes
