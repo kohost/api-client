@@ -96,6 +96,7 @@ const defs = {
       description: "Driver used to communicate with the object.",
       enum: [
         "adlink",
+        "apex-american-audio",
         "avigilon-alta",
         "aws-kinesis",
         "bacnet",
