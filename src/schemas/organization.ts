@@ -25,6 +25,15 @@ export const organizationSchema = {
     name: {
       type: "string",
     },
+    // Widening this enum requires a minor-units exponent table first:
+    // parseMoneyToCents and centsToInput both assume 2 decimal places.
+    currency: {
+      type: "string",
+      enum: ["USD"],
+      default: "USD",
+      description:
+        "ISO 4217 currency code for all of the organization's money amounts. USD only in v1.",
+    },
     smsNumber: {
       type: "string",
     },
@@ -219,6 +228,73 @@ export const organizationSchema = {
                 },
               },
             },
+            facilities: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                enabled: {
+                  type: "boolean",
+                  default: false,
+                },
+                agentUserId: {
+                  type: ["string", "null"],
+                  default: null,
+                },
+              },
+            },
+            approvals: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                dneAmount: {
+                  type: ["integer", "null"],
+                  minimum: 0,
+                  default: null,
+                  description:
+                    "Do-not-exceed amount in integer cents. Tickets whose marked-up estimate total exceeds it require approval; null or unset means the gate is off.",
+                },
+                approverUserIds: {
+                  type: "array",
+                  default: [],
+                  description:
+                    "Org users asked to approve when the gate trips; the effective set freezes onto each approval record at request time.",
+                  items: {
+                    type: "string",
+                  },
+                },
+              },
+            },
+            costs: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                markupTiers: {
+                  type: "array",
+                  default: [],
+                  lowerBoundTable: { key: "minAmount" },
+                  description:
+                    "Lower-bound markup rows keyed per cost entry by its vendor-cost estimate: first row minAmount 0, minAmounts strictly ascending, so gaps and overlaps are impossible. No property override; visible to roster agents and superadmins only, never to org-side viewers.",
+                  items: {
+                    type: "object",
+                    additionalProperties: false,
+                    required: ["minAmount", "percent"],
+                    properties: {
+                      minAmount: {
+                        type: "integer",
+                        minimum: 0,
+                        description:
+                          "Inclusive lower bound of the tier in integer cents.",
+                      },
+                      percent: {
+                        type: "number",
+                        minimum: 0,
+                        description: "Markup percent for the tier, uncapped.",
+                      },
+                    },
+                  },
+                },
+              },
+            },
           },
         },
         SOS: {
@@ -251,6 +327,43 @@ export const organizationSchema = {
         webhookToken: { type: "string" },
       },
     },
+    taxExempt: {
+      type: "boolean",
+      default: false,
+      description:
+        "Whether OneBill bills to this organization carry no tax. Kohost " +
+        "staff-edited; a draft bill live-reads it and snapshots it at " +
+        "mark-sent.",
+    },
+    billingAddress: {
+      $ref: "definitions.json#/definitions/address",
+      description:
+        "Postal address printed on OneBill bills. Org administrators edit it; " +
+        "a bill live-reads it while draft and snapshots it at mark-sent, which " +
+        "requires line1, city, state, and postalCode to be non-empty.",
+    },
+    billingContacts: {
+      type: "array",
+      description:
+        "Recipients of the bill-sent email. KFC-edited only; plain name/email " +
+        "pairs, recipients need not be platform users. Mark-sent requires at " +
+        "least one contact.",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["name", "email"],
+        properties: {
+          name: {
+            type: "string",
+            minLength: 1,
+          },
+          email: {
+            type: "string",
+            format: "email",
+          },
+        },
+      },
+    },
     createdAt: {
       $ref: "definitions.json#/definitions/date",
     },
@@ -278,9 +391,32 @@ export type OrganizationSchema = FromSchema<
   }
 >;
 
-type ConciergeTickets = NonNullable<
-  NonNullable<NonNullable<OrganizationSchema["features"]>["Concierge"]>["tickets"]
+type ConciergeFeatures = NonNullable<
+  NonNullable<OrganizationSchema["features"]>["Concierge"]
 >;
+
+type ConciergeTickets = NonNullable<ConciergeFeatures["tickets"]>;
+
+/** Org-level DNE approval gate config: amount plus default approver set. */
+export type ConciergeApprovalsConfig = NonNullable<
+  ConciergeFeatures["approvals"]
+>;
+
+/**
+ * The ISO 4217 code every money amount an organization owns is denominated in.
+ * USD alone in v1: widening the enum needs a minor-units exponent table first.
+ */
+export type Currency = NonNullable<OrganizationSchema["currency"]>;
+
+/** One lower-bound markup tier row. */
+export type MarkupTier = NonNullable<
+  NonNullable<ConciergeFeatures["costs"]>["markupTiers"]
+>[number];
+
+/** One OneBill billing contact: a plain name/email pair, KFC-edited. */
+export type OrganizationBillingContact = NonNullable<
+  OrganizationSchema["billingContacts"]
+>[number];
 
 /** One org-wide ticket notification default: channels + lock for a single event. */
 export type OrgNotificationDefaultEntry = NonNullable<

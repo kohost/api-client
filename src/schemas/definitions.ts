@@ -8,6 +8,8 @@ export const TICKET_NOTIFICATION_EVENTS = [
   "ticketCreatedAsObserver",
   "messageAsObserver",
   "ticketResolvedAsObserver",
+  "approvalRequested",
+  "approvalDecided",
 ] as const;
 
 export type TicketNotificationEvent =

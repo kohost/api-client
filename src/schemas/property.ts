@@ -166,6 +166,42 @@ export const propertySchema = {
               type: "boolean",
               default: true,
             },
+            facilities: {
+              type: "object",
+              additionalProperties: false,
+              description:
+                "Per-property override of the organization's facilities (KFC) config; fields are deliberately default-free so absence inherits the organization value",
+              properties: {
+                enabled: {
+                  type: "boolean",
+                },
+                agentUserId: {
+                  type: ["string", "null"],
+                },
+              },
+            },
+            approvals: {
+              type: "object",
+              additionalProperties: false,
+              description:
+                "Per-property override of the organization's approvals config; fields are deliberately default-free so absence inherits the organization value. Values only: the gate cannot be disabled per property, and markup tiers are org-only.",
+              properties: {
+                dneAmount: {
+                  type: "integer",
+                  minimum: 0,
+                  description:
+                    "Do-not-exceed amount in integer cents for this property.",
+                },
+                approverUserIds: {
+                  type: "array",
+                  description:
+                    "Org users asked to approve for this property, replacing the org list when present.",
+                  items: {
+                    type: "string",
+                  },
+                },
+              },
+            },
           },
         },
         SOS: {

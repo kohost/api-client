@@ -1,6 +1,8 @@
 export { alarmSchema, type AlarmSchema } from "./alarm.js";
 export { announcementSchema, type AnnouncementSchema } from "./announcement.js";
 export { automationSchema, type AutomationSchema } from "./automation.js";
+export { billSchema, type BillSchema, type BillLine } from "./bill.js";
+export { billingCategorySchema, type BillingCategorySchema } from "./billingCategory.js";
 export { cameraSchema, type CameraSchema } from "./camera.js";
 export { categorySchema, type CategorySchema } from "./category.js";
 export { courtesySchema, type CourtesySchema } from "./courtesy.js";
@@ -22,7 +24,6 @@ export { mediaFileSchema, type MediaFileSchema, methods as mediaFileMethods } fr
 export { mediaSourceSchema, type MediaSourceSchema } from "./mediaSource.js";
 export { motionSensorSchema, type MotionSensorSchema } from "./motionSensor.js";
 export { notificationSchema, type NotificationSchema } from "./notification.js";
-export { orderSchema, type OrderSchema } from "./order.js";
 export { organizationSchema, type OrganizationSchema } from "./organization.js";
 export { paymentSchema, type PaymentSchema } from "./payment.js";
 export { policySchema, type PolicySchema } from "./policy.js";

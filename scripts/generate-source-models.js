@@ -200,6 +200,7 @@ async function loadSchemas() {
     .filter(
       (fileName) =>
         fileName.endsWith(".ts") &&
+        !fileName.endsWith(".test.ts") &&
         fileName !== "index.ts" &&
         fileName !== "definitions.ts",
     );
@@ -233,7 +234,9 @@ function copyDir(src, dest) {
 
     if (entry.isDirectory()) {
       copyDir(srcPath, destPath);
-    } else {
+    } else if (!entry.name.endsWith(".test.ts")) {
+      // Tests never belong in .generated: they'd be typechecked by the build
+      // tsconfig and bundled into dist by tsdown (dragging vitest in with them).
       writeFileIfChanged(destPath, fs.readFileSync(srcPath));
     }
   }
@@ -376,6 +379,7 @@ async function generateValidatorCode(schemas) {
   return `${banner}
 import { Ajv } from "ajv";
 import addFormats from "ajv-formats";
+import { addLowerBoundTableKeyword } from "./lib/lowerBoundTable.js";
 
 ${imports.join("\n")}
 
@@ -395,6 +399,7 @@ const ajv = new Ajv({
 });
 
 addFormats(ajv);
+addLowerBoundTableKeyword(ajv);
 
 ${exports.join("\n")}
 `;

@@ -86,6 +86,16 @@
     }
   ],
   [
+    "DescribeSelfAccess",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/users/me/access"
+      },
+      "description": "The caller's platform-level standing (Kohost staff, global SuperAdmin, staff functions, concierge workspace membership)."
+    }
+  ],
+  [
     "DescribeUser",
     {
       "http": {
@@ -596,6 +606,46 @@
     }
   ],
   [
+    "DescribeTicketStatsSummary",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/stats/summary"
+      },
+      "description": "The calling organization's own ticket KPIs for a date window."
+    }
+  ],
+  [
+    "DescribeTicketStatsTickets",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/stats/tickets"
+      },
+      "description": "A page of the calling organization's own tickets, matching the stats filters."
+    }
+  ],
+  [
+    "DescribeTicketStatsHeatmap",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/stats/heatmap"
+      },
+      "description": "Daily ticket-creation counts over the trailing 12 months."
+    }
+  ],
+  [
+    "DescribeTicketStatsFilters",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/stats/filters"
+      },
+      "description": "Filter options for the calling organization's ticket stats."
+    }
+  ],
+  [
     "CreateTicket",
     {
       "http": {
@@ -873,6 +923,33 @@
     }
   ],
   [
+    "UpdateOrganizationBillingAddress",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/organizations/:id/billing-address"
+      }
+    }
+  ],
+  [
+    "UpdateOrganizationBillingContacts",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/organizations/:id/billing-contacts"
+      }
+    }
+  ],
+  [
+    "UpdateOrganizationTaxExempt",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/organizations/:id/tax-exempt"
+      }
+    }
+  ],
+  [
     "DeleteOrganization",
     {
       "http": {
@@ -897,6 +974,86 @@
         "method": "GET",
         "path": "/organizations"
       }
+    }
+  ],
+  [
+    "DescribeConciergeStatsSummary",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/admin/concierge-stats/summary"
+      },
+      "description": "Super-admin cross-organization KFC (Kohost Facilities Concierge) stats summary for a date window."
+    }
+  ],
+  [
+    "DescribeConciergeStatsFilters",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/admin/concierge-stats/filters"
+      },
+      "description": "Filter option lists (organizations, properties, issues, agent roster) for the KFC stats surface."
+    }
+  ],
+  [
+    "DescribeConciergeStatsTickets",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/admin/concierge-stats/tickets"
+      },
+      "description": "Paginated per-ticket drill-down rows behind the KFC stats filters."
+    }
+  ],
+  [
+    "DescribeConciergeStatsHeatmap",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/admin/concierge-stats/heatmap"
+      },
+      "description": "Daily cross-organization ticket-creation counts over the trailing 12 months."
+    }
+  ],
+  [
+    "ListConciergeWorkspaceBills",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/concierge/bills"
+      },
+      "description": "Cross-org OneBill invoices view: paginated, filterable, sortable bills across every KFC-enabled organization, for concierge workspace members. Rows are trimmed Bill projections; the caller resolves organization names and derives totals."
+    }
+  ],
+  [
+    "ListConciergeWorkspaceTickets",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/concierge/tickets"
+      },
+      "description": "Cross-org KFC agent workspace ticket queue, scoped to the caller's roster membership (superadmins may scope to another agent)."
+    }
+  ],
+  [
+    "DescribeConciergeWorkspaceFilters",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/concierge/tickets/filters"
+      },
+      "description": "Filter option lists (organizations, properties, agents, users, systems, issues, spaces, vendors) for the KFC agent workspace."
+    }
+  ],
+  [
+    "ListConciergeUninvoicedCosts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/concierge/uninvoiced-costs"
+      },
+      "description": "Cross-org OneBill reconciliation pool: every resolved cost not yet on a bill, grouped per KFC-enabled org and classified billable/waiting/review."
     }
   ],
   [
@@ -1380,6 +1537,159 @@
     }
   ],
   [
+    "ListBillingCategories",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/billing-categories"
+      }
+    }
+  ],
+  [
+    "CreateBillingCategory",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/billing-categories"
+      }
+    }
+  ],
+  [
+    "UpdateBillingCategory",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/billing-categories/:id"
+      }
+    }
+  ],
+  [
+    "ListBills",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/bills"
+      }
+    }
+  ],
+  [
+    "DescribeBill",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/bills/:id"
+      }
+    }
+  ],
+  [
+    "PreviewBill",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/bills/:id/preview"
+      }
+    }
+  ],
+  [
+    "ListOrganizationBills",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/organization/bills"
+      }
+    }
+  ],
+  [
+    "DescribeOrganizationBill",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/organization/bills/:id"
+      }
+    }
+  ],
+  [
+    "CreateBill",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/bills"
+      }
+    }
+  ],
+  [
+    "UpdateBill",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/bills/:id"
+      }
+    }
+  ],
+  [
+    "DeleteBill",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/bills/:id"
+      }
+    }
+  ],
+  [
+    "AddBillLine",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/bills/:id/lines"
+      }
+    }
+  ],
+  [
+    "UpdateBillLine",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/bills/:id/lines/:lineId"
+      }
+    }
+  ],
+  [
+    "RemoveBillLine",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/bills/:id/lines/:lineId"
+      }
+    }
+  ],
+  [
+    "MarkBillSent",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/bills/:id/send"
+      }
+    }
+  ],
+  [
+    "MarkBillPaid",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/bills/:id/paid"
+      }
+    }
+  ],
+  [
+    "VoidBill",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/bills/:id/void"
+      }
+    }
+  ],
+  [
     "CreateAutomation",
     {
       "http": {
@@ -1676,6 +1986,228 @@
       "http": {
         "method": "PUT",
         "path": "/servers/:id"
+      }
+    }
+  ],
+  [
+    "ScheduleWorkItem",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/work"
+      }
+    }
+  ],
+  [
+    "RescheduleWorkItem",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/tickets/:id/work/:workItemId"
+      }
+    }
+  ],
+  [
+    "CancelWorkItem",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/tickets/:id/work/:workItemId"
+      }
+    }
+  ],
+  [
+    "SetWorkItemNoCharge",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/work/:workItemId/no-charge"
+      },
+      "description": "Marks a scheduled visit as one that will never be billed."
+    }
+  ],
+  [
+    "ClearWorkItemNoCharge",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/tickets/:id/work/:workItemId/no-charge"
+      },
+      "description": "Takes a scheduled visit back off the no-charge disposition."
+    }
+  ],
+  [
+    "RecordCostEntry",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/costs"
+      }
+    }
+  ],
+  [
+    "EditCostEntry",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/tickets/:id/costs/:costId"
+      }
+    }
+  ],
+  [
+    "RecordCostActual",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/costs/:costId/actual"
+      }
+    }
+  ],
+  [
+    "SetCostVendorInvoice",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/tickets/:id/costs/:costId/vendor-invoice"
+      }
+    }
+  ],
+  [
+    "WriteOffCostEntry",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/costs/:costId/write-off"
+      }
+    }
+  ],
+  [
+    "ReinstateCostEntry",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/costs/:costId/reinstate"
+      }
+    }
+  ],
+  [
+    "AcknowledgeCostDivergence",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/costs/:costId/acknowledge-divergence"
+      }
+    }
+  ],
+  [
+    "RequestApproval",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/approvals"
+      }
+    }
+  ],
+  [
+    "DecideApproval",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/approvals/:approvalId/decision"
+      }
+    }
+  ],
+  [
+    "ListEligibleApprovers",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/tickets/:id/eligible-approvers"
+      }
+    }
+  ],
+  [
+    "DescribeConciergeFacilitiesViewer",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/concierge/facilities/me"
+      }
+    }
+  ],
+  [
+    "ListKohostStaff",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/staff"
+      },
+      "description": "Every verified @kohost.io user with their SuperAdmin flag, staff functions, Facilities Concierge assignments, and org grants."
+    }
+  ],
+  [
+    "SetUserSuperAdmin",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/staff/:id/super-admin"
+      }
+    }
+  ],
+  [
+    "UpdateStaffUser",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/staff/:id"
+      },
+      "description": "Edit a Kohost staff member's identity fields (first name, last name, email, phone)."
+    }
+  ],
+  [
+    "DeleteStaffUser",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/staff/:id"
+      },
+      "description": "Permanently delete a Kohost staff account across every organization."
+    }
+  ],
+  [
+    "DescribeStaffFunctions",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/staff-functions"
+      }
+    }
+  ],
+  [
+    "ListFacilitiesStaffIds",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/staff-functions/facilities/members"
+      },
+      "description": "The user ids holding the Facilities staff function. Readable by any signed-in user so display surfaces can brand them."
+    }
+  ],
+  [
+    "AddStaffFunctionMember",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/staff-functions/:staffFunction/members/:userId"
+      }
+    }
+  ],
+  [
+    "RemoveStaffFunctionMember",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/staff-functions/:staffFunction/members/:userId"
       }
     }
   ]
