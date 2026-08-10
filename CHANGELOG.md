@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.8.1
+
+### Patch Changes
+
+- [#676](https://github.com/kohost/kohost/pull/676) [`8ec51b5`](https://github.com/kohost/kohost/commit/8ec51b5ae164e86703af1b088f7e0410c7830849) Thanks [@itrogers](https://github.com/itrogers)! - Stop leaking the ambient X-Property-Id into cross-org requests: an empty/nullish per-request header now deletes the client's ambient header, and targeted headers strip the property explicitly when a request names an organization without one, fixing intermittent "Unavailable" tickets in the global concierge workspace.
+
 ## 7.8.0
 
 ### Minor Changes
