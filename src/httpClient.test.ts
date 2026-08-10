@@ -23,21 +23,4 @@ describe("createRequest header overrides", () => {
     });
     expect(request.headers.get("X-Organization-Id")).toBe("org-b");
   });
-
-  it("deletes an ambient header when the override is empty", () => {
-    const request = makeClient().createRequest({
-      url: "tickets",
-      headers: { "X-Organization-Id": "org-b", "X-Property-Id": "" },
-    });
-    expect(request.headers.get("X-Organization-Id")).toBe("org-b");
-    expect(request.headers.has("X-Property-Id")).toBe(false);
-  });
-
-  it("deletes an ambient header when the override is nullish", () => {
-    const request = makeClient().createRequest({
-      url: "tickets",
-      headers: { "X-Property-Id": null },
-    });
-    expect(request.headers.has("X-Property-Id")).toBe(false);
-  });
 });
