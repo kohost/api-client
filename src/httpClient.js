@@ -234,10 +234,16 @@ export class KohostHTTPClient {
     }
 
     const headers = new Headers(this.headers);
-    // Add any additional headers
+    // Per-request headers override the client's ambient ones. An empty or
+    // nullish value removes the ambient header entirely — callers use this to
+    // strip a scope header (e.g. X-Property-Id) the singleton has armed.
     if (config.headers) {
-      Object.keys(config.headers).forEach((key) => {
-        headers.set(key, config.headers[key]);
+      Object.entries(config.headers).forEach(([key, value]) => {
+        if (value === null || value === undefined || value === "") {
+          headers.delete(key);
+        } else {
+          headers.set(key, value);
+        }
       });
     }
 
