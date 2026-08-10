@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.8.2
+
+### Patch Changes
+
+- [`b4b0ce2`](https://github.com/kohost/kohost/commit/b4b0ce28b8a25594e83f6157e0938f68532281a5) Thanks [@itrogers](https://github.com/itrogers)! - Replace empty-header-deletes-ambient convention with explicit property targeting: cross-org ticket reads now name the ticket's own property id instead of unsetting X-Property-Id
+
 ## 7.8.1
 
 ### Patch Changes
