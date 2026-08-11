@@ -318,6 +318,27 @@ export const organizationSchema = {
             },
           },
         },
+        Resources: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            categories: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                order: {
+                  type: "array",
+                  description:
+                    "Org-wide curated Resource Category ID order, shared by every " +
+                    "Property's view of the Resource Library. IDs for deleted Categories " +
+                    "are ignored on read; Categories not yet listed sort to the end " +
+                    "alphabetically.",
+                  items: { type: "string" },
+                },
+              },
+            },
+          },
+        },
       },
     },
     credentials: {

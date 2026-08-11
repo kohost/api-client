@@ -607,11 +607,16 @@ function generateUseCaseCode(
   const httpMethod = method.toLowerCase();
   const classId = `${useCase.charAt(0).toUpperCase() + useCase.slice(1)}Command`;
 
-  // Generate TypeScript interface for the command config
+  // Generate TypeScript interface for the command config.
+  //
+  // A route with path parameters reads them off `data`, so its body has to be
+  // an object. A route without them does not, and several accept a collection
+  // as the whole body (`POST /resources` files a batch in one call), so the
+  // array shape `JSON.stringify` has always sent is admitted by the type too.
   const hasPathParams = pathParams.length > 0;
   const dataType = hasPathParams
     ? `{ ${pathParams.map((p) => `${p}: string`).join("; ")}; [key: string]: unknown }`
-    : `Record<string, unknown>`;
+    : `Record<string, unknown> | unknown[]`;
 
   return `${banner}
 

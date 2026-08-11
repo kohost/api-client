@@ -13,7 +13,8 @@ export const categorySchema = {
     },
     propertyId: {
       type: "string",
-      description: "ID of the property this entity belongs to. Optional — used as a per-document filter inside the org-scoped database.",
+      description:
+        "ID of the property this entity belongs to. Optional — used as a per-document filter inside the org-scoped database.",
     },
     type: {
       type: "string",
@@ -41,7 +42,19 @@ export const categorySchema = {
     },
     discriminator: {
       type: "string",
-      enum: ["space", "product", "mediaFile", "property", "user"],
+      enum: ["space", "product", "mediaFile", "property", "user", "resource"],
+    },
+    iconKey: {
+      type: "string",
+      minLength: 1,
+      description:
+        "Key into the app's curated icon gallery for this category's discriminator, selecting the glyph shown beside the name. Used by `resource` categories; the app falls back to a default glyph when unset or unrecognized.",
+    },
+    color: {
+      type: ["string", "null"],
+      pattern: "^#[0-9a-fA-F]{6}$",
+      description:
+        "Accent color for the category as a hex value, e.g. #3B93F0",
     },
     systemId: {
       $ref: "definitions.json#/definitions/systemId",

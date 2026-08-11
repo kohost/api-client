@@ -30,6 +30,7 @@ export { policySchema, type PolicySchema } from "./policy.js";
 export { productSchema, type ProductSchema } from "./product.js";
 export { propertySchema, type PropertySchema } from "./property.js";
 export { reservationSchema, type ReservationSchema } from "./reservation.js";
+export { resourceSchema, type ResourceSchema } from "./resource.js";
 export { serverSchema, type ServerSchema } from "./server.js";
 export { sessionSchema, type SessionSchema } from "./session.js";
 export { shortLinkSchema, type ShortLinkSchema } from "./shortLink.js";

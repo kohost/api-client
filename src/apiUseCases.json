@@ -552,6 +552,51 @@
     }
   ],
   [
+    "CreateResource",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/resources"
+      }
+    }
+  ],
+  [
+    "DeleteResource",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/resources/:id"
+      }
+    }
+  ],
+  [
+    "DescribeResource",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/resources/:id"
+      }
+    }
+  ],
+  [
+    "ListResources",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/resources"
+      }
+    }
+  ],
+  [
+    "UpdateResource",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/resources/:id"
+      }
+    }
+  ],
+  [
     "DescribeDepartment",
     {
       "http": {
