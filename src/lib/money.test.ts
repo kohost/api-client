@@ -12,14 +12,14 @@ import {
 } from "./money.js";
 
 describe("resolveMarkupTierTable", () => {
-  it("defaults an unconfigured organization to a flat 10%", () => {
-    expect(resolveMarkupTierTable(undefined)).toEqual([
-      { minAmount: 0, percent: 10 },
-    ]);
-    expect(resolveMarkupTierTable(null)).toEqual([
-      { minAmount: 0, percent: 10 },
-    ]);
-    expect(resolveMarkupTierTable([])).toEqual([{ minAmount: 0, percent: 10 }]);
+  it("defaults an unconfigured organization to 15% dropping to 10% at $3,000", () => {
+    const expected = [
+      { minAmount: 0, percent: 15 },
+      { minAmount: 300_000, percent: 10 },
+    ];
+    expect(resolveMarkupTierTable(undefined)).toEqual(expected);
+    expect(resolveMarkupTierTable(null)).toEqual(expected);
+    expect(resolveMarkupTierTable([])).toEqual(expected);
   });
 
   it("lets a saved table replace the default outright", () => {
@@ -39,7 +39,7 @@ describe("resolveMarkupTierTable", () => {
   it("hands back a copy, so a caller cannot mutate the shared default", () => {
     const resolved = resolveMarkupTierTable([]);
     resolved[0].percent = 99;
-    expect(DEFAULT_MARKUP_TIERS[0].percent).toBe(10);
+    expect(DEFAULT_MARKUP_TIERS[0].percent).toBe(15);
   });
 });
 

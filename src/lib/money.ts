@@ -11,13 +11,21 @@ import type { MarkupTier } from "../schemas/organization.js";
 /**
  * The tier table an organization keys against before anyone configures one.
  * KFC work is never billed at vendor cost, so an unconfigured organization
- * keys to a single flat tier rather than to zero. A saved table replaces this
+ * keys to this table rather than to zero. A saved table replaces this
  * outright — it is a fallback, not a floor, so an organization that should
  * carry no markup writes an explicit `0` tier.
  */
 export const DEFAULT_MARKUP_TIERS: readonly MarkupTier[] = [
-  { minAmount: 0, percent: 10 },
+  { minAmount: 0, percent: 15 },
+  { minAmount: 300_000, percent: 10 },
 ];
+
+/**
+ * The do-not-exceed amount seeded onto an organization when KFC is enabled and
+ * no amount is configured yet, in integer cents. Enablement refuses to leave
+ * the gate off by accident; an explicit amount can still replace it afterward.
+ */
+export const DEFAULT_DNE_AMOUNT = 150_000;
 
 /** An organization's markup tiers, or the default when it has none of its own. */
 export function resolveMarkupTierTable(

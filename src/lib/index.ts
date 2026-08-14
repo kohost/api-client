@@ -20,6 +20,7 @@ export {
 export { MAX_MESSAGE_ATTACHMENTS } from "./messageAttachments.js";
 export {
   DEFAULT_MARKUP_TIERS,
+  DEFAULT_DNE_AMOUNT,
   resolveMarkupTierTable,
   keyedMarkupPercent,
   DEFAULT_TAX_RATE,
