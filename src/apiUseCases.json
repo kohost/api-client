@@ -1457,6 +1457,42 @@
     }
   ],
   [
+    "ListSOSEvents",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sos/events"
+      }
+    }
+  ],
+  [
+    "DescribeSOSEvent",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sos/events/:eventId"
+      }
+    }
+  ],
+  [
+    "SendSOSUpdate",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/sos/update"
+      }
+    }
+  ],
+  [
+    "FetchEmergencyContacts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sos/emergency-contacts"
+      }
+    }
+  ],
+  [
     "DescribeIssue",
     {
       "http": {
@@ -2262,6 +2298,15 @@
       "http": {
         "method": "DELETE",
         "path": "/staff-functions/:staffFunction/members/:userId"
+      }
+    }
+  ],
+  [
+    "SendAnnouncement",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/announcements"
       }
     }
   ]

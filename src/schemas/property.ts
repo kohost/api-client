@@ -253,6 +253,11 @@ export const propertySchema = {
                 },
               },
             },
+            currentEventId: {
+              type: ["string", "null"],
+              description:
+                "ID of the sosEvent record for the in-progress activation. Set while active, cleared when the SOS is stopped.",
+            },
           },
         },
         Automations: {
@@ -265,6 +270,16 @@ export const propertySchema = {
           additionalProperties: false,
         },
         Resources: {
+          type: "object",
+          properties: {
+            enabled: {
+              type: "boolean",
+              default: true,
+            },
+          },
+          additionalProperties: false,
+        },
+        Announcements: {
           type: "object",
           properties: {
             enabled: {

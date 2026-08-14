@@ -115,6 +115,16 @@ export const systemUserSchema = {
     systemId: {
       $ref: "definitions.json#/definitions/systemId",
     },
+    propertyId: {
+      type: "string",
+      description:
+        "ID of the Property this synced user belongs to. Used as a per-document filter inside the org-scoped database.",
+    },
+    syncedAt: {
+      $ref: "definitions.json#/definitions/date",
+      description:
+        "When this user was last written through from its source system.",
+    },
   },
 } as const;
 

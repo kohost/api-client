@@ -12,22 +12,63 @@ export const announcementSchema = {
     id: { $ref: "definitions.json#/definitions/id" },
     propertyId: {
       type: "string",
-      description: "ID of the property this entity belongs to. Optional — used as a per-document filter inside the org-scoped database.",
+      description:
+        "ID of the property this entity belongs to. Optional — used as a per-document filter inside the org-scoped database.",
     },
     type: {
       type: "string",
       enum: ["announcement"],
       default: "announcement",
     },
-    users: {
+    audience: {
+      $ref: "definitions.json#/definitions/audience",
+      description:
+        "Who this announcement was directed at on the people axis. PA surfaces are the other axis and never reach the emergency-contact roster.",
+    },
+    channels: {
       type: "array",
+      description: "Personal channels this announcement was sent over.",
       items: {
         type: "string",
+        enum: ["sms", "email"],
       },
-      minItems: 1,
     },
-    group: {
+    subject: {
       type: "string",
+      description: "Email subject, and the title shown on a surface.",
+    },
+    surfaces: {
+      type: "array",
+      description:
+        "Surface channels the announcement was broadcast to, as the sender selected them. `category` is open for future surface kinds; only `pa` ships today.",
+      items: {
+        type: "object",
+        required: ["category", "kind"],
+        properties: {
+          category: {
+            type: "string",
+            enum: ["pa"],
+          },
+          kind: {
+            type: "string",
+            enum: ["all", "spaces", "devices"],
+          },
+          spaceIds: {
+            type: "array",
+            items: { type: "string" },
+          },
+          deviceIds: {
+            type: "array",
+            items: { type: "string" },
+          },
+          outputs: {
+            type: "array",
+            description: "PA output zones to page; all zones when omitted.",
+            items: { type: "string" },
+          },
+        },
+        additionalProperties: false,
+      },
     },
     body: {
       type: "string",

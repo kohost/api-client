@@ -53,6 +53,10 @@ export const emailMessageSchema = {
     statusMessage: {
       type: "string",
     },
+    errorCode: {
+      type: "string",
+      description: "Raw vendor delivery-failure code, e.g. Twilio 21610.",
+    },
     html: {
       type: "string",
     },

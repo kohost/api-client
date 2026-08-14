@@ -17,6 +17,23 @@ export {
   type PolicyLike,
   type PolicyPermissionLike,
 } from "./policy-resolvers.js";
+export { SIS_DRIVERS, isSISDriver, type SISDriver } from "./sisDrivers.js";
+export { SOS_AUDIENCES, type SOSAudience } from "./sosAudiences.js";
+export {
+  MESSAGE_ERROR_CATEGORIES,
+  categoryForMessageErrorCode,
+  isMessageErrorCategory,
+  type MessageErrorCategory,
+} from "./messageErrorCodes.js";
+export {
+  DELIVERY_OUTCOMES,
+  deliveryOutcomeForStatus,
+  type DeliveryOutcome,
+} from "./deliveryStatus.js";
+export type {
+  EmergencyContactAudience,
+  EmergencyContactRoleGroup,
+} from "./emergencyContacts.js";
 export { MAX_MESSAGE_ATTACHMENTS } from "./messageAttachments.js";
 export {
   DEFAULT_MARKUP_TIERS,

@@ -19,6 +19,31 @@ export const NOTIFICATION_CHANNELS = ["email", "sms", "push"] as const;
 
 export type NotificationChannel = (typeof NOTIFICATION_CHANNELS)[number];
 
+/**
+ * The platform roles an Audience may be selected by. The legacy `Guest` role a
+ * permission entry may still carry is deliberately absent: nothing targets it.
+ */
+export const PLATFORM_ROLE_NAMES = [
+  "SuperAdmin",
+  "Administrator",
+  "Manager",
+  "Agent",
+  "User",
+] as const;
+
+export type PlatformRoleName = (typeof PLATFORM_ROLE_NAMES)[number];
+
+const deliveryCountsNode = {
+  type: "object",
+  additionalProperties: false,
+  required: ["recipients", "sent", "failed"],
+  properties: {
+    recipients: { type: "integer", minimum: 0 },
+    sent: { type: "integer", minimum: 0 },
+    failed: { type: "integer", minimum: 0 },
+  },
+} as const;
+
 const defs = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "definitions.json",
@@ -204,7 +229,7 @@ const defs = {
         required: ["type", "status", "message"],
         properties: {
           id: {
-            type: "string"
+            type: "string",
           },
           type: {
             type: "string",
@@ -329,6 +354,75 @@ const defs = {
     notificationChannel: {
       type: "string",
       enum: NOTIFICATION_CHANNELS,
+    },
+    deliveryCounts: deliveryCountsNode,
+    audience: {
+      type: "object",
+      additionalProperties: false,
+      description:
+        "Who a people-facing broadcast was directed at, as the sender expressed it, plus the snapshot it resolved to. One shape for Announcements, SOS broadcasts and Automation notifications.",
+      properties: {
+        to: {
+          type: "object",
+          additionalProperties: false,
+          description:
+            'The User selector, one kind at a time. Absent or empty selects nobody; everyone is only ever the explicit `id: ["*"]` wildcard.',
+          properties: {
+            id: {
+              type: "array",
+              description:
+                "Named User ids, or the single wildcard `*` meaning everyone in scope.",
+              items: { type: "string" },
+            },
+            roles: {
+              type: "array",
+              items: { type: "string", enum: PLATFORM_ROLE_NAMES },
+            },
+            departmentIds: {
+              type: "array",
+              items: { type: "string" },
+            },
+          },
+        },
+        emergencyContacts: {
+          type: "boolean",
+          description:
+            "Whether the external SIS emergency-contact roster was included. Human-triggered sends only; an Automation can never set it.",
+        },
+        users: {
+          type: "array",
+          description:
+            "Snapshot of the User ids the selector resolved to at send time.",
+          items: { type: "string" },
+        },
+        delivery: {
+          type: "object",
+          additionalProperties: false,
+          description:
+            "Send-time delivery counts per audience. Absent for an audience that was not sent to.",
+          properties: {
+            internal: deliveryCountsNode,
+            emergencyContacts: {
+              type: "object",
+              additionalProperties: false,
+              required: ["recipients", "sent", "failed"],
+              properties: {
+                ...deliveryCountsNode.properties,
+                byChannel: {
+                  type: "object",
+                  additionalProperties: false,
+                  description:
+                    "Per-channel counts, present only for the channels attempted.",
+                  properties: {
+                    sms: deliveryCountsNode,
+                    email: deliveryCountsNode,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     },
   },
 } as const;

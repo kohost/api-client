@@ -35,6 +35,7 @@ export { serverSchema, type ServerSchema } from "./server.js";
 export { sessionSchema, type SessionSchema } from "./session.js";
 export { shortLinkSchema, type ShortLinkSchema } from "./shortLink.js";
 export { smsMessageSchema, type SmsMessageSchema } from "./smsMessage.js";
+export { sosEventSchema, type SOSEventSchema } from "./sosEvent.js";
 export { sosTypeSchema, type SOSTypeSchema } from "./sosType.js";
 export { spaceSchema, type SpaceSchema } from "./space.js";
 export { switchSchema, type SwitchSchema } from "./switch.js";

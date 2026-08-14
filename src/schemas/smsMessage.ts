@@ -46,6 +46,10 @@ export const smsMessageSchema = {
         "read",
       ],
     },
+    errorCode: {
+      type: "string",
+      description: "Raw vendor delivery-failure code, e.g. Twilio 21610.",
+    },
     body: {
       type: "string",
     },
