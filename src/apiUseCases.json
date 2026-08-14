@@ -498,6 +498,15 @@
     }
   ],
   [
+    "ReplaceDevice",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/spaces/:spaceId/devices/:id/replace"
+      }
+    }
+  ],
+  [
     "DescribeDeviceConfig",
     {
       "http": {
