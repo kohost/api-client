@@ -544,6 +544,7 @@ export const ticketSchema = {
               "priorityChanged",
               "scheduleDateChanged",
               "locationChanged",
+              "issueChanged",
               "nudged",
               "approvalRequested",
               "approvalApproved",
