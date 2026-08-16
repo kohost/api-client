@@ -1,5 +1,17 @@
 # @kohost/api-client
 
+## 7.9.0
+
+### Minor Changes
+
+- [#718](https://github.com/kohost/kohost/pull/718) [`258ed29`](https://github.com/kohost/kohost/commit/258ed2973601e7679a18f33cdfaf35d4173590a4) Thanks [@itrogers](https://github.com/itrogers)! - Forward-port the additive api-client schemas from the SOS event record branch so master tolerates data written by it, enabling switching between the two deploys. Property gains `SOS.currentEventId` and `Features.Announcements`; `smsMessage`/`emailMessage` gain an optional raw `errorCode`; `systemUser` gains `propertyId`/`syncedAt`; new `sosEvent` entity schema plus shared `audience`/`deliveryCounts` definitions; new lib helpers (`sisDrivers`, `sosAudiences`, `messageErrorCodes`, `deliveryStatus`, `emergencyContacts`); new client use cases (`ListSOSEvents`, `DescribeSOSEvent`, `SendSOSUpdate`, `FetchEmergencyContacts`, `SendAnnouncement`) that are inert until the API ships their routes. The unused legacy `announcement` schema is replaced with the audience/channels/surfaces shape.
+
+- [#714](https://github.com/kohost/kohost/pull/714) [`7664dc5`](https://github.com/kohost/kohost/commit/7664dc593b762fcd6abb08c652d7cd8d100ecc73) Thanks [@itrogers](https://github.com/itrogers)! - Seed KFC defaults at enablement: turning on Facilities Concierge seeds a $1,500 do-not-exceed amount when none is configured and requires at least one approver, and the default markup table becomes 15% dropping to 10% at $3,000
+
+- [#703](https://github.com/kohost/kohost/pull/703) [`8354894`](https://github.com/kohost/kohost/commit/8354894f999a26dd737359e2d979332a810fe6bd) Thanks [@itrogers](https://github.com/itrogers)! - Replace Device: claim a discovered device into an existing Device (keeps id/name/space, overwrites hardware fields, consumes the discovered row) via POST /spaces/:spaceId/devices/:id/replace and a per-row Replace picker in the Devices tab
+
+- [#711](https://github.com/kohost/kohost/pull/711) [`f9c469f`](https://github.com/kohost/kohost/commit/f9c469f7bdb28701a5bd99dbb9445f04f2e72648) Thanks [@itrogers](https://github.com/itrogers)! - Validate a ticket's new issue on reassignment and record the change in the ticket conversation as an `issueChanged` entry
+
 ## 7.8.2
 
 ### Patch Changes
