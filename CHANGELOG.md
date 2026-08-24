@@ -1,5 +1,28 @@
 # @kohost/api-client
 
+## 7.10.0
+
+### Minor Changes
+
+- [#457](https://github.com/kohost/kohost/pull/457) [`0f47376`](https://github.com/kohost/kohost/commit/0f473761b2f5b882c5b81443e01661c5074ef485) Thanks [@itrogers](https://github.com/itrogers)! - **Announcements.** Send a one-time message from a property to the people and places that need to hear it.
+
+  - Pick who hears it: everyone, specific users, roles, departments, or the school's External Users groups (students and parents from your SIS).
+  - Pick how it reaches them: SMS, email, and the PA system — narrowed by space, system, or zone. Play a PA preset instead of, or in addition to, a spoken message.
+  - Save a setup as a named preset and reuse it next time. Browse every past send and load one back into the composer.
+  - Recipients missing a phone number or email are skipped on that channel instead of blocking the send.
+
+  Announcements is enabled on every property. Administrators can use it immediately; other roles need `feature:Announcements` allowed in a policy.
+
+- [#457](https://github.com/kohost/kohost/pull/457) [`0f47376`](https://github.com/kohost/kohost/commit/0f473761b2f5b882c5b81443e01661c5074ef485) Thanks [@itrogers](https://github.com/itrogers)! - **SOS incident record, updates, and reporting.** Every SOS activation is now a durable incident with a full timeline.
+
+  - **Send updates mid-incident.** Administrators can broadcast an update to staff by SMS, email, and the PA system, or post a log-only note that notifies no one. Opt in students and parents (from the SIS roster) when they need to hear it too.
+  - **End with a final message.** Ending an SOS opens a drawer to send an all-clear to the same audiences and channels — or end silently.
+  - **See who got it.** Each timeline entry shows live sent/delivered/failed counts per audience and channel, with opt-outs and carrier failures called out.
+  - **One email thread per incident.** Every email about an SOS — automation alerts, updates, the all-clear — threads into a single conversation.
+  - **Automation runs on the timeline.** Each automation that fired on activation or deactivation appears in the timeline with per-action success or failure.
+  - **Post-incident notes.** Add internal, attributed notes to a closed incident.
+  - **Incident history report.** Under Reports, browse every past and present incident, filter by date and status, open a read-only view of the full timeline, and export an incident as a PDF.
+
 ## 7.9.0
 
 ### Minor Changes
