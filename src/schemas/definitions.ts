@@ -33,6 +33,16 @@ export const PLATFORM_ROLE_NAMES = [
 
 export type PlatformRoleName = (typeof PLATFORM_ROLE_NAMES)[number];
 
+/**
+ * The people outside the platform a broadcast may name, sourced from the SIS
+ * roster. `students` is every system user the SIS marks as a Student;
+ * `parents` is everybody else on the roster — every emergency-contact
+ * relationship the source system carries, whatever it calls it.
+ */
+export const EXTERNAL_AUDIENCE_GROUPS = ["students", "parents"] as const;
+
+export type ExternalAudienceGroup = (typeof EXTERNAL_AUDIENCE_GROUPS)[number];
+
 const deliveryCountsNode = {
   type: "object",
   additionalProperties: false,
@@ -384,10 +394,17 @@ const defs = {
             },
           },
         },
+        external: {
+          type: "array",
+          uniqueItems: true,
+          description:
+            "Which groups of the external SIS roster were included. Human-triggered sends only; an Automation can never set it.",
+          items: { type: "string", enum: EXTERNAL_AUDIENCE_GROUPS },
+        },
         emergencyContacts: {
           type: "boolean",
           description:
-            "Whether the external SIS emergency-contact roster was included. Human-triggered sends only; an Automation can never set it.",
+            'Deprecated: superseded by `external`. A stored `true` reads as `external: ["parents"]`.',
         },
         users: {
           type: "array",
@@ -402,10 +419,29 @@ const defs = {
             "Send-time delivery counts per audience. Absent for an audience that was not sent to.",
           properties: {
             internal: deliveryCountsNode,
+            external: {
+              type: "object",
+              additionalProperties: false,
+              required: ["recipients", "sent", "failed"],
+              properties: {
+                ...deliveryCountsNode.properties,
+                byChannel: {
+                  type: "object",
+                  additionalProperties: false,
+                  description:
+                    "Per-channel counts, present only for the channels attempted.",
+                  properties: {
+                    sms: deliveryCountsNode,
+                    email: deliveryCountsNode,
+                  },
+                },
+              },
+            },
             emergencyContacts: {
               type: "object",
               additionalProperties: false,
               required: ["recipients", "sent", "failed"],
+              description: "Deprecated: superseded by `external`.",
               properties: {
                 ...deliveryCountsNode.properties,
                 byChannel: {

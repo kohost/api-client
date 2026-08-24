@@ -32,7 +32,10 @@ export {
 } from "./deliveryStatus.js";
 export type {
   EmergencyContactAudience,
+  EmergencyContactPeople,
+  EmergencyContactPerson,
   EmergencyContactRoleGroup,
+  ExternalGroupCounts,
 } from "./emergencyContacts.js";
 export { MAX_MESSAGE_ATTACHMENTS } from "./messageAttachments.js";
 export {

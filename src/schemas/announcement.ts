@@ -7,7 +7,7 @@ export const announcementSchema = {
   title: "Announcement",
   description: "Announcement message sent to users",
   type: "object",
-  required: ["id", "type", "body"],
+  required: ["id", "type"],
   properties: {
     id: { $ref: "definitions.json#/definitions/id" },
     propertyId: {
@@ -19,6 +19,22 @@ export const announcementSchema = {
       type: "string",
       enum: ["announcement"],
       default: "announcement",
+    },
+    status: {
+      type: "string",
+      description:
+        "`sent` is a real broadcast; `preset` is a named, reusable configuration a sender loads into the composer. Absent on records written before presets existed — read as `sent`.",
+      enum: ["sent", "preset"],
+      default: "sent",
+    },
+    name: {
+      type: "string",
+      description: "Display name of a preset. Sent announcements have none.",
+    },
+    presetId: {
+      type: "string",
+      description:
+        "The preset this sent announcement was loaded from, when it was.",
     },
     audience: {
       $ref: "definitions.json#/definitions/audience",
@@ -40,16 +56,16 @@ export const announcementSchema = {
     surfaces: {
       type: "array",
       description:
-        "Surface channels the announcement was broadcast to, as the sender selected them. `category` is open for future surface kinds; only `pa` ships today.",
+        "Surface channels the announcement was broadcast to, as the sender selected them. `discriminator` is the mediaSource `Device.discriminator` targeted, open for future surface types; only `paSystem` ships today.",
       items: {
         type: "object",
-        required: ["category", "kind"],
+        required: ["discriminator", "scope"],
         properties: {
-          category: {
+          discriminator: {
             type: "string",
-            enum: ["pa"],
+            enum: ["paSystem"],
           },
-          kind: {
+          scope: {
             type: "string",
             enum: ["all", "spaces", "devices"],
           },
@@ -66,18 +82,112 @@ export const announcementSchema = {
             description: "PA output zones to page; all zones when omitted.",
             items: { type: "string" },
           },
+          playlistId: {
+            type: "string",
+            description:
+              "A PA playlist (driver recording) played in place of the spoken body; its zones are the playlist's own.",
+          },
         },
         additionalProperties: false,
       },
     },
     body: {
       type: "string",
+      description:
+        "The spoken/written message. Optional only when every surface plays a preset and no channel is selected.",
     },
     media: {
       $ref: "mediaFile.json",
     },
     sentBy: {
       type: "string",
+    },
+    result: {
+      type: "object",
+      additionalProperties: false,
+      required: ["recipientsResolved", "perChannel", "skipped", "surfaces"],
+      description:
+        "What the send actually achieved, written once at send time and never recomputed. Absent on presets and on sends recorded before this was stored. The `audience.delivery` counts are the same send viewed per audience; this is the per-channel and per-device detail behind them.",
+      properties: {
+        recipientsResolved: {
+          type: "integer",
+          minimum: 0,
+          description:
+            "How many internal Users the audience selector resolved to. Zero when no personal channel was selected, however wide the selector — an announcement with no channel reaches no User.",
+        },
+        external: {
+          type: "object",
+          additionalProperties: false,
+          required: ["recipients", "delivery"],
+          description:
+            "The external SIS roster this send reached. Absent when no external group was named.",
+          properties: {
+            recipients: {
+              type: "integer",
+              minimum: 0,
+              description: "Size of the roster the named groups resolved to.",
+            },
+            delivery: {
+              type: "object",
+              additionalProperties: false,
+              description:
+                "Per-channel counts, present only for the channels attempted.",
+              properties: {
+                sms: { $ref: "definitions.json#/definitions/deliveryCounts" },
+                email: { $ref: "definitions.json#/definitions/deliveryCounts" },
+              },
+            },
+          },
+        },
+        perChannel: {
+          type: "object",
+          additionalProperties: false,
+          required: ["sms", "email"],
+          description:
+            "Messages handed to each personal channel; zero for a channel the send did not select.",
+          properties: {
+            sms: { type: "integer" },
+            email: { type: "integer" },
+          },
+        },
+        skipped: {
+          type: "array",
+          description:
+            "Recipients a selected channel could not carry the announcement to. A missing contact detail is a per-channel skip, not a failed send, so one recipient may appear once per channel.",
+          items: {
+            type: "object",
+            required: ["userId", "channel", "reason"],
+            additionalProperties: false,
+            properties: {
+              userId: { type: "string" },
+              channel: { type: "string", enum: ["sms", "email"] },
+              reason: { type: "string", enum: ["no-phone", "no-email"] },
+            },
+          },
+        },
+        surfaces: {
+          type: "array",
+          description:
+            "Per-device outcome of the surface page, one entry per device the selectors resolved to. Distinct from the top-level `surfaces`, which is the selector the sender expressed.",
+          items: {
+            type: "object",
+            required: ["deviceId", "status"],
+            additionalProperties: false,
+            properties: {
+              deviceId: { type: "string" },
+              status: {
+                type: "string",
+                enum: ["sent", "failed", "skipped"],
+              },
+              reason: {
+                type: "string",
+                description:
+                  '`unsupported` when the driver advertises no content command; absent otherwise.',
+              },
+            },
+          },
+        },
+      },
     },
     tags: {
       type: "array",

@@ -1484,11 +1484,47 @@
     }
   ],
   [
+    "AddSOSEventNote",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/sos/events/:eventId/notes"
+      }
+    }
+  ],
+  [
+    "PreviewSOSEventReport",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sos/events/:eventId/report/preview"
+      }
+    }
+  ],
+  [
+    "ExportSOSEventReport",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/sos/events/:eventId/report"
+      }
+    }
+  ],
+  [
     "FetchEmergencyContacts",
     {
       "http": {
         "method": "GET",
         "path": "/sos/emergency-contacts"
+      }
+    }
+  ],
+  [
+    "FetchEmergencyContactPeople",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sos/emergency-contacts/people"
       }
     }
   ],
@@ -2307,6 +2343,51 @@
       "http": {
         "method": "POST",
         "path": "/announcements"
+      }
+    }
+  ],
+  [
+    "ListAnnouncements",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/announcements"
+      }
+    }
+  ],
+  [
+    "DescribeAnnouncement",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/announcements/:id"
+      }
+    }
+  ],
+  [
+    "CreateAnnouncementPreset",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/announcements/presets"
+      }
+    }
+  ],
+  [
+    "UpdateAnnouncementPreset",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/announcements/presets/:id"
+      }
+    }
+  ],
+  [
+    "DeleteAnnouncementPreset",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/announcements/presets/:id"
       }
     }
   ]

@@ -75,7 +75,26 @@ const broadcastEntryNode = {
     audience: {
       $ref: "definitions.json#/definitions/audience",
       description:
-        "Who this entry was directed at, and who it resolved to. `activation` and `final` entries always carry the everyone wildcard — neither is narrowable.",
+        "Who this entry was directed at, and who it resolved to. `activation` entries always carry the everyone wildcard; `update` and `final` entries carry whatever the sender named — an empty selector reaches nobody.",
+    },
+    channels: {
+      type: "array",
+      items: { type: "string", enum: ["sms", "email"] },
+      description:
+        "Personal channels the sender selected for this entry. Absent on entries recorded before channel selection existed, which sent over both.",
+    },
+    surfaces: {
+      type: "object",
+      additionalProperties: false,
+      required: ["targets", "sent", "failed", "skipped"],
+      description:
+        "Rollup of the PA-surface dispatch, present when the entry named surfaces. `targets` is the devices the selectors resolved to; `skipped` counts drivers that cannot render content.",
+      properties: {
+        targets: { type: "integer", minimum: 0 },
+        sent: { type: "integer", minimum: 0 },
+        failed: { type: "integer", minimum: 0 },
+        skipped: { type: "integer", minimum: 0 },
+      },
     },
     deliveryStatus: {
       type: "object",
@@ -84,7 +103,7 @@ const broadcastEntryNode = {
         "Computed on demand by DescribeSOSEvent (not persisted): live per-audience, per-channel outcome counts grouped from the sms/email collections by appData.sosUpdateId × status. Absent on the returned event until at least one matching message exists; only audiences/channels with data are present.",
       properties: {
         internal: audienceDeliveryNode,
-        emergencyContacts: audienceDeliveryNode,
+        external: audienceDeliveryNode,
       },
     },
   },
@@ -181,6 +200,30 @@ const automationRunEntryNode = {
   },
 } as const;
 
+const noteNode = {
+  type: "object",
+  additionalProperties: false,
+  required: ["id", "text", "by", "at"],
+  properties: {
+    id: {
+      type: "string",
+      description: "Unique identifier for the note.",
+    },
+    text: {
+      type: "string",
+      description: "Internal, plain-text note body. Never broadcast.",
+    },
+    by: {
+      ...sosActorNode,
+      description: "Actor that wrote the note; null when unattributed.",
+    },
+    at: {
+      $ref: "definitions.json#/definitions/date",
+      description: "When the note was recorded.",
+    },
+  },
+} as const;
+
 export const sosEventSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "sosEvent.json",
@@ -238,6 +281,27 @@ export const sosEventSchema = {
         oneOf: [broadcastEntryNode, automationRunEntryNode],
       },
     },
+    notes: {
+      type: "array",
+      default: [],
+      description:
+        "Append-only, internal-only post-incident notes. Kept outside the timeline: a note is for the record, never something that was broadcast.",
+      items: noteNode,
+    },
+    report: {
+      type: "object",
+      additionalProperties: false,
+      required: ["fileId", "url", "filename", "contentHash", "renderedAt"],
+      description:
+        "The most recently minted incident-report PDF, kept so a re-export of an unchanged, ended incident can reuse the file instead of rendering again. `contentHash` fingerprints the rendered content (excluding the generated-at stamp).",
+      properties: {
+        fileId: { type: "string" },
+        url: { type: "string" },
+        filename: { type: "string" },
+        contentHash: { type: "string" },
+        renderedAt: { $ref: "definitions.json#/definitions/date" },
+      },
+    },
     createdAt: {
       $ref: "definitions.json#/definitions/date",
       description: "When the SOS Event was created.",
@@ -258,6 +322,9 @@ export type SOSEventSchema = FromSchema<
   typeof sosEventSchema,
   {
     references: [typeof defs];
+    // `notes` carries `default: []` but is not required; keep it optional in
+    // the type so pre-notes documents and writers that omit it still fit.
+    keepDefaultedPropertiesOptional: true;
     deserialize: [
       {
         pattern: {
