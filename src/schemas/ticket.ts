@@ -279,13 +279,24 @@ const fullCostEntrySchema = {
         "follows. A written-off cost leaves the uninvoiced pool. Never set " +
         "by clients.",
     },
+    voided: {
+      type: "boolean",
+      default: false,
+      description:
+        "Server-maintained denormalization of billingReview (writtenOff " +
+        "pattern): true after a voided entry until a reinstated entry " +
+        "follows. A voided cost is withdrawn: it counts toward " +
+        "neither the approval gate nor financial completion and leaves the " +
+        "uninvoiced pool, but stays on the ticket so every viewer sees it " +
+        "was voided. Never set by clients.",
+    },
     billingReview: {
       type: "array",
       default: [],
       description:
         "Append-only billing review history for the entry (approval-history " +
-        "pattern): reversible write-offs and billed-vs-price divergence " +
-        "acknowledgements. Internal, redacted org-side.",
+        "pattern): reversible write-offs and voids, and billed-vs-price " +
+        "divergence acknowledgements. Internal, redacted org-side.",
       items: {
         type: "object",
         additionalProperties: false,
@@ -297,7 +308,12 @@ const fullCostEntrySchema = {
           },
           action: {
             type: "string",
-            enum: ["writtenOff", "reinstated", "divergenceAcknowledged"],
+            enum: [
+              "writtenOff",
+              "voided",
+              "reinstated",
+              "divergenceAcknowledged",
+            ],
           },
           performedBy: {
             type: ["string", "null"],
@@ -365,6 +381,21 @@ const redactedCostEntrySchema = {
         "The entry's stored customer price in integer cents — the whole of " +
         "what an org-side viewer receives, flattened out of the stored " +
         "price phase so none of its recording metadata comes with it.",
+    },
+    voided: {
+      type: "boolean",
+      default: false,
+      description:
+        "Whether the entry was voided (withdrawn). Carried through " +
+        "redaction so an org-side viewer sees the cost no longer counts.",
+    },
+    settled: {
+      type: "boolean",
+      default: false,
+      description:
+        "Whether a bill has claimed the entry or it was written off, so it " +
+        "can no longer be voided. Carried through redaction as a bare flag: " +
+        "neither the bill nor the write-off itself is exposed org-side.",
     },
   },
 } as const;
@@ -554,6 +585,7 @@ export const ticketSchema = {
               "workCanceled",
               "costRecorded",
               "costPriceChanged",
+              "costVoided",
             ],
             default: "message",
             description: "The discriminator of the message.",

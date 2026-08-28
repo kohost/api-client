@@ -2208,6 +2208,15 @@
     }
   ],
   [
+    "VoidCostEntry",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/costs/:costId/void"
+      }
+    }
+  ],
+  [
     "ReinstateCostEntry",
     {
       "http": {
