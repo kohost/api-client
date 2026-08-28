@@ -155,6 +155,7 @@ const defs = {
         "epson",
         "geovision-rs",
         "geovision-as-manager",
+        "hanwha",
         "honeywell-vista",
         "honeywell-resideo",
         "igor",
