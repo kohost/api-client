@@ -1,5 +1,17 @@
 # @kohost/api-client
 
+## 7.11.0
+
+### Minor Changes
+
+- [#795](https://github.com/kohost/kohost/pull/795) [`6b80e0c`](https://github.com/kohost/kohost/commit/6b80e0c418c2e175f567e4a404e2d7a1d5570532) Thanks [@itrogers](https://github.com/itrogers)! - Ticket and concierge stats now use a per-metric basis under the single `from`/`to` range. Opened stats stay on the created date; resolved stats (count, resolution time, resolved-by breakdowns) use the solved date, so work opened before the period but solved inside it is counted. Closed tickets are guaranteed a `solvedAt`: a migration backfills it and normalizes legacy string timestamps. The `solvedFrom`/`solvedTo`, `basis` and `resolvedRange` params are removed. The maximum stats window grows from one year to three. The admin concierge stats breakdown picker drops Location, Department, and Tag.
+
+- [#796](https://github.com/kohost/kohost/pull/796) [`65ba27d`](https://github.com/kohost/kohost/commit/65ba27dd9d2c12e9709f5f1e21008a8d240fd3c3) Thanks [@itrogers](https://github.com/itrogers)! - Ticket costs can be voided; voided costs clear the approval gate and financial completion
+
+### Patch Changes
+
+- [#602](https://github.com/kohost/kohost/pull/602) [`1c764e5`](https://github.com/kohost/kohost/commit/1c764e50891ba07877c9b38ff4329b63ba2418d8) Thanks [@itrogers](https://github.com/itrogers)! - Move the monorepo to Node 24 and npm 12: new Docker base image for the API, Node 24 across CI and the Netlify builds for app and web.
+
 ## 7.10.0
 
 ### Minor Changes
