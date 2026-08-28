@@ -14,7 +14,7 @@ describe("KFC stats window constants", () => {
   it("pins the anchor zone, default window, and max span", () => {
     expect(KFC_STATS_TIMEZONE).toBe("America/Los_Angeles");
     expect(KFC_STATS_DEFAULT_WINDOW_DAYS).toBe(30);
-    expect(KFC_STATS_MAX_RANGE_DAYS).toBe(366);
+    expect(KFC_STATS_MAX_RANGE_DAYS).toBe(1096);
   });
 });
 

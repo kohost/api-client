@@ -17,11 +17,11 @@ export const KFC_STATS_TIMEZONE = "America/Los_Angeles";
 export const KFC_STATS_DEFAULT_WINDOW_DAYS = 30;
 
 /**
- * Widest inclusive span a caller may request — a full leap year. Cross-org
- * federated aggregation cost scales with the window, so this caps the work an
- * arbitrary caller can ask for.
+ * Widest inclusive span a caller may request — three calendar years, including
+ * one leap day. Cross-org federated aggregation cost scales with the window, so
+ * this caps the work an arbitrary caller can ask for.
  */
-export const KFC_STATS_MAX_RANGE_DAYS = 366;
+export const KFC_STATS_MAX_RANGE_DAYS = 1096;
 
 /** A resolved inclusive day window as `YYYY-MM-DD` civil-date labels. */
 export interface KfcStatsWindowBounds {
