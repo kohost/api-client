@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.12.0
+
+### Minor Changes
+
+- [#819](https://github.com/kohost/kohost/pull/819) [`4279599`](https://github.com/kohost/kohost/commit/4279599b4eff1a325ba5a67c49a133d924401cad) Thanks [@itrogers](https://github.com/itrogers)! - Pull upstream standalone-repo changes: add `hanwha` to the driver enum; Group schema replaces `kind` ("Social"/"Department") with a required `discriminator` ("social"/"department"). Fixes the upstream commit that left the removed `kind` property in `required`, which made the Group schema unsatisfiable.
+
 ## 7.11.0
 
 ### Minor Changes

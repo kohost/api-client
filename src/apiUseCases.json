@@ -1771,6 +1771,15 @@
     }
   ],
   [
+    "AddBillLines",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/bills/:id/lines/batch"
+      }
+    }
+  ],
+  [
     "UpdateBillLine",
     {
       "http": {

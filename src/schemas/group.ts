@@ -7,7 +7,7 @@ export const groupSchema = {
   title: "Group",
   description: "A named collection of members.",
   type: "object",
-  required: ["id", "type", "kind", "discriminator"],
+  required: ["id", "type", "discriminator"],
   additionalProperties: false,
   properties: {
     id: {
