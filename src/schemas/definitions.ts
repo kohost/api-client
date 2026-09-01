@@ -158,6 +158,7 @@ const defs = {
         "hanwha",
         "honeywell-vista",
         "honeywell-resideo",
+        "honeywell-total-connect",
         "igor",
         "inncom",
         "isapi",
