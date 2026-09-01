@@ -5,10 +5,9 @@ export const groupSchema = {
   $schema: "http://json-schema.org/draft-07/schema",
   $id: "group.json",
   title: "Group",
-  description:
-    "A named collection of members. Conforms to SCIM 2.0 (RFC 7643) Group resource.",
+  description: "A named collection of members.",
   type: "object",
-  required: ["id", "type", "kind", "name"],
+  required: ["id", "type", "kind", "discriminator"],
   additionalProperties: false,
   properties: {
     id: {
