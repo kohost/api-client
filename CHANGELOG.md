@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.13.0
+
+### Minor Changes
+
+- [#831](https://github.com/kohost/kohost/pull/831) [`f2d1f96`](https://github.com/kohost/kohost/commit/f2d1f96b6ed0a490eeb01a69da6ebac0842546f2) Thanks [@itrogers](https://github.com/itrogers)! - Add `honeywell-total-connect` to the driver definitions schema (pulled from upstream api-client)
+
 ## 7.12.0
 
 ### Minor Changes
