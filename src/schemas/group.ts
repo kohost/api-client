@@ -25,9 +25,12 @@ export const groupSchema = {
       enum: ["group"],
       default: "group",
     },
-    kind: {
+    discriminator: {
       type: "string",
-      enum: ["Social", "Department"],
+      enum: [
+        "social",
+        "department",
+      ],
     },
     name: {
       type: "string",
