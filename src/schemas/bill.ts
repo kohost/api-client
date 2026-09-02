@@ -6,17 +6,23 @@ import { mediaFileSchema } from "./mediaFile";
 // `oneOf`. The two branches are disjoint via the `type` const plus
 // `additionalProperties: false`, so a line validates against exactly one.
 //
-// A cost line references a ticket cost entry by `(ticketId, costId)`. While the
-// bill is a draft it carries only the reference, the picked `categoryId`, and
-// any draft-time adjustment; the customer-facing `amount`, `description`, and
-// `categoryName` are live-read from the cost entry and snapshotted onto the
-// line at mark-sent. The billed amount is the marked-up actual (or the
-// `adjustedAmount` override, floored at zero) — vendor truth on the cost entry
-// is never touched.
+// A cost line always names its entry by `costId`; `source` says which
+// collection to look it up in. A `ticket` line resolves through
+// `(ticketId, costId)`, an `adhoc` line reads `costId` straight off the costs
+// collection with `ticketId` null. The claim path is what pairs the two, since
+// JSON Schema cannot state the pairing without splitting the branch and
+// breaking the `type` discriminator every reader keys off.
+//
+// While the bill is a draft the line carries only the reference, the picked
+// `categoryId`, and any draft-time adjustment; the customer-facing `amount`,
+// `description`, and `categoryName` are live-read from the claimed entry and
+// snapshotted onto the line at mark-sent. The billed amount is the marked-up
+// actual (or the `adjustedAmount` override, floored at zero) — vendor truth on
+// the entry is never touched.
 const costLineSchema = {
   type: "object",
   additionalProperties: false,
-  required: ["id", "type", "ticketId", "costId"],
+  required: ["id", "type"],
   properties: {
     id: {
       type: "string",
@@ -25,15 +31,29 @@ const costLineSchema = {
     type: {
       type: "string",
       enum: ["cost"],
-      description: "Discriminator: a line drawn from a ticket cost entry.",
+      description: "Discriminator: a line drawn from a recorded cost entry.",
+    },
+    source: {
+      type: "string",
+      enum: ["ticket", "adhoc"],
+      default: "ticket",
+      description:
+        "Where the claimed cost entry lives, and therefore how `costId` " +
+        "resolves: on a ticket, or in the costs collection.",
     },
     ticketId: {
-      type: "string",
-      description: "The ID of the ticket the claimed cost entry lives on.",
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The ID of the ticket the claimed cost entry lives on. Null on an " +
+        "`adhoc` line, which no ticket carries.",
     },
     costId: {
-      type: "string",
-      description: "The ID of the claimed cost entry within the ticket.",
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The ID of the claimed cost entry: an entry within the ticket on a " +
+        "`ticket` line, a costs-collection document on an `adhoc` one.",
     },
     categoryId: {
       type: ["string", "null"],

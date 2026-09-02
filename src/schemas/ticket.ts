@@ -1,5 +1,10 @@
 import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import {
+  costBillingReview,
+  costEntryProperties,
+  costEntryRequired,
+} from "./costEntry";
 import type { mediaFileSchema } from "./mediaFile";
 
 // Rich-text node vocabulary for parsedBody.content (ADR 0012). Deliberately
@@ -108,139 +113,17 @@ const richTextOrderedListNode = {
 const fullCostEntrySchema = {
   type: "object",
   additionalProperties: false,
-  required: ["id", "description", "currency", "price", "estimate", "markup"],
+  required: costEntryRequired,
   properties: {
-    id: {
-      type: "string",
-      description: "The ID of the cost entry.",
-    },
-    description: {
-      type: "string",
-      description: "What the cost covers.",
-    },
-    currency: {
-      type: "string",
-      default: "USD",
-      description: "ISO 4217 currency code of the entry's amounts.",
-    },
-    price: {
-      type: "object",
-      additionalProperties: false,
-      required: ["amount", "recordedBy", "recordedAt"],
-      description:
-        "The authoritative customer price of the entry — what the org is " +
-        "charged, what the approval gate totals, and what a bill line bills. " +
-        "Seeded at recording from the estimate and the markup, and from then " +
-        "on independent of all three: editing `estimate`, `actual`, or " +
-        "`markup` never moves it. Only an explicit price write does.",
-      properties: {
-        amount: {
-          type: "integer",
-          minimum: 0,
-          description: "Customer price in integer cents.",
-        },
-        recordedBy: {
-          type: "string",
-          description: "The ID of the user who recorded the amount.",
-        },
-        recordedAt: {
-          $ref: "definitions.json#/definitions/date",
-          description: "When the amount was recorded.",
-        },
-      },
-    },
-    estimate: {
-      type: "object",
-      additionalProperties: false,
-      required: ["amount", "recordedBy", "recordedAt"],
-      description: "The vendor cost estimate phase of the entry.",
-      properties: {
-        amount: {
-          type: "integer",
-          minimum: 0,
-          description: "Vendor cost estimate in integer cents.",
-        },
-        recordedBy: {
-          type: "string",
-          description: "The ID of the user who recorded the amount.",
-        },
-        recordedAt: {
-          $ref: "definitions.json#/definitions/date",
-          description: "When the amount was recorded.",
-        },
-      },
-    },
-    actual: {
-      type: "object",
-      additionalProperties: false,
-      required: ["amount", "recordedBy", "recordedAt"],
-      description:
-        "The actual vendor cost phase of the entry, recorded after the work.",
-      properties: {
-        amount: {
-          type: "integer",
-          minimum: 0,
-          description: "Actual vendor cost in integer cents.",
-        },
-        recordedBy: {
-          type: "string",
-          description: "The ID of the user who recorded the amount.",
-        },
-        recordedAt: {
-          $ref: "definitions.json#/definitions/date",
-          description: "When the amount was recorded.",
-        },
-      },
-    },
-    markup: {
-      type: "object",
-      additionalProperties: false,
-      required: ["percent"],
-      properties: {
-        percent: {
-          type: "number",
-          minimum: 0,
-          description:
-            "Markup percent the initial price was quoted at, uncapped. " +
-            "Context for how that quote was arrived at, not the source of " +
-            "truth for any amount: `price` is stored, so re-keying this " +
-            "percent prices nothing.",
-        },
-        custom: {
-          type: "boolean",
-          default: false,
-          description:
-            "Whether the percent was manually overridden rather than keyed from the configured markup tiers. Custom percents are never re-keyed on estimate edits.",
-        },
-      },
-    },
-    vendorInvoices: {
-      type: "array",
-      items: { $ref: "mediaFile.json" },
-      default: [],
-      description:
-        "The vendor's paperwork backing the entry's amounts, attached " +
-        "around recording the actual (or later) — an invoice plus whatever " +
-        "came with it. Internal: the file-store cannot enforce roster-only " +
-        "reads, so the boundary is this field living on the full shape " +
-        "only — the redacted projection never carries it.",
-    },
-    vendorInvoiceNumber: {
-      type: ["string", "null"],
-      default: null,
-      description:
-        "The vendor's own invoice number. Internal, redacted org-side like " +
-        "the rest of the cost split.",
-    },
-    vendorId: {
-      type: ["string", "null"],
-      default: null,
-      description:
-        "The Vendor the cost came from. A plain reference — no rollups — " +
-        "recorded alongside the vendor invoice and redacted org-side with " +
-        "the rest of the cost split. Independent of `workItemId`: a vendor " +
-        "cost need not trace to a scheduled visit.",
-    },
+    ...costEntryProperties,
+    // A ticket cost can also be voided, which the standalone kind has no
+    // ticket to be withdrawn from.
+    billingReview: costBillingReview([
+      "writtenOff",
+      "voided",
+      "reinstated",
+      "divergenceAcknowledged",
+    ]),
     workItemId: {
       type: ["string", "null"],
       default: null,
@@ -249,35 +132,6 @@ const fullCostEntrySchema = {
         "may name one visit, so a single trip's labor and materials can be " +
         "itemized. Cleared when the Work item is removed — the money record " +
         "outlives the scheduling record. Internal, redacted org-side.",
-    },
-    categoryId: {
-      type: ["string", "null"],
-      default: null,
-      description:
-        "The billing category classifying this cost, picked on the " +
-        "reconciliation pool before any bill claims the entry. `AddBillLine` " +
-        "snapshots it onto the claiming line, which owns its own category " +
-        "from then on. Internal, redacted org-side with the rest of the " +
-        "cost split.",
-    },
-    billId: {
-      type: ["string", "null"],
-      default: null,
-      description:
-        "Backlink to the bill whose draft claimed this cost as a line. " +
-        "Written when a draft bill adds the line, cleared on line removal, " +
-        "draft delete, or bill void; a claimed cost leaves the uninvoiced " +
-        "pool, making double-invoicing structurally impossible. " +
-        "Server-maintained at the repository, never set by clients.",
-    },
-    writtenOff: {
-      type: "boolean",
-      default: false,
-      description:
-        "Server-maintained denormalization of billingReview (approvalState " +
-        "pattern): true after a writtenOff entry until a reinstated entry " +
-        "follows. A written-off cost leaves the uninvoiced pool. Never set " +
-        "by clients.",
     },
     voided: {
       type: "boolean",
@@ -289,69 +143,6 @@ const fullCostEntrySchema = {
         "neither the approval gate nor financial completion and leaves the " +
         "uninvoiced pool, but stays on the ticket so every viewer sees it " +
         "was voided. Never set by clients.",
-    },
-    billingReview: {
-      type: "array",
-      default: [],
-      description:
-        "Append-only billing review history for the entry (approval-history " +
-        "pattern): reversible write-offs and voids, and billed-vs-price " +
-        "divergence acknowledgements. Internal, redacted org-side.",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        required: ["id", "action", "performedAt"],
-        properties: {
-          id: {
-            type: "string",
-            description: "The ID of the billing review entry.",
-          },
-          action: {
-            type: "string",
-            enum: [
-              "writtenOff",
-              "voided",
-              "reinstated",
-              "divergenceAcknowledged",
-            ],
-          },
-          performedBy: {
-            type: ["string", "null"],
-            default: null,
-            description:
-              "The ID of the user whose write appended this entry. Null " +
-              "when the write was not user-attributable.",
-          },
-          performedAt: {
-            $ref: "definitions.json#/definitions/date",
-            description: "When the entry was appended.",
-          },
-          note: {
-            type: ["string", "null"],
-            default: null,
-            description: "Free-text rationale for the action.",
-          },
-          billedAmount: {
-            type: "integer",
-            minimum: 0,
-            description:
-              "divergenceAcknowledged only: the amount a bill line already " +
-              "charged for this entry, in integer cents, frozen at ack time.",
-          },
-          priceAmount: {
-            type: "integer",
-            minimum: 0,
-            description:
-              "divergenceAcknowledged only: the entry's stored customer " +
-              "price in integer cents at ack time. A divergence is a billed " +
-              "line that no longer matches the price behind it — a price " +
-              "corrected after the cost was claimed — so the ack silences " +
-              "this one pair and any later price move re-flags it. A vendor " +
-              "actual arriving after billing is not a divergence: it moves " +
-              "margin, not what the customer owes.",
-          },
-        },
-      },
     },
   },
 } as const;

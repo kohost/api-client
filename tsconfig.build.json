@@ -6,6 +6,9 @@
     "declaration": true,
     "declarationMap": false,
     "outDir": "dist",
-    "tsBuildInfoFile": "node_modules/.cache/typescript/api-client-build.tsbuildinfo"
+    // In dist so the incremental state can't outlive the outputs it describes:
+    // CI restores node_modules but not dist, and a stale buildinfo there makes
+    // `tsc -b` skip emitting into the empty dist.
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
   }
 }

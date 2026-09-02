@@ -61,6 +61,44 @@ export function derivePrice(amount: number, percent: number): number {
   return Math.round(amount * (1 + percent / 100));
 }
 
+/**
+ * The markup percent a customer price stands for over a vendor cost, negative
+ * when the price is under the cost. Full float precision, so `derivePrice`
+ * gives that exact price back; round only for display.
+ *
+ * Zero on a zero vendor cost, where no percent produces any price and the
+ * figure records nothing. Callers that store this alongside a hand-set price
+ * mark it `custom`, which is what says the price came from a biller rather
+ * than from the percent.
+ */
+export function signedMarkupPercent(
+  costCents: number,
+  priceCents: number,
+): number {
+  if (costCents === 0) return 0;
+  // Integer numerator first, so clean ratios come out as clean percents
+  // (1000 -> 1200 is exactly 20, not 19.999999999999996).
+  return ((priceCents - costCents) * 100) / costCents;
+}
+
+/**
+ * The same percent, under the rule a ticket cost is recorded by: no price
+ * below the vendor cost, and no price at all on a zero cost.
+ *
+ * Null is the refusal. A ticket cost's `markup.percent` cannot go negative, so
+ * a price with no non-negative percent behind it is one the ticket API will
+ * not take. Ad hoc costs record a below-cost price deliberately and use
+ * `signedMarkupPercent` instead.
+ */
+export function markupPercentFromPrice(
+  costCents: number,
+  priceCents: number,
+): number | null {
+  if (costCents === 0) return priceCents === 0 ? 0 : null;
+  if (priceCents < costCents) return null;
+  return signedMarkupPercent(costCents, priceCents);
+}
+
 /** The sum of already-derived line amounts, in integer cents. */
 export function billTotal(lineAmounts: readonly number[]): number {
   return lineAmounts.reduce((sum, amount) => sum + amount, 0);

@@ -8,7 +8,9 @@ import {
   billTotal,
   derivePrice,
   formatMoney,
+  markupPercentFromPrice,
   resolveMarkupTierTable,
+  signedMarkupPercent,
 } from "./money.js";
 
 describe("resolveMarkupTierTable", () => {
@@ -59,12 +61,49 @@ describe("derivePrice", () => {
     [5000, 0, 5000],
   ];
 
-  it.each(vectors)(
-    "derivePrice(%i, %f) === %i",
-    (amount, percent, price) => {
-      expect(derivePrice(amount, percent)).toBe(price);
-    },
-  );
+  it.each(vectors)("derivePrice(%i, %f) === %i", (amount, percent, price) => {
+    expect(derivePrice(amount, percent)).toBe(price);
+  });
+});
+
+describe("signedMarkupPercent", () => {
+  it("is the percent a price above the vendor cost stands for", () => {
+    expect(signedMarkupPercent(1000, 1200)).toBe(20);
+    expect(signedMarkupPercent(5000, 5000)).toBe(0);
+  });
+
+  it("goes negative on a price under the vendor cost", () => {
+    expect(signedMarkupPercent(100_000, 80_000)).toBe(-20);
+    expect(signedMarkupPercent(5000, 0)).toBe(-100);
+  });
+
+  it("round-trips through derivePrice", () => {
+    for (const [cost, price] of [
+      [100_000, 80_000],
+      [1000, 1250],
+      [333, 111],
+    ]) {
+      expect(derivePrice(cost, signedMarkupPercent(cost, price))).toBe(price);
+    }
+  });
+
+  it("is zero on a vendor cost of nothing, which no percent prices", () => {
+    expect(signedMarkupPercent(0, 5000)).toBe(0);
+    expect(signedMarkupPercent(0, 0)).toBe(0);
+  });
+});
+
+describe("markupPercentFromPrice", () => {
+  it("refuses what a ticket cost cannot record", () => {
+    expect(markupPercentFromPrice(5000, 4999)).toBeNull();
+    expect(markupPercentFromPrice(0, 100)).toBeNull();
+  });
+
+  it("agrees with the signed percent everywhere else", () => {
+    expect(markupPercentFromPrice(1000, 1200)).toBe(20);
+    expect(markupPercentFromPrice(5000, 5000)).toBe(0);
+    expect(markupPercentFromPrice(0, 0)).toBe(0);
+  });
 });
 
 describe("billTotal", () => {

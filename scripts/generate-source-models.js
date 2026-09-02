@@ -194,6 +194,10 @@ function extractMethodsFromSource(sourceFile, exportName) {
   return methods;
 }
 
+// Property bags other schemas spread in. They declare no entity, so there is
+// no model, no validator and no `$id` to compile.
+const FRAGMENT_MODULES = new Set(["definitions.ts", "costEntry.ts"]);
+
 async function loadSchemas() {
   const schemaFiles = fs
     .readdirSync("src/schemas")
@@ -202,7 +206,7 @@ async function loadSchemas() {
         fileName.endsWith(".ts") &&
         !fileName.endsWith(".test.ts") &&
         fileName !== "index.ts" &&
-        fileName !== "definitions.ts",
+        !FRAGMENT_MODULES.has(fileName),
     );
 
   const modules = await Promise.all(

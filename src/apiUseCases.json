@@ -1825,6 +1825,56 @@
     }
   ],
   [
+    "CreateCost",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/costs"
+      },
+      "description": "Records a OneBill cost entry that no ticket carries: a vendor charge priced from the organization's markup tiers and landing in the uninvoiced pool. Optionally names the vendor it is owed to, and the customer price to charge instead of the tiers' figure."
+    }
+  ],
+  [
+    "EditCost",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/costs/:id"
+      },
+      "description": "Reconciles a OneBill cost entry: its description, billing category, vendor, vendor cost, customer price and vendor invoice number."
+    }
+  ],
+  [
+    "SetCostInvoice",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/costs/:id/vendor-invoice"
+      },
+      "description": "Attaches or removes a vendor invoice file on a OneBill cost entry, and sets its vendor invoice number."
+    }
+  ],
+  [
+    "WriteOffCost",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/costs/:id/write-off"
+      },
+      "description": "Writes off a OneBill cost entry, taking it out of the uninvoiced pool. Reversible."
+    }
+  ],
+  [
+    "ReinstateCost",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/costs/:id/reinstate"
+      },
+      "description": "Returns a written-off OneBill cost entry to the uninvoiced pool."
+    }
+  ],
+  [
     "CreateAutomation",
     {
       "http": {

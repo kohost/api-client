@@ -45,6 +45,8 @@ export {
   keyedMarkupPercent,
   DEFAULT_TAX_RATE,
   derivePrice,
+  markupPercentFromPrice,
+  signedMarkupPercent,
   billTotal,
   billTaxAmount,
   billGrandTotal,

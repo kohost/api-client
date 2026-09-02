@@ -96,6 +96,19 @@ describe("ticket cost entry wire shapes", () => {
     expect(validate(corrected)).toBe(true);
   });
 
+  // A biller may charge under what the vendor billed as a deliberate comp,
+  // and the percent behind that price is negative. A floor of zero here would
+  // force the entry to claim a markup it never had.
+  it("accepts a below-cost price and the negative markup behind it", () => {
+    const validate = compileCostEntryValidator();
+    const comped = {
+      ...fullCostEntry,
+      price: { ...fullCostEntry.price, amount: 8000 },
+      markup: { percent: -20, custom: true },
+    };
+    expect(validate(comped)).toBe(true);
+  });
+
   it("accepts the full shape carrying vendor and work item references", () => {
     const validate = compileCostEntryValidator();
     const withReferences = {
