@@ -74,6 +74,14 @@ export const emailMessageSchema = {
     replyTo: {
       type: ["string", "array"],
     },
+    cc: {
+      type: ["string", "array"],
+      items: { type: "string" },
+    },
+    bcc: {
+      type: ["string", "array"],
+      items: { type: "string" },
+    },
     appData: {
       type: "object",
       additionalProperties: true,
