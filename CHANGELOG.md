@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.14.0
+
+### Minor Changes
+
+- [#854](https://github.com/kohost/kohost/pull/854) [`31a9eb8`](https://github.com/kohost/kohost/commit/31a9eb8f97d6e9a2af7bb6084a76eadd62299276) Thanks [@itrogers](https://github.com/itrogers)! - When a KFC agent assigns a vendor, the vendor email Reply-To is that agent only and the agent is CC'd, keeping vendor correspondence private. Email messages now carry optional `cc`/`bcc` recipients through the send pipeline.
+
 ## 7.13.0
 
 ### Minor Changes
