@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.14.1
+
+### Patch Changes
+
+- [`3a03b33`](https://github.com/kohost/kohost/commit/3a03b3313e29f64159fa45b55c2e14d3519258af) Thanks [@itrogers](https://github.com/itrogers)! - Bump dependencies (Dependabot npm-minor-patch group, fast-uri); adapt `merge()` call sites to es-toolkit 1.52 return type.
+
 ## 7.14.0
 
 ### Minor Changes
