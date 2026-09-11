@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.15.0
+
+### Minor Changes
+
+- [`d240020`](https://github.com/kohost/kohost/commit/d240020f6ffde0fd0d864712bbec6ff3b313125b) Thanks [@itrogers](https://github.com/itrogers)! - Add `unifi-access` to the supported system ids
+
 ## 7.14.1
 
 ### Patch Changes
