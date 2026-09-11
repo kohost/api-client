@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.16.0
+
+### Minor Changes
+
+- [#934](https://github.com/kohost/kohost/pull/934) [`a089c54`](https://github.com/kohost/kohost/commit/a089c54838d973f95aa8679425ca3bbe3d07a020) Thanks [@itrogers](https://github.com/itrogers)! - Ticket schema gains `stages`, `awaitingResponse`, Work item `verification`, and the awaiting-response and verification conversation events; cost entries allow a Pending (unpriced) entry with nullable money; bill cost lines carry the vendor cost snapshot, ticket number, and property. New use cases: `SetAwaitingResponse`, `ClearAwaitingResponse`, `VerifyWorkItem`, `ClearWorkItemVerification`, `DescribeConciergeStageCounts`, `ListConciergeWorkspaceBillLines`, `DescribeConciergeBillsSummary`.
+
 ## 7.15.0
 
 ### Minor Changes
