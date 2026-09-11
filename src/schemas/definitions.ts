@@ -201,6 +201,7 @@ const defs = {
         "storable",
         "twilio",
         "unifi",
+        "unifi-access",
         "valcom",
         "veracross",
         "verkada",
