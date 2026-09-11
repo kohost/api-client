@@ -19,6 +19,14 @@ import { mediaFileSchema } from "./mediaFile";
 // snapshotted onto the line at mark-sent. The billed amount is the marked-up
 // actual (or the `adjustedAmount` override, floored at zero) — vendor truth on
 // the entry is never touched.
+//
+// `vendorCost`, `vendorId` and `hasActual` are a derived snapshot of that
+// vendor truth, written at mark-sent beside `amount` and re-patched when a
+// late actual lands on the claimed entry, so the transactions view and period
+// margin read one collection. `propertyId` and `ticketNumber` are snapshotted
+// beside them so that reader can address the source ticket's property without
+// resolving the ticket. The entry stays the source of truth; the vendor
+// invoice number and files are read live from it, never snapshotted.
 const costLineSchema = {
   type: "object",
   additionalProperties: false,
@@ -54,6 +62,23 @@ const costLineSchema = {
       description:
         "The ID of the claimed cost entry: an entry within the ticket on a " +
         "`ticket` line, a costs-collection document on an `adhoc` one.",
+    },
+    propertyId: {
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The property the claimed entry belongs to, snapshotted at " +
+        "mark-sent: the source ticket's property on a `ticket` line, the " +
+        "ad hoc entry's attributed property on an `adhoc` one. Lets a " +
+        "cross-organization reader reach the ticket's property scope " +
+        "without a ticket read. Internal, redacted org-side.",
+    },
+    ticketNumber: {
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The source ticket's number, snapshotted at mark-sent. Null on an " +
+        "`adhoc` line. Internal, redacted org-side.",
     },
     categoryId: {
       type: ["string", "null"],
@@ -101,6 +126,30 @@ const costLineSchema = {
       description:
         "The line description, snapshotted at mark-sent. Null while drafting, " +
         "when it live-reads from the cost entry.",
+    },
+    vendorCost: {
+      type: ["integer", "null"],
+      default: null,
+      description:
+        "What the claimed entry costs Kohost in integer cents, snapshotted " +
+        "at mark-sent: the vendor actual when recorded, else the estimate. " +
+        "Null while drafting or when the entry carries neither. Re-patched " +
+        "when a late actual lands. Internal, redacted org-side.",
+    },
+    vendorId: {
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The org-scoped Vendor named on the claimed entry, snapshotted at " +
+        "mark-sent. Internal, redacted org-side.",
+    },
+    hasActual: {
+      type: "boolean",
+      default: false,
+      description:
+        "Whether `vendorCost` is the vendor's settled actual rather than the " +
+        "estimate, snapshotted at mark-sent and re-patched when the actual " +
+        "lands. Internal, redacted org-side.",
     },
     taxable: {
       type: "boolean",

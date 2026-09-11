@@ -10,27 +10,46 @@
 // generator skips this file by name (`scripts/generate-source-models.js`):
 // these are fragments, not an entity.
 
+const moneyProperties = {
+  amount: {
+    type: "integer",
+    minimum: 0,
+    description: "The amount in integer cents.",
+  },
+  recordedBy: {
+    type: "string",
+    description: "The ID of the user who recorded the amount.",
+  },
+  recordedAt: {
+    $ref: "definitions.json#/definitions/date",
+    description: "When the amount was recorded.",
+  },
+} as const;
+
+const moneyRequired = ["amount", "recordedBy", "recordedAt"] as const;
+
 const money = (description: string) =>
   ({
     type: "object",
     additionalProperties: false,
-    required: ["amount", "recordedBy", "recordedAt"],
+    required: moneyRequired,
     description,
-    properties: {
-      amount: {
-        type: "integer",
-        minimum: 0,
-        description: "The amount in integer cents.",
-      },
-      recordedBy: {
-        type: "string",
-        description: "The ID of the user who recorded the amount.",
-      },
-      recordedAt: {
-        $ref: "definitions.json#/definitions/date",
-        description: "When the amount was recorded.",
-      },
-    },
+    properties: moneyProperties,
+  }) as const;
+
+/**
+ * The same phase on a host that admits a Pending cost, where `null` means the
+ * amount is not known yet. Only the ticket cost entry takes this shape: a
+ * ticket is what a vendor quote is awaited on.
+ */
+export const nullableMoney = (description: string) =>
+  ({
+    type: ["object", "null"],
+    additionalProperties: false,
+    required: moneyRequired,
+    default: null,
+    description,
+    properties: moneyProperties,
   }) as const;
 
 /**

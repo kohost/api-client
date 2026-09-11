@@ -1081,6 +1081,26 @@
     }
   ],
   [
+    "ListConciergeWorkspaceBillLines",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/concierge/bill-lines"
+      },
+      "description": "OneBill transactions view: every line on a sent or paid bill across every KFC-enabled organization, newest send first, paged and searchable, with the vendor-cost snapshot and resolved organization and vendor names."
+    }
+  ],
+  [
+    "DescribeConciergeBillsSummary",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/concierge/bills/summary"
+      },
+      "description": "Revenue, vendor cost, profit and margin billed through OneBill over a sentAt window, across the KFC-enabled organizations or one of them."
+    }
+  ],
+  [
     "ListConciergeWorkspaceTickets",
     {
       "http": {
@@ -1088,6 +1108,16 @@
         "path": "/concierge/tickets"
       },
       "description": "Cross-org KFC agent workspace ticket queue, scoped to the caller's roster membership (superadmins may scope to another agent)."
+    }
+  ],
+  [
+    "DescribeConciergeStageCounts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/concierge/tickets/stage-counts"
+      },
+      "description": "Live KFC ticket counts per Stage, plus the action-needed bucket, with the longest wait in each."
     }
   ],
   [
@@ -2212,6 +2242,26 @@
     }
   ],
   [
+    "SetAwaitingResponse",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/awaiting-response"
+      },
+      "description": "Marks the ticket as waiting on a reply, from one person on it or from anyone outside Kohost's side."
+    }
+  ],
+  [
+    "ClearAwaitingResponse",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/tickets/:id/awaiting-response"
+      },
+      "description": "Ends the wait the ticket is carrying."
+    }
+  ],
+  [
     "ClearWorkItemNoCharge",
     {
       "http": {
@@ -2219,6 +2269,26 @@
         "path": "/tickets/:id/work/:workItemId/no-charge"
       },
       "description": "Takes a scheduled visit back off the no-charge disposition."
+    }
+  ],
+  [
+    "VerifyWorkItem",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/tickets/:id/work/:workItemId/verification"
+      },
+      "description": "Records what a facilities roster member saw at a scheduled visit."
+    }
+  ],
+  [
+    "ClearWorkItemVerification",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/tickets/:id/work/:workItemId/verification"
+      },
+      "description": "Takes the recorded outcome back off a scheduled visit."
     }
   ],
   [

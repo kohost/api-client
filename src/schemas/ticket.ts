@@ -4,6 +4,7 @@ import {
   costBillingReview,
   costEntryProperties,
   costEntryRequired,
+  nullableMoney,
 } from "./costEntry";
 import type { mediaFileSchema } from "./mediaFile";
 
@@ -116,6 +117,38 @@ const fullCostEntrySchema = {
   required: costEntryRequired,
   properties: {
     ...costEntryProperties,
+    // Both amounts are null together on a Pending cost: an entry the roster
+    // recorded before the vendor quoted it. Nothing prices until the first
+    // amount lands, which seeds the estimate and derives the price from it.
+    price: nullableMoney(
+      "The authoritative customer price, what the org is charged, what the " +
+        "approval gate totals, and what a bill line bills. Seeded at pricing " +
+        "from the estimate and the markup, and from then on independent of " +
+        "all three: editing `estimate`, `actual`, or `markup` never moves it. " +
+        "Only an explicit price write does. Null while the entry is a Pending " +
+        "cost, which prices nothing and never reaches an org-side viewer.",
+    ),
+    estimate: nullableMoney(
+      "The vendor cost estimate phase of the entry. Null while the entry is " +
+        "a Pending cost: this field is what says an amount is known, so a " +
+        "null here is the whole definition of pending. Clearing a recorded " +
+        "amount back to null is refused; void the entry and record it again.",
+    ),
+    createdAt: {
+      $ref: "definitions.json#/definitions/date",
+      description:
+        "When the entry was recorded, whether or not it carried an amount. " +
+        "A Pending cost has no estimate to be dated by, so this is how long " +
+        "the roster has been waiting on the quote.",
+    },
+    createdBy: {
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The ID of the user who recorded the entry. Null when the write was " +
+        "not user-attributable. Stands in for `price.recordedBy` as the " +
+        "entry's author while it is a Pending cost.",
+    },
     // A ticket cost can also be voided, which the standalone kind has no
     // ticket to be withdrawn from.
     billingReview: costBillingReview([
@@ -291,6 +324,58 @@ const workItemSchema = {
         },
       },
     },
+    verification: {
+      type: ["object", "null"],
+      additionalProperties: false,
+      required: ["outcome", "verifiedBy", "verifiedAt"],
+      default: null,
+      description:
+        "What a facilities roster member saw at this visit, or null while " +
+        "nobody has recorded it. The date passing is not an outcome: an " +
+        "unverified past-dated visit is unverified, and this slot is the " +
+        "only thing that says whether the visit happened. Reversible by the " +
+        "roster while the ticket is active; frozen once it closes.",
+      properties: {
+        outcome: {
+          type: "string",
+          enum: ["completed", "notCompleted"],
+          description:
+            "Whether the work the visit was booked for got done. A " +
+            "not-completed visit is frozen: the return trip is a new work " +
+            "item, not a re-dated one.",
+        },
+        comment: {
+          type: ["string", "null"],
+          default: null,
+          description:
+            "What the verifier wants on the record, required when the visit " +
+            "was not completed and optional when it was.",
+        },
+        verifiedBy: {
+          type: "object",
+          additionalProperties: false,
+          required: ["id", "name"],
+          description:
+            "The roster member who recorded the outcome, named here so a " +
+            "later rename cannot rewrite what the thread already said.",
+          properties: {
+            id: {
+              type: "string",
+              description: "The ID of the verifying user.",
+            },
+            name: {
+              type: "string",
+              description:
+                "The verifying user's name at the time of the write.",
+            },
+          },
+        },
+        verifiedAt: {
+          $ref: "definitions.json#/definitions/date",
+          description: "When the outcome was recorded.",
+        },
+      },
+    },
   },
 } as const;
 
@@ -374,9 +459,14 @@ export const ticketSchema = {
               "workScheduled",
               "workRescheduled",
               "workCanceled",
+              "workCompleted",
+              "workNotCompleted",
+              "workVerificationCleared",
               "costRecorded",
               "costPriceChanged",
               "costVoided",
+              "awaitingResponse",
+              "awaitingResponseCleared",
             ],
             default: "message",
             description: "The discriminator of the message.",
@@ -495,6 +585,44 @@ export const ticketSchema = {
                 type: "string",
                 enum: ["open", "pending", "solved", "closed"],
                 description: "The status the ticket transitioned to.",
+              },
+            },
+          },
+          awaitingResponse: {
+            type: "object",
+            additionalProperties: false,
+            required: ["awaiting"],
+            description:
+              "Legacy. Earlier releases announced the Awaiting response marker in the conversation; the marker now lives only in the ticket's `awaitingResponse` slot and no new entries of this kind are written.",
+            properties: {
+              awaiting: {
+                type: "object",
+                additionalProperties: false,
+                required: ["id", "discriminator", "name"],
+                properties: {
+                  id: { type: "string" },
+                  discriminator: { type: "string", enum: ["user"] },
+                  name: { type: "string" },
+                },
+              },
+              messageId: {
+                type: ["string", "null"],
+                default: null,
+                description:
+                  "The conversation message this marker was sent with, when the composer set both in one write.",
+              },
+            },
+          },
+          awaitingResponseCleared: {
+            type: "object",
+            additionalProperties: false,
+            required: ["reason"],
+            description:
+              "Legacy. Earlier releases announced the end of a wait in the conversation; no new entries of this kind are written.",
+            properties: {
+              reason: {
+                type: "string",
+                enum: ["explicit", "left"],
               },
             },
           },
@@ -685,7 +813,7 @@ export const ticketSchema = {
       type: "array",
       default: [],
       description:
-        "Work items scheduled on the ticket: who is coming, when, and what for. Many per ticket, including repeat visits by the same performer. Carries no lifecycle status — the conversation log is the history and a past-dated entry is implicitly done. Never redacted; vendor identity is already public in assignment.",
+        "Work items scheduled on the ticket: who is coming, when, and what for. Many per ticket, including repeat visits by the same performer. Carries no lifecycle status — the conversation log is the history, and only a roster verification says whether a past-dated visit happened. Never redacted; vendor identity is already public in assignment.",
       items: workItemSchema,
     },
     costs: {
@@ -769,12 +897,74 @@ export const ticketSchema = {
       description:
         "The effective do-not-exceed amount in integer cents the approval gate compares against, resolved per read from the organization and property Concierge settings. Never stored on the document and never set by clients; absent on payloads where it could not be resolved. Viewer-independent: the DNE is the customer's own contract term, so org-side viewers see it.",
     },
+    stages: {
+      type: "array",
+      description:
+        "The Stages the ticket carries, in the fixed chip order. Derived at read time from the ticket's own facts, never stored and never set by clients, and absent for every viewer outside Kohost's facilities staff. A ticket may carry several at once; `closed` and `pending` tickets carry none.",
+      items: {
+        type: "string",
+        enum: [
+          "awaitingClientApproval",
+          "awaitingClientResponse",
+          "awaitingVendorQuote",
+          "vendorScheduled",
+          "confirmCosts",
+          "resolveReady",
+        ],
+      },
+    },
     approvalState: {
       type: "string",
       enum: ["clear", "awaitingApproval", "denied"],
       default: "clear",
       description:
         "Server-maintained denormalization of the approval gate, updated on every cost or approval write (reopenCount pattern) so queue filters get O(1) access. Never set by clients.",
+    },
+    awaitingResponse: {
+      type: ["object", "null"],
+      default: null,
+      additionalProperties: false,
+      required: ["author", "awaiting", "since"],
+      description:
+        "A Kohost Facilities agent's private note that they are waiting on a reply, from one named participant outside Kohost's side or from anyone outside it. Served only to the Facilities roster; every other viewer receives null. A named wait ends when anyone other than its author posts a public message or when the awaited person leaves the ticket; an anyone wait ends when someone outside Kohost's side posts a public message. Either ends when the roster clears it. Written only through SetAwaitingResponse and ClearAwaitingResponse.",
+      properties: {
+        author: {
+          type: "object",
+          additionalProperties: false,
+          required: ["id", "discriminator", "name"],
+          description: "Who set the marker.",
+          properties: {
+            id: { type: "string" },
+            discriminator: {
+              type: "string",
+              enum: ["user", "vendor", "system"],
+            },
+            name: { type: "string" },
+          },
+        },
+        awaiting: {
+          type: ["object", "null"],
+          additionalProperties: false,
+          required: ["id", "discriminator", "name"],
+          description:
+            "The person the ticket is waiting on. Null when the wait is on anyone outside Kohost's side rather than one named person.",
+          properties: {
+            id: { type: "string" },
+            discriminator: { type: "string", enum: ["user"] },
+            name: { type: "string" },
+          },
+        },
+        since: {
+          $ref: "definitions.json#/definitions/date",
+          description: "When the marker was set.",
+        },
+        messageId: {
+          type: ["string", "null"],
+          default: null,
+          description:
+            "Legacy. Earlier releases linked the marker to the message it was sent with; no longer written.",
+        },
+      },
     },
     tags: {
       type: "array",
@@ -840,6 +1030,9 @@ export type TicketCostEntry = Extract<
 
 /** One scheduled performance of work on a ticket. */
 export type TicketWorkItem = NonNullable<TicketSchemaBase["work"]>[number];
+
+/** One derived Stage a ticket may carry. The API's `resolveStages` owns the rules. */
+export type TicketStage = NonNullable<TicketSchemaBase["stages"]>[number];
 
 /** One append-only billing review entry on a stored cost entry. */
 export type TicketCostBillingReviewEntry = NonNullable<
