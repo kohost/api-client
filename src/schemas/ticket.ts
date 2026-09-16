@@ -126,7 +126,7 @@ const fullCostEntrySchema = {
         "from the estimate and the markup, and from then on independent of " +
         "all three: editing `estimate`, `actual`, or `markup` never moves it. " +
         "Only an explicit price write does. Null while the entry is a Pending " +
-        "cost, which prices nothing and never reaches an org-side viewer.",
+        "cost, which prices nothing.",
     ),
     estimate: nullableMoney(
       "The vendor cost estimate phase of the entry. Null while the entry is " +
@@ -148,6 +148,17 @@ const fullCostEntrySchema = {
         "The ID of the user who recorded the entry. Null when the write was " +
         "not user-attributable. Stands in for `price.recordedBy` as the " +
         "entry's author while it is a Pending cost.",
+    },
+    expectedOn: {
+      type: ["string", "null"],
+      pattern: "^\\d{4}-\\d{2}-\\d{2}$",
+      default: null,
+      description:
+        "The Quote-expected date: the calendar day the vendor promised the " +
+        "quote, as YYYY-MM-DD read in the property's timezone. Required " +
+        "while the entry is a Pending cost and cleared once it is priced; " +
+        "null on entries recorded before the date existed. Overwritten in " +
+        "place when the vendor slips. Survives redaction.",
     },
     // A ticket cost can also be voided, which the standalone kind has no
     // ticket to be withdrawn from.
@@ -199,12 +210,37 @@ const redactedCostEntrySchema = {
       description: "ISO 4217 currency code of the entry's amounts.",
     },
     price: {
-      type: "integer",
+      type: ["integer", "null"],
       minimum: 0,
       description:
         "The entry's stored customer price in integer cents — the whole of " +
         "what an org-side viewer receives, flattened out of the stored " +
-        "price phase so none of its recording metadata comes with it.",
+        "price phase so none of its recording metadata comes with it. Null " +
+        "while the entry is a Pending cost: the org sees a quote is owed, " +
+        "and nothing else until it lands.",
+    },
+    createdAt: {
+      $ref: "definitions.json#/definitions/date",
+      description:
+        "When the entry was recorded. Carried through redaction so a Pending " +
+        "cost, which has no priced phase to be dated by, still has a time.",
+    },
+    createdBy: {
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The ID of the user who recorded the entry, carried through " +
+        "redaction so the org side's cost controls know a Pending cost is " +
+        "the roster's, not theirs.",
+    },
+    expectedOn: {
+      type: ["string", "null"],
+      pattern: "^\\d{4}-\\d{2}-\\d{2}$",
+      default: null,
+      description:
+        "The Quote-expected date on a Pending cost, YYYY-MM-DD at the " +
+        "property. Carried through redaction: the day is the one fact an " +
+        "org-side viewer gets about a quote that is owed.",
     },
     voided: {
       type: "boolean",
@@ -234,7 +270,7 @@ const redactedCostEntrySchema = {
 const workItemSchema = {
   type: "object",
   additionalProperties: false,
-  required: ["id", "performer", "date"],
+  required: ["id", "performer"],
   properties: {
     id: {
       type: "string",
@@ -267,10 +303,24 @@ const workItemSchema = {
       },
     },
     date: {
-      type: "string",
+      type: ["string", "null"],
       pattern: "^\\d{4}-\\d{2}-\\d{2}$",
+      default: null,
       description:
-        "The calendar date of the visit as YYYY-MM-DD, read in the property's timezone.",
+        "The calendar date of the visit as YYYY-MM-DD, read in the property's " +
+        "timezone. Null while the item is Pending work, which carries " +
+        "`blockedUntil` instead; exactly one of the two is set.",
+    },
+    blockedUntil: {
+      type: ["string", "null"],
+      pattern: "^\\d{4}-\\d{2}-\\d{2}$",
+      default: null,
+      description:
+        "The Blocked-until date of Pending work: the day the roster expects " +
+        "the blocker to clear and scheduling to become possible, as " +
+        "YYYY-MM-DD in the property's timezone. Not a promise the work " +
+        "happens that day. Set only while `date` is null; cleared the moment " +
+        "the item is scheduled. Overwritten in place when it slips.",
     },
     time: {
       type: ["string", "null"],
@@ -907,6 +957,7 @@ export const ticketSchema = {
           "awaitingClientApproval",
           "awaitingClientResponse",
           "awaitingVendorQuote",
+          "awaitingScheduling",
           "vendorScheduled",
           "confirmCosts",
           "resolveReady",
