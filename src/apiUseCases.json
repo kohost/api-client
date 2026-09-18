@@ -1559,6 +1559,42 @@
     }
   ],
   [
+    "SyncSISRoster",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/sis/sync"
+      }
+    }
+  ],
+  [
+    "DescribeSISSync",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sis/sync"
+      }
+    }
+  ],
+  [
+    "ListSISPeople",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sis/people"
+      }
+    }
+  ],
+  [
+    "ListSISHouseholds",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/sis/households"
+      }
+    }
+  ],
+  [
     "DescribeIssue",
     {
       "http": {
@@ -2481,6 +2517,15 @@
       "http": {
         "method": "POST",
         "path": "/announcements"
+      }
+    }
+  ],
+  [
+    "PreviewAnnouncement",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/announcements/preview"
       }
     }
   ],

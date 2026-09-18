@@ -5,6 +5,7 @@ export * from "./command.js";
 export * from "./createImageUploadEndpoint.js";
 export * from "./createShortLink.js";
 export * from "./getCategories.js";
+export * from "./getGroups.js";
 export * from "./getMobileKey.js";
 export * from "./getProducts.js";
 export * from "./getRooms.js";

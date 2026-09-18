@@ -125,7 +125,26 @@ export const announcementSchema = {
             recipients: {
               type: "integer",
               minimum: 0,
-              description: "Size of the roster the named groups resolved to.",
+              description:
+                "Roster contacts holding an address on at least one attempted channel. A contact with no address for any selected channel is not a recipient.",
+            },
+            sent: {
+              type: "integer",
+              minimum: 0,
+              description:
+                "Recipients reached on at least one channel. Absent on sends recorded before it was stored.",
+            },
+            failed: {
+              type: "integer",
+              minimum: 0,
+              description:
+                "Recipients reached on no channel, excluding those who opted out. Absent on sends recorded before it was stored.",
+            },
+            optedOut: {
+              type: "integer",
+              minimum: 0,
+              description:
+                "Recipients skipped on every attempted channel because they opted out.",
             },
             delivery: {
               type: "object",

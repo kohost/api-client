@@ -36,10 +36,15 @@ export type PlatformRoleName = (typeof PLATFORM_ROLE_NAMES)[number];
 /**
  * The people outside the platform a broadcast may name, sourced from the SIS
  * roster. `students` is every system user the SIS marks as a Student;
- * `parents` is everybody else on the roster — every emergency-contact
+ * `staff` is everybody synced with nothing but the Staff role (faculty and
+ * staff); `parents` is everybody else on the roster — every emergency-contact
  * relationship the source system carries, whatever it calls it.
  */
-export const EXTERNAL_AUDIENCE_GROUPS = ["students", "parents"] as const;
+export const EXTERNAL_AUDIENCE_GROUPS = [
+  "students",
+  "parents",
+  "staff",
+] as const;
 
 export type ExternalAudienceGroup = (typeof EXTERNAL_AUDIENCE_GROUPS)[number];
 
@@ -51,6 +56,60 @@ const deliveryCountsNode = {
     recipients: { type: "integer", minimum: 0 },
     sent: { type: "integer", minimum: 0 },
     failed: { type: "integer", minimum: 0 },
+    optedOut: {
+      type: "integer",
+      minimum: 0,
+      description:
+        "Recipients skipped because they opted out of this channel. Counted apart from `failed`; absent on sends recorded before opt-out tracking.",
+    },
+  },
+} as const;
+
+export const SMS_OPT_OUT_REASONS = ["stop", "vendor"] as const;
+export const EMAIL_OPT_OUT_REASONS = [
+  "unsubscribe",
+  "spamReport",
+  "bounce",
+] as const;
+
+const dateNode = { type: ["string", "object"], format: "date-time" } as const;
+
+const optedOutAtNode = {
+  anyOf: [dateNode, { type: "null" }],
+  description:
+    "When the person opted out of this channel; null while they are reachable.",
+} as const;
+
+/**
+ * Per-channel opt-out state for a person reached over external messaging.
+ * Written by inbound STOP/START and vendor suppression events; read before
+ * every external send. A channel is opted out exactly when `optedOutAt` holds
+ * a date. Lives on SystemUser today; the same
+ * node could later sit in a User's per-Organization preferences entry.
+ */
+const consentNode = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    sms: {
+      type: "object",
+      additionalProperties: false,
+      required: ["optedOutAt"],
+      properties: {
+        optedOutAt: optedOutAtNode,
+        reason: { type: "string", enum: SMS_OPT_OUT_REASONS },
+        lastOptOutNoticeAt: dateNode,
+      },
+    },
+    email: {
+      type: "object",
+      additionalProperties: false,
+      required: ["optedOutAt"],
+      properties: {
+        optedOutAt: optedOutAtNode,
+        reason: { type: "string", enum: EMAIL_OPT_OUT_REASONS },
+      },
+    },
   },
 } as const;
 
@@ -369,6 +428,7 @@ const defs = {
       enum: NOTIFICATION_CHANNELS,
     },
     deliveryCounts: deliveryCountsNode,
+    consent: consentNode,
     audience: {
       type: "object",
       additionalProperties: false,

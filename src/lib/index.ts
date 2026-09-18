@@ -37,6 +37,22 @@ export type {
   EmergencyContactRoleGroup,
   ExternalGroupCounts,
 } from "./emergencyContacts.js";
+export {
+  SIS_BUCKETS,
+  type SISBucket,
+  type SISHousehold,
+  type SISHouseholdMember,
+  type SISHouseholds,
+  type SISHouseholdsQuery,
+  type SISPage,
+  type SISPeople,
+  type SISPeopleQuery,
+  type SISPeopleSort,
+  type SISPerson,
+  type SISSortDirection,
+  type SISSyncResult,
+  type SISSyncState,
+} from "./sis.js";
 export { MAX_MESSAGE_ATTACHMENTS } from "./messageAttachments.js";
 export {
   DEFAULT_MARKUP_TIERS,

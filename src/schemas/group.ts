@@ -19,6 +19,11 @@ export const groupSchema = {
     driver: {
       $ref: "definitions.json#/definitions/driver",
     },
+    propertyId: {
+      type: "string",
+      description:
+        "ID of the Property this synced group belongs to. Used as a per-document filter inside the org-scoped database.",
+    },
     type: {
       type: "string",
       enum: ["group"],
@@ -26,10 +31,7 @@ export const groupSchema = {
     },
     discriminator: {
       type: "string",
-      enum: [
-        "social",
-        "department",
-      ],
+      enum: ["social", "department"],
     },
     name: {
       type: "string",

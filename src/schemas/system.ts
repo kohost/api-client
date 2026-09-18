@@ -122,6 +122,11 @@ export const systemSchema = {
         },
       },
     },
+    syncedAt: {
+      $ref: "definitions.json#/definitions/date",
+      description:
+        "When the system's roster (people and households) was last synced into the platform.",
+    },
     createdAt: {
       $ref: "definitions.json#/definitions/date",
     },

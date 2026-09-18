@@ -9,7 +9,12 @@ export interface EmergencyContactRoleGroup {
 
 export interface ExternalGroupCounts {
   total: number;
+  /** Contacts with a phone or an email. */
   reachable: number;
+  /** Contacts with a phone, the SMS-only reach. */
+  sms: number;
+  /** Contacts with an email, the email-only reach. */
+  email: number;
 }
 
 export interface EmergencyContactAudience {
@@ -34,6 +39,8 @@ export interface EmergencyContactPerson {
   relationship: string | null;
   group: ExternalAudienceGroup;
   reachable: boolean;
+  /** Per-channel opt-out state; a routine send skips the channels marked true. */
+  optedOut?: { sms: boolean; email: boolean };
 }
 
 export interface EmergencyContactPeople {
