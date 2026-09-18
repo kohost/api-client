@@ -1,5 +1,21 @@
 # @kohost/api-client
 
+## 7.17.0
+
+### Minor Changes
+
+- [#968](https://github.com/kohost/kohost/pull/968) [`0f5c428`](https://github.com/kohost/kohost/commit/0f5c4288472ec6ca16c3b7e0d89bf72ab8c2757a) Thanks [@itrogers](https://github.com/itrogers)! - Adds the `PreviewAnnouncement` use case (`POST /announcements/preview`).
+
+- [#968](https://github.com/kohost/kohost/pull/968) [`0f5c428`](https://github.com/kohost/kohost/commit/0f5c4288472ec6ca16c3b7e0d89bf72ab8c2757a) Thanks [@itrogers](https://github.com/itrogers)! - `SystemUser` and `User.preferences[]` gain `messaging` (per-channel `sms`/`email` opt-out state). Delivery counts gain `optedOut`. `EmergencyContactPerson` gains optional `optedOut: { sms, email }`.
+
+- [#968](https://github.com/kohost/kohost/pull/968) [`0f5c428`](https://github.com/kohost/kohost/commit/0f5c4288472ec6ca16c3b7e0d89bf72ab8c2757a) Thanks [@itrogers](https://github.com/itrogers)! - System gains `syncedAt` (last successful roster sync) and Group gains `propertyId`. New `SyncSISRoster` and `DescribeSISSync` HTTP use cases, a `GetGroups` command beside `GetUsers`, and `SISSyncState` / `SISSyncResult` response types (also re-exported from `@kohost/types/sis`). `ListSISPeople` and `ListSISHouseholds` HTTP use cases with `SISPeople`, `SISPerson`, `SISHouseholds`, `SISHouseholdMember` and `SISBucket` response types.
+
+  `SISBucket` gains `staff`, last in `SIS_BUCKETS`.
+
+### Patch Changes
+
+- [#968](https://github.com/kohost/kohost/pull/968) [`0f5c428`](https://github.com/kohost/kohost/commit/0f5c4288472ec6ca16c3b7e0d89bf72ab8c2757a) Thanks [@itrogers](https://github.com/itrogers)! - Announcement `result.external` gains optional `sent`, `failed` and `optedOut`.
+
 ## 7.16.0
 
 ### Minor Changes
