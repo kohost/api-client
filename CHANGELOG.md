@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.18.0
+
+### Minor Changes
+
+- [`2fe26a5`](https://github.com/kohost/kohost/commit/2fe26a582bc359ecbd00201d3fbd1f6a1b3c047a) Thanks [@itrogers](https://github.com/itrogers)! - System gains `discriminator` (`accessControl`, `lighting`, `hvac`, `av`, `alarm`, `camera`) and `emergency` (`lockdown`, `evacuate`, or `null`). `emergency` is required when `discriminator` is `accessControl`.
+
 ## 7.17.0
 
 ### Minor Changes
