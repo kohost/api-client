@@ -18,6 +18,10 @@ export const systemSchema = {
       default: "system",
       enum: ["system"],
     },
+    discriminator: {
+      type: "string",
+      enum: ["accessControl", "lighting", "hvac", "av", "alarm", "camera"],
+    },
     name: {
       type: "string",
     },
@@ -107,6 +111,12 @@ export const systemSchema = {
         },
       },
     },
+    emergency: {
+      type: ["string", "null"],
+      enum: ["lockdown", "evacuate", null],
+      default: null,
+      description: "Active system wide emergency state",
+    },
     health: {
       type: "object",
       properties: {
@@ -137,6 +147,15 @@ export const systemSchema = {
       $ref: "definitions.json#/definitions/date",
     },
   },
+  allOf: [
+    {
+      if: {
+        properties: { discriminator: { const: "accessControl" } },
+        required: ["discriminator"],
+      },
+      then: { required: ["emergency"] },
+    }
+  ]
 } as const;
 
 export type SystemSchema = FromSchema<
