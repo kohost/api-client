@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.19.0
+
+### Minor Changes
+
+- [`7b124ee`](https://github.com/kohost/kohost/commit/7b124eeb58cd4f99c609550ca20b8fc59625cbb4) Thanks [@itrogers](https://github.com/itrogers)! - System replaces `discriminator` with `categories` (array of `access`, `climate`, `irrigation`, `lighting`, `media`, `security`, `sis`; defaults to `[]`). `emergency` is now required when `categories` contains `access`.
+
 ## 7.18.0
 
 ### Minor Changes
