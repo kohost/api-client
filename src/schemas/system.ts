@@ -18,9 +18,14 @@ export const systemSchema = {
       default: "system",
       enum: ["system"],
     },
-    discriminator: {
-      type: "string",
-      enum: ["accessControl", "lighting", "hvac", "av", "alarm", "camera"],
+    categories: {
+      type: "array",
+      uniqueItems: true,
+      default: [],
+      items: { 
+        enum: ["access", "climate", "irrigation", "lighting", "media", "security", "sis"] 
+      },
+      description: "The categories of functionality this system provides.",
     },
     name: {
       type: "string",
@@ -150,8 +155,8 @@ export const systemSchema = {
   allOf: [
     {
       if: {
-        properties: { discriminator: { const: "accessControl" } },
-        required: ["discriminator"],
+        properties: { categories: { contains: { const: "access" } } },
+        required: ["categories"],
       },
       then: { required: ["emergency"] },
     }
