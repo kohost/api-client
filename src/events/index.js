@@ -22,5 +22,6 @@ export * from "./systemMotionSensorUpdated.js";
 export * from "./systemSpaceUpdated.js";
 export * from "./systemSwitchUpdated.js";
 export * from "./systemThermostatUpdated.js";
+export * from "./systemUpdated.js";
 export * from "./systemUserUpdated.js";
 export * from "./systemWindowCoveringUpdated.js";
