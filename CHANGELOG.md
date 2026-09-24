@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.20.0
+
+### Minor Changes
+
+- [#1020](https://github.com/kohost/kohost/pull/1020) [`d2a1285`](https://github.com/kohost/kohost/commit/d2a12852a6cf3ee1bff2e6a1f01edc2d71b88bee) Thanks [@itrogers](https://github.com/itrogers)! - Add `SystemUpdated` event so drivers can publish their System record.
+
 ## 7.19.0
 
 ### Minor Changes
