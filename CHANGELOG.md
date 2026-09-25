@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.21.0
+
+### Minor Changes
+
+- [`92f4388`](https://github.com/kohost/kohost/commit/92f4388de3b132b38f554f17547cd19b58bb33d3) Thanks [@itrogers](https://github.com/itrogers)! - Add `isonas-pure-access` to the driver definitions schema (pulled from upstream api-client)
+
 ## 7.20.0
 
 ### Minor Changes
