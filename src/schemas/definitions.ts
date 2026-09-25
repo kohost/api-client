@@ -221,6 +221,7 @@ const defs = {
         "igor",
         "inncom",
         "isapi",
+        "isonas-pure-access",
         "kohost-k7",
         "kohost",
         "lapi",
