@@ -167,7 +167,7 @@ export const systemSchema = {
         properties: { categories: { contains: { const: "access" } } },
         required: ["categories"],
       },
-      then: { required: ["emergency"] },
+      then: { required: ["emergency", "supportedEmergencies"] },
     }
   ]
 } as const;
