@@ -122,6 +122,15 @@ export const systemSchema = {
       default: null,
       description: "Active system wide emergency state",
     },
+    supportedEmergencies: {
+      type: "array",
+      uniqueItems: true,
+      items: {
+        type: "string",
+        enum: [ "lockdown", "evacuate" ],
+      },
+      description: "System wide emergencies the system can enter. Omitted means unknown (legacy); an empty array means none are supported.",
+    },
     health: {
       type: "object",
       properties: {
