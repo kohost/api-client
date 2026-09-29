@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.22.0
+
+### Minor Changes
+
+- [`0ba85cb`](https://github.com/kohost/kohost/commit/0ba85cba975323abfeb3ae9e7933ab22f0de5ae5) Thanks [@itrogers](https://github.com/itrogers)! - System gains `supportedEmergencies` (unique array of `lockdown`, `evacuate`), required when `categories` contains `access` (pulled from upstream api-client)
+
 ## 7.21.0
 
 ### Minor Changes
