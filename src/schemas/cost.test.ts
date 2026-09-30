@@ -58,6 +58,29 @@ describe("cost document", () => {
     expect(doc.source).toBe("adhoc");
   });
 
+  it("accepts a contract line with the periods that landed on it", () => {
+    const validate = compileCostValidator();
+    const line = {
+      ...cost,
+      source: "contract",
+      serviceContractId: "sc_1",
+      splitId: "spl_1",
+      periodStart: "2026-10-01T00:00:00.000Z",
+      customerPeriodStarts: [],
+      vendorPeriodStarts: ["2026-10-01T00:00:00.000Z"],
+      price: { ...cost.price, amount: 0 },
+    };
+    expect(validate(line)).toBe(true);
+  });
+
+  it("rejects the retired stream fields", () => {
+    const validate = compileCostValidator();
+    expect(validate({ ...cost, stream: "vendor" })).toBe(false);
+    expect(
+      validate({ ...cost, customerPeriodStart: "2026-10-01T00:00:00.000Z" }),
+    ).toBe(false);
+  });
+
   it("requires the organization the entry is billed to", () => {
     const validate = compileCostValidator();
     const { organizationId, ...unstamped } = cost;

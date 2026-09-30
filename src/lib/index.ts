@@ -81,6 +81,12 @@ export {
   type BillEffectiveDateSource,
 } from "./bills.js";
 export {
+  ENDING_SOON_DAYS,
+  daysUntilEnd,
+  isEndingSoon,
+  isExpired,
+} from "./serviceContracts.js";
+export {
   KFC_STATS_TIMEZONE,
   KFC_STATS_DEFAULT_WINDOW_DAYS,
   KFC_STATS_MAX_RANGE_DAYS,

@@ -26,14 +26,53 @@ export const costSchema = {
     },
     source: {
       type: "string",
-      enum: ["adhoc"],
+      enum: ["adhoc", "contract"],
       default: "adhoc",
       description:
-        "How the entry came to be recorded. Only `adhoc` today, a biller " +
-        "typing in a charge; the enum is what lets a later importer or " +
-        "integration land in the same collection without a second one. A " +
+        "How the entry came to be recorded: `adhoc` when a biller typed in a " +
+        "charge, `contract` when a Service contract minted it for a line " +
+        "period. A contract entry's price is fixed by the contract: it skips " +
+        "the below-cost checks, and one priced at zero is never billed. A " +
         "ticket cost entry carries no source: living on the ticket is what " +
         "says where it came from.",
+    },
+    serviceContractId: {
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The Service contract that minted the entry. Set once at mint and " +
+        "never edited; null on an ad hoc cost.",
+    },
+    splitId: {
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The customer split the entry was minted for. Set once at mint.",
+    },
+    periodStart: {
+      anyOf: [{ $ref: "definitions.json#/definitions/date" }, { type: "null" }],
+      default: null,
+      description:
+        "The first day (UTC) of the line period the entry was minted for. " +
+        "With the contract and split it is the slot a line occupies, so a " +
+        "line is never minted twice.",
+    },
+    customerPeriodStarts: {
+      type: "array",
+      default: [],
+      items: { $ref: "definitions.json#/definitions/date" },
+      description:
+        "The first day (UTC) of each customer period whose price landed on " +
+        "this line: none or one. Empty on an ad hoc cost.",
+    },
+    vendorPeriodStarts: {
+      type: "array",
+      default: [],
+      items: { $ref: "definitions.json#/definitions/date" },
+      description:
+        "The first day (UTC) of each vendor period whose invoice day falls " +
+        "in this line, so its vendor amount landed here. Empty on an ad hoc " +
+        "cost and on a line whose vendor side is a settled zero.",
     },
     organizationId: {
       type: "string",

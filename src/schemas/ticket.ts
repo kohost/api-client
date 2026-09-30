@@ -474,6 +474,28 @@ export const ticketSchema = {
       type: "string",
       description: "The ID of the automation that created this ticket.",
     },
+    serviceContract: {
+      type: "object",
+      description:
+        "The Service contract Ticket schedule that minted this ticket. Written once by the schedule's own run and shown to Kohost staff only.",
+      required: ["id", "automationId"],
+      additionalProperties: false,
+      properties: {
+        id: {
+          type: "string",
+          description: "The ID of the service contract.",
+        },
+        automationId: {
+          type: "string",
+          description: "The ID of the ticket schedule that minted the ticket.",
+        },
+        name: {
+          type: "string",
+          description:
+            "The contract's current name, resolved when the ticket is read. Never stored.",
+        },
+      },
+    },
     conversation: {
       type: "array",
       default: [],

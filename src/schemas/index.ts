@@ -53,6 +53,13 @@ export { propertySchema, type PropertySchema } from "./property.js";
 export { reservationSchema, type ReservationSchema } from "./reservation.js";
 export { resourceSchema, type ResourceSchema } from "./resource.js";
 export { serverSchema, type ServerSchema } from "./server.js";
+export {
+  serviceContractSchema,
+  type ServiceContractSchema,
+  type ServiceContractCustomerStream,
+  type ServiceContractSplit,
+  type ServiceContractVendorStream,
+} from "./serviceContract.js";
 export { sessionSchema, type SessionSchema } from "./session.js";
 export { shortLinkSchema, type ShortLinkSchema } from "./shortLink.js";
 export { smsMessageSchema, type SmsMessageSchema } from "./smsMessage.js";

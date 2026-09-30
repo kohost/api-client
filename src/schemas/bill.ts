@@ -8,7 +8,8 @@ import { mediaFileSchema } from "./mediaFile";
 //
 // A cost line always names its entry by `costId`; `source` says which
 // collection to look it up in. A `ticket` line resolves through
-// `(ticketId, costId)`, an `adhoc` line reads `costId` straight off the costs
+// `(ticketId, costId)`, a ticket-less line (`adhoc`, or `contract` for an
+// entry a Service contract minted) reads `costId` straight off the costs
 // collection with `ticketId` null. The claim path is what pairs the two, since
 // JSON Schema cannot state the pairing without splitting the branch and
 // breaking the `type` discriminator every reader keys off.
@@ -43,11 +44,13 @@ const costLineSchema = {
     },
     source: {
       type: "string",
-      enum: ["ticket", "adhoc"],
+      enum: ["ticket", "adhoc", "contract"],
       default: "ticket",
       description:
         "Where the claimed cost entry lives, and therefore how `costId` " +
-        "resolves: on a ticket, or in the costs collection.",
+        "resolves: on a ticket, or in the costs collection. `contract` is a " +
+        "costs-collection entry a Service contract minted; it bills by the " +
+        "same rules as `adhoc`.",
     },
     ticketId: {
       type: ["string", "null"],
@@ -77,8 +80,24 @@ const costLineSchema = {
       type: ["string", "null"],
       default: null,
       description:
-        "The source ticket's number, snapshotted at mark-sent. Null on an " +
-        "`adhoc` line. Internal, redacted org-side.",
+        "The source ticket's number, snapshotted at mark-sent. Null on a " +
+        "ticket-less line. Internal, redacted org-side.",
+    },
+    serviceContractId: {
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The Service contract that minted the claimed entry. Null on every " +
+        "other line. Customer-facing: the org bill links the line to the " +
+        "contract it recurs under.",
+    },
+    serviceContractName: {
+      type: ["string", "null"],
+      default: null,
+      description:
+        "The contract's name, snapshotted at mark-sent so a sent bill reads " +
+        "the same after the contract is renamed. Null while drafting, when " +
+        "it live-reads from the contract.",
     },
     categoryId: {
       type: ["string", "null"],

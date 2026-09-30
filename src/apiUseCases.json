@@ -1081,23 +1081,23 @@
     }
   ],
   [
-    "ListConciergeWorkspaceBillLines",
+    "ListConciergeCostLedger",
     {
       "http": {
         "method": "GET",
-        "path": "/concierge/bill-lines"
+        "path": "/concierge/cost-ledger"
       },
-      "description": "OneBill transactions view: every line on a sent or paid bill across every KFC-enabled organization, newest send first, paged and searchable, with the vendor-cost snapshot and resolved organization and vendor names."
+      "description": "OneBill Cost ledger: every cost entry and bill line across every KFC-enabled organization at every stage (unreconciled, ready, on a draft, sent, paid, written off), paged, filtered, searched and sorted server-side, with the revenue and margin of the sent and paid rows in the filtered set."
     }
   ],
   [
-    "DescribeConciergeBillsSummary",
+    "ListConciergeServiceContracts",
     {
       "http": {
         "method": "GET",
-        "path": "/concierge/bills/summary"
+        "path": "/concierge/service-contracts"
       },
-      "description": "Revenue, vendor cost, profit and margin billed through OneBill over a sentAt window, across the KFC-enabled organizations or one of them."
+      "description": "OneBill Contracts view: Service contracts across every KFC-enabled organization for the staff who manage them, paged, filtered by status and organization, searched by name and sorted server-side, each with its vendor's name and where an active one stands for Add due contract costs, plus the due, ending-soon and monthly totals of the filtered set."
     }
   ],
   [
@@ -2572,6 +2572,166 @@
         "method": "DELETE",
         "path": "/announcements/presets/:id"
       }
+    }
+  ],
+  [
+    "ListServiceContracts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/service-contracts"
+      },
+      "description": "Lists the organization's Service contracts for Kohost staff, each with its vendor's name."
+    }
+  ],
+  [
+    "DescribeServiceContract",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/service-contracts/:id"
+      },
+      "description": "Reads one Service contract as Kohost staff see it, vendor amounts included."
+    }
+  ],
+  [
+    "CreateServiceContract",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/service-contracts"
+      },
+      "description": "Drafts a Service contract: a recurring vendor service with a term, a customer stream and an optional vendor stream, each with its own per-period total, cadence, and start inside the term. The customer stream splits its total across Properties, and each split carries its share of the vendor total. Nothing mints until it is activated."
+    }
+  ],
+  [
+    "UpdateServiceContract",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/service-contracts/:id"
+      },
+      "description": "Edits a Service contract. Only the fields sent change."
+    }
+  ],
+  [
+    "DuplicateServiceContract",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/service-contracts/:id/duplicate"
+      },
+      "description": "Copies a Service contract in any status into a new draft: name with \" (copy)\", contract number, description, and both streams (amounts, cadences, Vendor, and customer splits with their vendor amounts and fresh ids), starting this month. The approval, documents, term and Ticket schedules are not copied."
+    }
+  ],
+  [
+    "ActivateServiceContract",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/service-contracts/:id/activate"
+      },
+      "description": "Activates a draft Service contract once the written approval, categorized customer splits that add up to the customer total, and, with a vendor stream, a Vendor and split vendor amounts that add up to the vendor total are present. Each stream mints from its start; one that started before today mints from the period containing today unless `backdate: { customer?, vendor? }` asks for its first period."
+    }
+  ],
+  [
+    "ListOrganizationServiceContracts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/organization/service-contracts"
+      },
+      "description": "Lists the Organization's Service contracts as its Administrators read them: the customer stream, approval, and a count of recurring visits. Drafts and the vendor stream are left out."
+    }
+  ],
+  [
+    "DescribeOrganizationServiceContract",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/organization/service-contracts/:id"
+      },
+      "description": "Reads one Service contract in the Organization Administrator view. A draft reads as not found."
+    }
+  ],
+  [
+    "ListServiceContractCosts",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/service-contracts/:id/costs"
+      },
+      "description": "Lists what a Service contract has minted, newest line period first: one Contract cost per split per line period, each with its price, vendor cost, Cost ledger stage and reconciliation blocker, plus the organization it bills and each stream's next period due."
+    }
+  ],
+  [
+    "ListServiceContractTicketSchedules",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/service-contracts/:id/ticket-schedules"
+      },
+      "description": "Lists a Service contract's Ticket schedules: the recurring-ticket Automations stamped with the contract, in the order they were added."
+    }
+  ],
+  [
+    "AddServiceContractTicketSchedule",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/service-contracts/:id/ticket-schedules"
+      },
+      "description": "Adds a Ticket schedule to a draft or active Service contract at one of the Organization's Properties. The recurrence opens with a DTSTART line naming its first-ticket day inside the term. It sleeps while the contract is a draft, starts at its next occurrence once enabled without backfilling, and ends with the contract unless the recurrence names its own end."
+    }
+  ],
+  [
+    "UpdateServiceContractTicketSchedule",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/service-contracts/:id/ticket-schedules/:automationId"
+      },
+      "description": "Changes a Ticket schedule's Property, recurrence or ticket. Tickets it already minted are left alone."
+    }
+  ],
+  [
+    "RemoveServiceContractTicketSchedule",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/service-contracts/:id/ticket-schedules/:automationId"
+      },
+      "description": "Removes a Ticket schedule from a Service contract. Tickets it already minted are left alone."
+    }
+  ],
+  [
+    "CancelServiceContract",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/service-contracts/:id/cancel"
+      },
+      "description": "Cancels an active Service contract with a required reason. It stops adding costs; Costs already added are left alone. When lines are due but not yet in the Pool, 'dueCosts' must say whether to add them first ('add') or drop them ('drop')."
+    }
+  ],
+  [
+    "AddDueContractCosts",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/service-contracts/due-costs"
+      },
+      "description": "Adds every due Contract cost of the organization's active Service contracts to the Pool, and ends the contracts whose term has passed. Reports each contract that failed."
+    }
+  ],
+  [
+    "DeleteServiceContract",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/service-contracts/:id"
+      },
+      "description": "Hard-deletes a draft Service contract. An activated contract is never deleted."
     }
   ]
 ]

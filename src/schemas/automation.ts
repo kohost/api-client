@@ -243,6 +243,11 @@ export const automationSchema = {
       description: "The URL of the webhook that triggers the automation",
       format: "uri",
     },
+    serviceContractId: {
+      type: "string",
+      description:
+        "The Service contract whose Ticket schedule this automation is. Its contract page is the only writer.",
+    },
   },
   additionalProperties: false,
 } as const;
