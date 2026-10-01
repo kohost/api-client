@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.24.0
+
+### Minor Changes
+
+- [#1067](https://github.com/kohost/kohost/pull/1067) [`8a5c0df`](https://github.com/kohost/kohost/commit/8a5c0dfee4fbc1eed2eb4b59c5ee704b3a1bab88) Thanks [@itrogers](https://github.com/itrogers)! - OneBill cost rows (ticket cost entries, ad hoc and Contract costs, Manual lines) carry a Ledger note (`note`) and a Vendor payment (`vendorPayment: { paidOn }`), editable in any state through `EditCostEntry`, `EditCost` and `UpdateBillLine`. A Vendor payment needs a vendor actual above zero; while set, the actual can't be cleared or zeroed and the row can't be voided or deleted. Both ride every Cost ledger source and never reach an Organization-facing response.
+
 ## 7.23.1
 
 ### Patch Changes
