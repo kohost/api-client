@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.23.1
+
+### Patch Changes
+
+- [#1058](https://github.com/kohost/kohost/pull/1058) [`9bae115`](https://github.com/kohost/kohost/commit/9bae1157b9a5c941cc6b69645a50ffe3835f2154) Thanks [@itrogers](https://github.com/itrogers)! - Bump in-range dependencies to latest (Sentry 10.75.3, socket.io 4.8.4, tiptap 3.31.4, TanStack Query 5.104.0, vite 8.3.1, wrangler 4.145.0, sharp 0.35.5, etc.), upgrade remark-mdx-frontmatter to v6, and apply npm audit fixes (ip-address, moment, fast-uri, brace-expansion).
+
 ## 7.23.0
 
 ### Minor Changes
