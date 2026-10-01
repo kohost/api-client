@@ -1,5 +1,6 @@
 import defs, { ISODateString } from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
+import { ledgerAnnotationProperties } from "./costEntry";
 import { mediaFileSchema } from "./mediaFile";
 
 // One bill line is a discriminated union on `type`, so `lines.items` is their
@@ -184,8 +185,8 @@ const costLineSchema = {
 // `description` and `amount` (which may be negative, serving as a credit) and
 // an optional `propertyId`. The independent internal fields — informational
 // `cost` (never derives the amount), `vendorId`, the vendor-invoice file, and
-// `vendorInvoiceNumber` — are redacted org-side via `canSeeCostSplit` and stay
-// editable in any bill state.
+// `vendorInvoiceNumber`, the Ledger note and the Vendor payment — are redacted
+// org-side via `canSeeCostSplit` and stay editable in any bill state.
 const manualLineSchema = {
   type: "object",
   additionalProperties: false,
@@ -256,6 +257,7 @@ const manualLineSchema = {
       description:
         "The vendor's own invoice number. Internal, redacted org-side.",
     },
+    ...ledgerAnnotationProperties,
     taxable: {
       type: "boolean",
       default: false,

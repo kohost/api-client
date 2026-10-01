@@ -120,6 +120,42 @@ export const costBillingReview = <const Actions extends readonly string[]>(
     },
   }) as const;
 
+/**
+ * Kohost's private bookkeeping on a Cost ledger row: the Ledger note and the
+ * Vendor payment. Every row kind carries both beside its vendor invoice, so a
+ * Manual line spreads these in too. Editable in any state, never attributed,
+ * and never part of a redacted projection.
+ */
+export const ledgerAnnotationProperties = {
+  note: {
+    type: ["string", "null"],
+    maxLength: 1000,
+    default: null,
+    description:
+      "The Ledger note: Kohost's free-text note on the row, overwritten on " +
+      "edit with no attribution. Internal, redacted org-side.",
+  },
+  vendorPayment: {
+    type: ["object", "null"],
+    additionalProperties: false,
+    required: ["paidOn"],
+    default: null,
+    description:
+      "The Vendor payment: Kohost has paid the vendor for this row. Only a " +
+      "row with a vendor actual above zero carries one, and while it does " +
+      "that actual cannot be cleared or zeroed and the row cannot be voided " +
+      "or deleted. Gates nothing on the customer side. An object so it can " +
+      "grow a reference and amount. Internal, redacted org-side.",
+    properties: {
+      paidOn: {
+        type: "string",
+        pattern: "^\\d{4}-\\d{2}-\\d{2}$",
+        description: "The calendar day the vendor was paid, as YYYY-MM-DD.",
+      },
+    },
+  },
+} as const;
+
 export const costEntryRequired = [
   "id",
   "description",
@@ -213,6 +249,7 @@ export const costEntryProperties = {
       "The vendor's own invoice number. Internal, redacted org-side like the " +
       "rest of the cost split.",
   },
+  ...ledgerAnnotationProperties,
   billId: {
     type: ["string", "null"],
     default: null,
