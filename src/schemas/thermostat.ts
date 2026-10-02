@@ -192,7 +192,6 @@ export const thermostatSchema = {
     uiEnabled: {
       type: "boolean",
       description: "Local thermostat controls active or not",
-      default: true,
     },
     // deprecated, use alerts instead
     equipment: {
