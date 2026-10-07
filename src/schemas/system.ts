@@ -119,7 +119,6 @@ export const systemSchema = {
     emergency: {
       type: ["string", "null"],
       enum: ["lockdown", "evacuate", null],
-      default: null,
       description: "Active system wide emergency state",
     },
     supportedEmergencies: {
@@ -134,7 +133,6 @@ export const systemSchema = {
     trippedSensors: {
       type: "array",
       uniqueItems: true,
-      default: [],
       items: {
         type: "string",
         enum: ["rain"],
