@@ -131,6 +131,25 @@ export const systemSchema = {
       },
       description: "System wide emergencies the system can enter. Omitted means unknown (legacy); an empty array means none are supported.",
     },
+    trippedSensors: {
+      type: "array",
+      uniqueItems: true,
+      default: [],
+      items: {
+        type: "string",
+        enum: ["rain"],
+      },
+      description: "Active sensors",
+    },
+    supportedSensors: {
+      type: "array",
+      uniqueItems: true,
+      items: {
+        type: "string",
+        enum: [ "rain" ],
+      },
+      description: "System wide supported sensors.",
+    },
     health: {
       type: "object",
       properties: {
@@ -168,6 +187,13 @@ export const systemSchema = {
         required: ["categories"],
       },
       then: { required: ["emergency", "supportedEmergencies"] },
+    },
+    {
+      if: {
+        properties: { categories: { contains: { const: "irrigation" } } },
+        required: ["categories"],
+      },
+      then: { required: ["trippedSensors", "supportedSensors"] },
     }
   ]
 } as const;
