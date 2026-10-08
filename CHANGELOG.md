@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.27.0
+
+### Minor Changes
+
+- [`6434473`](https://github.com/kohost/kohost/commit/6434473f54415653b17c04d14acd03b57b271d56) Thanks [@itrogers](https://github.com/itrogers)! - Add `2n` to the driver definitions schema (pulled from upstream api-client)
+
 ## 7.26.0
 
 ### Minor Changes
