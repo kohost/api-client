@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.26.0
+
+### Minor Changes
+
+- [#1099](https://github.com/kohost/kohost/pull/1099) [`ec39b3a`](https://github.com/kohost/kohost/commit/ec39b3a9c305398406916fbcb026eea6c484dab5) Thanks [@itrogers](https://github.com/itrogers)! - API keys act as their User (optionally user-wide, limited to allowed operations, managed only by global SuperAdmins) and authenticate `/auth/validate` and file-store uploads; concurrent Ticket cost and vendor-invoice writes no longer drop each other's changes.
+
 ## 7.24.0
 
 ### Minor Changes
