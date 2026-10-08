@@ -42,6 +42,12 @@ export const credentialSchema = {
     keyHash: {
       type: "string",
     },
+    allowedOperations: {
+      type: ["array", "null"],
+      items: { type: "string" },
+      description:
+        "For an apiKey: the operations the key may call. Null or absent means unrestricted.",
+    },
     userId: {
       type: "string",
     },

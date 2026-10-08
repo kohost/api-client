@@ -185,6 +185,15 @@
     }
   ],
   [
+    "SetApiKeyAllowedOperations",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/users/:userId/apiKey/allowed-operations"
+      }
+    }
+  ],
+  [
     "RevokeApiKey",
     {
       "http": {
