@@ -191,6 +191,7 @@ const defs = {
       type: "string",
       description: "Driver used to communicate with the object.",
       enum: [
+        "2n",
         "adlink",
         "apex-american-audio",
         "avigilon-alta",
