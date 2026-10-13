@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.27.1
+
+### Patch Changes
+
+- [#1147](https://github.com/kohost/kohost/pull/1147) [`6401a42`](https://github.com/kohost/kohost/commit/6401a42708c8411ed3d5d348a983aa3f5ccff169) Thanks [@itrogers](https://github.com/itrogers)! - Issue routing names the Organization's assigned Facilities agent and offers them in the Issue editor's pickers, through a new `DescribeConciergeFacilitiesAgents` read that returns each scope's agent as an id and branded name; `ListUsers` still hides Kohost staff.
+
 ## 7.27.0
 
 ### Minor Changes
