@@ -2445,6 +2445,15 @@
     }
   ],
   [
+    "DescribeConciergeFacilitiesAgents",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/concierge/facilities/agents"
+      }
+    }
+  ],
+  [
     "ListKohostStaff",
     {
       "http": {
