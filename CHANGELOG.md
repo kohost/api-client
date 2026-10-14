@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.28.0
+
+### Minor Changes
+
+- [#1154](https://github.com/kohost/kohost/pull/1154) [`9e89991`](https://github.com/kohost/kohost/commit/9e89991989eee51d06b283b84c255c1ff4d33b16) Thanks [@itrogers](https://github.com/itrogers)! - Saved filters: a User can save, apply, rename and delete named Tickets list filters, stored on their own User record and never returned to anyone else.
+
 ## 7.27.1
 
 ### Patch Changes
