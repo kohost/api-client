@@ -255,6 +255,33 @@
     }
   ],
   [
+    "CreateSavedFilter",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/users/me/savedFilters"
+      }
+    }
+  ],
+  [
+    "UpdateSavedFilter",
+    {
+      "http": {
+        "method": "PUT",
+        "path": "/users/me/savedFilters/:id"
+      }
+    }
+  ],
+  [
+    "DeleteSavedFilter",
+    {
+      "http": {
+        "method": "DELETE",
+        "path": "/users/me/savedFilters/:id"
+      }
+    }
+  ],
+  [
     "UpsertSystemCredentials",
     {
       "http": false,

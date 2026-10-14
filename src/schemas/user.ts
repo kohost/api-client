@@ -1,4 +1,8 @@
-import defs, { ISODateString } from "./definitions";
+import defs, {
+  ISODateString,
+  MAX_SAVED_FILTERS,
+  SAVED_FILTER_NAME_MAX_LENGTH,
+} from "./definitions";
 import type { FromSchema } from "json-schema-to-ts";
 import { mediaFileSchema } from "./mediaFile";
 import { policySchema } from "./policy";
@@ -151,6 +155,53 @@ export const userSchema = {
                   items: {
                     $ref: "definitions.json#/definitions/notificationChannel",
                   },
+                },
+              },
+            },
+          },
+          savedFilters: {
+            type: "array",
+            maxItems: MAX_SAVED_FILTERS,
+            description:
+              "The User's Saved filters for this Organization's Tickets list. Only the Organization-level entry (no propertyId) carries them.",
+            items: {
+              type: "object",
+              additionalProperties: false,
+              required: [
+                "id",
+                "name",
+                "ticketSearchFilters",
+                "sort",
+                "unreadOnly",
+                "createdAt",
+                "updatedAt",
+              ],
+              properties: {
+                id: {
+                  type: "string",
+                },
+                name: {
+                  type: "string",
+                  minLength: 1,
+                  maxLength: SAVED_FILTER_NAME_MAX_LENGTH,
+                },
+                ticketSearchFilters: {
+                  type: "string",
+                  maxLength: 2000,
+                  description:
+                    "The Tickets list's qs-encoded filter blob, exactly as its URL carries it. Opaque to the API.",
+                },
+                sort: {
+                  $ref: "definitions.json#/definitions/ticketSortPreset",
+                },
+                unreadOnly: {
+                  type: "boolean",
+                },
+                createdAt: {
+                  $ref: "definitions.json#/definitions/date",
+                },
+                updatedAt: {
+                  $ref: "definitions.json#/definitions/date",
                 },
               },
             },

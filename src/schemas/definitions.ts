@@ -19,6 +19,20 @@ export const NOTIFICATION_CHANNELS = ["email", "sms", "push"] as const;
 
 export type NotificationChannel = (typeof NOTIFICATION_CHANNELS)[number];
 
+export const TICKET_SORT_PRESETS = [
+  "priorityHigh",
+  "priorityLow",
+  "createdNewest",
+  "createdOldest",
+  "replyNewest",
+  "replyOldest",
+] as const;
+
+export type TicketSortPreset = (typeof TICKET_SORT_PRESETS)[number];
+
+export const MAX_SAVED_FILTERS = 20;
+export const SAVED_FILTER_NAME_MAX_LENGTH = 40;
+
 /**
  * The platform roles an Audience may be selected by. The legacy `Guest` role a
  * permission entry may still carry is deliberately absent: nothing targets it.
@@ -428,6 +442,10 @@ const defs = {
     notificationChannel: {
       type: "string",
       enum: NOTIFICATION_CHANNELS,
+    },
+    ticketSortPreset: {
+      type: "string",
+      enum: TICKET_SORT_PRESETS,
     },
     deliveryCounts: deliveryCountsNode,
     consent: consentNode,
