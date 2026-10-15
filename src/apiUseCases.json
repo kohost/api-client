@@ -1279,6 +1279,33 @@
     }
   ],
   [
+    "ArchiveProperty",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/properties/:id/archive"
+      }
+    }
+  ],
+  [
+    "DescribePropertyArchiveImpact",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/properties/:id/archive-impact"
+      }
+    }
+  ],
+  [
+    "UnarchiveProperty",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/properties/:id/unarchive"
+      }
+    }
+  ],
+  [
     "UpdateProperty",
     {
       "http": {

@@ -102,3 +102,13 @@ export {
   type RichTextListItemNode,
   type RichTextMentionNode,
 } from "./ticketRichText.js";
+export {
+  isArchivedProperty,
+  activeProperties,
+  archivedAtIso,
+  type ArchivableProperty,
+  type ArchiveBlockerType,
+  type ArchiveWarningType,
+  type ArchiveImpactItem,
+  type PropertyArchiveImpact,
+} from "./properties.js";

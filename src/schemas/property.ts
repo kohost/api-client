@@ -342,6 +342,12 @@ export const propertySchema = {
     deletedAt: {
       $ref: "definitions.json#/definitions/date",
     },
+    archivedAt: {
+      anyOf: [{ $ref: "definitions.json#/definitions/date" }, { type: "null" }],
+      description:
+        "When the Property was archived. An Archived Property keeps its " +
+        "history but takes no new work and is never chosen on anyone's behalf.",
+    },
     credentials: {
       type: "object",
       additionalProperties: true,
