@@ -58,6 +58,7 @@ export const cameraSchema = {
             "verkada",
             "mediamtx",
             "mobile-mule",
+            "go2rtc",
           ],
         },
         allowedOrigins: {
