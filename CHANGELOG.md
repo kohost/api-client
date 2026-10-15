@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.29.0
+
+### Minor Changes
+
+- [#1173](https://github.com/kohost/kohost/pull/1173) [`b4293b0`](https://github.com/kohost/kohost/commit/b4293b0ae9b24f42e1d08b8b014260f71e7595d2) Thanks [@itrogers](https://github.com/itrogers)! - Archived Properties: a SuperAdmin can archive a closed campus (once its blockers are cleared) and unarchive it. Its Tickets, Costs and Bill lines keep naming it, but it takes no new work and is never chosen on anyone's behalf. Archiving disables its Automations and stops listening to its Systems, which are kept. Delete Property now refuses a Property with Tickets, Costs or Bills.
+
 ## 7.28.0
 
 ### Minor Changes
