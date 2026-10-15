@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.30.0
+
+### Minor Changes
+
+- [`2600f4f`](https://github.com/kohost/kohost/commit/2600f4f205d15d8603baa0db28118a87e9f25e83) Thanks [@itrogers](https://github.com/itrogers)! - Add `go2rtc` to the camera driver enum (pulled from upstream api-client)
+
 ## 7.29.0
 
 ### Minor Changes
