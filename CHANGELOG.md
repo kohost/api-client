@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.32.0
+
+### Minor Changes
+
+- [`562edd4`](https://github.com/kohost/kohost/commit/562edd4e30045276e7bb54a933f0364d46208f7b) Thanks [@itrogers](https://github.com/itrogers)! - Add `genetec` to the driver enum (pulled from upstream api-client)
+
 ## 7.31.0
 
 ### Minor Changes
