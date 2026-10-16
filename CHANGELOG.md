@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.33.0
+
+### Minor Changes
+
+- [`e174924`](https://github.com/kohost/kohost/commit/e1749240a7b3cea175d10b77eeb96851818231ff) Thanks [@itrogers](https://github.com/itrogers)! - Add `hartmann` to the driver enum (pulled from upstream api-client)
+
 ## 7.32.0
 
 ### Minor Changes
