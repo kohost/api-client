@@ -254,6 +254,7 @@ const defs = {
         "honeywell-vista",
         "honeywell-resideo",
         "honeywell-total-connect",
+        "hartmann",
         "igor",
         "inncom",
         "isapi",
