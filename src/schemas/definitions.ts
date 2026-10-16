@@ -26,9 +26,29 @@ export const TICKET_SORT_PRESETS = [
   "createdOldest",
   "replyNewest",
   "replyOldest",
+  "issueAsc",
+  "issueDesc",
+  "locationAsc",
+  "locationDesc",
+  "requesterAsc",
+  "requesterDesc",
+  "assigneeAsc",
+  "assigneeDesc",
 ] as const;
 
 export type TicketSortPreset = (typeof TICKET_SORT_PRESETS)[number];
+
+export const TICKET_GROUP_BY_VALUES = [
+  "none",
+  "priority",
+  "vendor",
+  "issue",
+  "requester",
+  "assignedTo",
+  "property",
+] as const;
+
+export type TicketGroupBy = (typeof TICKET_GROUP_BY_VALUES)[number];
 
 export const MAX_SAVED_FILTERS = 20;
 export const SAVED_FILTER_NAME_MAX_LENGTH = 40;
@@ -446,6 +466,10 @@ const defs = {
     ticketSortPreset: {
       type: "string",
       enum: TICKET_SORT_PRESETS,
+    },
+    ticketGroupBy: {
+      type: "string",
+      enum: TICKET_GROUP_BY_VALUES,
     },
     deliveryCounts: deliveryCountsNode,
     consent: consentNode,

@@ -194,6 +194,11 @@ export const userSchema = {
                 sort: {
                   $ref: "definitions.json#/definitions/ticketSortPreset",
                 },
+                groupBy: {
+                  $ref: "definitions.json#/definitions/ticketGroupBy",
+                  description:
+                    "How the Tickets list groups its rows. Absent on Saved filters made before grouping existed, which read as ungrouped.",
+                },
                 unreadOnly: {
                   type: "boolean",
                 },
