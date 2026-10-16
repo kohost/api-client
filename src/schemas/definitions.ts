@@ -247,6 +247,7 @@ const defs = {
         "earbridge",
         "ecobee",
         "epson",
+        "genetec",
         "geovision-rs",
         "geovision-as-manager",
         "hanwha",
