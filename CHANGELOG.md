@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.31.0
+
+### Minor Changes
+
+- [#1179](https://github.com/kohost/kohost/pull/1179) [`cf21608`](https://github.com/kohost/kohost/commit/cf2160837447cb8f6596d7f65b153e90e8b2550a) Thanks [@itrogers](https://github.com/itrogers)! - Org Concierge ticket list: group by (Priority, Vendor, Issue, Requester, Assigned to, and Property when the user has more than one Concierge Property), server-side sorts by Issue, Location, Requester and Assigned to name, and multiple people per Requester/Assigned To filter (OR within a filter). Saved filters store grouping, and a bare Concierge URL restores the last-used view, sort, filters and grouping. "Back to tickets" keeps the list's scroll position, the save-filter button scrolls with the filter bar, and the phone header wraps instead of overlapping the tabs. Back arrows that fall back to a parent page replace the entry instead of pushing it, fixing a loop between pages (e.g. Smart Building and Doors). Device settings drawer wraps long System Device IDs instead of overflowing on phones.
+
 ## 7.30.0
 
 ### Minor Changes
