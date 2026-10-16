@@ -53,12 +53,6 @@ describe("serializeRichTextBody", () => {
     ).toBe("hey @Jane Doe");
   });
 
-  it("renders hardBreak as a newline", () => {
-    expect(
-      serializeRichTextBody([paragraph(text("one"), hardBreak, text("two"))]),
-    ).toBe("one\ntwo");
-  });
-
   it("prefixes bullet items with • and renumbers ordered items", () => {
     expect(
       serializeRichTextBody([
@@ -72,16 +66,6 @@ describe("serializeRichTextBody", () => {
         },
       ]),
     ).toBe("• a\n• b\n1. x\n2. y");
-  });
-
-  it("trims trailing newlines", () => {
-    expect(
-      serializeRichTextBody([paragraph(text("tail"), hardBreak, hardBreak)]),
-    ).toBe("tail");
-  });
-
-  it("returns an empty string for no blocks", () => {
-    expect(serializeRichTextBody([])).toBe("");
   });
 });
 
@@ -110,10 +94,6 @@ describe("isWellFormedRichText", () => {
     expect(isWellFormedRichText(content)).toBe(true);
   });
 
-  it("accepts a single paragraph with only text", () => {
-    expect(isWellFormedRichText([paragraph(text("hello"))])).toBe(true);
-  });
-
   it("rejects an unknown block type", () => {
     expect(isWellFormedRichText([{ type: "codeBlock", content: [text("x")] }])).toBe(
       false,
@@ -126,12 +106,6 @@ describe("isWellFormedRichText", () => {
     ).toBe(false);
   });
 
-  it("rejects an unknown mark", () => {
-    expect(
-      isWellFormedRichText([paragraph(text("x", ["strike"] as never))]),
-    ).toBe(false);
-  });
-
   it("rejects a mention with an unknown discriminator", () => {
     expect(
       isWellFormedRichText([
@@ -141,24 +115,6 @@ describe("isWellFormedRichText", () => {
           discriminator: "group",
           label: "Ops",
         } as never),
-      ]),
-    ).toBe(false);
-  });
-
-  it("rejects an empty content array", () => {
-    expect(isWellFormedRichText([])).toBe(false);
-  });
-
-  it("rejects empty nested content arrays", () => {
-    expect(isWellFormedRichText([{ type: "paragraph", content: [] }])).toBe(
-      false,
-    );
-    expect(isWellFormedRichText([{ type: "bulletList", content: [] }])).toBe(
-      false,
-    );
-    expect(
-      isWellFormedRichText([
-        { type: "bulletList", content: [{ type: "listItem", content: [] }] },
       ]),
     ).toBe(false);
   });

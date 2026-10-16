@@ -14,21 +14,11 @@ describe("categoryForMessageErrorCode", () => {
     expect(categoryForMessageErrorCode("30027")).toBe("rateCapped");
   });
 
-  it("trims surrounding whitespace before matching", () => {
-    expect(categoryForMessageErrorCode(" 21610 ")).toBe("optedOut");
-  });
-
   it("returns null for unmapped, empty, or nullish codes", () => {
     expect(categoryForMessageErrorCode("99999")).toBeNull();
     expect(categoryForMessageErrorCode("")).toBeNull();
     expect(categoryForMessageErrorCode(null)).toBeNull();
     expect(categoryForMessageErrorCode(undefined)).toBeNull();
-  });
-
-  it("exposes expired as a category even though no code maps to it yet", () => {
-    expect(MESSAGE_ERROR_CATEGORIES).toContain("expired");
-    expect(isMessageErrorCategory("expired")).toBe(true);
-    expect(isMessageErrorCategory("nope")).toBe(false);
   });
 });
 

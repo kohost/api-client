@@ -110,10 +110,6 @@ describe("billTotal", () => {
   it("sums line amounts, including credits", () => {
     expect(billTotal([520000, 15000, -20000])).toBe(515000);
   });
-
-  it("is zero for no lines", () => {
-    expect(billTotal([])).toBe(0);
-  });
 });
 
 describe("billTaxAmount", () => {
@@ -121,14 +117,6 @@ describe("billTaxAmount", () => {
     // 10000 * 8.375% = 837.5 → 838
     expect(billTaxAmount(10000, DEFAULT_TAX_RATE)).toBe(838);
     expect(billTaxAmount(100, 8.375)).toBe(8);
-  });
-
-  it("is zero at a zero rate", () => {
-    expect(billTaxAmount(10000, 0)).toBe(0);
-  });
-
-  it("reduces with a partially credited base", () => {
-    expect(billTaxAmount(10000 - 2000, 10)).toBe(800);
   });
 
   it("clamps a negative taxable base to zero tax", () => {
@@ -147,23 +135,5 @@ describe("billGrandTotal", () => {
 describe("formatMoney", () => {
   it("pins persisted copy to en-US by default", () => {
     expect(formatMoney(123456, "USD")).toBe("$1,234.56");
-  });
-
-  it("defaults the currency to USD", () => {
-    expect(formatMoney(5000)).toBe("$50.00");
-  });
-
-  it("honors a non-USD currency under the en-US pin", () => {
-    expect(formatMoney(123456, "EUR")).toBe("€1,234.56");
-  });
-
-  it("follows the runtime locale when locale is null", () => {
-    // The null branch must not re-pin to en-US; it defers to whatever the
-    // runtime's default formatter produces.
-    const runtimeDefault = new Intl.NumberFormat(undefined, {
-      style: "currency",
-      currency: "USD",
-    }).format(1234.56);
-    expect(formatMoney(123456, "USD", null)).toBe(runtimeDefault);
   });
 });

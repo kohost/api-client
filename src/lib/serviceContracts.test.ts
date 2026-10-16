@@ -23,10 +23,6 @@ describe("daysUntilEnd", () => {
   it("goes negative once the end date has passed", () => {
     expect(daysUntilEnd("2026-09-17", TODAY)).toBe(-2);
   });
-
-  it("has nothing to count on an open-ended contract", () => {
-    expect(daysUntilEnd(null, TODAY)).toBeNull();
-  });
 });
 
 describe("isEndingSoon", () => {

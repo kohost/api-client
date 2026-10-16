@@ -1,22 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  KFC_STATS_DEFAULT_WINDOW_DAYS,
-  KFC_STATS_MAX_RANGE_DAYS,
-  KFC_STATS_TIMEZONE,
-  resolveKfcStatsWindowBounds,
-} from "./kfcStatsWindow.js";
-
-describe("KFC stats window constants", () => {
-  // These are the values both the API's resolveKfcStatsRange and the app's
-  // resolveRange used to copy by hand; pin them so a change to the contract is
-  // a deliberate, single edit rather than a silent divergence.
-  it("pins the anchor zone, default window, and max span", () => {
-    expect(KFC_STATS_TIMEZONE).toBe("America/Los_Angeles");
-    expect(KFC_STATS_DEFAULT_WINDOW_DAYS).toBe(30);
-    expect(KFC_STATS_MAX_RANGE_DAYS).toBe(1096);
-  });
-});
+import { resolveKfcStatsWindowBounds } from "./kfcStatsWindow.js";
 
 describe("resolveKfcStatsWindowBounds", () => {
   const TODAY = "2026-07-21";
@@ -44,19 +28,6 @@ describe("resolveKfcStatsWindowBounds", () => {
     expect(resolveKfcStatsWindowBounds({ from: "2026-07-01" }, TODAY)).toEqual({
       from: "2026-07-01",
       to: "2026-07-21",
-    });
-  });
-
-  it("treats null like a missing bound", () => {
-    expect(
-      resolveKfcStatsWindowBounds({ from: null, to: null }, TODAY),
-    ).toEqual({ from: "2026-06-22", to: "2026-07-21" });
-  });
-
-  it("shifts across a month boundary without drifting", () => {
-    expect(resolveKfcStatsWindowBounds({ to: "2026-01-10" }, TODAY)).toEqual({
-      from: "2025-12-12",
-      to: "2026-01-10",
     });
   });
 

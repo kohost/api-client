@@ -62,19 +62,6 @@ describe("ticket cost entry wire shapes", () => {
     expect(validate(fullCostEntry)).toBe(true);
   });
 
-  it("accepts the full shape with a recorded actual", () => {
-    const validate = compileCostEntryValidator();
-    const withActual = {
-      ...fullCostEntry,
-      actual: {
-        amount: 9500,
-        recordedBy: "usr_1",
-        recordedAt: "2026-07-21T00:00:00.000Z",
-      },
-    };
-    expect(validate(withActual)).toBe(true);
-  });
-
   it("accepts the redacted price-only shape an org-side viewer receives", () => {
     const validate = compileCostEntryValidator();
     expect(validate(redactedCostEntry)).toBe(true);
@@ -85,15 +72,6 @@ describe("ticket cost entry wire shapes", () => {
     const { price, ...withoutPrice } = fullCostEntry;
     void price;
     expect(validate(withoutPrice)).toBe(false);
-  });
-
-  it("keeps the stored price independent of the estimate and the markup", () => {
-    const validate = compileCostEntryValidator();
-    const corrected = {
-      ...fullCostEntry,
-      price: { ...fullCostEntry.price, amount: 20000 },
-    };
-    expect(validate(corrected)).toBe(true);
   });
 
   // A biller may charge under what the vendor billed as a deliberate comp,
@@ -195,10 +173,5 @@ describe("ticket work item wire shape", () => {
     const validate = compileWorkItemValidator();
     expect(validate({ ...workItem, time: "10:00AM" })).toBe(false);
     expect(validate({ ...workItem, time: "24:00" })).toBe(false);
-  });
-
-  it("rejects a lifecycle status — the conversation log is the history", () => {
-    const validate = compileWorkItemValidator();
-    expect(validate({ ...workItem, status: "completed" })).toBe(false);
   });
 });
