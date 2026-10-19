@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.34.0
+
+### Minor Changes
+
+- [`7d61bdc`](https://github.com/kohost/kohost/commit/7d61bdca2c5a2437c1e6c9d8936dadb281b17329) Thanks [@itrogers](https://github.com/itrogers)! - Add `axis` to the driver enum (pulled from upstream api-client)
+
 ## 7.33.0
 
 ### Minor Changes
