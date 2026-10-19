@@ -221,8 +221,8 @@ export const costEntryProperties = {
     default: null,
     description:
       "The Vendor the charge is owed to. A plain reference — no rollups — " +
-      "resolved inside the entry's own organization. Internal, redacted " +
-      "org-side with the rest of the cost split.",
+      "resolved inside the entry's own organization. Customer-facing: " +
+      "survives redaction, since naming the vendor reveals no cost.",
   },
   categoryId: {
     type: ["string", "null"],
