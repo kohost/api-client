@@ -228,6 +228,7 @@ const defs = {
         "2n",
         "adlink",
         "apex-american-audio",
+        "axis",
         "avigilon-alta",
         "aws-kinesis",
         "bacnet",
