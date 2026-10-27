@@ -1013,6 +1013,15 @@
     }
   ],
   [
+    "DescribeFacilitiesHandover",
+    {
+      "http": {
+        "method": "GET",
+        "path": "/organizations/:id/facilities-handover"
+      }
+    }
+  ],
+  [
     "UpdateOrganizationBillingAddress",
     {
       "http": {
