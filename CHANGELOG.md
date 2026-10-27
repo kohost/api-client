@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.35.0
+
+### Minor Changes
+
+- [#1242](https://github.com/kohost/kohost/pull/1242) [`8eada05`](https://github.com/kohost/kohost/commit/8eada055dcd5471fc0b87c72556f35d6b6a8b33e) Thanks [@itrogers](https://github.com/itrogers)! - Replacing a Facilities agent (org or property) now moves Issue routing that names the old agent to the new one, and, when the writer passes `reassignTickets: true`, the old agent's open and pending tickets too, each with an assignment entry, notification and Activity record. `DescribeFacilitiesHandover` (`GET /organizations/:id/facilities-handover`) counts what would move, and both the Facilities settings card and the Staff page assignments dialog ask whether to reassign before saving. The Staff page dialog now lists every enabled org, so a member can take over an org another agent holds.
+
 ## 7.34.0
 
 ### Minor Changes
