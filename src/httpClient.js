@@ -1,3 +1,18 @@
+/**
+ * statusText is always empty over HTTP/2, so the message falls back to the
+ * status; `status`/`statusCode` let callers branch on it as they do for
+ * structured API errors.
+ * @param {Response} response
+ */
+function createStatusError(response) {
+  const error = new Error(
+    response.statusText || `Request failed with status ${response.status}`,
+  );
+  error.status = response.status;
+  error.statusCode = response.status;
+  return error;
+}
+
 export class KohostHTTPClient {
   #onSuccess;
   #onError;
@@ -134,12 +149,16 @@ export class KohostHTTPClient {
       response.headers.get("Content-Type")?.includes("application/json") ||
       false;
 
-    const responseData = isJsonResponse ? await response.json() : response.body;
+    const responseData = isJsonResponse
+      ? await response.json().catch((error) => {
+        if (response.ok) throw error;
+      })
+      : response.body;
 
     if (!response.ok) {
-      let error = responseData?.error || new Error(response.statusText);
-
       const status = response.status;
+
+      let error = responseData?.error || createStatusError(response);
       const errorMessage = responseData?.error?.message;
 
       const expectedError = status >= 400 && status < 500;
