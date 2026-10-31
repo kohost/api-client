@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.36.0
+
+### Minor Changes
+
+- [`95ead7d`](https://github.com/kohost/kohost/commit/95ead7d77fb90b2c0bb752d946c6efaf914b7286) Thanks [@claude](https://github.com/claude)! - Add `cvte-ifp` to the driver enum (pulled from upstream api-client)
+
 ## 7.35.1
 
 ### Patch Changes
