@@ -1,5 +1,13 @@
 # @kohost/api-client
 
+## 7.35.1
+
+### Patch Changes
+
+- [#1302](https://github.com/kohost/kohost/pull/1302) [`42b2bc6`](https://github.com/kohost/kohost/commit/42b2bc6bec254f635f73fc24b32acab34977e450) Thanks [@itrogers](https://github.com/itrogers)! - Reject non-OK responses without a structured error body with an `Error` that carries the HTTP status, so bodiless 401s reach session-expired handling and bodiless 403s are not retried.
+
+- [#1299](https://github.com/kohost/kohost/pull/1299) [`52c4a4b`](https://github.com/kohost/kohost/commit/52c4a4b9b27d2a1211f68dca1b500d948f52b080) Thanks [@itrogers](https://github.com/itrogers)! - Encode path param values in generated use-case commands, so ids containing `:` (migrated `propertyId:oldId` space and media-file ids) no longer throw `Missing parameters`; only declared params with no value count as missing.
+
 ## 7.35.0
 
 ### Minor Changes
