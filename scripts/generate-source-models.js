@@ -662,22 +662,22 @@ export class ${classId} {
     if (typeof query === "undefined") query = null;
     if (typeof headers === "undefined") headers = null;
 
-    // Replace path parameters with values from data
-    let url: string = ${classId}.url;
-
-    if (pathParams && data) {
-      for (const param of pathParams) {
-        const urlParam = ":" + param;
-        url = url.replace(urlParam, (data as Record<string, string>)[param]);
-      }
-    }
-
-    // Make sure all parameters have been replaced
-    const missingParams = url.match(/:[a-zA-Z0-9]+/g);
-    if (missingParams) {
-      const missing = missingParams.map((param) => param.replace(":", ""));
+    // Ids can carry reserved characters (migrated ids look like
+    // \`propertyId:oldId\`), so values are encoded and only absent ones count
+    // as missing.
+    const values = (data ?? {}) as Record<string, unknown>;
+    const missing = pathParams.filter(
+      (param) => values[param] === undefined || values[param] === null || values[param] === "",
+    );
+    if (missing.length > 0) {
       throw new Error("Missing parameters: " + missing.join(", "));
     }
+
+    const url: string = ${classId}.url.replace(/:([a-zA-Z0-9]+)/g, (placeholder, param: string) =>
+      (pathParams as readonly string[]).includes(param)
+        ? encodeURIComponent(String(values[param]))
+        : placeholder,
+    );
 
     this.url = url;
     this.data = data;

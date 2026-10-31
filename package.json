@@ -80,6 +80,7 @@
     }
   },
   "scripts": {
+    "pretest": "npm run generate-models",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest --passWithNoTests",
     "lint": "eslint --cache --cache-location node_modules/.cache/eslint/",
