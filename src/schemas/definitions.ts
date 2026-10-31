@@ -237,6 +237,7 @@ const defs = {
         "comelit",
         "cool-automation",
         "crestron",
+        "cvte-ifp",
         "dell",
         "digital-watchdog",
         "distech",
