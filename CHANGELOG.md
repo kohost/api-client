@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.37.0
+
+### Minor Changes
+
+- [#1377](https://github.com/kohost/kohost/pull/1377) [`038862f`](https://github.com/kohost/kohost/commit/038862f81cc2970a87574887f927550c4689d218) Thanks [@itrogers](https://github.com/itrogers)! - Precompile model validators at build time, one standalone module per schema, so importing models no longer compiles AJV validators (`new Function`) at load: one model imports in ~10 ms instead of ~470 ms, and models work in CSP-restricted and Worker runtimes. Models expose `schema` and `validator` as accessors, so bundles keep only the models they import. `ValidationError` messages now name each failing path and reason (`Invalid User: /email must match format "email"`); `cause` still holds the raw AJV errors. A model's `validator` is now a plain validate function with `errors` (no `.schema`); `schemaProperties` reads the model's `schema`. Schemas pass AJV strict mode at generation; a Space now rejects non-object `devices`.
+
 ## 7.36.0
 
 ### Minor Changes
