@@ -6,8 +6,8 @@ import { costSchema } from "./cost";
 import defs from "./definitions";
 import { mediaFileSchema } from "./mediaFile";
 
-// Mirrors the AJV configuration the model generator compiles validators with
-// (scripts/generate-source-models.js), so these assertions exercise the same
+// Mirrors the validation options the model generator compiles validators with
+// (scripts/utils/validators.js; its strict flags only add compile-time checks), so these assertions exercise the same
 // rules a `Cost` model runs in `Entity`.
 function compileCostValidator() {
   const ajv = new Ajv({

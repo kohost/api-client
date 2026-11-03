@@ -1,12 +1,16 @@
 /* eslint-disable */
-import { Ajv } from "ajv";
-import addFormats from "ajv-formats";
 import fs from "node:fs";
 import path from "node:path";
+import {
+  generateValidatorDeclaration,
+  generateValidatorModule,
+  lintSchemas,
+} from "./utils/validators.js";
 
 const GENERATED_DIR = ".generated";
 const MODELS_DIR = path.join(GENERATED_DIR, "models");
 const USE_CASES_DIR = path.join(GENERATED_DIR, "useCases");
+const VALIDATORS_DIR = path.join(GENERATED_DIR, "validators");
 
 // Output is machine-consumed; prettier costs ~half the total runtime, so it's
 // opt-in for humans reading .generated/.
@@ -263,27 +267,32 @@ function setupGeneratedDir() {
 loadSchemas().then(async (schemas) => {
   setupGeneratedDir();
 
-  // Generate validate.ts
-  const validateCode = await generateValidatorCode(schemas);
+  const { default: definitionsSchema } =
+    await import("../src/schemas/definitions.ts");
+  const entitySchemas = Array.from(
+    schemas.values(),
+    (module) => module.default,
+  );
+  const allSchemas = [definitionsSchema, ...entitySchemas];
+  lintSchemas(allSchemas);
+
+  fs.mkdirSync(VALIDATORS_DIR, { recursive: true });
+  for (const schema of entitySchemas) {
+    const { fileName } = getSchemaNames(schema.title);
+    writeFileIfChanged(
+      path.join(VALIDATORS_DIR, `${fileName}.js`),
+      generateValidatorModule(allSchemas, schema, banner),
+    );
+    writeFileIfChanged(
+      path.join(VALIDATORS_DIR, `${fileName}.d.ts`),
+      generateValidatorDeclaration(banner),
+    );
+  }
+
   writeFileIfChanged(
     path.join(GENERATED_DIR, "validate.ts"),
-    await formatCode(validateCode),
+    await formatCode(generateValidateIndex(entitySchemas)),
   );
-
-  const ajv = new Ajv({
-    allErrors: true,
-    useDefaults: true,
-    strict: false,
-    allowMatchingProperties: true,
-    allowUnionTypes: true,
-    strictRequired: false,
-    discriminator: true,
-    schemas: Array.from(schemas.entries()).map(([fileName, module]) => {
-      return module.default;
-    }),
-  });
-
-  addFormats(ajv);
 
   // Generate model files
   const modelNames = [];
@@ -342,7 +351,9 @@ loadSchemas().then(async (schemas) => {
   console.log(`Generated files in ${GENERATED_DIR}/`);
   console.log(`  - Copied src/ to ${GENERATED_DIR}/`);
   console.log(`  - index.ts (main entry point)`);
-  console.log(`  - validate.ts`);
+  console.log(
+    `  - validate.ts + validators/ (${entitySchemas.length} validators)`,
+  );
   console.log(`  - models/ (${modelNames.length} model files + entity.ts)`);
   console.log(`  - useCases/ (${useCaseNames.length} files)`);
   console.log(
@@ -350,63 +361,12 @@ loadSchemas().then(async (schemas) => {
   );
 });
 
-/**
- * @param {Map<string, object>} schemas
- */
-async function generateValidatorCode(schemas) {
-  const imports = [];
-  const schemaList = [];
-  const exports = [];
-
-  // Always include definitions schema first (it's referenced by other schemas)
-  imports.push(
-    `import { definitionsSchema as defs } from "./schemas/definitions.js";`,
-  );
-  schemaList.push("defs");
-
-  for (const [fileName, module] of schemas.entries()) {
-    const schema = module.default;
-    const baseName = fileName.replace(".ts", "");
-    const schemaKey = module.schemaKey;
-
-    imports.push(`import { ${schemaKey} } from "./schemas/${baseName}.js";`);
-    schemaList.push(schemaKey);
-
-    if (schema.$id !== "definitions.json") {
-      const title = schema.title.replace(/\s+/g, "");
-      exports.push(
-        `export const validate${title} = ajv.compile(${schemaKey});`,
-      );
-    }
-  }
-
-  return `${banner}
-import { Ajv } from "ajv";
-import addFormats from "ajv-formats";
-import { addLowerBoundTableKeyword } from "./lib/lowerBoundTable.js";
-
-${imports.join("\n")}
-
-const schemas = [
-  ${schemaList.join(",\n  ")}
-];
-
-const ajv = new Ajv({
-  allErrors: true,
-  useDefaults: true,
-  strict: false,
-  allowMatchingProperties: true,
-  allowUnionTypes: true,
-  strictRequired: false,
-  discriminator: true,
-  schemas: schemas,
-});
-
-addFormats(ajv);
-addLowerBoundTableKeyword(ajv);
-
-${exports.join("\n")}
-`;
+function generateValidateIndex(schemas) {
+  const exports = schemas.map((schema) => {
+    const { className, fileName } = getSchemaNames(schema.title);
+    return `export { default as validate${className} } from "./validators/${fileName}.js";`;
+  });
+  return `${banner}\n\n${exports.join("\n")}\n`;
 }
 
 function generateModelCode(schema, schemaModule, names) {
@@ -503,21 +463,21 @@ function generateModelCode(schema, schemaModule, names) {
   const declarationMerging = hasUnionType
     ? `// Union type schema - using index signature since union types can't be extended
 export class ${className} extends Entity {
-  [key: string]: unknown;
-  declare schema: typeof ${schemaVar};
-  declare validator: typeof validate;`
+  [key: string]: unknown;`
     : `export interface ${className} extends ${typeName} {}
-export class ${className} extends Entity {
-  declare schema: typeof ${schemaVar};
-  declare validator: typeof validate;`;
+export class ${className} extends Entity {`;
 
   // Generate the data type alias for backwards compatibility
   const dataTypeAlias = `${className}Data`;
 
+  // `schema` and `validator` are accessors, not prototype assignments: a
+  // top-level side effect would keep every model, schema and validator in any
+  // bundle that imports the models barrel.
   return `${banner}
 
 import { Entity } from "./entity.js";
-import { validate${className} as validate } from "../validate.js";
+import type { Validator } from "../validators/runtime.js";
+import validate from "../validators/${fileName}.js";
 import { ${schemaVar}, type ${typeName} } from "../schemas/${fileName}.js";
 
 /**
@@ -529,6 +489,13 @@ export type ${dataTypeAlias} = ${typeName};
  * ${schema.description || className}
  */
 ${declarationMerging}
+  get schema(): typeof ${schemaVar} {
+    return ${schemaVar};
+  }
+
+  get validator(): Validator {
+    return validate;
+  }
 
   constructor(data: ${typeName}) {
     super(data);
@@ -543,14 +510,6 @@ ${getterMethods}
 
 ${setterMethods}
 }
-
-Object.defineProperty(${className}.prototype, "schema", {
-  value: ${schemaVar}
-});
-
-Object.defineProperty(${className}.prototype, "validator", {
-  get: function() { return validate; }
-});
 `;
 }
 

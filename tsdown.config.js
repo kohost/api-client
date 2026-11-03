@@ -19,6 +19,8 @@ export default defineConfig({
     ".generated/schemas/*",
     ".generated/httpClient.js",
     ".generated/validate.ts",
+    ".generated/validators/*.js",
+    ".generated/validators/runtime.ts",
   ],
   outDir: "dist",
   // Scoped to tsdown's own outputs: tsc -b emits .d.ts into dist incrementally,

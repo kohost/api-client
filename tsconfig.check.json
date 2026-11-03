@@ -1,7 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "include": [".generated/**/*"],
-  "exclude": ["dist", "node_modules"],
+  // Standalone validator code is machine-generated; its sibling .d.ts types it.
+  "exclude": ["dist", "node_modules", ".generated/validators/*.js"],
   "compilerOptions": {
     "skipLibCheck": true,
     "checkJs": false,

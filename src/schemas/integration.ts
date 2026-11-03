@@ -32,12 +32,12 @@ export const integrationSchema = {
     itunesAppId: {
       type: "string",
       description: "iOS App Store ID for the vendor's companion app.",
-      example: "960998088",
+      examples: ["960998088"],
     },
     googleAppId: {
       type: "string",
       description: "Google Play package ID for the vendor's companion app.",
-      example: "com.saltosystems.justin",
+      examples: ["com.saltosystems.justin"],
     },
     createdAt: {
       $ref: "definitions.json#/definitions/date",

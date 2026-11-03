@@ -216,7 +216,6 @@ export const automationSchema = {
             },
           },
         },
-        minItems: 1,
       },
     },
     createdAt: {

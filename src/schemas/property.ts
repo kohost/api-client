@@ -117,25 +117,6 @@ export const propertySchema = {
             },
             cameraConfig: {
               type: "object",
-              doorStationConfig: {
-                type: "object",
-                patternProperties: {
-                  "^[a-zA-Z0-9]+$": {
-                    type: "object",
-                    properties: {
-                      lockIds: {
-                        type: "array",
-                        items: {
-                          type: "string",
-                        },
-                        default: [],
-                        description:
-                          "List of lock ids that will be available for control from this door station",
-                      },
-                    },
-                  },
-                },
-              },
               examples: [
                 {
                   wZz7hucY: {

@@ -6,8 +6,8 @@ import defs from "./definitions";
 import { mediaFileSchema } from "./mediaFile";
 import { ticketSchema } from "./ticket";
 
-// Mirrors the AJV configuration the model generator compiles validators with
-// (scripts/generate-source-models.js), so these assertions exercise the same
+// Mirrors the validation options the model generator compiles validators with
+// (scripts/utils/validators.js; its strict flags only add compile-time checks), so these assertions exercise the same
 // rules a `Ticket` model runs in `Entity`. Each validator targets a single
 // array element via a JSON-pointer $ref into the registered ticket schema, so
 // entry shapes can be checked without assembling a whole valid ticket.

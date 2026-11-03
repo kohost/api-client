@@ -32,7 +32,7 @@ export const systemSchema = {
     },
     driver: {
       $ref: "definitions.json#/definitions/driver",
-      example: "salto",
+      examples: ["salto"],
       description: "The driver value that implements the system",
     },
     organizationId: {
@@ -108,11 +108,11 @@ export const systemSchema = {
         },
         itunesAppId: {
           type: "string",
-          example: "807316865",
+          examples: ["807316865"],
         },
         googleAppId: {
           type: "string",
-          example: "tw.com.geovision.gvaccesscontrol",
+          examples: ["tw.com.geovision.gvaccesscontrol"],
         },
       },
     },
@@ -181,14 +181,18 @@ export const systemSchema = {
   allOf: [
     {
       if: {
-        properties: { categories: { contains: { const: "access" } } },
+        properties: {
+          categories: { type: "array", contains: { const: "access" } },
+        },
         required: ["categories"],
       },
       then: { required: ["emergency", "supportedEmergencies"] },
     },
     {
       if: {
-        properties: { categories: { contains: { const: "irrigation" } } },
+        properties: {
+          categories: { type: "array", contains: { const: "irrigation" } },
+        },
         required: ["categories"],
       },
       then: { required: ["trippedSensors", "supportedSensors"] },

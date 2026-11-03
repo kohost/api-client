@@ -162,6 +162,7 @@ export const spaceSchema = {
     devices: {
       type: "array",
       items: {
+        type: "object",
         discriminator: { propertyName: "type" },
         oneOf: [
           { $ref: "switch.json" },
