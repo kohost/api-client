@@ -1945,6 +1945,15 @@
     }
   ],
   [
+    "ResendBill",
+    {
+      "http": {
+        "method": "POST",
+        "path": "/bills/:id/resend"
+      }
+    }
+  ],
+  [
     "MarkBillPaid",
     {
       "http": {
