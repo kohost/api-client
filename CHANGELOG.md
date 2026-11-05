@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.38.0
+
+### Minor Changes
+
+- [`5078686`](https://github.com/kohost/kohost/commit/50786861cdd4dd8055428dce36377becfdd8e7ea) Thanks [@itrogers](https://github.com/itrogers)! - OneBill can resend a sent, unpaid bill: `ResendBill` (`POST /bills/:id/resend`) emails the existing PDF to the chosen billing contacts with an optional message, without changing the bill. Bill emails now come from the configurable `onebill.email.from` (default `Kohost <customercare@kohost.io>`), reply to customer care, and blind-copy `onebill.email.bcc`.
+
 ## 7.37.0
 
 ### Minor Changes
