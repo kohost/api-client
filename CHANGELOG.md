@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.39.0
+
+### Minor Changes
+
+- [#1407](https://github.com/kohost/kohost/pull/1407) [`1173690`](https://github.com/kohost/kohost/commit/11736909cd6f5f9d39c9b9e912c66f22184d8d43) Thanks [@itrogers](https://github.com/itrogers)! - Require a Reply-expected date when setting an Awaiting response marker. Awaiting Client Response dates its chip and age by it, counts as overdue once it passes, and splits into Overdue / Today / Upcoming / Undated bands like Awaiting Vendor Quote.
+
 ## 7.38.0
 
 ### Minor Changes
