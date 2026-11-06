@@ -1031,6 +1031,15 @@ export const ticketSchema = {
           $ref: "definitions.json#/definitions/date",
           description: "When the marker was set.",
         },
+        expectedOn: {
+          type: ["string", "null"],
+          pattern: "^\\d{4}-\\d{2}-\\d{2}$",
+          default: null,
+          description:
+            "The Reply-expected date: the calendar day the roster expects the " +
+            "reply by, as YYYY-MM-DD read in the property's timezone. Required " +
+            "on every new marker; null on markers set before the date existed.",
+        },
         messageId: {
           type: ["string", "null"],
           default: null,
