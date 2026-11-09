@@ -239,8 +239,9 @@ export const costEntryProperties = {
     description:
       "The vendor's paperwork backing the entry's amounts — an invoice plus " +
       "whatever came with it. Internal: the file-store cannot enforce " +
-      "roster-only reads, so the boundary is this field living on the full " +
-      "shape only, and the redacted projection never carries it.",
+      "reads limited to Facilities Managers, so the boundary is this field " +
+      "living on the full shape only, and the redacted projection never " +
+      "carries it.",
   },
   vendorInvoiceNumber: {
     type: ["string", "null"],

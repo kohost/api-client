@@ -57,7 +57,7 @@ const redactedCostEntry = {
 };
 
 describe("ticket cost entry wire shapes", () => {
-  it("accepts the full vendor cost shape a roster viewer receives", () => {
+  it("accepts the full vendor cost shape a Facilities Manager receives", () => {
     const validate = compileCostEntryValidator();
     expect(validate(fullCostEntry)).toBe(true);
   });

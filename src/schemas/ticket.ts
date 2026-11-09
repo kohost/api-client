@@ -102,8 +102,8 @@ const richTextOrderedListNode = {
 } as const;
 
 // A cost entry reaches a client in one of two shapes, and both are valid wire
-// payloads a `Ticket` model must accept. A roster viewer or superadmin receives
-// the stored entry (`fullCostEntry`): the customer `price`, the vendor
+// payloads a `Ticket` model must accept. A Facilities Manager or superadmin
+// receives the stored entry (`fullCostEntry`): the customer `price`, the vendor
 // `estimate`, `markup`, and an optional `actual`. Every other viewer receives
 // the redacted projection (`redactedCostEntry`) the API builds field-by-field —
 // the stored price as a bare amount, never the vendor cost or markup behind it
@@ -117,8 +117,8 @@ const fullCostEntrySchema = {
   required: costEntryRequired,
   properties: {
     ...costEntryProperties,
-    // Both amounts are null together on a Pending cost: an entry the roster
-    // recorded before the vendor quoted it. Nothing prices until the first
+    // Both amounts are null together on a Pending cost: an entry a Facilities
+    // Manager recorded before the vendor quoted it. Nothing prices until the first
     // amount lands, which seeds the estimate and derives the price from it.
     price: nullableMoney(
       "The authoritative customer price, what the org is charged, what the " +
@@ -139,7 +139,7 @@ const fullCostEntrySchema = {
       description:
         "When the entry was recorded, whether or not it carried an amount. " +
         "A Pending cost has no estimate to be dated by, so this is how long " +
-        "the roster has been waiting on the quote.",
+        "the Facilities Manager has been waiting on the quote.",
     },
     createdBy: {
       type: ["string", "null"],
@@ -231,7 +231,7 @@ const redactedCostEntrySchema = {
       description:
         "The ID of the user who recorded the entry, carried through " +
         "redaction so the org side's cost controls know a Pending cost is " +
-        "the roster's, not theirs.",
+        "the Facilities Manager's, not theirs.",
     },
     expectedOn: {
       type: ["string", "null"],
@@ -316,8 +316,8 @@ const workItemSchema = {
       pattern: "^\\d{4}-\\d{2}-\\d{2}$",
       default: null,
       description:
-        "The Blocked-until date of Pending work: the day the roster expects " +
-        "the blocker to clear and scheduling to become possible, as " +
+        "The Blocked-until date of Pending work: the day the Facilities " +
+        "Manager expects the blocker to clear and scheduling to become possible, as " +
         "YYYY-MM-DD in the property's timezone. Not a promise the work " +
         "happens that day. Set only while `date` is null; cleared the moment " +
         "the item is scheduled. Overwritten in place when it slips.",
@@ -380,11 +380,11 @@ const workItemSchema = {
       required: ["outcome", "verifiedBy", "verifiedAt"],
       default: null,
       description:
-        "What a facilities roster member saw at this visit, or null while " +
+        "What a Facilities Manager saw at this visit, or null while " +
         "nobody has recorded it. The date passing is not an outcome: an " +
         "unverified past-dated visit is unverified, and this slot is the " +
         "only thing that says whether the visit happened. Reversible by the " +
-        "roster while the ticket is active; frozen once it closes.",
+        "Facilities Managers while the ticket is active; frozen once it closes.",
       properties: {
         outcome: {
           type: "string",
@@ -406,7 +406,7 @@ const workItemSchema = {
           additionalProperties: false,
           required: ["id", "name"],
           description:
-            "The roster member who recorded the outcome, named here so a " +
+            "The Facilities Manager who recorded the outcome, named here so a " +
             "later rename cannot rewrite what the thread already said.",
           properties: {
             id: {
@@ -885,7 +885,7 @@ export const ticketSchema = {
       type: "array",
       default: [],
       description:
-        "Work items scheduled on the ticket: who is coming, when, and what for. Many per ticket, including repeat visits by the same performer. Carries no lifecycle status — the conversation log is the history, and only a roster verification says whether a past-dated visit happened. Never redacted; vendor identity is already public in assignment.",
+        "Work items scheduled on the ticket: who is coming, when, and what for. Many per ticket, including repeat visits by the same performer. Carries no lifecycle status — the conversation log is the history, and only a Facilities Manager's verification says whether a past-dated visit happened. Never redacted; vendor identity is already public in assignment.",
       items: workItemSchema,
     },
     costs: {
@@ -999,7 +999,7 @@ export const ticketSchema = {
       additionalProperties: false,
       required: ["author", "awaiting", "since"],
       description:
-        "A Kohost Facilities agent's private note that they are waiting on a reply, from one named participant outside Kohost's side or from anyone outside it. Served only to the Facilities roster; every other viewer receives null. A named wait ends when anyone other than its author posts a public message or when the awaited person leaves the ticket; an anyone wait ends when someone outside Kohost's side posts a public message. Either ends when the roster clears it. Written only through SetAwaitingResponse and ClearAwaitingResponse.",
+        "A Kohost Facilities agent's private note that they are waiting on a reply, from one named participant outside Kohost's side or from anyone outside it. Served only to the Facilities Managers; every other viewer receives null. A named wait ends when anyone other than its author posts a public message or when the awaited person leaves the ticket; an anyone wait ends when someone outside Kohost's side posts a public message. Either ends when a Facilities Manager clears it. Written only through SetAwaitingResponse and ClearAwaitingResponse.",
       properties: {
         author: {
           type: "object",
@@ -1036,8 +1036,8 @@ export const ticketSchema = {
           pattern: "^\\d{4}-\\d{2}-\\d{2}$",
           default: null,
           description:
-            "The Reply-expected date: the calendar day the roster expects the " +
-            "reply by, as YYYY-MM-DD read in the property's timezone. Required " +
+            "The Reply-expected date: the calendar day the Facilities Manager " +
+            "expects the reply by, as YYYY-MM-DD read in the property's timezone. Required " +
             "on every new marker; null on markers set before the date existed.",
         },
         messageId: {

@@ -1092,7 +1092,7 @@
         "method": "GET",
         "path": "/admin/concierge-stats/filters"
       },
-      "description": "Filter option lists (organizations, properties, issues, agent roster) for the KFC stats surface."
+      "description": "Filter option lists (organizations, properties, issues, Facilities Managers) for the KFC stats surface."
     }
   ],
   [
@@ -1152,7 +1152,7 @@
         "method": "GET",
         "path": "/concierge/tickets"
       },
-      "description": "Cross-org KFC agent workspace ticket queue, scoped to the caller's roster membership (superadmins may scope to another agent)."
+      "description": "Cross-org KFC agent workspace ticket queue, scoped to where the caller is a Facilities Manager (superadmins may scope to another agent)."
     }
   ],
   [
@@ -2395,7 +2395,7 @@
         "method": "POST",
         "path": "/tickets/:id/work/:workItemId/verification"
       },
-      "description": "Records what a facilities roster member saw at a scheduled visit."
+      "description": "Records what a Facilities Manager saw at a scheduled visit."
     }
   ],
   [

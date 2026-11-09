@@ -273,7 +273,7 @@ export const organizationSchema = {
                   default: [],
                   lowerBoundTable: { key: "minAmount" },
                   description:
-                    "Lower-bound markup rows keyed per cost entry by its vendor-cost estimate: first row minAmount 0, minAmounts strictly ascending, so gaps and overlaps are impossible. No property override; visible to roster agents and superadmins only, never to org-side viewers.",
+                    "Lower-bound markup rows keyed per cost entry by its vendor-cost estimate: first row minAmount 0, minAmounts strictly ascending, so gaps and overlaps are impossible. No property override; visible to Facilities Managers and superadmins only, never to org-side viewers.",
                   items: {
                     type: "object",
                     additionalProperties: false,
