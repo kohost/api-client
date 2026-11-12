@@ -40,7 +40,7 @@ const money = (description: string) =>
 /**
  * The same phase on a host that admits a Pending cost, where `null` means the
  * amount is not known yet. Only the ticket cost entry takes this shape: a
- * ticket is what a vendor quote is awaited on.
+ * ticket is what vendor pricing is awaited on.
  */
 export const nullableMoney = (description: string) =>
   ({

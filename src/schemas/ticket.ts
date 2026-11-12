@@ -139,7 +139,7 @@ const fullCostEntrySchema = {
       description:
         "When the entry was recorded, whether or not it carried an amount. " +
         "A Pending cost has no estimate to be dated by, so this is how long " +
-        "the Facilities Manager has been waiting on the quote.",
+        "the Facilities Manager has been waiting on pricing.",
     },
     createdBy: {
       type: ["string", "null"],
@@ -154,8 +154,8 @@ const fullCostEntrySchema = {
       pattern: "^\\d{4}-\\d{2}-\\d{2}$",
       default: null,
       description:
-        "The Quote-expected date: the calendar day the vendor promised the " +
-        "quote, as YYYY-MM-DD read in the property's timezone. Required " +
+        "The Pricing-expected date: the calendar day the vendor promised " +
+        "pricing, as YYYY-MM-DD read in the property's timezone. Required " +
         "while the entry is a Pending cost and cleared once it is priced; " +
         "null on entries recorded before the date existed. Overwritten in " +
         "place when the vendor slips. Survives redaction.",
@@ -216,7 +216,7 @@ const redactedCostEntrySchema = {
         "The entry's stored customer price in integer cents — the whole of " +
         "what an org-side viewer receives, flattened out of the stored " +
         "price phase so none of its recording metadata comes with it. Null " +
-        "while the entry is a Pending cost: the org sees a quote is owed, " +
+        "while the entry is a Pending cost: the org sees pricing is owed, " +
         "and nothing else until it lands.",
     },
     createdAt: {
@@ -238,9 +238,9 @@ const redactedCostEntrySchema = {
       pattern: "^\\d{4}-\\d{2}-\\d{2}$",
       default: null,
       description:
-        "The Quote-expected date on a Pending cost, YYYY-MM-DD at the " +
+        "The Pricing-expected date on a Pending cost, YYYY-MM-DD at the " +
         "property. Carried through redaction: the day is the one fact an " +
-        "org-side viewer gets about a quote that is owed.",
+        "org-side viewer gets about pricing that is owed.",
     },
     voided: {
       type: "boolean",
@@ -978,7 +978,7 @@ export const ticketSchema = {
         enum: [
           "awaitingClientApproval",
           "awaitingClientResponse",
-          "awaitingVendorQuote",
+          "awaitingVendorPricing",
           "awaitingScheduling",
           "vendorScheduled",
           "confirmCosts",
