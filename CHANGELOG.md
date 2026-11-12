@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.40.0
+
+### Minor Changes
+
+- [#1503](https://github.com/kohost/kohost/pull/1503) [`7203b36`](https://github.com/kohost/kohost/commit/7203b363c0348912c69fdd6e1996d74b096046c1) Thanks [@itrogers](https://github.com/itrogers)! - Rename the Awaiting Vendor Quote Stage to Awaiting Vendor Pricing (`awaitingVendorQuote` → `awaitingVendorPricing`), the `awaitingQuote` pool status, cost-ledger blocker and close-blocker reason to `awaitingPricing`, and the Quote-expected date to the Pricing-expected date. A Pending cost linked to completed work that Confirm Vendor Costs picks up no longer also holds Awaiting Vendor Pricing.
+
 ## 7.39.0
 
 ### Minor Changes
