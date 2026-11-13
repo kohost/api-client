@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.41.0
+
+### Minor Changes
+
+- [`457ac16`](https://github.com/kohost/kohost/commit/457ac16af17fbd79a8c26ea6e5968c7e06a5b9bf) Thanks [@itrogers](https://github.com/itrogers)! - Add `akuvox` to the driver enum (pulled from upstream api-client)
+
 ## 7.40.0
 
 ### Minor Changes
