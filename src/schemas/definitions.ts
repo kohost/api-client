@@ -227,6 +227,7 @@ const defs = {
       enum: [
         "2n",
         "adlink",
+        "akuvox",
         "apex-american-audio",
         "axis",
         "avigilon-alta",
