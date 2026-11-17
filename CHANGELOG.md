@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.42.0
+
+### Minor Changes
+
+- [`0be04ef`](https://github.com/kohost/kohost/commit/0be04ef086a83d7ece4b3c45fb041f2dfed0344d) Thanks [@itrogers](https://github.com/itrogers)! - Add `liveStream.supportsTwoWayAudio` to the camera schema (pulled from upstream api-client)
+
 ## 7.41.0
 
 ### Minor Changes
