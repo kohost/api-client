@@ -100,7 +100,7 @@ export const cameraSchema = {
             "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBYRXhpZgAATU0AKgAAAAgAA1EQAAEAAAABAQAAAFERAAQAAAABAAABAgABAA",
           ],
         },
-        supportstwoWayAudio: {
+        supportsTwoWayAudio: {
           type: "boolean",
         } 
       },
