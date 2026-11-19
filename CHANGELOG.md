@@ -1,5 +1,11 @@
 # @kohost/api-client
 
+## 7.43.0
+
+### Minor Changes
+
+- [#1558](https://github.com/kohost/kohost/pull/1558) [`da53985`](https://github.com/kohost/kohost/commit/da539856a891e6ba8edefcf073d2c1305e2ec0c3) Thanks [@itrogers](https://github.com/itrogers)! - Ticket messages can reference another ticket: typing `#` in the composer (including the new-ticket description) suggests tickets on the same property that the author can open (tickets people opened before system-generated ones), and the reference is stored as a `ticket` rich-text node (`{ type: "ticket", id, number }`) whose plain-text and email projection is `#number`. In the conversation it links to the ticket and shows its subject and status on hover; the back arrow on a ticket opened from a reference returns to the ticket that referenced it. The new-ticket description also allows `@` mentions again; its suggestion lists open in the top layer, anchored to the composer, so the settings drawer no longer clips them.
+
 ## 7.42.0
 
 ### Minor Changes
