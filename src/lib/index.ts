@@ -101,6 +101,7 @@ export {
   type RichTextInlineNode,
   type RichTextListItemNode,
   type RichTextMentionNode,
+  type RichTextTicketNode,
 } from "./ticketRichText.js";
 export {
   isArchivedProperty,

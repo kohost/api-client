@@ -27,6 +27,12 @@ const mention = (
 
 const hardBreak: RichTextInlineNode = { type: "hardBreak" };
 
+const ticketRef: RichTextInlineNode = {
+  type: "ticket",
+  id: "ticket-1",
+  number: "110001",
+};
+
 const paragraph = (...content: RichTextInlineNode[]): RichTextBlockNode => ({
   type: "paragraph",
   content,
@@ -51,6 +57,12 @@ describe("serializeRichTextBody", () => {
     expect(
       serializeRichTextBody([paragraph(text("hey "), mention("user"))]),
     ).toBe("hey @Jane Doe");
+  });
+
+  it("renders ticket references as #number", () => {
+    expect(
+      serializeRichTextBody([paragraph(text("see "), ticketRef, text(" too"))]),
+    ).toBe("see #110001 too");
   });
 
   it("prefixes bullet items with • and renumbers ordered items", () => {
@@ -81,6 +93,7 @@ describe("isWellFormedRichText", () => {
         text("underline", ["underline"]),
         text("all three", ["bold", "italic", "underline"]),
         mention("user"),
+        ticketRef,
       ),
       {
         type: "bulletList",
@@ -115,6 +128,17 @@ describe("isWellFormedRichText", () => {
           discriminator: "group",
           label: "Ops",
         } as never),
+      ]),
+    ).toBe(false);
+  });
+
+  it("rejects a ticket reference missing its id or number", () => {
+    expect(
+      isWellFormedRichText([paragraph({ type: "ticket", id: "t-1" } as never)]),
+    ).toBe(false);
+    expect(
+      isWellFormedRichText([
+        paragraph({ type: "ticket", number: "110001" } as never),
       ]),
     ).toBe(false);
   });

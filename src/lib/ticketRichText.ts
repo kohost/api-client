@@ -17,12 +17,17 @@ export type RichTextMentionNode = Extract<
   RichTextInlineNode,
   { type: "mention" }
 >;
+export type RichTextTicketNode = Extract<
+  RichTextInlineNode,
+  { type: "ticket" }
+>;
 
 function serializeInline(nodes: readonly RichTextInlineNode[]): string {
   let text = "";
   for (const node of nodes) {
     if (node.type === "text") text += node.text;
     else if (node.type === "mention") text += `@${node.label}`;
+    else if (node.type === "ticket") text += `#${node.number}`;
     else text += "\n";
   }
   return text;
@@ -33,8 +38,9 @@ function serializeInline(nodes: readonly RichTextInlineNode[]): string {
  * derives the stored `body` from this; emails, SMS, `$text` search, ticket
  * subjects, and previews all read that `body`, and the app reuses the same
  * projection for client-side UI state (e.g. the submit-disabled check). Marks
- * are dropped, mentions render as `@label`, list items get `• ` / renumbered
- * `1. ` prefixes, and trailing newlines are trimmed.
+ * are dropped, mentions render as `@label`, ticket references as `#number`,
+ * list items get `• ` / renumbered `1. ` prefixes, and trailing newlines are
+ * trimmed.
  */
 export function serializeRichTextBody(
   content: readonly RichTextBlockNode[],
@@ -87,6 +93,8 @@ function isInlineNode(node: unknown): boolean {
         typeof node.discriminator === "string" &&
         MENTION_DISCRIMINATORS.has(node.discriminator)
       );
+    case "ticket":
+      return typeof node.id === "string" && typeof node.number === "string";
     case "hardBreak":
       return true;
     default:

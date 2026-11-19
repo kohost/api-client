@@ -44,6 +44,20 @@ const richTextMentionNode = {
   },
 } as const;
 
+const richTextTicketNode = {
+  type: "object",
+  additionalProperties: false,
+  required: ["type", "id", "number"],
+  properties: {
+    type: { type: "string", enum: ["ticket"] },
+    id: { type: "string" },
+    number: {
+      type: "string",
+      description: "Number of the referenced Ticket, shown as #number.",
+    },
+  },
+} as const;
+
 const richTextHardBreakNode = {
   type: "object",
   additionalProperties: false,
@@ -57,7 +71,12 @@ const richTextInlineNodes = {
   type: "array",
   minItems: 1,
   items: {
-    anyOf: [richTextTextNode, richTextMentionNode, richTextHardBreakNode],
+    anyOf: [
+      richTextTextNode,
+      richTextMentionNode,
+      richTextTicketNode,
+      richTextHardBreakNode,
+    ],
   },
 } as const;
 
